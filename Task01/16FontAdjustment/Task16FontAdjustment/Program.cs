@@ -53,7 +53,7 @@ namespace Task16FontAdjustment
                 return fontAdjustment |= FontAdjustment.Italic;
 
             if (fontAdjustment.HasFlag(FontAdjustment.Underline))
-                return fontAdjustment |=FontAdjustment.Underline;
+                return fontAdjustment |= FontAdjustment.Underline;
 
             return fontAdjustment;
         }
