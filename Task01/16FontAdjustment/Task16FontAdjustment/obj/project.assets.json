@@ -694,11 +694,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Den\\source\\repos\\Task16FontAdjustment\\Task16FontAdjustment\\Task16FontAdjustment.csproj",
+      "projectUniqueName": "C:\\Users\\Den\\source\\repos\\Task01\\16FontAdjustment\\Task16FontAdjustment\\Task16FontAdjustment.csproj",
       "projectName": "Task16FontAdjustment",
-      "projectPath": "C:\\Users\\Den\\source\\repos\\Task16FontAdjustment\\Task16FontAdjustment\\Task16FontAdjustment.csproj",
+      "projectPath": "C:\\Users\\Den\\source\\repos\\Task01\\16FontAdjustment\\Task16FontAdjustment\\Task16FontAdjustment.csproj",
       "packagesPath": "C:\\Users\\Den\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Den\\source\\repos\\Task16FontAdjustment\\Task16FontAdjustment\\obj\\",
+      "outputPath": "C:\\Users\\Den\\source\\repos\\Task01\\16FontAdjustment\\Task16FontAdjustment\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
