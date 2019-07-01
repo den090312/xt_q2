@@ -1,0 +1,10 @@
+C:\Users\Den\source\repos\Task13AnotherTriangle\Task13AnotherTriangle\bin\Debug\netcoreapp2.1\Task13AnotherTriangle.deps.json
+C:\Users\Den\source\repos\Task13AnotherTriangle\Task13AnotherTriangle\bin\Debug\netcoreapp2.1\Task13AnotherTriangle.runtimeconfig.json
+C:\Users\Den\source\repos\Task13AnotherTriangle\Task13AnotherTriangle\bin\Debug\netcoreapp2.1\Task13AnotherTriangle.runtimeconfig.dev.json
+C:\Users\Den\source\repos\Task13AnotherTriangle\Task13AnotherTriangle\bin\Debug\netcoreapp2.1\Task13AnotherTriangle.dll
+C:\Users\Den\source\repos\Task13AnotherTriangle\Task13AnotherTriangle\bin\Debug\netcoreapp2.1\Task13AnotherTriangle.pdb
+C:\Users\Den\source\repos\Task13AnotherTriangle\Task13AnotherTriangle\obj\Debug\netcoreapp2.1\Task13AnotherTriangle.csproj.CoreCompileInputs.cache
+C:\Users\Den\source\repos\Task13AnotherTriangle\Task13AnotherTriangle\obj\Debug\netcoreapp2.1\Task13AnotherTriangle.AssemblyInfoInputs.cache
+C:\Users\Den\source\repos\Task13AnotherTriangle\Task13AnotherTriangle\obj\Debug\netcoreapp2.1\Task13AnotherTriangle.AssemblyInfo.cs
+C:\Users\Den\source\repos\Task13AnotherTriangle\Task13AnotherTriangle\obj\Debug\netcoreapp2.1\Task13AnotherTriangle.dll
+C:\Users\Den\source\repos\Task13AnotherTriangle\Task13AnotherTriangle\obj\Debug\netcoreapp2.1\Task13AnotherTriangle.pdb

@@ -1,0 +1,11 @@
+C:\Users\Den\source\repos\Task15SumOfNumbers\Task15SumOfNumbers\bin\Debug\netcoreapp2.1\Task15SumOfNumbers.deps.json
+C:\Users\Den\source\repos\Task15SumOfNumbers\Task15SumOfNumbers\bin\Debug\netcoreapp2.1\Task15SumOfNumbers.runtimeconfig.json
+C:\Users\Den\source\repos\Task15SumOfNumbers\Task15SumOfNumbers\bin\Debug\netcoreapp2.1\Task15SumOfNumbers.runtimeconfig.dev.json
+C:\Users\Den\source\repos\Task15SumOfNumbers\Task15SumOfNumbers\bin\Debug\netcoreapp2.1\Task15SumOfNumbers.dll
+C:\Users\Den\source\repos\Task15SumOfNumbers\Task15SumOfNumbers\bin\Debug\netcoreapp2.1\Task15SumOfNumbers.pdb
+C:\Users\Den\source\repos\Task15SumOfNumbers\Task15SumOfNumbers\obj\Debug\netcoreapp2.1\Task15SumOfNumbers.csprojAssemblyReference.cache
+C:\Users\Den\source\repos\Task15SumOfNumbers\Task15SumOfNumbers\obj\Debug\netcoreapp2.1\Task15SumOfNumbers.csproj.CoreCompileInputs.cache
+C:\Users\Den\source\repos\Task15SumOfNumbers\Task15SumOfNumbers\obj\Debug\netcoreapp2.1\Task15SumOfNumbers.AssemblyInfoInputs.cache
+C:\Users\Den\source\repos\Task15SumOfNumbers\Task15SumOfNumbers\obj\Debug\netcoreapp2.1\Task15SumOfNumbers.AssemblyInfo.cs
+C:\Users\Den\source\repos\Task15SumOfNumbers\Task15SumOfNumbers\obj\Debug\netcoreapp2.1\Task15SumOfNumbers.dll
+C:\Users\Den\source\repos\Task15SumOfNumbers\Task15SumOfNumbers\obj\Debug\netcoreapp2.1\Task15SumOfNumbers.pdb
