@@ -1,0 +1,11 @@
+C:\Users\Den\source\repos\Task02Simple\Task02Simple\bin\Debug\netcoreapp2.1\Task02Simple.deps.json
+C:\Users\Den\source\repos\Task02Simple\Task02Simple\bin\Debug\netcoreapp2.1\Task02Simple.runtimeconfig.json
+C:\Users\Den\source\repos\Task02Simple\Task02Simple\bin\Debug\netcoreapp2.1\Task02Simple.runtimeconfig.dev.json
+C:\Users\Den\source\repos\Task02Simple\Task02Simple\bin\Debug\netcoreapp2.1\Task02Simple.dll
+C:\Users\Den\source\repos\Task02Simple\Task02Simple\bin\Debug\netcoreapp2.1\Task02Simple.pdb
+C:\Users\Den\source\repos\Task02Simple\Task02Simple\obj\Debug\netcoreapp2.1\Task02Simple.csprojAssemblyReference.cache
+C:\Users\Den\source\repos\Task02Simple\Task02Simple\obj\Debug\netcoreapp2.1\Task02Simple.csproj.CoreCompileInputs.cache
+C:\Users\Den\source\repos\Task02Simple\Task02Simple\obj\Debug\netcoreapp2.1\Task02Simple.AssemblyInfoInputs.cache
+C:\Users\Den\source\repos\Task02Simple\Task02Simple\obj\Debug\netcoreapp2.1\Task02Simple.AssemblyInfo.cs
+C:\Users\Den\source\repos\Task02Simple\Task02Simple\obj\Debug\netcoreapp2.1\Task02Simple.dll
+C:\Users\Den\source\repos\Task02Simple\Task02Simple\obj\Debug\netcoreapp2.1\Task02Simple.pdb

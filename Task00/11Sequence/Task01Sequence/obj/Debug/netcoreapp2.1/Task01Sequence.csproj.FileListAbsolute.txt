@@ -1,0 +1,11 @@
+C:\Users\Den\source\repos\Task01Sequence\Task01Sequence\bin\Debug\netcoreapp2.1\Task01Sequence.deps.json
+C:\Users\Den\source\repos\Task01Sequence\Task01Sequence\bin\Debug\netcoreapp2.1\Task01Sequence.runtimeconfig.json
+C:\Users\Den\source\repos\Task01Sequence\Task01Sequence\bin\Debug\netcoreapp2.1\Task01Sequence.runtimeconfig.dev.json
+C:\Users\Den\source\repos\Task01Sequence\Task01Sequence\bin\Debug\netcoreapp2.1\Task01Sequence.dll
+C:\Users\Den\source\repos\Task01Sequence\Task01Sequence\bin\Debug\netcoreapp2.1\Task01Sequence.pdb
+C:\Users\Den\source\repos\Task01Sequence\Task01Sequence\obj\Debug\netcoreapp2.1\Task01Sequence.csprojAssemblyReference.cache
+C:\Users\Den\source\repos\Task01Sequence\Task01Sequence\obj\Debug\netcoreapp2.1\Task01Sequence.csproj.CoreCompileInputs.cache
+C:\Users\Den\source\repos\Task01Sequence\Task01Sequence\obj\Debug\netcoreapp2.1\Task01Sequence.AssemblyInfoInputs.cache
+C:\Users\Den\source\repos\Task01Sequence\Task01Sequence\obj\Debug\netcoreapp2.1\Task01Sequence.AssemblyInfo.cs
+C:\Users\Den\source\repos\Task01Sequence\Task01Sequence\obj\Debug\netcoreapp2.1\Task01Sequence.dll
+C:\Users\Den\source\repos\Task01Sequence\Task01Sequence\obj\Debug\netcoreapp2.1\Task01Sequence.pdb
