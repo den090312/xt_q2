@@ -15,19 +15,19 @@ namespace _111AverageStringLength
         static double GetAveradgeStringLength(string userString)
         {
             //удаляем все знаки препинания кроме пробелов
-            StringBuilder mySB = GetNoPuncExceptSpaceSB(userString);
+            var NoPuncExceptSpaceString = GetNoPuncExceptSpaceString(userString);
 
             //получаем массив слов
-            var wordsArray = mySB.ToString().Split(' ');
+            var wordsArray = NoPuncExceptSpaceString.Split(' ');
 
             //удаляем пробелы
-            var noSpaceString = mySB.ToString().Replace(" ", "");
+            var NoPunctuationString = NoPuncExceptSpaceString.Replace(" ", "");
 
             //средняя длина слова равна отношению количества символов в строке к количеству слов
-            return (double)noSpaceString.Length / (double)wordsArray.Length;
+            return (double)NoPunctuationString.Length / (double)wordsArray.Length;
         }
 
-        static StringBuilder GetNoPuncExceptSpaceSB(string userString)
+        static string GetNoPuncExceptSpaceString(string userString)
         {
             StringBuilder mySB = new StringBuilder();
             var myCharArray = userString.ToCharArray();
@@ -40,7 +40,7 @@ namespace _111AverageStringLength
                 }
             }
 
-            return mySB;
+            return mySB.ToString();
         }
     }
 }
