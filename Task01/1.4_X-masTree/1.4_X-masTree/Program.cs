@@ -35,15 +35,14 @@ namespace _1._4_X_masTree
 
         static void DrawXMasTree(int numberOfFragments)
         {
+
             //рассчитываем отступ слева для короны елочки
             int indentValue = (((numberOfFragments * 2 + 1) - 1) / 2);
 
             //выводим корону елочки
             DrawCrown(indentValue);
 
-            //инициализиурем количество строк фрагмента елочки
             int numberOfLines = 2;
-
             while (numberOfFragments > 0)
             {
                 //выводим фрагмент елочки
@@ -56,7 +55,7 @@ namespace _1._4_X_masTree
 
         static void DrawFragment(int indentValue, int numberOfLines)
         {
-            //инициализируем длину строки фрагмента елочки
+            //инициализируем длину строки треугольника
             int stringLenth = 1;
 
             for (int i = 1; i <= numberOfLines; i++)
@@ -64,13 +63,13 @@ namespace _1._4_X_masTree
                 //выводим отступ
                 DrawIndent(indentValue);
 
-                //выводим строку фрагмента елочки
+                //выводим строку треугольника
                 DrawString(stringLenth);
 
                 // получаем длину новой строки
                 stringLenth += 2;
 
-                //для каждой новой строки фрагмента елочки отступ будет уменьшаться на 1
+                //для каждой новой строки треугольника отступ будет уменьшаться на 1
                 indentValue--;
             }
         }
