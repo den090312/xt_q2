@@ -47,13 +47,19 @@ namespace Task16FontAdjustment
         static FontAdjustment GetCurrentAdjusment(FontAdjustment fontAdjustment)
         {
             if (fontAdjustment.HasFlag(FontAdjustment.Bold))
-                return fontAdjustment |= FontAdjustment.Bold;
+            {
+                return fontAdjustment |= FontAdjustment.Bold;    
+            }                
 
             if (fontAdjustment.HasFlag(FontAdjustment.Italic))
-                return fontAdjustment |= FontAdjustment.Italic;
+            {
+                return fontAdjustment |= FontAdjustment.Italic;    
+            }                
 
             if (fontAdjustment.HasFlag(FontAdjustment.Underline))
-                return fontAdjustment |= FontAdjustment.Underline;
+            {
+                return fontAdjustment |= FontAdjustment.Underline;    
+            }                
 
             return fontAdjustment;
         }
@@ -85,9 +91,13 @@ namespace Task16FontAdjustment
         static FontAdjustment SetFontAdjusment(FontAdjustment fontAdjustment, FontAdjustment fontAdjustmentFlag)
         {
             if (fontAdjustment.HasFlag(fontAdjustmentFlag))
-                fontAdjustment ^= fontAdjustmentFlag;
+            {
+                fontAdjustment ^= fontAdjustmentFlag;   
+            }                   
             else
+            {
                 fontAdjustment |= fontAdjustmentFlag;
+            }                
 
             return fontAdjustment;
         }
@@ -116,9 +126,13 @@ namespace Task16FontAdjustment
 
             int result;
             if (sb.Length > 0)
-                result = int.Parse(sb.ToString());
+            {
+                result = int.Parse(sb.ToString());    
+            }                
             else
-                result = 0;
+            {
+                result = 0;   
+            }              
 
             return result;
         }
