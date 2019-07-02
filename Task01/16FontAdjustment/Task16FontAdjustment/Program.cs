@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 
 namespace Task16FontAdjustment
@@ -23,11 +23,10 @@ namespace Task16FontAdjustment
             bool inputComplete = false;
             while (!inputComplete)
             {
-                int resultKey = GetKeyFromConsole();
-                if (resultKey != 0)
+                int userKey = GetKeyFromConsole();
+                if (userKey != 0)
                 {
-                    fontAdjustment = ChangeFontAdjustmentFromKey(fontAdjustment, resultKey);
-
+                    fontAdjustment = ChangeFontAdjustmentFromKey(fontAdjustment, userKey);
                     Console.WriteLine("");
                     Console.WriteLine("Параметры надписи: " + GetCurrentAdjusment(fontAdjustment));
                     WriteMenu();
@@ -48,16 +47,18 @@ namespace Task16FontAdjustment
         {
             if (fontAdjustment.HasFlag(FontAdjustment.Bold))
             {
-                return fontAdjustment |= FontAdjustment.Bold;    
-            }                
+                return fontAdjustment |= FontAdjustment.Bold;
+            }
+
             if (fontAdjustment.HasFlag(FontAdjustment.Italic))
             {
-                return fontAdjustment |= FontAdjustment.Italic;    
-            }                
+                return fontAdjustment |= FontAdjustment.Italic;
+            }
+
             if (fontAdjustment.HasFlag(FontAdjustment.Underline))
             {
-                return fontAdjustment |= FontAdjustment.Underline;    
-            }                
+                return fontAdjustment |= FontAdjustment.Underline;
+            }
 
             return fontAdjustment;
         }
@@ -65,7 +66,7 @@ namespace Task16FontAdjustment
         static FontAdjustment ChangeFontAdjustmentFromKey(FontAdjustment fontAdjustment, int consoleKey)
         {
             switch (consoleKey)
-            {              
+            {
                 case 1:
                     fontAdjustment = SetFontAdjusment(fontAdjustment, FontAdjustment.Bold);
                     break;
@@ -74,7 +75,7 @@ namespace Task16FontAdjustment
                     break;
                 case 3:
                     fontAdjustment = SetFontAdjusment(fontAdjustment, FontAdjustment.Underline);
-                    break;           
+                    break;
                 case 4:
                     Environment.Exit(0);
                     break;
@@ -87,12 +88,12 @@ namespace Task16FontAdjustment
         {
             if (fontAdjustment.HasFlag(fontAdjustmentFlag))
             {
-                fontAdjustment ^= fontAdjustmentFlag;   
-            }                   
+                fontAdjustment ^= fontAdjustmentFlag;
+            }
             else
             {
                 fontAdjustment |= fontAdjustmentFlag;
-            }                
+            }
 
             return fontAdjustment;
         }
@@ -122,12 +123,12 @@ namespace Task16FontAdjustment
             int result;
             if (sb.Length > 0)
             {
-                result = int.Parse(sb.ToString());    
-            }                
+                result = int.Parse(sb.ToString());
+            }
             else
             {
-                result = 0;   
-            }              
+                result = 0;
+            }
 
             return result;
         }
