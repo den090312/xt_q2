@@ -6,11 +6,10 @@ namespace _18NoPositive
     {
         static void Main(string[] args)
         {
-            int maxValue = 101;
-            int minValue = -1 * maxValue;
-            int[,,] myArray = GetRandomArray(maxValue, minValue);
+            int maxValue = 100;
+            int[,,] myArray = GetRandomArray(maxValue);
 
-            Console.WriteLine("Трёхмерный массив случайных чисел от " + (minValue + 1) + " до " + (maxValue - 1) + ":");
+            Console.WriteLine("Трёхмерный массив случайных чисел от " +(-1 * maxValue) + " до " +maxValue + ":");
             Console.WriteLine("");
             WriteArray(myArray);
 
@@ -83,7 +82,7 @@ namespace _18NoPositive
             }
         }
 
-        static int[,,] GetRandomArray(int maxValue, int minValue)
+        static int[,,] GetRandomArray(int maxValue)
         {
             int[,,] myArray = new int[5, 5, 5];
             Random myRandom = new Random();
@@ -94,7 +93,7 @@ namespace _18NoPositive
                 {
                     for (int z = 0; z <= 4; z++)
                     {
-                        myArray[x, y, z] = myRandom.Next(minValue, maxValue);
+                        myArray[x, y, z] = myRandom.Next(-1 * maxValue, maxValue);
                     }
                 }
             }
