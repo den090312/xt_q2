@@ -22,9 +22,14 @@ namespace _12_CharDoubler
             Console.WriteLine("");
         }
 
-        static string GetCharDoubledString(string firstString, string secondStringg)
+        static string GetCharDoubledString(string firstString, string secondString)
         {
             string resultString;
+
+            var firstCharArray = firstString.ToCharArray();
+            var secondharArray = secondString.ToCharArray();
+
+            f
 
             return resultString;
         }
