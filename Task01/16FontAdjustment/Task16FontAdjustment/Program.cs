@@ -26,7 +26,7 @@ namespace Task16FontAdjustment
                 int userKey = GetKeyFromConsole();
                 if (userKey != 0)
                 {
-                    fontAdjustment = ChangeFontAdjustmentFromKey(fontAdjustment, userKey);
+                    fontAdjustment = ChangeFontAdjustment(fontAdjustment, userKey);
                     Console.WriteLine("");
                     Console.WriteLine("Параметры надписи: " + fontAdjustment);
                     WriteMenu();
@@ -43,7 +43,7 @@ namespace Task16FontAdjustment
             Console.WriteLine("\t4: EXIT");
         }
 
-        static FontAdjustment ChangeFontAdjustmentFromKey(FontAdjustment fontAdjustment, int consoleKey)
+        static FontAdjustment ChangeFontAdjustment(FontAdjustment fontAdjustment, int consoleKey)
         {
             switch (consoleKey)
             {
