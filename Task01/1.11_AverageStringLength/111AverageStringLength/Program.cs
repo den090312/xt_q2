@@ -8,10 +8,10 @@ namespace _111AverageStringLength
         static void Main(string[] args)
         {
             Console.WriteLine("Введите строку. Максимальная длина - 254 симвоола");
-            StringBuilder myStringBuilder = new StringBuilder(Console.ReadLine());
+           //StringBuilder myStringBuilder = new StringBuilder(Console.ReadLine());
 
             //удаляем знаки препинания из строки
-            RemovePunctuation(myStringBuilder);
+            StringBuilder myStringBuilder = GetNoPunctuationSB(Console.ReadLine());
 
             //копируем SB в новую строку
             var fullString = myStringBuilder.ToString();
@@ -28,13 +28,20 @@ namespace _111AverageStringLength
             Console.WriteLine("Средняя длина слова: "+ result);
         }
 
-        static void RemovePunctuation(StringBuilder myStringBuilder)
+        static StringBuilder GetNoPunctuationSB(string userString)
         {
-            string[] punctuationMarks = { ".", "," , ":", ";", "!", "?", "'", "-", "—", "{", "}", "[", "]", "(", ")", "«", "»", "<", ">", "\"" };
-            foreach (string element in punctuationMarks)
+            StringBuilder myStringBuilder = new StringBuilder();
+            var myCharArray = userString.ToCharArray();
+
+            for (int i = 0; i <= myCharArray.Length; i++)
             {
-                myStringBuilder.Replace(element, "");
+                if (!Char.IsPunctuation(myCharArray[i]))
+                {
+                    myStringBuilder.Append(myCharArray[i]);
+                }
             }
+
+            return myStringBuilder;
         }
     }
 }
