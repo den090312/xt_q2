@@ -42,7 +42,9 @@ namespace _1._4_X_masTree
             //выводим корону елочки
             DrawCrown(leftIndent);
 
+            // инициализируем количество строк фрагмента елочки
             int numberOfStrings = 2;
+
             while (numberOfFragments > 0)
             {
                 //выводим фрагмент елочки
@@ -66,17 +68,17 @@ namespace _1._4_X_masTree
                 //выводим строку фрагмента елочки
                 DrawString(stringLenth);
 
-                // получаем длину новой строки фрагмента елочки
+                //получаем длину новой строки фрагмента елочки
                 stringLenth += 2;
 
-                //для каждой новой строки треугольника отступ будет уменьшаться на 1
+                //для каждой новой строки фрагмента елочки отступ будет уменьшаться на 1
                 leftIndent--;
             }
         }
 
-        static void DrawCrown(int indentValue)
+        static void DrawCrown(int leftIndent)
         {
-            for (int i = 1; i <= indentValue; i++)
+            for (int i = 1; i <= leftIndent; i++)
             {
                 Console.Write(' ');
             }
@@ -84,9 +86,9 @@ namespace _1._4_X_masTree
             Console.WriteLine();
         }
 
-        static void DrawIndent(int indentValue)
+        static void DrawIndent(int leftIndent)
         {
-            for (int i = 1; i <= indentValue; i++)
+            for (int i = 1; i <= leftIndent; i++)
             {
                 Console.Write(' ');
             }
