@@ -35,12 +35,16 @@ namespace Task02Simple
         {
             //четное число - всегда составное (кроме 2)
             if (n % 2 == 0) 
-                return n == 2;
+            {
+                return n == 2;    
+            }                
 
             //если можно извлечь кв. корень без остатка - число составное
             double dSqrt = Math.Sqrt(n);
             if (int.TryParse(dSqrt.ToString(), out int X)) 
-                return false;
+            {
+                return false;    
+            }                
 
             //особенности округления при конвертации double в int - к положительным числам прибавить 0.5
             //должно работать быстрее, чем Math.Round() и Convert.ToInt32()
@@ -49,8 +53,12 @@ namespace Task02Simple
 
             //проверяем результат от деления на нечетные числа от 3 до округленного кв. корня
             for (int i = 3; i <= M; i += 2)
-                if (n % i == 0) 
-                    return false;
+            {
+                if (n % i == 0)
+                {
+                    return false;  
+                }
+            }
 
             return true;
         }
