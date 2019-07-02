@@ -77,10 +77,16 @@ namespace _18NoPositive
             Random myRandom = new Random();
 
             for (int x = 0; x <= 4; i++)
+            {
                 for (int y = 0; j <= 4; y++)
+                {
                     for (int z = 0; z <= 4; z++)
+                    {
                         myArray[x, y, z] = myRandom.Next(minValue, maxValue);
-
+                    }                   
+                }
+            }
+                
             return myArray;
         }
     }
