@@ -11,47 +11,24 @@ namespace _12_CharDoubler
             Console.WriteLine("");
 
             Console.WriteLine("Введите первую строку:");
+            var firstString = Console.ReadLine();
             Console.WriteLine("");
 
             Console.WriteLine("Введите вторую строку:");
+            var secondString = Console.ReadLine();
             Console.WriteLine("");
 
-            Console.WriteLine("Результирующая строка:");
+            Console.WriteLine("Результирующая строка: "+GetCharDoubledString(firstString, secondString));
             Console.WriteLine("");
-
-            Console.WriteLine("Средняя длина слова: " + GetAveradgeStringLength(Console.ReadLine()));
         }
 
-        static double GetAveradgeStringLength(string userString)
+        static string GetCharDoubledString(string firstString, string secondStringg)
         {
-            //удаляем из строки все знаки препинания кроме пробелов
-            var NoPuncExceptSpaceString = GetNoPuncExceptSpaceString(userString);
+            string resultString;
 
-            //получаем массив слов
-            var wordsArray = NoPuncExceptSpaceString.Split(' ');
-
-            //удаляем пробелы из строки
-            var NoPunctuationString = NoPuncExceptSpaceString.Replace(" ", "");
-
-            //средняя длина слова равна отношению количества символов в строке к количеству слов
-            return (double)NoPunctuationString.Length / (double)wordsArray.Length;
+            return resultString;
         }
 
-        static string GetNoPuncExceptSpaceString(string userString)
-        {
-            StringBuilder mySB = new StringBuilder();
-            var myCharArray = userString.ToCharArray();
-
-            for (int i = 0; i <= myCharArray.Length - 1; i++)
-            {
-                if (!Char.IsPunctuation(myCharArray[i]) | myCharArray[i] == ' ')
-                {
-                    mySB.Append(myCharArray[i]);
-                }
-            }
-
-            return mySB.ToString();
-        }
     }
 }
 
