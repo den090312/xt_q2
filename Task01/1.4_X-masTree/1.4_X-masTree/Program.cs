@@ -37,40 +37,40 @@ namespace _1._4_X_masTree
         {
 
             //рассчитываем отступ слева для короны елочки
-            int indentValue = (((numberOfFragments * 2 + 1) - 1) / 2);
+            int leftIndent = (((numberOfFragments * 2 + 1) - 1) / 2);
 
             //выводим корону елочки
-            DrawCrown(indentValue);
+            DrawCrown(leftIndent);
 
-            int numberOfLines = 2;
+            int numberOfStrings = 2;
             while (numberOfFragments > 0)
             {
                 //выводим фрагмент елочки
-                DrawFragment(indentValue, numberOfLines);
+                DrawFragment(leftIndent, numberOfStrings);
 
-                numberOfLines++;
+                numberOfStrings++;
                 numberOfFragments--;
             }
         }
 
-        static void DrawFragment(int indentValue, int numberOfLines)
+        static void DrawFragment(int leftIndent, int numberOfStrings)
         {
-            //инициализируем длину строки треугольника
+            //инициализируем длину строки фрагмента елочки
             int stringLenth = 1;
 
-            for (int i = 1; i <= numberOfLines; i++)
+            for (int i = 1; i <= numberOfStrings; i++)
             {
                 //выводим отступ
-                DrawIndent(indentValue);
+                DrawIndent(leftIndent);
 
-                //выводим строку треугольника
+                //выводим строку фрагмента елочки
                 DrawString(stringLenth);
 
-                // получаем длину новой строки
+                // получаем длину новой строки фрагмента елочки
                 stringLenth += 2;
 
                 //для каждой новой строки треугольника отступ будет уменьшаться на 1
-                indentValue--;
+                leftIndent--;
             }
         }
 
