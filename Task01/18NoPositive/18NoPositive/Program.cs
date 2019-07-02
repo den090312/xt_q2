@@ -8,7 +8,7 @@ namespace _18NoPositive
         {
             int maxValue = 101;
             int minValue = -1 * maxValue;
-            int[,,] myArray = GetRandomArray(new Random(), maxValue, minValue);
+            int[,,] myArray = GetRandomArray(maxValue, minValue);
 
             Console.WriteLine("Трёхмерный массив случайных чисел от "+ (minValue + 1) + " до "+ (maxValue - 1) + ":");
             Console.WriteLine("");
@@ -71,46 +71,15 @@ namespace _18NoPositive
             }
         }
 
-        static int[,,] GetRandomArray(Random myRandom, int maxValue, int minValue)
+        static int[,,] GetRandomArray(int maxValue, int minValue)
         {
-            int[,,] myArray = new int[5, 5, 5]
-            {
-                {
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                },
-                {
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                },
-                {
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                },
-                {
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                },
-                {
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                    { myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue), myRandom.Next(minValue, maxValue) },
-                },
-            };
+            int[,,] myArray = new int[5, 5, 5];
+            Random myRandom = new Random();
+
+            for (int x = 0; x <= 4; i++)
+                for (int y = 0; j <= 4; y++)
+                    for (int z = 0; z <= 4; z++)
+                        myArray[x, y, z] = myRandom.Next(minValue, maxValue);
 
             return myArray;
         }
