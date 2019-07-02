@@ -11,7 +11,9 @@ namespace _1._4_X_masTree
 
         static int GetNumberOfFragmentsFromConsole()
         {
+            //количество фрагментов елочки
             int numberOfFragments;
+
             bool isInt;
             do
             {
@@ -41,6 +43,12 @@ namespace _1._4_X_masTree
             //выводим корону елочки
             DrawCrown(leftIndent);
 
+            //выводим остальные фрагменты елочки
+            DrawTreeFraments(leftIndent, numberOfFragments);
+        }
+
+        static void DrawTreeFraments(int leftIndent, int numberOfFragments)
+        {
             // инициализируем количество строк фрагмента елочки
             int numberOfStrings = 2;
 
