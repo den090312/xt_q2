@@ -1,0 +1,7 @@
+C:\Users\Bolotin\source\repos\19NonNegativeSum\19NonNegativeSum\bin\Debug\19NonNegativeSum.exe.config
+C:\Users\Bolotin\source\repos\19NonNegativeSum\19NonNegativeSum\bin\Debug\19NonNegativeSum.exe
+C:\Users\Bolotin\source\repos\19NonNegativeSum\19NonNegativeSum\bin\Debug\19NonNegativeSum.pdb
+C:\Users\Bolotin\source\repos\19NonNegativeSum\19NonNegativeSum\obj\Debug\19NonNegativeSum.csprojAssemblyReference.cache
+C:\Users\Bolotin\source\repos\19NonNegativeSum\19NonNegativeSum\obj\Debug\19NonNegativeSum.csproj.CoreCompileInputs.cache
+C:\Users\Bolotin\source\repos\19NonNegativeSum\19NonNegativeSum\obj\Debug\19NonNegativeSum.exe
+C:\Users\Bolotin\source\repos\19NonNegativeSum\19NonNegativeSum\obj\Debug\19NonNegativeSum.pdb
