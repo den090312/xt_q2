@@ -1,0 +1,7 @@
+C:\Users\Bolotin\source\repos\111AverageStringLength\111AverageStringLength\bin\Debug\111AverageStringLength.exe.config
+C:\Users\Bolotin\source\repos\111AverageStringLength\111AverageStringLength\bin\Debug\111AverageStringLength.exe
+C:\Users\Bolotin\source\repos\111AverageStringLength\111AverageStringLength\bin\Debug\111AverageStringLength.pdb
+C:\Users\Bolotin\source\repos\111AverageStringLength\111AverageStringLength\obj\Debug\111AverageStringLength.csprojAssemblyReference.cache
+C:\Users\Bolotin\source\repos\111AverageStringLength\111AverageStringLength\obj\Debug\111AverageStringLength.csproj.CoreCompileInputs.cache
+C:\Users\Bolotin\source\repos\111AverageStringLength\111AverageStringLength\obj\Debug\111AverageStringLength.exe
+C:\Users\Bolotin\source\repos\111AverageStringLength\111AverageStringLength\obj\Debug\111AverageStringLength.pdb
