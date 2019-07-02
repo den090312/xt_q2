@@ -14,13 +14,13 @@ namespace _111AverageStringLength
 
         static double GetAveradgeStringLength(string userString)
         {
-            //удаляем все знаки препинания кроме пробелов
+            //удаляем из строки все знаки препинания кроме пробелов
             var NoPuncExceptSpaceString = GetNoPuncExceptSpaceString(userString);
 
             //получаем массив слов
             var wordsArray = NoPuncExceptSpaceString.Split(' ');
 
-            //удаляем пробелы
+            //удаляем пробелы из строки
             var NoPunctuationString = NoPuncExceptSpaceString.Replace(" ", "");
 
             //средняя длина слова равна отношению количества символов в строке к количеству слов
