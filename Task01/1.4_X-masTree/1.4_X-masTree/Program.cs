@@ -12,7 +12,7 @@ namespace _1._4_X_masTree
         static int GetNumberOfFragmentsFromConsole()
         {
             //количество фрагментов елочки
-            int numberOfFragments;
+            int quantityOfFragments;
 
             bool isInt;
             do
@@ -23,51 +23,51 @@ namespace _1._4_X_masTree
                 //есть еще неактуальный размер, который не влезает в экран - его в расчет не берем
                 int windowEdge = Console.WindowWidth / 2 + 1;
                 Console.WriteLine("Введите положительное целое число меньше " + windowEdge);
-                isInt = int.TryParse(Console.ReadLine(), out numberOfFragments);
+                isInt = int.TryParse(Console.ReadLine(), out quantityOfFragments);
 
                 if (isInt)
                 {
-                    isInt = numberOfFragments > 0 & numberOfFragments < windowEdge;
+                    isInt = quantityOfFragments > 0 & quantityOfFragments < windowEdge;
                 }
             }
             while (isInt == false);
 
-            return numberOfFragments;
+            return quantityOfFragments;
         }
 
-        static void DrawXMasTree(int numberOfFragments)
+        static void DrawXMasTree(int quantityOfFragments)
         {
             //рассчитываем отступ слева для короны елочки
-            int leftIndent = (((numberOfFragments * 2 + 1) - 1) / 2);
+            int leftIndent = (((quantityOfFragments * 2 + 1) - 1) / 2);
 
             //выводим корону елочки
             DrawCrown(leftIndent);
 
             //выводим остальные фрагменты елочки
-            DrawTreeFragments(leftIndent, numberOfFragments);
+            DrawTreeFragments(leftIndent, quantityOfFragments);
         }
 
-        static void DrawTreeFragments(int leftIndent, int numberOfFragments)
+        static void DrawTreeFragments(int leftIndent, int quantityOfFragments)
         {
             // инициализируем количество строк фрагмента елочки
-            int numberOfStrings = 2;
+            int quantityOfStrings = 2;
 
-            while (numberOfFragments > 0)
+            while (quantityOfFragments > 0)
             {
                 //выводим фрагмент елочки
-                DrawFragment(leftIndent, numberOfStrings);
+                DrawFragment(leftIndent, quantityOfStrings);
 
-                numberOfStrings++;
-                numberOfFragments--;
+                quantityOfStrings++;
+                quantityOfFragments--;
             }
         }
 
-        static void DrawFragment(int leftIndent, int numberOfStrings)
+        static void DrawFragment(int leftIndent, int quantityOfStrings)
         {
             //инициализируем длину строки фрагмента елочки
             int stringLenth = 1;
 
-            for (int i = 1; i <= numberOfStrings; i++)
+            for (int i = 1; i <= quantityOfStrings; i++)
             {
                 //выводим отступ
                 DrawIndent(leftIndent);
