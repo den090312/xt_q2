@@ -50,12 +50,10 @@ namespace Task16FontAdjustment
             {
                 return fontAdjustment |= FontAdjustment.Bold;    
             }                
-
             if (fontAdjustment.HasFlag(FontAdjustment.Italic))
             {
                 return fontAdjustment |= FontAdjustment.Italic;    
             }                
-
             if (fontAdjustment.HasFlag(FontAdjustment.Underline))
             {
                 return fontAdjustment |= FontAdjustment.Underline;    
@@ -71,15 +69,12 @@ namespace Task16FontAdjustment
                 case 1:
                     fontAdjustment = SetFontAdjusment(fontAdjustment, FontAdjustment.Bold);
                     break;
-
                 case 2:
                     fontAdjustment = SetFontAdjusment(fontAdjustment, FontAdjustment.Italic);
                     break;
-
                 case 3:
                     fontAdjustment = SetFontAdjusment(fontAdjustment, FontAdjustment.Underline);
-                    break;
-                
+                    break;           
                 case 4:
                     Environment.Exit(0);
                     break;
