@@ -6,7 +6,7 @@ namespace Task16FontAdjustment
     class Program
     {
         [Flags]
-        enum FontAdjustment
+        enum Font
         {
             None = 0,
             Bold = 1,
@@ -16,7 +16,7 @@ namespace Task16FontAdjustment
 
         static void Main(string[] args)
         {
-            FontAdjustment fontAdjustment = FontAdjustment.None;
+            Font myFont = Font.None;
             Console.WriteLine("Параметры надписи: None");
             WriteMenu();
 
@@ -26,9 +26,9 @@ namespace Task16FontAdjustment
                 int userKey = GetKeyFromConsole();
                 if (userKey != 0)
                 {
-                    fontAdjustment = ChangeFontAdjustment(fontAdjustment, userKey);
+                    myFont = ChangeFontFromKey(myFont, userKey);
                     Console.WriteLine("");
-                    Console.WriteLine("Параметры надписи: " + fontAdjustment);
+                    Console.WriteLine("Параметры надписи: " + myFont);
                     WriteMenu();
                 }
             }
@@ -43,45 +43,45 @@ namespace Task16FontAdjustment
             Console.WriteLine("\t4: EXIT");
         }
 
-        static FontAdjustment ChangeFontAdjustment(FontAdjustment fontAdjustment, int consoleKey)
+        static Font ChangeFontFromKey(Font myFont, int consoleKey)
         {
             switch (consoleKey)
             {
                 case 1:
-                    fontAdjustment = SetFontAdjusment(fontAdjustment, FontAdjustment.Bold);
+                    myFont = GetFont(myFont, Font.Bold);
                     break;
                 case 2:
-                    fontAdjustment = SetFontAdjusment(fontAdjustment, FontAdjustment.Italic);
+                    myFont = GetFont(myFont, Font.Italic);
                     break;
                 case 3:
-                    fontAdjustment = SetFontAdjusment(fontAdjustment, FontAdjustment.Underline);
+                    myFont = GetFont(myFont, Font.Underline);
                     break;
                 case 4:
                     Environment.Exit(0);
                     break;
             }
 
-            return fontAdjustment;
+            return myFont;
         }
 
-        static FontAdjustment SetFontAdjusment(FontAdjustment fontAdjustment, FontAdjustment fontAdjustmentFlag)
+        static Font GetFont(Font font, Font fontFlag)
         {
-            if (fontAdjustment.HasFlag(fontAdjustmentFlag))
+            if (font.HasFlag(fontFlag))
             {
-                fontAdjustment ^= fontAdjustmentFlag;
+                font ^= fontFlag;
             }
             else
             {
-                fontAdjustment |= fontAdjustmentFlag;
+                font |= fontFlag;
             }
 
-            return fontAdjustment;
+            return font;
         }
 
         static int GetKeyFromConsole()
         {
             bool inputComplete = false;
-            StringBuilder sb = new StringBuilder();
+            StringBuilder mySb = new StringBuilder();
             while (!inputComplete)
             {
                 ConsoleKeyInfo key = Console.ReadKey(true);
@@ -92,18 +92,18 @@ namespace Task16FontAdjustment
                 }
                 else if (char.IsDigit(key.KeyChar) & (key.KeyChar == '1' || key.KeyChar == '2' || key.KeyChar == '3' || key.KeyChar == '4'))
                 {
-                    if (sb.Length < 1)
+                    if (mySb.Length < 1)
                     {
-                        sb.Append(key.KeyChar);
+                        mySb.Append(key.KeyChar);
                         Console.Write(key.KeyChar.ToString());
                     }
                 }
             }
 
             int result;
-            if (sb.Length > 0)
+            if (mySb.Length > 0)
             {
-                result = int.Parse(sb.ToString());
+                result = int.Parse(mySb.ToString());
             }
             else
             {
