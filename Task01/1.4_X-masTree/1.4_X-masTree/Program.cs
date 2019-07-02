@@ -44,10 +44,10 @@ namespace _1._4_X_masTree
             DrawCrown(leftIndent);
 
             //выводим остальные фрагменты елочки
-            DrawTreeFraments(leftIndent, numberOfFragments);
+            DrawTreeFragments(leftIndent, numberOfFragments);
         }
 
-        static void DrawTreeFraments(int leftIndent, int numberOfFragments)
+        static void DrawTreeFragments(int leftIndent, int numberOfFragments)
         {
             // инициализируем количество строк фрагмента елочки
             int numberOfStrings = 2;
