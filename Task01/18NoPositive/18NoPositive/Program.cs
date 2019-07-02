@@ -23,20 +23,26 @@ namespace _18NoPositive
         static void WriteArray(int[,,] myArray)
         {
             for (int x = 0; x <= 4; x++)
-                WriteY(x, myArray);
+            {
+                WriteY(x, myArray);   
+            }                
         }
 
         static void WriteY(int x, int[,,] myArray)
         {
             for (int y = 0; y <= 4; y++)
-                WriteZ(x, y, myArray);
+            {
+                WriteZ(x, y, myArray);   
+            }
             Console.WriteLine();
         }
 
         static void WriteZ(int x, int y, int[,,] myArray)
         {
             for (int z = 0; z <= 4; z++)
+            {
                 Console.Write(myArray[x, y, z] + " ");
+            }               
             Console.WriteLine();
         }
 
@@ -45,7 +51,9 @@ namespace _18NoPositive
             for (int x = 0; x <= 4; x++)
             {
                 if (myArray[x, 0, 0] > 0)
-                    myArray[x, 0, 0] = 0;
+                {
+                    myArray[x, 0, 0] = 0;    
+                }
                 SetNoPositiveY(x, myArray);
             }
 
