@@ -24,14 +24,21 @@ namespace _12_CharDoubler
 
         static string GetCharDoubledString(string firstString, string secondString)
         {
-            string resultString;
-
             var firstCharArray = firstString.ToCharArray();
-            var secondharArray = secondString.ToCharArray();
+            var secondCharArray = secondString.ToCharArray();
 
-            f
+            var mySB = new StringBuilder();
 
-            return resultString;
+            for (int i = 0; i <= firstCharArray.Length - 1; i++)
+            {
+                mySB.Append(firstCharArray[i]);
+                if (Array.Exists(secondCharArray, element => element == firstCharArray[i]))
+                {
+                    mySB.Append(firstCharArray[i]);
+                }
+            }
+
+            return mySB.ToString();
         }
 
     }
