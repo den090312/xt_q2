@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace _17ArrayProcessing
 {
@@ -6,30 +6,29 @@ namespace _17ArrayProcessing
     {
         static void Main(string[] args)
         {
-            int maxValue = 101;
-            int[] myArray = GetRandomArray(new Random(), maxValue);
+            int maxValue = 100;
+            int[] myArray = GetRandomArray(maxValue);
 
-            Console.WriteLine("Массив случайных чисел от 1 до " + (maxValue - 1) + ":");
+            Console.WriteLine("Массив случайных чисел от 1 до " + maxValue + ":");
             WriteArray(myArray);
-
             Console.WriteLine("");
 
             Console.WriteLine("Максимальное значение: " + GetMaxValue(myArray) + "");
-            Console.WriteLine("Минимальное значение: "  + GetMinValue(myArray) + "");
-
+            Console.WriteLine("Минимальное значение: " + GetMinValue(myArray) + "");
             Console.WriteLine("");
 
             Console.WriteLine("Отсортированный массив:");
             WriteArray(GetSortedArray(myArray));
         }
 
-        static int[] GetRandomArray(Random myRandom, int maxValue)
+        static int[] GetRandomArray(int maxValue)
         {
-            int[] myArray =
+            Random myRandom = new Random();
+            int[] myArray = new int[10];
+            for (int i = 0; i <= 9; i++)
             {
-                myRandom.Next(maxValue), myRandom.Next(maxValue), myRandom.Next(maxValue), myRandom.Next(maxValue), myRandom.Next(maxValue),
-                myRandom.Next(maxValue), myRandom.Next(maxValue), myRandom.Next(maxValue), myRandom.Next(maxValue), myRandom.Next(maxValue)
-            };
+                myArray[i] = myRandom.Next(maxValue);
+            }
 
             return myArray;
         }
@@ -37,15 +36,21 @@ namespace _17ArrayProcessing
         static void WriteArray(int[] myArray)
         {
             foreach (int element in myArray)
+            {
                 Console.WriteLine(element);
+            }
         }
 
         static int GetMaxValue(int[] myArray)
         {
             int max = myArray[0];
             foreach (int element in myArray)
+            {
                 if (element > max)
+                {
                     max = element;
+                }
+            }
 
             return max;
         }
@@ -54,8 +59,12 @@ namespace _17ArrayProcessing
         {
             int min = myArray[0];
             foreach (int element in myArray)
+            {
                 if (element < min)
+                {
                     min = element;
+                }
+            }
 
             return min;
         }
