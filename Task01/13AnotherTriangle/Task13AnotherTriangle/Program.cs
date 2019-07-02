@@ -47,13 +47,7 @@ namespace Task13AnotherTriangle
                 DrawIndent(indentValue);
 
                 //выводим строку треугольника
-                int j = 1;
-                while (j <= stringLenth)
-                {
-                    Console.Write('*');
-                    j++;
-                }
-                Console.WriteLine("");
+                DrawLine(indentValue);
 
                 // получаем длину новой строки
                 stringLenth += 2;
@@ -66,9 +60,18 @@ namespace Task13AnotherTriangle
         static void DrawIndent(int indentValue)
         {
             for (int i = 1; i <= indentValue; i++)
-            {
                 Console.Write(' ');
-            }
         }
+        
+        static void DrawLine(int indentValue)
+        {
+            int j = 1;
+            while (j <= stringLenth)
+            {
+                Console.Write('*');
+                j++;
+            }
+            Console.WriteLine("");
+        }        
     }
 }
