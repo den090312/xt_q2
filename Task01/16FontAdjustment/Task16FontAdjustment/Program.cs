@@ -28,7 +28,7 @@ namespace Task16FontAdjustment
                 {
                     fontAdjustment = ChangeFontAdjustmentFromKey(fontAdjustment, userKey);
                     Console.WriteLine("");
-                    Console.WriteLine("Параметры надписи: " + GetCurrentAdjusment(fontAdjustment));
+                    Console.WriteLine("Параметры надписи: " + fontAdjustment);
                     WriteMenu();
                 }
             }
@@ -41,26 +41,6 @@ namespace Task16FontAdjustment
             Console.WriteLine("\t2: italic");
             Console.WriteLine("\t3: underline");
             Console.WriteLine("\t4: EXIT");
-        }
-
-        static FontAdjustment GetCurrentAdjusment(FontAdjustment fontAdjustment)
-        {
-            if (fontAdjustment.HasFlag(FontAdjustment.Bold))
-            {
-                return fontAdjustment |= FontAdjustment.Bold;
-            }
-
-            if (fontAdjustment.HasFlag(FontAdjustment.Italic))
-            {
-                return fontAdjustment |= FontAdjustment.Italic;
-            }
-
-            if (fontAdjustment.HasFlag(FontAdjustment.Underline))
-            {
-                return fontAdjustment |= FontAdjustment.Underline;
-            }
-
-            return fontAdjustment;
         }
 
         static FontAdjustment ChangeFontAdjustmentFromKey(FontAdjustment fontAdjustment, int consoleKey)
