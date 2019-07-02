@@ -65,7 +65,9 @@ namespace _18NoPositive
             for (int y = 0; y <= 4; y++)
             {
                 if (myArray[x, y, 0] > 0)
-                    myArray[x, y, 0] = 0;
+                {
+                    myArray[x, y, 0] = 0;   
+                }                   
                 SetNoPositiveZ(x, y, myArray);
             }
         }
@@ -75,7 +77,9 @@ namespace _18NoPositive
             for (int z = 0; z <= 4; z++)
             {
                 if (myArray[x, y, z] > 0)
-                    myArray[x, y, z] = 0;
+                {
+                    myArray[x, y, z] = 0;    
+                }                    
             }
         }
 
