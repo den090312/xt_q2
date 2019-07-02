@@ -1,0 +1,57 @@
+﻿using System;
+using System.Text;
+
+namespace _12_CharDoubler
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Максимальная длина строки - 254 симвоола");
+            Console.WriteLine("");
+
+            Console.WriteLine("Введите первую строку:");
+            Console.WriteLine("");
+
+            Console.WriteLine("Введите вторую строку:");
+            Console.WriteLine("");
+
+            Console.WriteLine("Результирующая строка:");
+            Console.WriteLine("");
+
+            Console.WriteLine("Средняя длина слова: " + GetAveradgeStringLength(Console.ReadLine()));
+        }
+
+        static double GetAveradgeStringLength(string userString)
+        {
+            //удаляем из строки все знаки препинания кроме пробелов
+            var NoPuncExceptSpaceString = GetNoPuncExceptSpaceString(userString);
+
+            //получаем массив слов
+            var wordsArray = NoPuncExceptSpaceString.Split(' ');
+
+            //удаляем пробелы из строки
+            var NoPunctuationString = NoPuncExceptSpaceString.Replace(" ", "");
+
+            //средняя длина слова равна отношению количества символов в строке к количеству слов
+            return (double)NoPunctuationString.Length / (double)wordsArray.Length;
+        }
+
+        static string GetNoPuncExceptSpaceString(string userString)
+        {
+            StringBuilder mySB = new StringBuilder();
+            var myCharArray = userString.ToCharArray();
+
+            for (int i = 0; i <= myCharArray.Length - 1; i++)
+            {
+                if (!Char.IsPunctuation(myCharArray[i]) | myCharArray[i] == ' ')
+                {
+                    mySB.Append(myCharArray[i]);
+                }
+            }
+
+            return mySB.ToString();
+        }
+    }
+}
+
