@@ -35,7 +35,6 @@ namespace _1._4_X_masTree
 
         static void DrawXMasTree(int numberOfFragments)
         {
-
             //рассчитываем отступ слева для короны елочки
             int leftIndent = (((numberOfFragments * 2 + 1) - 1) / 2);
 
