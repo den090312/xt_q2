@@ -18,7 +18,9 @@ namespace Task15SumOfNumbers
             for (int i = startNumber; startNumber >= 1; startNumber--)
             {
                 if (startNumber % 3 == 0 | startNumber % 5 == 0)
+                {
                     sum += startNumber;
+                }
             }
 
             return sum;
