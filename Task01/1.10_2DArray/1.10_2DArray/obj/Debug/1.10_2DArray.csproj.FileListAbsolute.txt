@@ -5,3 +5,10 @@ C:\Users\Bolotin\source\repos\1.10_2DArray\1.10_2DArray\obj\Debug\1.10_2DArray.c
 C:\Users\Bolotin\source\repos\1.10_2DArray\1.10_2DArray\obj\Debug\1.10_2DArray.csproj.CoreCompileInputs.cache
 C:\Users\Bolotin\source\repos\1.10_2DArray\1.10_2DArray\obj\Debug\1.10_2DArray.exe
 C:\Users\Bolotin\source\repos\1.10_2DArray\1.10_2DArray\obj\Debug\1.10_2DArray.pdb
+C:\Users\Den\source\repos\Task01\1.10_2DArray\1.10_2DArray\bin\Debug\1.10_2DArray.exe.config
+C:\Users\Den\source\repos\Task01\1.10_2DArray\1.10_2DArray\bin\Debug\1.10_2DArray.exe
+C:\Users\Den\source\repos\Task01\1.10_2DArray\1.10_2DArray\bin\Debug\1.10_2DArray.pdb
+C:\Users\Den\source\repos\Task01\1.10_2DArray\1.10_2DArray\obj\Debug\1.10_2DArray.csprojAssemblyReference.cache
+C:\Users\Den\source\repos\Task01\1.10_2DArray\1.10_2DArray\obj\Debug\1.10_2DArray.csproj.CoreCompileInputs.cache
+C:\Users\Den\source\repos\Task01\1.10_2DArray\1.10_2DArray\obj\Debug\1.10_2DArray.exe
+C:\Users\Den\source\repos\Task01\1.10_2DArray\1.10_2DArray\obj\Debug\1.10_2DArray.pdb

@@ -18,7 +18,7 @@ namespace _1._10_2DArray
             Write2DArray(myArray);
             Console.WriteLine("");
 
-            Console.WriteLine("Сумма элементов массива, стоящих на чётных позициях, равна: "+ GetSumOddPosElements(myArray));
+            Console.WriteLine("Сумма элементов массива, стоящих на чётных позициях, равна "+ GetSumOddPosElements(myArray));
         }
 
         static int[,] GetRandom2DArray()
