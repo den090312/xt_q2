@@ -18,7 +18,7 @@ namespace Task02Simple
             bool isInt;
             do
             {
-                Console.WriteLine("Введите положительное число больше 1 и меньше 2147483647");
+                Console.WriteLine("Введите положительное число больше 1 и меньше 2147483648");
                 isInt = int.TryParse(Console.ReadLine(), out n);
 
                 if (isInt)
