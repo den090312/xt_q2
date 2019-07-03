@@ -33,7 +33,7 @@ namespace _111AverageStringLength
 
             for (int i = 0; i <= myCharArray.Length - 1; i++)
             {
-                if (!Char.IsPunctuation(myCharArray[i]) | myCharArray[i] == ' ')
+                if (!Char.IsPunctuation(myCharArray[i]))
                 {
                     mySB.Append(myCharArray[i]);
                 }
