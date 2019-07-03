@@ -17,7 +17,7 @@ namespace _111AverageStringLength
             var NoPuncExceptSpaceString = GetNoPuncExceptSpaceString(userString);
 
             //получаем массив слов
-            var wordsArray = NoPuncExceptSpaceString.Split(' ');
+            var wordsArray = NoPuncExceptSpaceString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             //удаляем пробелы из строки
             var NoPunctuationString = NoPuncExceptSpaceString.Replace(" ", "");
