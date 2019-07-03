@@ -9,13 +9,13 @@ namespace _19NonNegativeSum
             int maxValue = 100;
             int[] myArray = GetRandomArray(maxValue);
 
-            Console.WriteLine("Массив случайных чисел от 1 до "+ maxValue + ":");
+            Console.WriteLine($"Массив случайных чисел от 1 до {maxValue}");
             Console.WriteLine();
 
             WriteArray(myArray);
             Console.WriteLine();
 
-            Console.WriteLine("Сумма неотрицательных элементов массива равна: "+ GetNonNegativeSum(myArray));
+            Console.WriteLine($"Сумма неотрицательных элементов массива равна: {GetNonNegativeSum(myArray)}");
         }
 
         static int[] GetRandomArray(int maxValue)

@@ -9,13 +9,13 @@ namespace _17ArrayProcessing
             int maxValue = 100;
             int[] myArray = GetRandomArray(maxValue);
 
-            Console.WriteLine("Массив случайных чисел от 1 до "+ maxValue + ":");
+            Console.WriteLine($"Массив случайных чисел от 1 до {maxValue}");
             WriteArray(myArray);
-            Console.WriteLine("");
+            Console.WriteLine();
 
-            Console.WriteLine("Максимальное значение: "+ GetMaxValue(myArray) + "");
-            Console.WriteLine("Минимальное значение: "+ GetMinValue(myArray) + "");
-            Console.WriteLine("");
+            Console.WriteLine($"Максимальное значение: {GetMaxValue(myArray)}");
+            Console.WriteLine($"Минимальное значение: {GetMinValue(myArray)}");
+            Console.WriteLine();
 
             Console.WriteLine("Отсортированный массив:");
             WriteArray(GetSortedArray(myArray));

@@ -9,12 +9,12 @@ namespace _18NoPositive
             int maxValue = 100;
             int[,,] myArray = GetRandomArray(maxValue);
 
-            Console.WriteLine("Трёхмерный массив случайных чисел от "+(-1 * maxValue) + " до "+maxValue + ":");
-            Console.WriteLine("");
+            Console.WriteLine($"Трёхмерный массив случайных чисел от {(-1 * maxValue)} до {maxValue}:");
+            Console.WriteLine();
             WriteArray(myArray);
 
             Console.WriteLine("Заменяем положительные элементы на нули:");
-            Console.WriteLine("");
+            Console.WriteLine();
 
             WriteArray(SetNoPositiveArray(myArray));
         }

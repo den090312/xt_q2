@@ -9,12 +9,12 @@ namespace _1._10_2DArray
             int[,] myArray = GetRandom2DArray();
 
             Console.WriteLine("Двумерный массив случайных чисел:");
-            Console.WriteLine("");
+            Console.WriteLine();
 
             Write2DArray(myArray);
-            Console.WriteLine("");
+            Console.WriteLine();
 
-            Console.WriteLine("Сумма элементов массива, стоящих на чётных позициях, равна "+ GetSumOddPosElements(myArray));
+            Console.WriteLine($"Сумма элементов массива, стоящих на чётных позициях, равна {GetSumOddPosElements(myArray)}");
         }
 
         static int[,] GetRandom2DArray()
@@ -40,7 +40,7 @@ namespace _1._10_2DArray
                 {
                     Console.Write(myArray[i, j] + " ");
                 }
-                Console.WriteLine("");
+                Console.WriteLine();
             }
         }
 
