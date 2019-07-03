@@ -60,7 +60,9 @@ namespace Task13AnotherTriangle
         static void DrawIndent(int indentValue)
         {
             for (int i = 1; i <= indentValue; i++)
-                Console.Write(' ');
+            {
+                Console.Write(' ');           
+            }
         }
 
         static void DrawString(int stringLenth)
