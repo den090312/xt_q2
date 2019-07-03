@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace _19NonNegativeSum
 {
@@ -10,10 +10,12 @@ namespace _19NonNegativeSum
             int[] myArray = GetRandomArray(maxValue);
 
             Console.WriteLine("Массив случайных чисел от 1 до " + maxValue + ":");
-            WriteArray(myArray);
-            Console.WriteLine("");
+            Console.WriteLine();
 
-            Console.WriteLine("Сумма неотрицательных элементов массива равна: "+ GetNonNegativeSum(myArray));
+            WriteArray(myArray);
+            Console.WriteLine();
+
+            Console.WriteLine("Сумма неотрицательных элементов массива равна: " + GetNonNegativeSum(myArray));
         }
 
         static int[] GetRandomArray(int maxValue)
