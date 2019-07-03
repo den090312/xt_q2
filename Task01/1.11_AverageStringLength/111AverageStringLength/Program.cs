@@ -39,6 +39,7 @@ namespace _111AverageStringLength
                 }
             }
 
+            //убираем пробелы в начале и в конце строки
             return mySB.ToString().Trim(' ');
         }
     }
