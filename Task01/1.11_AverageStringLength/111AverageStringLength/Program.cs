@@ -8,22 +8,22 @@ namespace _111AverageStringLength
         static void Main(string[] args)
         {
             Console.WriteLine("Введите строку. Максимальная длина - 254 символа");
-            Console.WriteLine("Средняя длина слова: "+ GetAveradgeStringLength(Console.ReadLine()));
+            Console.WriteLine("Средняя длина слова: " + GetAveradgeStringLength(Console.ReadLine()));
         }
 
         static double GetAveradgeStringLength(string userString)
         {
             //удаляем из строки все знаки препинания кроме пробелов
-            var NoPuncExceptSpaceString = GetNoPuncExceptSpaceString(userString);
+            var noPuncExceptSpaceString = GetNoPuncExceptSpaceString(userString);
 
             //получаем массив слов
-            var wordsArray = NoPuncExceptSpaceString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var wordsArray = noPuncExceptSpaceString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
             //удаляем пробелы из строки
-            var NoPunctuationString = NoPuncExceptSpaceString.Replace(" ", "");
+            var noPunctuationString = noPuncExceptSpaceString.Replace(" ", "");
 
             //средняя длина слова равна отношению количества символов в строке к количеству слов
-            return (double)NoPunctuationString.Length / (double)wordsArray.Length;
+            return (double)noPunctuationString.Length / (double)wordsArray.Length;
         }
 
         static string GetNoPuncExceptSpaceString(string userString)
