@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 
 namespace Task11Rectangle
@@ -117,7 +117,7 @@ namespace Task11Rectangle
                 //проверка на знак 'минус'
                 if (key.KeyChar == '-')
                 {
-                    if (!sb.ToString().Contains('-'))
+                    if (!sb.ToString().Contains("-"))
                     {
                         sb.Append(key.KeyChar);
                         Console.Write(key.KeyChar.ToString());
