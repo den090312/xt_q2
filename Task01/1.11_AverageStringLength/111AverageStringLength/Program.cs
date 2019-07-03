@@ -7,9 +7,8 @@ namespace _111AverageStringLength
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Введите строку. Максимальная длина - 254 симвоола");
-            Console.WriteLine("");
-            Console.WriteLine("Средняя длина слова: " + GetAveradgeStringLength(Console.ReadLine()));
+            Console.WriteLine("Введите строку. Максимальная длина - 254 символа");
+            Console.WriteLine("Средняя длина слова: "+ GetAveradgeStringLength(Console.ReadLine()));
         }
 
         static double GetAveradgeStringLength(string userString)
@@ -40,7 +39,7 @@ namespace _111AverageStringLength
                 }
             }
 
-            return mySB.ToString();
+            return mySB.ToString().Trim(' ');
         }
     }
 }
