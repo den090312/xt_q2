@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 
 namespace _12_CharDoubler
@@ -18,7 +18,7 @@ namespace _12_CharDoubler
             var secondString = Console.ReadLine();
             Console.WriteLine("");
 
-            Console.WriteLine("Результирующая строка: "+GetCharDoubledString(firstString, secondString));
+            Console.WriteLine("Результирующая строка: "+ GetCharDoubledString(firstString, secondString));
             Console.WriteLine("");
         }
 
@@ -43,4 +43,3 @@ namespace _12_CharDoubler
 
     }
 }
-
