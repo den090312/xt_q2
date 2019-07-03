@@ -7,7 +7,7 @@ namespace Task15SumOfNumbers
         static void Main(string[] args)
         {
             Console.WriteLine("Задача: Найти сумму всех чисел меньше 1000, кратных 3 или 5");
-            Console.WriteLine("Ответ: " + GetSum());
+            Console.WriteLine($"Ответ: {GetSum()}");
         }
 
         static int GetSum()

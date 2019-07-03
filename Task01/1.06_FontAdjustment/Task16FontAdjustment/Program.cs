@@ -27,8 +27,8 @@ namespace Task16FontAdjustment
                 if (userKey != 0)
                 {
                     myFont = ChangeFont(myFont, userKey);
-                    Console.WriteLine("");
-                    Console.WriteLine("Параметры надписи: "+ myFont);
+                    Console.WriteLine();
+                    Console.WriteLine($"Параметры надписи: {myFont}");
                     WriteMenu();
                 }
             }
@@ -81,7 +81,7 @@ namespace Task16FontAdjustment
         static int GetKeyFromConsole()
         {
             bool inputComplete = false;
-            StringBuilder mySb = new StringBuilder();
+            StringBuilder userKeySB = new StringBuilder();
             while (!inputComplete)
             {
                 ConsoleKeyInfo key = Console.ReadKey(true);
@@ -92,18 +92,18 @@ namespace Task16FontAdjustment
                 }
                 else if (char.IsDigit(key.KeyChar) & (key.KeyChar == '1' || key.KeyChar == '2' || key.KeyChar == '3' || key.KeyChar == '4'))
                 {
-                    if (mySb.Length < 1)
+                    if (userKeySB.Length < 1)
                     {
-                        mySb.Append(key.KeyChar);
-                        Console.Write(key.KeyChar.ToString());
+                        userKeySB.Append(key.KeyChar);
+                        Console.Write(key.KeyChar);
                     }
                 }
             }
 
             int result;
-            if (mySb.Length > 0)
+            if (userKeySB.Length > 0)
             {
-                result = int.Parse(mySb.ToString());
+                result = int.Parse(userKeySB.ToString());
             }
             else
             {
