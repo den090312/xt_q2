@@ -20,7 +20,7 @@ namespace Task13AnotherTriangle
                 //ограничиваем кол-во строк актуальным размером окна консоли 
                 //есть еще неактуальный размер, который не влезает в экран - его в расчет не берем
                 int windowEdge = Console.WindowWidth / 2 + 1;
-                Console.WriteLine("Введите положительное целое число меньше " + windowEdge);
+                Console.WriteLine($"Введите положительное целое число меньше {windowEdge}");
                 isInt = int.TryParse(Console.ReadLine(), out numberOfLines);
 
                 if (isInt)
@@ -73,7 +73,7 @@ namespace Task13AnotherTriangle
                 Console.Write('*');
                 j++;
             }
-            Console.WriteLine("");
+            Console.WriteLine();
         }
     }
 }

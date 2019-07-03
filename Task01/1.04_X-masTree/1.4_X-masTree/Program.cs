@@ -22,7 +22,7 @@ namespace _1._4_X_masTree
                 //ограничиваем кол-во строк актуальным размером окна консоли 
                 //есть еще неактуальный размер, который не влезает в экран - его в расчет не берем
                 int windowEdge = Console.WindowWidth / 2 + 1;
-                Console.WriteLine("Введите положительное целое число меньше " + windowEdge);
+                Console.WriteLine($"Введите положительное целое число меньше {windowEdge}");
                 isInt = int.TryParse(Console.ReadLine(), out quantityOfFragments);
 
                 if (isInt)
@@ -109,7 +109,7 @@ namespace _1._4_X_masTree
                 Console.Write('*');
                 j++;
             }
-            Console.WriteLine("");
+            Console.WriteLine();
         }
     }
 }

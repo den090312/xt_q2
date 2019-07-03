@@ -18,12 +18,12 @@ namespace Task12Triangle
                 //ограничиваем кол-во строк актуальным размером окна консоли 
                 //есть еще неактуальный размер, который не влезает в экран - его в расчет не берем
                 int windowEdge = Console.WindowWidth + 1;
-                Console.WriteLine("Введите положительное целое число меньше " + windowEdge);
+                Console.WriteLine($"Введите положительное целое число меньше {windowEdge}");
                 isInt = int.TryParse(Console.ReadLine(), out n);
 
                 if (isInt)
                 {
-                    isInt = n > 0 & n < windowEdge; ;
+                    isInt = n > 0 & n < windowEdge;
                 }
             }
             while (isInt == false);
