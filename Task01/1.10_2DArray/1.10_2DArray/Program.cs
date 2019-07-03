@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
 namespace _1._10_2DArray
 {
@@ -42,7 +38,7 @@ namespace _1._10_2DArray
             {
                 for (int j = 0; j <= 9; j++)
                 {
-                    Console.Write(myArray[i,j] + " ");
+                    Console.Write(myArray[i, j] + " ");
                 }
                 Console.WriteLine("");
             }
