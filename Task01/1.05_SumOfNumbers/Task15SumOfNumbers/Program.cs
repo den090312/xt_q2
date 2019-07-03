@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Task15SumOfNumbers
 {
@@ -13,9 +13,8 @@ namespace Task15SumOfNumbers
         static int GetSum()
         {
             int sum = 0;
-            int startNumber = 999;
 
-            for (int i = startNumber; startNumber >= 1; startNumber--)
+            for (int startNumber = 999; startNumber >= 1; startNumber--)
             {
                 if (startNumber % 3 == 0 | startNumber % 5 == 0)
                 {
