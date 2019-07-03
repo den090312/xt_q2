@@ -9,7 +9,7 @@ namespace _18NoPositive
             int maxValue = 100;
             int[,,] myArray = GetRandomArray(maxValue);
 
-            Console.WriteLine("Трёхмерный массив случайных чисел от " +(-1 * maxValue) + " до " +maxValue + ":");
+            Console.WriteLine("Трёхмерный массив случайных чисел от "+(-1 * maxValue) + " до "+maxValue + ":");
             Console.WriteLine("");
             WriteArray(myArray);
 
