@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Task12Triangle
 {
@@ -15,12 +15,15 @@ namespace Task12Triangle
             bool isInt;
             do
             {
-                Console.WriteLine("Введите положительное число меньше 2147483647");
+                //ограничиваем кол-во строк актуальным размером окна консоли 
+                //есть еще неактуальный размер, который не влезает в экран - его в расчет не берем
+                int windowEdge = Console.WindowWidth + 1;
+                Console.WriteLine("Введите положительное целое число меньше " + windowEdge);
                 isInt = int.TryParse(Console.ReadLine(), out n);
 
                 if (isInt)
                 {
-                    isInt = n > 0;
+                    isInt = n > 0 & n < windowEdge; ;
                 }
             }
             while (isInt == false);
