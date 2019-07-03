@@ -19,7 +19,7 @@ namespace Task11Rectangle
             int b = GetIntFromConsole(sideIndex = 2, aValue = a);
 
             Console.WriteLine();
-            Console.WriteLine("Площадь прямоугольника: " + GetSquare(a, b));
+            Console.WriteLine($"Площадь прямоугольника: {GetSquare(a, b)}");
         }
 
         static int GetSquare(int a, int b) => a * b;
@@ -53,7 +53,7 @@ namespace Task11Rectangle
             }
             else
             {
-                inputComplete = InputCompleteFalse("Введенное число превышает " + int.MaxValue + "");
+                inputComplete = InputCompleteFalse($"Введенное число превышает {int.MaxValue}");
                 sb.Clear();
             }
 
@@ -63,7 +63,10 @@ namespace Task11Rectangle
         static void EmulateConsoleKeyBackSpace(StringBuilder sb, int sideNumber, int aValue)
         {
             //уменьшаем строку на 1 символ
-            if (sb.Length > 0) { sb.Length--; }
+            if (sb.Length > 0)
+            {
+                sb.Length--;
+            }
 
             //очищаем текущий ввод
             Console.Clear();
@@ -111,7 +114,7 @@ namespace Task11Rectangle
                 if (char.IsDigit(key.KeyChar))
                 {
                     sb.Append(key.KeyChar);
-                    Console.Write(key.KeyChar.ToString());
+                    Console.Write(key.KeyChar);
                 }
 
                 //проверка на знак 'минус'
@@ -120,7 +123,7 @@ namespace Task11Rectangle
                     if (!sb.ToString().Contains("-"))
                     {
                         sb.Append(key.KeyChar);
-                        Console.Write(key.KeyChar.ToString());
+                        Console.Write(key.KeyChar);
                     }
                 }
             }

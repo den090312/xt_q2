@@ -41,7 +41,7 @@ namespace Task02Simple
 
             //если можно извлечь кв. корень без остатка - число составное
             double dSqrt = Math.Sqrt(n);
-            if (int.TryParse(dSqrt.ToString(), out int X)) 
+            if (int.TryParse(dSqrt.ToString(), out int X))
             {
                 return false;    
             }                
