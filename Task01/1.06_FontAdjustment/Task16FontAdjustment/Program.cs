@@ -16,10 +16,10 @@ namespace Task16FontAdjustment
 
         static void Main(string[] args)
         {
-            Font myFont = Font.None;
             Console.WriteLine("Параметры надписи: None");
             WriteMenu();
 
+            Font myFont = Font.None;
             bool inputComplete = false;
             while (!inputComplete)
             {
@@ -28,7 +28,7 @@ namespace Task16FontAdjustment
                 {
                     myFont = ChangeFont(myFont, userKey);
                     Console.WriteLine("");
-                    Console.WriteLine("Параметры надписи: " + myFont);
+                    Console.WriteLine("Параметры надписи: "+ myFont);
                     WriteMenu();
                 }
             }
@@ -48,13 +48,13 @@ namespace Task16FontAdjustment
             switch (consoleKey)
             {
                 case 1:
-                    myFont = GetFont(myFont, Font.Bold);
+                    myFont = ChangeFontFromFlag(myFont, Font.Bold);
                     break;
                 case 2:
-                    myFont = GetFont(myFont, Font.Italic);
+                    myFont = ChangeFontFromFlag(myFont, Font.Italic);
                     break;
                 case 3:
-                    myFont = GetFont(myFont, Font.Underline);
+                    myFont = ChangeFontFromFlag(myFont, Font.Underline);
                     break;
                 case 4:
                     Environment.Exit(0);
@@ -64,7 +64,7 @@ namespace Task16FontAdjustment
             return myFont;
         }
 
-        static Font GetFont(Font font, Font fontFlag)
+        static Font ChangeFontFromFlag(Font font, Font fontFlag)
         {
             if (font.HasFlag(fontFlag))
             {
