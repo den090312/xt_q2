@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace _1._1.RECTANGLE
+namespace _1._01.RECTANGLE
 {
     class Program
     {

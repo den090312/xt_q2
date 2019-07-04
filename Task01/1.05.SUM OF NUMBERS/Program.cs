@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _1._5.SUM_OF_NUMBERS
+namespace _1._05.SUM_OF_NUMBERS
 {
     class Program
     {

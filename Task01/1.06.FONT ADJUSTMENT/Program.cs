@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace _1._6.FONT_ADJUSTMENT
+namespace _1._06.FONT_ADJUSTMENT
 {
     class Program
     {

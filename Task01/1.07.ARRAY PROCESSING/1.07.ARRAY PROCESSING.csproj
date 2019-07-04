@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RootNamespace>_1._7.ARRAY_PROCESSING</RootNamespace>
+    <RootNamespace>_1._07.ARRAY_PROCESSING</RootNamespace>
   </PropertyGroup>
 
 </Project>

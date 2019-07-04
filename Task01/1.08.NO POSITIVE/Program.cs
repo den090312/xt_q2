@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _1._8.NO_POSITIVE
+namespace _1._08.NO_POSITIVE
 {
     class Program
     {

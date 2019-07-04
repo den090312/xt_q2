@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _1._2.TRIANGLE
+namespace _1._02.TRIANGLE
 {
     class Program
     {

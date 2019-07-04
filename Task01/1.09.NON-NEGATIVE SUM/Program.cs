@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _1._9.NON_NEGATIVE_SUM
+namespace _1._09.NON_NEGATIVE_SUM
 {
     class Program
     {

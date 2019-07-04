@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _1._7.ARRAY_PROCESSING
+namespace _1._07.ARRAY_PROCESSING
 {
     class Program
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _1._4.X_MAS_TREE
+namespace _1._04.X_MAS_TREE
 {
     class Program
     {

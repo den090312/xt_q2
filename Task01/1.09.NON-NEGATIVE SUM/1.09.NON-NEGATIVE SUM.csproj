@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RootNamespace>_1._9.NON_NEGATIVE_SUM</RootNamespace>
+    <RootNamespace>_1._09.NON_NEGATIVE_SUM</RootNamespace>
   </PropertyGroup>
 
 </Project>

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RootNamespace>_1._5.SUM_OF_NUMBERS</RootNamespace>
+    <RootNamespace>_1._05.SUM_OF_NUMBERS</RootNamespace>
   </PropertyGroup>
 
 </Project>
