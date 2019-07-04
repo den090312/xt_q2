@@ -3,7 +3,7 @@ using System.Text;
 
 namespace _1._01.RECTANGLE
 {
-    class Program //коммит прошел через расширение для VS
+    class Program
     {
         static void Main(string[] args)
         {
