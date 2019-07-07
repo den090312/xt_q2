@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 
 namespace _1._11.AVERAGE_STRING_LENGTH
@@ -8,10 +8,10 @@ namespace _1._11.AVERAGE_STRING_LENGTH
         static void Main(string[] args)
         {
             Console.WriteLine("Введите строку. Максимальная длина - 254 символа");
-            Console.WriteLine($"Средняя длина слова: {GetAveradgeStringLength(Console.ReadLine())}");
+            Console.WriteLine($"Средняя длина слова: {GetAverageStringLength(Console.ReadLine())}");
         }
 
-        static double GetAveradgeStringLength(string userString)
+        static double GetAverageStringLength(string userString)
         {
             //удаляем знаки препинания
             var noPunctuationSB = GetNoPunctuationSB(userString);
