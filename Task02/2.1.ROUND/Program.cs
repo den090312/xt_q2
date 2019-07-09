@@ -53,7 +53,6 @@ namespace _2._1.ROUND
 
             public Round(Point userCenterCoordinates, double userRadius)
             {
-
                 if (userRadius <= 0)
                 {
                     throw new Exception("Отрицательные значения и ноль недопустимы!");
