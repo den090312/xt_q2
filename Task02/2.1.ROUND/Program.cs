@@ -40,7 +40,7 @@ namespace _2._1.ROUND
         public class Round
         {
             //координаты центра круга
-            public Point centerCoordinates;
+            public Point СenterCoordinates { get; }
 
             //радиус круга
             public double Radius { get; }
@@ -60,7 +60,7 @@ namespace _2._1.ROUND
                 }
                 else
                 {
-                    centerCoordinates = userCenterCoordinates;
+                    СenterCoordinates = userCenterCoordinates;
                     Radius = userRadius;
                 }
             }
