@@ -42,9 +42,6 @@ namespace _2._1.ROUND
             //координаты центра круга
             public Point centerCoordinates;
 
-            //радиус круга
-            private double radius;
-
             public Round(Point userCenterCoordinates, double userRadius)
             {
 
@@ -55,18 +52,18 @@ namespace _2._1.ROUND
                 else
                 {
                     centerCoordinates = userCenterCoordinates;
-                    radius = userRadius;
+                    Radius = userRadius;
                 }
             }
 
             //радиус круга
-            public double Radius => radius;
+            public double Radius { get; }
 
             //длина окружности
-            public double Circumference => 2 * Math.PI * radius;
+            public double Circumference => 2 * Math.PI * Radius;
 
             //площадь круга
-            public double Square => Math.PI * radius * radius;
+            public double Square => Math.PI * Radius * Radius;
         }
     }
 }
