@@ -47,26 +47,20 @@ namespace _2._1.ROUND
 
             public Round(Point userCenterCoordinates, double userRadius)
             {
-                centerCoordinates = userCenterCoordinates;
-                radius = userRadius;
-            }
 
-            public double Radius
-            {
-                get => radius;
-
-                set
+                if (userRadius <= 0)
                 {
-                    if (value <= 0)
-                    {
-                        throw new Exception("Отрицательные значения и ноль недопустимы!");
-                    }
-                    else
-                    {
-                        radius = value;
-                    }
+                    throw new Exception("Отрицательные значения и ноль недопустимы!");
+                }
+                else
+                {
+                    centerCoordinates = userCenterCoordinates;
+                    radius = userRadius;
                 }
             }
+
+            //радиус круга
+            public double Radius => radius;
 
             //длина окружности
             public double Circumference => 2 * Math.PI * radius;
