@@ -51,6 +51,7 @@ namespace _2._1.ROUND
             //площадь круга
             public double Square => Math.PI * Radius * Radius;
 
+            //конструктор
             public Round(Point userCenterCoordinates, double userRadius)
             {
                 if (userRadius <= 0)
