@@ -29,7 +29,6 @@ namespace _2._1.ROUND
             myRound.СenterCoordinates.X = -15;
 
             WriteRoundInfo(myRound);
-
         }
 
         static void WriteRoundInfo(Round myRound)
