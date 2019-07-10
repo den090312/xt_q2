@@ -8,7 +8,9 @@ namespace _2._2.TRIANGLE
         {
             Triangle myTriangle = new Triangle(3, 4, 5);
 
+            Console.WriteLine($"Стороны треугольника: {myTriangle.A}, {myTriangle.B}, {myTriangle.C}");
             Console.WriteLine($"Периметр треугольника: {myTriangle.Perimeter}");
+            Console.WriteLine($"Площадь треугольника: {myTriangle.Area}");
         }
 
         class Triangle
@@ -18,6 +20,8 @@ namespace _2._2.TRIANGLE
             public int C { get; }
 
             public int Perimeter => A + B + C;
+
+            public double Area => Math.Sqrt((A + B + C) / 2 * ((A + B + C) / 2 - A) * ((A + B + C) / 2 - B) * ((A + B + C) / 2 - C));
 
             public Triangle(int A, int B, int C)
             {
