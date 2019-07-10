@@ -24,25 +24,33 @@ namespace _2._1.ROUND
             myRound.Radius = 50;
 
             WriteRoundInfo(myRound);
+
+            //изменяем координату X
+            myRound.СenterCoordinates.X = -15;
+
+            WriteRoundInfo(myRound);
+
         }
 
         static void WriteRoundInfo(Round myRound)
         {
-            Console.WriteLine($"Координаты центра круга: ({myRound.СenterCoordinates.x},{myRound.СenterCoordinates.y})");
+            Console.WriteLine($"Координаты центра круга: ({myRound.СenterCoordinates.X},{myRound.СenterCoordinates.Y})");
             Console.WriteLine($"Радиус круга: {myRound.Radius}");
             Console.WriteLine($"Длина окружности: {myRound.Circumference}");
             Console.WriteLine($"Площадь круга: {myRound.Square}");
             Console.WriteLine();
         }
 
-        //структура "Точка" с двумя координатами
-        public struct Point
+        //класс "Точка" с двумя координатами
+        public class Point
         {
-            public int x, y;
-            public Point(int x, int y)
+            public int X { get; set; }
+            public int Y { get; set; }
+
+            public Point(int X, int Y)
             {
-                this.x = x;
-                this.y = y;
+                this.X = X;
+                this.Y = Y;
             }
         }
 
