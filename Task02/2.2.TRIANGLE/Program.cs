@@ -15,37 +15,107 @@ namespace _2._2.TRIANGLE
 
         class Triangle
         {
-            public int A { get; }
-            public int B { get; }
-            public int C { get; }
+            private int a;
+            public int A
+            {
+                get
+                {
+                    return a;
+                }
+                set
+                {
+                    if (a >= b + c | b >= a + c | c >= a + b)
+                    {
+                        throw new ArgumentException("Треугольник с такими сторонами построить нельзя!");
+                    }
+                    else
+                    {
+                        a = value;
+                    }
+                }
+            }
+
+            private int b;
+            public int B
+            {
+                get
+                {
+                    return b;
+                }
+                set
+                {
+                    if (a >= b + c | b >= a + c | c >= a + b)
+                    {
+                        throw new ArgumentException("Треугольник с такими сторонами построить нельзя!");
+                    }
+                    else
+                    {
+                        b = value;
+                    }
+                }
+            }
+
+            private int c;
+            public int C
+            {
+                get
+                {
+                    return c;
+                }
+                set
+                {
+                    if (a >= b + c | b >= a + c | c >= a + b)
+                    {
+                        throw new ArgumentException("Треугольник с такими сторонами построить нельзя!");
+                    }
+                    else
+                    {
+                        c = value;
+                    }
+                }
+            }
 
             public Triangle(int A, int B, int C)
             {
                 int a;
                 if (A <= 0)
+                {
                     throw new ArgumentException("Сторона треугольника не может быть меньше или равно нулю!");
+                }
                 else
+                {
                     a = A;
+                }
 
                 int b;
                 if (B <= 0)
+                {
                     throw new ArgumentException("Сторона треугольника не может быть меньше или равно нулю!");
+                }
                 else
+                {
                     b = B;
+                }
 
                 int c;
                 if (C <= 0)
+                {
                     throw new ArgumentException("Сторона треугольника не может быть меньше или равно нулю!");
-                else
-                    c = C;
-
-                if (a >= b + c | b >= a + c | c >= a + b)
-                    throw new ArgumentException("Треугольник с такими сторонами построить нельзя!");
+                }
                 else
                 {
-                    this.A = a;
-                    this.B = b;
-                    this.C = c;
+                    c = C;
+                }
+
+                if (a >= b + c | b >= a + c | c >= a + b)
+                {
+                    throw new ArgumentException("Треугольник с такими сторонами построить нельзя!");
+                }
+                else
+                {
+                    this.a = a;
+                    this.b = b;
+                    this.c = c;
                 }
             }
 
