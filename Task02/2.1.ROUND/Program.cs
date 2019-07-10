@@ -36,7 +36,7 @@ namespace _2._1.ROUND
             Console.WriteLine($"Координаты центра круга: ({myRound.СenterCoordinates.X},{myRound.СenterCoordinates.Y})");
             Console.WriteLine($"Радиус круга: {myRound.Radius}");
             Console.WriteLine($"Длина окружности: {myRound.Circumference}");
-            Console.WriteLine($"Площадь круга: {myRound.Square}");
+            Console.WriteLine($"Площадь круга: {myRound.Area}");
             Console.WriteLine();
         }
 
@@ -82,7 +82,7 @@ namespace _2._1.ROUND
             public double Circumference => 2 * Math.PI * Radius;
 
             //площадь круга
-            public double Square => Math.PI * Radius * Radius;
+            public double Area => Math.PI * Radius * Radius;
 
             //конструктор
             public Round(Point userCenterCoordinates, double userRadius)
