@@ -56,7 +56,7 @@ namespace _2._1.ROUND
             {
                 if (userRadius <= 0)
                 {
-                    throw new Exception("Отрицательные значения и ноль недопустимы!");
+                    throw new ArgumentException("Отрицательные значения и ноль недопустимы!");
                 }
                 else
                 {
