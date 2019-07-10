@@ -15,27 +15,24 @@ namespace _2._1.ROUND
             //создаем объект класса "Круг"
             var myRound = new Round(myCoordinates, myRadius);
 
-            //выводим радиус круга
-            Console.WriteLine($"Радиус круга: {myRound.Radius}");
-
-            //проверяем длину окружности
-            Console.WriteLine($"Длина окружности: {myRound.Circumference}");
-
-            //проверяем площадь круга
-            Console.WriteLine($"Площадь круга: {myRound.Square}");
+            WriteRoundInfo(myRound);
 
             //изменяем координаты         
             myRound.СenterCoordinates = new Point(10, 10);
-            Console.WriteLine($"Координаты центра круга: ({myRound.СenterCoordinates.x},{myRound.СenterCoordinates.y})");
 
             //изменяем радиус
             myRound.Radius = 50;
 
-            //проверяем длину окружности
-            Console.WriteLine($"Длина окружности: {myRound.Circumference}");
+            WriteRoundInfo(myRound);
+        }
 
-            //проверяем площадь круга
+        static void WriteRoundInfo(Round myRound)
+        {
+            Console.WriteLine($"Координаты центра круга: ({myRound.СenterCoordinates.x},{myRound.СenterCoordinates.y})");
+            Console.WriteLine($"Радиус круга: {myRound.Radius}");
+            Console.WriteLine($"Длина окружности: {myRound.Circumference}");
             Console.WriteLine($"Площадь круга: {myRound.Square}");
+            Console.WriteLine();
         }
 
         //структура "Точка" с двумя координатами
