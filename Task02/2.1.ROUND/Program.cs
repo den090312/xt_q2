@@ -77,10 +77,8 @@ namespace _2._1.ROUND
                     {
                         throw new ArgumentException("Отрицательные значения и ноль недопустимы!");
                     }
-                    else
-                    {
-                        radius = value;
-                    }
+
+                    radius = value;
                 }
             }
 
@@ -91,11 +89,9 @@ namespace _2._1.ROUND
                 {
                     throw new ArgumentException("Отрицательные значения и ноль недопустимы!");
                 }
-                else
-                {
-                    СenterCoordinates = userCenterCoordinates;
-                    radius = userRadius;
-                }
+
+                СenterCoordinates = userCenterCoordinates;
+                radius = userRadius;
             }
         }
     }
