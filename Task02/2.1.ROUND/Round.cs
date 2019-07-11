@@ -24,7 +24,7 @@ namespace _2._1.ROUND
             {
                 if (radius <= 0)
                 {
-                    throw new ArgumentException("Отрицательные значения и ноль недопустимы!");
+                    throw new ArgumentException("Отрицательное значение радиуса недопустимо!");
                 }
 
                 radius = value;
@@ -36,7 +36,7 @@ namespace _2._1.ROUND
         {
             if (userRadius <= 0)
             {
-                throw new ArgumentException("Отрицательные значения и ноль недопустимы!");
+                throw new ArgumentException("Отрицательное значение радиуса недопустимо!");
             }
 
             СenterCoordinates = userCenterCoordinates;

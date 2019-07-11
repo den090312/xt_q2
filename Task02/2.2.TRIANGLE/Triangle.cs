@@ -2,7 +2,7 @@
 
 namespace _2._2.TRIANGLE
 {
-    class Triangle
+    public class Triangle
     {
         private int a, b, c;
 

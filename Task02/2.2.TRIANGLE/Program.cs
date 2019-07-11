@@ -4,13 +4,13 @@ namespace _2._2.TRIANGLE
 {
     class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var myTriangle = new Triangle(GetTriangleSideFromConsole('A'), GetTriangleSideFromConsole('B'), GetTriangleSideFromConsole('C'));
             WriteTriangleInfo(myTriangle);
         }
 
-        static void WriteTriangleInfo(Triangle userTriangle)
+        private static void WriteTriangleInfo(Triangle userTriangle)
         {
             Console.WriteLine();
             Console.WriteLine($"Стороны треугольника: {userTriangle.A}, {userTriangle.B}, {userTriangle.C}");
@@ -19,7 +19,7 @@ namespace _2._2.TRIANGLE
             Console.WriteLine();
         }
 
-        static int GetTriangleSideFromConsole(char sideLetter)
+        private static int GetTriangleSideFromConsole(char sideLetter)
         {
             Console.WriteLine($"Сторона треугольника {sideLetter}");
             int triangleSide;

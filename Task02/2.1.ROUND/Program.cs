@@ -4,7 +4,7 @@ namespace _2._1.ROUND
 {
     class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //инициализируем координаты точки
             var myCoordinates = new Point(5, 20);
@@ -20,7 +20,6 @@ namespace _2._1.ROUND
 
             //задаем координаты 
             itIsRadius = false;
-
             Console.WriteLine("Центр круга. Координата X");
             int X = GetIntFromConsole(itIsRadius);
             Console.WriteLine("Центр круга. Координата Y");
@@ -41,7 +40,7 @@ namespace _2._1.ROUND
             Console.WriteLine();
         }
 
-        static int GetIntFromConsole(bool itIsRadius)
+        private static int GetIntFromConsole(bool itIsRadius)
         {
             int intFromConsole;
 
