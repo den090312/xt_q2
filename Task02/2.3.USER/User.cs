@@ -65,6 +65,11 @@ namespace _2._3.USER
             }
         }
 
+        public User()
+        {
+
+        }
+
         public User(string userLastName, string userFirstName, string userSecondName)
         {
             CheckNameForLetters(userLastName, "Фамилия");
