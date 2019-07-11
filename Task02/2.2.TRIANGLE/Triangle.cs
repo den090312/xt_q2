@@ -60,7 +60,7 @@ namespace _2._2.TRIANGLE
             {
                 var halfPerimeter = Perimeter / 2;
 
-                return Math.Sqrt(halfPerimeter * (halfPerimeter - A) * (halfPerimeter - B) * (halfPerimeter - C));
+                return Math.Round(Math.Sqrt(halfPerimeter * (halfPerimeter - A) * (halfPerimeter - B) * (halfPerimeter - C)), 3);
             }
         }
 
