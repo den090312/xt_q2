@@ -9,7 +9,7 @@ namespace _2._2.TRIANGLE
             Triangle myTriangle = new Triangle(3, 4, 5);
             WriteTriangleInfo(myTriangle);
 
-            myTriangle.A = 4;
+            myTriangle.A = -4;
             WriteTriangleInfo(myTriangle);
         }
 
@@ -23,6 +23,18 @@ namespace _2._2.TRIANGLE
 
         class Triangle
         {
+            private static int SetAboveZeroTriangleSide(int userValue)
+            {
+                if (userValue <= 0)
+                {
+                    throw new ArgumentException("Сторона треугольника не может быть меньше или равна нулю!");
+                }
+                else
+                {
+                    return userValue;
+                }
+            }
+
             private int a;
             public int A
             {
@@ -32,14 +44,7 @@ namespace _2._2.TRIANGLE
                 }
                 set
                 {
-                    if (value <= 0)
-                    {
-                        throw new ArgumentException("Сторона треугольника не может быть меньше или равно нулю!");
-                    }
-                    else
-                    {
-                        a = value;
-                    }
+                    a = SetAboveZeroTriangleSide(value);
 
                     if (a >= b + c | b >= a + c | c >= a + b)
                     {
@@ -61,14 +66,7 @@ namespace _2._2.TRIANGLE
                 }
                 set
                 {
-                    if (value <= 0)
-                    {
-                        throw new ArgumentException("Сторона треугольника не может быть меньше или равно нулю!");
-                    }
-                    else
-                    {
-                        b = value;
-                    }
+                    b = SetAboveZeroTriangleSide(value);
 
                     if (a >= b + c | b >= a + c | c >= a + b)
                     {
@@ -90,14 +88,7 @@ namespace _2._2.TRIANGLE
                 }
                 set
                 {
-                    if (value <= 0)
-                    {
-                        throw new ArgumentException("Сторона треугольника не может быть меньше или равно нулю!");
-                    }
-                    else
-                    {
-                        c = value;
-                    }
+                    c = SetAboveZeroTriangleSide(value);
 
                     if (a >= b + c | b >= a + c | c >= a + b)
                     {
@@ -112,35 +103,9 @@ namespace _2._2.TRIANGLE
 
             public Triangle(int A, int B, int C)
             {
-                int a;
-                if (A <= 0)
-                {
-                    throw new ArgumentException("Сторона треугольника не может быть меньше или равно нулю!");
-                }
-                else
-                {
-                    a = A;
-                }
-
-                int b;
-                if (B <= 0)
-                {
-                    throw new ArgumentException("Сторона треугольника не может быть меньше или равно нулю!");
-                }
-                else
-                {
-                    b = B;
-                }
-
-                int c;
-                if (C <= 0)
-                {
-                    throw new ArgumentException("Сторона треугольника не может быть меньше или равно нулю!");
-                }
-                else
-                {
-                    c = C;
-                }
+                int a = SetAboveZeroTriangleSide(A);
+                int b = SetAboveZeroTriangleSide(B);
+                int c = SetAboveZeroTriangleSide(C);
 
                 if (a >= b + c | b >= a + c | c >= a + b)
                 {
