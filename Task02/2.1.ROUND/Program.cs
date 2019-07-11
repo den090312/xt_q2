@@ -9,27 +9,24 @@ namespace _2._1.ROUND
             //инициализируем координаты точки
             var myCoordinates = new Point(5, 20);
 
-            //инициализируем радиус
-            Console.WriteLine("Введите радиус круга:");
+            //радиус
+            Console.WriteLine("Радиус круга");
             bool itIsRadius = true;
             double myRadius = GetIntFromConsole(itIsRadius);
+            Console.WriteLine();
 
             //создаем объект класса "Круг"
             var myRound = new Round(myCoordinates, myRadius);
 
-            WriteRoundInfo(myRound);
-
-            //изменяем координаты   
+            //задаем координаты 
             itIsRadius = false;
-            myRound.СenterCoordinates = new Point(GetIntFromConsole(itIsRadius), GetIntFromConsole(itIsRadius));
 
-            //изменяем радиус
-            myRound.Radius = 50;
+            Console.WriteLine("Центр круга. Координата X");
+            int X = GetIntFromConsole(itIsRadius);
+            Console.WriteLine("Центр круга. Координата Y");
+            int Y = GetIntFromConsole(itIsRadius);
 
-            WriteRoundInfo(myRound);
-
-            //изменяем координату X
-            myRound.СenterCoordinates.X = -15;
+            myRound.СenterCoordinates = new Point(X, Y);
 
             WriteRoundInfo(myRound);
         }
