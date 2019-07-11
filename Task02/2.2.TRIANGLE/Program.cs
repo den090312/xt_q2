@@ -43,7 +43,7 @@ namespace _2._2.TRIANGLE
                 get => a;
                 set
                 {
-                    int userValue = GetTrinagleSide(value);
+                    int userValue = GetTriangleSide(value);
                     CheckTriangleExistence(userValue, b, c);
                     a = userValue;
                 }
@@ -54,7 +54,7 @@ namespace _2._2.TRIANGLE
                 get => b;
                 set
                 {
-                    int userValue = GetTrinagleSide(value);
+                    int userValue = GetTriangleSide(value);
                     CheckTriangleExistence(a, userValue, c);
                     b = userValue;
                 }
@@ -65,7 +65,7 @@ namespace _2._2.TRIANGLE
                 get => c;
                 set
                 {
-                    int userValue = GetTrinagleSide(value);
+                    int userValue = GetTriangleSide(value);
                     CheckTriangleExistence(a, b, userValue);
                     c = userValue;
                 }
@@ -83,7 +83,7 @@ namespace _2._2.TRIANGLE
                 }
             }
 
-            private int GetTrinagleSide(int sideValue)
+            private int GetTriangleSide(int sideValue)
             {
                 CheckTriangleSideAboveZero(sideValue);
 
