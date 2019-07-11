@@ -77,7 +77,7 @@ namespace _2._2.TRIANGLE
             {
                 get
                 {
-                    var halfPerimeter = (A + B + C) / 2;
+                    var halfPerimeter = Perimeter / 2;
 
                     return Math.Sqrt(halfPerimeter * (halfPerimeter - A) * (halfPerimeter - B) * (halfPerimeter - C));
                 }
