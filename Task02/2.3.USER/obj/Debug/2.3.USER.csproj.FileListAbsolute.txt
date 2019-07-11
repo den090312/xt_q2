@@ -4,3 +4,4 @@ C:\Users\Den\source\repos\Task02\2.3.USER\bin\Debug\2.3.USER.pdb
 C:\Users\Den\source\repos\Task02\2.3.USER\obj\Debug\2.3.USER.csproj.CoreCompileInputs.cache
 C:\Users\Den\source\repos\Task02\2.3.USER\obj\Debug\2.3.USER.exe
 C:\Users\Den\source\repos\Task02\2.3.USER\obj\Debug\2.3.USER.pdb
+C:\Users\Den\source\repos\Task02\2.3.USER\obj\Debug\2.3.USER.csprojAssemblyReference.cache

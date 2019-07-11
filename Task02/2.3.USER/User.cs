@@ -67,9 +67,9 @@ namespace _2._3.USER
 
         public User(string userLastName, string userFirstName, string userSecondName)
         {
-            CheckNameForLetters(lastName, "Фамилия");
-            CheckNameForLetters(firstName, "Имя");
-            CheckNameForLetters(secondName, "Отчество");
+            CheckNameForLetters(userLastName, "Фамилия");
+            CheckNameForLetters(userFirstName, "Имя");
+            CheckNameForLetters(userSecondName, "Отчество");
 
             lastName = userLastName;
             firstName = userFirstName;
