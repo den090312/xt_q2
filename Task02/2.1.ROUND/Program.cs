@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace _2._1.ROUND
 {
@@ -11,7 +11,7 @@ namespace _2._1.ROUND
 
             //инициализируем радиус
             double myRadius = 20;
-            
+
             //создаем объект класса "Круг"
             var myRound = new Round(myCoordinates, myRadius);
 
@@ -62,6 +62,12 @@ namespace _2._1.ROUND
             //радиус круга            
             private double radius;
 
+            //длина окружности
+            public double Circumference => 2 * Math.PI * Radius;
+
+            //площадь круга
+            public double Area => Math.PI * Radius * Radius;
+
             public double Radius
             {
                 get => radius;
@@ -77,12 +83,6 @@ namespace _2._1.ROUND
                     }
                 }
             }
-
-            //длина окружности
-            public double Circumference => 2 * Math.PI * Radius;
-
-            //площадь круга
-            public double Area => Math.PI * Radius * Radius;
 
             //конструктор
             public Round(Point userCenterCoordinates, double userRadius)
