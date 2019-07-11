@@ -8,14 +8,14 @@ namespace _2._1.ROUND
         //инициализируем координаты центра круга
         public Point СenterCoordinates = new Point(0, 0);
 
-        //радиус круга            
-        private double radius;
-
         //длина окружности
         public double Circumference => 2 * Math.PI * Radius;
 
         //площадь круга
         public double Area => Math.PI * Radius * Radius;
+
+        //радиус круга            
+        private double radius;
 
         public double Radius
         {
