@@ -14,7 +14,7 @@ namespace _2._3.USER
             get => firstName;
             set
             {
-                CheckNameForNumbers(value, "Имя");
+                CheckNameForLetters(value, "Имя");
                 firstName = value;
             }
         }
@@ -23,7 +23,7 @@ namespace _2._3.USER
             get => secondName;
             set
             {
-                CheckNameForNumbers(value, "Отчество");
+                CheckNameForLetters(value, "Отчество");
                 secondName = value;
             }
         }
@@ -33,7 +33,7 @@ namespace _2._3.USER
             get => lastName;
             set
             {
-                CheckNameForNumbers(value, "Фамилия");
+                CheckNameForLetters(value, "Фамилия");
                 lastName = value;
             }
         }
@@ -58,21 +58,32 @@ namespace _2._3.USER
                 var userAge = DateTime.Now.AddYears(-birthDate.Year).Year;
                 if (userAge <= 0)
                 {
-                    throw new ArgumentException("Возраст не может быть отрицательным или меньше нуля!");
+                    throw new ArgumentException("Возраст не может быть меньше или равен нулю!");
                 }
 
                 return userAge;
             }
         }
 
-        private static void CheckNameForNumbers(string userName, string nameType)
+        public User(string userLastName, string userFirstName, string userSecondName)
+        {
+            CheckNameForLetters(lastName, "Фамилия");
+            CheckNameForLetters(firstName, "Имя");
+            CheckNameForLetters(secondName, "Отчество");
+
+            lastName = userLastName;
+            firstName = userFirstName;
+            secondName = userSecondName;
+        }
+
+        private static void CheckNameForLetters(string userName, string nameType)
         {
             var userCharArray = userName.ToCharArray();
             foreach (char element in userCharArray)
             {
-                if (char.IsDigit(element))
+                if (!char.IsLetter(element))
                 {
-                    throw new ArgumentException($"Цифры в поле '{nameType}' недопустимы!");
+                    throw new ArgumentException($"Недопустимый символ в поле '{nameType}'!");
                 }
             }
         }
