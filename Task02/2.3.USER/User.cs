@@ -15,7 +15,7 @@ namespace _2._3.USER
             get => firstName;
             set
             {
-                CheckNameForLetters(value, "Имя");
+                CheckNameForCorrect(value, "Имя");
                 firstName = value;
             }
         }
@@ -24,7 +24,7 @@ namespace _2._3.USER
             get => secondName;
             set
             {
-                CheckNameForLetters(value, "Отчество");
+                CheckNameForCorrect(value, "Отчество");
                 secondName = value;
             }
         }
@@ -34,7 +34,7 @@ namespace _2._3.USER
             get => lastName;
             set
             {
-                CheckNameForLetters(value, "Фамилия");
+                CheckNameForCorrect(value, "Фамилия");
                 lastName = value;
             }
         }
@@ -79,18 +79,23 @@ namespace _2._3.USER
 
         public User(string userLastName, string userFirstName, string userSecondName)
         {
-            CheckNameForLetters(userLastName, "Фамилия");
-            CheckNameForLetters(userFirstName, "Имя");
-            CheckNameForLetters(userSecondName, "Отчество");
+            CheckNameForCorrect(userLastName, "Фамилия");
+            CheckNameForCorrect(userFirstName, "Имя");
+            CheckNameForCorrect(userSecondName, "Отчество");
 
             lastName = userLastName;
             firstName = userFirstName;
             secondName = userSecondName;
         }
 
-        private static void CheckNameForLetters(string userName, string nameType)
+        private static void CheckNameForCorrect(string userName, string nameType)
         {
             var userCharArray = userName.ToCharArray();
+            if (char.IsLower(userCharArray[0]))
+            {
+                throw new ArgumentException($"Поле '{nameType}' должно начинаться с заглавной буквы!");
+            }
+
             foreach (char element in userCharArray)
             {
                 if (!char.IsLetter(element))
