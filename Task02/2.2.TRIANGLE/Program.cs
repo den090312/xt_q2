@@ -9,7 +9,7 @@ namespace _2._2.TRIANGLE
             Triangle myTriangle = new Triangle(3, 4, 5);
             WriteTriangleInfo(myTriangle);
 
-            myTriangle.A = -4;
+            myTriangle.A = 100;
             WriteTriangleInfo(myTriangle);
         }
 
@@ -41,19 +41,19 @@ namespace _2._2.TRIANGLE
             public int A
             {
                 get => a;
-                set => a = SetTriangleSide(value);
+                set => CheckTriangleExistence(GetTrinagleSide(value), b, c);
             }
 
             public int B
             {
                 get => b;
-                set => b = SetTriangleSide(value);
+                set => CheckTriangleExistence(a, GetTrinagleSide(value), c);
             }
 
             public int C
             {
                 get => c;
-                set => c = SetTriangleSide(value);
+                set => CheckTriangleExistence(a, b, GetTrinagleSide(value));
             }
 
             public int Perimeter => A + B + C;
@@ -68,10 +68,9 @@ namespace _2._2.TRIANGLE
                 }
             }
 
-            private int SetTriangleSide(int sideValue)
+            private int GetTrinagleSide(int sideValue)
             {
                 CheckTriangleSideAboveZero(sideValue);
-                CheckTriangleExistence(a, b, c);
 
                 return sideValue;
             }
