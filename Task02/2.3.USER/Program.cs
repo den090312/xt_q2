@@ -20,8 +20,7 @@ namespace _2._3.USER
             myUser.SecondName = GetNameFromConsole("отчество");
             Console.WriteLine();
 
-            //myUser.BirthDate = GetBirthDateFromConsole();
-            myUser.BirthDate = DateTime.ParseExact("15.10.1989", Format, CultureInfo.InvariantCulture, DateTimeStyles.None);
+            myUser.BirthDate = GetBirthDateFromConsole();
             Console.WriteLine();
 
             Console.WriteLine("Пользователь № 1");

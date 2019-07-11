@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Globalization;
 
 namespace _2._3.USER
 {
     public class User
     {
-        private const string Format = "dd.MM.yyyy";
-
         private string firstName;
         private string secondName;
         private string lastName;
@@ -47,17 +44,9 @@ namespace _2._3.USER
             get => birthDate;
             set
             {
-                bool isDate = DateTime.TryParseExact(value.ToString(), Format, CultureInfo.InvariantCulture, DateTimeStyles.None, out value);
-                if (!isDate)
+                if (value > currentDateTime)
                 {
-                    throw new ArgumentException($"Дата должна быть формата '{Format}'!");
-                }
-                else
-                {
-                    if (value > currentDateTime)
-                    {
-                        throw new ArgumentException("Дата рождения не может быть больше текущей даты!");
-                    }
+                    throw new ArgumentException("Дата рождения не может быть больше текущей даты!");
                 }
 
                 birthDate = value;
