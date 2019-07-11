@@ -27,6 +27,8 @@ namespace _2._1.ROUND
 
             myRound.СenterCoordinates = new Point(X, Y);
 
+            myRound.Radius = -5;
+
             WriteRoundInfo(myRound);
         }
 

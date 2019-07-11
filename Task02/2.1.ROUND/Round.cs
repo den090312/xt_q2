@@ -22,7 +22,7 @@ namespace _2._1.ROUND
             get => radius;
             set
             {
-                CheckRadiusAboveZero(radius);
+                CheckRadiusAboveZero(value);
                 radius = value;
             }
         }
