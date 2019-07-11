@@ -27,37 +27,33 @@ namespace _2._2.TRIANGLE
 
             public Triangle(int A, int B, int C)
             {
-                int a = SetAboveZeroTriangleSide(A);
-                int b = SetAboveZeroTriangleSide(B);
-                int c = SetAboveZeroTriangleSide(C);
+                CheckTriangleSideAboveZero(A);
+                CheckTriangleSideAboveZero(B);
+                CheckTriangleSideAboveZero(C);
 
-                CheckTriangleExistence(a, b, c);
+                CheckTriangleExistence(A, B, C);
 
-                this.a = a;
-                this.b = b;
-                this.c = c;
+                a = A;
+                b = B;
+                c = C;
             }
 
             public int A
             {
                 get => a;
-                set
-                {
-                    a = SetAboveZeroTriangleSide(value);
-                    CheckTriangleExistence(a, b, c);
-                    a = value;
-                }
+                set => a = SetTriangleSide(value);
             }
 
             public int B
             {
                 get => b;
-                set
-                {
-                    b = SetAboveZeroTriangleSide(value);
-                    CheckTriangleExistence(a, b, c);
-                    b = value;
-                }
+                set => b = SetTriangleSide(value);
+            }
+
+            public int C
+            {
+                get => c;
+                set => c = SetTriangleSide(value);
             }
 
             public int Perimeter => A + B + C;
@@ -72,25 +68,20 @@ namespace _2._2.TRIANGLE
                 }
             }
 
-            public int C
+            private int SetTriangleSide(int sideValue)
             {
-                get => c;
-                set
-                {
-                    c = SetAboveZeroTriangleSide(value);
-                    CheckTriangleExistence(a, b, c);
-                    c = value;
-                }
+                CheckTriangleSideAboveZero(sideValue);
+                CheckTriangleExistence(a, b, c);
+
+                return sideValue;
             }
 
-            private static int SetAboveZeroTriangleSide(int userValue)
+            private void CheckTriangleSideAboveZero(int userValue)
             {
                 if (userValue <= 0)
                 {
                     throw new ArgumentException("Сторона треугольника не может быть меньше или равна нулю!");
                 }
-
-                return userValue;
             }
 
             private static void CheckTriangleExistence(int a, int b, int c)
