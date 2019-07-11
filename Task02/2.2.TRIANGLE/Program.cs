@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace _2._2.TRIANGLE
 {
@@ -7,10 +7,18 @@ namespace _2._2.TRIANGLE
         static void Main(string[] args)
         {
             Triangle myTriangle = new Triangle(3, 4, 5);
+            WriteTriangleInfo(myTriangle);
 
-            Console.WriteLine($"Стороны треугольника: {myTriangle.A}, {myTriangle.B}, {myTriangle.C}");
-            Console.WriteLine($"Периметр треугольника: {myTriangle.Perimeter}");
-            Console.WriteLine($"Площадь треугольника: {myTriangle.Area}");
+            myTriangle.A = 4;
+            WriteTriangleInfo(myTriangle);
+        }
+
+        static void WriteTriangleInfo(Triangle userTriangle)
+        {
+            Console.WriteLine();
+            Console.WriteLine($"Стороны треугольника: {userTriangle.A}, {userTriangle.B}, {userTriangle.C}");
+            Console.WriteLine($"Периметр треугольника: {userTriangle.Perimeter}");
+            Console.WriteLine($"Площадь треугольника: {userTriangle.Area}");
         }
 
         class Triangle
@@ -24,6 +32,15 @@ namespace _2._2.TRIANGLE
                 }
                 set
                 {
+                    if (value <= 0)
+                    {
+                        throw new ArgumentException("Сторона треугольника не может быть меньше или равно нулю!");
+                    }
+                    else
+                    {
+                        a = value;
+                    }
+
                     if (a >= b + c | b >= a + c | c >= a + b)
                     {
                         throw new ArgumentException("Треугольник с такими сторонами построить нельзя!");
@@ -44,6 +61,15 @@ namespace _2._2.TRIANGLE
                 }
                 set
                 {
+                    if (value <= 0)
+                    {
+                        throw new ArgumentException("Сторона треугольника не может быть меньше или равно нулю!");
+                    }
+                    else
+                    {
+                        b = value;
+                    }
+
                     if (a >= b + c | b >= a + c | c >= a + b)
                     {
                         throw new ArgumentException("Треугольник с такими сторонами построить нельзя!");
@@ -64,6 +90,15 @@ namespace _2._2.TRIANGLE
                 }
                 set
                 {
+                    if (value <= 0)
+                    {
+                        throw new ArgumentException("Сторона треугольника не может быть меньше или равно нулю!");
+                    }
+                    else
+                    {
+                        c = value;
+                    }
+
                     if (a >= b + c | b >= a + c | c >= a + b)
                     {
                         throw new ArgumentException("Треугольник с такими сторонами построить нельзя!");
