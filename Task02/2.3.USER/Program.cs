@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Globalization;
 
 namespace _2._3.USER
 {
     class Program
     {
+        private const string Format = "dd-MM-yyyy";
+
         private static void Main(string[] args) 
         {
             //создаем пользователя через конструктор по умолчанию
@@ -18,16 +21,16 @@ namespace _2._3.USER
             myUser.SecondName = GetNameFromConsole("отчество");
             Console.WriteLine();
 
-            Console.WriteLine("Дата рождения. Введите строку формата 'дд.мм.гггг'");
+            Console.WriteLine($"Дата рождения. Введите строку формата {Format}");
             myUser.BirthDate = GetBirthDateFromConsole(Console.ReadLine());
 
             Console.WriteLine("Пользователь № 1");
             WriteUserInfo(myUser);
 
             //создаем пользователя через конструктор ФИО
-            var myUser2 = new User("Иванов", "Сидор", "Пупкиевич");
-            Console.WriteLine("Пользователь № 2");
-            WriteUserInfo(myUser2);
+            //var myUser2 = new User("Иванов", "Сидор", "Пупкиевич");
+            //Console.WriteLine("Пользователь № 2");
+            //WriteUserInfo(myUser2);
         }
 
         private static void WriteUserInfo(User user)
@@ -54,8 +57,8 @@ namespace _2._3.USER
             bool isDate;
             do
             {
-                Console.WriteLine($"Введите дату в корректном формате: 'дд.мм.гггг':");
-                isDate = DateTime.TryParse(Console.ReadLine(), out birthDate);
+                Console.WriteLine($"Введите дату в корректном формате: {Format}:");
+                isDate = DateTime.TryParseExact(Console.ReadLine(), Format, CultureInfo.InvariantCulture, DateTimeStyles.None, out birthDate);
             }
             while (isDate == false);
 
