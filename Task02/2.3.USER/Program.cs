@@ -18,6 +18,9 @@ namespace _2._3.USER
             myUser.SecondName = GetNameFromConsole("отчество");
             Console.WriteLine();
 
+            Console.WriteLine("Дата рождения. Введите строку формата 'дд.мм.гггг'");
+            myUser.BirthDate = GetBirthDateFromConsole(Console.ReadLine());
+
             Console.WriteLine("Пользователь № 1");
             WriteUserInfo(myUser);
 
@@ -42,6 +45,21 @@ namespace _2._3.USER
             Console.WriteLine($"Введите {nameType}:");
 
             return Console.ReadLine();
+        }
+
+        private static DateTime GetBirthDateFromConsole(string formatString)
+        {
+            DateTime birthDate;
+
+            bool isDate;
+            do
+            {
+                Console.WriteLine($"Введите дату в корректном формате: 'дд.мм.гггг':");
+                isDate = DateTime.TryParse(Console.ReadLine(), out birthDate);
+            }
+            while (isDate == false);
+
+            return birthDate;
         }
     }
 }

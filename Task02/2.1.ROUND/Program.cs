@@ -66,11 +66,6 @@ namespace _2._1.ROUND
                 {
                     Console.WriteLine($"Введите целое число меньше или равно {int.MaxValue}:");
                     isInt = int.TryParse(Console.ReadLine(), out intFromConsole);
-
-                    if (isInt)
-                    {
-                        isInt = true;
-                    }
                 }
                 while (isInt == false);
             }
