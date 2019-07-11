@@ -5,7 +5,7 @@ namespace _2._3.USER
 {
     class Program
     {
-        private const string Format = "dd-MM-yyyy";
+        private const string Format = "dd.MM.yyyy";
 
         private static void Main(string[] args) 
         {
@@ -21,16 +21,11 @@ namespace _2._3.USER
             myUser.SecondName = GetNameFromConsole("отчество");
             Console.WriteLine();
 
-            Console.WriteLine($"Дата рождения. Введите строку формата {Format}");
-            myUser.BirthDate = GetBirthDateFromConsole(Console.ReadLine());
+            myUser.BirthDate = GetBirthDateFromConsole();
+            Console.WriteLine();
 
             Console.WriteLine("Пользователь № 1");
             WriteUserInfo(myUser);
-
-            //создаем пользователя через конструктор ФИО
-            //var myUser2 = new User("Иванов", "Сидор", "Пупкиевич");
-            //Console.WriteLine("Пользователь № 2");
-            //WriteUserInfo(myUser2);
         }
 
         private static void WriteUserInfo(User user)
@@ -38,7 +33,7 @@ namespace _2._3.USER
             Console.WriteLine($"Фамилия: {user.LastName}");
             Console.WriteLine($"Имя: {user.FirstName}");
             Console.WriteLine($"Отчество: {user.SecondName}");
-            Console.WriteLine($"Дата рождения: {user.BirthDate.ToString("D")}");
+            Console.WriteLine($"Дата рождения: {user.BirthDate.ToString(Format)}");
             Console.WriteLine($"Возраст: {user.Age}");
             Console.WriteLine();
         }
@@ -50,14 +45,14 @@ namespace _2._3.USER
             return Console.ReadLine();
         }
 
-        private static DateTime GetBirthDateFromConsole(string formatString)
+        private static DateTime GetBirthDateFromConsole()
         {
             DateTime birthDate;
 
             bool isDate;
             do
             {
-                Console.WriteLine($"Введите дату в корректном формате: {Format}:");
+                Console.WriteLine($"Введите дату в формате: {Format}:");
                 isDate = DateTime.TryParseExact(Console.ReadLine(), Format, CultureInfo.InvariantCulture, DateTimeStyles.None, out birthDate);
             }
             while (isDate == false);

@@ -8,6 +8,7 @@ namespace _2._3.USER
         private string secondName;
         private string lastName;
         private DateTime birthDate;
+        private readonly DateTime currentDateTime = DateTime.Now;
 
         public string FirstName
         {
@@ -43,7 +44,7 @@ namespace _2._3.USER
             get => birthDate;
             set
             {
-                if (value > DateTime.Now)
+                if (value > currentDateTime)
                 {
                     throw new ArgumentException("Дата рождения не может быть больше текущей даты!");
                 }
@@ -55,7 +56,13 @@ namespace _2._3.USER
         {
             get
             {
-                var userAge = DateTime.Now.AddYears(-birthDate.Year).Year;
+                var userAge = currentDateTime.AddYears(-birthDate.Year).Year;
+
+                if (currentDateTime.Month < birthDate.Month)
+                {
+                    userAge--;
+                }
+
                 if (userAge <= 0)
                 {
                     throw new ArgumentException("Возраст не может быть меньше или равен нулю!");
