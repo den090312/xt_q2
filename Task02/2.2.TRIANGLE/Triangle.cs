@@ -60,7 +60,7 @@ namespace _2._2.TRIANGLE
             {
                 var halfPerimeter = Perimeter / 2;
 
-                return Math.Round(Math.Sqrt(halfPerimeter * (halfPerimeter - A) * (halfPerimeter - B) * (halfPerimeter - C)), 3);
+                return Math.Sqrt(halfPerimeter * (halfPerimeter - A) * (halfPerimeter - B) * (halfPerimeter - C));
             }
         }
 
@@ -68,7 +68,7 @@ namespace _2._2.TRIANGLE
         {
             if (userValue <= 0)
             {
-                throw new ArgumentException("Сторона треугольника не может быть меньше или равна нулю!");
+                throw new ArgumentException("Сторона треугольника должна быть больше нуля!");
             }
         }
 
@@ -76,7 +76,7 @@ namespace _2._2.TRIANGLE
         {
             if (a >= b + c || b >= a + c || c >= a + b)
             {
-                throw new ArgumentException("Треугольник с такими сторонами построить нельзя!");
+                throw new ArgumentException("Треугольник с заданными сторонами не существует!");
             }
         }
     }

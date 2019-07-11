@@ -6,12 +6,7 @@ namespace _2._2.TRIANGLE
     {
         static void Main(string[] args)
         {
-
-            int a = GetTriangleSideFromConsole('A');
-            int b = GetTriangleSideFromConsole('B');
-            int c = GetTriangleSideFromConsole('C');
-
-            Triangle myTriangle = new Triangle(a, b, c);
+            var myTriangle = new Triangle(GetTriangleSideFromConsole('A'), GetTriangleSideFromConsole('B'), GetTriangleSideFromConsole('C'));
             WriteTriangleInfo(myTriangle);
         }
 
@@ -27,14 +22,12 @@ namespace _2._2.TRIANGLE
         static int GetTriangleSideFromConsole(char sideLetter)
         {
             Console.WriteLine($"Сторона треугольника {sideLetter}");
-
             int triangleSide;
 
             bool isInt;
             do
             {
                 Console.WriteLine($"Введите целое положительное число меньше {int.MaxValue}:");
-
                 isInt = int.TryParse(Console.ReadLine(), out triangleSide);
 
                 if (isInt)
