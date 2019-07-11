@@ -15,10 +15,10 @@ namespace _2._2.TRIANGLE
 
         static void WriteTriangleInfo(Triangle userTriangle)
         {
-            Console.WriteLine();
             Console.WriteLine($"Стороны треугольника: {userTriangle.A}, {userTriangle.B}, {userTriangle.C}");
             Console.WriteLine($"Периметр треугольника: {userTriangle.Perimeter}");
             Console.WriteLine($"Площадь треугольника: {userTriangle.Area}");
+            Console.WriteLine();
         }
 
         class Triangle
