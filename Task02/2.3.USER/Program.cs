@@ -9,7 +9,6 @@ namespace _2._3.USER
 
         private static void Main(string[] args) 
         {
-            //создаем пользователя через конструктор по умолчанию
             var myUser = new User();
 
             myUser.LastName = GetNameFromConsole("фамилию");
@@ -21,7 +20,8 @@ namespace _2._3.USER
             myUser.SecondName = GetNameFromConsole("отчество");
             Console.WriteLine();
 
-            myUser.BirthDate = GetBirthDateFromConsole();
+            //myUser.BirthDate = GetBirthDateFromConsole();
+            myUser.BirthDate = DateTime.ParseExact("15.10.1989", Format, CultureInfo.InvariantCulture, DateTimeStyles.None);
             Console.WriteLine();
 
             Console.WriteLine("Пользователь № 1");
