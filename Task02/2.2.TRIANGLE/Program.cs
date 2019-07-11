@@ -6,7 +6,13 @@ namespace _2._2.TRIANGLE
     {
         private static void Main(string[] args)
         {
-            var myTriangle = new Triangle(GetTriangleSideFromConsole('A'), GetTriangleSideFromConsole('B'), GetTriangleSideFromConsole('C'));
+            var myTriangle = new Triangle
+            (
+                GetTriangleSideFromConsole('A'), 
+                GetTriangleSideFromConsole('B'), 
+                GetTriangleSideFromConsole('C')
+            );
+
             WriteTriangleInfo(myTriangle);
         }
 
