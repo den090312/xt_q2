@@ -22,11 +22,7 @@ namespace _2._1.ROUND
             get => radius;
             set
             {
-                if (radius <= 0)
-                {
-                    throw new ArgumentException("Отрицательное значение радиуса недопустимо!");
-                }
-
+                CheckRadiusAboveZero(radius);
                 radius = value;
             }
         }
@@ -34,13 +30,17 @@ namespace _2._1.ROUND
         //конструктор
         public Round(Point userCenterCoordinates, double userRadius)
         {
-            if (userRadius <= 0)
+            CheckRadiusAboveZero(userRadius);
+            СenterCoordinates = userCenterCoordinates;
+            radius = userRadius;
+        }
+
+        private static void CheckRadiusAboveZero(double radius)
+        {
+            if (radius <= 0)
             {
                 throw new ArgumentException("Отрицательное значение радиуса недопустимо!");
             }
-
-            СenterCoordinates = userCenterCoordinates;
-            radius = userRadius;
         }
     }
 }
