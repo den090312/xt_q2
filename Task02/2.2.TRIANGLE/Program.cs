@@ -43,9 +43,9 @@ namespace _2._2.TRIANGLE
                 get => a;
                 set
                 {
-                    int userValue = GetTriangleSide(value);
-                    CheckTriangleExistence(userValue, b, c);
-                    a = userValue;
+                    CheckTriangleSideAboveZero(value);
+                    CheckTriangleExistence(value, b, c);
+                    a = value;
                 }
             }
 
@@ -54,9 +54,9 @@ namespace _2._2.TRIANGLE
                 get => b;
                 set
                 {
-                    int userValue = GetTriangleSide(value);
-                    CheckTriangleExistence(a, userValue, c);
-                    b = userValue;
+                    CheckTriangleSideAboveZero(value);
+                    CheckTriangleExistence(a, value, c);
+                    b = value;
                 }
             }
 
@@ -65,9 +65,9 @@ namespace _2._2.TRIANGLE
                 get => c;
                 set
                 {
-                    int userValue = GetTriangleSide(value);
-                    CheckTriangleExistence(a, b, userValue);
-                    c = userValue;
+                    CheckTriangleSideAboveZero(value);
+                    CheckTriangleExistence(a, b, value);
+                    c = value;
                 }
             }
 
@@ -81,13 +81,6 @@ namespace _2._2.TRIANGLE
 
                     return Math.Sqrt(halfPerimeter * (halfPerimeter - A) * (halfPerimeter - B) * (halfPerimeter - C));
                 }
-            }
-
-            private int GetTriangleSide(int sideValue)
-            {
-                CheckTriangleSideAboveZero(sideValue);
-
-                return sideValue;
             }
 
             private void CheckTriangleSideAboveZero(int userValue)
