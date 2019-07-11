@@ -31,68 +31,13 @@ namespace _2._1.ROUND
             WriteRoundInfo(myRound);
         }
 
-        static void WriteRoundInfo(Round myRound)
+        private static void WriteRoundInfo(Round myRound)
         {
             Console.WriteLine($"Координаты центра круга: ({myRound.СenterCoordinates.X},{myRound.СenterCoordinates.Y})");
             Console.WriteLine($"Радиус круга: {myRound.Radius}");
             Console.WriteLine($"Длина окружности: {myRound.Circumference}");
             Console.WriteLine($"Площадь круга: {myRound.Area}");
             Console.WriteLine();
-        }
-
-        //класс "Точка" с двумя координатами
-        public class Point
-        {
-            public int X { get; set; }
-            public int Y { get; set; }
-
-            public Point(int X, int Y)
-            {
-                this.X = X;
-                this.Y = Y;
-            }
-        }
-
-        //класс "Круг"
-        public class Round
-        {
-            //инициализируем координаты центра круга
-            public Point СenterCoordinates = new Point(0, 0);
-
-            //радиус круга            
-            private double radius;
-
-            //длина окружности
-            public double Circumference => 2 * Math.PI * Radius;
-
-            //площадь круга
-            public double Area => Math.PI * Radius * Radius;
-
-            public double Radius
-            {
-                get => radius;
-                set
-                {
-                    if (radius <= 0)
-                    {
-                        throw new ArgumentException("Отрицательные значения и ноль недопустимы!");
-                    }
-
-                    radius = value;
-                }
-            }
-
-            //конструктор
-            public Round(Point userCenterCoordinates, double userRadius)
-            {
-                if (userRadius <= 0)
-                {
-                    throw new ArgumentException("Отрицательные значения и ноль недопустимы!");
-                }
-
-                СenterCoordinates = userCenterCoordinates;
-                radius = userRadius;
-            }
         }
     }
 }

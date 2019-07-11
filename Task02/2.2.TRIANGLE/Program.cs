@@ -27,7 +27,7 @@ namespace _2._2.TRIANGLE
             bool isInt;
             do
             {
-                Console.WriteLine($"Введите целое положительное число меньше {int.MaxValue}:");
+                Console.WriteLine($"Введите целое положительное число меньше или равно {int.MaxValue}:");
                 isInt = int.TryParse(Console.ReadLine(), out triangleSide);
 
                 if (isInt)
