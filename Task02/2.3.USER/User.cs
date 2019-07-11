@@ -14,7 +14,7 @@ namespace _2._3.USER
             get => firstName;
             set
             {
-                CheckNameForNumbers(value);
+                CheckNameForNumbers(value, "Имя");
                 firstName = value;
             }
         }
@@ -23,7 +23,7 @@ namespace _2._3.USER
             get => secondName;
             set
             {
-                CheckNameForNumbers(value);
+                CheckNameForNumbers(value, "Отчество");
                 secondName = value;
             }
         }
@@ -33,7 +33,7 @@ namespace _2._3.USER
             get => lastName;
             set
             {
-                CheckNameForNumbers(value);
+                CheckNameForNumbers(value, "Фамилия");
                 lastName = value;
             }
         }
@@ -47,6 +47,7 @@ namespace _2._3.USER
                 {
                     throw new ArgumentException("Дата рождения не может быть больше текущей даты!");
                 }
+
                 birthDate = value;
             }
         }
@@ -59,18 +60,19 @@ namespace _2._3.USER
                 {
                     throw new ArgumentException("Возраст не может быть отрицательным или меньше нуля!");
                 }
+
                 return userAge;
             }
         }
 
-        private static void CheckNameForNumbers(string userName)
+        private static void CheckNameForNumbers(string userName, string nameType)
         {
             var userCharArray = userName.ToCharArray();
             foreach (char element in userCharArray)
             {
                 if (char.IsDigit(element))
                 {
-                    throw new ArgumentException("Цифры в ФИО недопустимы!");
+                    throw new ArgumentException($"Цифры в поле '{nameType}' недопустимы!");
                 }
             }
         }
