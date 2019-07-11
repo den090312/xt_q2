@@ -93,7 +93,7 @@ namespace _2._2.TRIANGLE
 
             private static void CheckTriangleExistence(int a, int b, int c)
             {
-                if (a >= b + c | b >= a + c | c >= a + b)
+                if (a >= b + c || b >= a + c || c >= a + b)
                 {
                     throw new ArgumentException("Треугольник с такими сторонами построить нельзя!");
                 }
