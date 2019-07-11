@@ -29,19 +29,22 @@ namespace _2._2.TRIANGLE
                 {
                     throw new ArgumentException("Сторона треугольника не может быть меньше или равна нулю!");
                 }
-                else
+
+                return userValue;
+            }
+
+            private static void CheckTriangleExistence(int a, int b, int c)
+            {
+                if (a >= b + c | b >= a + c | c >= a + b)
                 {
-                    return userValue;
+                    throw new ArgumentException("Треугольник с такими сторонами построить нельзя!");
                 }
             }
 
             private int a;
             public int A
             {
-                get
-                {
-                    return a;
-                }
+                get => a;
                 set
                 {
                     a = SetAboveZeroTriangleSide(value);
@@ -50,54 +53,36 @@ namespace _2._2.TRIANGLE
                     {
                         throw new ArgumentException("Треугольник с такими сторонами построить нельзя!");
                     }
-                    else
-                    {
-                        a = value;
-                    }
+
+                    a = value;
                 }
             }
 
             private int b;
             public int B
             {
-                get
-                {
-                    return b;
-                }
+                get => b;
                 set
                 {
                     b = SetAboveZeroTriangleSide(value);
 
-                    if (a >= b + c | b >= a + c | c >= a + b)
-                    {
-                        throw new ArgumentException("Треугольник с такими сторонами построить нельзя!");
-                    }
-                    else
-                    {
-                        b = value;
-                    }
+                    CheckTriangleExistence(a, b, c);
+
+                    b = value;
                 }
             }
 
             private int c;
             public int C
             {
-                get
-                {
-                    return c;
-                }
+                get => c;
                 set
                 {
                     c = SetAboveZeroTriangleSide(value);
 
-                    if (a >= b + c | b >= a + c | c >= a + b)
-                    {
-                        throw new ArgumentException("Треугольник с такими сторонами построить нельзя!");
-                    }
-                    else
-                    {
-                        c = value;
-                    }
+                    CheckTriangleExistence(a, b, c);
+
+                    c = value;
                 }
             }
 
@@ -107,21 +92,24 @@ namespace _2._2.TRIANGLE
                 int b = SetAboveZeroTriangleSide(B);
                 int c = SetAboveZeroTriangleSide(C);
 
-                if (a >= b + c | b >= a + c | c >= a + b)
-                {
-                    throw new ArgumentException("Треугольник с такими сторонами построить нельзя!");
-                }
-                else
-                {
-                    this.a = a;
-                    this.b = b;
-                    this.c = c;
-                }
+                CheckTriangleExistence(a, b, c);
+
+                this.a = a;
+                this.b = b;
+                this.c = c;
             }
 
             public int Perimeter => A + B + C;
 
-            public double Area => Math.Sqrt((A + B + C) / 2 * ((A + B + C) / 2 - A) * ((A + B + C) / 2 - B) * ((A + B + C) / 2 - C));
+            public double Area
+            {
+                get
+                {
+                    var halfPerimeter = (A + B + C) / 2;
+
+                    return Math.Sqrt(halfPerimeter * (halfPerimeter - A) * (halfPerimeter - B) * (halfPerimeter - C));
+                }
+            }
         }
     }
 }
