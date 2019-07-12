@@ -5,36 +5,20 @@ namespace _2._4.MY_STRING
 {
     public class MyString
     {
-        public char[] CharArray { get; private set; }
+        private char[] charArray;
 
-        public MyString(string userString) => CharArray = userString.ToCharArray();
-
-        public MyString(char[] userCharArray) => CharArray = userCharArray;
-
-        public char[] MyStringToCharArray(MyString myString)
-        {
-            CharArray = new char[10];
-
-            return CharArray;
-        }
-
-        public MyString CharArrayToMyString(char[] userCharArray)
-        {
-            MyString myString = new MyString(userCharArray);
-
-            return myString;
-        }
+        public MyString(string userString) => charArray = StringToCharArray(userString);
 
         public static bool operator ==(MyString myString1, MyString myString2)
         {
-            if (myString1.CharArray.Length != myString2.CharArray.Length)
+            if (myString1.charArray.Length != myString2.charArray.Length)
             {
                 return false;
             }
 
-            for (int i = 0; i <= myString1.CharArray.Length - 1; i++)
+            for (int i = 0; i <= myString1.charArray.Length - 1; i++)
             {
-                if (myString1.CharArray[i] != myString1.CharArray[i])
+                if (myString1.charArray[i] != myString1.charArray[i])
                 {
                     return false;
                 }
@@ -45,14 +29,14 @@ namespace _2._4.MY_STRING
 
         public static bool operator !=(MyString myString1, MyString myString2)
         {
-            if (myString1.CharArray.Length != myString2.CharArray.Length)
+            if (myString1.charArray.Length != myString2.charArray.Length)
             {
                 return true;
             }
 
-            for (int i = 0; i <= myString1.CharArray.Length - 1; i++)
+            for (int i = 0; i <= myString1.charArray.Length - 1; i++)
             {
-                if (myString1.CharArray[i] != myString1.CharArray[i])
+                if (myString1.charArray[i] != myString1.charArray[i])
                 {
                     return true;
                 }
@@ -61,23 +45,35 @@ namespace _2._4.MY_STRING
             return false;
         }
 
-        public static bool operator >(MyString myString1, MyString myString2) => myString1.CharArray.Length > myString2.CharArray.Length;
-        public static bool operator <(MyString myString1, MyString myString2) => myString1.CharArray.Length < myString2.CharArray.Length;
+        public static bool operator >(MyString myString1, MyString myString2) => myString1.charArray.Length > myString2.charArray.Length;
+        public static bool operator <(MyString myString1, MyString myString2) => myString1.charArray.Length < myString2.charArray.Length;
         public static string operator +(MyString myString1, MyString myString2)
         {
             StringBuilder mySB = new StringBuilder();
 
-            foreach (char element in myString1.CharArray)
+            foreach (char element in myString1.charArray)
             {
                 mySB.Append(element);
             }
 
-            foreach (char element in myString2.CharArray)
+            foreach (char element in myString2.charArray)
             {
                 mySB.Append(element);
             }
 
             return mySB.ToString();
+        }
+
+        private char[] StringToCharArray(string thoseString)
+        {
+            char[] myCharArray = new char[thoseString.Length];
+
+            for (int i = 0; i <= thoseString.Length - 1; i++)
+            {
+                myCharArray[i] = thoseString[i];
+            }
+
+            return myCharArray;
         }
     }
 }
