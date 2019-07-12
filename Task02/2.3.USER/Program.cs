@@ -46,7 +46,7 @@ namespace _2._3.USER
 
         private static string GetBirthDateFromConsole()
         {
-            Console.WriteLine($"Введите дату в формате: {Format}:");
+            Console.WriteLine($"Введите дату рождения в формате: {Format}:");
 
             return Console.ReadLine();
         }
