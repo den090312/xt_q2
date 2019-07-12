@@ -13,6 +13,8 @@ namespace _2._3.USER
         private DateTime birthDate;
         private readonly DateTime currentDateTime = DateTime.Now;
 
+        public DateTime BirthDate => birthDate;
+
         public string FirstName
         {
             get => firstName;
