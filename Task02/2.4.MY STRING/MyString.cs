@@ -47,16 +47,13 @@ namespace _2._4.MY_STRING
 
         public static bool operator >(MyString myString1, MyString myString2) => myString1.charArray.Length > myString2.charArray.Length;
         public static bool operator <(MyString myString1, MyString myString2) => myString1.charArray.Length < myString2.charArray.Length;
-        public static string operator +(MyString myString1, MyString myString2)
+        public static string operator +(MyString myString1, MyString myString2) => CharArrayToString(myString1.charArray) + CharArrayToString(myString2.charArray);
+
+        private static string CharArrayToString(char[] thoseCharArray)
         {
             StringBuilder mySB = new StringBuilder();
 
-            foreach (char element in myString1.charArray)
-            {
-                mySB.Append(element);
-            }
-
-            foreach (char element in myString2.charArray)
+            foreach (char element in thoseCharArray)
             {
                 mySB.Append(element);
             }
