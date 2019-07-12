@@ -12,6 +12,7 @@ namespace _2._4.MY_STRING
             innerString = userString;
             innerCharArray = userString.ToCharArray();
         }
+
         public MyString(char[] userCharArray)
         {
             innerString = userCharArray.ToString();
@@ -31,5 +32,9 @@ namespace _2._4.MY_STRING
 
             return myString;
         }
+
+        public static bool operator ==(MyString myString1, MyString myString2) => myString1.innerString == myString2.innerString;
+
+        public static bool operator !=(MyString myString1, MyString myString2) => myString1.innerString != myString2.innerString;
     }
 }
