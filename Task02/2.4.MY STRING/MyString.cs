@@ -8,6 +8,7 @@ namespace _2._4.MY_STRING
         private char[] charArray;
 
         public MyString(string userString) => charArray = StringToCharArray(userString);
+        public MyString(char[] userCharArray) => charArray = userCharArray;
 
         public static bool operator ==(MyString myString1, MyString myString2)
         {
@@ -72,5 +73,9 @@ namespace _2._4.MY_STRING
 
             return myCharArray;
         }
+
+        public char[] MyStringToCharArray(MyString mystring) => mystring.charArray;
+
+
     }
 }
