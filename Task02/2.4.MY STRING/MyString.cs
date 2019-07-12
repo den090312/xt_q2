@@ -5,25 +5,26 @@ namespace _2._4.MY_STRING
     public class MyString
     {
         private string innerString;
-        private char[] innerCharArray;
+
+        public char[] CharArray { get; private set; }
 
         public MyString(string userString)
         {
             innerString = userString;
-            innerCharArray = userString.ToCharArray();
+            CharArray = userString.ToCharArray();
         }
 
         public MyString(char[] userCharArray)
         {
             innerString = userCharArray.ToString();
-            innerCharArray = userCharArray;
+            CharArray = userCharArray;
         }
 
         public char[] MyStringToCharArray(MyString myString)
         {
-            innerCharArray = myString.innerString.ToCharArray();
+            CharArray = myString.innerString.ToCharArray();
 
-            return innerCharArray;
+            return CharArray;
         }
 
         public MyString CharArrayToMyString(char[] userCharArray)
@@ -33,8 +34,9 @@ namespace _2._4.MY_STRING
             return myString;
         }
 
-        public static bool operator ==(MyString myString1, MyString myString2) => myString1.innerString == myString2.innerString;
-
-        public static bool operator !=(MyString myString1, MyString myString2) => myString1.innerString != myString2.innerString;
+        public static bool operator ==(MyString myString1, MyString myString2) => myString1.CharArray == myString2.CharArray;
+        public static bool operator !=(MyString myString1, MyString myString2) => myString1.CharArray != myString2.CharArray;
+        public static bool operator >(MyString myString1, MyString myString2) => myString1.CharArray.Length > myString2.CharArray.Length;
+        public static bool operator <(MyString myString1, MyString myString2) => myString1.CharArray.Length < myString2.CharArray.Length;
     }
 }
