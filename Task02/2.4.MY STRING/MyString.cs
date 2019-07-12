@@ -74,8 +74,26 @@ namespace _2._4.MY_STRING
             return myCharArray;
         }
 
-        public char[] MyStringToCharArray(MyString mystring) => mystring.charArray;
+        public char[] ToCharArray(MyString mystring) => mystring.charArray;
 
+        public bool TryFind(char userChar, out int index)
+        {
+            index = 0;
+            bool found = false;
 
+            foreach (char element in charArray)
+            {
+                if (element == userChar)
+                {
+                    return true;
+                }
+                else
+                {
+                    index++;
+                }
+            }
+
+            return found;
+        }
     }
 }
