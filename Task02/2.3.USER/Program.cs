@@ -19,16 +19,15 @@ namespace _2._3.USER
             myUser.SecondName = GetNameFromConsole("отчество");
             Console.WriteLine();
 
-            //myUser.SetBirthDate("15.10.1989");
             myUser.SetBirthDate(GetBirthDateFromConsole());
             Console.WriteLine();
 
-            Console.WriteLine("Пользователь № 1");
             WriteUserInfo(myUser);
         }
 
         private static void WriteUserInfo(User user)
         {
+            Console.WriteLine("ПОЛЬЗОВАТЕЛЬ");
             Console.WriteLine($"Фамилия: {user.LastName}");
             Console.WriteLine($"Имя: {user.FirstName}");
             Console.WriteLine($"Отчество: {user.SecondName}");
