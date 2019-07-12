@@ -56,7 +56,7 @@ namespace _2._3.USER
                 throw new ArgumentException("Дата рождения не может быть больше текущей даты!");
             }
 
-            this.birthDate = userBirthDate;
+            birthDate = userBirthDate;
         }
         public int Age
         {
