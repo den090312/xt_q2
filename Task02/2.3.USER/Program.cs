@@ -19,11 +19,8 @@ namespace _2._3.USER
             myUser.SecondName = GetNameFromConsole("отчество");
             Console.WriteLine();
 
-            //ставим дату рождения из консоли
-            myUser.BirthDate = GetBirthDateFromConsole();
-
-            //меняем дату рождения методом класса
-            myUser.SetBirthDate("15.10.1989");
+            //myUser.SetBirthDate("15.10.1989");
+            myUser.SetBirthDate(GetBirthDateFromConsole());
             Console.WriteLine();
 
             Console.WriteLine("Пользователь № 1");
@@ -47,19 +44,11 @@ namespace _2._3.USER
             return Console.ReadLine();
         }
 
-        private static DateTime GetBirthDateFromConsole()
+        private static string GetBirthDateFromConsole()
         {
-            DateTime birthDate;
+            Console.WriteLine($"Введите дату в формате: {Format}:");
 
-            bool isDate;
-            do
-            {
-                Console.WriteLine($"Введите дату в формате: {Format}:");
-                isDate = DateTime.TryParseExact(Console.ReadLine(), Format, CultureInfo.InvariantCulture, DateTimeStyles.None, out birthDate);
-            }
-            while (isDate == false);
-
-            return birthDate;
+            return Console.ReadLine();
         }
     }
 }

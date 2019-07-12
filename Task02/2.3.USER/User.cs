@@ -15,7 +15,7 @@ namespace _2._3.USER
 
         public DateTime BirthDate => birthDate;
 
-        public DateTime CurrentDateTime => currentDateTime;
+        private DateTime CurrentDateTime => currentDateTime;
 
         public string FirstName
         {
