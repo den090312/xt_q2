@@ -71,7 +71,7 @@ namespace _2._3.USER
                     userAge--;
                 }
 
-                if (userAge <= 0)
+                if (userAge < 0)
                 {
                     throw new ArgumentException("Возраст не может быть меньше нуля!");
                 }
