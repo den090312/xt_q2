@@ -6,7 +6,6 @@ namespace _2._3.USER
     class Program
     {
         private const string Format = "dd.MM.yyyy";
-
         private static void Main(string[] args) 
         {
             var myUser = new User();
@@ -20,7 +19,11 @@ namespace _2._3.USER
             myUser.SecondName = GetNameFromConsole("отчество");
             Console.WriteLine();
 
+            //ставим дату рождения из консоли
             myUser.BirthDate = GetBirthDateFromConsole();
+
+            //меняем дату рождения методом класса
+            myUser.SetBirthDate("15.10.1989");
             Console.WriteLine();
 
             Console.WriteLine("Пользователь № 1");

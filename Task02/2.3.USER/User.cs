@@ -1,14 +1,21 @@
 ﻿using System;
+using System.Globalization;
 
 namespace _2._3.USER
 {
     public class User
     {
+        private const string Format = "dd.MM.yyyy";
+
         private string firstName;
         private string secondName;
         private string lastName;
         private DateTime birthDate;
         private readonly DateTime currentDateTime = DateTime.Now;
+
+        public DateTime BirthDate => birthDate;
+
+        public DateTime CurrentDateTime => currentDateTime;
 
         public string FirstName
         {
@@ -39,26 +46,29 @@ namespace _2._3.USER
             }
         }
 
-        public DateTime BirthDate
+        public void SetBirthDate(string userDate)
         {
-            get => birthDate;
-            set
-            {
-                if (value > currentDateTime)
-                {
-                    throw new ArgumentException("Дата рождения не может быть больше текущей даты!");
-                }
+            bool isDate = DateTime.TryParseExact(userDate, Format, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime userBirthDate);
 
-                birthDate = value;
+            if (!isDate)
+            {
+                throw new ArgumentException($"Дата рождения должна быть в формате: {Format}:");
             }
+
+            if (userBirthDate > CurrentDateTime)
+            {
+                throw new ArgumentException("Дата рождения не может быть больше текущей даты!");
+            }
+
+            this.birthDate = userBirthDate;
         }
         public int Age
         {
             get
             {
-                var userAge = currentDateTime.AddYears(-birthDate.Year).Year;
+                var userAge = CurrentDateTime.AddYears(-birthDate.Year).Year;
 
-                if (currentDateTime.Month < birthDate.Month)
+                if (CurrentDateTime.Month < birthDate.Month)
                 {
                     userAge--;
                 }

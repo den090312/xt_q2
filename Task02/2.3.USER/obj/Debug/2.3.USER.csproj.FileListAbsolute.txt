@@ -5,3 +5,10 @@ C:\Users\Den\source\repos\Task02\2.3.USER\obj\Debug\2.3.USER.csproj.CoreCompileI
 C:\Users\Den\source\repos\Task02\2.3.USER\obj\Debug\2.3.USER.exe
 C:\Users\Den\source\repos\Task02\2.3.USER\obj\Debug\2.3.USER.pdb
 C:\Users\Den\source\repos\Task02\2.3.USER\obj\Debug\2.3.USER.csprojAssemblyReference.cache
+C:\Users\Bolotin\Source\Repos\xt_q2\Task02\2.3.USER\bin\Debug\2.3.USER.exe.config
+C:\Users\Bolotin\Source\Repos\xt_q2\Task02\2.3.USER\bin\Debug\2.3.USER.exe
+C:\Users\Bolotin\Source\Repos\xt_q2\Task02\2.3.USER\bin\Debug\2.3.USER.pdb
+C:\Users\Bolotin\Source\Repos\xt_q2\Task02\2.3.USER\obj\Debug\2.3.USER.csprojAssemblyReference.cache
+C:\Users\Bolotin\Source\Repos\xt_q2\Task02\2.3.USER\obj\Debug\2.3.USER.csproj.CoreCompileInputs.cache
+C:\Users\Bolotin\Source\Repos\xt_q2\Task02\2.3.USER\obj\Debug\2.3.USER.exe
+C:\Users\Bolotin\Source\Repos\xt_q2\Task02\2.3.USER\obj\Debug\2.3.USER.pdb
