@@ -12,7 +12,7 @@ namespace _2._1.ROUND
             //радиус
             Console.WriteLine("Радиус круга");
             bool itIsRadius = true;
-            double myRadius = GetIntFromConsole(itIsRadius);
+            Radius myRadius = new Radius(GetDoubleFromConsole(itIsRadius));
             Console.WriteLine();
 
             //создаем объект класса "Круг"
@@ -34,10 +34,43 @@ namespace _2._1.ROUND
         {
             Console.WriteLine();
             Console.WriteLine($"Координаты центра круга: ({myRound.СenterCoordinates.X},{myRound.СenterCoordinates.Y})");
-            Console.WriteLine($"Радиус круга: {myRound.Radius}");
+            Console.WriteLine($"Радиус: {myRound.CircleRadius.Value}");
             Console.WriteLine($"Длина окружности: {myRound.Circumference}");
             Console.WriteLine($"Площадь круга: {myRound.Area}");
             Console.WriteLine();
+        }
+
+        private static double GetDoubleFromConsole(bool itIsRadius)
+        {
+            double doubleFromConsole;
+
+            bool isInt;
+
+            if (itIsRadius)
+            {
+                do
+                {
+                    Console.WriteLine($"Введите положительное число меньше или равно {double.MaxValue}:");
+                    isInt = double.TryParse(Console.ReadLine(), out doubleFromConsole);
+
+                    if (isInt)
+                    {
+                        isInt = doubleFromConsole > 0;
+                    }
+                }
+                while (isInt == false);
+            }
+            else
+            {
+                do
+                {
+                    Console.WriteLine($"Введите целое число меньше или равно {int.MaxValue}:");
+                    isInt = double.TryParse(Console.ReadLine(), out doubleFromConsole);
+                }
+                while (isInt == false);
+            }
+
+            return doubleFromConsole;
         }
 
         private static int GetIntFromConsole(bool itIsRadius)

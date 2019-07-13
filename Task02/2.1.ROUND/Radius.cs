@@ -16,6 +16,11 @@ namespace _2._1.ROUND
             }
         }
 
+        public Radius(double radiusValue)
+        {
+            value = radiusValue;
+        }
+
         private static void CheckRadiusAboveZero(double radius)
         {
             if (radius <= 0)
