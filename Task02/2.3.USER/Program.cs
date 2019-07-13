@@ -9,9 +9,9 @@ namespace _2._3.USER
         {
             var myUser = new User();
 
-            myUser.LastName = GetNameFromConsole("фамилию");
-            myUser.FirstName = GetNameFromConsole("имя");
-            myUser.SecondName = GetNameFromConsole("отчество");
+            myUser.LastName = GetStringValueFromConsole("фамилию");
+            myUser.FirstName = GetStringValueFromConsole("имя");
+            myUser.SecondName = GetStringValueFromConsole("отчество");
             Console.WriteLine();
             myUser.SetBirthDate(GetBirthDateFromConsole());
 
@@ -30,10 +30,10 @@ namespace _2._3.USER
             Console.WriteLine();
         }
 
-        public static string GetNameFromConsole(string nameType)
+        public static string GetStringValueFromConsole(string valueType)
         {
             Console.WriteLine();
-            Console.WriteLine($"Введите {nameType}:");
+            Console.WriteLine($"Введите {valueType}:");
 
             return Console.ReadLine();
         }

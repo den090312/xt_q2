@@ -7,15 +7,39 @@ namespace _2._5.EMPLOYEE
     {
         private static void Main(string[] args)
         {
-            User myEmployee = new Employee();
+            User myUser = new Employee();
 
-            myEmployee.LastName = _2._3.USER.Program.GetNameFromConsole("фамилию");
-            myEmployee.FirstName = _2._3.USER.Program.GetNameFromConsole("имя");
-            myEmployee.SecondName = _2._3.USER.Program.GetNameFromConsole("отчество");
+            myUser.LastName = _3.USER.Program.GetStringValueFromConsole("фамилию");
+            myUser.FirstName = _3.USER.Program.GetStringValueFromConsole("имя");
+            myUser.SecondName = _3.USER.Program.GetStringValueFromConsole("отчество");
             Console.WriteLine();
-            myEmployee.SetBirthDate(_2._3.USER.Program.GetBirthDateFromConsole());
+            myUser.SetBirthDate(_2._3.USER.Program.GetBirthDateFromConsole());
 
-            _2._3.USER.Program.WriteUserInfo(myEmployee);
+            Employee myEmployee = (Employee)myUser;
+            myEmployee.WorkExperience = GetIntFromConsole();
+            myEmployee.Position = _3.USER.Program.GetStringValueFromConsole("должность"); ;
+
+            _2._3.USER.Program.WriteUserInfo(myUser);
+        }
+
+        private static int GetIntFromConsole()
+        {
+            int intValue;
+
+            bool isInt;
+            do
+            {
+                Console.WriteLine($"Введите целое положительное число меньше или равно {int.MaxValue}:");
+                isInt = int.TryParse(Console.ReadLine(), out intValue);
+
+                if (isInt)
+                {
+                    isInt = intValue > 0;
+                }
+            }
+            while (isInt == false);
+
+            return intValue;
         }
     }
 }
