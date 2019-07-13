@@ -4,27 +4,17 @@ namespace _2._4.MY_STRING
 {
     public class MyString
     {
-        private char[] charArray;
-
-        public char[] CharArray
-        {
-            get => charArray;
-            set
-            {
-                charArray = value;
-            }
-        }
-
-        public int Length => charArray.Length;
-        public MyString(string userString) => charArray = StringToCharArray(userString);
-        public MyString(char[] userCharArray) => charArray = userCharArray;
+        public char[] CharArray { get; set; }
+        public int Length => CharArray.Length;
+        public MyString(string userString) => CharArray = StringToCharArray(userString);
+        public MyString(char[] userCharArray) => CharArray = userCharArray;
 
         public bool TryFind(char userChar, out int index)
         {
             index = 0;
             bool found = false;
 
-            foreach (char element in charArray)
+            foreach (char element in CharArray)
             {
                 if (element == userChar)
                 {
@@ -43,15 +33,15 @@ namespace _2._4.MY_STRING
         {
             char buffer;
 
-            for (int i = 0; i < charArray.Length - 1; i++)
+            for (int i = 0; i < CharArray.Length - 1; i++)
             {
-                for (int j = i + 1; j < charArray.Length; j++)
+                for (int j = i + 1; j < CharArray.Length; j++)
                 {
-                    if (charArray[j] < charArray[i])
+                    if (CharArray[j] < CharArray[i])
                     {
-                        buffer = charArray[i];
-                        charArray[i] = charArray[j];
-                        charArray[j] = buffer;
+                        buffer = CharArray[i];
+                        CharArray[i] = CharArray[j];
+                        CharArray[j] = buffer;
                     }
                 }
             }
@@ -61,15 +51,15 @@ namespace _2._4.MY_STRING
 
         public MyString Reverse()
         {
-            var lastIndex = charArray.Length - 1;
-            var swapStep = charArray.Length % 2 == 0 ? lastIndex / 2 : (lastIndex + 1) / 2;
+            var lastIndex = CharArray.Length - 1;
+            var swapStep = CharArray.Length % 2 == 0 ? lastIndex / 2 : (lastIndex + 1) / 2;
             char buffer;
 
             for (int i = 0; i <= swapStep; i++)
             {
-                buffer = charArray[i];
-                charArray[i] = charArray[lastIndex - i];
-                charArray[lastIndex - i] = buffer;
+                buffer = CharArray[i];
+                CharArray[i] = CharArray[lastIndex - i];
+                CharArray[lastIndex - i] = buffer;
             }
 
             return this;
@@ -77,14 +67,14 @@ namespace _2._4.MY_STRING
 
         public static bool operator ==(MyString myString1, MyString myString2)
         {
-            if (myString1.charArray.Length != myString2.charArray.Length)
+            if (myString1.CharArray.Length != myString2.CharArray.Length)
             {
                 return false;
             }
 
-            for (int i = 0; i <= myString1.charArray.Length - 1; i++)
+            for (int i = 0; i <= myString1.CharArray.Length - 1; i++)
             {
-                if (myString1.charArray[i] != myString1.charArray[i])
+                if (myString1.CharArray[i] != myString1.CharArray[i])
                 {
                     return false;
                 }
@@ -95,14 +85,14 @@ namespace _2._4.MY_STRING
 
         public static bool operator !=(MyString myString1, MyString myString2)
         {
-            if (myString1.charArray.Length != myString2.charArray.Length)
+            if (myString1.CharArray.Length != myString2.CharArray.Length)
             {
                 return true;
             }
 
-            for (int i = 0; i <= myString1.charArray.Length - 1; i++)
+            for (int i = 0; i <= myString1.CharArray.Length - 1; i++)
             {
-                if (myString1.charArray[i] != myString1.charArray[i])
+                if (myString1.CharArray[i] != myString1.CharArray[i])
                 {
                     return true;
                 }
@@ -115,16 +105,16 @@ namespace _2._4.MY_STRING
         {
             var myString = userObject as MyString;
 
-            return myString == null ? false : charArray.Equals(myString.charArray);
+            return myString == null ? false : CharArray.Equals(myString.CharArray);
         }
 
-        public override int GetHashCode() => charArray.GetHashCode();
-        public static bool operator >(MyString myString1, MyString myString2) => myString1.charArray.Length > myString2.charArray.Length;
-        public static bool operator <(MyString myString1, MyString myString2) => myString1.charArray.Length < myString2.charArray.Length;
+        public override int GetHashCode() => CharArray.GetHashCode();
+        public static bool operator >(MyString myString1, MyString myString2) => myString1.CharArray.Length > myString2.CharArray.Length;
+        public static bool operator <(MyString myString1, MyString myString2) => myString1.CharArray.Length < myString2.CharArray.Length;
         public static MyString operator +(MyString myString1, MyString myString2)
         {
-            var charArray1 = myString1.charArray;
-            var charArray2 = myString2.charArray;
+            var charArray1 = myString1.CharArray;
+            var charArray2 = myString2.CharArray;
             var length1 = charArray1.Length;
             var length3 = length1 + charArray2.Length;
             var resultCharArray = new char[length3];
