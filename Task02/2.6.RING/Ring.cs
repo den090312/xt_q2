@@ -5,8 +5,8 @@ namespace _2._6.RING
 {
     public class Ring
     {
-        private Radius innerRadius;
         private Radius outerRadius;
+        private Radius innerRadius;
 
         public Point СenterCoordinates = new Point(0, 0);
 
