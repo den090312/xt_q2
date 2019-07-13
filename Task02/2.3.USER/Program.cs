@@ -6,11 +6,13 @@ namespace _2._3.USER
     {
         private static void Main(string[] args) 
         {
-            var myUser = new User();
+            var myUser = new User
+            {
+                LastName = GetStringValueFromConsole("фамилию"),
+                FirstName = GetStringValueFromConsole("имя"),
+                SecondName = GetStringValueFromConsole("отчество")
+            };
 
-            myUser.LastName = GetStringValueFromConsole("фамилию");
-            myUser.FirstName = GetStringValueFromConsole("имя");
-            myUser.SecondName = GetStringValueFromConsole("отчество");
             myUser.SetBirthDate(GetBirthDateFromConsole(myUser));
             Console.WriteLine();
 

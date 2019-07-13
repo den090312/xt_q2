@@ -6,12 +6,14 @@ namespace _2._5.EMPLOYEE
     {
         private static void Main(string[] args)
         {
-            var myEmployee = new Employee();
+            var myEmployee = new Employee
+            {
+                LastName = _3.USER.Program.GetStringValueFromConsole("фамилию"),
+                FirstName = _3.USER.Program.GetStringValueFromConsole("имя"),
+                SecondName = _3.USER.Program.GetStringValueFromConsole("отчество")
+            };
 
-            myEmployee.LastName = _3.USER.Program.GetStringValueFromConsole("фамилию");
-            myEmployee.FirstName = _3.USER.Program.GetStringValueFromConsole("имя");
-            myEmployee.SecondName = _3.USER.Program.GetStringValueFromConsole("отчество");
-            myEmployee.SetBirthDate(_2._3.USER.Program.GetBirthDateFromConsole(myEmployee));
+            myEmployee.SetBirthDate(_3.USER.Program.GetBirthDateFromConsole(myEmployee));
 
             Console.WriteLine("Ввод стажа работы:");
             myEmployee.WorkExperience = GetIntFromConsole();
