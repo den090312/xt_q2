@@ -57,6 +57,11 @@ namespace _2._3.USER
                 throw new ArgumentException("Дата рождения не может быть больше текущей даты!");
             }
 
+            if (userBirthDate == currentDateTime)
+            {
+                throw new ArgumentException("Добро пожаловать в наш бренный мир!");
+            }
+
             BirthDate = userBirthDate;
         }
         public int Age
