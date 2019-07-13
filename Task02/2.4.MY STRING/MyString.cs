@@ -145,7 +145,7 @@ namespace _2._4.MY_STRING
             return new MyString(resultCharArray);
         }
 
-        private char[] StringToCharArray(string thoseString)
+        private static char[] StringToCharArray(string thoseString)
         {
             char[] myCharArray = new char[thoseString.Length];
             var lastIndex = thoseString.Length - 1;
