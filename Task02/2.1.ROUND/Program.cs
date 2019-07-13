@@ -2,30 +2,22 @@ using System;
 
 namespace _2._1.ROUND
 {
-    class Program
+    public class Program
     {
         private static void Main(string[] args)
         {
             //инициализируем координаты точки
-            var myCoordinates = new Point(5, 20);
+            var centerCoordinates = new Point(5, 20);
 
             //радиус
-            Console.WriteLine("Радиус круга");
-            bool itIsRadius = true;
-            Radius myRadius = new Radius(GetDoubleFromConsole(itIsRadius));
+            Radius radius = new Radius(GetRadiusFromConsole());
             Console.WriteLine();
 
             //создаем объект класса "Круг"
-            var myRound = new Round(myCoordinates, myRadius);
+            var myRound = new Round(centerCoordinates, radius);
 
             //задаем координаты 
-            itIsRadius = false;
-            Console.WriteLine("Центр круга. Координата X");
-            int X = GetIntFromConsole(itIsRadius);
-            Console.WriteLine("Центр круга. Координата Y");
-            int Y = GetIntFromConsole(itIsRadius);
-
-            myRound.СenterCoordinates = new Point(X, Y);
+            myRound.СenterCoordinates = new Point(GetCoordinateFromConsole('X'), GetCoordinateFromConsole('Y'));
 
             WriteRoundInfo(myRound);
         }
@@ -40,68 +32,39 @@ namespace _2._1.ROUND
             Console.WriteLine();
         }
 
-        private static double GetDoubleFromConsole(bool itIsRadius)
+        public static double GetRadiusFromConsole()
         {
+            Console.WriteLine("Радиус");
             double doubleFromConsole;
-
             bool isInt;
 
-            if (itIsRadius)
+            do
             {
-                do
-                {
-                    Console.WriteLine($"Введите положительное число меньше или равно {double.MaxValue}:");
-                    isInt = double.TryParse(Console.ReadLine(), out doubleFromConsole);
+                Console.WriteLine($"Введите положительное число меньше или равно {double.MaxValue}:");
+                isInt = double.TryParse(Console.ReadLine(), out doubleFromConsole);
 
-                    if (isInt)
-                    {
-                        isInt = doubleFromConsole > 0;
-                    }
-                }
-                while (isInt == false);
-            }
-            else
-            {
-                do
+                if (isInt)
                 {
-                    Console.WriteLine($"Введите целое число меньше или равно {int.MaxValue}:");
-                    isInt = double.TryParse(Console.ReadLine(), out doubleFromConsole);
+                    isInt = doubleFromConsole > 0;
                 }
-                while (isInt == false);
             }
+            while (isInt == false);
 
             return doubleFromConsole;
         }
 
-        private static int GetIntFromConsole(bool itIsRadius)
+        public static int GetCoordinateFromConsole(char measure)
         {
             int intFromConsole;
-
             bool isInt;
 
-            if (itIsRadius)
+            do
             {
-                do
-                {
-                    Console.WriteLine($"Введите целое положительное число меньше или равно {int.MaxValue}:");
-                    isInt = int.TryParse(Console.ReadLine(), out intFromConsole);
-
-                    if (isInt)
-                    {
-                        isInt = intFromConsole > 0;
-                    }
-                }
-                while (isInt == false);
+                Console.WriteLine($"Ввод координаты. Измерение {measure}");
+                Console.WriteLine($"Введите целое число меньше или равно {int.MaxValue}:");
+                isInt = int.TryParse(Console.ReadLine(), out intFromConsole);
             }
-            else
-            {
-                do
-                {
-                    Console.WriteLine($"Введите целое число меньше или равно {int.MaxValue}:");
-                    isInt = int.TryParse(Console.ReadLine(), out intFromConsole);
-                }
-                while (isInt == false);
-            }
+            while (isInt == false);
 
             return intFromConsole;
         }

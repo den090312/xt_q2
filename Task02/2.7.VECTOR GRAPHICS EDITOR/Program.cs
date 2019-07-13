@@ -33,17 +33,16 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
             Console.WriteLine("\t5: Кольцо");
             Console.WriteLine("\t6: ВЫХОД");
             Console.WriteLine();
-            Console.WriteLine();
         }
 
         private static TwoPointsFigure GetTwoPointsFigureFromConsole()
         {
             Console.WriteLine();
             Console.WriteLine("Точка 1");
-            var point1 = new Point(GetCoordinateFromConsole('X'), GetCoordinateFromConsole('Y'));
+            var point1 = new Point(_1.ROUND.Program.GetCoordinateFromConsole('X'), _1.ROUND.Program.GetCoordinateFromConsole('Y'));
             Console.WriteLine();
             Console.WriteLine("Точка 2");
-            var point2 = new Point(GetCoordinateFromConsole('X'), GetCoordinateFromConsole('Y'));
+            var point2 = new Point(_1.ROUND.Program.GetCoordinateFromConsole('X'), _1.ROUND.Program.GetCoordinateFromConsole('Y'));
             Console.WriteLine();
             var userFigure = new TwoPointsFigure(point1, point2);
 
@@ -58,6 +57,25 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
             Console.WriteLine();
         }
 
+        private static Circle GetCircleFromConsole()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Координаты центра");
+            var centerCoordinates = new Point(_1.ROUND.Program.GetCoordinateFromConsole('X'), _1.ROUND.Program.GetCoordinateFromConsole('Y'));
+            Radius radius = new Radius(_1.ROUND.Program.GetRadiusFromConsole());
+            var myCircle = new Round(centerCoordinates, radius);
+            Console.WriteLine();
+
+            return myCircle;
+        }
+        private static void DisplayCircleFigure(string figureType, Circle circleFigure)
+        {
+            Console.WriteLine($"Тип фигуры: {figureType}");
+            Console.WriteLine($"Координаты центра: ({circleFigure.СenterCoordinates.X},{circleFigure.СenterCoordinates.Y})");
+            Console.WriteLine($"Радиус: {circleFigure.CircleRadius.Value}");
+            Console.WriteLine();
+        }
+
         private static void CreateSelectedFigure(int consoleKey)
         {
             switch (consoleKey)
@@ -66,6 +84,7 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
                     DisplayTwoPointsFigure("Линия", GetTwoPointsFigureFromConsole());
                     break;
                 case 2:
+                    DisplayCircleFigure("Окружность", GetCircleFromConsole());
                     break;
                 case 3:
                     DisplayTwoPointsFigure("Прямоугольник", GetTwoPointsFigureFromConsole());
@@ -78,22 +97,6 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
                     Environment.Exit(0);
                     break;
             }
-        }
-
-        private static int GetCoordinateFromConsole(char measure)
-        {
-            int intFromConsole;
-            bool isInt;
-
-            do
-            {
-                Console.WriteLine($"Ввод координаты. Измерение {measure}");
-                Console.WriteLine($"Введите целое число меньше или равно {int.MaxValue}:");
-                isInt = int.TryParse(Console.ReadLine(), out intFromConsole);
-            }
-            while (isInt == false);
-
-            return intFromConsole;
         }
 
         static int GetKeyFromConsole()
