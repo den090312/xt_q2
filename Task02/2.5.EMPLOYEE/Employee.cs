@@ -5,6 +5,6 @@ namespace _2._5.EMPLOYEE
     class Employee : User
     {
         public int WorkExperience { get; set; }
-        public int Position { get; set; }
+        public string Position { get; set; }
     }
 }

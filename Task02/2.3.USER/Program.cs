@@ -2,7 +2,7 @@
 
 namespace _2._3.USER
 {
-    class Program
+    public class Program
     {
         private const string Format = "dd.MM.yyyy";
         private static void Main(string[] args) 
@@ -24,7 +24,7 @@ namespace _2._3.USER
             WriteUserInfo(myUser);
         }
 
-        private static void WriteUserInfo(User user)
+        public static void WriteUserInfo(User user)
         {
             Console.WriteLine("ПОЛЬЗОВАТЕЛЬ");
             Console.WriteLine($"Фамилия: {user.LastName}");
