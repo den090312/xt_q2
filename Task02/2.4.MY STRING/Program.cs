@@ -31,6 +31,11 @@ namespace _2._4.MY_STRING
             Console.WriteLine("Обратный MyString3:");
             WriteMyString(myString3.Reverse());
 
+            //меняем массив MyString3 
+            Console.WriteLine("Новый MyString3:");
+            myString3.CharArray = new char[] { 'а', 'б', 'в', 'г', 'д', 'е', 'ж' };
+            WriteMyString(myString3);
+
             //поиск элемента
             var myChar = '3';
             if (myString3.TryFind(myChar, out int index))
@@ -47,7 +52,7 @@ namespace _2._4.MY_STRING
 
         private static void WriteMyString(MyString myString)
         {
-            var charArray = myString.ToCharArray();
+            var charArray = myString.CharArray;
 
             foreach (char element in charArray)
             {

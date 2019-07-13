@@ -4,13 +4,20 @@ namespace _2._4.MY_STRING
 {
     public class MyString
     {
-        private readonly char[] charArray;
+        private char[] charArray;
+
+        public char[] CharArray
+        {
+            get => charArray;
+            set
+            {
+                charArray = value;
+            }
+        }
 
         public int Length => charArray.Length;
         public MyString(string userString) => charArray = StringToCharArray(userString);
         public MyString(char[] userCharArray) => charArray = userCharArray;
-
-        public char[] ToCharArray() => charArray;
 
         public bool TryFind(char userChar, out int index)
         {
@@ -141,8 +148,9 @@ namespace _2._4.MY_STRING
         private char[] StringToCharArray(string thoseString)
         {
             char[] myCharArray = new char[thoseString.Length];
+            var lastIndex = thoseString.Length - 1;
 
-            for (int i = 0; i <= thoseString.Length - 1; i++)
+            for (int i = 0; i <= lastIndex; i++)
             {
                 myCharArray[i] = thoseString[i];
             }
