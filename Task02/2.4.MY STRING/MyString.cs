@@ -115,8 +115,10 @@ namespace _2._4.MY_STRING
         {
             var charArray1 = myString1.CharArray;
             var charArray2 = myString2.CharArray;
+
             var length1 = charArray1.Length;
             var length3 = length1 + charArray2.Length;
+
             var resultCharArray = new char[length3];
 
             for (int i = 0; i < length1; i++)
