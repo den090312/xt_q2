@@ -7,9 +7,9 @@ namespace _2._3.USER
     {
         public readonly string Format = "dd.MM.yyyy";
 
+        private string lastName;
         private string firstName;
         private string secondName;
-        private string lastName;
         private readonly DateTime currentDateTime = DateTime.Now;
 
         public DateTime BirthDate { get; private set; }
@@ -77,11 +77,6 @@ namespace _2._3.USER
 
                 return userAge;
             }
-        }
-
-        public User()
-        {
-
         }
 
         public User(string userLastName, string userFirstName, string userSecondName)

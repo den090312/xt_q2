@@ -7,10 +7,6 @@ namespace _2._5.EMPLOYEE
     {
         private int workExperience;
 
-        public Employee()
-        {
-        }
-
         public Employee(string userLastName, string userFirstName, string userSecondName) : base(userLastName, userFirstName, userSecondName)
         {
         }

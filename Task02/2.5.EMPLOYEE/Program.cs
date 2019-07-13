@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2._3.USER;
+using System;
 
 namespace _2._5.EMPLOYEE
 {
@@ -7,11 +8,11 @@ namespace _2._5.EMPLOYEE
         private static void Main(string[] args)
         {
             var myEmployee = new Employee
-            {
-                LastName = _3.USER.Program.GetStringValueFromConsole("фамилию"),
-                FirstName = _3.USER.Program.GetStringValueFromConsole("имя"),
-                SecondName = _3.USER.Program.GetStringValueFromConsole("отчество")
-            };
+            (
+                _3.USER.Program.GetStringValueFromConsole("фамилию"),
+                _3.USER.Program.GetStringValueFromConsole("имя"),
+                _3.USER.Program.GetStringValueFromConsole("отчество")
+            );
 
             myEmployee.SetBirthDate(_3.USER.Program.GetBirthDateFromConsole(myEmployee));
 
