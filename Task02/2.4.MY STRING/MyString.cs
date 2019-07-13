@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 
 namespace _2._4.MY_STRING
 {
@@ -9,6 +8,47 @@ namespace _2._4.MY_STRING
 
         public MyString(string userString) => charArray = StringToCharArray(userString);
         public MyString(char[] userCharArray) => charArray = userCharArray;
+
+        public char[] ToCharArray() => charArray;
+
+        public bool TryFind(char userChar, out int index)
+        {
+            index = 0;
+            bool found = false;
+
+            foreach (char element in charArray)
+            {
+                if (element == userChar)
+                {
+                    return true;
+                }
+                else
+                {
+                    index++;
+                }
+            }
+
+            return found;
+        }
+
+        public MyString Sort()
+        {
+            char buffer;
+            for (int i = 0; i < charArray.Length - 1; i++)
+            {
+                for (int j = i + 1; j < charArray.Length; j++)
+                {
+                    if (charArray[j] < charArray[i])
+                    {
+                        buffer = charArray[i];
+                        charArray[i] = charArray[j];
+                        charArray[j] = buffer;
+                    }
+                }
+            }
+
+            return this;
+        }
 
         public static bool operator ==(MyString myString1, MyString myString2)
         {
@@ -57,7 +97,7 @@ namespace _2._4.MY_STRING
 
         public static bool operator >(MyString myString1, MyString myString2) => myString1.charArray.Length > myString2.charArray.Length;
         public static bool operator <(MyString myString1, MyString myString2) => myString1.charArray.Length < myString2.charArray.Length;
-        public static string operator +(MyString myString1, MyString myString2) => CharArrayToString(myString1.charArray) + CharArrayToString(myString2.charArray);
+        public static MyString operator +(MyString myString1, MyString myString2) => new MyString(CharArrayToString(myString1.charArray) + CharArrayToString(myString2.charArray));
 
         private static string CharArrayToString(char[] thoseCharArray)
         {
@@ -81,47 +121,6 @@ namespace _2._4.MY_STRING
             }
 
             return myCharArray;
-        }
-
-        public char[] ToCharArray() => charArray;
-
-        public bool TryFind(char userChar, out int index)
-        {
-            index = 0;
-            bool found = false;
-
-            foreach (char element in charArray)
-            {
-                if (element == userChar)
-                {
-                    return true;
-                }
-                else
-                {
-                    index++;
-                }
-            }
-
-            return found;
-        }
-
-        public MyString Sort()
-        {
-            char buffer;
-            for (int i = 0; i < charArray.Length - 1; i++)
-            {
-                for (int j = i + 1; j < charArray.Length; j++)
-                {
-                    if (charArray[j] < charArray[i])
-                    {
-                        buffer = charArray[i];
-                        charArray[i] = charArray[j];
-                        charArray[j] = buffer;
-                    }
-                }
-            }
-
-            return this;
         }
     }
 }

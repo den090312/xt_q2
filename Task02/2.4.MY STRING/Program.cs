@@ -6,13 +6,31 @@ namespace _2._4.MY_STRING
     {
         private static void Main(string[] args)
         {
-            var myString = new MyString("строка2957667349000011");
+            //создание объекта через массив
+            var myString1 = new MyString(new char[] { 'a', 'b', 'c', 'd'});
 
-            WriteMyString(myString.Sort());
+            Console.WriteLine("MyString1:");
+            WriteMyString(myString1);
 
-            if (myString.TryFind('3', out int index))
+            //создание объекта через строку
+            var myString2 = new MyString("строка2957667349000011");
+
+            Console.WriteLine("MyString2:");
+            WriteMyString(myString2);
+
+            Console.WriteLine("Сортировка MyString2:");
+            WriteMyString(myString2.Sort());
+
+            //конкатенация
+            var myString3 = myString1 + myString2;
+            Console.WriteLine("MyString1 + MyString2:");
+            WriteMyString(myString3);
+
+            //поиск элемента
+            var myChar = '3';
+            if (myString3.TryFind(myChar, out int index))
             {
-                Console.WriteLine($"Значение найдено, индекс равен {index}");
+                Console.WriteLine($"Значение '{myChar}' найдено, индекс равен {index}");
             }
             else
             {
@@ -22,15 +40,14 @@ namespace _2._4.MY_STRING
 
         private static void WriteMyString(MyString myString)
         {
-            Console.WriteLine("Отсортированный массив:");
-
             var charArray = myString.ToCharArray();
 
             foreach (char element in charArray)
             {
-                Console.Write($"{element} ");
+                Console.Write($"{element}");
             }
 
+            Console.WriteLine();
             Console.WriteLine();
         }
     }
