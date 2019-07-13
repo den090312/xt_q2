@@ -6,7 +6,9 @@ namespace _2._4.MY_STRING
     {
         private static void Main(string[] args)
         {
-            var myString = new MyString("строка12345");
+            var myString = new MyString("строка2957667349000011");
+
+            WriteMyString(myString.Sort());
 
             if (myString.TryFind('3', out int index))
             {
@@ -16,6 +18,20 @@ namespace _2._4.MY_STRING
             {
                 Console.WriteLine("Значение не найдено");
             }
+        }
+
+        private static void WriteMyString(MyString myString)
+        {
+            Console.WriteLine("Отсортированный массив:");
+
+            var charArray = myString.ToCharArray();
+
+            foreach (char element in charArray)
+            {
+                Console.Write($"{element} ");
+            }
+
+            Console.WriteLine();
         }
     }
 }

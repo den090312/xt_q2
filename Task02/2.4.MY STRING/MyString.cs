@@ -5,7 +5,7 @@ namespace _2._4.MY_STRING
 {
     public class MyString
     {
-        private char[] charArray;
+        private readonly char[] charArray;
 
         public MyString(string userString) => charArray = StringToCharArray(userString);
         public MyString(char[] userCharArray) => charArray = userCharArray;
@@ -28,15 +28,6 @@ namespace _2._4.MY_STRING
             return true;
         }
 
-        public override bool Equals(object userObject)
-        {
-            var myString = userObject as MyString;
-
-            return myString == null ? false : charArray.Equals(myString.charArray);
-        }
-
-        public override int GetHashCode() => charArray.GetHashCode();
-
         public static bool operator !=(MyString myString1, MyString myString2)
         {
             if (myString1.charArray.Length != myString2.charArray.Length)
@@ -55,6 +46,14 @@ namespace _2._4.MY_STRING
             return false;
         }
 
+        public override bool Equals(object userObject)
+        {
+            var myString = userObject as MyString;
+
+            return myString == null ? false : charArray.Equals(myString.charArray);
+        }
+
+        public override int GetHashCode() => charArray.GetHashCode();
 
         public static bool operator >(MyString myString1, MyString myString2) => myString1.charArray.Length > myString2.charArray.Length;
         public static bool operator <(MyString myString1, MyString myString2) => myString1.charArray.Length < myString2.charArray.Length;
@@ -84,7 +83,7 @@ namespace _2._4.MY_STRING
             return myCharArray;
         }
 
-        public char[] ToCharArray(MyString mystring) => mystring.charArray;
+        public char[] ToCharArray() => charArray;
 
         public bool TryFind(char userChar, out int index)
         {
@@ -104,6 +103,25 @@ namespace _2._4.MY_STRING
             }
 
             return found;
+        }
+
+        public MyString Sort()
+        {
+            char buffer;
+            for (int i = 0; i < charArray.Length - 1; i++)
+            {
+                for (int j = i + 1; j < charArray.Length; j++)
+                {
+                    if (charArray[j] < charArray[i])
+                    {
+                        buffer = charArray[i];
+                        charArray[i] = charArray[j];
+                        charArray[j] = buffer;
+                    }
+                }
+            }
+
+            return this;
         }
     }
 }
