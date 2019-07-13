@@ -6,6 +6,7 @@ namespace _2._6.RING
     class Ring : Circle
     {
         private double ringRadius;
+        private double ringArea;
 
         public double RingRadius
         {
@@ -21,6 +22,14 @@ namespace _2._6.RING
 
                 ringRadius = value;
             }
+        }
+
+        public double RingArea
+        {
+            get => ringArea;
+            private set => ringArea = RingRadius > Radius
+                    ? Math.PI * (RingRadius * RingRadius - Radius * Radius)
+                    : Math.PI * (Radius * Radius - RingRadius * RingRadius);
         }
 
         public double RingCircumference => 2 * Math.PI * RingRadius;
