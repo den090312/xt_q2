@@ -5,7 +5,7 @@ namespace _2._3.USER
 {
     public class User
     {
-        private const string Format = "dd.MM.yyyy";
+        public readonly string Format = "dd.MM.yyyy";
 
         private string firstName;
         private string secondName;
