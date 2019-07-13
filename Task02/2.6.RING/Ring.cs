@@ -8,6 +8,8 @@ namespace _2._6.RING
         private Radius innerRadius;
         private Radius outerRadius;
 
+        public Point СenterCoordinates = new Point(0, 0);
+
         public Radius InnerRadius
         {
             get => innerRadius;
@@ -30,14 +32,16 @@ namespace _2._6.RING
         public double Area => Math.PI * (InnerRadius.Value * InnerRadius.Value - OuterRadius.Value * OuterRadius.Value);
         public double TotalCircumference => 2 * Math.PI * InnerRadius.Value + 2 * Math.PI * OuterRadius.Value;
 
-        public Ring(Point userCenterCoordinates, Radius innerRadius, Radius outerRadius)
+        public Ring(Point userCenterCoordinates, Radius userInnerRadius, Radius userOuterRadius)
         {
-
+            СenterCoordinates = userCenterCoordinates;
+            innerRadius = userInnerRadius;
+            outerRadius = userOuterRadius;
         }
 
         private void RadiusCheck(Radius innerRadius, Radius outerRadius)
         {
-            if (innerRadius.Value < outerRadius.Value)
+            if (outerRadius.Value < innerRadius.Value)
             {
                 throw new ArgumentException("Внешний радиус не может быть меньше внутреннего!");
             }
