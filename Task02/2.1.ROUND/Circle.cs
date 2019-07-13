@@ -21,6 +21,10 @@ namespace _2._1.ROUND
             }
         }
 
+        public Circle()
+        {
+        }
+
         //конструктор
         public Circle(Point userCenterCoordinates, double userRadius)
         {
