@@ -35,8 +35,8 @@ namespace _2._6.RING
         public Ring(Point userCenterCoordinates, Radius userInnerRadius, Radius userOuterRadius)
         {
             СenterCoordinates = userCenterCoordinates;
-            innerRadius = userInnerRadius;
-            outerRadius = userOuterRadius;
+            InnerRadius = userInnerRadius;
+            OuterRadius = userOuterRadius;
         }
 
         private void RadiusCheck(Radius innerRadius, Radius outerRadius)

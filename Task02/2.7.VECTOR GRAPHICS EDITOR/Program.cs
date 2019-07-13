@@ -1,4 +1,5 @@
 ﻿using _2._1.ROUND;
+using _2._6.RING;
 using System;
 using System.Text;
 
@@ -17,7 +18,7 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
                 int userKey = GetKeyFromConsole();
                 if (userKey != 0)
                 {
-                    CreateSelectedFigure(userKey);
+                    DisplaySelectedFigure(userKey);
                     WriteMenu();
                 }
             }
@@ -35,7 +36,7 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
             Console.WriteLine();
         }
 
-        private static TwoPointsFigure GetTwoPointsFigureFromConsole()
+        private static TwoPointsFigure GetTwoPointsFromConsole()
         {
             Console.WriteLine();
             Console.WriteLine("Точка 1");
@@ -49,7 +50,7 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
             return userFigure;
         }
 
-        private static void DisplayTwoPointsFigure(string figureType, TwoPointsFigure twoPointsFigure)
+        private static void DisplayTwoPoints(string figureType, TwoPointsFigure twoPointsFigure)
         {
             Console.WriteLine($"Тип фигуры: {figureType}");
             Console.WriteLine($"Точка1: ({twoPointsFigure.Point1.X},{twoPointsFigure.Point1.Y})");
@@ -63,12 +64,12 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
             Console.WriteLine("Координаты центра");
             var centerCoordinates = new Point(_1.ROUND.Program.GetCoordinateFromConsole('X'), _1.ROUND.Program.GetCoordinateFromConsole('Y'));
             Radius radius = new Radius(_1.ROUND.Program.GetRadiusFromConsole());
-            var myCircle = new Round(centerCoordinates, radius);
+            var userCircle = new Round(centerCoordinates, radius);
             Console.WriteLine();
 
-            return myCircle;
+            return userCircle;
         }
-        private static void DisplayCircleFigure(string figureType, Circle circleFigure)
+        private static void DisplayCircle(string figureType, Circle circleFigure)
         {
             Console.WriteLine($"Тип фигуры: {figureType}");
             Console.WriteLine($"Координаты центра: ({circleFigure.СenterCoordinates.X},{circleFigure.СenterCoordinates.Y})");
@@ -76,22 +77,45 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
             Console.WriteLine();
         }
 
-        private static void CreateSelectedFigure(int consoleKey)
+        private static Ring GetRingFromConsole()
+        {
+            Console.WriteLine();
+            var centerCoordinates = new Point(_1.ROUND.Program.GetCoordinateFromConsole('X'), _1.ROUND.Program.GetCoordinateFromConsole('Y'));
+            Radius innerRadius = new Radius(_1.ROUND.Program.GetRadiusFromConsole());
+            Radius outerRadius = new Radius(_1.ROUND.Program.GetRadiusFromConsole());
+            var userRing = new Ring(centerCoordinates, innerRadius, outerRadius);
+            Console.WriteLine();
+
+            return userRing;
+        }
+
+        private static void DisplayRing(string figureType, Ring ringFigure)
+        {
+            Console.WriteLine($"Тип фигуры: {figureType}");
+            Console.WriteLine($"Координаты центра: ({ringFigure.СenterCoordinates.X},{ringFigure.СenterCoordinates.Y})");
+            Console.WriteLine($"Внутренний радиус: {ringFigure.OuterRadius.Value}");
+            Console.WriteLine($"Внешний радиус: {ringFigure.InnerRadius.Value}");
+            Console.WriteLine();
+        }
+
+        private static void DisplaySelectedFigure(int consoleKey)
         {
             switch (consoleKey)
             {
                 case 1:
-                    DisplayTwoPointsFigure("Линия", GetTwoPointsFigureFromConsole());
+                    DisplayTwoPoints("Линия", GetTwoPointsFromConsole());
                     break;
                 case 2:
-                    DisplayCircleFigure("Окружность", GetCircleFromConsole());
+                    DisplayCircle("Окружность", GetCircleFromConsole());
                     break;
                 case 3:
-                    DisplayTwoPointsFigure("Прямоугольник", GetTwoPointsFigureFromConsole());
+                    DisplayTwoPoints("Прямоугольник", GetTwoPointsFromConsole());
                     break;
                 case 4:
+                    DisplayCircle("Круг", GetCircleFromConsole());
                     break;
                 case 5:
+                    DisplayRing("Кольцо", GetRingFromConsole());
                     break;
                 case 6:
                     Environment.Exit(0);

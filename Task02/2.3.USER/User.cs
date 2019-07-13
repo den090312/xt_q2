@@ -90,9 +90,9 @@ namespace _2._3.USER
             CheckNameForCorrect(userFirstName, "Имя");
             CheckNameForCorrect(userSecondName, "Отчество");
 
-            lastName = userLastName;
-            firstName = userFirstName;
-            secondName = userSecondName;
+            LastName = userLastName;
+            FirstName = userFirstName;
+            SecondName = userSecondName;
         }
 
         private static void CheckNameForCorrect(string userName, string nameType)

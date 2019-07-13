@@ -6,17 +6,17 @@ namespace _2._2.TRIANGLE
     {
         private int a, b, c;
 
-        public Triangle(int A, int B, int C)
+        public Triangle(int sideA, int sideB, int sideC)
         {
-            CheckTriangleSideAboveZero(A);
-            CheckTriangleSideAboveZero(B);
-            CheckTriangleSideAboveZero(C);
+            CheckTriangleSideAboveZero(sideA);
+            CheckTriangleSideAboveZero(sideB);
+            CheckTriangleSideAboveZero(sideC);
 
-            CheckTriangleExistence(A, B, C);
+            CheckTriangleExistence(sideA, sideB, sideC);
 
-            a = A;
-            b = B;
-            c = C;
+            A = sideA;
+            B = sideB;
+            C = sideC;
         }
 
         public int A

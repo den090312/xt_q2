@@ -55,6 +55,10 @@
       <Project>{1181B323-7708-4817-B37A-A658F6B3ECFB}</Project>
       <Name>2.1.ROUND</Name>
     </ProjectReference>
+    <ProjectReference Include="..\2.6.RING\2.6.RING.csproj">
+      <Project>{53A6297D-8B3B-4F5D-B938-5C0667223668}</Project>
+      <Name>2.6.RING</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
