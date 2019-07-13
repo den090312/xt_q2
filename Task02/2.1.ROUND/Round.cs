@@ -9,7 +9,5 @@ namespace _2._1.ROUND
         }
 
         public double Area => Math.PI * Radius * Radius;
-
-
     }
 }

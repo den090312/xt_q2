@@ -17,20 +17,16 @@ namespace _2._6.RING
 
                 if (value == Radius)
                 {
-                    throw new Exception("Радиусы кольца не могут быть равны!");
+                    throw new Exception("Радиус кольца не может быть равен радиусу окружности!");
                 }
 
                 ringRadius = value;
             }
         }
 
-        public double RingArea
-        {
-            get => ringArea;
-            private set => ringArea = RingRadius > Radius
+        public double RingArea => ringArea = RingRadius > Radius
                     ? Math.PI * (RingRadius * RingRadius - Radius * Radius)
                     : Math.PI * (Radius * Radius - RingRadius * RingRadius);
-        }
 
         public double RingCircumference => 2 * Math.PI * RingRadius;
         public double TotalCircumference => Circumference + RingCircumference;
