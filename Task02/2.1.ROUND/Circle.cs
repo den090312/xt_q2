@@ -3,13 +3,13 @@
 namespace _2._1.ROUND
 {
     public class Circle
-    {
+    {   
+        private double radius;
+
         public Point СenterCoordinates = new Point(0, 0);
 
         //длина окружности
         public double Circumference => 2 * Math.PI * Radius;
-     
-        private double radius;
 
         public double Radius
         {
@@ -33,7 +33,7 @@ namespace _2._1.ROUND
             radius = userRadius;
         }
 
-        private static void CheckRadiusAboveZero(double radius)
+        protected static void CheckRadiusAboveZero(double radius)
         {
             if (radius <= 0)
             {
