@@ -7,11 +7,11 @@ namespace _2._3.USER
         private static void Main(string[] args) 
         {
             var myUser = new User
-            {
-                LastName = GetStringValueFromConsole("фамилию"),
-                FirstName = GetStringValueFromConsole("имя"),
-                SecondName = GetStringValueFromConsole("отчество")
-            };
+            (
+                GetStringValueFromConsole("фамилию"),
+                GetStringValueFromConsole("имя"),
+                GetStringValueFromConsole("отчество")
+            );
 
             myUser.SetBirthDate(GetBirthDateFromConsole(myUser));
             Console.WriteLine();
