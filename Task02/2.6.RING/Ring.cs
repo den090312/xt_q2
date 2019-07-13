@@ -34,5 +34,9 @@ namespace _2._6.RING
 
         public double RingCircumference => 2 * Math.PI * RingRadius;
         public double TotalCircumference => Circumference + RingCircumference;
+
+        public Ring(Point userCenterCoordinates, double userRadius) : base(userCenterCoordinates, userRadius)
+        {
+        }
     }
 }

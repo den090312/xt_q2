@@ -6,7 +6,7 @@ namespace _2._6.RING
     {
         private static void Main(string[] args)
         {
-
+            
         }
     }
 }
