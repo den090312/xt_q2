@@ -13,7 +13,7 @@ namespace _2._4.MY_STRING
             WriteMyString(myString1);
 
             //создание объекта через строку
-            var myString2 = new MyString("4637125");
+            var myString2 = new MyString("46371825");
 
             Console.WriteLine("MyString2:");
             WriteMyString(myString2);

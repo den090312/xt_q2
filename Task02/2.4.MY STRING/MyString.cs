@@ -6,6 +6,7 @@ namespace _2._4.MY_STRING
     {
         private readonly char[] charArray;
 
+        public int Length => charArray.Length;
         public MyString(string userString) => charArray = StringToCharArray(userString);
         public MyString(char[] userCharArray) => charArray = userCharArray;
 
@@ -119,17 +120,13 @@ namespace _2._4.MY_STRING
             var charArray1 = myString1.charArray;
             var charArray2 = myString2.charArray;
             var length1 = charArray1.Length;
-            var length2 = charArray2.Length;
-
-            var length3 = length1 + length2;
-
+            var length3 = length1 + charArray2.Length;
             var resultCharArray = new char[length3];
 
             for (int i = 0; i < length1; i++)
             {
                 resultCharArray[i] = charArray1[i];
             }
-
 
             int j = 0;
             for (int i = length1; i < length3; i++)
@@ -140,7 +137,6 @@ namespace _2._4.MY_STRING
 
             return new MyString(resultCharArray);
         }
-
 
         private char[] StringToCharArray(string thoseString)
         {
