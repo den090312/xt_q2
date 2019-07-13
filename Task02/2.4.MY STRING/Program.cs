@@ -7,13 +7,13 @@ namespace _2._4.MY_STRING
         private static void Main(string[] args)
         {
             //создание объекта через массив
-            var myString1 = new MyString(new char[] { 'a', 'b', 'c', 'd', 'e'});
+            var myString1 = new MyString(new char[] { 'a', 'b', 'c', 'd', 'e', 'i', 'j'});
 
             Console.WriteLine("MyString1:");
             WriteMyString(myString1);
 
             //создание объекта через строку
-            var myString2 = new MyString("43125");
+            var myString2 = new MyString("4637125");
 
             Console.WriteLine("MyString2:");
             WriteMyString(myString2);
@@ -23,10 +23,13 @@ namespace _2._4.MY_STRING
             Console.WriteLine("MyString1 + MyString2:");
             WriteMyString(myString3);
 
+            //сортировка
             Console.WriteLine("Сортировка MyString3:");
             WriteMyString(myString3.Sort());
 
-
+            //реверс
+            Console.WriteLine("Обратный MyString3:");
+            WriteMyString(myString3.Reverse());
 
             //поиск элемента
             var myChar = '3';

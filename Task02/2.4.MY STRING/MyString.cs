@@ -34,6 +34,7 @@ namespace _2._4.MY_STRING
         public MyString Sort()
         {
             char buffer;
+
             for (int i = 0; i < charArray.Length - 1; i++)
             {
                 for (int j = i + 1; j < charArray.Length; j++)
@@ -45,6 +46,22 @@ namespace _2._4.MY_STRING
                         charArray[j] = buffer;
                     }
                 }
+            }
+
+            return this;
+        }
+
+        public MyString Reverse()
+        {
+            var lastIndex = charArray.Length - 1;
+            var swapStep = charArray.Length % 2 == 0 ? lastIndex / 2 : (lastIndex + 1) / 2;
+            char buffer;
+
+            for (int i = 0; i <= swapStep; i++)
+            {
+                buffer = charArray[i];
+                charArray[i] = charArray[lastIndex - i];
+                charArray[lastIndex - i] = buffer;
             }
 
             return this;
