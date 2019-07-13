@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1181B323-7708-4817-B37A-A658F6B3ECFB}</ProjectGuid>
+    <ProjectGuid>{53A6297D-8B3B-4F5D-B938-5C0667223668}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>_2._1.ROUND</RootNamespace>
-    <AssemblyName>2.1.ROUND</AssemblyName>
+    <RootNamespace>_2._6.RING</RootNamespace>
+    <AssemblyName>2.6.RING</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,11 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Circle.cs" />
-    <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Round.cs" />
+    <Compile Include="Ring.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
