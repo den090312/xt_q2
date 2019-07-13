@@ -6,18 +6,11 @@ namespace _2._1.ROUND
     {
         private static void Main(string[] args)
         {
-            //инициализируем координаты точки
-            var centerCoordinates = new Point(5, 20);
-
-            //радиус
-            Radius radius = new Radius(GetRadiusFromConsole());
-            Console.WriteLine();
-
-            //создаем объект класса "Круг"
-            var myRound = new Round(centerCoordinates, radius);
-
-            //задаем координаты 
-            myRound.СenterCoordinates = new Point(GetCoordinateFromConsole('X'), GetCoordinateFromConsole('Y'));
+            var myRound = new Round
+            (
+                new Point(GetCoordinateFromConsole('X'), GetCoordinateFromConsole('Y')), 
+                new Radius(GetRadiusFromConsole())
+            );
 
             WriteRoundInfo(myRound);
         }

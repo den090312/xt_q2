@@ -1,5 +1,4 @@
-﻿using _2._3.USER;
-using System;
+﻿using System;
 
 namespace _2._5.EMPLOYEE
 {
@@ -17,7 +16,7 @@ namespace _2._5.EMPLOYEE
             myEmployee.SetBirthDate(_3.USER.Program.GetBirthDateFromConsole(myEmployee));
 
             Console.WriteLine("Ввод стажа работы:");
-            myEmployee.WorkExperience = GetIntFromConsole();
+            myEmployee.WorkExperience = GetPositiveIntFromConsole();
             myEmployee.Position = _3.USER.Program.GetStringValueFromConsole("должность"); ;
             Console.WriteLine();
 
@@ -27,7 +26,7 @@ namespace _2._5.EMPLOYEE
             Console.WriteLine($"Должность: {myEmployee.Position}");
         }
 
-        private static int GetIntFromConsole()
+        private static int GetPositiveIntFromConsole()
         {
             int intValue;
             bool isInt;
