@@ -10,7 +10,11 @@ namespace _2._4.MY_STRING
 
             if (myString.TryFind('3', out int index))
             {
-                Console.WriteLine(index);
+                Console.WriteLine($"Значение найдено, индекс равен {index}");
+            }
+            else
+            {
+                Console.WriteLine("Значение не найдено");
             }
         }
     }

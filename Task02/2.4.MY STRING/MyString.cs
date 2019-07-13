@@ -28,6 +28,15 @@ namespace _2._4.MY_STRING
             return true;
         }
 
+        public override bool Equals(object userObject)
+        {
+            var myString = userObject as MyString;
+
+            return myString == null ? false : charArray.Equals(myString.charArray);
+        }
+
+        public override int GetHashCode() => charArray.GetHashCode();
+
         public static bool operator !=(MyString myString1, MyString myString2)
         {
             if (myString1.charArray.Length != myString2.charArray.Length)
@@ -45,6 +54,7 @@ namespace _2._4.MY_STRING
 
             return false;
         }
+
 
         public static bool operator >(MyString myString1, MyString myString2) => myString1.charArray.Length > myString2.charArray.Length;
         public static bool operator <(MyString myString1, MyString myString2) => myString1.charArray.Length < myString2.charArray.Length;
