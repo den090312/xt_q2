@@ -3,38 +3,18 @@
 namespace _2._1.ROUND
 {
     public class Circle
-    {   
-        private double radius;
-
+    {
         public Point СenterCoordinates = new Point(0, 0);
+        public Radius CircleRadius { get; set; }
 
         //длина окружности
-        public double Circumference => 2 * Math.PI * Radius;
-
-        public double Radius
-        {
-            get => radius;
-            set
-            {
-                CheckRadiusAboveZero(value);
-                radius = value;
-            }
-        }
+        public double Circumference => 2 * Math.PI * CircleRadius.Value;
 
         //конструктор
-        public Circle(Point userCenterCoordinates, double userRadius)
+        public Circle(Point userCenterCoordinates, Radius userRadius)
         {
-            CheckRadiusAboveZero(userRadius);
             СenterCoordinates = userCenterCoordinates;
-            radius = userRadius;
-        }
-
-        protected static void CheckRadiusAboveZero(double radius)
-        {
-            if (radius <= 0)
-            {
-                throw new ArgumentException("Отрицательное значение радиуса недопустимо!");
-            }
+            CircleRadius = userRadius;
         }
     }
 }

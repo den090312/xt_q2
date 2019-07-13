@@ -3,35 +3,49 @@ using System;
 
 namespace _2._6.RING
 {
-    class Ring : Circle
+    public class Ring
     {
-        private double ringRadius;
+        private Radius innerRadius;
+        private Radius outerRadius;
 
-        public double RingRadius
+        public Radius InnerRadius
         {
-            get => ringRadius;
+            get => innerRadius;
             set
             {
-                CheckRadiusAboveZero(value);
-
-                if (value == Radius)
-                {
-                    throw new Exception("Радиус кольца не может быть равен радиусу окружности!");
-                }
-
-                ringRadius = value;
+                RadiusCheck(innerRadius, outerRadius);
+                innerRadius = value;
+            }
+        }
+        public Radius OuterRadius
+        {
+            get => outerRadius;
+            set
+            {
+                RadiusCheck(innerRadius, outerRadius);
+                outerRadius = value;
             }
         }
 
-        public double RingArea => RingRadius > Radius
-                    ? Math.PI * (RingRadius * RingRadius - Radius * Radius)
-                    : Math.PI * (Radius * Radius - RingRadius * RingRadius);
+        public double Area => Math.PI * (InnerRadius.Value * InnerRadius.Value - OuterRadius.Value * OuterRadius.Value);
+        public double TotalCircumference => 2 * Math.PI * InnerRadius.Value + 2 * Math.PI * OuterRadius.Value;
 
-        public double RingCircumference => 2 * Math.PI * RingRadius;
-        public double TotalCircumference => Circumference + RingCircumference;
-
-        public Ring(Point userCenterCoordinates, double userRadius) : base(userCenterCoordinates, userRadius)
+        public Ring(Point userCenterCoordinates, Radius innerRadius, Radius outerRadius)
         {
+
+        }
+
+        private void RadiusCheck(Radius innerRadius, Radius outerRadius)
+        {
+            if (innerRadius.Value < outerRadius.Value)
+            {
+                throw new ArgumentException("Внешний радиус не может быть меньше внутреннего!");
+            }
+
+            if (innerRadius.Value == outerRadius.Value)
+            {
+                throw new ArgumentException("Внешний радиус не может быть равен внутреннему!");
+            }
         }
     }
 }
