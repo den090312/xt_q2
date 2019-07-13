@@ -10,22 +10,17 @@ namespace _2._3.USER
             var myUser = new User();
 
             myUser.LastName = GetNameFromConsole("фамилию");
-            Console.WriteLine();
-
             myUser.FirstName = GetNameFromConsole("имя");
-            Console.WriteLine();
-
             myUser.SecondName = GetNameFromConsole("отчество");
             Console.WriteLine();
-
             myUser.SetBirthDate(GetBirthDateFromConsole());
-            Console.WriteLine();
 
             WriteUserInfo(myUser);
         }
 
         public static void WriteUserInfo(User user)
         {
+            Console.WriteLine();
             Console.WriteLine("ПОЛЬЗОВАТЕЛЬ");
             Console.WriteLine($"Фамилия: {user.LastName}");
             Console.WriteLine($"Имя: {user.FirstName}");
@@ -35,14 +30,15 @@ namespace _2._3.USER
             Console.WriteLine();
         }
 
-        private static string GetNameFromConsole(string nameType)
+        public static string GetNameFromConsole(string nameType)
         {
+            Console.WriteLine();
             Console.WriteLine($"Введите {nameType}:");
 
             return Console.ReadLine();
         }
 
-        private static string GetBirthDateFromConsole()
+        public static string GetBirthDateFromConsole()
         {
             Console.WriteLine($"Введите дату рождения в формате: {Format}:");
 
