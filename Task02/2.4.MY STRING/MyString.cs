@@ -112,7 +112,6 @@ namespace _2._4.MY_STRING
         }
 
         public override int GetHashCode() => charArray.GetHashCode();
-
         public static bool operator >(MyString myString1, MyString myString2) => myString1.charArray.Length > myString2.charArray.Length;
         public static bool operator <(MyString myString1, MyString myString2) => myString1.charArray.Length < myString2.charArray.Length;
         public static MyString operator +(MyString myString1, MyString myString2)
@@ -129,6 +128,7 @@ namespace _2._4.MY_STRING
             }
 
             int j = 0;
+
             for (int i = length1; i < length3; i++)
             {
                 resultCharArray[i] = charArray2[j];
