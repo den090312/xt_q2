@@ -22,5 +22,8 @@ namespace _2._6.RING
                 ringRadius = value;
             }
         }
+
+        public double RingCircumference => 2 * Math.PI * RingRadius;
+        public double TotalCircumference => Circumference + RingCircumference;
     }
 }
