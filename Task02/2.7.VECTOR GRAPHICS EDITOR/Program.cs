@@ -76,14 +76,11 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
         private static Ring GetRingFromConsole()
         {
             Console.WriteLine();
-            Console.WriteLine("Внешняя окружность");
-            var outerCircle = GetCircleFromConsole();
-            Console.WriteLine("Внутренняя окружность");
-            var innerCircle = new Circle(outerCircle.CenterCoordinates, GetPointFromConsole("Координаты края"));
+            Console.WriteLine("Окружность кольца");
+            var circle = GetCircleFromConsole();
 
-            var userRing = new Ring(outerCircle, innerCircle);
 
-            return userRing;
+            return new Ring(circle, GetPointFromConsole("Координаты края второго кольца"));
         }
 
         private static void DisplayRectangle(string figureType, Rectangle rectangle)
@@ -115,13 +112,13 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
             Console.WriteLine();
         }
 
-        private static void DisplayRing(string figureType, Ring ringFigure)
+        private static void DisplayRing(string figureType, Ring ring)
         {
             Console.WriteLine();
             Console.WriteLine($"{figureType}");
-            Console.WriteLine($"Координаты центра: ({ringFigure.СenterCoordinates.X},{ringFigure.СenterCoordinates.Y})");
-            Console.WriteLine($"Внутренний радиус: {ringFigure.Circle.Radius}");
-            Console.WriteLine($"Внешний радиус: {ringFigure.InnerCircle.Radius}");
+            Console.WriteLine($"Координаты центра: ({ring.Circle.CenterCoordinates.X},{ring.Circle.CenterCoordinates.Y})");
+            Console.WriteLine($"Радиус 1: {ring.Circle.Radius}");
+            Console.WriteLine($"Радиус 2: {ring.Radius}");
             Console.WriteLine();
         }
 
