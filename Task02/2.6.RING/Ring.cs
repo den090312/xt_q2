@@ -7,7 +7,7 @@ namespace _2._6.RING
     {
         //для создания кольца через внешний-внутренний радиусы
         private double outerRadius;
-        private double innerRadius;
+        private readonly double innerRadius;
 
         //для создания кольца через точки
         private double radius;

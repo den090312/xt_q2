@@ -75,11 +75,6 @@ namespace _2._1.ROUND
             {
                 throw new Exception("Координаты края окружности не могут быть равны координатам центра!");
             }
-
-            if (userEdgeCoordinates < userCenterCoordinates)
-            {
-                throw new Exception("Координаты края окружности не могут быть меньше координат центра!");
-            }
         }
     }
 }
