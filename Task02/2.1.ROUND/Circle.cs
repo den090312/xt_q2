@@ -60,11 +60,7 @@ namespace _2._1.ROUND
                     return radius;
                 }
             }
-
-            set
-            {
-                radius = value;
-            }
+            set => radius = value;
         }
 
         public double Circumference => 2 * Math.PI * Radius;
