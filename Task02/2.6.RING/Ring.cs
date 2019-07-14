@@ -49,6 +49,11 @@ namespace _2._6.RING
             {
                 throw new Exception("Окружности кольца не должны совпадать!");
             }
+
+            if (userCircleRadius < userRadius)
+            {
+                throw new Exception("Внешний радиус должен быть больше внутреннего!");
+            }
         }
     }
 }

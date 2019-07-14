@@ -6,6 +6,7 @@ namespace _2._1.ROUND
     {
         private static void Main(string[] args)
         {
+            ////конструктор через точки
             var myRound = new Round
             (
                 new Point(GetCoordinateFromConsole("Центр круга", 'X'), GetCoordinateFromConsole("Центр круга", 'Y')),
@@ -13,6 +14,15 @@ namespace _2._1.ROUND
             );
 
             WriteRoundInfo(myRound);
+
+            //конструктор с указанием радиуса
+            var myRound2 = new Round
+            (
+                new Point(GetCoordinateFromConsole("Центр круга", 'X'), GetCoordinateFromConsole("Центр круга", 'Y')),
+                GetRadiusFromConsole()
+            );
+
+            WriteRoundInfo(myRound2);
         }
 
         private static void WriteRoundInfo(Round myRound)
@@ -42,6 +52,29 @@ namespace _2._1.ROUND
             while (isInt == false);
 
             return intFromConsole;
+        }
+
+        public static double GetRadiusFromConsole()
+        {
+            Console.WriteLine("Радиус");
+
+            double doubleFromConsole;
+            bool isDouble;
+
+            do
+            {
+                Console.WriteLine($"Введите целое положительное число меньше или равно {int.MaxValue}:");
+                isDouble = double.TryParse(Console.ReadLine(), out doubleFromConsole);
+
+                if (isDouble)
+                {
+                   isDouble = doubleFromConsole > 0;
+                }
+
+            }
+            while (isDouble == false);
+
+            return doubleFromConsole;
         }
     }
 }
