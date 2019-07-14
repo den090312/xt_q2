@@ -5,57 +5,49 @@ namespace _2._6.RING
 {
     public class Ring
     {
-        private Circle outerCircle;
-        private Circle innerCircle;
+        private double radius;
 
-        public Ring(Circle userOuterCircle, Circle userInnerCircle)
+        public Ring(Circle userCircle, Point userEdge)
         {
-            CheckRing();
-            OuterCircle = userOuterCircle;
-            InnerCircle = userInnerCircle;
+            var userRingRadius = GetRingRadius(userCircle, userEdge);
+            RadiusCheck(userCircle.Radius, userRingRadius);
+
+            radius = userRingRadius;
+            Circle = userCircle;
+            Edge = userEdge;
         }
 
-        public Point СenterCoordinates = new Point(0, 0);
+        public double GetRingRadius(Circle Circle, Point Edge) => Math.Sqrt
+        (
+            Math.Pow(Edge.X - Circle.CenterCoordinates.X, 2) + 
+            Math.Pow(Edge.Y - Circle.CenterCoordinates.Y, 2)
+        );
 
-        public Circle OuterCircle
+        public double Radius
         {
-            get => outerCircle;
+            get => radius;
             set
             {
-                CheckRing();
-                outerCircle = value;
+                RadiusCheck(Circle.Radius, value);
+                radius = value;
             }
         }
 
-        public Circle InnerCircle
+        public Point Edge { get; set; }
+
+        public Circle Circle { get; set; }
+
+        public double Area => Circle.Radius > Radius
+                    ? Math.PI * (Math.Pow(Circle.Radius, 2) - Math.Pow(Radius, 2))
+                    : Math.PI * (Math.Pow(Radius, 2) - Math.Pow(Circle.Radius, 2));
+
+        public double TotalCircumference => 2 * Math.PI * Radius + 2 * Math.PI * Circle.Radius;
+
+        private void RadiusCheck(double userCircleRadius, double userRadius)
         {
-            get => innerCircle;
-            set
+            if (userCircleRadius == userRadius)
             {
-                CheckRing();
-                innerCircle = value;
-            }
-        }
-
-        public double Area => Math.PI * (Math.Pow(OuterCircle.Radius, 2) - Math.Pow(InnerCircle.Radius, 2));
-
-        public double TotalCircumference => 2 * Math.PI * InnerCircle.Radius + 2 * Math.PI * OuterCircle.Radius;
-
-        private void CheckRing()
-        {
-            if (OuterCircle.Radius < InnerCircle.Radius)
-            {
-                throw new Exception("Внешнее кольцо не может совпадать с внутренним!");
-            }
-
-            if (OuterCircle.CenterCoordinates < InnerCircle.CenterCoordinates)
-            {
-                throw new Exception("Внешнее кольцо должно быть больше внутреннего!");
-            }
-
-            if (OuterCircle.CenterCoordinates != InnerCircle.CenterCoordinates)
-            {
-                throw new Exception("Центры двух окружностей должны совпадать!");
+                throw new Exception("Окружности кольца не должны совпадать!");
             }
         }
     }

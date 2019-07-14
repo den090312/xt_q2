@@ -65,7 +65,7 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
 
         private static Rectangle GetRectangleFromConsole() => new Rectangle(GetLineFromConsole());
 
-        private static Line GetLineFromConsole() => new Line(GetPointFromConsole("Начало линии"), GetPointFromConsole("Конец линии"));
+        private static Line GetLineFromConsole() => new Line(GetPointFromConsole("Точка 1"), GetPointFromConsole("Точка 2"));
 
         private static Point GetPointFromConsole(string purpose) => new Point
         (
@@ -75,10 +75,11 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
 
         private static Ring GetRingFromConsole()
         {
+            Console.WriteLine();
             Console.WriteLine("Внешняя окружность");
             var outerCircle = GetCircleFromConsole();
             Console.WriteLine("Внутренняя окружность");
-            var innerCircle = GetCircleFromConsole();
+            var innerCircle = new Circle(outerCircle.CenterCoordinates, GetPointFromConsole("Координаты края"));
 
             var userRing = new Ring(outerCircle, innerCircle);
 
@@ -87,7 +88,8 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
 
         private static void DisplayRectangle(string figureType, Rectangle rectangle)
         {
-            Console.WriteLine($"Тип фигуры: {figureType}");
+            Console.WriteLine();
+            Console.WriteLine($"{figureType}");
             Console.WriteLine($"Точка 1: ({rectangle.Line1.Point1.X},{rectangle.Line1.Point1.Y})");
             Console.WriteLine($"Точка 2: ({rectangle.Line1.Point2.X},{rectangle.Line1.Point2.Y})");
             Console.WriteLine($"Точка 3: ({rectangle.Line2.Point1.X},{rectangle.Line2.Point1.Y})");
@@ -97,7 +99,8 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
 
         private static void DisplayLine(string figureType, Line line)
         {
-            Console.WriteLine($"Тип фигуры: {figureType}");
+            Console.WriteLine();
+            Console.WriteLine($"{figureType}");
             Console.WriteLine($"Точка1: ({line.Point1.X},{line.Point1.Y})");
             Console.WriteLine($"Точка2: ({line.Point2.X},{line.Point2.Y})");
             Console.WriteLine();
@@ -105,7 +108,8 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
 
         private static void DisplayCircle(string figureType, Circle circle)
         {
-            Console.WriteLine($"Тип фигуры: {figureType}");
+            Console.WriteLine();
+            Console.WriteLine($"{figureType}");
             Console.WriteLine($"Координаты центра: ({circle.CenterCoordinates.X},{circle.CenterCoordinates.Y})");
             Console.WriteLine($"Радиус: {circle.Radius}");
             Console.WriteLine();
@@ -113,9 +117,10 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
 
         private static void DisplayRing(string figureType, Ring ringFigure)
         {
-            Console.WriteLine($"Тип фигуры: {figureType}");
+            Console.WriteLine();
+            Console.WriteLine($"{figureType}");
             Console.WriteLine($"Координаты центра: ({ringFigure.СenterCoordinates.X},{ringFigure.СenterCoordinates.Y})");
-            Console.WriteLine($"Внутренний радиус: {ringFigure.OuterCircle.Radius}");
+            Console.WriteLine($"Внутренний радиус: {ringFigure.Circle.Radius}");
             Console.WriteLine($"Внешний радиус: {ringFigure.InnerCircle.Radius}");
             Console.WriteLine();
         }
