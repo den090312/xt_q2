@@ -12,20 +12,24 @@ namespace _2._6.RING
         //для создания кольца через точки
         private double radius;
 
+        //конструктор через кольцо и точку
         public Ring(Circle userCircle, Point userEdge)
         {
-            var userRingRadius = GetRingRadius(userCircle, userEdge);
-            RadiusCheck(userCircle.Radius, userRingRadius);
+            var userOuterRingRadius = GetRingRadius(userCircle, userEdge);
+            RadiusCheck(userCircle.Radius, userOuterRingRadius);
 
-            radius = userRingRadius;
+            radius = userOuterRingRadius;
             Circle = userCircle;
             Edge = userEdge;
         }
 
+        //конструктор через кольцо и внешний радиус
         public Ring(Circle userCircle, double userOuterRadius)
         {
+            RadiusCheck(userCircle.Radius, userOuterRadius);
+
             innerRadius = userCircle.Radius;
-            outerRadius = userOuterRadius 
+            outerRadius = userOuterRadius;
         }
 
         public double GetRingRadius(Circle Circle, Point Edge) => Math.Sqrt
@@ -54,14 +58,14 @@ namespace _2._6.RING
 
         public double TotalCircumference => 2 * Math.PI * Radius + 2 * Math.PI * Circle.Radius;
 
-        private void RadiusCheck(double userCircleRadius, double userRadius)
+        private void RadiusCheck(double userCircleInnerRadius, double userOuterRadius)
         {
-            if (userCircleRadius == userRadius)
+            if (userCircleInnerRadius == userOuterRadius)
             {
                 throw new Exception("Окружности кольца не должны совпадать!");
             }
 
-            if (userCircleRadius < userRadius)
+            if (userCircleInnerRadius < userOuterRadius)
             {
                 throw new Exception("Внешний радиус должен быть больше внутреннего!");
             }
