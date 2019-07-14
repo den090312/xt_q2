@@ -6,8 +6,6 @@ namespace _2._5.EMPLOYEE
     public class Employee
     {
         private int workExperience;
-        public string Position { get; set; }
-        public User User { get; }
 
         public Employee(User employeeUser, int employeeWorkExperience, string employeePosition)
         {
@@ -20,6 +18,10 @@ namespace _2._5.EMPLOYEE
             WorkExperience = employeeWorkExperience;
             Position = employeePosition;
         }
+
+        public string Position { get; set; }
+
+        public User User { get; }
 
         public int WorkExperience
         {

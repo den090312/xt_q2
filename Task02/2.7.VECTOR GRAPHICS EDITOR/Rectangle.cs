@@ -4,10 +4,11 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
 {
     public class Rectangle
     {
-        public Line Line1 { get; set; }
-        public Line Line2 => GetSecondLine(Line1);
-
         public Rectangle(Line userLine) => Line1 = userLine;
+
+        public Line Line1 { get; set; }
+
+        public Line Line2 => GetSecondLine(Line1);
 
         private Line GetSecondLine(Line firstLine) => new Line
         (

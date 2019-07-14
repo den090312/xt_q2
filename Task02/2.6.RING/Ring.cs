@@ -8,7 +8,15 @@ namespace _2._6.RING
         private Circle outerCircle;
         private Circle innerCircle;
 
+        public Ring(Circle userOuterCircle, Circle userInnerCircle)
+        {
+            CheckRing();
+            OuterCircle = userOuterCircle;
+            InnerCircle = userInnerCircle;
+        }
+
         public Point СenterCoordinates = new Point(0, 0);
+
         public Circle OuterCircle
         {
             get => outerCircle;
@@ -30,14 +38,8 @@ namespace _2._6.RING
         }
 
         public double Area => Math.PI * (Math.Pow(OuterCircle.Radius, 2) - Math.Pow(InnerCircle.Radius, 2));
-        public double TotalCircumference => 2 * Math.PI * InnerCircle.Radius + 2 * Math.PI * OuterCircle.Radius;
 
-        public Ring(Circle userOuterCircle, Circle userInnerCircle)
-        {
-            CheckRing();
-            OuterCircle = userOuterCircle;
-            InnerCircle = userInnerCircle;
-        }
+        public double TotalCircumference => 2 * Math.PI * InnerCircle.Radius + 2 * Math.PI * OuterCircle.Radius;
 
         private void CheckRing()
         {

@@ -2,10 +2,13 @@
 {
     public class MyString
     {
-        public char[] CharArray { get; set; }
-        public int Length => CharArray.Length;
         public MyString(string userString) => CharArray = StringToCharArray(userString);
+
         public MyString(char[] userCharArray) => CharArray = userCharArray;
+
+        public char[] CharArray { get; set; }
+
+        public int Length => CharArray.Length;
 
         public bool TryFind(char userChar, out int index)
         {
@@ -61,6 +64,19 @@
             }
 
             return this;
+        }
+
+        private static char[] StringToCharArray(string thoseString)
+        {
+            char[] myCharArray = new char[thoseString.Length];
+            var lastIndex = thoseString.Length - 1;
+
+            for (int i = 0; i <= lastIndex; i++)
+            {
+                myCharArray[i] = thoseString[i];
+            }
+
+            return myCharArray;
         }
 
         public static bool operator ==(MyString myString1, MyString myString2)
@@ -133,19 +149,6 @@
             }
 
             return new MyString(resultCharArray);
-        }
-
-        private static char[] StringToCharArray(string thoseString)
-        {
-            char[] myCharArray = new char[thoseString.Length];
-            var lastIndex = thoseString.Length - 1;
-
-            for (int i = 0; i <= lastIndex; i++)
-            {
-                myCharArray[i] = thoseString[i];
-            }
-
-            return myCharArray;
         }
     }
 }

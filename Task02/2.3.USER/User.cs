@@ -5,12 +5,23 @@ namespace _2._3.USER
 {
     public class User
     {
-        public readonly string Format = "dd.MM.yyyy";
-
         private string lastName;
         private string firstName;
         private string secondName;
         private readonly DateTime currentDateTime = DateTime.Now;
+
+        public readonly string Format = "dd.MM.yyyy";
+
+        public User(string userLastName, string userFirstName, string userSecondName)
+        {
+            CheckNameForCorrect(userLastName, "Фамилия");
+            CheckNameForCorrect(userFirstName, "Имя");
+            CheckNameForCorrect(userSecondName, "Отчество");
+
+            LastName = userLastName;
+            FirstName = userFirstName;
+            SecondName = userSecondName;
+        }
 
         public DateTime BirthDate { get; private set; }
 
@@ -23,6 +34,7 @@ namespace _2._3.USER
                 firstName = value;
             }
         }
+
         public string SecondName
         {
             get => secondName;
@@ -64,6 +76,7 @@ namespace _2._3.USER
 
             BirthDate = userBirthDate;
         }
+
         public int Age
         {
             get
@@ -82,17 +95,6 @@ namespace _2._3.USER
 
                 return userAge;
             }
-        }
-
-        public User(string userLastName, string userFirstName, string userSecondName)
-        {
-            CheckNameForCorrect(userLastName, "Фамилия");
-            CheckNameForCorrect(userFirstName, "Имя");
-            CheckNameForCorrect(userSecondName, "Отчество");
-
-            LastName = userLastName;
-            FirstName = userFirstName;
-            SecondName = userSecondName;
         }
 
         private static void CheckNameForCorrect(string userName, string nameType)
