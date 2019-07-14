@@ -10,17 +10,8 @@ namespace _2._5.EMPLOYEE
 
         public Employee(User employeeUser)
         {
-            User = employeeUser;
-        }
-
-        public Employee(User employeeUser, int employeeWorkExperience, string employeePosition)
-        {
             AgeCheck(employeeUser);
-            WorkExperienceCheck(employeeWorkExperience, employeeUser);
-
             User = employeeUser;
-            WorkExperience = employeeWorkExperience;
-            Position = employeePosition;
         }
 
         public string Position
@@ -35,6 +26,8 @@ namespace _2._5.EMPLOYEE
                         throw new ArgumentException($"Недопустимый символ в поле 'должность'!");
                     }
                 }
+
+                position = value;
             }
         }
 
