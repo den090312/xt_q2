@@ -61,7 +61,7 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
             Console.WriteLine();
         }
 
-        private static TwoPointsFigure GetTwoPointsFromConsole()
+        private static Line GetTwoPointsFromConsole()
         {
             Console.WriteLine();
             Console.WriteLine("Точка 1");
@@ -70,12 +70,12 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
             Console.WriteLine("Точка 2");
             var point2 = new Point(_1.ROUND.Program.GetCoordinateFromConsole('X'), _1.ROUND.Program.GetCoordinateFromConsole('Y'));
             Console.WriteLine();
-            var userFigure = new TwoPointsFigure(point1, point2);
+            var userFigure = new Line(point1, point2);
 
             return userFigure;
         }
 
-        private static void DisplayTwoPoints(string figureType, TwoPointsFigure twoPointsFigure)
+        private static void DisplayTwoPoints(string figureType, Line twoPointsFigure)
         {
             Console.WriteLine($"Тип фигуры: {figureType}");
             Console.WriteLine($"Точка1: ({twoPointsFigure.Point1.X},{twoPointsFigure.Point1.Y})");
@@ -85,12 +85,18 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
 
         private static Circle GetCircleFromConsole()
         {
-            Console.WriteLine();
-            Console.WriteLine("Координаты центра");
-            var centerCoordinates = new Point(_1.ROUND.Program.GetCoordinateFromConsole('X'), _1.ROUND.Program.GetCoordinateFromConsole('Y'));
-            Radius radius = new Radius(_1.ROUND.Program.GetRadiusFromConsole());
-            var userCircle = new Circle(centerCoordinates, radius);
-            Console.WriteLine();
+            //Console.WriteLine();
+            //Console.WriteLine("Координаты центра");
+            //var centerCoordinates = new Point(_1.ROUND.Program.GetCoordinateFromConsole('X'), _1.ROUND.Program.GetCoordinateFromConsole('Y'));
+            //Console.WriteLine("Координаты края");
+            //var edgeCoordinates = new Point(_1.ROUND.Program.GetCoordinateFromConsole('X'), _1.ROUND.Program.GetCoordinateFromConsole('Y'));
+
+            //Radius radius = new Radius(_1.ROUND.Program.GetRadiusFromConsole());
+            //var userCircle = new Circle(centerCoordinates, radius);
+            //Console.WriteLine();
+
+            var userFigure = GetTwoPointsFromConsole();
+
 
             return userCircle;
         }

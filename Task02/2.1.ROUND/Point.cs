@@ -9,5 +9,14 @@
             this.X = X;
             this.Y = Y;
         }
+
+        public static bool operator >(Point point1, Point point2) => point1.X + point1.Y > point2.X + point2.Y;
+
+        public static bool operator <(Point point1, Point point2) => point1.X + point1.Y < point2.X + point2.Y;
+
+        public static bool operator ==(Point point1, Point point2) => point1.X == point2.X & point1.Y == point2.Y ? true : false;
+
+        public static bool operator !=(Point point1, Point point2) => point1.X != point2.X || point1.Y != point2.Y ? true : false;
+
     }
 }
