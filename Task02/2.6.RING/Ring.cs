@@ -6,7 +6,7 @@ namespace _2._6.RING
     public class Ring
     {
         //для создания кольца через внешний-внутренний радиусы
-        private double outerRadius;
+        private readonly double outerRadius;
         private readonly double innerRadius;
 
         //для создания кольца через точки
