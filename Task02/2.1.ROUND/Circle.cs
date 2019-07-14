@@ -9,6 +9,7 @@ namespace _2._1.ROUND
 
         public Circle(Point userCenterCoordinates, Point userEdgeCoordinates)
         {
+            CheckCoordinates();
             CenterCoordinates = userCenterCoordinates;
             EdgeCoordinates = userEdgeCoordinates;
         }

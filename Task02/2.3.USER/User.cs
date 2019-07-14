@@ -8,7 +8,7 @@ namespace _2._3.USER
         private string lastName;
         private string firstName;
         private string secondName;
-        private readonly DateTime currentDateTime = DateTime.Now;
+        private readonly DateTime currentDateTime = DateTime.Now.Date;
 
         public readonly string Format = "dd.MM.yyyy";
 
@@ -81,16 +81,16 @@ namespace _2._3.USER
         {
             get
             {
+                if (BirthDate.Year == currentDateTime.Year)
+                {
+                    throw new ArgumentException("Возраст не может быть меньше года!");
+                }
+
                 var userAge = currentDateTime.AddYears(-BirthDate.Year).Year;
 
                 if (currentDateTime.Month < BirthDate.Month)
                 {
                     userAge--;
-                }
-
-                if (userAge < 0)
-                {
-                    throw new ArgumentException("Возраст не может быть меньше нуля!");
                 }
 
                 return userAge;

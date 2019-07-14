@@ -9,10 +9,8 @@ namespace _2._5.EMPLOYEE
 
         public Employee(User employeeUser, int employeeWorkExperience, string employeePosition)
         {
-            if (employeeUser.Age < 18)
-            {
-                throw new ArgumentException("Официальное трудоустройство возможно только с 18 лет!");
-            }
+            AgeCheck(employeeUser);
+            WorkExperienceCheck(employeeWorkExperience, employeeUser);
 
             User = employeeUser;
             WorkExperience = employeeWorkExperience;
@@ -28,14 +26,25 @@ namespace _2._5.EMPLOYEE
             get => workExperience;
             set
             {
-                if (workExperience >= User.Age)
-                {
-                    throw new ArgumentException("Опыт работы не может быть больше или равен возрасту!");
-                }
-
+                WorkExperienceCheck(value, User);
                 workExperience = value;
             }
         }
 
+        private void WorkExperienceCheck(int employeeWorkExperience, User employeeUser)
+        {
+            if (employeeWorkExperience >= employeeUser.Age)
+            {
+                throw new ArgumentException("Опыт работы не может быть больше или равен возрасту!");
+            }
+        }
+
+        private void AgeCheck(User employeeUser)
+        {
+            if (employeeUser.Age < 18)
+            {
+                throw new ArgumentException("Официальное трудоустройство возможно только с 18 лет!");
+            }
+        }
     }
 }
