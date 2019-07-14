@@ -8,8 +8,8 @@ namespace _2._1.ROUND
         {
             var myRound = new Round
             (
-                new Point(GetCoordinateFromConsole('X'), GetCoordinateFromConsole('Y')), 
-                new Radius(GetRadiusFromConsole())
+                new Point(GetCoordinateFromConsole('X'), GetCoordinateFromConsole('Y')),
+                new Point(GetCoordinateFromConsole('X'), GetCoordinateFromConsole('Y'))
             );
 
             WriteRoundInfo(myRound);
@@ -18,8 +18,8 @@ namespace _2._1.ROUND
         private static void WriteRoundInfo(Round myRound)
         {
             Console.WriteLine();
-            Console.WriteLine($"Координаты центра круга: ({myRound.СenterCoordinates.X},{myRound.СenterCoordinates.Y})");
-            Console.WriteLine($"Радиус: {myRound.CircleRadius.Value}");
+            Console.WriteLine($"Координаты центра круга: ({myRound.CenterCoordinates.X},{myRound.CenterCoordinates.Y})");
+            Console.WriteLine($"Радиус: {myRound.CircleRadius}");
             Console.WriteLine($"Длина окружности: {myRound.Circumference}");
             Console.WriteLine($"Площадь круга: {myRound.Area}");
             Console.WriteLine();

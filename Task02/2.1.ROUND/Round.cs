@@ -4,10 +4,10 @@ namespace _2._1.ROUND
 {
     public class Round : Circle
     {
-        public Round(Point userCenterCoordinates, Radius userRadius) : base(userCenterCoordinates, userRadius)
+        public Round(Point userCenterCoordinates, Point userEdgeCoordinates) : base(userCenterCoordinates, userEdgeCoordinates)
         {
         }
 
-        public double Area => Math.PI * CircleRadius.Value * CircleRadius.Value;
+        public double Area => Math.PI * CircleRadius * CircleRadius;
     }
 }

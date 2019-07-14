@@ -27,13 +27,17 @@ namespace _2._1.ROUND
             }
         }
 
-        public Radius CircleRadius { get; set; }
-        public double Circumference => 2 * Math.PI * CircleRadius.Value;
+        public double CircleRadius => Math.Sqrt
+        ( 
+            Math.Pow(edgeCoordinates.X - centerCoordinates.X, 2) +
+            Math.Pow(edgeCoordinates.Y - centerCoordinates.Y, 2)
+        );
+        public double Circumference => 2 * Math.PI * CircleRadius;
 
-        public Circle(Point userCenterCoordinates, Radius userRadius)
+        public Circle(Point userCenterCoordinates, Point userEdgeCoordinates)
         {
             CenterCoordinates = userCenterCoordinates;
-            CircleRadius = userRadius;
+            EdgeCoordinates = userEdgeCoordinates;
         }
 
         private void CheckCoordinates()
