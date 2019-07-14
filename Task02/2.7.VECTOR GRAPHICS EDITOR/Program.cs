@@ -29,13 +29,13 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
             switch (consoleKey)
             {
                 case 1:
-                    DisplayTwoPoints("Линия", GetTwoPointsFromConsole());
+                    DisplayLine("Линия", GetLineFromConsole());
                     break;
                 case 2:
                     DisplayCircle("Окружность", GetCircleFromConsole());
                     break;
                 case 3:
-                    DisplayTwoPoints("Прямоугольник", GetTwoPointsFromConsole());
+                    DisplayRectangle("Прямоугольник", GetRectangleFromConsole());
                     break;
                 case 4:
                     DisplayCircle("Круг", GetCircleFromConsole());
@@ -61,61 +61,52 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
             Console.WriteLine();
         }
 
-        private static Line GetTwoPointsFromConsole()
-        {
-            Console.WriteLine();
-            Console.WriteLine("Точка 1");
-            var point1 = new Point(_1.ROUND.Program.GetCoordinateFromConsole('X'), _1.ROUND.Program.GetCoordinateFromConsole('Y'));
-            Console.WriteLine();
-            Console.WriteLine("Точка 2");
-            var point2 = new Point(_1.ROUND.Program.GetCoordinateFromConsole('X'), _1.ROUND.Program.GetCoordinateFromConsole('Y'));
-            Console.WriteLine();
-            var userFigure = new Line(point1, point2);
+        private static Rectangle GetRectangleFromConsole() => new Rectangle(GetLineFromConsole());
 
-            return userFigure;
-        }
+        private static Line GetLineFromConsole() => new Line(GetPointFromConsole("Начало линии"), GetPointFromConsole("Конец линии"));
 
-        private static void DisplayTwoPoints(string figureType, Line twoPointsFigure)
+        private static Point GetPointFromConsole(string purpose) => new Point
+        (
+            _1.ROUND.Program.GetCoordinateFromConsole(purpose, 'X'), 
+            _1.ROUND.Program.GetCoordinateFromConsole(purpose, 'Y')
+        );
+
+        private static void DisplayRectangle(string figureType, Rectangle rectangle)
         {
             Console.WriteLine($"Тип фигуры: {figureType}");
-            Console.WriteLine($"Точка1: ({twoPointsFigure.Point1.X},{twoPointsFigure.Point1.Y})");
-            Console.WriteLine($"Точка2: ({twoPointsFigure.Point2.X},{twoPointsFigure.Point2.Y})");
+            Console.WriteLine($"Точка 1: ({rectangle.Line1.Point1.X},{rectangle.Line1.Point1.Y})");
+            Console.WriteLine($"Точка 2: ({rectangle.Line1.Point2.X},{rectangle.Line1.Point2.Y})");
+            Console.WriteLine($"Точка 3: ({rectangle.Line2.Point1.X},{rectangle.Line2.Point1.Y})");
+            Console.WriteLine($"Точка 4: ({rectangle.Line2.Point2.X},{rectangle.Line2.Point2.Y})");
             Console.WriteLine();
         }
 
-        private static Circle GetCircleFromConsole()
-        {
-            //Console.WriteLine();
-            //Console.WriteLine("Координаты центра");
-            //var centerCoordinates = new Point(_1.ROUND.Program.GetCoordinateFromConsole('X'), _1.ROUND.Program.GetCoordinateFromConsole('Y'));
-            //Console.WriteLine("Координаты края");
-            //var edgeCoordinates = new Point(_1.ROUND.Program.GetCoordinateFromConsole('X'), _1.ROUND.Program.GetCoordinateFromConsole('Y'));
-
-            //Radius radius = new Radius(_1.ROUND.Program.GetRadiusFromConsole());
-            //var userCircle = new Circle(centerCoordinates, radius);
-            //Console.WriteLine();
-
-            var userFigure = GetTwoPointsFromConsole();
-
-
-            return userCircle;
-        }
-        private static void DisplayCircle(string figureType, Circle circleFigure)
+        private static void DisplayLine(string figureType, Line line)
         {
             Console.WriteLine($"Тип фигуры: {figureType}");
-            Console.WriteLine($"Координаты центра: ({circleFigure.СenterCoordinates.X},{circleFigure.СenterCoordinates.Y})");
-            Console.WriteLine($"Радиус: {circleFigure.Radius.Value}");
+            Console.WriteLine($"Точка1: ({line.Point1.X},{line.Point1.Y})");
+            Console.WriteLine($"Точка2: ({line.Point2.X},{line.Point2.Y})");
+            Console.WriteLine();
+        }
+
+        private static Circle GetCircleFromConsole() => new Circle(GetPointFromConsole("Координаты центра"), GetPointFromConsole("Координаты края"));
+
+        private static void DisplayCircle(string figureType, Circle circle)
+        {
+            Console.WriteLine($"Тип фигуры: {figureType}");
+            Console.WriteLine($"Координаты центра: ({circle.CenterCoordinates.X},{circle.CenterCoordinates.Y})");
+            Console.WriteLine($"Радиус: {circle.Radius}");
             Console.WriteLine();
         }
 
         private static Ring GetRingFromConsole()
         {
-            Console.WriteLine();
-            var centerCoordinates = new Point(_1.ROUND.Program.GetCoordinateFromConsole('X'), _1.ROUND.Program.GetCoordinateFromConsole('Y'));
-            Radius innerRadius = new Radius(_1.ROUND.Program.GetRadiusFromConsole());
-            Radius outerRadius = new Radius(_1.ROUND.Program.GetRadiusFromConsole());
-            var userRing = new Ring(centerCoordinates, innerRadius, outerRadius);
-            Console.WriteLine();
+            Console.WriteLine("Внешняя окружность");
+            var outerCircle = GetCircleFromConsole();
+            Console.WriteLine("Внутренняя окружность");
+            var innerCircle = GetCircleFromConsole();
+
+            var userRing = new Ring(outerCircle, innerCircle);
 
             return userRing;
         }
@@ -124,8 +115,8 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
         {
             Console.WriteLine($"Тип фигуры: {figureType}");
             Console.WriteLine($"Координаты центра: ({ringFigure.СenterCoordinates.X},{ringFigure.СenterCoordinates.Y})");
-            Console.WriteLine($"Внутренний радиус: {ringFigure.OuterRadius.Value}");
-            Console.WriteLine($"Внешний радиус: {ringFigure.InnerRadius.Value}");
+            Console.WriteLine($"Внутренний радиус: {ringFigure.OuterCircle.Radius}");
+            Console.WriteLine($"Внешний радиус: {ringFigure.InnerCircle.Radius}");
             Console.WriteLine();
         }
 

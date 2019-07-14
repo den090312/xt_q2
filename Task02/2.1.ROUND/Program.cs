@@ -27,6 +27,7 @@ namespace _2._1.ROUND
 
         public static int GetCoordinateFromConsole(string purpose, char measure)
         {
+            Console.WriteLine();
             Console.WriteLine($"{purpose}");
 
             int intFromConsole;
