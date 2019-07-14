@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2._3.USER;
+using System;
 
 namespace _2._5.EMPLOYEE
 {
@@ -6,22 +7,24 @@ namespace _2._5.EMPLOYEE
     {
         private static void Main(string[] args)
         {
-            var myEmployee = new Employee
+            var myUser = new User
             (
                 _3.USER.Program.GetStringValueFromConsole("фамилию"),
                 _3.USER.Program.GetStringValueFromConsole("имя"),
                 _3.USER.Program.GetStringValueFromConsole("отчество")
             );
 
-            myEmployee.SetBirthDate(_3.USER.Program.GetBirthDateFromConsole(myEmployee));
+            myUser.SetBirthDate(_3.USER.Program.GetBirthDateFromConsole(myUser));
 
             Console.WriteLine("Ввод стажа работы:");
-            myEmployee.WorkExperience = GetPositiveIntFromConsole();
-            myEmployee.Position = _3.USER.Program.GetStringValueFromConsole("должность"); ;
+            int workExperience = GetPositiveIntFromConsole();
+            string position = _3.USER.Program.GetStringValueFromConsole("должность"); 
             Console.WriteLine();
 
+            var myEmployee = new Employee(myUser, workExperience, position);
+
             Console.WriteLine("РАБОТНИК");
-            _2._3.USER.Program.WriteInfo(myEmployee);
+            _2._3.USER.Program.WriteInfo(myUser);
             Console.WriteLine($"Стаж работы: {myEmployee.WorkExperience}");
             Console.WriteLine($"Должность: {myEmployee.Position}");
         }
