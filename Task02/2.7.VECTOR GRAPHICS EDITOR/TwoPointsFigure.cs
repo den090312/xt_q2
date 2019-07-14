@@ -12,6 +12,5 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
             Point1 = userPoint1;
             Point2 = userPoint2;
         }
-
     }
 }

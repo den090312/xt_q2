@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace _2._4.MY_STRING
+﻿namespace _2._4.MY_STRING
 {
     public class MyString
     {
