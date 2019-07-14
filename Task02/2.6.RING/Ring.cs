@@ -30,6 +30,7 @@ namespace _2._6.RING
 
             innerRadius = userCircle.Radius;
             outerRadius = userOuterRadius;
+            Circle = userCircle;
         }
 
         public double GetRingRadius(Circle Circle, Point Edge) => Math.Sqrt
@@ -65,7 +66,7 @@ namespace _2._6.RING
                 throw new Exception("Окружности кольца не должны совпадать!");
             }
 
-            if (userCircleInnerRadius < userOuterRadius)
+            if (userOuterRadius < userCircleInnerRadius)
             {
                 throw new Exception("Внешний радиус должен быть больше внутреннего!");
             }
