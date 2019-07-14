@@ -7,14 +7,7 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
         private Line line2;
 
         public Line Line1 { get; set; }
-        public Line Line2
-        {
-            get => line2;
-            private set
-            {
-                line2 = GetSecondLine(value);
-            }
-        }
+        public Line Line2 => GetSecondLine(Line1);
 
         public Rectangle(Line userLine)
         {
