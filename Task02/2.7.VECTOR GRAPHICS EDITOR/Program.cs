@@ -104,7 +104,7 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
         {
             Console.WriteLine($"Тип фигуры: {figureType}");
             Console.WriteLine($"Координаты центра: ({circleFigure.СenterCoordinates.X},{circleFigure.СenterCoordinates.Y})");
-            Console.WriteLine($"Радиус: {circleFigure.CircleRadius.Value}");
+            Console.WriteLine($"Радиус: {circleFigure.Radius.Value}");
             Console.WriteLine();
         }
 

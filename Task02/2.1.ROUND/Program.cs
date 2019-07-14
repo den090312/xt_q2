@@ -19,7 +19,7 @@ namespace _2._1.ROUND
         {
             Console.WriteLine();
             Console.WriteLine($"Координаты центра круга: ({myRound.CenterCoordinates.X},{myRound.CenterCoordinates.Y})");
-            Console.WriteLine($"Радиус: {myRound.CircleRadius}");
+            Console.WriteLine($"Радиус: {myRound.Radius}");
             Console.WriteLine($"Длина окружности: {myRound.Circumference}");
             Console.WriteLine($"Площадь круга: {myRound.Area}");
             Console.WriteLine();

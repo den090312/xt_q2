@@ -27,12 +27,12 @@ namespace _2._1.ROUND
             }
         }
 
-        public double CircleRadius => Math.Sqrt
+        public double Radius => Math.Sqrt
         ( 
             Math.Pow(edgeCoordinates.X - centerCoordinates.X, 2) +
             Math.Pow(edgeCoordinates.Y - centerCoordinates.Y, 2)
         );
-        public double Circumference => 2 * Math.PI * CircleRadius;
+        public double Circumference => 2 * Math.PI * Radius;
 
         public Circle(Point userCenterCoordinates, Point userEdgeCoordinates)
         {

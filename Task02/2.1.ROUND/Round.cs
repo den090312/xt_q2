@@ -8,6 +8,6 @@ namespace _2._1.ROUND
         {
         }
 
-        public double Area => Math.PI * CircleRadius * CircleRadius;
+        public double Area => Math.PI * Radius * Radius;
     }
 }
