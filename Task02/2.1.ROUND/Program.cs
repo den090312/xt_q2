@@ -6,7 +6,7 @@ namespace _2._1.ROUND
     {
         private static void Main(string[] args)
         {
-            ////конструктор через точки
+            //конструктор через точки
             var myRound = new Round
             (
                 new Point(GetCoordinateFromConsole("Центр круга", 'X'), GetCoordinateFromConsole("Центр круга", 'Y')),

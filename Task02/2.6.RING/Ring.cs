@@ -5,6 +5,11 @@ namespace _2._6.RING
 {
     public class Ring
     {
+        //для создания кольца через внешний-внутренний радиусы
+        private double outerRadius;
+        private double innerRadius;
+
+        //для создания кольца через точки
         private double radius;
 
         public Ring(Circle userCircle, Point userEdge)
@@ -17,6 +22,12 @@ namespace _2._6.RING
             Edge = userEdge;
         }
 
+        public Ring(Circle userCircle, double userOuterRadius)
+        {
+            innerRadius = userCircle.Radius;
+            outerRadius = userOuterRadius 
+        }
+
         public double GetRingRadius(Circle Circle, Point Edge) => Math.Sqrt
         (
             Math.Pow(Edge.X - Circle.CenterCoordinates.X, 2) + 
@@ -25,7 +36,7 @@ namespace _2._6.RING
 
         public double Radius
         {
-            get => radius;
+            get => outerRadius == 0 ? radius : outerRadius;
             set
             {
                 RadiusCheck(Circle.Radius, value);
