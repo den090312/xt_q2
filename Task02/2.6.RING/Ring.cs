@@ -8,12 +8,13 @@ namespace _2._6.RING
         private Circle outerCircle;
         private Circle innerCircle;
 
+        public Point СenterCoordinates = new Point(0, 0);
         public Circle OuterCircle
         {
             get => outerCircle;
             set
             {
-                CheckCircles();
+                CheckRing();
                 outerCircle = value;
             }
         }
@@ -23,23 +24,22 @@ namespace _2._6.RING
             get => innerCircle;
             set
             {
-                CheckCircles();
+                CheckRing();
                 innerCircle = value;
             }
         }
 
-        public Point СenterCoordinates = new Point(0, 0);
         public double Area => Math.PI * (Math.Pow(OuterCircle.Radius, 2) - Math.Pow(InnerCircle.Radius, 2));
         public double TotalCircumference => 2 * Math.PI * InnerCircle.Radius + 2 * Math.PI * OuterCircle.Radius;
 
         public Ring(Circle userOuterCircle, Circle userInnerCircle)
         {
-            CheckCircles();
+            CheckRing();
             OuterCircle = userOuterCircle;
             InnerCircle = userInnerCircle;
         }
 
-        private void CheckCircles()
+        private void CheckRing()
         {
             if (OuterCircle.Radius < InnerCircle.Radius)
             {
