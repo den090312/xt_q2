@@ -17,11 +17,12 @@ namespace _2._5.EMPLOYEE
             myUser.SetBirthDate(_3.USER.Program.GetBirthDateFromConsole(myUser));
 
             Console.WriteLine("Ввод стажа работы:");
-            int workExperience = GetPositiveIntFromConsole();
-            string position = _3.USER.Program.GetStringValueFromConsole("должность"); 
-            Console.WriteLine();
 
-            var myEmployee = new Employee(myUser, workExperience, position);
+            var myEmployee = new Employee(myUser)
+            {
+                WorkExperience = GetPositiveIntFromConsole(),
+                Position = _3.USER.Program.GetStringValueFromConsole("должность")
+            };
 
             Console.WriteLine("РАБОТНИК");
             _2._3.USER.Program.WriteInfo(myUser);

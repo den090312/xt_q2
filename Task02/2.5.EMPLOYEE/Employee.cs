@@ -5,7 +5,13 @@ namespace _2._5.EMPLOYEE
 {
     public class Employee
     {
+        private string position;
         private int workExperience;
+
+        public Employee(User employeeUser)
+        {
+            User = employeeUser;
+        }
 
         public Employee(User employeeUser, int employeeWorkExperience, string employeePosition)
         {
@@ -17,7 +23,20 @@ namespace _2._5.EMPLOYEE
             Position = employeePosition;
         }
 
-        public string Position { get; set; }
+        public string Position
+        {
+            get => position;
+            set
+            {
+                foreach (char element in value)
+                {
+                    if (!char.IsLetter(element))
+                    {
+                        throw new ArgumentException($"Недопустимый символ в поле 'должность'!");
+                    }
+                }
+            }
+        }
 
         public User User { get; }
 
