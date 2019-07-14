@@ -9,7 +9,7 @@ namespace _2._1.ROUND
 
         public Circle(Point userCenterCoordinates, Point userEdgeCoordinates)
         {
-            CheckCoordinates();
+            CheckCoordinates(userCenterCoordinates, userEdgeCoordinates);
             CenterCoordinates = userCenterCoordinates;
             EdgeCoordinates = userEdgeCoordinates;
         }
@@ -19,7 +19,7 @@ namespace _2._1.ROUND
             get => centerCoordinates;
             set
             {
-                CheckCoordinates();
+                CheckCoordinates(centerCoordinates, edgeCoordinates);
                 centerCoordinates = value;
             }
         }
@@ -29,7 +29,7 @@ namespace _2._1.ROUND
             get => edgeCoordinates;
             set
             {
-                CheckCoordinates();
+                CheckCoordinates(centerCoordinates, edgeCoordinates);
                 edgeCoordinates = value;
             }
         }
@@ -42,14 +42,9 @@ namespace _2._1.ROUND
 
         public double Circumference => 2 * Math.PI * Radius;
 
-        private void CheckCoordinates()
+        private void CheckCoordinates(Point userCenterCoordinates, Point userEdgeCoordinates)
         {
-            if (EdgeCoordinates < CenterCoordinates)
-            {
-                throw new Exception("Координаты края окружности должны быть меньше координат центра!");
-            }
-
-            if (EdgeCoordinates == CenterCoordinates)
+            if (userEdgeCoordinates == userCenterCoordinates)
             {
                 throw new Exception("Координаты края окружности не могут быть равны координатам центра!");
             }
