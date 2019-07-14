@@ -8,8 +8,8 @@ namespace _2._1.ROUND
         {
             var myRound = new Round
             (
-                new Point(GetCoordinateFromConsole('X'), GetCoordinateFromConsole('Y')),
-                new Point(GetCoordinateFromConsole('X'), GetCoordinateFromConsole('Y'))
+                new Point(GetCoordinateFromConsole("Центр круга", 'X'), GetCoordinateFromConsole("Центр круга", 'Y')),
+                new Point(GetCoordinateFromConsole("Край круга", 'X'), GetCoordinateFromConsole("Край круга", 'Y'))
             );
 
             WriteRoundInfo(myRound);
@@ -25,29 +25,10 @@ namespace _2._1.ROUND
             Console.WriteLine();
         }
 
-        public static double GetRadiusFromConsole()
+        public static int GetCoordinateFromConsole(string purpose, char measure)
         {
-            Console.WriteLine("Радиус");
-            double doubleFromConsole;
-            bool isInt;
+            Console.WriteLine($"{purpose}");
 
-            do
-            {
-                Console.WriteLine($"Введите положительное число меньше или равно {double.MaxValue}:");
-                isInt = double.TryParse(Console.ReadLine(), out doubleFromConsole);
-
-                if (isInt)
-                {
-                    isInt = doubleFromConsole > 0;
-                }
-            }
-            while (isInt == false);
-
-            return doubleFromConsole;
-        }
-
-        public static int GetCoordinateFromConsole(char measure)
-        {
             int intFromConsole;
             bool isInt;
 

@@ -4,7 +4,7 @@ namespace _2._1.ROUND
 {
     public class Circle
     {
-        private Point edgeCoordinates;
+        private Point edgeCoordinates = new Point(10, 10);
         private Point centerCoordinates = new Point(0, 0);
 
         public Point CenterCoordinates
