@@ -78,7 +78,7 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
             Console.WriteLine();
             Console.WriteLine("Окружность кольца");
 
-            return new Ring(GetCircleFromConsole(), GetPointFromConsole("Координаты края второго кольца"));
+            return new Ring(GetCircleFromConsole(), GetPointFromConsole("Координаты внешнего кольца"));
         }
 
         private static void DisplayRectangle(string figureType, Rectangle rectangle)
