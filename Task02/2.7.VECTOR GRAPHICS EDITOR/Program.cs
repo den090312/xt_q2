@@ -61,6 +61,8 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
             Console.WriteLine();
         }
 
+        private static Circle GetCircleFromConsole() => new Circle(GetPointFromConsole("Координаты центра"), GetPointFromConsole("Координаты края"));
+
         private static Rectangle GetRectangleFromConsole() => new Rectangle(GetLineFromConsole());
 
         private static Line GetLineFromConsole() => new Line(GetPointFromConsole("Начало линии"), GetPointFromConsole("Конец линии"));
@@ -70,6 +72,18 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
             _1.ROUND.Program.GetCoordinateFromConsole(purpose, 'X'), 
             _1.ROUND.Program.GetCoordinateFromConsole(purpose, 'Y')
         );
+
+        private static Ring GetRingFromConsole()
+        {
+            Console.WriteLine("Внешняя окружность");
+            var outerCircle = GetCircleFromConsole();
+            Console.WriteLine("Внутренняя окружность");
+            var innerCircle = GetCircleFromConsole();
+
+            var userRing = new Ring(outerCircle, innerCircle);
+
+            return userRing;
+        }
 
         private static void DisplayRectangle(string figureType, Rectangle rectangle)
         {
@@ -89,26 +103,12 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
             Console.WriteLine();
         }
 
-        private static Circle GetCircleFromConsole() => new Circle(GetPointFromConsole("Координаты центра"), GetPointFromConsole("Координаты края"));
-
         private static void DisplayCircle(string figureType, Circle circle)
         {
             Console.WriteLine($"Тип фигуры: {figureType}");
             Console.WriteLine($"Координаты центра: ({circle.CenterCoordinates.X},{circle.CenterCoordinates.Y})");
             Console.WriteLine($"Радиус: {circle.Radius}");
             Console.WriteLine();
-        }
-
-        private static Ring GetRingFromConsole()
-        {
-            Console.WriteLine("Внешняя окружность");
-            var outerCircle = GetCircleFromConsole();
-            Console.WriteLine("Внутренняя окружность");
-            var innerCircle = GetCircleFromConsole();
-
-            var userRing = new Ring(outerCircle, innerCircle);
-
-            return userRing;
         }
 
         private static void DisplayRing(string figureType, Ring ringFigure)
