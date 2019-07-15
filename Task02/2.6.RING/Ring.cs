@@ -16,7 +16,7 @@ namespace _2._6.RING
         public Ring(Circle userCircle, Point userEdge)
         {
             var userOuterRingRadius = GetRingRadius(userCircle, userEdge);
-            RadiusCheck(userCircle.Radius, userOuterRingRadius);
+            RingRadiusCheck(userCircle.Radius, userOuterRingRadius);
 
             radius = userOuterRingRadius;
             Circle = userCircle;
@@ -26,7 +26,7 @@ namespace _2._6.RING
         //конструктор через кольцо и внешний радиус
         public Ring(Circle userCircle, double userOuterRadius)
         {
-            RadiusCheck(userCircle.Radius, userOuterRadius);
+            RingRadiusCheck(userCircle.Radius, userOuterRadius);
 
             innerRadius = userCircle.Radius;
             outerRadius = userOuterRadius;
@@ -44,7 +44,7 @@ namespace _2._6.RING
             get => outerRadius == 0 ? radius : outerRadius;
             set
             {
-                RadiusCheck(Circle.Radius, value);
+                RingRadiusCheck(Circle.Radius, value);
                 radius = value;
             }
         }
@@ -59,8 +59,13 @@ namespace _2._6.RING
 
         public double TotalCircumference => 2 * Math.PI * Radius + 2 * Math.PI * Circle.Radius;
 
-        private void RadiusCheck(double userCircleInnerRadius, double userOuterRadius)
+        private void RingRadiusCheck(double userCircleInnerRadius, double userOuterRadius)
         {
+            if (userOuterRadius < 0)
+            {
+                throw new Exception("Внешний радиус не может быть отрицательным!");
+            }
+
             if (userCircleInnerRadius == userOuterRadius)
             {
                 throw new Exception("Окружности кольца не должны совпадать!");

@@ -19,6 +19,11 @@ namespace _2._1.ROUND
         //конструктор с указанием радиуса
         public Circle(Point userCenterCoordinates, double userRadius)
         {
+            if (userRadius < 0)
+            {
+                throw new Exception("Радиус не может быть меньше нуля!");
+            }
+
             centerCoordinates = userCenterCoordinates;
             radius = userRadius;
         }
