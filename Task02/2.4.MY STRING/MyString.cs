@@ -8,11 +8,6 @@ namespace _2._4.MY_STRING
 
         public int Length => CharArray.Length;
 
-        public MyString()
-        {
-            CharArray = new char[0];
-        }
-
         public MyString(string userString)
         {
             NullCheck(userString);
