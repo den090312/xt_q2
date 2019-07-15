@@ -1,4 +1,6 @@
-﻿namespace _2._4.MY_STRING
+﻿using System;
+
+namespace _2._4.MY_STRING
 {
     public class MyString
     {
@@ -6,9 +8,22 @@
 
         public int Length => CharArray.Length;
 
-        public MyString(string userString) => CharArray = userString.ToCharArray();
+        public MyString()
+        {
+            CharArray = new char[0];
+        }
 
-        public MyString(char[] userCharArray) => CharArray = userCharArray;
+        public MyString(string userString)
+        {
+            NullCheck(userString);
+            CharArray = userString.ToCharArray();
+        }
+
+        public MyString(char[] userCharArray)
+        {
+            NullCheck(userCharArray);
+            CharArray = userCharArray;
+        }
 
         public char this[int i]
         {
@@ -140,6 +155,22 @@
             }
 
             return new MyString(resultCharArray);
+        }
+
+        private void NullCheck(string userString)
+        {
+            if (userString == null)
+            {
+                throw new ArgumentNullException($"{nameof(userString)} is null!");
+            }
+        }
+
+        private void NullCheck(char[] userCharArray)
+        {
+            if (userCharArray == null)
+            {
+                throw new ArgumentNullException($"{nameof(userCharArray)} is null!");
+            }
         }
     }
 }
