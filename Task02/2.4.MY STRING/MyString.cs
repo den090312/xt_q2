@@ -2,13 +2,21 @@
 {
     public class MyString
     {
-        public char[] CharArray { get; set; }
+        private char[] CharArray { get; set; }
 
         public int Length => CharArray.Length;
 
-        public MyString(string userString) => CharArray = StringToCharArray(userString);
+        public MyString(string userString) => CharArray = userString.ToCharArray();
 
         public MyString(char[] userCharArray) => CharArray = userCharArray;
+
+        public char this[int i]
+        {
+            get => CharArray[i];
+            set => CharArray[i] = value;
+        }
+
+        public char[] ToCharArray() => CharArray;
 
         public bool TryFind(char userChar, out int index)
         {
@@ -64,19 +72,6 @@
             }
 
             return this;
-        }
-
-        private static char[] StringToCharArray(string thoseString)
-        {
-            char[] myCharArray = new char[thoseString.Length];
-            var lastIndex = thoseString.Length - 1;
-
-            for (int i = 0; i <= lastIndex; i++)
-            {
-                myCharArray[i] = thoseString[i];
-            }
-
-            return myCharArray;
         }
 
         public override bool Equals(object obj) => obj is MyString myString && CharArray == myString.CharArray && Length == myString.Length;
