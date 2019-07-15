@@ -19,5 +19,9 @@
         public static bool operator ==(Point point1, Point point2) => point1.X == point2.X & point1.Y == point2.Y ? true : false;
 
         public static bool operator !=(Point point1, Point point2) => point1.X != point2.X || point1.Y != point2.Y ? true : false;
+
+        public override bool Equals(object obj) => obj is Point point && X == point.X && Y == point.Y;
+
+        public override int GetHashCode() => X.GetHashCode() + Y.GetHashCode();
     }
 }
