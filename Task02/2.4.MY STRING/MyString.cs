@@ -2,13 +2,13 @@
 {
     public class MyString
     {
-        public MyString(string userString) => CharArray = StringToCharArray(userString);
-
-        public MyString(char[] userCharArray) => CharArray = userCharArray;
-
         public char[] CharArray { get; set; }
 
         public int Length => CharArray.Length;
+
+        public MyString(string userString) => CharArray = StringToCharArray(userString);
+
+        public MyString(char[] userCharArray) => CharArray = userCharArray;
 
         public bool TryFind(char userChar, out int index)
         {
@@ -79,6 +79,10 @@
             return myCharArray;
         }
 
+        public override bool Equals(object obj) => obj is MyString myString && CharArray == myString.CharArray && Length == myString.Length;
+
+        public override int GetHashCode() => CharArray.GetHashCode() + Length.GetHashCode();
+
         public static bool operator ==(MyString myString1, MyString myString2)
         {
             if (myString1.CharArray.Length != myString2.CharArray.Length)
@@ -115,14 +119,6 @@
             return false;
         }
 
-        public override bool Equals(object userObject)
-        {
-            var myString = userObject as MyString;
-
-            return myString == null ? false : CharArray.Equals(myString.CharArray);
-        }
-
-        public override int GetHashCode() => CharArray.GetHashCode();
         public static bool operator >(MyString myString1, MyString myString2) => myString1.CharArray.Length > myString2.CharArray.Length;
         public static bool operator <(MyString myString1, MyString myString2) => myString1.CharArray.Length < myString2.CharArray.Length;
         public static MyString operator +(MyString myString1, MyString myString2)
