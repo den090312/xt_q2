@@ -12,6 +12,26 @@ namespace _2._6.RING
         //для создания кольца через точки
         private double radius;
 
+        public Circle Circle { get; set; }
+
+        public Point Edge { get; set; }
+
+        public double Radius
+        {
+            get => outerRadius == 0 ? radius : outerRadius;
+            set
+            {
+                RingRadiusCheck(Circle.Radius, value);
+                radius = value;
+            }
+        }
+
+        public double Area => Circle.Radius > Radius
+                    ? Math.PI * (Math.Pow(Circle.Radius, 2) - Math.Pow(Radius, 2))
+                    : Math.PI * (Math.Pow(Radius, 2) - Math.Pow(Circle.Radius, 2));
+
+        public double TotalCircumference => 2 * Math.PI * Radius + 2 * Math.PI * Circle.Radius;
+
         //конструктор через кольцо и край внешней окружности
         public Ring(Circle userCircle, Point userEdge)
         {
@@ -38,26 +58,6 @@ namespace _2._6.RING
             Math.Pow(Edge.X - Circle.CenterCoordinates.X, 2) + 
             Math.Pow(Edge.Y - Circle.CenterCoordinates.Y, 2)
         );
-
-        public double Radius
-        {
-            get => outerRadius == 0 ? radius : outerRadius;
-            set
-            {
-                RingRadiusCheck(Circle.Radius, value);
-                radius = value;
-            }
-        }
-
-        public Point Edge { get; set; }
-
-        public Circle Circle { get; set; }
-
-        public double Area => Circle.Radius > Radius
-                    ? Math.PI * (Math.Pow(Circle.Radius, 2) - Math.Pow(Radius, 2))
-                    : Math.PI * (Math.Pow(Radius, 2) - Math.Pow(Circle.Radius, 2));
-
-        public double TotalCircumference => 2 * Math.PI * Radius + 2 * Math.PI * Circle.Radius;
 
         private void RingRadiusCheck(double userCircleInnerRadius, double userOuterRingRadius)
         {
