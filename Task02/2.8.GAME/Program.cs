@@ -9,10 +9,15 @@ namespace _2._8.GAME
 
         }
 
-        public class Player : Subject
+        public class Player : Subject , IMovable
         {
             private int health;
             private int speed;
+
+            public void Move()
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public class Bonus : Subject
@@ -20,9 +25,12 @@ namespace _2._8.GAME
 
         }
 
-        public class Monster : Subject
+        public class Monster : Subject, IMovable
         {
-
+            public void Move()
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public class Obstruction : Subject
