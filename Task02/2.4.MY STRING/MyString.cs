@@ -152,7 +152,7 @@ namespace _2._4.MY_STRING
             return new MyString(resultCharArray);
         }
 
-        private void NullCheck(string userString)
+        private static void NullCheck(string userString)
         {
             if (userString == null)
             {
@@ -160,7 +160,7 @@ namespace _2._4.MY_STRING
             }
         }
 
-        private void NullCheck(char[] userCharArray)
+        private static void NullCheck(char[] userCharArray)
         {
             if (userCharArray == null)
             {

@@ -14,9 +14,9 @@ namespace _2._3.USER
 
         public User(string userLastName, string userFirstName, string userSecondName)
         {
-            CheckNameForCorrect(userLastName, "Фамилия");
-            CheckNameForCorrect(userFirstName, "Имя");
-            CheckNameForCorrect(userSecondName, "Отчество");
+            CheckName(userLastName, "Фамилия");
+            CheckName(userFirstName, "Имя");
+            CheckName(userSecondName, "Отчество");
 
             LastName = userLastName;
             FirstName = userFirstName;
@@ -30,7 +30,7 @@ namespace _2._3.USER
             get => firstName;
             set
             {
-                CheckNameForCorrect(value, "Имя");
+                CheckName(value, "Имя");
                 firstName = value;
             }
         }
@@ -40,7 +40,7 @@ namespace _2._3.USER
             get => secondName;
             set
             {
-                CheckNameForCorrect(value, "Отчество");
+                CheckName(value, "Отчество");
                 secondName = value;
             }
         }
@@ -50,13 +50,14 @@ namespace _2._3.USER
             get => lastName;
             set
             {
-                CheckNameForCorrect(value, "Фамилия");
+                CheckName(value, "Фамилия");
                 lastName = value;
             }
         }
 
         public void SetBirthDate(string userDate)
         {
+            NullCheck(userDate);
             bool isDate = DateTime.TryParseExact(userDate, Format, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime userBirthDate);
 
             if (!isDate)
@@ -97,9 +98,11 @@ namespace _2._3.USER
             }
         }
 
-        private static void CheckNameForCorrect(string userName, string nameType)
+        private static void CheckName(string userName, string nameType)
         {
+            NullCheck(userName);
             var userCharArray = userName.ToCharArray();
+
             if (char.IsLower(userCharArray[0]))
             {
                 throw new ArgumentException($"Поле '{nameType}' должно начинаться с заглавной буквы!");
@@ -111,6 +114,14 @@ namespace _2._3.USER
                 {
                     throw new ArgumentException($"Недопустимый символ в поле '{nameType}'!");
                 }
+            }
+        }
+
+        private static void NullCheck(string userString)
+        {
+            if (userString == null)
+            {
+                throw new ArgumentNullException($"{nameof(userString)} is null!");
             }
         }
     }

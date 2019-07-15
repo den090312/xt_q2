@@ -9,7 +9,6 @@ namespace _2._8.GAME
 
         }
 
-
         public class Player : Subject
         {
             private int health;

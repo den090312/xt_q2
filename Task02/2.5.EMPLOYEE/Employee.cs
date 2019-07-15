@@ -8,6 +8,8 @@ namespace _2._5.EMPLOYEE
         private string position;
         private int workExperience;
 
+        public User User { get; }
+
         public Employee(User employeeUser)
         {
             AgeCheck(employeeUser);
@@ -30,8 +32,6 @@ namespace _2._5.EMPLOYEE
                 position = value;
             }
         }
-
-        public User User { get; }
 
         public int WorkExperience
         {
