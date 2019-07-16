@@ -46,11 +46,11 @@ namespace _2._8.GAME
 
         }
 
-        public void GetHealth(int amauntHealth)
+        public void GetHealth(int amountHealth)
         {
             if (health != 10)
             {
-                health += amauntHealth;
+                health += amountHealth;
             }
         }
     }
