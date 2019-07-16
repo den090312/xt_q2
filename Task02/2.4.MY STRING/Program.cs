@@ -46,6 +46,11 @@ namespace _2._4.MY_STRING
 
             Console.WriteLine();
 
+            //получаем значение по индексу
+            Console.WriteLine("Индексатор:");
+            Console.WriteLine($"MyString3[0] = '{myString3[0]}'");
+            Console.WriteLine();
+
             //получаем длину массива
             Console.WriteLine("Длина MyString3:");
             Console.WriteLine(myString3.Length);
