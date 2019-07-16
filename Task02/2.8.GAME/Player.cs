@@ -3,7 +3,7 @@ using System;
 
 namespace _2._8.GAME
 {
-    public class Player : Subject, IMovable
+    public class Player : Subject, IControllable
     {
         private Circle shape;
         private int health = 10;
@@ -13,7 +13,17 @@ namespace _2._8.GAME
             shape = playerShape;
         }
 
-        public void Move()
+        public void GoLeft()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GoRight()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GoUp()
         {
             throw new NotImplementedException();
         }
