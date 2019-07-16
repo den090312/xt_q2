@@ -74,7 +74,7 @@ namespace _2._1.ROUND
             }
         }
 
-        private void MoveCircle(Point newCenterCoordinates)
+        public void MoveTo(Point newCenterCoordinates)
         {
             edgeCoordinates += newCenterCoordinates - centerCoordinates;
         }

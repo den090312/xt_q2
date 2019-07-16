@@ -11,13 +11,14 @@ namespace _2._8.GAME
         private enum Type
         {
             Bear = 0,
-            Wolf = 1
+            Wolf = 1,
+            Snake = 2
         }
 
-        private Monster(Circle Shape, Type Type)
+        private Monster(Circle shape, Type type)
         {
-            shape = Shape;
-            type = Type;
+            this.shape = shape;
+            this.type = type;
         }
 
         public void Move()

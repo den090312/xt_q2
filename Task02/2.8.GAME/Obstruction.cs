@@ -10,13 +10,14 @@ namespace _2._8.GAME
         private enum Type
         {
             Stone = 0,
-            Tree = 1
+            Tree = 1,
+            Pit = 2
         }
 
-        private Obstruction(Circle Shape, Type Type)
+        private Obstruction(Circle shape, Type type)
         {
-            shape = Shape;
-            type = Type;
+            this.shape = shape;
+            this.type = type;
         }
     }
 }

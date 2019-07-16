@@ -18,19 +18,24 @@ namespace _2._8.GAME
             throw new NotImplementedException();
         }
 
-        public void GoLeft()
+        public void GoLeft(Player player, int countSteps)
         {
-            throw new NotImplementedException();
+            player.shape.MoveTo(new Point(shape.CenterCoordinates.X - countSteps, shape.CenterCoordinates.Y));
         }
 
-        public void GoRight()
+        public void GoRight(Player player, int countSteps)
         {
-            throw new NotImplementedException();
+            player.shape.MoveTo(new Point(shape.CenterCoordinates.X + countSteps, shape.CenterCoordinates.Y));
         }
 
-        public void GoUp()
+        public void GoUp(Player player, int countSteps)
         {
-            throw new NotImplementedException();
+            player.shape.MoveTo(new Point(shape.CenterCoordinates.X, shape.CenterCoordinates.Y + countSteps));
+        }
+
+        public void GoDown(Player player, int countSteps)
+        {
+            player.shape.MoveTo(new Point(shape.CenterCoordinates.X, shape.CenterCoordinates.Y - countSteps));
         }
     }
 }
