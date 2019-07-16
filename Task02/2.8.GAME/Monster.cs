@@ -20,7 +20,7 @@ namespace _2._8.GAME
             type = Type;
         }
 
-        public void GoUp()
+        public void Move()
         {
             throw new NotImplementedException();
         }

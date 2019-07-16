@@ -13,6 +13,11 @@ namespace _2._8.GAME
             shape = playerShape;
         }
 
+        public void Move()
+        {
+            throw new NotImplementedException();
+        }
+
         public void GoLeft()
         {
             throw new NotImplementedException();
