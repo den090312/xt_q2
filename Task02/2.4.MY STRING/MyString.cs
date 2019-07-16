@@ -154,7 +154,7 @@ namespace _2._4.MY_STRING
 
         private static void NullCheck(string userString)
         {
-            if (userString == null)
+            if (userString is null)
             {
                 throw new ArgumentNullException($"{nameof(userString)} is null!");
             }
@@ -162,7 +162,7 @@ namespace _2._4.MY_STRING
 
         private static void NullCheck(char[] userCharArray)
         {
-            if (userCharArray == null)
+            if (userCharArray is null)
             {
                 throw new ArgumentNullException($"{nameof(userCharArray)} is null!");
             }

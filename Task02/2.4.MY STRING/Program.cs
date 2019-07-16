@@ -46,22 +46,15 @@ namespace _2._4.MY_STRING
 
             Console.WriteLine();
 
-            //получаем массив MyString3
-            var charArray = myString3.CharArray;
-
-            //меняем массив MyString3 
-            Console.WriteLine("Новый MyString3:");
-            myString3.CharArray = new char[] { 'а', 'б', 'в', 'г', 'д', 'е', 'ж' };
-            WriteMyString(myString3);
-
             //получаем длину массива
             Console.WriteLine("Длина MyString3:");
             Console.WriteLine(myString3.Length);
+            Console.WriteLine();
         }
 
         private static void WriteMyString(MyString myString)
         {
-            var charArray = myString.CharArray;
+            var charArray = myString.ToCharArray();
 
             foreach (char element in charArray)
             {
