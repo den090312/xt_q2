@@ -5,12 +5,15 @@ namespace _2._8.GAME
 {
     public class Player : Subject, IControllable
     {
-        private Circle shape;
-        private int health = 10;
+        private Circle shape = new Circle(new Point(0, 0), 1);
+        private int health = 8;
 
-        private Player(Circle playerShape)
+        public Circle Shape { get => shape; private set => shape = value; }
+        public int Health { get => health; private set => health = value; }
+
+        public Player(Circle playerShape)
         {
-            shape = playerShape;
+            Shape = playerShape;
         }
 
         public void Move()
@@ -18,24 +21,32 @@ namespace _2._8.GAME
             throw new NotImplementedException();
         }
 
-        public void GoLeft(Player player, int countSteps)
+        public void GoLeft(int countSteps)
         {
-            player.shape.MoveTo(new Point(shape.CenterCoordinates.X - countSteps, shape.CenterCoordinates.Y));
+            Shape.MoveTo(new Point(Shape.CenterCoordinates.X - countSteps, Shape.CenterCoordinates.Y));
         }
 
-        public void GoRight(Player player, int countSteps)
+        public void GoRight(int countSteps)
         {
-            player.shape.MoveTo(new Point(shape.CenterCoordinates.X + countSteps, shape.CenterCoordinates.Y));
+            Shape.MoveTo(new Point(Shape.CenterCoordinates.X + countSteps, Shape.CenterCoordinates.Y));
         }
 
-        public void GoUp(Player player, int countSteps)
+        public void GoUp(int countSteps)
         {
-            player.shape.MoveTo(new Point(shape.CenterCoordinates.X, shape.CenterCoordinates.Y + countSteps));
+            Shape.MoveTo(new Point(Shape.CenterCoordinates.X, Shape.CenterCoordinates.Y + countSteps));
         }
 
-        public void GoDown(Player player, int countSteps)
+        public void GoDown(int countSteps)
         {
-            player.shape.MoveTo(new Point(shape.CenterCoordinates.X, shape.CenterCoordinates.Y - countSteps));
+            Shape.MoveTo(new Point(Shape.CenterCoordinates.X, Shape.CenterCoordinates.Y - countSteps));
+        }
+
+        public void GetHealth(int amauntHealth)
+        {
+            if (health != 10)
+            {
+                health += amauntHealth;
+            }
         }
     }
 }
