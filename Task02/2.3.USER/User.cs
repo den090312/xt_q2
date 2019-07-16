@@ -101,6 +101,8 @@ namespace _2._3.USER
         private static void CheckName(string userName, string nameType)
         {
             NullCheck(userName);
+            NullCheck(nameType);
+
             var userCharArray = userName.ToCharArray();
 
             if (char.IsLower(userCharArray[0]))
@@ -119,9 +121,17 @@ namespace _2._3.USER
 
         private static void NullCheck(string userString)
         {
-            if (userString == null)
+            if (userString is null)
             {
                 throw new ArgumentNullException($"{nameof(userString)} is null!");
+            }
+        }
+
+        private static void NullCheck(User user)
+        {
+            if (user is null)
+            {
+                throw new ArgumentNullException($"{nameof(user)} is null!");
             }
         }
     }

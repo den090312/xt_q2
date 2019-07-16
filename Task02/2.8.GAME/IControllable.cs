@@ -6,7 +6,5 @@ namespace _2._8.GAME
         void GoLeft();
 
         void GoRight();
-
-        void Move();
     }
 }
