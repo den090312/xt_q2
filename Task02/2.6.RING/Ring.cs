@@ -11,10 +11,10 @@ namespace _2._6.RING
 
         //для создания кольца через точки
         private double radius = 0;
-
+        private Circle circle = new Circle(new Point(0, 0), 1);
         public readonly Point edge = new Point(0, 0);
 
-        public Circle Circle { get; private set; }
+        public Circle Circle { get => circle; private set => circle = value; }
 
         public double Radius
         {
@@ -55,7 +55,7 @@ namespace _2._6.RING
 
         private double GetRingRadius(Circle Circle, Point Edge) => Math.Sqrt
         (
-            Math.Pow(Edge.X - Circle.CenterCoordinates.X, 2) + 
+            Math.Pow(Edge.X - Circle.CenterCoordinates.X, 2) +
             Math.Pow(Edge.Y - Circle.CenterCoordinates.Y, 2)
         );
 

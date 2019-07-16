@@ -78,5 +78,19 @@ namespace _2._1.ROUND
         {
             edgeCoordinates += newCenterCoordinates - centerCoordinates;
         }
+
+        public static bool operator ==(Circle circle1, Circle circle2) => circle1.centerCoordinates == circle2.centerCoordinates ? true : false;
+
+        public static bool operator !=(Circle circle1, Circle circle2) => circle1.centerCoordinates != circle2.centerCoordinates ? true : false;
+
+        public override bool Equals(object obj)
+        {
+            return obj is Circle circle 
+                && centerCoordinates == circle.centerCoordinates 
+                && edgeCoordinates == circle.edgeCoordinates 
+                && radius == circle.radius;
+        }
+
+        public override int GetHashCode() => centerCoordinates.GetHashCode() + edgeCoordinates.GetHashCode() + radius.GetHashCode();
     }
 }
