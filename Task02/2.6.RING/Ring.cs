@@ -12,7 +12,7 @@ namespace _2._6.RING
         //для создания кольца через точки
         private double radius = 0;
 
-        public readonly Point edge;
+        public readonly Point edge = new Point(0, 0);
 
         public Circle Circle { get; private set; }
 
