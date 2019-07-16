@@ -126,13 +126,5 @@ namespace _2._3.USER
                 throw new ArgumentNullException($"{nameof(userString)} is null!");
             }
         }
-
-        private static void NullCheck(User user)
-        {
-            if (user is null)
-            {
-                throw new ArgumentNullException($"{nameof(user)} is null!");
-            }
-        }
     }
 }
