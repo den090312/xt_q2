@@ -5,7 +5,7 @@ namespace _2._1.ROUND
     public class Circle
     {
         private Point edgeCoordinates = new Point(0, 0);
-        private Point centerCoordinates = new Point(0, 0);
+        private Point centerCoordinates = new Point(0, 1);
         private double radius = 0;
 
         //конструктор через точки
