@@ -6,11 +6,9 @@ namespace _2._8.GAME
 {
     public class Bonus : Subject
     {
-        private Circle shape = new Circle(new Point(0, 0), 1);
-
         public Type type;
 
-        public Circle Shape { get => shape; private set => shape = value; }
+        public override Circle Shape { get; set; }
 
         public enum Type
         {
@@ -18,10 +16,10 @@ namespace _2._8.GAME
             Cherry = 1
         }
 
-        public Bonus(Circle Shape, Type Type)
+        public Bonus(Circle shape, Type type)
         {
-            shape = Shape;
-            type = Type;
+            Shape = shape;
+            this.type = type;
         }
     }
 }

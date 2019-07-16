@@ -13,7 +13,7 @@ namespace _2._8.GAME
 
             player.GoRight(3);
 
-            if (player.Shape.CenterCoordinates == apple.Shape.CenterCoordinates)
+            if (IsOverlayed(player, apple))
             {
                 player.GetHealth(1);
             }
@@ -22,7 +22,7 @@ namespace _2._8.GAME
 
             player.GoRight(1);
 
-            if (player.Shape.CenterCoordinates == bear.Shape.CenterCoordinates)
+            if (IsOverlayed(player, bear))
             {
                 player.GetHealth(-3);
             }
@@ -31,10 +31,24 @@ namespace _2._8.GAME
 
             player.GoUp(1);
 
-            if (player.Shape.CenterCoordinates != tree.Shape.CenterCoordinates)
+            if (IsOverlayed(player, tree))
             {
-                player.GoUp(1);
+                player.Stop();
             }
+        }
+
+        private static bool IsOverlayed(Subject sub1, Subject sub2) => sub1.Shape.CenterCoordinates == sub2.Shape.CenterCoordinates;
+
+        private static bool TryToGo()
+        {
+            bool tryToGo = false;
+
+            return tryToGo;
+        }
+
+        private static void GetEvent()
+        {
+
         }
     }
 }

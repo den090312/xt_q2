@@ -25,6 +25,7 @@ namespace _2._6.RING
             var myRing = new Ring(myCircle, OuterRadius);
             WriteRingInfo(myRing);
         }
+
         private static void WriteRingInfo(Ring myRing)
         {
             Console.WriteLine();

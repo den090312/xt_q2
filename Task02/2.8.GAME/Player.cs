@@ -5,10 +5,10 @@ namespace _2._8.GAME
 {
     public class Player : Subject, IControllable
     {
-        private Circle shape = new Circle(new Point(0, 0), 1);
         private int health = 8;
 
-        public Circle Shape { get => shape; private set => shape = value; }
+        public override Circle Shape { get; set; }
+
         public int Health { get => health; private set => health = value; }
 
         public Player(Circle playerShape)
@@ -39,6 +39,11 @@ namespace _2._8.GAME
         public void GoDown(int countSteps)
         {
             Shape.MoveTo(new Point(Shape.CenterCoordinates.X, Shape.CenterCoordinates.Y - countSteps));
+        }
+
+        public void Stop()
+        {
+
         }
 
         public void GetHealth(int amauntHealth)
