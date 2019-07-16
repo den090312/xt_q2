@@ -56,5 +56,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\2.1.ROUND\2.1.ROUND.csproj">
+      <Project>{1181B323-7708-4817-B37A-A658F6B3ECFB}</Project>
+      <Name>2.1.ROUND</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\2.7.VECTOR GRAPHICS EDITOR\2.7.VECTOR GRAPHICS EDITOR.csproj">
+      <Project>{9B66CA1F-6A8A-4D84-88A9-3C6E9C04AF2D}</Project>
+      <Name>2.7.VECTOR GRAPHICS EDITOR</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
