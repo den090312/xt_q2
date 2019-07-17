@@ -10,12 +10,12 @@ namespace _2._8.GAME
             Tree = 1
         }
 
-        public Type BonusType { get; private set; }
+        public Type ObstructionType { get; private set; }
 
         public Obstruction(Point userCenter, Type userType)
         {
             Shape = new Circle(userCenter, radius);
-            BonusType = userType;
+            ObstructionType = userType;
         }
     }
 }
