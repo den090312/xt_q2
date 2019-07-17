@@ -4,9 +4,10 @@ namespace _2._1.ROUND
 {
     public class Circle
     {
-        private Point edgeCoordinates = new Point(0, 0);
         private Point centerCoordinates = new Point(0, 1);
         private double radius = 0;
+
+        public Point EdgeCoordinates { get; private set; } = new Point(0, 0);
 
         //конструктор через точки
         public Circle(Point userCenterCoordinates, Point userEdgeCoordinates)
@@ -33,16 +34,11 @@ namespace _2._1.ROUND
             get => centerCoordinates;
             private set
             {
-                CheckCoordinates(centerCoordinates, edgeCoordinates);
+                CheckCoordinates(centerCoordinates, EdgeCoordinates);
                 centerCoordinates = value;
             }
         }
 
-        public Point EdgeCoordinates
-        {
-            get => edgeCoordinates;
-            private set => edgeCoordinates = value;
-        }
 
         public double Radius
         {
@@ -52,8 +48,8 @@ namespace _2._1.ROUND
                 {
                     return Math.Sqrt
                     (
-                        Math.Pow(edgeCoordinates.X - centerCoordinates.X, 2) +
-                        Math.Pow(edgeCoordinates.Y - centerCoordinates.Y, 2)
+                        Math.Pow(EdgeCoordinates.X - centerCoordinates.X, 2) +
+                        Math.Pow(EdgeCoordinates.Y - centerCoordinates.Y, 2)
                     );
                 }
                 else
@@ -76,14 +72,14 @@ namespace _2._1.ROUND
 
         public void MoveTo(Point newCenterCoordinates)
         {
-            edgeCoordinates += newCenterCoordinates - centerCoordinates;
+            EdgeCoordinates += newCenterCoordinates - centerCoordinates;
         }
 
         public static bool operator ==(Circle circle1, Circle circle2)
         {
 
             return circle1.centerCoordinates == circle2.centerCoordinates 
-                && circle1.edgeCoordinates == circle2.edgeCoordinates 
+                && circle1.EdgeCoordinates == circle2.EdgeCoordinates 
                 && circle1.radius == circle2.radius ? true : false;
         }
 
@@ -93,10 +89,10 @@ namespace _2._1.ROUND
         {
             return obj is Circle circle 
                 && centerCoordinates == circle.centerCoordinates 
-                && edgeCoordinates == circle.edgeCoordinates 
+                && EdgeCoordinates == circle.EdgeCoordinates 
                 && radius == circle.radius;
         }
 
-        public override int GetHashCode() => centerCoordinates.GetHashCode() + edgeCoordinates.GetHashCode() + radius.GetHashCode();
+        public override int GetHashCode() => centerCoordinates.GetHashCode() + EdgeCoordinates.GetHashCode() + radius.GetHashCode();
     }
 }

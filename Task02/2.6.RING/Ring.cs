@@ -6,15 +6,15 @@ namespace _2._6.RING
     public class Ring
     {
         //для создания кольца через внешний-внутренний радиусы
-        private readonly double outerRadius = 0;
-        private readonly double innerRadius = 0;
+        private double outerRadius = 0;
+        private double innerRadius = 0;
 
         //для создания кольца через точки
         private double radius = 0;
-        private Circle circle = new Circle(new Point(0, 0), 1);
+
         public readonly Point edge = new Point(0, 0);
 
-        public Circle Circle { get => circle; private set => circle = value; }
+        public Circle Circle { get; private set; } = new Circle(new Point(0, 0), 1);
 
         public double Radius
         {

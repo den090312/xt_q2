@@ -5,12 +5,9 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
 {
     public class Line
     {
-        private Point point1 = new Point(0, 0);
-        private Point point2 = new Point(0, 0);
+        public Point Point1 { get; private set; } = new Point(0, 0);
 
-        public Point Point1 { get => point1; private set => point1 = value; }
-
-        public Point Point2 { get => point2; private set => point2 = value; }
+        public Point Point2 { get; private set; } = new Point(0, 0);
 
         public Line(Point userPoint1, Point userPoint2)
         {
