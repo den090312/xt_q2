@@ -28,5 +28,10 @@ namespace _2._8.GAME
         {
             throw new NotImplementedException();
         }
+
+        internal bool NoBonuses()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

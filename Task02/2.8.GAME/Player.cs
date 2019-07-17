@@ -14,8 +14,9 @@ namespace _2._8.GAME
             Right = 3
         }
 
-        private int health = 6;
         private Direction direction;
+
+        public int Health { get; private set; } = 6;
 
         public Dictionary<Direction, bool> Stops { get; private set; } = GetStopsDictionary();
 
@@ -24,9 +25,9 @@ namespace _2._8.GAME
             Shape = new Circle(userCenter, radius);
         }
 
-        private static Dictionary<Player.Direction, bool> GetStopsDictionary()
+        private static Dictionary<Direction, bool> GetStopsDictionary()
         {
-            var stops = new Dictionary<Player.Direction, bool>(4)
+            var stops = new Dictionary<Direction, bool>(4)
             {
                 { Player.Direction.Up, false },
                 { Player.Direction.Down, false },
@@ -84,11 +85,11 @@ namespace _2._8.GAME
             }
         }
 
-        public void GetHealth(int amountHealth)
+        public void SetHealth(int amountHealth)
         {
-            if (health != 10)
+            if (Health != 10)
             {
-                health += amountHealth;
+                Health += amountHealth;
             }
         }
     }
