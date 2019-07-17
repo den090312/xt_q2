@@ -28,10 +28,10 @@ namespace _2._8.GAME
         {
             var stops = new Dictionary<Player.Direction, bool>(4)
             {
-                { Player.Direction.Up, true },
-                { Player.Direction.Down, true },
-                { Player.Direction.Left, true },
-                { Player.Direction.Right, true }
+                { Player.Direction.Up, false },
+                { Player.Direction.Down, false },
+                { Player.Direction.Left, false },
+                { Player.Direction.Right, false }
             };
 
             return stops;
