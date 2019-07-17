@@ -6,11 +6,6 @@ namespace _2._8.GAME
     public class Player : Subject, IControllable
     {
         private int health = 6;
-        private bool stop = false;
-        private bool lefttWall = false;
-        private bool rightWall = false;
-        private bool upWall = false;
-        private bool downWall = false;
         private Direction direction;
 
         public enum Direction
@@ -31,83 +26,28 @@ namespace _2._8.GAME
             throw new NotImplementedException();
         }
 
-        public void Stop()
-        {
-            stop = true;
-        }
-
         public Direction GetDirection() => direction;
 
         private Direction SetDirection(Direction playerDirection) => direction = playerDirection;
 
         public void GoLeft(int countSteps)
         {
-            SetDirection(Direction.Left);
-
-            if (!lefttWall & !stop)
-            {
-                shape.MoveTo(new Point(shape.CenterCoordinates.X - countSteps, shape.CenterCoordinates.Y));
-                rightWall = false;
-                upWall = false;
-                downWall = false;
-            }
-            else
-            {
-                stop = true;
-            }
-
             direction = Direction.Left;
         }
 
         public void GoRight(int countSteps)
         {
-            SetDirection(Direction.Right);
-
-            if (!rightWall & !stop)
-            {
-                shape.MoveTo(new Point(shape.CenterCoordinates.X + countSteps, shape.CenterCoordinates.Y));
-                lefttWall = false;
-                upWall = false;
-                downWall = false;
-            }
-            else
-            {
-                stop = true;
-            }
+            direction = Direction.К;
         }
 
         public void GoUp(int countSteps)
         {
-            SetDirection(Direction.Up);
-
-            if (!upWall & !stop)
-            {
-                shape.MoveTo(new Point(shape.CenterCoordinates.X, shape.CenterCoordinates.Y + countSteps));
-                rightWall = false;
-                lefttWall = false;
-                downWall = false;
-            }
-            else
-            {
-                stop = true;
-            }
+            direction = Direction.Up;
         }
 
         public void GoDown(int countSteps)
         {
-            SetDirection(Direction.Down);
-
-            if (!downWall & !stop)
-            {
-                shape.MoveTo(new Point(shape.CenterCoordinates.X, shape.CenterCoordinates.Y - countSteps));
-                rightWall = false;
-                upWall = false;
-                lefttWall = false;
-            }
-            else
-            {
-                stop = true;
-            }
+            direction = Direction.Down;
         }
 
         public void GetHealth(int amountHealth)
