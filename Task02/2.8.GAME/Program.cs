@@ -30,6 +30,8 @@ namespace _2._8.GAME
             player.GoDown(2);
             field.ChangeSubjectLocation(UseEvent(player, cherry));
             WinCheck(player, field);
+
+            player.GetLocation();
         }
 
         private static void WinCheck(Player player, Field field)
@@ -103,7 +105,7 @@ namespace _2._8.GAME
 
         private static Player SetStop(Player player)
         {
-            var direction = player.GetDirection();
+            var direction = player.GetLocation();
 
             switch (direction)
             {

@@ -43,7 +43,7 @@ namespace _2._8.GAME
             throw new NotImplementedException();
         }
 
-        public Direction GetDirection() => direction;
+        public Direction GetLocation() => direction;
 
         public void GoLeft(int countSteps)
         {
