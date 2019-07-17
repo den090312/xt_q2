@@ -30,8 +30,6 @@ namespace _2._8.GAME
             player.GoDown(2);
             field.ChangeSubjectLocation(UseEvent(player, cherry));
             WinCheck(player, field);
-
-            player.GetLocation();
         }
 
         private static void WinCheck(Player player, Field field)
