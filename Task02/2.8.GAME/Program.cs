@@ -7,17 +7,17 @@ namespace _2._8.GAME
     {
         private static void Main(string[] args)
         {
-            var player = new Player(new Circle(new Point(0, 0), 3));
+            var player = new Player(new Point(0, 0));
 
-            var apple = new Bonus(new Circle(new Point(0, 3), 3), Bonus.Type.Apple);
+            var apple = new Bonus(new Point(0, 0), Bonus.Type.Apple);
             player.GoRight(3);
             player = GetEvent(player, apple);
 
-            var bear = new Monster(new Circle(new Point(0, 4), 5), Monster.Type.Bear);
+            var bear = new Monster(new Point(0, 0), Monster.Type.Bear);
             player.GoRight(1);
             player = GetEvent(player, bear);
 
-            var tree = new Obstruction(new Circle(new Point(2, 4), 4), Obstruction.Type.Pit);
+            var tree = new Obstruction(new Point(0, 0), Obstruction.Type.Pit);
             player.GoUp(1);
             player = GetEvent(player, tree);
         }
@@ -72,25 +72,12 @@ namespace _2._8.GAME
         {
             if (IsOverlayed(player, obstruction))
             {
-                switch (obstruction.type)
-                {
-                    case Obstruction.Type.Pit:
-                        player.GetHealth(-3);
-                        break;
-
-                    case Obstruction.Type.Stone:
-                        player.GetHealth(-2);
-                        break;
-
-                    case Obstruction.Type.Tree:
-                        player.GetHealth(-1);
-                        break;
-                }
+                player.Stop();
             }
 
             return player;
         }
 
-        private static bool IsOverlayed(Subject sub1, Subject sub2) => sub1.Shape.CenterCoordinates == sub2.Shape.CenterCoordinates;
+        private static bool IsOverlayed(Subject sub1, Subject sub2) => sub1.shape.CenterCoordinates == sub2.shape.CenterCoordinates;
     }
 }

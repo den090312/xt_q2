@@ -8,8 +8,6 @@ namespace _2._8.GAME
     {
         public Type type;
 
-        public override Circle Shape { get; set; }
-
         public enum Type
         {
             Apple = 0,
@@ -17,9 +15,9 @@ namespace _2._8.GAME
             Limon = 2
         }
 
-        public Bonus(Circle shape, Type type)
+        public Bonus(Point userCenter, Type type)
         {
-            Shape = shape;
+            shape = new Circle(userCenter, radius);
             this.type = type;
         }
     }

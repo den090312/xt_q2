@@ -6,14 +6,19 @@ namespace _2._8.GAME
     public class Player : Subject, IControllable
     {
         private int health = 6;
+        private bool stop = false; 
 
-        public override Circle Shape { get; set; }
 
         public int Health { get => health; private set => health = value; }
 
-        public Player(Circle playerShape)
+        public Player(Point userCenter)
         {
-            Shape = playerShape;
+            shape = new Circle(userCenter, radius);
+        }
+
+    public void Stop()
+        {
+            stop = true;
         }
 
         public void Move()
@@ -23,27 +28,26 @@ namespace _2._8.GAME
 
         public void GoLeft(int countSteps)
         {
-            Shape.MoveTo(new Point(Shape.CenterCoordinates.X - countSteps, Shape.CenterCoordinates.Y));
+            if (!stop)
+                shape.MoveTo(new Point(shape.CenterCoordinates.X - countSteps, shape.CenterCoordinates.Y));
         }
 
         public void GoRight(int countSteps)
         {
-            Shape.MoveTo(new Point(Shape.CenterCoordinates.X + countSteps, Shape.CenterCoordinates.Y));
+            if (!stop)
+                shape.MoveTo(new Point(shape.CenterCoordinates.X + countSteps, shape.CenterCoordinates.Y));
         }
 
         public void GoUp(int countSteps)
         {
-            Shape.MoveTo(new Point(Shape.CenterCoordinates.X, Shape.CenterCoordinates.Y + countSteps));
+            if (!stop)
+                shape.MoveTo(new Point(shape.CenterCoordinates.X, shape.CenterCoordinates.Y + countSteps));
         }
 
         public void GoDown(int countSteps)
         {
-            Shape.MoveTo(new Point(Shape.CenterCoordinates.X, Shape.CenterCoordinates.Y - countSteps));
-        }
-
-        public void Stop()
-        {
-
+            if (!stop)
+                shape.MoveTo(new Point(shape.CenterCoordinates.X, shape.CenterCoordinates.Y - countSteps));
         }
 
         public void GetHealth(int amountHealth)

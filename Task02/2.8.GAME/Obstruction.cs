@@ -4,11 +4,7 @@ namespace _2._8.GAME
 {
     public class Obstruction : Subject
     {
-        private Circle shape = new Circle(new Point(0, 0), 1);
-
         public Type type;
-
-        public Circle Shape { get => shape; private set => shape = value; }
 
         public enum Type
         {
@@ -17,9 +13,9 @@ namespace _2._8.GAME
             Pit = 2
         }
 
-        public Obstruction(Circle shape, Type type)
+        public Obstruction(Point userCenter, Type type)
         {
-            this.shape = shape;
+            shape = new Circle(userCenter, radius);
             this.type = type;
         }
     }

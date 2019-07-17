@@ -5,8 +5,8 @@ namespace _2._8.GAME
 {
     public abstract class Subject
     {
-        private Circle shape = new Circle(new Point(0, 0), 3);
-
-        public virtual Circle Shape { get => shape; set => shape = value; }
+        public Point center = new Point(0, 0);
+        public readonly double radius = 3;
+        public Circle shape = new Circle(new Point(0, 0), 3);
     }
 }

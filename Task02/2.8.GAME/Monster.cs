@@ -7,8 +7,6 @@ namespace _2._8.GAME
     {
         public Type type;
 
-        public override Circle Shape { get; set; }
-
         public enum Type
         {
             Bear = 0,
@@ -16,9 +14,9 @@ namespace _2._8.GAME
             Snake = 2
         }
 
-        public Monster(Circle shape, Type type)
+        public Monster(Point userCenter, Type type)
         {
-            Shape = shape;
+            shape = new Circle(userCenter, radius);
             this.type = type;
         }
 
