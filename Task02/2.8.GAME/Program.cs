@@ -21,7 +21,7 @@ namespace _2._8.GAME
 
             var tree = new Obstruction(new Point(3, 1), Obstruction.Type.Pit);
             player.GoUp(1);
-            player = GetEvent(player, tree);
+            player = GetEvent(player, tree, Player.Direction.Up);
         }
 
         private static Player GetEvent(Player player, Bonus bonus)
@@ -70,11 +70,14 @@ namespace _2._8.GAME
             return player;
         }
 
-        private static Player GetEvent(Player player, Obstruction obstruction)
+        private static Player GetEvent(Player player, Obstruction obstruction, Player.Direction direction)
         {
             if (IsOverlayed(player, obstruction))
             {
-
+                if (player.GetDirection() == direction)
+                {
+                    player.Stop();
+                }
             }
 
             return player;

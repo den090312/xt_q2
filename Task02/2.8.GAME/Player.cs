@@ -6,6 +6,7 @@ namespace _2._8.GAME
     public class Player : Subject, IControllable
     {
         private int health = 6;
+        private bool stop = false;
         private bool lefttWall = false;
         private bool rightWall = false;
         private bool upWall = false;
@@ -30,6 +31,11 @@ namespace _2._8.GAME
             throw new NotImplementedException();
         }
 
+        public void Stop()
+        {
+            stop = true;
+        }
+
         public Direction GetDirection() => direction;
 
         private Direction SetDirection(Direction playerDirection) => direction = playerDirection;
@@ -38,12 +44,16 @@ namespace _2._8.GAME
         {
             SetDirection(Direction.Left);
 
-            if (!lefttWall)
+            if (!lefttWall & !stop)
             {
                 shape.MoveTo(new Point(shape.CenterCoordinates.X - countSteps, shape.CenterCoordinates.Y));
                 rightWall = false;
                 upWall = false;
                 downWall = false;
+            }
+            else
+            {
+                stop = true;
             }
 
             direction = Direction.Left;
@@ -53,12 +63,16 @@ namespace _2._8.GAME
         {
             SetDirection(Direction.Right);
 
-            if (!rightWall)
+            if (!rightWall & !stop)
             {
                 shape.MoveTo(new Point(shape.CenterCoordinates.X + countSteps, shape.CenterCoordinates.Y));
                 lefttWall = false;
                 upWall = false;
                 downWall = false;
+            }
+            else
+            {
+                stop = true;
             }
         }
 
@@ -66,12 +80,16 @@ namespace _2._8.GAME
         {
             SetDirection(Direction.Up);
 
-            if (!upWall)
+            if (!upWall & !stop)
             {
                 shape.MoveTo(new Point(shape.CenterCoordinates.X, shape.CenterCoordinates.Y + countSteps));
                 rightWall = false;
                 lefttWall = false;
                 downWall = false;
+            }
+            else
+            {
+                stop = true;
             }
         }
 
@@ -79,12 +97,16 @@ namespace _2._8.GAME
         {
             SetDirection(Direction.Down);
 
-            if (!downWall)
+            if (!downWall & !stop)
             {
                 shape.MoveTo(new Point(shape.CenterCoordinates.X, shape.CenterCoordinates.Y - countSteps));
                 rightWall = false;
                 upWall = false;
                 lefttWall = false;
+            }
+            else
+            {
+                stop = true;
             }
         }
 
