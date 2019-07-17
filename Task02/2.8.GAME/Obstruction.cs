@@ -4,7 +4,7 @@ namespace _2._8.GAME
 {
     public class Obstruction : Subject
     {
-        public Type type;
+        public Type BonusType { get; private set; }
 
         public enum Type
         {
@@ -12,10 +12,10 @@ namespace _2._8.GAME
             Tree = 1
         }
 
-        public Obstruction(Point userCenter, Type type)
+        public Obstruction(Point userCenter, Type userType)
         {
             Shape = new Circle(userCenter, radius);
-            this.type = type;
+            BonusType = userType;
         }
     }
 }

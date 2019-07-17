@@ -6,7 +6,7 @@ namespace _2._8.GAME
 {
     public class Bonus : Subject
     {
-        public Type type;
+        public Type BonusType { get; private set; }
 
         public enum Type
         {
@@ -15,10 +15,10 @@ namespace _2._8.GAME
             Limon = 2
         }
 
-        public Bonus(Point userCenter, Type type)
+        public Bonus(Point userCenter, Type userType)
         {
             Shape = new Circle(userCenter, radius);
-            this.type = type;
+            BonusType = userType;
         }
     }
 }

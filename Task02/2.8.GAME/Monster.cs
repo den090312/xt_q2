@@ -5,7 +5,7 @@ namespace _2._8.GAME
 {
     public class Monster : Subject, IMovable
     {
-        public Type type;
+        public Type MonsterType { get; private set; }
 
         public enum Type
         {
@@ -14,10 +14,10 @@ namespace _2._8.GAME
             Snake = 2
         }
 
-        public Monster(Point userCenter, Type type)
+        public Monster(Point userCenter, Type userType)
         {
             Shape = new Circle(userCenter, radius);
-            this.type = type;
+            MonsterType = userType;
         }
 
         public void Move()

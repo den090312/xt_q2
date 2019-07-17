@@ -97,7 +97,7 @@ namespace _2._8.GAME
         {
             if (IsOverlayed(player, bonus))
             {
-                switch (bonus.type)
+                switch (bonus.BonusType)
                 {
                     case Bonus.Type.Apple:
                         player.SetHealth(3);
@@ -130,7 +130,7 @@ namespace _2._8.GAME
         {
             if (IsOverlayed(player, monster))
             {
-                switch (monster.type)
+                switch (monster.MonsterType)
                 {
                     case Monster.Type.Bear:
                         player.SetHealth(-3);
