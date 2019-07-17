@@ -13,11 +13,11 @@ namespace _2._8.GAME
             player.GoRight(3);
             player = GetEvent(player, apple);
 
-            var bear = new Monster(new Point(0, 0), Monster.Type.Bear);
+            var bear = new Monster(new Point(3, 0), Monster.Type.Bear);
             player.GoRight(1);
             player = GetEvent(player, bear);
 
-            var tree = new Obstruction(new Point(0, 0), Obstruction.Type.Pit);
+            var tree = new Obstruction(new Point(3, 1), Obstruction.Type.Pit);
             player.GoUp(1);
             player = GetEvent(player, tree);
         }
@@ -72,7 +72,7 @@ namespace _2._8.GAME
         {
             if (IsOverlayed(player, obstruction))
             {
-                player.Stop();
+                player.UpWall = true;
             }
 
             return player;
