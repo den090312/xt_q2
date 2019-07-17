@@ -5,14 +5,14 @@ namespace _2._8.GAME
 {
     public class Monster : Subject, IMovable
     {
-        public Type MonsterType { get; private set; }
-
         public enum Type
         {
             Bear = 0,
             Wolf = 1,
             Snake = 2
         }
+
+        public Type MonsterType { get; private set; }
 
         public Monster(Point userCenter, Type userType)
         {
