@@ -38,9 +38,9 @@ namespace _2._8.GAME
             if (!lefttWall)
             {
                 shape.MoveTo(new Point(shape.CenterCoordinates.X - countSteps, shape.CenterCoordinates.Y));
-                rightWall = true;
-                upWall = true;
-                downWall = true;
+                rightWall = false;
+                upWall = false;
+                downWall = false;
             }
         }
 
@@ -49,9 +49,9 @@ namespace _2._8.GAME
             if (!rightWall)
             {
                 shape.MoveTo(new Point(shape.CenterCoordinates.X + countSteps, shape.CenterCoordinates.Y));
-                lefttWall = true;
-                upWall = true;
-                downWall = true;
+                lefttWall = false;
+                upWall = false;
+                downWall = false;
             }
         }
 
@@ -60,9 +60,9 @@ namespace _2._8.GAME
             if (!upWall)
             {
                 shape.MoveTo(new Point(shape.CenterCoordinates.X, shape.CenterCoordinates.Y + countSteps));
-                rightWall = true;
-                lefttWall = true;
-                downWall = true;
+                rightWall = false;
+                lefttWall = false;
+                downWall = false;
             }
         }
 
@@ -71,9 +71,9 @@ namespace _2._8.GAME
             if (!stop)
             {
                 shape.MoveTo(new Point(shape.CenterCoordinates.X, shape.CenterCoordinates.Y - countSteps));
-                rightWall = true;
-                upWall = true;
-                lefttWall = true;
+                rightWall = false;
+                upWall = false;
+                lefttWall = false;
             }
         }
 
