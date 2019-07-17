@@ -1,5 +1,6 @@
 ﻿using _2._1.ROUND;
 using System;
+using System.Collections.Generic;
 
 namespace _2._8.GAME
 {
@@ -13,17 +14,18 @@ namespace _2._8.GAME
 
             var apple = new Bonus(new Point(0, 0), Bonus.Type.Apple);
             player.GoRight(3);
-            player = GetEvent(player, apple);
+            player = UseEvent(player, apple);
 
             var bear = new Monster(new Point(3, 0), Monster.Type.Bear);
             player.GoRight(1);
-            player = GetEvent(player, bear);
+            player = UseEvent(player, bear);
 
             var tree = new Obstruction(new Point(3, 1), Obstruction.Type.Pit);
             player.GoUp(1);
+            player = UseEvent(player, tree);
         }
 
-        private static Player GetEvent(Player player, Bonus bonus)
+        private static Player UseEvent(Player player, Bonus bonus)
         {
             if (IsOverlayed(player, bonus))
             {
@@ -46,7 +48,17 @@ namespace _2._8.GAME
             return player;
         }
 
-        private static Player GetEvent(Player player, Monster monster)
+        private static Player UseEvent(Player player, Obstruction obstruction)
+        {
+            if (IsOverlayed(player, obstruction))
+            {
+                player = SetStop(player);
+            }
+
+            return player;
+        }
+
+        private static Player UseEvent(Player player, Monster monster)
         {
             if (IsOverlayed(player, monster))
             {
@@ -64,6 +76,32 @@ namespace _2._8.GAME
                         player.GetHealth(-1);
                         break;
                 }
+            }
+
+            return player;
+        }
+
+        private static Player SetStop(Player player)
+        {
+            var direction = player.GetDirection();
+
+            switch (direction)
+            {
+                case Player.Direction.Up:
+                    player.Stops[Player.Direction.Up] = true;
+                    break;
+
+                case Player.Direction.Down:
+                    player.Stops[Player.Direction.Down] = true;
+                    break;
+
+                case Player.Direction.Left:
+                    player.Stops[Player.Direction.Left] = true;
+                    break;
+
+                case Player.Direction.Right:
+                    player.Stops[Player.Direction.Right] = true;
+                    break;
             }
 
             return player;

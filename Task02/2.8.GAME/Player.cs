@@ -1,5 +1,6 @@
 ﻿using _2._1.ROUND;
 using System;
+using System.Collections.Generic;
 
 namespace _2._8.GAME
 {
@@ -13,12 +14,28 @@ namespace _2._8.GAME
             Right = 3
         }
 
+        private Dictionary<Player.Direction, bool> stops = GetStopsDictionary();
+
         private int health = 6;
         private Direction direction;
+
+        public Dictionary<Direction, bool> Stops { get => stops; private set => stops = value; }
 
         public Player(Point userCenter)
         {
             shape = new Circle(userCenter, radius);
+        }
+
+        private static Dictionary<Player.Direction, bool> GetStopsDictionary()
+        {
+            var stops = new Dictionary<Player.Direction, bool>(4);
+
+            stops.Add(Player.Direction.Up, true);
+            stops.Add(Player.Direction.Down, true);
+            stops.Add(Player.Direction.Left, true);
+            stops.Add(Player.Direction.Right, true);
+
+            return stops;
         }
 
         public void Move()
