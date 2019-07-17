@@ -105,6 +105,6 @@ namespace _2._8.GAME
             return player;
         }
 
-        private static bool IsOverlayed(Subject sub1, Subject sub2) => sub1.shape.CenterCoordinates == sub2.shape.CenterCoordinates;
+        private static bool IsOverlayed(Subject sub1, Subject sub2) => sub1.Shape.CenterCoordinates == sub2.Shape.CenterCoordinates;
     }
 }

@@ -16,7 +16,7 @@ namespace _2._8.GAME
 
         public Monster(Point userCenter, Type type)
         {
-            shape = new Circle(userCenter, radius);
+            Shape = new Circle(userCenter, radius);
             this.type = type;
         }
 

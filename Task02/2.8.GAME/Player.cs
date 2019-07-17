@@ -21,7 +21,7 @@ namespace _2._8.GAME
 
         public Player(Point userCenter)
         {
-            shape = new Circle(userCenter, radius);
+            Shape = new Circle(userCenter, radius);
         }
 
         private static Dictionary<Player.Direction, bool> GetStopsDictionary()
@@ -50,7 +50,7 @@ namespace _2._8.GAME
 
             if (Stops[direction] == false)
             {
-                shape.MoveTo(new Point(shape.CenterCoordinates.X - countSteps, shape.CenterCoordinates.Y));
+                Shape.MoveTo(new Point(Shape.CenterCoordinates.X - countSteps, Shape.CenterCoordinates.Y));
             }
         }
 
@@ -60,7 +60,7 @@ namespace _2._8.GAME
 
             if (Stops[direction] == false)
             {
-                shape.MoveTo(new Point(shape.CenterCoordinates.X + countSteps, shape.CenterCoordinates.Y));
+                Shape.MoveTo(new Point(Shape.CenterCoordinates.X + countSteps, Shape.CenterCoordinates.Y));
             }
         }
 
@@ -70,7 +70,7 @@ namespace _2._8.GAME
 
             if (Stops[direction] == false)
             {
-                shape.MoveTo(new Point(shape.CenterCoordinates.X, shape.CenterCoordinates.Y + countSteps));
+                Shape.MoveTo(new Point(Shape.CenterCoordinates.X, Shape.CenterCoordinates.Y + countSteps));
             }
         }
 
@@ -80,7 +80,7 @@ namespace _2._8.GAME
 
             if (Stops[direction] == false)
             {
-                shape.MoveTo(new Point(shape.CenterCoordinates.X, shape.CenterCoordinates.Y - countSteps));
+                Shape.MoveTo(new Point(Shape.CenterCoordinates.X, Shape.CenterCoordinates.Y - countSteps));
             }
         }
 
