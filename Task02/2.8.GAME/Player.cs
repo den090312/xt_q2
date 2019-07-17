@@ -5,9 +5,16 @@ namespace _2._8.GAME
 {
     public class Player : Subject, IControllable
     {
+        public enum Direction
+        {
+            Up = 0,
+            Down = 1,
+            Left = 2,
+            Right = 3
+        }
+
         private int health = 6;
         private Direction direction;
-        private Obstruction obstruction;
 
         public Player(Point userCenter)
         {
