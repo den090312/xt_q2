@@ -9,8 +9,7 @@ namespace _2._8.GAME
         public enum Type
         {
             Stone = 0,
-            Tree = 1,
-            Pit = 2
+            Tree = 1
         }
 
         public Obstruction(Point userCenter, Type type)

@@ -79,7 +79,6 @@ namespace _2._1.ROUND
             edgeCoordinates += newCenterCoordinates - centerCoordinates;
         }
 
-
         public static bool operator ==(Circle circle1, Circle circle2)
         {
 

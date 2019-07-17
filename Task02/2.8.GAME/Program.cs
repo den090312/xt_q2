@@ -10,17 +10,21 @@ namespace _2._8.GAME
 
             var player = new Player(new Point(0, 0));
 
-            var apple = new Bonus(new Point(0, 0), Bonus.Type.Apple);
+            var apple = new Bonus(new Point(3, 0), Bonus.Type.Apple);
             player.GoRight(3);
-            player = UseEvent(player, apple);
+            field.ChangeSubjectLocation(UseEvent(player, apple));
 
-            var bear = new Monster(new Point(3, 0), Monster.Type.Bear);
-            player.GoRight(1);
-            player = UseEvent(player, bear);
+            var bear = new Monster(new Point(2, 0), Monster.Type.Bear);
+            player.GoLeft(1);
+            field.ChangeSubjectLocation(UseEvent(player, bear));
 
-            var tree = new Obstruction(new Point(3, 1), Obstruction.Type.Pit);
+            var stone = new Obstruction(new Point(2, 1), Obstruction.Type.Stone);
             player.GoUp(1);
-            player = UseEvent(player, tree);
+            field.ChangeSubjectLocation(UseEvent(player, stone));
+
+            var cherry = new Bonus(new Point(0, 1), Bonus.Type.Cherry);
+            player.GoDown(2);
+            field.ChangeSubjectLocation(UseEvent(player, cherry));
         }
 
         private static Player UseEvent(Player player, Bonus bonus)

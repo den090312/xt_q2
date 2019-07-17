@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2._1.ROUND;
+using System;
 
 namespace _2._8.GAME
 {
@@ -21,6 +22,11 @@ namespace _2._8.GAME
 
             this.width = width;
             this.height = height;
+        }
+
+        public void ChangeSubjectLocation(Subject sub)
+        {
+            throw new NotImplementedException();
         }
     }
 }
