@@ -7,7 +7,7 @@ namespace _2._8.GAME
         private int width;
         private int height;
 
-        private Field(int width, int height)
+        public Field(int width, int height)
         {
             if (width < 0)
             {

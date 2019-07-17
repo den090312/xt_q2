@@ -10,7 +10,5 @@ namespace _2._8.GAME
         void GoUp(int countSteps);
 
         void GoDown(int countSteps);
-
-        void Stop();
     }
 }

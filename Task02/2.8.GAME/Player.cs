@@ -6,26 +6,23 @@ namespace _2._8.GAME
     public class Player : Subject, IControllable
     {
         private int health = 6;
-        private bool stop = false;
         private bool lefttWall = false;
         private bool rightWall = false;
         private bool upWall = false;
         private bool downWall = false;
+        private Direction direction;
 
-        public int Health { get => health; private set => health = value; }
-        public bool LefttWall { private get => lefttWall; set => lefttWall = value; }
-        public bool RightWall { private get => rightWall; set => rightWall = value; }
-        public bool UpWall { private get => upWall; set => upWall = value; }
-        public bool DownWall { private get => downWall; set => downWall = value; }
+        public enum Direction
+        {
+            Up = 0,
+            Down = 1,
+            Left = 2,
+            Right = 3
+        }
 
         public Player(Point userCenter)
         {
             shape = new Circle(userCenter, radius);
-        }
-
-        public void Stop()
-        {
-            stop = true;
         }
 
         public void Move()
@@ -33,8 +30,14 @@ namespace _2._8.GAME
             throw new NotImplementedException();
         }
 
+        public Direction GetDirection() => direction;
+
+        private Direction SetDirection(Direction playerDirection) => direction = playerDirection;
+
         public void GoLeft(int countSteps)
         {
+            SetDirection(Direction.Left);
+
             if (!lefttWall)
             {
                 shape.MoveTo(new Point(shape.CenterCoordinates.X - countSteps, shape.CenterCoordinates.Y));
@@ -42,10 +45,14 @@ namespace _2._8.GAME
                 upWall = false;
                 downWall = false;
             }
+
+            direction = Direction.Left;
         }
 
         public void GoRight(int countSteps)
         {
+            SetDirection(Direction.Right);
+
             if (!rightWall)
             {
                 shape.MoveTo(new Point(shape.CenterCoordinates.X + countSteps, shape.CenterCoordinates.Y));
@@ -57,6 +64,8 @@ namespace _2._8.GAME
 
         public void GoUp(int countSteps)
         {
+            SetDirection(Direction.Up);
+
             if (!upWall)
             {
                 shape.MoveTo(new Point(shape.CenterCoordinates.X, shape.CenterCoordinates.Y + countSteps));
@@ -68,7 +77,9 @@ namespace _2._8.GAME
 
         public void GoDown(int countSteps)
         {
-            if (!stop)
+            SetDirection(Direction.Down);
+
+            if (!downWall)
             {
                 shape.MoveTo(new Point(shape.CenterCoordinates.X, shape.CenterCoordinates.Y - countSteps));
                 rightWall = false;

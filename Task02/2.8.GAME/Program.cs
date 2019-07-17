@@ -7,6 +7,8 @@ namespace _2._8.GAME
     {
         private static void Main(string[] args)
         {
+            var field = new Field(100, 100);
+
             var player = new Player(new Point(0, 0));
 
             var apple = new Bonus(new Point(0, 0), Bonus.Type.Apple);
@@ -72,7 +74,7 @@ namespace _2._8.GAME
         {
             if (IsOverlayed(player, obstruction))
             {
-                player.UpWall = true;
+
             }
 
             return player;
