@@ -22,7 +22,7 @@ namespace _2._8.GAME
 
         public Player(Point userCenter)
         {
-            Shape = new Circle(userCenter, radius);
+            Shape = new Circle(userCenter, radius); 
         }
 
         private static Dictionary<Direction, bool> GetStopsDictionary()
@@ -91,6 +91,88 @@ namespace _2._8.GAME
             {
                 Health += amountHealth;
             }
+        }
+
+        public static Player UseEvent(Player player, Bonus bonus)
+        {
+            if (IsOverlayed(player, bonus))
+            {
+                switch (bonus.type)
+                {
+                    case Bonus.Type.Apple:
+                        player.SetHealth(3);
+                        break;
+
+                    case Bonus.Type.Limon:
+                        player.SetHealth(2);
+                        break;
+
+                    case Bonus.Type.Cherry:
+                        player.SetHealth(1);
+                        break;
+                }
+            }
+
+            return player;
+        }
+
+        public static Player UseEvent(Player player, Obstruction obstruction)
+        {
+            if (IsOverlayed(player, obstruction))
+            {
+                player = SetStop(player);
+            }
+
+            return player;
+        }
+
+        public static Player UseEvent(Player player, Monster monster)
+        {
+            if (IsOverlayed(player, monster))
+            {
+                switch (monster.type)
+                {
+                    case Monster.Type.Bear:
+                        player.SetHealth(-3);
+                        break;
+
+                    case Monster.Type.Wolf:
+                        player.SetHealth(-2);
+                        break;
+
+                    case Monster.Type.Snake:
+                        player.SetHealth(-1);
+                        break;
+                }
+            }
+
+            return player;
+        }
+
+        public static Player SetStop(Player player)
+        {
+            var direction = player.GetLocation();
+
+            switch (direction)
+            {
+                case Direction.Up:
+                    player.Stops[Direction.Up] = true;
+                    break;
+
+                case Direction.Down:
+                    player.Stops[Direction.Down] = true;
+                    break;
+
+                case Direction.Left:
+                    player.Stops[Direction.Left] = true;
+                    break;
+
+                case Direction.Right:
+                    player.Stops[Direction.Right] = true;
+                    break;
+            }
+
+            return player;
         }
     }
 }
