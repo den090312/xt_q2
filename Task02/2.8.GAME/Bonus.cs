@@ -13,7 +13,8 @@ namespace _2._8.GAME
         public enum Type
         {
             Apple = 0,
-            Cherry = 1
+            Cherry = 1,
+            Limon = 2
         }
 
         public Bonus(Circle shape, Type type)

@@ -5,7 +5,7 @@ namespace _2._8.GAME
 {
     public class Player : Subject, IControllable
     {
-        private int health = 8;
+        private int health = 6;
 
         public override Circle Shape { get; set; }
 

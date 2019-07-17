@@ -79,7 +79,14 @@ namespace _2._1.ROUND
             edgeCoordinates += newCenterCoordinates - centerCoordinates;
         }
 
-        public static bool operator ==(Circle circle1, Circle circle2) => circle1.centerCoordinates == circle2.centerCoordinates ? true : false;
+
+        public static bool operator ==(Circle circle1, Circle circle2)
+        {
+
+            return circle1.centerCoordinates == circle2.centerCoordinates 
+                && circle1.edgeCoordinates == circle2.edgeCoordinates 
+                && circle1.radius == circle2.radius ? true : false;
+        }
 
         public static bool operator !=(Circle circle1, Circle circle2) => circle1.centerCoordinates != circle2.centerCoordinates ? true : false;
 
