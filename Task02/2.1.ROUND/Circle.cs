@@ -22,7 +22,7 @@ namespace _2._1.ROUND
         {
             if (userRadius <= 0)
             {
-                throw new Exception("Радиус должен быть больше или равен нулю!");
+                throw new Exception("Радиус должен быть больше нуля!");
             }
 
             centerCoordinates = userCenterCoordinates;
