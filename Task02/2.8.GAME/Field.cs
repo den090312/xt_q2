@@ -1,12 +1,16 @@
 ﻿using _2._1.ROUND;
 using System;
+using System.Collections.Generic;
 
 namespace _2._8.GAME
 {
     public class Field
     {
-        private int width;
-        private int height;
+        public List<Subject> Subjects { get; private set; } = new List<Subject>();
+
+        public int Width { get; private set; }
+
+        public int Height { get; private set; }
 
         public Field(int width, int height)
         {
@@ -20,9 +24,11 @@ namespace _2._8.GAME
                 throw new Exception("Высота поля не может быть меньше нуля!");
             }
 
-            this.width = width;
-            this.height = height;
+            Width = width;
+            Height = height;
         }
+
+        public Subject AddSubject(Subject subject) => subject;
 
         public void ChangeSubjectLocation(Subject sub)
         {

@@ -20,9 +20,10 @@ namespace _2._8.GAME
 
         public Dictionary<Direction, bool> Stops { get; private set; } = GetStopsDictionary();
 
-        public Player(Point userCenter)
+        public Player(Field userField, Point userCenter)
         {
-            Shape = new Circle(userCenter, radius); 
+            Shape = new Circle(userCenter, radius);
+            userField.AddSubject(this);
         }
 
         private static Dictionary<Direction, bool> GetStopsDictionary()

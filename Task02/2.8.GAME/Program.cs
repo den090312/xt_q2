@@ -7,29 +7,28 @@ namespace _2._8.GAME
     {
         private static void Main(string[] args)
         {
-            var field = new Field(100, 100);
+            var gameField = new Field(100, 100);
+            var player = new Player(gameField, Point.Create(0, 0));
 
-            var player = new Player(new Point(0, 0));
-
-            var apple = new Bonus(new Point(3, 0), Bonus.Type.Apple);
+            var apple = new Bonus(gameField, Point.Create(3, 0), Bonus.Type.Apple);
             player.GoRight(3);
-            field.ChangeSubjectLocation(Player.UseEvent(player, apple));
-            WinCheck(player, field);
+            gameField.ChangeSubjectLocation(Player.UseEvent(player, apple));
+            WinCheck(player, gameField);
 
-            var bear = new Monster(new Point(2, 0), Monster.Type.Bear);
+            var bear = new Monster(gameField, Point.Create(2, 0), Monster.Type.Bear);
             player.GoLeft(1);
-            field.ChangeSubjectLocation(Player.UseEvent(player, bear));
-            WinCheck(player, field);
+            gameField.ChangeSubjectLocation(Player.UseEvent(player, bear));
+            WinCheck(player, gameField);
 
-            var stone = new Obstruction(new Point(2, 1), Obstruction.Type.Stone);
+            var stone = new Obstruction(Point.Create(2, 1), Obstruction.Type.Stone);
             player.GoUp(1);
-            field.ChangeSubjectLocation(Player.UseEvent(player, stone));
-            WinCheck(player, field);
+            gameField.ChangeSubjectLocation(Player.UseEvent(player, stone));
+            WinCheck(player, gameField);
 
-            var cherry = new Bonus(new Point(0, 1), Bonus.Type.Cherry);
+            var cherry = new Bonus(gameField, Point.Create(0, 1), Bonus.Type.Cherry);
             player.GoDown(2);
-            field.ChangeSubjectLocation(Player.UseEvent(player, cherry));
-            WinCheck(player, field);
+            gameField.ChangeSubjectLocation(Player.UseEvent(player, cherry));
+            WinCheck(player, gameField);
         }
 
         private static void WinCheck(Player player, Field field)
