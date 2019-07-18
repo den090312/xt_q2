@@ -17,11 +17,13 @@ namespace _2._8.GAME
 
         public Bonus() { }
 
-        public Bonus(Field userField, Point location, Type userType)
+        public Bonus(Field field, Point location, Type userType)
         {
+            FieldNullCheck(field);
+
             Location = location;
             BonusType = userType;
-            userField.AddSubject(this);
+            field.AddSubject(this);
         }
     }
 }

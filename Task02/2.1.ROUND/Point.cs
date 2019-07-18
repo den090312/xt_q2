@@ -2,9 +2,9 @@
 {
     public class Point
     {
-        public int X { get; private set; }
+        public int X { get; private set; } = 0;
 
-        public int Y { get; private set; }
+        public int Y { get; private set; } = 0;
 
         public Point(int X, int Y)
         {
@@ -13,6 +13,7 @@
         }
 
         public static Point Create(int X, int Y) => new Point(X, Y);
+
         public void MoveTo(Point location)
         {
             X = location.X;

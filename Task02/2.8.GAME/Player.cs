@@ -20,10 +20,12 @@ namespace _2._8.GAME
 
         public Dictionary<Direction, bool> Stops { get; private set; } = GetStopsDictionary();
 
-        public Player(Field userField, Point location)
+        public Player(Field field, Point location)
         {
+            FieldNullCheck(field);
+
             Location = location;
-            userField.AddSubject(this);
+            field.AddSubject(this);
         }
 
         private static Dictionary<Direction, bool> GetStopsDictionary()

@@ -14,11 +14,13 @@ namespace _2._8.GAME
 
         public Type MonsterType { get; private set; }
 
-        public Monster(Field userField, Point location, Type userType)
+        public Monster(Field field, Point location, Type userType)
         {
+            FieldNullCheck(field);
+
             Location = location;
             MonsterType = userType;
-            userField.AddSubject(this);
+            field.AddSubject(this);
         }
 
         public void Move()

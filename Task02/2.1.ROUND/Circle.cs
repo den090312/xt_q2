@@ -4,10 +4,10 @@ namespace _2._1.ROUND
 {
     public class Circle
     {
-        private Point centerCoordinates = new Point(0, 1);
+        private Point centerCoordinates = new Point(0, 0);
         private double radius = 0;
 
-        public Point EdgeCoordinates { get; private set; } = new Point(0, 0);
+        public Point EdgeCoordinates { get; private set; } = new Point(0, 1);
 
         //конструктор через точки
         public Circle(Point userCenterCoordinates, Point userEdgeCoordinates)

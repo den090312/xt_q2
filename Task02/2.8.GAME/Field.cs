@@ -30,14 +30,26 @@ namespace _2._8.GAME
 
         public void AddSubject(Subject subject)
         {
+            SubjectNullCheck(subject);
+
             Subjects.Add(subject);
         }
 
         public void RemoveSubject(Subject subject)
         {
+            SubjectNullCheck(subject);
+
             Subjects.Remove(subject);
         }
 
         public bool NoBonuses() => Subjects.Exists(element => element.GetType() == typeof(Bonus));
+
+        private static void SubjectNullCheck(Subject subject)
+        {
+            if (subject is null)
+            {
+                throw new ArgumentNullException($"{nameof(subject)} is null!");
+            }
+        }
     }
 }
