@@ -11,6 +11,9 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
 
         public Line(Point userPoint1, Point userPoint2)
         {
+            NullCheck(userPoint1);
+            NullCheck(userPoint2);
+
             PointsCheck(userPoint1, userPoint2);
 
             Point1 = userPoint1;
@@ -19,9 +22,20 @@ namespace _2._7.VECTOR_GRAPHICS_EDITOR
 
         private static void PointsCheck(Point userPoint1, Point userPoint2)
         {
+            NullCheck(userPoint1);
+            NullCheck(userPoint2);
+
             if (userPoint1 == userPoint2)
             {
                 throw new ArgumentException("Линия не может состоять из двух одинаковых точек!");
+            }
+        }
+
+        private static void NullCheck(Point point)
+        {
+            if (point is null)
+            {
+                throw new ArgumentNullException($"{nameof(point)} is null!");
             }
         }
     }
