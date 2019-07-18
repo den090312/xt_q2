@@ -6,11 +6,11 @@ namespace _2._6.RING
     public class Ring
     {
         //для создания кольца через внешний-внутренний радиусы
-        private double outerRadius = 0;
-        private double innerRadius = 0;
+        private double outerRadius;
+        private double innerRadius;
 
         //для создания кольца через точки
-        private double radius = 0;
+        private double radius;
 
         public readonly Point edge = new Point(6, 6);
 
@@ -35,6 +35,8 @@ namespace _2._6.RING
         //конструктор через кольцо и край внешней окружности
         public Ring(Circle userCircle, Point userEdge)
         {
+            CircleNullCheck(userCircle);
+
             var userOuterRingRadius = GetRingRadius(userCircle, userEdge);
             RingRadiusCheck(userCircle.Radius, userOuterRingRadius);
 
@@ -46,6 +48,7 @@ namespace _2._6.RING
         //конструктор через кольцо и внешний радиус
         public Ring(Circle userCircle, double userOuterRingRadius)
         {
+            CircleNullCheck(userCircle);
             RingRadiusCheck(userCircle.Radius, userOuterRingRadius);
 
             innerRadius = userCircle.Radius;
@@ -53,10 +56,10 @@ namespace _2._6.RING
             Circle = userCircle;
         }
 
-        private double GetRingRadius(Circle Circle, Point Edge) => Math.Sqrt
+        private double GetRingRadius(Circle circle, Point edge) => Math.Sqrt
         (
-            Math.Pow(Edge.X - Circle.CenterCoordinates.X, 2) +
-            Math.Pow(Edge.Y - Circle.CenterCoordinates.Y, 2)
+            Math.Pow(edge.X - circle.CenterCoordinates.X, 2) +
+            Math.Pow(edge.Y - circle.CenterCoordinates.Y, 2)
         );
 
         private void RingRadiusCheck(double userCircleInnerRadius, double userOuterRingRadius)
@@ -74,6 +77,14 @@ namespace _2._6.RING
             if (userOuterRingRadius < userCircleInnerRadius)
             {
                 throw new Exception("Внешний радиус должен быть больше внутреннего!");
+            }
+        }
+
+        private static void CircleNullCheck(Circle circle)
+        {
+            if (circle is null)
+            {
+                throw new ArgumentNullException($"{nameof(circle)} is null!");
             }
         }
     }
