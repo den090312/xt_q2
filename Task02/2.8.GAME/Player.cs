@@ -46,7 +46,7 @@ namespace _2._8.GAME
             throw new NotImplementedException();
         }
 
-        public Direction GetLocation() => direction;
+        public Direction GetDirection() => direction;
 
         public void GoLeft(int countSteps)
         {
@@ -150,7 +150,7 @@ namespace _2._8.GAME
 
         public void SetStop()
         {
-            var direction = GetLocation();
+            var direction = GetDirection();
 
             switch (direction)
             {
