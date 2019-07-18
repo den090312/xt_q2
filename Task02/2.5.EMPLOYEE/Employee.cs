@@ -5,14 +5,16 @@ namespace _2._5.EMPLOYEE
 {
     public class Employee
     {
-        private string position;
+        private string position = String.Empty;
         private int workExperience;
 
         public User User { get; }
 
         public Employee(User employeeUser)
         {
+            UserNullCheck(employeeUser);
             AgeCheck(employeeUser);
+
             User = employeeUser;
         }
 
@@ -45,6 +47,8 @@ namespace _2._5.EMPLOYEE
 
         private void WorkExperienceCheck(int employeeWorkExperience, User employeeUser)
         {
+            UserNullCheck(employeeUser);
+
             if (employeeWorkExperience >= employeeUser.Age)
             {
                 throw new ArgumentException("Опыт работы не может быть больше или равен возрасту!");
@@ -53,9 +57,19 @@ namespace _2._5.EMPLOYEE
 
         private void AgeCheck(User employeeUser)
         {
+            UserNullCheck(employeeUser);
+
             if (employeeUser.Age < 18)
             {
                 throw new ArgumentException("Официальное трудоустройство возможно только с 18 лет!");
+            }
+        }
+
+        private static void UserNullCheck(User user)
+        {
+            if (user is null)
+            {
+                throw new ArgumentNullException($"{nameof(user)} is null!");
             }
         }
     }

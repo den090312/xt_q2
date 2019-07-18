@@ -4,7 +4,7 @@ namespace _2._4.MY_STRING
 {
     public class MyString
     {
-        private char[] CharArray { get; set; }
+        private char[] CharArray { get; set; } = new char[0];
 
         public int Length => CharArray.Length;
 
@@ -28,7 +28,12 @@ namespace _2._4.MY_STRING
 
         public char[] ToCharArray() => CharArray;
 
-        public MyString Create(char[] charArray) => new MyString(charArray);
+        public MyString Create(char[] userCharArray)
+        {
+            NullCheck(userCharArray);
+
+            return new MyString(userCharArray);
+        }
 
         public bool TryFind(char userChar, out int index)
         {

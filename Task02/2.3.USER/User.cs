@@ -5,9 +5,9 @@ namespace _2._3.USER
 {
     public class User
     {
-        private string lastName;
-        private string firstName;
-        private string secondName;
+        private string lastName = String.Empty;
+        private string firstName = String.Empty;
+        private string secondName = String.Empty;
         private readonly DateTime currentDateTime = DateTime.Now.Date;
 
         public readonly string Format = "dd.MM.yyyy";
@@ -58,6 +58,7 @@ namespace _2._3.USER
         public void SetBirthDate(string userDate)
         {
             NullCheck(userDate);
+
             bool isDate = DateTime.TryParseExact(userDate, Format, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime userBirthDate);
 
             if (!isDate)
@@ -100,9 +101,6 @@ namespace _2._3.USER
 
         private static void CheckName(string userName, string nameType)
         {
-            NullCheck(userName);
-            NullCheck(nameType);
-
             var userCharArray = userName.ToCharArray();
 
             if (char.IsLower(userCharArray[0]))
