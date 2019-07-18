@@ -12,11 +12,13 @@ namespace _2._8.GAME
 
         public Type ObstructionType { get; private set; }
 
-        public Obstruction(Field userField, Point location, Type userType)
+        public Obstruction(Field field, Point location, Type userType)
         {
+            FieldNullCheck(field);
+
             Location = location;
             ObstructionType = userType;
-            userField.AddSubject(this);
+            field.AddSubject(this);
         }
     }
 }
