@@ -98,6 +98,9 @@ namespace _2._8.GAME
 
         public void TryGetBonus(Field field, Bonus bonus)
         {
+            FieldNullCheck(field);
+            BonusNullCheck(bonus);
+
             if (IsOverlayed(this, bonus))
             {
                 switch (bonus.BonusType)
@@ -121,6 +124,8 @@ namespace _2._8.GAME
 
         public void TryObstructionEvent(Obstruction obstruction)
         {
+            ObstructionNullCheck(obstruction);
+
             if (IsOverlayed(this, obstruction))
             {
                 SetStop();
@@ -129,6 +134,8 @@ namespace _2._8.GAME
 
         public void TryMonsterEvent(Monster monster)
         {
+            MonsterNullCheck(monster);
+
             if (IsOverlayed(this, monster))
             {
                 switch (monster.MonsterType)
