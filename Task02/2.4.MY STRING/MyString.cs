@@ -28,6 +28,8 @@ namespace _2._4.MY_STRING
 
         public char[] ToCharArray() => CharArray;
 
+        public MyString Create(char[] charArray) => new MyString(charArray);
+
         public bool TryFind(char userChar, out int index)
         {
             index = 0;
