@@ -13,6 +13,11 @@
         }
 
         public static Point Create(int X, int Y) => new Point(X, Y);
+        public void MoveTo(Point location)
+        {
+            X = location.X;
+            Y = location.Y;
+        }
 
         public static Point operator +(Point point1, Point point2) => new Point(point1.X + point1.X, point2.Y + point2.Y);
 

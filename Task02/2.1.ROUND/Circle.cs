@@ -69,11 +69,6 @@ namespace _2._1.ROUND
             }
         }
 
-        public void MoveTo(Point newCenterCoordinates)
-        {
-            EdgeCoordinates += newCenterCoordinates - centerCoordinates;
-        }
-
         public static bool operator ==(Circle circle1, Circle circle2)
         {
 

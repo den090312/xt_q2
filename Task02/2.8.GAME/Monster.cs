@@ -14,9 +14,9 @@ namespace _2._8.GAME
 
         public Type MonsterType { get; private set; }
 
-        public Monster(Field userField, Point userCenter, Type userType)
+        public Monster(Field userField, Point location, Type userType)
         {
-            Shape = new Circle(userCenter, radius);
+            Location = location;
             MonsterType = userType;
             userField.AddSubject(this);
         }

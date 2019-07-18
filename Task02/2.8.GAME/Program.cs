@@ -12,22 +12,22 @@ namespace _2._8.GAME
 
             var apple = new Bonus(field, Point.Create(3, 0), Bonus.Type.Apple);
             player.GoRight(3);
-            player.LaunchEvent(apple);
+            player.TryGetBonus(field, apple);
             WinCheck(player, field);
 
             var bear = new Monster(field, Point.Create(2, 0), Monster.Type.Bear);
             player.GoLeft(1);
-            player.LaunchEvent(bear);
+            player.TryMonsterEvent(bear);
             WinCheck(player, field);
 
             var stone = new Obstruction(field, Point.Create(2, 1), Obstruction.Type.Stone);
             player.GoUp(1);
-            player.LaunchEvent(stone);
+            player.TryObstructionEvent(stone);
             WinCheck(player, field);
 
             var cherry = new Bonus(field, Point.Create(0, 1), Bonus.Type.Cherry);
             player.GoDown(2);
-            player.LaunchEvent(cherry);
+            player.TryGetBonus(field, cherry);
             WinCheck(player, field);
         }
 
@@ -36,6 +36,11 @@ namespace _2._8.GAME
             if (player.Health > 0 & field.NoBonuses())
             {
                 Console.WriteLine("WIN");
+            }
+
+            if (player.Health > 0 & !field.NoBonuses())
+            {
+                Console.WriteLine("GAME COUNTINEWS");
             }
 
             if (player.Health == 0)

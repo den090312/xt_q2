@@ -20,9 +20,9 @@ namespace _2._8.GAME
 
         public Dictionary<Direction, bool> Stops { get; private set; } = GetStopsDictionary();
 
-        public Player(Field userField, Point userCenter)
+        public Player(Field userField, Point location)
         {
-            Shape = new Circle(userCenter, radius);
+            Location = location;
             userField.AddSubject(this);
         }
 
@@ -52,7 +52,7 @@ namespace _2._8.GAME
 
             if (Stops[direction] == false)
             {
-                Shape.MoveTo(new Point(Shape.CenterCoordinates.X - countSteps, Shape.CenterCoordinates.Y));
+                Location.MoveTo(new Point(Location.X - countSteps, Location.Y));
             }
         }
 
@@ -62,7 +62,7 @@ namespace _2._8.GAME
 
             if (Stops[direction] == false)
             {
-                Shape.MoveTo(new Point(Shape.CenterCoordinates.X + countSteps, Shape.CenterCoordinates.Y));
+                Location.MoveTo(new Point(Location.X + countSteps, Location.Y));
             }
         }
 
@@ -72,7 +72,7 @@ namespace _2._8.GAME
 
             if (Stops[direction] == false)
             {
-                Shape.MoveTo(new Point(Shape.CenterCoordinates.X, Shape.CenterCoordinates.Y + countSteps));
+                Location.MoveTo(new Point(Location.X, Location.Y + countSteps));
             }
         }
 
@@ -82,7 +82,7 @@ namespace _2._8.GAME
 
             if (Stops[direction] == false)
             {
-                Shape.MoveTo(new Point(Shape.CenterCoordinates.X, Shape.CenterCoordinates.Y - countSteps));
+                Location.MoveTo(new Point(Location.X, Location.Y - countSteps));
             }
         }
 
@@ -94,7 +94,7 @@ namespace _2._8.GAME
             }
         }
 
-        public void LaunchEvent(Bonus bonus)
+        public void TryGetBonus(Field field, Bonus bonus)
         {
             if (IsOverlayed(this, bonus))
             {
@@ -112,10 +112,12 @@ namespace _2._8.GAME
                         ChangeHealth(1);
                         break;
                 }
+
+                field.RemoveSubject(bonus);
             }
         }
 
-        public void LaunchEvent(Obstruction obstruction)
+        public void TryObstructionEvent(Obstruction obstruction)
         {
             if (IsOverlayed(this, obstruction))
             {
@@ -123,7 +125,7 @@ namespace _2._8.GAME
             }
         }
 
-        public void LaunchEvent(Monster monster)
+        public void TryMonsterEvent(Monster monster)
         {
             if (IsOverlayed(this, monster))
             {

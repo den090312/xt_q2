@@ -33,14 +33,11 @@ namespace _2._8.GAME
             Subjects.Add(subject);
         }
 
-        public void ChangeSubjectLocation(Subject sub)
+        public void RemoveSubject(Subject subject)
         {
-            throw new NotImplementedException();
+            Subjects.Remove(subject);
         }
 
-        internal bool NoBonuses()
-        {
-            throw new NotImplementedException();
-        }
+        public bool NoBonuses() => !Subjects.Exists(element => element.GetType() == typeof(Bonus));
     }
 }

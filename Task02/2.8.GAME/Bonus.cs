@@ -15,9 +15,11 @@ namespace _2._8.GAME
             Limon = 2
         }
 
-        public Bonus(Field userField, Point userCenter, Type userType)
+        public Bonus() { }
+
+        public Bonus(Field userField, Point location, Type userType)
         {
-            Shape = new Circle(userCenter, radius);
+            Location = location;
             BonusType = userType;
             userField.AddSubject(this);
         }

@@ -12,9 +12,9 @@ namespace _2._8.GAME
 
         public Type ObstructionType { get; private set; }
 
-        public Obstruction(Field userField, Point userCenter, Type userType)
+        public Obstruction(Field userField, Point location, Type userType)
         {
-            Shape = new Circle(userCenter, radius);
+            Location = location;
             ObstructionType = userType;
             userField.AddSubject(this);
         }
