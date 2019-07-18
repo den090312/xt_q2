@@ -20,7 +20,7 @@ namespace _2._8.GAME
             player.LaunchEvent(bear);
             WinCheck(player, field);
 
-            var stone = new Obstruction(Point.Create(2, 1), Obstruction.Type.Stone);
+            var stone = new Obstruction(field, Point.Create(2, 1), Obstruction.Type.Stone);
             player.GoUp(1);
             player.LaunchEvent(stone);
             WinCheck(player, field);

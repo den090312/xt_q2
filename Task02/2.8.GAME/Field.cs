@@ -28,7 +28,10 @@ namespace _2._8.GAME
             Height = height;
         }
 
-        public Subject AddSubject(Subject subject) => subject;
+        public void AddSubject(Subject subject)
+        {
+            Subjects.Add(subject);
+        }
 
         public void ChangeSubjectLocation(Subject sub)
         {
