@@ -7,28 +7,28 @@ namespace _2._8.GAME
     {
         private static void Main(string[] args)
         {
-            var gameField = new Field(100, 100);
-            var player = new Player(gameField, Point.Create(0, 0));
+            var field = new Field(100, 100);
+            var player = new Player(field, Point.Create(0, 0));
 
-            var apple = new Bonus(gameField, Point.Create(3, 0), Bonus.Type.Apple);
+            var apple = new Bonus(field, Point.Create(3, 0), Bonus.Type.Apple);
             player.GoRight(3);
-            gameField.ChangeSubjectLocation(Player.UseEvent(player, apple));
-            WinCheck(player, gameField);
+            player.LaunchEvent(apple);
+            WinCheck(player, field);
 
-            var bear = new Monster(gameField, Point.Create(2, 0), Monster.Type.Bear);
+            var bear = new Monster(field, Point.Create(2, 0), Monster.Type.Bear);
             player.GoLeft(1);
-            gameField.ChangeSubjectLocation(Player.UseEvent(player, bear));
-            WinCheck(player, gameField);
+            player.LaunchEvent(bear);
+            WinCheck(player, field);
 
             var stone = new Obstruction(Point.Create(2, 1), Obstruction.Type.Stone);
             player.GoUp(1);
-            gameField.ChangeSubjectLocation(Player.UseEvent(player, stone));
-            WinCheck(player, gameField);
+            player.LaunchEvent(stone);
+            WinCheck(player, field);
 
-            var cherry = new Bonus(gameField, Point.Create(0, 1), Bonus.Type.Cherry);
+            var cherry = new Bonus(field, Point.Create(0, 1), Bonus.Type.Cherry);
             player.GoDown(2);
-            gameField.ChangeSubjectLocation(Player.UseEvent(player, cherry));
-            WinCheck(player, gameField);
+            player.LaunchEvent(cherry);
+            WinCheck(player, field);
         }
 
         private static void WinCheck(Player player, Field field)

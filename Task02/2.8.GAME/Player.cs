@@ -86,7 +86,7 @@ namespace _2._8.GAME
             }
         }
 
-        public void SetHealth(int amountHealth)
+        public void ChangeHealth(int amountHealth)
         {
             if (Health != 10)
             {
@@ -94,86 +94,79 @@ namespace _2._8.GAME
             }
         }
 
-        public static Player UseEvent(Player player, Bonus bonus)
+        public void LaunchEvent(Bonus bonus)
         {
-            if (IsOverlayed(player, bonus))
+            if (IsOverlayed(this, bonus))
             {
                 switch (bonus.BonusType)
                 {
                     case Bonus.Type.Apple:
-                        player.SetHealth(3);
+                        ChangeHealth(3);
                         break;
 
                     case Bonus.Type.Limon:
-                        player.SetHealth(2);
+                        ChangeHealth(2);
                         break;
 
                     case Bonus.Type.Cherry:
-                        player.SetHealth(1);
+                        ChangeHealth(1);
                         break;
                 }
             }
-
-            return player;
         }
 
-        public static Player UseEvent(Player player, Obstruction obstruction)
+        public void LaunchEvent(Obstruction obstruction)
         {
-            if (IsOverlayed(player, obstruction))
+            if (IsOverlayed(this, obstruction))
             {
-                player = SetStop(player);
+                SetStop();
             }
-
-            return player;
         }
 
-        public static Player UseEvent(Player player, Monster monster)
+        public void LaunchEvent(Monster monster)
         {
-            if (IsOverlayed(player, monster))
+            if (IsOverlayed(this, monster))
             {
                 switch (monster.MonsterType)
                 {
                     case Monster.Type.Bear:
-                        player.SetHealth(-3);
+                        ChangeHealth(-3);
                         break;
 
                     case Monster.Type.Wolf:
-                        player.SetHealth(-2);
+                        ChangeHealth(-2);
                         break;
 
                     case Monster.Type.Snake:
-                        player.SetHealth(-1);
+                        ChangeHealth(-1);
                         break;
                 }
             }
-
-            return player;
         }
 
-        public static Player SetStop(Player player)
+        public void SetStop()
         {
-            var direction = player.GetLocation();
+            var direction = GetLocation();
 
             switch (direction)
             {
                 case Direction.Up:
-                    player.Stops[Direction.Up] = true;
+                    Stops[Direction.Up] = true;
                     break;
 
                 case Direction.Down:
-                    player.Stops[Direction.Down] = true;
+                    Stops[Direction.Down] = true;
                     break;
 
                 case Direction.Left:
-                    player.Stops[Direction.Left] = true;
+                    Stops[Direction.Left] = true;
                     break;
 
                 case Direction.Right:
-                    player.Stops[Direction.Right] = true;
+                    Stops[Direction.Right] = true;
                     break;
             }
 
-            return player;
         }
     }
 }
