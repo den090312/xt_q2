@@ -27,6 +27,7 @@ namespace _2._1.ROUND
 
             centerCoordinates = userCenterCoordinates;
             radius = userRadius;
+            EdgeCoordinates = null;
         }
 
         public Point CenterCoordinates

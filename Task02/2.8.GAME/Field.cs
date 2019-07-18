@@ -38,6 +38,6 @@ namespace _2._8.GAME
             Subjects.Remove(subject);
         }
 
-        public bool NoBonuses() => !Subjects.Exists(element => element.GetType() == typeof(Bonus));
+        public bool NoBonuses() => Subjects.Exists(element => element.GetType() == typeof(Bonus));
     }
 }
