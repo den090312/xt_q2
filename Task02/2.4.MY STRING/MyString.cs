@@ -52,9 +52,9 @@ namespace _2._4.MY_STRING
         {
             char buffer;
 
-            for (int i = 0; i < CharArray.Length - 1; i++)
+            for (int i = 0; i < Length - 1; i++)
             {
-                for (int j = i + 1; j < CharArray.Length; j++)
+                for (int j = i + 1; j < Length; j++)
                 {
                     if (CharArray[j] < CharArray[i])
                     {
@@ -70,8 +70,8 @@ namespace _2._4.MY_STRING
 
         public MyString Reverse()
         {
-            var lastIndex = CharArray.Length - 1;
-            var swapStep = CharArray.Length % 2 == 0 ? lastIndex / 2 : (lastIndex + 1) / 2;
+            var lastIndex = Length - 1;
+            var swapStep = Length % 2 == 0 ? lastIndex / 2 : (lastIndex + 1) / 2;
             char buffer;
 
             for (int i = 0; i <= swapStep; i++)
@@ -90,12 +90,12 @@ namespace _2._4.MY_STRING
 
         public static bool operator ==(MyString myString1, MyString myString2)
         {
-            if (myString1.CharArray.Length != myString2.CharArray.Length)
+            if (myString1.Length != myString2.Length)
             {
                 return false;
             }
 
-            for (int i = 0; i <= myString1.CharArray.Length - 1; i++)
+            for (int i = 0; i <= myString1.Length - 1; i++)
             {
                 if (myString1.CharArray[i] != myString1.CharArray[i])
                 {
@@ -108,12 +108,12 @@ namespace _2._4.MY_STRING
 
         public static bool operator !=(MyString myString1, MyString myString2)
         {
-            if (myString1.CharArray.Length != myString2.CharArray.Length)
+            if (myString1.Length != myString2.Length)
             {
                 return true;
             }
 
-            for (int i = 0; i <= myString1.CharArray.Length - 1; i++)
+            for (int i = 0; i <= myString1.Length - 1; i++)
             {
                 if (myString1.CharArray[i] != myString1.CharArray[i])
                 {
@@ -124,8 +124,8 @@ namespace _2._4.MY_STRING
             return false;
         }
 
-        public static bool operator >(MyString myString1, MyString myString2) => myString1.CharArray.Length > myString2.CharArray.Length;
-        public static bool operator <(MyString myString1, MyString myString2) => myString1.CharArray.Length < myString2.CharArray.Length;
+        public static bool operator >(MyString myString1, MyString myString2) => myString1.Length > myString2.Length;
+        public static bool operator <(MyString myString1, MyString myString2) => myString1.Length < myString2.Length;
         public static MyString operator +(MyString myString1, MyString myString2)
         {
             var charArray1 = myString1.CharArray;
