@@ -93,7 +93,7 @@ namespace _2._1.ROUND
                 && radius == circle.radius;
         }
 
-        public override int GetHashCode() => centerCoordinates.GetHashCode() ^ EdgeCoordinates.GetHashCode() ^ radius.GetHashCode();
+        public override int GetHashCode() => centerCoordinates.GetHashCode() ^ EdgeCoordinates.GetHashCode() ^ radius.GetHashCode() ^ base.GetHashCode();
 
         private void PointNullCheck(Point point)
         {
