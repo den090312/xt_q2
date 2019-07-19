@@ -18,6 +18,14 @@ namespace _2._8.GAME
             }
         }
 
+        protected void LocationNullCheck(Point location)
+        {
+            if (location is null)
+            {
+                throw new ArgumentNullException($"{nameof(location)} is null!");
+            }
+        }
+
         protected void FieldNullCheck(Field field)
         {
             if (field is null)

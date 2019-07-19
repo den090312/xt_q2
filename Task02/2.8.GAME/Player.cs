@@ -23,6 +23,7 @@ namespace _2._8.GAME
         public Player(Field field, Point location)
         {
             FieldNullCheck(field);
+            LocationNullCheck(location);
             LocationFieldCheck(field, location);
 
             Location = location;
