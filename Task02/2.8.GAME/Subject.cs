@@ -10,6 +10,14 @@ namespace _2._8.GAME
 
         protected static bool IsOverlayed(Subject sub1, Subject sub2) => sub1.Location == sub2.Location;
 
+        protected static void LocationFieldCheck(Field field, Point location)
+        {
+            if (location.X > field.Width || location.Y > field.Height)
+            {
+                throw new ArgumentNullException($"{nameof(location)} не может находится за пределами поля!");
+            }
+        }
+
         protected void FieldNullCheck(Field field)
         {
             if (field is null)

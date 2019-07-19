@@ -17,6 +17,7 @@ namespace _2._8.GAME
         public Monster(Field field, Point location, Type userType)
         {
             FieldNullCheck(field);
+            LocationFieldCheck(field, location);
 
             Location = location;
             MonsterType = userType;

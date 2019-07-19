@@ -20,6 +20,7 @@ namespace _2._8.GAME
         public Bonus(Field field, Point location, Type userType)
         {
             FieldNullCheck(field);
+            LocationFieldCheck(field, location);
 
             Location = location;
             BonusType = userType;
