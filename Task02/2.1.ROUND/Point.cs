@@ -1,4 +1,6 @@
-﻿namespace _2._1.ROUND
+﻿using System;
+
+namespace _2._1.ROUND
 {
     public class Point
     {
@@ -16,6 +18,8 @@
 
         public void MoveTo(Point location)
         {
+            LocationNullCheck(location);
+
             X = location.X;
             Y = location.Y;
         }
@@ -35,5 +39,13 @@
         public override bool Equals(object obj) => obj is Point point && X == point.X && Y == point.Y;
 
         public override int GetHashCode() => X.GetHashCode() + Y.GetHashCode();
+
+        private void LocationNullCheck(Point location)
+        {
+            if (location is null)
+            {
+                throw new ArgumentNullException($"{nameof(location)} is null!");
+            }
+        }
     }
 }
