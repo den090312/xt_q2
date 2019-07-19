@@ -12,3 +12,10 @@ C:\Users\Bolotin\Source\Repos\xt_q2\Task02\2.3.USER\obj\Debug\2.3.USER.csprojAss
 C:\Users\Bolotin\Source\Repos\xt_q2\Task02\2.3.USER\obj\Debug\2.3.USER.csproj.CoreCompileInputs.cache
 C:\Users\Bolotin\Source\Repos\xt_q2\Task02\2.3.USER\obj\Debug\2.3.USER.exe
 C:\Users\Bolotin\Source\Repos\xt_q2\Task02\2.3.USER\obj\Debug\2.3.USER.pdb
+C:\Users\Bolotin\Source\Repos\NewRepos\Task02\2.3.USER\bin\Debug\2.3.USER.exe.config
+C:\Users\Bolotin\Source\Repos\NewRepos\Task02\2.3.USER\bin\Debug\2.3.USER.exe
+C:\Users\Bolotin\Source\Repos\NewRepos\Task02\2.3.USER\bin\Debug\2.3.USER.pdb
+C:\Users\Bolotin\Source\Repos\NewRepos\Task02\2.3.USER\obj\Debug\2.3.USER.csprojAssemblyReference.cache
+C:\Users\Bolotin\Source\Repos\NewRepos\Task02\2.3.USER\obj\Debug\2.3.USER.csproj.CoreCompileInputs.cache
+C:\Users\Bolotin\Source\Repos\NewRepos\Task02\2.3.USER\obj\Debug\2.3.USER.exe
+C:\Users\Bolotin\Source\Repos\NewRepos\Task02\2.3.USER\obj\Debug\2.3.USER.pdb

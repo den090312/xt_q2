@@ -97,6 +97,9 @@ namespace _2._4.MY_STRING
 
         public static bool operator ==(MyString myString1, MyString myString2)
         {
+            NullCheck(myString1);
+            NullCheck(myString2);
+
             if (myString1.Length != myString2.Length)
             {
                 return false;
@@ -115,6 +118,9 @@ namespace _2._4.MY_STRING
 
         public static bool operator !=(MyString myString1, MyString myString2)
         {
+            NullCheck(myString1);
+            NullCheck(myString2);
+
             if (myString1.Length != myString2.Length)
             {
                 return true;
@@ -131,10 +137,27 @@ namespace _2._4.MY_STRING
             return false;
         }
 
-        public static bool operator >(MyString myString1, MyString myString2) => myString1.Length > myString2.Length;
-        public static bool operator <(MyString myString1, MyString myString2) => myString1.Length < myString2.Length;
+        public static bool operator >(MyString myString1, MyString myString2)
+        {
+            NullCheck(myString1);
+            NullCheck(myString2);
+
+            return myString1.Length > myString2.Length;
+        }
+
+        public static bool operator <(MyString myString1, MyString myString2)
+        {
+            NullCheck(myString1);
+            NullCheck(myString2);
+
+            return myString1.Length < myString2.Length;
+        }
+
         public static MyString operator +(MyString myString1, MyString myString2)
         {
+            NullCheck(myString1);
+            NullCheck(myString2);
+
             var charArray1 = myString1.CharArray;
             var charArray2 = myString2.CharArray;
 
@@ -172,6 +195,14 @@ namespace _2._4.MY_STRING
             if (userCharArray is null)
             {
                 throw new ArgumentNullException($"{nameof(userCharArray)} is null!");
+            }
+        }
+
+        private static void NullCheck(MyString myStringy)
+        {
+            if (myStringy is null)
+            {
+                throw new ArgumentNullException($"{nameof(myStringy)} is null!");
             }
         }
     }
