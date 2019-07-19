@@ -74,7 +74,7 @@ namespace _2._1.ROUND
 
         public override bool Equals(object obj) => obj is Point point && X == point.X && Y == point.Y;
 
-        public override int GetHashCode() => X.GetHashCode() + Y.GetHashCode();
+        public override int GetHashCode() => X.GetHashCode() ^ Y.GetHashCode();
 
         private static void NullCheck(Point point)
         {
