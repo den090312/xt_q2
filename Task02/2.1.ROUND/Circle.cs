@@ -12,6 +12,9 @@ namespace _2._1.ROUND
         //конструктор через точки
         public Circle(Point userCenterCoordinates, Point userEdgeCoordinates)
         {
+            PointNullCheck(userCenterCoordinates);
+            PointNullCheck(userEdgeCoordinates);
+
             CheckCoordinates(userCenterCoordinates, userEdgeCoordinates);
             CenterCoordinates = userCenterCoordinates;
             EdgeCoordinates = userEdgeCoordinates;
@@ -20,6 +23,8 @@ namespace _2._1.ROUND
         //конструктор с указанием радиуса
         public Circle(Point userCenterCoordinates, double userRadius)
         {
+            PointNullCheck(userCenterCoordinates);
+
             if (userRadius <= 0)
             {
                 throw new Exception("Радиус должен быть больше нуля!");
@@ -89,5 +94,13 @@ namespace _2._1.ROUND
         }
 
         public override int GetHashCode() => centerCoordinates.GetHashCode() + EdgeCoordinates.GetHashCode() + radius.GetHashCode();
+
+        private void PointNullCheck(Point point)
+        {
+            if (point is null)
+            {
+                throw new ArgumentNullException($"{nameof(point)} is null!");
+            }
+        }
     }
 }

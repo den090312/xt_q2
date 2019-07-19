@@ -36,6 +36,7 @@ namespace _2._6.RING
         public Ring(Circle userCircle, Point userEdge)
         {
             CircleNullCheck(userCircle);
+            PointNullCheck(userEdge);
 
             var userOuterRingRadius = GetRingRadius(userCircle, userEdge);
             RingRadiusCheck(userCircle.Radius, userOuterRingRadius);
@@ -85,6 +86,14 @@ namespace _2._6.RING
             if (circle is null)
             {
                 throw new ArgumentNullException($"{nameof(circle)} is null!");
+            }
+        }
+
+        private static void PointNullCheck(Point point)
+        {
+            if (point is null)
+            {
+                throw new ArgumentNullException($"{nameof(point)} is null!");
             }
         }
     }

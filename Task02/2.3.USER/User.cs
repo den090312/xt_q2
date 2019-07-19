@@ -101,6 +101,9 @@ namespace _2._3.USER
 
         private static void CheckName(string userName, string nameType)
         {
+            NullCheck(userName);
+            NullCheck(nameType);
+
             var userCharArray = userName.ToCharArray();
 
             if (char.IsLower(userCharArray[0]))
