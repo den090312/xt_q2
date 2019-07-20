@@ -73,7 +73,7 @@ namespace _32_WORD_FREQUENCY
 
         private static string GetNoPunctuationWord(string word)
         {
-            StringBuilder mySB = new StringBuilder();
+            var mySB = new StringBuilder();
             var myCharArray = word.ToCharArray();
 
             for (int i = 0; i <= myCharArray.Length - 1; i++)
@@ -89,8 +89,9 @@ namespace _32_WORD_FREQUENCY
 
         private static string GetEnglishTextFromConsole()
         {
+            var userKeySB = new StringBuilder();
+
             bool inputComplete = false;
-            StringBuilder userKeySB = new StringBuilder();
 
             while (!inputComplete)
             {
