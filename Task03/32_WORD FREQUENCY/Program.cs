@@ -9,7 +9,7 @@ namespace _32_WORD_FREQUENCY
         private static void Main(string[] args)
         {
             Console.WriteLine("Введите английский текст");
-            var wordsArray = GetEnglishTextFromConsole().Split(new char[] { ' ', '.' }, StringSplitOptions.RemoveEmptyEntries);
+            var wordsArray = GetEnglishTextFromConsole().Split(new char[] { ' ', '.' , '\r' }, StringSplitOptions.RemoveEmptyEntries);
 
             var wordsList = new List<string>();
 
@@ -33,6 +33,7 @@ namespace _32_WORD_FREQUENCY
                 }
             }
 
+            Console.WriteLine();
             Console.WriteLine();
 
             foreach (KeyValuePair<string, int> kvp in wordDict)
