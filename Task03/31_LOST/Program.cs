@@ -4,41 +4,14 @@ using System.Collections.Generic;
 
 namespace _31_LOST
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Queue<int> numbers = new Queue<int>();
-
-            var n = GetPositiveIntFromConsole();
-
-            for (int i = 1; i <= n; i++)
-            {
-                numbers.Enqueue(i);
-            }
-
-            n = 1;
-
-            do
-            {
-                if (n == 2)
-                {
-                    numbers.Dequeue();
-                    n = 1;
-                }
-                else
-                {
-                    numbers.Enqueue(numbers.Peek());
-                    numbers.Dequeue();
-                    n = 2;
-                }
-            }
-            while (numbers.Count > 1);
-
-            Console.WriteLine($"LOST: {numbers.Peek()}");
+            Console.WriteLine($"LOST: {GetLost(GetQueue(GetPositiveIntFromConsole()))}");
         }
 
-        static int GetPositiveIntFromConsole()
+        private static int GetPositiveIntFromConsole()
         {
             Console.WriteLine("Количество людей в кругу");
 
@@ -58,6 +31,41 @@ namespace _31_LOST
             while (isInt == false);
 
             return manQuantity;
+        }
+
+        private static Queue<int> GetQueue(int n)
+        {
+            Queue<int> myQueue = new Queue<int>();
+
+            for (int i = 1; i <= n; i++)
+            {
+                myQueue.Enqueue(i);
+            }
+
+            return myQueue;
+        }
+
+        private static int GetLost(Queue<int> numbers)
+        {
+            int step = 1;
+
+            do
+            {
+                if (step == 2)
+                {
+                    numbers.Dequeue();
+                    step = 1;
+                }
+                else
+                {
+                    numbers.Enqueue(numbers.Peek());
+                    numbers.Dequeue();
+                    step = 2;
+                }
+            }
+            while (numbers.Count > 1);
+
+            return numbers.Peek();
         }
     }
 }
