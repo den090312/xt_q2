@@ -35,7 +35,7 @@ namespace _31_LOST
 
         private static Queue<int> GetQueue(int humanQuantity)
         {
-            Queue<int> humanQueue = new Queue<int>();
+            Queue<int> humanQueue = new Queue<int>(humanQuantity);
 
             for (int i = 1; i <= humanQuantity; i++)
             {
