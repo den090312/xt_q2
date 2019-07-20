@@ -8,36 +8,36 @@ namespace _31_LOST
     {
         private static void Main(string[] args)
         {
-            Console.WriteLine($"LOST: {GetLost(GetQueue(GetPositiveIntFromConsole()))}");
+            Console.WriteLine($"LOST: {GetLost(GetQueue(GetHumanQuantity()))}");
         }
 
-        private static int GetPositiveIntFromConsole()
+        private static int GetHumanQuantity()
         {
             Console.WriteLine("Количество людей в кругу");
 
-            int manQuantity;
+            int humanQuantity;
 
             bool isInt;
             do
             {
                 Console.WriteLine($"Введите положительное целое число меньше или равно {int.MaxValue}");
-                isInt = int.TryParse(Console.ReadLine(), out manQuantity);
+                isInt = int.TryParse(Console.ReadLine(), out humanQuantity);
 
                 if (isInt)
                 {
-                    isInt = manQuantity > 0;
+                    isInt = humanQuantity > 0;
                 }
             }
             while (isInt == false);
 
-            return manQuantity;
+            return humanQuantity;
         }
 
-        private static Queue<int> GetQueue(int n)
+        private static Queue<int> GetQueue(int humanQuantity)
         {
             Queue<int> myQueue = new Queue<int>();
 
-            for (int i = 1; i <= n; i++)
+            for (int i = 1; i <= humanQuantity; i++)
             {
                 myQueue.Enqueue(i);
             }
@@ -45,7 +45,7 @@ namespace _31_LOST
             return myQueue;
         }
 
-        private static int GetLost(Queue<int> numbers)
+        private static int GetLost(Queue<int> humanQueue)
         {
             int step = 1;
 
@@ -53,19 +53,19 @@ namespace _31_LOST
             {
                 if (step == 2)
                 {
-                    numbers.Dequeue();
+                    humanQueue.Dequeue();
                     step = 1;
                 }
                 else
                 {
-                    numbers.Enqueue(numbers.Peek());
-                    numbers.Dequeue();
+                    humanQueue.Enqueue(humanQueue.Peek());
+                    humanQueue.Dequeue();
                     step = 2;
                 }
             }
-            while (numbers.Count > 1);
+            while (humanQueue.Count > 1);
 
-            return numbers.Peek();
+            return humanQueue.Peek();
         }
     }
 }
