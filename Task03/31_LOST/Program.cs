@@ -47,20 +47,21 @@ namespace _31_LOST
 
         private static int GetLost(Queue<int> humanQueue)
         {
-            int step = 1;
+            bool removeNext = false;
 
             do
             {
-                if (step == 2)
+                switch (removeNext)
                 {
-                    humanQueue.Dequeue();
-                    step = 1;
-                }
-                else
-                {
-                    humanQueue.Enqueue(humanQueue.Peek());
-                    humanQueue.Dequeue();
-                    step = 2;
+                    case false:
+                        humanQueue.Enqueue(humanQueue.Peek());
+                        humanQueue.Dequeue();
+                        removeNext = true;
+                        break;
+                    default:
+                        humanQueue.Dequeue();
+                        removeNext = false;
+                        break;
                 }
             }
             while (humanQueue.Count > 1);
