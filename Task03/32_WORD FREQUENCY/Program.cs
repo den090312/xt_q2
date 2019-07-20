@@ -10,7 +10,37 @@ namespace _32_WORD_FREQUENCY
         {
             Console.WriteLine("Введите английский текст");
             var wordsArray = GetEnglishTextFromConsole().Split(new char[] { ' ', '.' , '\r' }, StringSplitOptions.RemoveEmptyEntries);
+            WriteDictionary(GetWordsFrequencyDictionary(GetWordsList(wordsArray)));
+        }
 
+        private static void WriteDictionary(Dictionary<string, int> wordsDict)
+        {
+            Console.WriteLine();
+            Console.WriteLine();
+
+            foreach (KeyValuePair<string, int> kvp in wordsDict)
+            {
+                Console.WriteLine($"Слово \"{kvp.Key}\" встречается {kvp.Value} раз(а)");
+            }
+        }
+
+        private static Dictionary<string, int> GetWordsFrequencyDictionary(List<string> wordsList)
+        {
+            var wordsDict = new Dictionary<string, int>();
+
+            foreach (string word in wordsList)
+            {
+                if (!wordsDict.ContainsKey(word))
+                {
+                    wordsDict.Add(word, GetFrequency(word, wordsList));
+                }
+            }
+
+            return wordsDict;
+        }
+
+        private static List<string> GetWordsList(string[] wordsArray)
+        {
             var wordsList = new List<string>();
 
             for (int i = 0; i < wordsArray.Length; i++)
@@ -23,23 +53,7 @@ namespace _32_WORD_FREQUENCY
                 }
             }
 
-            var wordDict = new Dictionary<string, int>();
-
-            foreach (string word in wordsList)
-            {
-                if (!wordDict.ContainsKey(word))
-                {
-                    wordDict.Add(word, GetFrequency(word, wordsList));
-                }
-            }
-
-            Console.WriteLine();
-            Console.WriteLine();
-
-            foreach (KeyValuePair<string, int> kvp in wordDict)
-            {
-                Console.WriteLine($"Слово \"{kvp.Key}\" встречается {kvp.Value} раз(а)");
-            }
+            return wordsList;
         }
 
         private static int GetFrequency(string word, List<string> wordsList)
@@ -105,7 +119,7 @@ namespace _32_WORD_FREQUENCY
             return userKeySB.Length > 0 ? userKeySB.ToString() : string.Empty;
         }
 
-        static void EmulateConsoleKeyBackSpace(StringBuilder sb)
+        private static void EmulateConsoleKeyBackSpace(StringBuilder sb)
         {
             if (sb.Length > 0)
             {
