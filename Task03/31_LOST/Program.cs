@@ -17,48 +17,25 @@ namespace _31_LOST
                 numbers.Enqueue(i);
             }
 
-            //пока работает только для четного числа
             n = 1;
 
-            if (numbers.Count % 2 == 0)
+            do
             {
-                do
+                if (n == 2)
                 {
-                    if (n == 2)
-                    {
-                        numbers.Dequeue();
-                        n = 1;
-                    }
-                    else
-                    {
-                        numbers.Enqueue(numbers.Peek());
-                        numbers.Dequeue();
-                        n = 2;
-                    }
+                    numbers.Dequeue();
+                    n = 1;
                 }
-                while (numbers.Count > 1);
-            }
-            else
-            {
-                do
+                else
                 {
-                    if (n == 2)
-                    {
-                        numbers.Dequeue();
-                        n = 1;
-                    }
-                    else
-                    {
-                        numbers.Enqueue(numbers.Peek());
-                        numbers.Dequeue();
-                        n = 2;
-                    }
+                    numbers.Enqueue(numbers.Peek());
+                    numbers.Dequeue();
+                    n = 2;
                 }
-                while (numbers.Count > 1);
             }
+            while (numbers.Count > 1);
 
-            Console.WriteLine(numbers.Peek());
-
+            Console.WriteLine($"LOST: {numbers.Peek()}");
         }
 
         static int GetPositiveIntFromConsole()
