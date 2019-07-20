@@ -10,7 +10,7 @@ namespace _32_WORD_FREQUENCY
         {
             Console.WriteLine("Введите английский текст");
             var wordsArray = GetEnglishTextFromConsole().Split(new char[] { ' ', '.' , '\r' }, StringSplitOptions.RemoveEmptyEntries);
-            WriteDictionary(GetWordsFrequencyDictionary(GetWordsList(wordsArray)));
+            WriteDictionary(GetWordsFrequencyDictionary(GetNoPuctuationWordsList(wordsArray)));
         }
 
         private static void WriteDictionary(Dictionary<string, int> wordsDict)
@@ -39,7 +39,7 @@ namespace _32_WORD_FREQUENCY
             return wordsDict;
         }
 
-        private static List<string> GetWordsList(string[] wordsArray)
+        private static List<string> GetNoPuctuationWordsList(string[] wordsArray)
         {
             var wordsList = new List<string>();
 
