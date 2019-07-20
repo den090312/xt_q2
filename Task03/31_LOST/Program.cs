@@ -35,14 +35,14 @@ namespace _31_LOST
 
         private static Queue<int> GetQueue(int humanQuantity)
         {
-            Queue<int> myQueue = new Queue<int>();
+            Queue<int> humanQueue = new Queue<int>();
 
             for (int i = 1; i <= humanQuantity; i++)
             {
-                myQueue.Enqueue(i);
+                humanQueue.Enqueue(i);
             }
 
-            return myQueue;
+            return humanQueue;
         }
 
         private static int GetLost(Queue<int> humanQueue)
