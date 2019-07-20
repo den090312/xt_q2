@@ -1,1 +1,2 @@
-Circle null check =(
+Circle null check
+модификаторы доступа
