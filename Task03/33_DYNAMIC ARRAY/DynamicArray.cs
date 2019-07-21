@@ -61,8 +61,14 @@ namespace _33_DYNAMIC_ARRAY
 
             if (Length == Capacity)
             {
-                Capacity *= 2;
-                SetNewCapacity(Capacity * 2);
+                if (Capacity > 0)
+                {
+                    SetNewCapacity(Capacity * 2);
+                }
+                else
+                {
+                    SetNewCapacity(1);
+                }
             }
 
             dynamicArray[nextIndex] = element;
