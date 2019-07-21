@@ -4,16 +4,16 @@ using System.Collections.Generic;
 
 namespace _33_DYNAMIC_ARRAY
 {
-    class DynamicArray<T>
+    class CreateArrayFromCapacity<T>
     {
         private T[] dynamicArray;
 
-        public DynamicArray()
+        public CreateArrayFromCapacity()
         {
             dynamicArray = new T[0];
         }
 
-        public DynamicArray(int userCapacity)
+        public CreateArrayFromCapacity(int userCapacity)
         {
             if (userCapacity > 0)
             {
@@ -25,18 +25,11 @@ namespace _33_DYNAMIC_ARRAY
             }
         }
 
-        public DynamicArray(IEnumerable<T> userIEnum)
+        public CreateArrayFromCapacity(IEnumerable<T> userIEnum)
         {
             NullCheck(userIEnum);
 
-            int capacity = 0;
-
-            foreach (T element in userIEnum)
-            {
-                capacity++;
-            }
-
-            dynamicArray = new T[capacity];
+            dynamicArray = new T[GetDynamicArrayCapacity(userIEnum)];
 
             int i = 0;
 
@@ -44,6 +37,18 @@ namespace _33_DYNAMIC_ARRAY
             {
                 dynamicArray[i] = element;
             }
+        }
+
+        private int GetDynamicArrayCapacity(IEnumerable<T> userIEnum)
+        {
+            int capacity = 0;
+
+            foreach (T element in userIEnum)
+            {
+                capacity++;
+            }
+
+            return capacity;
         }
 
         private static void NullCheck(IEnumerable<T> iEnumerable)
