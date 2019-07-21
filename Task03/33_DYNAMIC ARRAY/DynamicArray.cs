@@ -6,9 +6,11 @@ namespace _33_DYNAMIC_ARRAY
 {
     class DynamicArray<T>
     {
-        private T[] dynamicArray;
+        private T[] dynamicArray = new T[0];
 
         public int Capacity { get; private set; } = 0;
+
+        public int Length => dynamicArray.Length;
 
         public DynamicArray()
         {
@@ -33,15 +35,9 @@ namespace _33_DYNAMIC_ARRAY
         {
             NullCheck(userIEnum);
 
-            Capacity = GetDynamicArrayCapacity(userIEnum);
+            Capacity = GetIEnumerableLength(userIEnum);
             dynamicArray = new T[Capacity];
-
-            int i = 0;
-
-            foreach (T element in userIEnum)
-            {
-                dynamicArray[i] = element;
-            }
+            FillDynamicArrayFromIEnumerable(userIEnum, 0);
         }
 
         public T this[int i]
@@ -52,16 +48,12 @@ namespace _33_DYNAMIC_ARRAY
 
         public void Add(T element)
         {
-            var nextIndex = dynamicArray.Length + 1;
+            var nextIndex = Length + 1;
 
-            if (dynamicArray.Length == Capacity)
+            if (Length == Capacity)
             {
                 Capacity *= 2;
-
-                var newArray = new T[Capacity];
-
-                dynamicArray.CopyTo(newArray, 0);
-                dynamicArray = newArray;
+                ExpandDynamicArray();
             }
 
             dynamicArray[nextIndex] = element;
@@ -69,10 +61,48 @@ namespace _33_DYNAMIC_ARRAY
 
         public void AddRange(IEnumerable<T> userIEnum)
         {
-
+            var nextIndex = Length + 1;
+            CapacityAdjusment(GetIEnumerableLength(userIEnum));
+            ExpandDynamicArray();
+            FillDynamicArrayFromIEnumerable(userIEnum, nextIndex);
         }
 
-        private static int GetDynamicArrayCapacity(IEnumerable<T> userIEnum)
+        private void CapacityAdjusment(int userIEnumLength)
+        {
+            if (Length == Capacity)
+            {
+                Capacity += userIEnumLength;
+            }
+
+            if (Length < Capacity)
+            {
+                var freeCellsQuantity = Capacity - Length;
+
+                if (freeCellsQuantity < userIEnumLength)
+                {
+                    Capacity += userIEnumLength - freeCellsQuantity;
+                }
+            }
+        }
+
+        private void ExpandDynamicArray()
+        {
+            var newArray = new T[Capacity];
+
+            dynamicArray.CopyTo(newArray, 0);
+            dynamicArray = newArray;
+        }
+
+        private void FillDynamicArrayFromIEnumerable(IEnumerable<T> userIEnum, int startIndex)
+        {
+            foreach (T element in userIEnum)
+            {
+                dynamicArray[startIndex] = element;
+                startIndex++;
+            }
+        }
+
+        private static int GetIEnumerableLength(IEnumerable<T> userIEnum)
         {
             int capacity = 0;
 
