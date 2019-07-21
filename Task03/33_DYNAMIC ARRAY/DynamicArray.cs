@@ -61,10 +61,19 @@ namespace _33_DYNAMIC_ARRAY
 
         public void AddRange(IEnumerable<T> userIEnum)
         {
-            var nextIndex = Length + 1;
+            var startIndex = Length + 1;
             CapacityAdjusment(GetIEnumerableLength(userIEnum));
             ExpandDynamicArray();
-            FillDynamicArrayFromIEnumerable(userIEnum, nextIndex);
+            FillDynamicArrayFromIEnumerable(userIEnum, startIndex);
+        }
+
+        public static bool Remove(T element)
+        {
+            bool removeSuccess = false;
+
+            //var elementIndex = dynamicArray.
+
+            return removeSuccess;
         }
 
         private void CapacityAdjusment(int userIEnumLength)
