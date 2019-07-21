@@ -25,18 +25,14 @@ namespace _33_DYNAMIC_ARRAY
             }
         }
 
-        public DynamicArray(IEnumerable<T> iEnumerable)
+        public DynamicArray(IEnumerable<T> userIEnum)
         {
-            NullCheck(iEnumerable);
+            NullCheck(userIEnum);
 
-            int capacity = 0;
-
-            foreach (T element in iEnumerable)
+            foreach (T element in userIEnum)
             {
-                capacity++;
+                dynamicArray.Add(element);
             }
-
-            dynamicArray = new List<T>(capacity);
         }
 
         private static void NullCheck(IEnumerable<T> iEnumerable)
