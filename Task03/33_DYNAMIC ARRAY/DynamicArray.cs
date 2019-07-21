@@ -6,18 +6,18 @@ namespace _33_DYNAMIC_ARRAY
 {
     class DynamicArray<T>
     {
-        private List<T> dynamicArray = new List<T>(0);
+        private T[] dynamicArray;
 
         public DynamicArray()
         {
-            dynamicArray = new List<T>(0);
+            dynamicArray = new T[0];
         }
 
         public DynamicArray(int userCapacity)
         {
             if (userCapacity > 0)
             {
-                dynamicArray = new List<T>(userCapacity);
+                dynamicArray = new T[userCapacity];
             }
             else
             {
@@ -29,9 +29,20 @@ namespace _33_DYNAMIC_ARRAY
         {
             NullCheck(userIEnum);
 
+            int capacity = 0;
+
             foreach (T element in userIEnum)
             {
-                dynamicArray.Add(element);
+                capacity++;
+            }
+
+            dynamicArray = new T[capacity];
+
+            int i = 0;
+
+            foreach (T element in userIEnum)
+            {
+                dynamicArray[i] = element;
             }
         }
 
