@@ -8,9 +8,12 @@ namespace _33_DYNAMIC_ARRAY
     {
         private T[] dynamicArray;
 
+        public int Capacity { get; private set; } = 0;
+
         public DynamicArray()
         {
             dynamicArray = new T[0];
+            Capacity = 8;
         }
 
         public DynamicArray(int userCapacity)
@@ -18,6 +21,7 @@ namespace _33_DYNAMIC_ARRAY
             if (userCapacity > 0)
             {
                 dynamicArray = new T[userCapacity];
+                Capacity = userCapacity;
             }
             else
             {
@@ -29,7 +33,8 @@ namespace _33_DYNAMIC_ARRAY
         {
             NullCheck(userIEnum);
 
-            dynamicArray = new T[GetDynamicArrayCapacity(userIEnum)];
+            Capacity = GetDynamicArrayCapacity(userIEnum);
+            dynamicArray = new T[Capacity];
 
             int i = 0;
 
@@ -37,6 +42,23 @@ namespace _33_DYNAMIC_ARRAY
             {
                 dynamicArray[i] = element;
             }
+        }
+
+        public void Add(T element)
+        {
+            var nextIndex = dynamicArray.Length + 1;
+
+            if (dynamicArray.Length == Capacity)
+            {
+                Capacity *= 2;
+
+                var newArray = new T[Capacity];
+
+                dynamicArray.CopyTo(newArray, 0);
+                dynamicArray = newArray;
+            }
+
+            dynamicArray[nextIndex] = element;
         }
 
         private int GetDynamicArrayCapacity(IEnumerable<T> userIEnum)
@@ -51,11 +73,11 @@ namespace _33_DYNAMIC_ARRAY
             return capacity;
         }
 
-        private static void NullCheck(IEnumerable<T> iEnumerable)
+        private static void NullCheck(IEnumerable<T> userIEnum)
         {
-            if (iEnumerable is null)
+            if (userIEnum is null)
             {
-                throw new ArgumentException($"{nameof(iEnumerable)} is null!");
+                throw new ArgumentException($"{nameof(userIEnum)} is null!");
             }
         }
     }
