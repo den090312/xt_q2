@@ -111,6 +111,25 @@ namespace _33_DYNAMIC_ARRAY
                 SetNewCapacity(Capacity + 1);
             }
 
+            var tempArray = dynamicArray;
+            dynamicArray = new T[0];
+
+            int j = 0;
+
+            for (int i = 0; i < Length; i++)
+            {
+                if (i == index)
+                {
+                    dynamicArray[i] = element;
+                    j--;
+                }
+                else
+                {
+                    dynamicArray[i] = tempArray[j];
+                    j++;
+                }
+            }
+
             return inserted;
         }
 
