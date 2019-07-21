@@ -64,7 +64,7 @@ namespace _33_DYNAMIC_ARRAY
 
         public void Add(T element)
         {
-            var nextIndex = Length + 1;
+            var nextIndex = Length;
 
             if (Length == Capacity)
             {
