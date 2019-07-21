@@ -40,13 +40,6 @@ namespace _33_DYNAMIC_ARRAY
             FillDynamicArrayFromIEnumerable(userIEnum, 0);
         }
 
-        public DynamicArray(T[] userArray)
-        {
-            NullCheck(userArray);
-            dynamicArray = userArray;
-            Capacity = userArray.Length;
-        }
-
         public T this[int i]
         {
             get
