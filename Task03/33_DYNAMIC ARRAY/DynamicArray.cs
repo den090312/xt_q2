@@ -40,6 +40,13 @@ namespace _33_DYNAMIC_ARRAY
             FillDynamicArrayFromIEnumerable(userIEnum, 0);
         }
 
+        public DynamicArray(T[] userArray)
+        {
+            NullCheck(userArray);
+            dynamicArray = userArray;
+            Capacity = userArray.Length;
+        }
+
         public T this[int i]
         {
             get
@@ -86,9 +93,10 @@ namespace _33_DYNAMIC_ARRAY
             else
             {
                 var tempArray = dynamicArray;
-                dynamicArray = new T[0];
+                var newLength = tempArray.Length;
+                dynamicArray = new T[newLength];
 
-                for (int i = 0; i < Length; i++)
+                for (int i = 0; i < newLength; i++)
                 {
                     if (i != index)
                     {
@@ -112,11 +120,11 @@ namespace _33_DYNAMIC_ARRAY
             }
 
             var tempArray = dynamicArray;
-            dynamicArray = new T[0];
+            dynamicArray = new T[Capacity];
 
             int j = 0;
 
-            for (int i = 0; i < Length; i++)
+            for (int i = 0; i < Capacity; i++)
             {
                 if (i == index)
                 {
@@ -126,8 +134,9 @@ namespace _33_DYNAMIC_ARRAY
                 else
                 {
                     dynamicArray[i] = tempArray[j];
-                    j++;
                 }
+
+                j++;
             }
 
             return inserted;
@@ -213,6 +222,14 @@ namespace _33_DYNAMIC_ARRAY
             }
         }
 
+        private static void NullCheck(T[] userArray)
+        {
+            if (userArray is null)
+            {
+                throw new ArgumentException($"{nameof(userArray)} is null!");
+            }
+        }
+
         private static void TypeCheck(T element)
         {
             if (element.GetType() != typeof(T))
@@ -228,7 +245,7 @@ namespace _33_DYNAMIC_ARRAY
                 throw new ArgumentException($"{nameof(index)} < 0: индекс не может быть отрицательным!");
             }
 
-            if (index > Length)
+            if (index > Length - 1)
             {
                 throw new ArgumentOutOfRangeException($"{nameof(index)}: индекс находится за границами массива!");
             }

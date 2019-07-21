@@ -7,11 +7,13 @@ namespace _33_DYNAMIC_ARRAY
     {
         static void Main(string[] args)
         {
-            //var dymanicArray = new DynamicArray<Array>(-1);
+            var MyDA = new DynamicArray<string>(new string[6] { "7", "3", "5", "10", "13", "123" });
+            MyDA.Insert("751", 3);
 
-            var list = new List<int>();
-
-            list.Add("123");
+            for (int i = 0; i < MyDA.Length; i++)
+            {
+                Console.WriteLine(MyDA[i]);
+            }
         }
     }
 }
