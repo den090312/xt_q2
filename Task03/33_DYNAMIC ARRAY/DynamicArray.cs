@@ -14,7 +14,7 @@ namespace _33_DYNAMIC_ARRAY
 
         public DynamicArray()
         {
-            dynamicArray = new T[0];
+            dynamicArray = new T[8];
             Capacity = 8;
         }
 
