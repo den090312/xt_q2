@@ -76,6 +76,8 @@ namespace _33_DYNAMIC_ARRAY
 
         public void AddRange(IEnumerable<T> userIEnum)
         {
+            NullCheck(userIEnum);
+
             var startIndex = Length;
             SetNewCapacity(CapacityAdjusment(GetIEnumerableLength(userIEnum)));
             FillDynamicArrayFromIEnumerable(userIEnum, startIndex);
