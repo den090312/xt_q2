@@ -61,7 +61,7 @@ namespace _33_DYNAMIC_ARRAY
             dynamicArray[nextIndex] = element;
         }
 
-        private int GetDynamicArrayCapacity(IEnumerable<T> userIEnum)
+        private static int GetDynamicArrayCapacity(IEnumerable<T> userIEnum)
         {
             int capacity = 0;
 
