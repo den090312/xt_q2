@@ -42,8 +42,17 @@ namespace _33_DYNAMIC_ARRAY
 
         public T this[int i]
         {
-            get => dynamicArray[i];
-            set => dynamicArray[i] = value;
+            get
+            {
+                IndexCheck(i);
+                return dynamicArray[i];
+            }
+
+            set
+            {
+                IndexCheck(i);
+                dynamicArray[i] = value;
+            }
         }
 
         public void Add(T element)
@@ -97,7 +106,10 @@ namespace _33_DYNAMIC_ARRAY
 
             bool inserted = false;
 
-
+            if (Length == Capacity)
+            {
+                SetNewCapacity(Capacity + 1);
+            }
 
             return inserted;
         }
@@ -187,6 +199,19 @@ namespace _33_DYNAMIC_ARRAY
             if (element.GetType() != typeof(T))
             {
                 throw new ArgumentException($"{nameof(element)} содержит неверный тип данных!");
+            }
+        }
+
+        private void IndexCheck(int index)
+        {
+            if (index < 0)
+            {
+                throw new ArgumentException($"{nameof(index)} < 0: индекс не может быть отрицательным!");
+            }
+
+            if (index > Length)
+            {
+                throw new ArgumentOutOfRangeException($"{nameof(index)}: индекс находится за границами массива!");
             }
         }
     }
