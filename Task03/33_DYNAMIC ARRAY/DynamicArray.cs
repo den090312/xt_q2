@@ -203,14 +203,14 @@ namespace _33_DYNAMIC_ARRAY
 
         private static int GetIEnumerableLength(IEnumerable<T> userIEnum)
         {
-            int capacity = 0;
+            int iEnumerableLength = 0;
 
             foreach (T element in userIEnum)
             {
-                capacity++;
+                iEnumerableLength++;
             }
 
-            return capacity;
+            return iEnumerableLength;
         }
 
         private static void NullCheck(IEnumerable<T> userIEnum)
