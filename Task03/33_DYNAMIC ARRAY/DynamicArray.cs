@@ -259,14 +259,8 @@ namespace _33_DYNAMIC_ARRAY
             }
         }
 
-        public IEnumerator GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerator GetEnumerator() => dynamicArray.GetEnumerator();
 
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+        IEnumerator<T> IEnumerable<T>.GetEnumerator() => ((IEnumerable<T>)dynamicArray).GetEnumerator();
     }
 }
