@@ -1,28 +1,50 @@
 ﻿
 using System;
+using System.Collections.Generic;
 
 namespace _33_DYNAMIC_ARRAY
 {
     class DynamicArray<T>
     {
-        private char[] charArray = new char[0]; 
+        private List<T> dynamicArray = new List<T>(0);
 
         public DynamicArray()
         {
-            charArray = new char[8];
+            dynamicArray = new List<T>(0);
         }
 
         public DynamicArray(int userCapacity)
         {
             if (userCapacity > 0)
             {
-                charArray = new char[userCapacity];
+                dynamicArray = new List<T>(userCapacity);
             }
             else
             {
                 throw new ArgumentException($"{nameof(userCapacity)} < 0. Емкость массива не может быть отрицательной!");
             }
+        }
 
+        public DynamicArray(IEnumerable<T> iEnumerable)
+        {
+            NullCheck(iEnumerable);
+
+            int capacity = 0;
+
+            foreach (T element in iEnumerable)
+            {
+                capacity++;
+            }
+
+            dynamicArray = new List<T>(capacity);
+        }
+
+        private static void NullCheck(IEnumerable<T> iEnumerable)
+        {
+            if (iEnumerable is null)
+            {
+                throw new ArgumentException($"{nameof(iEnumerable)} is null!");
+            }
         }
     }
 }
