@@ -44,6 +44,12 @@ namespace _33_DYNAMIC_ARRAY
             }
         }
 
+        public T this[int i]
+        {
+            get => dynamicArray[i];
+            set => dynamicArray[i] = value;
+        }
+
         public void Add(T element)
         {
             var nextIndex = dynamicArray.Length + 1;
@@ -59,6 +65,11 @@ namespace _33_DYNAMIC_ARRAY
             }
 
             dynamicArray[nextIndex] = element;
+        }
+
+        public void AddRange(IEnumerable<T> userIEnum)
+        {
+
         }
 
         private static int GetDynamicArrayCapacity(IEnumerable<T> userIEnum)
