@@ -96,12 +96,20 @@ namespace _33_DYNAMIC_ARRAY
                 var newLength = tempArray.Length;
                 dynamicArray = new T[newLength];
 
+                int j = 0;
+
                 for (int i = 0; i < newLength; i++)
                 {
                     if (i != index)
                     {
-                        dynamicArray[i] = tempArray[i];
+                        dynamicArray[j] = tempArray[i];
                     }
+                    else
+                    {
+                        j--;
+                    }
+
+                    j++;
                 }
 
                 return true;
