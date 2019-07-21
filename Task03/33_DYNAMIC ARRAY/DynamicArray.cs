@@ -53,7 +53,7 @@ namespace _33_DYNAMIC_ARRAY
             if (Length == Capacity)
             {
                 Capacity *= 2;
-                ExpandDynamicArray();
+                SetNewCapacity(Capacity * 2);
             }
 
             dynamicArray[nextIndex] = element;
@@ -62,25 +62,73 @@ namespace _33_DYNAMIC_ARRAY
         public void AddRange(IEnumerable<T> userIEnum)
         {
             var startIndex = Length + 1;
-            CapacityAdjusment(GetIEnumerableLength(userIEnum));
-            ExpandDynamicArray();
+            SetNewCapacity(CapacityAdjusment(GetIEnumerableLength(userIEnum)));
             FillDynamicArrayFromIEnumerable(userIEnum, startIndex);
         }
 
-        public static bool Remove(T element)
+        public bool Remove(T element)
         {
-            bool removeSuccess = false;
+            TypeCheck(element);
 
-            //var elementIndex = dynamicArray.
+            if (!TryFind(element, out int index))
+            {
+                return false;
+            }
+            else
+            {
+                var tempArray = dynamicArray;
+                dynamicArray = new T[0];
 
-            return removeSuccess;
+                for (int i = 0; i < Length; i++)
+                {
+                    if (i != index)
+                    {
+                        dynamicArray[i] = tempArray[i];
+                    }
+                }
+
+                return true;
+            }
         }
 
-        private void CapacityAdjusment(int userIEnumLength)
+        public bool Insert(T element, int index)
         {
+            TypeCheck(element);
+
+            bool inserted = false;
+
+
+
+            return inserted;
+        }
+
+        private bool TryFind(T searchableElement, out int index)
+        {
+            index = 0;
+            bool found = false;
+
+            foreach (T element in dynamicArray)
+            {
+                if (element.Equals(searchableElement))
+                {
+                    return true;
+                }
+                else
+                {
+                    index++;
+                }
+            }
+
+            return found;
+        }
+
+        private int CapacityAdjusment(int userIEnumLength)
+        {
+            int newCapacity = 0;
+
             if (Length == Capacity)
             {
-                Capacity += userIEnumLength;
+                newCapacity += userIEnumLength;
             }
 
             if (Length < Capacity)
@@ -89,17 +137,20 @@ namespace _33_DYNAMIC_ARRAY
 
                 if (freeCellsQuantity < userIEnumLength)
                 {
-                    Capacity += userIEnumLength - freeCellsQuantity;
+                    newCapacity += userIEnumLength - freeCellsQuantity;
                 }
             }
+
+            return newCapacity;
         }
 
-        private void ExpandDynamicArray()
+        private void SetNewCapacity(int newCapacity)
         {
-            var newArray = new T[Capacity];
+            var newArray = new T[newCapacity];
 
             dynamicArray.CopyTo(newArray, 0);
             dynamicArray = newArray;
+            Capacity = newCapacity;
         }
 
         private void FillDynamicArrayFromIEnumerable(IEnumerable<T> userIEnum, int startIndex)
@@ -128,6 +179,14 @@ namespace _33_DYNAMIC_ARRAY
             if (userIEnum is null)
             {
                 throw new ArgumentException($"{nameof(userIEnum)} is null!");
+            }
+        }
+
+        private static void TypeCheck(T element)
+        {
+            if (element.GetType() != typeof(T))
+            {
+                throw new ArgumentException($"{nameof(element)} содержит неверный тип данных!");
             }
         }
     }
