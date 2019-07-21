@@ -15,9 +15,14 @@ namespace _33_DYNAMIC_ARRAY
             //var myList = new List<string>(new string[6] { "0", "2", "3", "1", "5", "4" });
             //MyDA.AddRange(myList);
 
-            for (int i = 0; i < MyDA.Length; i++)
+            //for (int i = 0; i < MyDA.Length; i++)
+            //{
+            //    Console.WriteLine(MyDA[i]);
+            //}
+
+            foreach (string element in MyDA)
             {
-                Console.WriteLine(MyDA[i]);
+                Console.WriteLine(element);
             }
         }
     }
