@@ -1,10 +1,10 @@
-﻿
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace _33_DYNAMIC_ARRAY
 {
-    class DynamicArray<T>
+    public class DynamicArray<T> : IEnumerable, IEnumerable<T>
     {
         private T[] dynamicArray = new T[0];
 
@@ -257,6 +257,16 @@ namespace _33_DYNAMIC_ARRAY
             {
                 throw new ArgumentOutOfRangeException($"{nameof(index)}: индекс находится за границами массива!");
             }
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 }
