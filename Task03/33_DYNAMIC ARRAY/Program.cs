@@ -6,7 +6,7 @@ namespace _33_DYNAMIC_ARRAY
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Do something");
+            //var dymanicArray = new DynamicArray<Array>(-1);
         }
     }
 }
