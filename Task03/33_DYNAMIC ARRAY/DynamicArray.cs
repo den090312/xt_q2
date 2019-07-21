@@ -77,8 +77,6 @@ namespace _33_DYNAMIC_ARRAY
 
         public bool Remove(T element)
         {
-            TypeCheck(element);
-
             if (!TryFind(element, out int index))
             {
                 return false;
@@ -111,7 +109,7 @@ namespace _33_DYNAMIC_ARRAY
 
         public bool Insert(T element, int index)
         {
-            TypeCheck(element);
+            IndexCheck(index);
 
             bool inserted = false;
 
@@ -220,22 +218,6 @@ namespace _33_DYNAMIC_ARRAY
             if (userIEnum is null)
             {
                 throw new ArgumentException($"{nameof(userIEnum)} is null!");
-            }
-        }
-
-        private static void NullCheck(T[] userArray)
-        {
-            if (userArray is null)
-            {
-                throw new ArgumentException($"{nameof(userArray)} is null!");
-            }
-        }
-
-        private static void TypeCheck(T element)
-        {
-            if (element.GetType() != typeof(T))
-            {
-                throw new ArgumentException($"{nameof(element)} содержит неверный тип данных!");
             }
         }
 
