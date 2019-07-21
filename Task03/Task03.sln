@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "31_LOST", "31_LOST\31_LOST.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "32_WORD FREQUENCY", "32_WORD FREQUENCY\32_WORD FREQUENCY.csproj", "{ED96ADA2-59EE-45C9-BA8F-DED2A5F79505}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "33_DYNAMIC ARRAY", "33_DYNAMIC ARRAY\33_DYNAMIC ARRAY.csproj", "{56E771F5-4749-4616-9264-6F79A4B8A8D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{ED96ADA2-59EE-45C9-BA8F-DED2A5F79505}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED96ADA2-59EE-45C9-BA8F-DED2A5F79505}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED96ADA2-59EE-45C9-BA8F-DED2A5F79505}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56E771F5-4749-4616-9264-6F79A4B8A8D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56E771F5-4749-4616-9264-6F79A4B8A8D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56E771F5-4749-4616-9264-6F79A4B8A8D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56E771F5-4749-4616-9264-6F79A4B8A8D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
