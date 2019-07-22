@@ -259,5 +259,7 @@ namespace _33_DYNAMIC_ARRAY
         public IEnumerator GetEnumerator() => dynamicArray.GetEnumerator();
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator() => ((IEnumerable<T>)dynamicArray).GetEnumerator();
+
+        public object Clone() => new DynamicArray<T> { dynamicArray = dynamicArray, capacity = capacity };
     }
 }
