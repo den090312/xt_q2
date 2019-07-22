@@ -1,2 +1,1 @@
-Circle null check
-модификаторы доступа
+Оптимизировать Remove() и Insert()
