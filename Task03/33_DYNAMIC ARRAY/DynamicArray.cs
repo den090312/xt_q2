@@ -7,18 +7,38 @@ namespace _33_DYNAMIC_ARRAY
     public class DynamicArray<T> : IEnumerable, IEnumerable<T>
     {
         private T[] dynamicArray = new T[0];
+        private int capacity = 0;
 
-        public int Capacity { get; private set; } = 0;
+        public int Capacity
+        {
+            get => capacity;
+            set
+            {
+                if (value < capacity)
+                {
+                    var tempArray = dynamicArray;
+
+                    dynamicArray = new T[value];
+
+                    for (int i = 0; i < value; i++)
+                    {
+                        dynamicArray[i] = tempArray[i];
+                    }
+                }
+
+                capacity = value;
+            }
+        }
 
         public int Length => dynamicArray.Length;
 
-        public DynamicArray() => Capacity = 8;
+        public DynamicArray() => capacity = 8;
 
         public DynamicArray(int userCapacity)
         {
             if (userCapacity > 0)
             {
-                Capacity = userCapacity;
+                capacity = userCapacity;
             }
             else
             {
@@ -29,8 +49,8 @@ namespace _33_DYNAMIC_ARRAY
         public DynamicArray(IEnumerable<T> userIEnum)
         {
             NullCheck(userIEnum);
-            Capacity = GetIEnumerableLength(userIEnum);
-            dynamicArray = new T[Capacity];
+            capacity = GetIEnumerableLength(userIEnum);
+            dynamicArray = new T[capacity];
             FillDynamicArrayFromIEnumerable(userIEnum);
         }
 
@@ -39,23 +59,24 @@ namespace _33_DYNAMIC_ARRAY
             get
             {
                 IndexCheck(i);
-                return dynamicArray[i];
+
+                return dynamicArray[TryParseNegativeIndex(i)];
             }
 
             set
             {
                 IndexCheck(i);
-                dynamicArray[i] = value;
+                dynamicArray[TryParseNegativeIndex(i)] = value;
             }
         }
 
         public void Add(T element)
         {
-            if (Length == Capacity)
+            if (Length == capacity)
             {
-                if (Capacity > 0)
+                if (capacity > 0)
                 {
-                    SetNewCapacity(Capacity * 2);
+                    SetNewCapacity(capacity * 2);
                 }
                 else
                 {
@@ -109,19 +130,21 @@ namespace _33_DYNAMIC_ARRAY
         {
             IndexCheck(index);
 
+            index = TryParseNegativeIndex(index);
+
             bool inserted = false;
 
-            if (Length == Capacity)
+            if (Length == capacity)
             {
-                SetNewCapacity(Capacity + 1);
+                SetNewCapacity(capacity + 1);
             }
 
             var tempArray = dynamicArray;
-            dynamicArray = new T[Capacity];
+            dynamicArray = new T[capacity];
 
             int j = 0;
 
-            for (int i = 0; i < Capacity; i++)
+            for (int i = 0; i < capacity; i++)
             {
                 if (i == index)
                 {
@@ -161,16 +184,16 @@ namespace _33_DYNAMIC_ARRAY
 
         private int CapacityAdjusment(int userIEnumLength)
         {
-            int newCapacity = Capacity;
+            int newCapacity = capacity;
 
-            if (Length == Capacity)
+            if (Length == capacity)
             {
                 newCapacity += userIEnumLength;
             }
 
-            if (Length < Capacity)
+            if (Length < capacity)
             {
-                var freeCellsQuantity = Capacity - Length;
+                var freeCellsQuantity = capacity - Length;
 
                 if (freeCellsQuantity < userIEnumLength)
                 {
@@ -187,7 +210,7 @@ namespace _33_DYNAMIC_ARRAY
 
             dynamicArray.CopyTo(newArray, 0);
             dynamicArray = newArray;
-            Capacity = newCapacity;
+            capacity = newCapacity;
         }
 
         private void FillDynamicArrayFromIEnumerable(IEnumerable<T> userIEnum)
@@ -223,21 +246,13 @@ namespace _33_DYNAMIC_ARRAY
 
         private void IndexCheck(int index)
         {
-            //if (index < 0)
-            //{
-            //    throw new ArgumentException($"{nameof(index)} < 0: индекс не может быть отрицательным!");
-            //}
-
-            //if (index > Length - 1)
-            //{
-            //    throw new ArgumentOutOfRangeException($"{nameof(index)}: индекс находится за границами массива!");
-            //}
-
             if (index < -1 * Length & index > Length - 1)
             {
                 throw new ArgumentOutOfRangeException($"{nameof(index)}: индекс находится за границами массива!");
             }
         }
+
+        private int TryParseNegativeIndex(int index) => index < 0 ? (index += Length) : index;
 
         public IEnumerator GetEnumerator() => dynamicArray.GetEnumerator();
 
