@@ -11,7 +11,7 @@ namespace _1._06.FONT_ADJUSTMENT
             None = 0,
             Bold = 1,
             Italic = 2,
-            Underline = 4
+            Underline = 3
         }
 
         static void Main(string[] args)
