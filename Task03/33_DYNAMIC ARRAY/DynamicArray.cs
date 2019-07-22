@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace _33_DYNAMIC_ARRAY
+namespace _33_DYNAMIC_ARRAY // включает в себя задание 3.4.	* DYNAMIC ARRAY (HARDCORE MODE)
 {
     public class DynamicArray<T> : IEnumerable, IEnumerable<T>, ICloneable
     {
