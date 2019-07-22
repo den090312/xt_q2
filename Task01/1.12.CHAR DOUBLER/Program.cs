@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace _1._12.CHAR_DOUBLER
 {

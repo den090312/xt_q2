@@ -11,7 +11,7 @@ namespace _1._06.FONT_ADJUSTMENT
             None = 0,
             Bold = 1,
             Italic = 2,
-            Underline = 4
+            Underline = 3
         }
 
         static void Main(string[] args)
@@ -45,37 +45,16 @@ namespace _1._06.FONT_ADJUSTMENT
 
         static Font ChangeFont(Font myFont, int consoleKey)
         {
-            switch (consoleKey)
+            if (myFont.HasFlag((Font)consoleKey))
             {
-                case 1:
-                    myFont = ChangeFontFromFlag(myFont, Font.Bold);
-                    break;
-                case 2:
-                    myFont = ChangeFontFromFlag(myFont, Font.Italic);
-                    break;
-                case 3:
-                    myFont = ChangeFontFromFlag(myFont, Font.Underline);
-                    break;
-                case 4:
-                    Environment.Exit(0);
-                    break;
-            }
-
-            return myFont;
-        }
-
-        static Font ChangeFontFromFlag(Font font, Font fontFlag)
-        {
-            if (font.HasFlag(fontFlag))
-            {
-                font ^= fontFlag;
+                myFont ^= (Font)consoleKey;
             }
             else
             {
-                font |= fontFlag;
+                myFont |= (Font)consoleKey;
             }
 
-            return font;
+            return myFont;
         }
 
         static int GetKeyFromConsole()

@@ -47,9 +47,9 @@ namespace _1._10._2D_ARRAY
         static int GetSumOddPosElements(int[,] myArray)
         {
             int sum = 0;
-            for (int i = 0; i <= 9; i++)
+            for (int i = 0; i < myArray.Length; i++)
             {
-                for (int j = 0; j <= 9; j++)
+                for (int j = 0; j < myArray.Length; j++)
                 {
                     if ((i + j) % 2 == 0)
                     {
