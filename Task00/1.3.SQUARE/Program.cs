@@ -2,7 +2,7 @@
 
 namespace _1._3.SQUARE
 {
-    class Program
+    public class Program
     {
         private static void Main(string[] args)
         {
