@@ -13,6 +13,7 @@ namespace _1._3.SQUARE
         {
             int n;
             bool isInt;
+
             do
             {
                 Console.WriteLine("Введите нечетное число больше 2 и меньше 2147483648");
