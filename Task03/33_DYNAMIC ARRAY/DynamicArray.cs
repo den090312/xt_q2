@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace _33_DYNAMIC_ARRAY
 {
-    public class DynamicArray<T> : IEnumerable, IEnumerable<T>
+    public class DynamicArray<T> : IEnumerable, IEnumerable<T>, ICloneable
     {
         private T[] dynamicArray = new T[0];
         private int capacity = 0;
@@ -69,6 +69,8 @@ namespace _33_DYNAMIC_ARRAY
                 dynamicArray[TryParseNegativeIndex(i)] = value;
             }
         }
+
+        public T[] ToArray() => dynamicArray;
 
         public void Add(T element)
         {
