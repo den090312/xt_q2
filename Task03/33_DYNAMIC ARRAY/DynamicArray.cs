@@ -12,17 +12,12 @@ namespace _33_DYNAMIC_ARRAY
 
         public int Length => dynamicArray.Length;
 
-        public DynamicArray()
-        {
-            dynamicArray = new T[8];
-            Capacity = 8;
-        }
+        public DynamicArray() => Capacity = 8;
 
         public DynamicArray(int userCapacity)
         {
             if (userCapacity > 0)
             {
-                dynamicArray = new T[userCapacity];
                 Capacity = userCapacity;
             }
             else
@@ -34,10 +29,9 @@ namespace _33_DYNAMIC_ARRAY
         public DynamicArray(IEnumerable<T> userIEnum)
         {
             NullCheck(userIEnum);
-
             Capacity = GetIEnumerableLength(userIEnum);
             dynamicArray = new T[Capacity];
-            FillDynamicArrayFromIEnumerable(userIEnum, 0);
+            FillDynamicArrayFromIEnumerable(userIEnum);
         }
 
         public T this[int i]
@@ -57,8 +51,6 @@ namespace _33_DYNAMIC_ARRAY
 
         public void Add(T element)
         {
-            var nextIndex = Length;
-
             if (Length == Capacity)
             {
                 if (Capacity > 0)
@@ -71,16 +63,14 @@ namespace _33_DYNAMIC_ARRAY
                 }
             }
 
-            dynamicArray[nextIndex] = element;
+            dynamicArray[Length] = element;
         }
 
         public void AddRange(IEnumerable<T> userIEnum)
         {
             NullCheck(userIEnum);
-
-            var startIndex = Length;
             SetNewCapacity(CapacityAdjusment(GetIEnumerableLength(userIEnum)));
-            FillDynamicArrayFromIEnumerable(userIEnum, startIndex);
+            FillDynamicArrayFromIEnumerable(userIEnum);
         }
 
         public bool Remove(T element)
@@ -200,8 +190,10 @@ namespace _33_DYNAMIC_ARRAY
             Capacity = newCapacity;
         }
 
-        private void FillDynamicArrayFromIEnumerable(IEnumerable<T> userIEnum, int startIndex)
+        private void FillDynamicArrayFromIEnumerable(IEnumerable<T> userIEnum)
         {
+            var startIndex = Length;
+
             foreach (T element in userIEnum)
             {
                 dynamicArray[startIndex] = element;
@@ -231,12 +223,17 @@ namespace _33_DYNAMIC_ARRAY
 
         private void IndexCheck(int index)
         {
-            if (index < 0)
-            {
-                throw new ArgumentException($"{nameof(index)} < 0: индекс не может быть отрицательным!");
-            }
+            //if (index < 0)
+            //{
+            //    throw new ArgumentException($"{nameof(index)} < 0: индекс не может быть отрицательным!");
+            //}
 
-            if (index > Length - 1)
+            //if (index > Length - 1)
+            //{
+            //    throw new ArgumentOutOfRangeException($"{nameof(index)}: индекс находится за границами массива!");
+            //}
+
+            if (index < -1 * Length & index > Length - 1)
             {
                 throw new ArgumentOutOfRangeException($"{nameof(index)}: индекс находится за границами массива!");
             }
