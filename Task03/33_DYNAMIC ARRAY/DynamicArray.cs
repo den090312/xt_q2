@@ -257,7 +257,7 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание 3.4.D
 
         private void IndexCheck(int index)
         {
-            if (index < -1 * Length & index > Length - 1)
+            if (index < -1 * Length || index > Length - 1)
             {
                 throw new ArgumentOutOfRangeException($"{nameof(index)}: индекс находится за границами массива!");
             }
