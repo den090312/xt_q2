@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="CycledDynamicArray.cs" />
     <Compile Include="DynamicArray.cs" />
-    <Compile Include="ICloneable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
