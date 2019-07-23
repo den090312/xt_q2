@@ -31,6 +31,9 @@ namespace _33_DYNAMIC_ARRAY
 
             Console.WriteLine();
 
+            Console.WriteLine();
+            Console.WriteLine("Обрезка:");
+
             MyDA.Capacity = 5;
 
             foreach (string element in MyDA)
@@ -42,6 +45,19 @@ namespace _33_DYNAMIC_ARRAY
             Console.WriteLine($"length = {MyDA.Length}");
 
             Console.WriteLine();
+            Console.WriteLine("Массив:");
+
+            var array = MyDA.ToArray();
+
+            foreach (string element in array)
+            {
+                Console.WriteLine(element);
+            }
+
+            Console.WriteLine($"capacity = {MyDA.Capacity}");
+            Console.WriteLine($"length = {MyDA.Length}");
+            
+            Console.WriteLine();
             Console.WriteLine("Клон:");
 
             var MyDaClone = (DynamicArray<string>)MyDA.Clone();
@@ -51,22 +67,18 @@ namespace _33_DYNAMIC_ARRAY
                 Console.WriteLine(element);
             }
 
-            Console.WriteLine();
-            Console.WriteLine("Массив:");
+            Console.WriteLine($"capacity = {MyDA.Capacity}");
+            Console.WriteLine($"length = {MyDA.Length}");
 
-            var array = MyDaClone.ToArray();
+            //Console.WriteLine();
+            //Console.WriteLine("Циклический массив:");
 
-            foreach (string element in array)
-            {
-                Console.WriteLine(element);
-            }
+            //var cycledArray = new CycledDynamicArray<string>(myList1.ToArray());
 
-            var cycledArray = new CycledDynamicArray<string>(myList1.ToArray());
-
-            foreach (string item in cycledArray)
-            {
-                Console.WriteLine(item);
-            }
+            //foreach (string item in cycledArray)
+            //{
+            //    Console.WriteLine(item);
+            //}
         }
     }
 }

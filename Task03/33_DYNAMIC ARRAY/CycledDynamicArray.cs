@@ -6,7 +6,7 @@ namespace _33_DYNAMIC_ARRAY
 {
     public class CycledDynamicArray<T> : DynamicArray<T>
     {
-        private T[] cycledDynamicArray = new T[0];
+        private readonly T[] cycledDynamicArray = new T[0];
 
         public CycledDynamicArray(T[] userArray)
         {
@@ -14,20 +14,14 @@ namespace _33_DYNAMIC_ARRAY
             (userArray as ICollection).CopyTo(cycledDynamicArray, 0);
         }
 
-        public new IEnumerator<T> GetEnumerator()
-        {
-            return new CycledEnumerator(cycledDynamicArray);
-        }
+        public new IEnumerator<T> GetEnumerator() => new CycledEnumerator(cycledDynamicArray);
 
         class CycledEnumerator : IEnumerator<T>
         {
-            private T[] cycledDynamicArray = new T[0];
+            private readonly T[] cycledDynamicArray = new T[0];
             private int position = -1;
 
-            public CycledEnumerator(T[] userArray)
-            {
-                cycledDynamicArray = userArray;
-            }
+            public CycledEnumerator(T[] userArray) => cycledDynamicArray = userArray;
 
             public T Current => cycledDynamicArray[position];
 
@@ -47,10 +41,7 @@ namespace _33_DYNAMIC_ARRAY
                 return true;
             }
 
-            public void Reset()
-            {
-                position = 0;
-            }
+            public void Reset() => position = 0;
 
             public void Dispose() => throw new NotImplementedException();
         }
