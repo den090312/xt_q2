@@ -6,12 +6,15 @@ namespace _31_LOST
 {
     public class Program
     {
-        private static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Console.WriteLine($"LOST: {GetLost(GetQueue(GetHumanQuantity()))}");
+            Console.WriteLine($"LOST: {Lost.GetHumanQuantity().GetQueue().GetLost()}");
         }
+    }
 
-        private static int GetHumanQuantity()
+    internal static class Lost
+    {
+        internal static int GetHumanQuantity()
         {
             Console.WriteLine("Количество людей в кругу");
 
@@ -33,7 +36,7 @@ namespace _31_LOST
             return humanQuantity;
         }
 
-        private static Queue<int> GetQueue(int humanQuantity)
+        internal static Queue<int> GetQueue(this int humanQuantity)
         {
             Queue<int> humanQueue = new Queue<int>(humanQuantity);
 
@@ -45,7 +48,7 @@ namespace _31_LOST
             return humanQueue;
         }
 
-        private static int GetLost(Queue<int> humanQueue)
+        internal static int GetLost(this Queue<int> humanQueue)
         {
             bool removeNext = false;
 
