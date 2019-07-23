@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace _33_DYNAMIC_ARRAY // включает в себя задание 3.4.	* DYNAMIC ARRAY (HARDCORE MODE)
+namespace _33_DYNAMIC_ARRAY // включает в себя задание 3.4.DYNAMIC ARRAY (HARDCORE MODE)
 {
     public class DynamicArray<T> : IEnumerable<T>, ICloneable
     {
@@ -51,6 +51,7 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание 3.4.	
             NullCheck(userIEnum);
             capacity = GetIEnumerableLength(userIEnum);
             dynamicArray = new T[capacity];
+
             var startIndex = 0;
             FillDynamicArrayFromIEnumerable(userIEnum, startIndex);
         }
@@ -79,22 +80,29 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание 3.4.	
             {
                 if (capacity > 0)
                 {
-                    SetNewCapacity(capacity * 2);
+                    SetNewCapacity(capacity + 1);
                 }
                 else
                 {
                     SetNewCapacity(1);
                 }
+
+                ResizeArray(Length + 1);
             }
 
-            dynamicArray[Length] = element;
+            dynamicArray[Length - 1] = element;
         }
 
         public void AddRange(IEnumerable<T> userIEnum)
         {
             NullCheck(userIEnum);
-            SetNewCapacity(CapacityAdjusment(GetIEnumerableLength(userIEnum)));
+
             var startIndex = Length;
+            var iEnumLength = GetIEnumerableLength(userIEnum);
+            var adjCapacity = GetAdjusmentedCapacity(iEnumLength);
+
+            ResizeArray(SetNewCapacity(adjCapacity));
+
             FillDynamicArrayFromIEnumerable(userIEnum, startIndex);
         }
 
@@ -108,7 +116,7 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание 3.4.	
             {
                 var tempArray = dynamicArray;
                 var newLength = tempArray.Length;
-                dynamicArray = new T[newLength];
+                dynamicArray = new T[newLength - 1];
 
                 int j = 0;
 
@@ -144,7 +152,7 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание 3.4.	
             }
 
             var tempArray = dynamicArray;
-            dynamicArray = new T[capacity];
+            dynamicArray = new T[Length + 1];
 
             int j = 0;
 
@@ -186,7 +194,7 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание 3.4.	
             return found;
         }
 
-        private int CapacityAdjusment(int userIEnumLength)
+        private int GetAdjusmentedCapacity(int userIEnumLength)
         {
             int newCapacity = capacity;
 
@@ -208,13 +216,14 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание 3.4.	
             return newCapacity;
         }
 
-        private void SetNewCapacity(int newCapacity)
+        private int SetNewCapacity(int newCapacity) => capacity = newCapacity;
+
+        private void ResizeArray(int newSize)
         {
-            var newArray = new T[newCapacity];
+            var newArray = new T[newSize];
 
             dynamicArray.CopyTo(newArray, 0);
             dynamicArray = newArray;
-            capacity = newCapacity;
         }
 
         private void FillDynamicArrayFromIEnumerable(IEnumerable<T> userIEnum, int startIndex)
