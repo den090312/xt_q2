@@ -51,7 +51,8 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание 3.4.	
             NullCheck(userIEnum);
             capacity = GetIEnumerableLength(userIEnum);
             dynamicArray = new T[capacity];
-            FillDynamicArrayFromIEnumerable(userIEnum);
+            var startIndex = 0;
+            FillDynamicArrayFromIEnumerable(userIEnum, startIndex);
         }
 
         public T this[int i]
@@ -93,7 +94,8 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание 3.4.	
         {
             NullCheck(userIEnum);
             SetNewCapacity(CapacityAdjusment(GetIEnumerableLength(userIEnum)));
-            FillDynamicArrayFromIEnumerable(userIEnum);
+            var startIndex = Length;
+            FillDynamicArrayFromIEnumerable(userIEnum, startIndex);
         }
 
         public bool Remove(T element)
@@ -215,10 +217,8 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание 3.4.	
             capacity = newCapacity;
         }
 
-        private void FillDynamicArrayFromIEnumerable(IEnumerable<T> userIEnum)
+        private void FillDynamicArrayFromIEnumerable(IEnumerable<T> userIEnum, int startIndex)
         {
-            var startIndex = Length;
-
             foreach (T element in userIEnum)
             {
                 dynamicArray[startIndex] = element;
