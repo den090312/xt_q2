@@ -101,7 +101,8 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание '3.4.
             var iEnumLength = GetIEnumerableLength(userIEnum);
             var adjCapacity = GetAdjusmentedCapacity(iEnumLength);
 
-            ResizeArray(SetNewCapacity(adjCapacity));
+            SetNewCapacity(adjCapacity);
+            ResizeArray(capacity);
 
             FillDynamicArrayFromIEnumerable(userIEnum, startIndex);
         }
@@ -216,7 +217,7 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание '3.4.
             return newCapacity;
         }
 
-        private int SetNewCapacity(int newCapacity) => capacity = newCapacity;
+        private void SetNewCapacity(int newCapacity) => capacity = newCapacity;
 
         private void ResizeArray(int newSize)
         {
