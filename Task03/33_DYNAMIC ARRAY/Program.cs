@@ -10,6 +10,8 @@ namespace _33_DYNAMIC_ARRAY
         {
             var myList1 = new List<string>() { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" };
 
+            //var MyDA = new DynamicArray<string>(-7);
+
             var MyDA = new DynamicArray<string>(myList1);
 
             //MyDA.Insert("751", 15);

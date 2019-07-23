@@ -14,6 +14,8 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание '3.4.
             get => capacity;
             set
             {
+                CapacityCheck(value);
+
                 if (value < capacity)
                 {
                     var tempArray = dynamicArray;
@@ -36,14 +38,7 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание '3.4.
 
         public DynamicArray(int userCapacity)
         {
-            if (userCapacity > 0)
-            {
-                capacity = userCapacity;
-            }
-            else
-            {
-                throw new ArgumentException($"{nameof(userCapacity)} < 0. Емкость массива не может быть отрицательной!");
-            }
+            CapacityCheck(userCapacity);
         }
 
         public DynamicArray(IEnumerable<T> userIEnum)
@@ -261,6 +256,18 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание '3.4.
             if (index < -1 * Length || index > Length - 1)
             {
                 throw new ArgumentOutOfRangeException($"{nameof(index)}: индекс находится за границами массива!");
+            }
+        }
+
+        private void CapacityCheck(int userCapacity)
+        {
+            if (userCapacity > 0)
+            {
+                capacity = userCapacity;
+            }
+            else
+            {
+                throw new ArgumentException($"{nameof(userCapacity)} < 0. Емкость массива не может быть отрицательной!");
             }
         }
 
