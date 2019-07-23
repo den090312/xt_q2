@@ -20,17 +20,17 @@ namespace _33_DYNAMIC_ARRAY
             //var myList2 = new List<string>(new string[6] { "0", "2", "3", "1", "5", "4" });
             //MyDA.AddRange(myList2);
 
-            //foreach (string element in MyDA)
-            //{
-            //    Console.WriteLine(element);
-            //}
-
-            var cycledArray = new CycledDynamicArray<string>(myList1.ToArray());
-
-            foreach (string item in cycledArray)
+            foreach (string element in MyDA)
             {
-                Console.WriteLine(item);
+                Console.WriteLine(element);
             }
+
+            //var cycledArray = new CycledDynamicArray<string>(myList1.ToArray());
+
+            //foreach (string item in cycledArray)
+            //{
+            //    Console.WriteLine(item);
+            //}
         }
     }
 }
