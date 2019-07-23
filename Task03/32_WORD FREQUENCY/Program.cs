@@ -4,13 +4,15 @@ using System.Text;
 
 namespace _32_WORD_FREQUENCY
 {
-    public class Program
+    internal class Program
     {
         private static void Main(string[] args)
         {
             Console.WriteLine("Введите английский текст");
-            var wordsArray = GetEnglishTextFromConsole().Split(new char[] { ' ', '.' , '\r' }, StringSplitOptions.RemoveEmptyEntries);
-            WriteDictionary(GetWordsFrequencyDictionary(GetNoPuctuationWordsList(wordsArray)));
+
+            var wordsArray = GetEnglishTextFromConsole().Split(new char[] { ' ', '.', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+
+            Frequency.GetList(wordsArray).GetDictionary().Write();
         }
 
         private static string GetEnglishTextFromConsole()
@@ -57,8 +59,11 @@ namespace _32_WORD_FREQUENCY
             Console.WriteLine("Введите английский текст");
             Console.Write(sb);
         }
+    }
 
-        private static List<string> GetNoPuctuationWordsList(string[] wordsArray)
+    internal static class Frequency
+    {
+        internal static List<string> GetList(this string[] wordsArray)
         {
             var wordsList = new List<string>();
 
@@ -75,7 +80,7 @@ namespace _32_WORD_FREQUENCY
             return wordsList;
         }
 
-        private static string GetNoPunctuationWord(string word)
+        private static string GetNoPunctuationWord(this string word)
         {
             var mySB = new StringBuilder();
             var myCharArray = word.ToCharArray();
@@ -91,7 +96,7 @@ namespace _32_WORD_FREQUENCY
             return mySB.ToString();
         }
 
-        private static Dictionary<string, int> GetWordsFrequencyDictionary(List<string> wordsList)
+        internal static Dictionary<string, int> GetDictionary(this List<string> wordsList)
         {
             var wordsDict = new Dictionary<string, int>();
 
@@ -106,7 +111,7 @@ namespace _32_WORD_FREQUENCY
             return wordsDict;
         }
 
-        private static int GetFrequency(string word, List<string> wordsList)
+        private static int GetFrequency(this string word, List<string> wordsList)
         {
             int frequency = 0;
 
@@ -121,7 +126,7 @@ namespace _32_WORD_FREQUENCY
             return frequency;
         }
 
-        private static void WriteDictionary(Dictionary<string, int> wordsDict)
+        internal static void Write(this Dictionary<string, int> wordsDict)
         {
             Console.WriteLine();
             Console.WriteLine();

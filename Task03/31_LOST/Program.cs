@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace _31_LOST
 {
-    public class Program
+    internal class Program
     {
-        public static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine($"LOST: {Lost.GetHumanQuantity().GetQueue().GetLost()}");
         }
