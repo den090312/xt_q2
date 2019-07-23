@@ -25,7 +25,7 @@ namespace _33_DYNAMIC_ARRAY
             //    Console.WriteLine(element);
             //}
 
-            var cycledArray = new CycledDynamicArray<string>(MyDA);
+            var cycledArray = new CycledDynamicArray<string>(myList1.ToArray());
 
             foreach (string item in cycledArray)
             {
