@@ -4,10 +4,9 @@ using System.Collections.Generic;
 
 namespace _33_DYNAMIC_ARRAY
 {
-    public class CycledDynamicArray<T> : DynamicArray<T>, IEnumerable<T>, IEnumerator<T>
+    public class CycledDynamicArray<T> : DynamicArray<T>
     {
         private T[] cycledDynamicArray = new T[0];
-        private int position = -1;
 
         public CycledDynamicArray(T[] userArray)
         {
@@ -15,23 +14,46 @@ namespace _33_DYNAMIC_ARRAY
             (userArray as ICollection).CopyTo(cycledDynamicArray, 0);
         }
 
-        public T Current => throw new NotImplementedException();
-
-        object IEnumerator.Current => throw new NotImplementedException();
-
-        public void Dispose()
+        public new IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return new CycledEnumerator(cycledDynamicArray);
         }
 
-        public bool MoveNext()
+        class CycledEnumerator : IEnumerator<T>
         {
-            throw new NotImplementedException();
-        }
+            private T[] cycledDynamicArray = new T[0];
+            private int position = -1;
 
-        public void Reset()
-        {
-            throw new NotImplementedException();
+            public CycledEnumerator(T[] userArray)
+            {
+                cycledDynamicArray = userArray;
+            }
+
+            public T Current => cycledDynamicArray[position];
+
+            object IEnumerator.Current => Current;
+
+            public bool MoveNext()
+            {
+                if (position < cycledDynamicArray.Length - 1)
+                {
+                    position++;
+                }
+                else
+                {
+                    Reset();                
+                }
+
+                return true;
+            }
+
+            public void Reset()
+            {
+                position = -1;
+            }
+
+            public void Dispose() => throw new NotImplementedException();
         }
     }
 }
+

@@ -6,7 +6,7 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание 3.4.	
 {
     public class DynamicArray<T> : IEnumerable<T>, ICloneable
     {
-        protected T[] dynamicArray = new T[0];
+        private T[] dynamicArray = new T[0];
         private int capacity = 0;
 
         public int Capacity
