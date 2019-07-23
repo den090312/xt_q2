@@ -27,7 +27,7 @@ namespace _33_DYNAMIC_ARRAY
             Console.WriteLine($"capacity = {MyDA.Capacity}");
             Console.WriteLine($"length = {MyDA.Length}");
 
-            //Console.WriteLine($"MyDA[-3] = {MyDA[-3]}");
+            Console.WriteLine($"MyDA[-3] = {MyDA[-3]}");
 
             Console.WriteLine();
 
@@ -61,12 +61,12 @@ namespace _33_DYNAMIC_ARRAY
                 Console.WriteLine(element);
             }
 
-            //var cycledArray = new CycledDynamicArray<string>(myList1.ToArray());
+            var cycledArray = new CycledDynamicArray<string>(myList1.ToArray());
 
-            //foreach (string item in cycledArray)
-            //{
-            //    Console.WriteLine(item);
-            //}
+            foreach (string item in cycledArray)
+            {
+                Console.WriteLine(item);
+            }
         }
     }
 }
