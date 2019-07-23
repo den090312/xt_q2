@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace _33_DYNAMIC_ARRAY
 {
-    public class CycledDynamicArray<T> : DynamicArray<T>, IEnumerable, IEnumerable<T>, IEnumerator
+    public class CycledDynamicArray<T> : DynamicArray<T>, IEnumerable<T>, IEnumerator<T>
     {
         private T[] cycledDynamicArray = new T[0];
         private int position = -1;
@@ -14,27 +15,23 @@ namespace _33_DYNAMIC_ARRAY
             (userArray as ICollection).CopyTo(cycledDynamicArray, 0);
         }
 
-        public object Current => Current;
+        public T Current => throw new NotImplementedException();
 
-        public new IEnumerator GetEnumerator()
+        object IEnumerator.Current => throw new NotImplementedException();
+
+        public void Dispose()
         {
-            if (!MoveNext())
-            {
-                Reset();
-            }
-
-            return cycledDynamicArray.GetEnumerator();
+            throw new NotImplementedException();
         }
 
         public bool MoveNext()
         {
-            position++;
-            return (position < cycledDynamicArray.Length);
+            throw new NotImplementedException();
         }
 
         public void Reset()
         {
-            position = -1;
+            throw new NotImplementedException();
         }
     }
 }
