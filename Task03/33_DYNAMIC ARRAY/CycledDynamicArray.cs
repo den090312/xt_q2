@@ -49,7 +49,7 @@ namespace _33_DYNAMIC_ARRAY
 
             public void Reset()
             {
-                position = -1;
+                position = 0;
             }
 
             public void Dispose() => throw new NotImplementedException();
