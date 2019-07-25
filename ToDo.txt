@@ -1,2 +1,1 @@
-Проверка на int.MaxValue
 Проверить всю логику DynamicArray Hardcore mode
