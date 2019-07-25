@@ -13,6 +13,8 @@ namespace _33_DYNAMIC_ARRAY
 
             var MyDA = new DynamicArray<string>(myList1);
 
+            var newArray = MyDA.ToArray();
+
             //MyDA.Insert("751", 15);
             //MyDA.Remove("2");
             //MyDA.Add("321");

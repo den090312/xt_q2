@@ -34,16 +34,25 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание '3.4.
 
         public int Length => dynamicArray.Length;
 
-        public DynamicArray() => capacity = 8;
+        public DynamicArray()
+        {
+            capacity = 8;
+            dynamicArray = new T[capacity];
+        }
 
         public DynamicArray(int userCapacity)
         {
+            IntMaxValueCheck(userCapacity);
             CapacityCheck(userCapacity);
+
+            capacity = userCapacity;
+            dynamicArray = new T[capacity];
         }
 
         public DynamicArray(IEnumerable<T> userIEnum)
         {
             NullCheck(userIEnum);
+
             capacity = GetIEnumerableLength(userIEnum);
             dynamicArray = new T[capacity];
 
@@ -67,7 +76,13 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание '3.4.
             }
         }
 
-        public T[] ToArray() => dynamicArray;
+        public T[] ToArray()
+        {
+            var newArray = new T[capacity]; 
+            dynamicArray.CopyTo(newArray, 0);
+
+            return newArray;
+        }
 
         public void Add(T element)
         {
@@ -75,11 +90,11 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание '3.4.
             {
                 if (capacity > 0)
                 {
-                    SetNewCapacity(capacity + 1);
+                    capacity *= 2;
                 }
                 else
                 {
-                    SetNewCapacity(1);
+                    capacity = 8;
                 }
 
                 ResizeArray(Length + 1);
@@ -94,9 +109,8 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание '3.4.
 
             var startIndex = Length;
             var iEnumLength = GetIEnumerableLength(userIEnum);
-            var adjCapacity = GetAdjusmentedCapacity(iEnumLength);
+            capacity = GetAdjusmentedCapacity(iEnumLength) + 8;
 
-            SetNewCapacity(adjCapacity);
             ResizeArray(capacity);
 
             FillDynamicArrayFromIEnumerable(userIEnum, startIndex);
@@ -144,7 +158,7 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание '3.4.
 
             if (Length == capacity)
             {
-                SetNewCapacity(capacity + 1);
+                capacity += 8;
             }
 
             var tempArray = dynamicArray;
@@ -212,8 +226,6 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание '3.4.
             return newCapacity;
         }
 
-        private void SetNewCapacity(int newCapacity) => capacity = newCapacity;
-
         private void ResizeArray(int newSize)
         {
             var newArray = new T[newSize];
@@ -268,6 +280,14 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание '3.4.
             else
             {
                 throw new ArgumentException($"{nameof(userCapacity)} < 0. Емкость массива не может быть отрицательной!");
+            }
+        }
+
+        private void IntMaxValueCheck(int userInt)
+        {
+            if (userInt > int.MaxValue)
+            {
+                throw new ArgumentException($"{nameof(userInt)}: Превышено максимальное значение int!");
             }
         }
 
