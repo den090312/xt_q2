@@ -1,1 +1,1 @@
-
+Проверить всю логику DynamicArray Hardcore mode
