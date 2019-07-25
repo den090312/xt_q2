@@ -7,11 +7,15 @@ namespace _41_CUSTOM_SORT
     {
         static void Main(string[] args)
         {
-            var myArray = new string[]{ "1", "3", "0", "7", "-90", "123" };
-
-            Sorter<string> sorter = new Sorter<string>(Sort);
+            var myArray = new int[]{ 1, 3, 0, 7, -90, 123 };
+            var sorter = new Sorter<int>(Sort);
 
             sorter(myArray);
+
+            foreach (int item in myArray)
+            {
+                Console.WriteLine(item);
+            }
         }
 
         public delegate T[] Sorter<T>(T[] array);
