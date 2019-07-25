@@ -1,6 +1,5 @@
 Расширить запас Capacity
 Реализовать кастомный нумератор через yield
-Проверить CapacityCheck, возможно дублирование логики
 Проверка на int.MaxValue
 Добавить Array.CopyTo()
 Проверить всю логику DynamicArray Hardcore mode
