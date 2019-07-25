@@ -3,5 +3,4 @@
 Проверка на int.MaxValue
 Добавить Array.CopyTo()
 Проверить всю логику DynamicArray Hardcore mode
-Переписать ToArray
 Проверить Reset()
