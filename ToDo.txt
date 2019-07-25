@@ -1,6 +1,2 @@
-Расширить запас Capacity
-Реализовать кастомный нумератор через yield
 Проверка на int.MaxValue
-Добавить Array.CopyTo()
 Проверить всю логику DynamicArray Hardcore mode
-Проверить Reset()
