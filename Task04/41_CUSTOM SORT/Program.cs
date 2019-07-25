@@ -8,9 +8,8 @@ namespace _41_CUSTOM_SORT
         static void Main(string[] args)
         {
             var myArray = new int[] { 1, 3, 0, 7, -90, 123 };
-            //var sorter = new Sorter<int>(Sort);
 
-            //sorter(myArray);
+            Sort(myArray);
 
             foreach (int item in myArray)
             {
@@ -24,9 +23,12 @@ namespace _41_CUSTOM_SORT
         {
             for (int i = 0; i < array.Length; i++)
             {
-                if (Compare(array[i], array[i + 1]) == 1)
+                for (int j = i + 1; j < array.Length; j++)
                 {
-                    Swap(ref array[i], ref array[i + 1]);
+                    if (Compare(array[j], array[i]) < 0)
+                    {
+                        Swap(ref array[i], ref array[j]);
+                    }
                 }
             }
 
