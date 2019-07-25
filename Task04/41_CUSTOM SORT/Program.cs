@@ -12,20 +12,20 @@ namespace _41_CUSTOM_SORT
 
             //sorter(myArray);
 
-            Sort(myArray, Compare<int>(3, 5));
-
             foreach (int item in myArray)
             {
                 Console.WriteLine(item);
             }
         }
 
-        public static T[] Sort<T>(T[] array, Func<T> compareResult)
+        public delegate MyComparer Func<in T1, in T2, out MyComparer>(T1 arg1, T2 arg2);
+
+        public static T[] Sort<T>(T[] array)
         {
             return array;
         }
 
-        public static Func<T> Compare<T>(int x, int y)
+        public static int Compare<T1, T2>(int x, int y)
         {
             if (x > y)
                 return 1;
