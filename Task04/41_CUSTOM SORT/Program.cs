@@ -9,7 +9,9 @@ namespace _41_CUSTOM_SORT
         {
             var myArray = new int[] { 1, 3, 0, 7, -90, 123 };
 
-            Sort(myArray);
+            Func<int, int, int> myComparer = Compare;
+
+            Sort(myArray, myComparer);
 
             foreach (int item in myArray)
             {
@@ -17,15 +19,13 @@ namespace _41_CUSTOM_SORT
             }
         }
 
-        public delegate MyComparer Func<in T1, in T2, out MyComparer>(T1 arg1, T2 arg2);
-
-        public static T[] Sort<T>(T[] array)
+        public static T[] Sort<T>(T[] array, Func<T, T, int> compare)
         {
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = i + 1; j < array.Length; j++)
                 {
-                    if (Compare(array[j], array[i]) < 0)
+                    if (compare(array[j], array[i]) < 0)
                     {
                         Swap(ref array[i], ref array[j]);
                     }
