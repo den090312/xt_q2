@@ -42,9 +42,9 @@ namespace _41_CUSTOM_SORT
 
         public static int Compare<T1, T2>(T1 x, T2 y)
         {
-            if (x > y)
+            if ((int)(object)x > (int)(object)y)
                 return 1;
-            else if (x < y)
+            else if ((int)(object)x < (int)(object)y)
                 return -1;
             else
                 return 0;
