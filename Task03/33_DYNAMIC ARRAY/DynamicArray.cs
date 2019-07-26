@@ -96,9 +96,9 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание '3.4.
                 {
                     capacity = 8;
                 }
-
-                ResizeArray(Length + 1);
             }
+
+            ResizeArray(Length + 1);
 
             dynamicArray[Length - 1] = element;
         }
@@ -166,7 +166,7 @@ namespace _33_DYNAMIC_ARRAY // включает в себя задание '3.4.
 
             int j = 0;
 
-            for (int i = 0; i < capacity; i++)
+            for (int i = 0; i < Length; i++)
             {
                 if (i == index)
                 {

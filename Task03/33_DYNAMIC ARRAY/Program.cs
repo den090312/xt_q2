@@ -7,17 +7,17 @@ namespace _33_DYNAMIC_ARRAY
     {
         static void Main(string[] args)
         {
-            var myList1 = new List<string>() { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" };
+            var myList1 = new List<string>() { "0" };
 
             //var MyDA = new DynamicArray<string>(-7);
 
             var MyDA = new DynamicArray<string>(myList1);
 
-            var newArray = MyDA.ToArray();
+            //var newArray = MyDA.ToArray();
 
-            //MyDA.Insert("751", 15);
-            //MyDA.Remove("2");
-            //MyDA.Add("321");
+            MyDA.Insert("751", 0);
+            MyDA.Remove("751");
+            MyDA.Add("321");
 
             //var myList2 = new List<string>(new string[6] { "6", "7", "8", "9", "10", "11" });
             //MyDA.AddRange(myList2);
@@ -27,51 +27,51 @@ namespace _33_DYNAMIC_ARRAY
                 Console.WriteLine(element);
             }
 
-            Console.WriteLine($"capacity = {MyDA.Capacity}");
-            Console.WriteLine($"length = {MyDA.Length}");
+            //Console.WriteLine($"capacity = {MyDA.Capacity}");
+            //Console.WriteLine($"length = {MyDA.Length}");
 
-            Console.WriteLine($"MyDA[-3] = {MyDA[-3]}");
+            //Console.WriteLine($"MyDA[-3] = {MyDA[-3]}");
 
-            Console.WriteLine();
+            //Console.WriteLine();
 
-            Console.WriteLine();
-            Console.WriteLine("Обрезка:");
+            //Console.WriteLine();
+            //Console.WriteLine("Обрезка:");
 
-            MyDA.Capacity = 5;
+            //MyDA.Capacity = 5;
 
-            foreach (string element in MyDA)
-            {
-                Console.WriteLine(element);
-            }
+            //foreach (string element in MyDA)
+            //{
+            //    Console.WriteLine(element);
+            //}
 
-            Console.WriteLine($"capacity = {MyDA.Capacity}");
-            Console.WriteLine($"length = {MyDA.Length}");
+            //Console.WriteLine($"capacity = {MyDA.Capacity}");
+            //Console.WriteLine($"length = {MyDA.Length}");
 
-            Console.WriteLine();
-            Console.WriteLine("Массив:");
+            //Console.WriteLine();
+            //Console.WriteLine("Массив:");
 
-            var array = MyDA.ToArray();
+            //var array = MyDA.ToArray();
 
-            foreach (string element in array)
-            {
-                Console.WriteLine(element);
-            }
+            //foreach (string element in array)
+            //{
+            //    Console.WriteLine(element);
+            //}
 
-            Console.WriteLine($"capacity = {MyDA.Capacity}");
-            Console.WriteLine($"length = {MyDA.Length}");
+            //Console.WriteLine($"capacity = {MyDA.Capacity}");
+            //Console.WriteLine($"length = {MyDA.Length}");
             
-            Console.WriteLine();
-            Console.WriteLine("Клон:");
+            //Console.WriteLine();
+            //Console.WriteLine("Клон:");
 
-            var MyDaClone = (DynamicArray<string>)MyDA.Clone();
+            //var MyDaClone = (DynamicArray<string>)MyDA.Clone();
 
-            foreach (string element in MyDaClone)
-            {
-                Console.WriteLine(element);
-            }
+            //foreach (string element in MyDaClone)
+            //{
+            //    Console.WriteLine(element);
+            //}
 
-            Console.WriteLine($"capacity = {MyDA.Capacity}");
-            Console.WriteLine($"length = {MyDA.Length}");
+            //Console.WriteLine($"capacity = {MyDA.Capacity}");
+            //Console.WriteLine($"length = {MyDA.Length}");
 
             //Console.WriteLine();
             //Console.WriteLine("Циклический массив:");
