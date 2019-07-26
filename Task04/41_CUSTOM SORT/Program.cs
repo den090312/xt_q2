@@ -9,9 +9,7 @@ namespace _41_CUSTOM_SORT
         {
             var myArray = new int[] { 1, 3, 0, 7, -90, 123 };
 
-            Func<int, int, bool> myComparer = Compare;
-
-            Sort(myArray, myComparer);
+            Sort(myArray, (x, y) => x < y);
 
             foreach (int item in myArray)
             {
