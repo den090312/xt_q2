@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29020.237
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "41_CUSTOM SORT", "41_CUSTOM SORT\41_CUSTOM SORT.csproj", "{714A479F-63E0-40FE-8CCC-08D2CFF35DBE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "42_CUSTOM SORT DEMO", "42_CUSTOM SORT DEMO\42_CUSTOM SORT DEMO.csproj", "{D9D63303-6B35-4938-9F0E-31204DBDD3E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{714A479F-63E0-40FE-8CCC-08D2CFF35DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{714A479F-63E0-40FE-8CCC-08D2CFF35DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{714A479F-63E0-40FE-8CCC-08D2CFF35DBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9D63303-6B35-4938-9F0E-31204DBDD3E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9D63303-6B35-4938-9F0E-31204DBDD3E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9D63303-6B35-4938-9F0E-31204DBDD3E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9D63303-6B35-4938-9F0E-31204DBDD3E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
