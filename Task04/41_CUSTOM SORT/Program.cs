@@ -17,7 +17,7 @@ namespace _41_CUSTOM_SORT
             }
         }
 
-        private static T[] Sort<T>(T[] array, Func<T, T, bool> compare)
+        public static T[] Sort<T>(T[] array, Func<T, T, bool> compare)
         {
             NullCheck(array);
             NullCheck(compare);
@@ -43,7 +43,7 @@ namespace _41_CUSTOM_SORT
             item2 = buffer;
         }
 
-        private static void NullCheck<T>(T[] array)
+        public static void NullCheck<T>(T[] array)
         {
             if (array is null)
             {
@@ -51,7 +51,7 @@ namespace _41_CUSTOM_SORT
             }
         }
 
-        private static void NullCheck<T>(Func<T, T, bool> comparer)
+        public static void NullCheck<T>(Func<T, T, bool> comparer)
         {
             if (comparer is null)
             {

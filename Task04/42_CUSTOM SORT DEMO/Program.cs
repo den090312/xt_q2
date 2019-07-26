@@ -1,4 +1,5 @@
 ﻿using System;
+using _41_CUSTOM_SORT;
 
 namespace _42_CUSTOM_SORT_DEMO
 {
@@ -20,8 +21,8 @@ namespace _42_CUSTOM_SORT_DEMO
 
         private static T[] Sort<T>(T[] array, Func<T, T, bool> compare)
         {
-            NullCheck(array);
-            NullCheck(compare);
+            _41_CUSTOM_SORT.Program.NullCheck(array);
+            _41_CUSTOM_SORT.Program.NullCheck(compare);
 
             for (int i = 0; i < array.Length; i++)
             {
@@ -66,22 +67,6 @@ namespace _42_CUSTOM_SORT_DEMO
             }
 
             return false;
-        }
-
-        private static void NullCheck<T>(T[] array)
-        {
-            if (array is null)
-            {
-                throw new ArgumentNullException($"{nameof(array)} is null!");
-            }
-        }
-
-        private static void NullCheck<T>(Func<T, T, bool> comparer)
-        {
-            if (comparer is null)
-            {
-                throw new ArgumentNullException($"{nameof(comparer)} is null!");
-            }
         }
     }
 }
