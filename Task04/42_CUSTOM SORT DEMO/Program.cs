@@ -6,9 +6,11 @@ namespace _42_CUSTOM_SORT_DEMO
     {
         static void Main(string[] args)
         {
-            var myArray = new string[] { "123", "3рвпарпв5", "иу5гтрпвв", "п8ыкт94и668768", "34", "-08ыи7па" };
+            var myArray = new string[] { "123ffgf", "3рвпарпв5g", "иу5гтрпвв", "п8ыкт94и668768", "3f43fn", "-08ыи7па" };
 
-            Sort(myArray, (x, y) => x < y);
+            Func<string, string, bool> myComparer = Compare;
+
+            Sort(myArray, myComparer);
 
             foreach (string item in myArray)
             {
@@ -41,18 +43,26 @@ namespace _42_CUSTOM_SORT_DEMO
 
         public static bool Compare<T>(T x, T y)
         {
+            var stringX = x.ToString();
+            var stringY = y.ToString();
 
-            if (x.ToString().Length < y.ToString().Length)
+            if (stringX.Length < stringY.Length)
             {
                 return true;
             }
 
-            if (x.ToString().Length == y.ToString().Length)
+            if (stringX.Length == stringY.Length)
             {
-
+                for (int i = 0; i < stringX.Length; i++)
+                {
+                    if (stringX[i] < stringY[i])
+                    {
+                        return true;
+                    }
+                }
             }
 
-            return true;
+            return false;
         }
     }
 }
