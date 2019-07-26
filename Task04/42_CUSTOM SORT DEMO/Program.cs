@@ -6,7 +6,7 @@ namespace _42_CUSTOM_SORT_DEMO
     {
         static void Main(string[] args)
         {
-            var myArray = new string[] { "123ffgf", "3рвпарпв5g", "иу5гтрпвв", "п8ыкт94и668768", "3f43fn", "-08ыи7па" };
+            var myArray = new string[] { "abcdi", "dcdef", "aby", "abc", "abcdef", "abcdez" };
 
             Func<string, string, bool> myComparer = Compare;
 
