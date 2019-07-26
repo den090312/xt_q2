@@ -6,11 +6,11 @@ namespace _41_CUSTOM_SORT
     {
         public static void Main(string[] args)
         {
-            var myArray = new char[] { '1', '3', '0', '7', '9', '5' };
+            var myArray = new int[] { 1, 3, 0, 7, 9, 5 };
 
             Sort(myArray, (x, y) => x < y);
 
-            foreach (char item in myArray)
+            foreach (int item in myArray)
             {
                 Console.WriteLine(item);
             }
