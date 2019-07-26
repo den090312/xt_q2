@@ -9,40 +9,34 @@ namespace _43_SORTING_UNIT
     {
         public static event Action<string> SortingIsDoneAlert;
 
-        public static void SortingIsDone(string alertText)
-        {
-            Console.WriteLine(alertText);
-        }
-
-        public static void ThreadProc()
-        {
-        }
+        public static void SortingIsDone(string alertText) => Console.WriteLine(alertText);
 
         public static void SortingInThread<T>(T[] array, Func<T, T, bool> compare)
         {
-            var thread = new Thread(new ThreadStart(ThreadProc));
+            var thread = new Thread(() =>
+            {
+                var threadId = $"Thread {Thread.CurrentThread.ManagedThreadId}";
+
+                Console.WriteLine($"{threadId}: start");
+
+                _41_CUSTOM_SORT.Program.Sort(array, compare);
+
+                Console.WriteLine($"{threadId}: in progress");
+
+                SortingIsDoneAlert?.Invoke($"{threadId}: finish");
+
+                Console.WriteLine();
+                Console.WriteLine($"{threadId} result array");
+
+                foreach (T item in array)
+                {
+                    Console.WriteLine(item);
+                }
+
+                Console.WriteLine();
+            });
 
             thread.Start();
-
-            var threadState = $"Thread {Thread.CurrentThread.ManagedThreadId} {Thread.CurrentThread.ThreadState}";
-
-            Console.WriteLine($"{threadState}");
-
-            _41_CUSTOM_SORT.Program.Sort(array, compare);
-
-            Console.WriteLine($"{threadState}");
-
-            SortingIsDoneAlert?.Invoke($"{threadState}");
-
-            Console.WriteLine();
-            Console.WriteLine($"{threadState} result array");
-
-            foreach (T item in array)
-            {
-                Console.WriteLine(item);
-            }
-
-            Console.WriteLine();
         }
     }
 }
