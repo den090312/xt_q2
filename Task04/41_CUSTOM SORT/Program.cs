@@ -7,11 +7,11 @@ namespace _41_CUSTOM_SORT
     {
         static void Main(string[] args)
         {
-            var myArray = new int[] { 1, 3, 0, 7, -90, 123 };
+            var myArray = new char[] { '1', '3', '0', '7', '9', '5' };
 
             Sort(myArray, (x, y) => x < y);
 
-            foreach (int item in myArray)
+            foreach (char item in myArray)
             {
                 Console.WriteLine(item);
             }
