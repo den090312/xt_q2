@@ -26,12 +26,9 @@ namespace _43_SORTING_UNIT
                 SortingIsDoneAlert?.Invoke($"{threadId}: finish");
 
                 Console.WriteLine();
-                Console.WriteLine($"{threadId} result array");
+                Console.WriteLine($"{threadId} result array:");
 
-                foreach (T item in array)
-                {
-                    Console.WriteLine(item);
-                }
+                _41_CUSTOM_SORT.Program.WriteArray(array);
 
                 Console.WriteLine();
             });

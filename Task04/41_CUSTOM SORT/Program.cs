@@ -10,7 +10,12 @@ namespace _41_CUSTOM_SORT
 
             Sort(myArray, (x, y) => x < y);
 
-            foreach (int item in myArray)
+            WriteArray(myArray);
+        }
+
+        public static void WriteArray<T>(T[] myArray)
+        {
+            foreach (T item in myArray)
             {
                 Console.WriteLine(item);
             }
