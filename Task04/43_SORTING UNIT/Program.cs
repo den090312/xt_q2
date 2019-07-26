@@ -6,7 +6,7 @@ namespace _43_SORTING_UNIT
     {
         static void Main(string[] args)
         {
-
+            SortingUnit.SortingIsDoneAlert += SortingUnit.SortingIsDone;
         }
     }
 }

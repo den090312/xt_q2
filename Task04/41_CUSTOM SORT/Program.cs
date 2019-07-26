@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 
 namespace _41_CUSTOM_SORT
 {
@@ -36,7 +35,7 @@ namespace _41_CUSTOM_SORT
             return array;
         }
 
-        private static void Swap<T>(ref T item1, ref T item2)
+        public static void Swap<T>(ref T item1, ref T item2)
         {
             var buffer = item1;
             item1 = item2;

@@ -1,5 +1,4 @@
 ﻿using System;
-using _41_CUSTOM_SORT;
 
 namespace _42_CUSTOM_SORT_DEMO
 {
@@ -30,19 +29,12 @@ namespace _42_CUSTOM_SORT_DEMO
                 {
                     if (compare(array[j], array[i]))
                     {
-                        Swap(ref array[i], ref array[j]);
+                        _41_CUSTOM_SORT.Program.Swap(ref array[i], ref array[j]);
                     }
                 }
             }
 
             return array;
-        }
-
-        private static void Swap<T>(ref T item1, ref T item2)
-        {
-            var buffer = item1;
-            item1 = item2;
-            item2 = buffer;
         }
 
         private static bool Compare<T>(T x, T y)
