@@ -27,9 +27,11 @@ namespace _44_NUMBER_ARRAY_SUM
             {
                 int sum = 0;
 
-                for (int i = 0; i < array.Length; i++)
+                var intArray = (int[])(object)array;
+
+                for (int i = 0; i < intArray.Length; i++)
                 {
-                    sum += (int)(object)array[i];
+                    sum += intArray[i];
                 }
 
                 return sum;
