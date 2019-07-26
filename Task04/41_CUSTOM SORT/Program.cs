@@ -9,7 +9,7 @@ namespace _41_CUSTOM_SORT
         {
             var myArray = new int[] { 1, 3, 0, 7, -90, 123 };
 
-            Func<int, int, int> myComparer = Compare;
+            Func<int, int, bool> myComparer = Compare;
 
             Sort(myArray, myComparer);
 
@@ -19,13 +19,13 @@ namespace _41_CUSTOM_SORT
             }
         }
 
-        public static T[] Sort<T>(T[] array, Func<T, T, int> compare)
+        public static T[] Sort<T>(T[] array, Func<T, T, bool> compare)
         {
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = i + 1; j < array.Length; j++)
                 {
-                    if (compare(array[j], array[i]) < 0)
+                    if (compare(array[j], array[i]))
                     {
                         Swap(ref array[i], ref array[j]);
                     }
@@ -42,20 +42,6 @@ namespace _41_CUSTOM_SORT
             item2 = buffer;
         }
 
-        public static int Compare<T1, T2>(T1 x, T2 y)
-        {
-            if ((int)(object)x > (int)(object)y)
-            {
-                return 1;
-            }
-            else if ((int)(object)x < (int)(object)y)
-            {
-                return -1;
-            }
-            else
-            {
-                return 0;
-            }
-        }
+        public static bool Compare<T1, T2>(T1 x, T2 y) => (int)(object)x < (int)(object)y;
     }
 }
