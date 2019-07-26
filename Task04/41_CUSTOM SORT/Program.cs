@@ -39,7 +39,5 @@ namespace _41_CUSTOM_SORT
             item1 = item2;
             item2 = buffer;
         }
-
-        public static bool Compare<T1, T2>(T1 x, T2 y) => (int)(object)x < (int)(object)y;
     }
 }
