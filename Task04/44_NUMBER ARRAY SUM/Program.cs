@@ -17,6 +17,8 @@ namespace _44_NUMBER_ARRAY_SUM
     {
         public static T Sum<T>(T[] array)
         {
+            var arrayType = array.GetType();
+
             T sum;
 
             foreach (T item in array)
