@@ -23,14 +23,19 @@ namespace _44_NUMBER_ARRAY_SUM
     {
         public static T Sum<T>(T[] array, Func<T[], Type> type)
         {
-            T sum = 0;
-
-            foreach (T item in array)
+            if (type is int)
             {
-                sum += item;
+                int sum = 0;
+
+                for (int i = 0; i < array.Length; i++)
+                {
+                    sum += (int)(object)array[i];
+                }
+
+                return sum;
             }
 
-            return sum;
+            return array[0];
         }
     }
 }
