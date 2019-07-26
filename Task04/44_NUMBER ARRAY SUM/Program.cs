@@ -11,7 +11,9 @@ namespace _44_NUMBER_ARRAY_SUM
 
             Func<int[], Type> type = GetType;
 
-            Console.WriteLine(GetSum.Sum(myArray, type));
+            var sum = GetSum.Sum(myArray, type);
+
+            Console.WriteLine(sum);
         }
 
         public static Type GetType<T>(T[] array) => array.GetType();
@@ -21,8 +23,6 @@ namespace _44_NUMBER_ARRAY_SUM
     {
         public static T Sum<T>(T[] array, Func<T[], Type> type)
         {
-            var arrayType = array.GetType();
-
             T sum = 0;
 
             foreach (T item in array)
