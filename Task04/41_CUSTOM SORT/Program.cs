@@ -5,7 +5,7 @@ namespace _41_CUSTOM_SORT
 {
     public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var myArray = new char[] { '1', '3', '0', '7', '9', '5' };
 
@@ -17,8 +17,11 @@ namespace _41_CUSTOM_SORT
             }
         }
 
-        public static T[] Sort<T>(T[] array, Func<T, T, bool> compare)
+        private static T[] Sort<T>(T[] array, Func<T, T, bool> compare)
         {
+            NullCheck(array);
+            NullCheck(compare);
+
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = i + 1; j < array.Length; j++)
@@ -33,11 +36,27 @@ namespace _41_CUSTOM_SORT
             return array;
         }
 
-        public static void Swap<T>(ref T item1, ref T item2)
+        private static void Swap<T>(ref T item1, ref T item2)
         {
             var buffer = item1;
             item1 = item2;
             item2 = buffer;
+        }
+
+        private static void NullCheck<T>(T[] array)
+        {
+            if (array is null)
+            {
+                throw new ArgumentNullException($"{nameof(array)} is null!");
+            }
+        }
+
+        private static void NullCheck<T>(Func<T, T, bool> comparer)
+        {
+            if (comparer is null)
+            {
+                throw new ArgumentNullException($"{nameof(comparer)} is null!");
+            }
         }
     }
 }

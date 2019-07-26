@@ -2,9 +2,9 @@
 
 namespace _42_CUSTOM_SORT_DEMO
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public void Main(string[] args)
         {
             var myArray = new string[] { "abcdi", "dcdef", "aby", "abc", "abcdef", "abcdez" };
 
@@ -18,8 +18,11 @@ namespace _42_CUSTOM_SORT_DEMO
             }
         }
 
-        public static T[] Sort<T>(T[] array, Func<T, T, bool> compare)
+        private static T[] Sort<T>(T[] array, Func<T, T, bool> compare)
         {
+            NullCheck(array);
+            NullCheck(compare);
+
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = i + 1; j < array.Length; j++)
@@ -34,14 +37,14 @@ namespace _42_CUSTOM_SORT_DEMO
             return array;
         }
 
-        public static void Swap<T>(ref T item1, ref T item2)
+        private static void Swap<T>(ref T item1, ref T item2)
         {
             var buffer = item1;
             item1 = item2;
             item2 = buffer;
         }
 
-        public static bool Compare<T>(T x, T y)
+        private static bool Compare<T>(T x, T y)
         {
             var stringX = x.ToString();
             var stringY = y.ToString();
@@ -63,6 +66,22 @@ namespace _42_CUSTOM_SORT_DEMO
             }
 
             return false;
+        }
+
+        private static void NullCheck<T>(T[] array)
+        {
+            if (array is null)
+            {
+                throw new ArgumentNullException($"{nameof(array)} is null!");
+            }
+        }
+
+        private static void NullCheck<T>(Func<T, T, bool> comparer)
+        {
+            if (comparer is null)
+            {
+                throw new ArgumentNullException($"{nameof(comparer)} is null!");
+            }
         }
     }
 }
