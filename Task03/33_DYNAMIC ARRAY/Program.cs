@@ -7,7 +7,7 @@ namespace _33_DYNAMIC_ARRAY
     {
         static void Main(string[] args)
         {
-            var myList1 = new List<string>() { "0" };
+            var myList1 = new List<string>() { };
 
             //var MyDA = new DynamicArray<string>(-7);
 
@@ -15,9 +15,11 @@ namespace _33_DYNAMIC_ARRAY
 
             //var newArray = MyDA.ToArray();
 
+            MyDA.Add("321");
             MyDA.Insert("751", 0);
             MyDA.Remove("751");
-            MyDA.Add("321");
+            MyDA.Remove("321");
+            MyDA.Add("01");
 
             //var myList2 = new List<string>(new string[6] { "6", "7", "8", "9", "10", "11" });
             //MyDA.AddRange(myList2);
