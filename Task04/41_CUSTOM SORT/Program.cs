@@ -40,7 +40,7 @@ namespace _41_CUSTOM_SORT
             return array;
         }
 
-        public static void Swap<T>(ref T item1, ref T item2)
+        private static void Swap<T>(ref T item1, ref T item2)
         {
             var buffer = item1;
             item1 = item2;

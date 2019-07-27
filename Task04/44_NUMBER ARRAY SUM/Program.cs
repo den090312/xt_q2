@@ -17,7 +17,7 @@ namespace _44_NUMBER_ARRAY_SUM
         }
     }
 
-    internal static class NumberArrayExtansion
+    public static class NumberArrayExtansion
     {
         public static T Sum<T>(this T[] array)
         {

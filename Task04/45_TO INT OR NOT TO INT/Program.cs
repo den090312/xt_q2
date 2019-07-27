@@ -2,9 +2,9 @@
 
 namespace _45_TO_INT_OR_NOT_TO_INT
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var myString = "123456";
 
@@ -19,9 +19,9 @@ namespace _45_TO_INT_OR_NOT_TO_INT
         }
     }
 
-    internal static class StringExtension
+    public static class StringExtension
     {
-        internal static bool IsPositiveInt(this string userString)
+        public static bool IsPositiveInt(this string userString)
         {
             NullCheck(userString);
 
