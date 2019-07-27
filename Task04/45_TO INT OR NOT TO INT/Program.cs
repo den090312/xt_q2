@@ -6,19 +6,15 @@ namespace _45_TO_INT_OR_NOT_TO_INT
     {
         static void Main(string[] args)
         {
-            var myString = "123456";
-
-            //var myString = "0";
-
-            //Console.WriteLine(Convert.ToInt32(myString));
+            var myString = "-123456,6";
 
             if (myString.IsInt())
             {
-                Console.WriteLine($"'{myString}' is positive integer");
+                Console.WriteLine($"{myString} is positive integer");
             }
             else
             {
-                Console.WriteLine($"'{myString}' is NOT positive integer");
+                Console.WriteLine($"{myString} is NOT positive integer");
             }
         }
     }
@@ -27,6 +23,11 @@ namespace _45_TO_INT_OR_NOT_TO_INT
     {
         internal static bool IsInt(this string userString)
         {
+            if (userString[0] == '-')
+            {
+                return false;
+            }
+
             if (userString.Length == 1 & userString[0] == '0')
             {
                 return false;
