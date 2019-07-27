@@ -10,10 +10,10 @@ namespace _43_SORTING_UNIT
 
         public static void SortingIsDone(string alertText) => Console.WriteLine(alertText);
 
-        public static void SortingInThread<T>(T[] array, Func<T, T, bool> compare)
+        public static void SortingInThread<T>(T[] array, Func<T, T, bool> comparer)
         {
             _41_CUSTOM_SORT.Program.NullCheck(array);
-            _41_CUSTOM_SORT.Program.NullCheck(compare);
+            _41_CUSTOM_SORT.Program.NullCheck(comparer);
 
             var thread = new Thread(() =>
             {
@@ -21,7 +21,7 @@ namespace _43_SORTING_UNIT
 
                 Console.WriteLine($"{threadId}: start");
 
-                _41_CUSTOM_SORT.Program.Sort(array, compare);
+                _41_CUSTOM_SORT.Program.Sort(array, comparer);
 
                 Console.WriteLine($"{threadId}: in progress");
 
