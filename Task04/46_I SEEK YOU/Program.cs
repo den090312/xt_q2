@@ -11,17 +11,17 @@ namespace _46_I_SEEK_YOU
             var myArray = new int[] { 1, 3, 0, 7, 9, 5 };
 
             //экземпляр делегата
-            Func<int, bool> condition = IsPositive;
+            var condition1 = new Condition<int>(IsPositive);
 
-            var positiveArray1 = ArrayFindAllFunc(myArray, condition);
+            var positiveArray1 = ArrayFindAll(myArray, condition1);
 
             //делегат в виде анонимного метода
-            Condition<int> positive = delegate (int userInt) { return userInt > 0; };
+            Condition<int> condition2 = delegate (int userInt) { return userInt > 0; };
 
-            var positiveArray2 = ArrayFindAllAnon(myArray, positive);
+            var positiveArray2 = ArrayFindAll(myArray, condition2);
 
             //делегат в виде лямбда-выражения
-            var positiveArray3 = ArrayFindAllFunc(myArray, x => x > 0);
+            var positiveArray3 = ArrayFindAll(myArray, x => x > 0);
 
             //LINQ-выражение
             var positiveArray4 = myArray.Where(x => x > 0);
@@ -51,22 +51,7 @@ namespace _46_I_SEEK_YOU
             return found;
         }
 
-        public static T[] ArrayFindAllFunc<T>(T[] array, Func<T, bool> condition)
-        {
-            var tempList = new List<T>();
-
-            foreach (T element in array)
-            {
-                if (condition(element))
-                {
-                    tempList.Add(element);
-                }
-            }
-
-            return tempList.ToArray();
-        }
-
-        public static T[] ArrayFindAllAnon<T>(T[] array, Condition<T> condition)
+        public static T[] ArrayFindAll<T>(T[] array, Condition<T> condition)
         {
             var tempList = new List<T>();
 
