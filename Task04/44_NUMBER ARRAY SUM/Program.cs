@@ -7,33 +7,17 @@ namespace _44_NUMBER_ARRAY_SUM
     {
         static void Main(string[] args)
         {
-            var myArray = new int[] { 1, 3, 0, 7, 9, 5 };
+            var myArray = new float[] { 1, 3, 0, 7, 9, 5 };
 
-            Func<int[], decimal[]> decimalArray = GetDecimalArray;
-
-            var sum = GetSum.Sum(myArray, decimalArray);
-
-            Console.WriteLine(sum);
-        }
-
-        public static decimal[] GetDecimalArray<T>(T[] array)
-        {
-            var decimalArray = new decimal[array.Length];
-
-            for(int i = 0; i < array.Length; i++)
-            {
-                decimalArray[i] = Convert.ToDecimal(array[i]);
-            }
-
-            return decimalArray;
+            Console.WriteLine(myArray.Sum());
         }
     }
 
     internal static class GetSum
     {
-        public static decimal Sum<T>(T[] array, Func<T[], decimal[]> getDecimalArray)
+        public static decimal Sum<T>(this T[] array)
         {
-            var newArray = getDecimalArray(array);
+            var newArray = GetDecimalArray(array);
 
             decimal sum = 0;
 
@@ -43,6 +27,18 @@ namespace _44_NUMBER_ARRAY_SUM
             }
 
             return sum;
+        }
+
+        private static decimal[] GetDecimalArray<T>(T[] array)
+        {
+            var decimalArray = new decimal[array.Length];
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                decimalArray[i] = Convert.ToDecimal(array[i]);
+            }
+
+            return decimalArray;
         }
     }
 }
