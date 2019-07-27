@@ -12,9 +12,9 @@ namespace _46_I_SEEK_YOU
         {
             var myArray = new int[] { 1, 3, 0, 7, 9, 5 };
 
-            Func<int, bool> isPositive = IsPositive;
+            Func<int, bool> condition = IsPositive;
 
-            var allPositiveArray = SeachInArrayExtansion.ArrayFindAll(myArray, isPositive);
+            var allPositiveArray = SeachInArrayExtansion.ArrayFindAll(myArray, condition);
         }
 
         public static bool IsPositive(int userInt) => userInt > 0;
@@ -42,15 +42,13 @@ namespace _46_I_SEEK_YOU
             return found;
         }
 
-        public delegate bool Predicate<in T>(T obj);
-
-        public static T[] ArrayFindAll<T>(T[] array, Predicate<T> predicate)
+        public static T[] ArrayFindAll<T>(T[] array, Func<T, bool> condition)
         {
             var tempList = new List<T>();
 
             foreach (T element in array)
             {
-                if (predicate(element))
+                if (condition(element))
                 {
                     tempList.Add(element);
                 }
