@@ -55,7 +55,7 @@ namespace _44_NUMBER_ARRAY_SUM
             }
             catch
             {
-                throw new ArgumentException($"{nameof(array)} is not a number array!");
+                throw new ArgumentException($"'{nameof(array)}' is not a number array!");
             }
         }
     }
