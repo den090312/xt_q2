@@ -12,15 +12,21 @@ namespace _46_I_SEEK_YOU
         {
             var myArray = new int[] { 1, 3, 0, 7, 9, 5 };
 
+            //экземпляр делегата
             Func<int, bool> condition = IsPositive;
 
             var allPositiveArray1 = ArrayFindAllFunc(myArray, condition);
 
+            //делегат в виде анонимного метода
             Condition<int> positive = delegate (int userInt) { return userInt > 0; };
 
             var allPositiveArray2 = ArrayFindAllAnon(myArray, positive);
 
+            //делегат в виде лямбда-выражения
             var allPositiveArray3 = ArrayFindAllFunc(myArray, x => x > 0);
+
+            //LINQ-выражение
+            //var allPositiveArray3 = ArrayFindAllFunc(myArray, x => x > 0);
         }
 
         public static bool IsPositive(int userInt) => userInt > 0;
