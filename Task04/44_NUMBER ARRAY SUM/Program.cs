@@ -7,7 +7,9 @@ namespace _44_NUMBER_ARRAY_SUM
     {
         static void Main(string[] args)
         {
-            var myArray = new char[] { '1', '3', '0', '7', '9', '5' };
+            //var myArray = new char[] { '1', '3', '0', '7', '9', '5' };
+
+            var myArray = new int[] { 1, 3, 0, 7, 9, 5 };
 
             Console.WriteLine(myArray.Sum());
         }
