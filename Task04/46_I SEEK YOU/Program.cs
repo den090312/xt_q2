@@ -13,6 +13,8 @@ namespace _46_I_SEEK_YOU
             var myArray = new int[] { 1, 3, 0, 7, 9, 5 };
 
             Predicate<int> allPositive = delegate (int x) { return x > 0; };
+
+            var allPositiveArray = SeachInArrayExtansion.ArrayFindAll(myArray, allPositive);
         }
     }
 

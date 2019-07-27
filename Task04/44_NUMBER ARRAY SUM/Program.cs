@@ -19,7 +19,7 @@ namespace _44_NUMBER_ARRAY_SUM
 
     internal static class NumberArrayExtansion
     {
-        public static decimal Sum<T>(this T[] array)
+        public static T Sum<T>(this T[] array)
         {
             var newArray = GetDecimalArray(array);
 
@@ -30,7 +30,9 @@ namespace _44_NUMBER_ARRAY_SUM
                 sum += newArray[i];
             }
 
-            return sum;
+            var resultSum = (T)Convert.ChangeType(sum, typeof(T));
+
+            return resultSum;
         }
 
         private static decimal[] GetDecimalArray<T>(T[] array)
