@@ -14,7 +14,9 @@ namespace _46_I_SEEK_YOU
 
             Func<int, bool> condition = IsPositive;
 
-            var allPositiveArray = SeachInArrayExtansion.ArrayFindAll(myArray, condition);
+            var allPositiveArray1 = SeachInArrayExtansion.ArrayFindAll(myArray, condition);
+
+            var allPositiveArray2 = SeachInArrayExtansion.ArrayFindAll(myArray, x => x > 0);
         }
 
         public static bool IsPositive(int userInt) => userInt > 0;
