@@ -11,7 +11,7 @@ namespace _44_NUMBER_ARRAY_SUM
 
             Func<int[], decimal[]> toDecimalArray = ToDecimalArray;
 
-            var sum = GetSum.Sum((decimal[])(object)myArray);
+            var sum = GetSum.Sum(myArray, toDecimalArray);
 
             Console.WriteLine(sum);
         }
@@ -21,7 +21,7 @@ namespace _44_NUMBER_ARRAY_SUM
 
     internal static class GetSum
     {
-        public static decimal Sum(decimal[] array)
+        public static decimal Sum<T>(T[] array, Func<int[], decimal[]> toDecimalArray)
         {
             decimal sum = 0;
 
