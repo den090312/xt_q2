@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "44_NUMBER ARRAY SUM", "44_N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "45_TO INT OR NOT TO INT", "45_TO INT OR NOT TO INT\45_TO INT OR NOT TO INT.csproj", "{FF4F93A5-ADE8-4CCD-B813-5C8672440640}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "46_I SEEK YOU", "46_I SEEK YOU\46_I SEEK YOU.csproj", "{1A29F160-65C2-4144-8CD7-CD1527ED8DB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{FF4F93A5-ADE8-4CCD-B813-5C8672440640}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF4F93A5-ADE8-4CCD-B813-5C8672440640}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF4F93A5-ADE8-4CCD-B813-5C8672440640}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A29F160-65C2-4144-8CD7-CD1527ED8DB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A29F160-65C2-4144-8CD7-CD1527ED8DB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A29F160-65C2-4144-8CD7-CD1527ED8DB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A29F160-65C2-4144-8CD7-CD1527ED8DB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
