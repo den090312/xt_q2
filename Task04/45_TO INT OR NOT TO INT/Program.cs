@@ -6,7 +6,7 @@ namespace _45_TO_INT_OR_NOT_TO_INT
     {
         static void Main(string[] args)
         {
-            var myString = "-123456";
+            var myString = "123456";
 
             if (myString.IsPositiveInt())
             {
