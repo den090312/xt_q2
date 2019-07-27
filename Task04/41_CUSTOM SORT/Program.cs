@@ -21,16 +21,16 @@ namespace _41_CUSTOM_SORT
             }
         }
 
-        public static T[] Sort<T>(T[] array, Func<T, T, bool> compare)
+        public static T[] Sort<T>(T[] array, Func<T, T, bool> comparer)
         {
             NullCheck(array);
-            NullCheck(compare);
+            NullCheck(comparer);
 
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = i + 1; j < array.Length; j++)
                 {
-                    if (compare(array[j], array[i]))
+                    if (comparer(array[j], array[i]))
                     {
                         Swap(ref array[i], ref array[j]);
                     }

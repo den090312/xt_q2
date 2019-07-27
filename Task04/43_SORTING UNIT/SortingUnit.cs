@@ -1,7 +1,6 @@
 ﻿
 using System;
 using System.Threading;
-using _41_CUSTOM_SORT;
 
 namespace _43_SORTING_UNIT
 {
