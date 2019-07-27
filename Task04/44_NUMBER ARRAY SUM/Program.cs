@@ -35,14 +35,7 @@ namespace _44_NUMBER_ARRAY_SUM
 
         private static decimal[] GetDecimalArray<T>(T[] array)
         {
-            try
-            {
-                var tryPar = Convert.ToDecimal(array[0]);            
-            }
-            catch
-            {
-                throw new ArgumentException($"{nameof(array)} is not a number array!");
-            }
+            NumberArrayCheck(array);
 
             var decimalArray = new decimal[array.Length];
 
@@ -52,6 +45,18 @@ namespace _44_NUMBER_ARRAY_SUM
             }
 
             return decimalArray;
+        }
+
+        private static void NumberArrayCheck<T>(T[] array)
+        {
+            try
+            {
+                var tryPar = Convert.ToDecimal(array[0]);
+            }
+            catch
+            {
+                throw new ArgumentException($"{nameof(array)} is not a number array!");
+            }
         }
     }
 }
