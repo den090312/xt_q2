@@ -16,7 +16,17 @@ namespace _44_NUMBER_ARRAY_SUM
             Console.WriteLine(sum);
         }
 
-        public static decimal[] GetDecimalArray<T>(T array) => (decimal[])(object)array;
+        public static decimal[] GetDecimalArray<T>(T[] array)
+        {
+            var decimalArray = new decimal[array.Length];
+
+            for(int i = 0; i < array.Length; i++)
+            {
+                decimalArray[i] = Convert.ToDecimal(array[i]);
+            }
+
+            return decimalArray;
+        }
     }
 
     internal static class GetSum
