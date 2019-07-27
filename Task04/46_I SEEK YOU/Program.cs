@@ -13,18 +13,18 @@ namespace _46_I_SEEK_YOU
             //экземпляр делегата
             Func<int, bool> condition = IsPositive;
 
-            var allPositiveArray1 = ArrayFindAllFunc(myArray, condition);
+            var positiveArray1 = ArrayFindAllFunc(myArray, condition);
 
             //делегат в виде анонимного метода
             Condition<int> positive = delegate (int userInt) { return userInt > 0; };
 
-            var allPositiveArray2 = ArrayFindAllAnon(myArray, positive);
+            var positiveArray2 = ArrayFindAllAnon(myArray, positive);
 
             //делегат в виде лямбда-выражения
-            var allPositiveArray3 = ArrayFindAllFunc(myArray, x => x > 0);
+            var positiveArray3 = ArrayFindAllFunc(myArray, x => x > 0);
 
             //LINQ-выражение
-            var allPositiveArray4 = myArray.Where(x => x > 0);
+            var positiveArray4 = myArray.Where(x => x > 0);
         }
 
         public static bool IsPositive(int userInt) => userInt > 0;
