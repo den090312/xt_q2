@@ -13,7 +13,7 @@ namespace _44_NUMBER_ARRAY_SUM
         }
     }
 
-    internal static class GetSum
+    internal static class NumberArrayExtansion
     {
         public static decimal Sum<T>(this T[] array)
         {
