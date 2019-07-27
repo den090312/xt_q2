@@ -12,6 +12,9 @@ namespace _43_SORTING_UNIT
 
         public static void SortingInThread<T>(T[] array, Func<T, T, bool> compare)
         {
+            _41_CUSTOM_SORT.Program.NullCheck(array);
+            _41_CUSTOM_SORT.Program.NullCheck(compare);
+
             var thread = new Thread(() =>
             {
                 var threadId = $"Thread {Thread.CurrentThread.ManagedThreadId}";

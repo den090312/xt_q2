@@ -3,9 +3,9 @@ using System;
 
 namespace _44_NUMBER_ARRAY_SUM
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             //var myArray = new char[] { '1', '3', '0', '7', '9', '5' };
             //var myArray = new float[] { 1, 3, 0, 7, 9, 5 };
