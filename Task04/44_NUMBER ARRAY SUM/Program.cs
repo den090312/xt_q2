@@ -41,7 +41,7 @@ namespace _44_NUMBER_ARRAY_SUM
             }
             catch
             {
-                throw new ArgumentException($"{nameof(array)} can't be converted to decimal!");
+                throw new ArgumentException($"{nameof(array)} is not a number array!");
             }
 
             var decimalArray = new decimal[array.Length];
