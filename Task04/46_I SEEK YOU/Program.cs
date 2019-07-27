@@ -12,9 +12,8 @@ namespace _46_I_SEEK_YOU
         {
             var myArray = new int[] { 1, 3, 0, 7, 9, 5 };
 
-
+            Predicate<int> isPositive = delegate (int x) { return x > 0; };
         }
-
     }
 
     internal static class SeachInArrayExtansion
@@ -41,24 +40,19 @@ namespace _46_I_SEEK_YOU
 
         public delegate bool Predicate<in T>(T obj);
 
-        public static bool TryFind<T>(T[] array, T userElement, out int index, Predicate<T> predicate)
+        public static T[] ArrayFindAll<T>(T[] array, Predicate<T> predicate)
         {
-            index = 0;
-            bool found = false;
+            var tempList = new List<T>();
 
             foreach (T element in array)
             {
-                if (element.Equals(userElement))
+                if (predicate(element))
                 {
-                    return true;
-                }
-                else
-                {
-                    index++;
+                    tempList.Add(element);
                 }
             }
 
-            return found;
+            return tempList.ToArray();
         }
     }
 }
