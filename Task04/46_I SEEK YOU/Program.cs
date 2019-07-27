@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _46_I_SEEK_YOU
 {
@@ -26,7 +24,7 @@ namespace _46_I_SEEK_YOU
             var allPositiveArray3 = ArrayFindAllFunc(myArray, x => x > 0);
 
             //LINQ-выражение
-            //var allPositiveArray3 = ArrayFindAllFunc(myArray, x => x > 0);
+            var allPositiveArray4 = myArray.Where(x => x > 0);
         }
 
         public static bool IsPositive(int userInt) => userInt > 0;
