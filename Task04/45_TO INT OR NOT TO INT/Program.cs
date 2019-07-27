@@ -6,9 +6,9 @@ namespace _45_TO_INT_OR_NOT_TO_INT
     {
         static void Main(string[] args)
         {
-            var myString = "-123456,6";
+            var myString = "-123456";
 
-            if (myString.IsInt())
+            if (myString.IsPositiveInt())
             {
                 Console.WriteLine($"{myString} is positive integer");
             }
@@ -21,12 +21,9 @@ namespace _45_TO_INT_OR_NOT_TO_INT
 
     internal static class StringExtension
     {
-        internal static bool IsInt(this string userString)
+        internal static bool IsPositiveInt(this string userString)
         {
-            if (userString[0] == '-')
-            {
-                return false;
-            }
+            NullCheck(userString);
 
             if (userString.Length == 1 & userString[0] == '0')
             {
@@ -35,13 +32,21 @@ namespace _45_TO_INT_OR_NOT_TO_INT
 
             foreach (char symbol in userString)
             {
-                if (symbol < 48 || symbol > 57)
+                if (!char.IsDigit(symbol))
                 {
                     return false;
                 }
             }
 
             return true;
+        }
+
+        private static void NullCheck(string userString)
+        {
+            if (userString is null)
+            {
+                throw new ArgumentNullException($"{nameof(userString)} is null!");
+            }
         }
     }
 }
