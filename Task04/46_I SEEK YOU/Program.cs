@@ -19,9 +19,29 @@ namespace _46_I_SEEK_YOU
 
     internal static class SeachInArrayExtansion
     {
+        public static bool TryFind<T>(T[] array, T userElement, out int index)
+        {
+            index = 0;
+            bool found = false;
+
+            foreach (T element in array)
+            {
+                if (element.Equals(userElement))
+                {
+                    return true;
+                }
+                else
+                {
+                    index++;
+                }
+            }
+
+            return found;
+        }
+
         public delegate bool Predicate<in T>(T obj);
 
-        public static bool TryFind<T>(T[] array, T userElement, out int index)
+        public static bool TryFind<T>(T[] array, T userElement, out int index, Predicate<T> predicate)
         {
             index = 0;
             bool found = false;
