@@ -53,17 +53,17 @@ namespace _46_I_SEEK_YOU
 
         public static T[] ArrayFindAll<T>(T[] array, Condition<T> condition)
         {
-            var tempList = new List<T>();
+            var resultList = new List<T>();
 
             foreach (T element in array)
             {
                 if (condition(element))
                 {
-                    tempList.Add(element);
+                    resultList.Add(element);
                 }
             }
 
-            return tempList.ToArray();
+            return resultList.ToArray();
         }
     }
 }
