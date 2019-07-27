@@ -7,7 +7,7 @@ namespace _44_NUMBER_ARRAY_SUM
     {
         static void Main(string[] args)
         {
-            var myArray = new float[] { 1, 3, 0, 7, 9, 5 };
+            var myArray = new char[] { '1', '3', '0', '7', '9', '5' };
 
             Console.WriteLine(myArray.Sum());
         }
@@ -31,6 +31,15 @@ namespace _44_NUMBER_ARRAY_SUM
 
         private static decimal[] GetDecimalArray<T>(T[] array)
         {
+            try
+            {
+                var tryPar = Convert.ToDecimal(array[0]);            
+            }
+            catch
+            {
+                throw new ArgumentException($"{nameof(array)} can't be converted to decimal!");
+            }
+
             var decimalArray = new decimal[array.Length];
 
             for (int i = 0; i < array.Length; i++)
