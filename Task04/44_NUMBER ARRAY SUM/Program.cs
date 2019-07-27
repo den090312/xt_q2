@@ -9,35 +9,28 @@ namespace _44_NUMBER_ARRAY_SUM
         {
             var myArray = new int[] { 1, 3, 0, 7, 9, 5 };
 
-            Func<int[], Type> type = GetType;
+            Func<int[], decimal[]> toDecimalArray = ToDecimalArray;
 
-            var sum = GetSum.Sum(myArray, type);
+            var sum = GetSum.Sum((decimal[])(object)myArray);
 
             Console.WriteLine(sum);
         }
 
-        public static Type GetType<T>(T[] array) => array.GetType();
+        public static decimal[] ToDecimalArray<T>(T array) => (decimal[])(object)array;
     }
 
     internal static class GetSum
     {
-        public static T Sum<T>(T[] array, Func<T[], Type> type)
+        public static decimal Sum(decimal[] array)
         {
-            if (type is int)
+            decimal sum = 0;
+
+            for (int i = 0; i < array.Length; i++)
             {
-                int sum = 0;
-
-                var intArray = (int[])(object)array;
-
-                for (int i = 0; i < intArray.Length; i++)
-                {
-                    sum += intArray[i];
-                }
-
-                return sum;
+                sum += array[i];
             }
 
-            return array[0];
+            return sum;
         }
     }
 }
