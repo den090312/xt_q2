@@ -8,7 +8,7 @@ namespace _46_I_SEEK_YOU
     {
         public static void Main(string[] args)
         {
-            var array = new int[] { 1, 3, 0, 7, 9, 5 };
+            var array = new int[] { -1, 3, 0, -7, -9, 5 };
 
             //экземпляр делегата
             var condition1 = new Condition<int>(IsPositive);
