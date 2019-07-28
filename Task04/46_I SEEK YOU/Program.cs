@@ -24,7 +24,7 @@ namespace _46_I_SEEK_YOU
             var positiveArray3 = ArrayFindAll(array, x => x > 0);
 
             //LINQ-выражение
-            var positiveArray4 = array.Where(x => x > 0);
+            var positiveArray4 = array.Where(x => x > 0).ToArray();
         }
 
         public static bool IsPositive(int x) => x > 0;
