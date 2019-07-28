@@ -10,8 +10,8 @@ namespace _44_NUMBER_ARRAY_SUM
             //var myArray = new char[] { '1', '3', '0', '7', '9', '5' };
             //var myArray = new float[] { 1, 3, 0, 7, 9, 5 };
             //var myArray = new double[] { 1, 3, 0, 7, 9, 5 };
-            var myArray = new long[] { 1, 3, 0, 7, 9, 5 };
             //var myArray = new int[] { 1, 3, 0, 7, 9, 5 };
+            var myArray = new long[] { 1, 3, 0, 7, 9, 5 };
 
             Console.WriteLine(myArray.Sum());
         }
@@ -21,32 +21,16 @@ namespace _44_NUMBER_ARRAY_SUM
     {
         public static T Sum<T>(this T[] array)
         {
-            var newArray = GetDecimalArray(array);
+            NumberArrayCheck(array);
 
             decimal sum = 0;
 
-            for (int i = 0; i < newArray.Length; i++)
-            {
-                sum += newArray[i];
-            }
-
-            var resultSum = (T)Convert.ChangeType(sum, typeof(T));
-
-            return resultSum;
-        }
-
-        private static decimal[] GetDecimalArray<T>(T[] array)
-        {
-            NumberArrayCheck(array);
-
-            var decimalArray = new decimal[array.Length];
-
             for (int i = 0; i < array.Length; i++)
             {
-                decimalArray[i] = Convert.ToDecimal(array[i]);
+                sum += Convert.ToDecimal(array[i]);
             }
 
-            return decimalArray;
+            return (T)Convert.ChangeType(sum, typeof(T));
         }
 
         private static void NumberArrayCheck<T>(T[] array)
