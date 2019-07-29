@@ -10,6 +10,9 @@ namespace _46_I_SEEK_YOU
         {
             var array = new int[] { -1, 3, 0, -7, -9, 5 };
 
+            //простой вызов метода
+            var positiveArray = ArrayFindAllPositive(array);
+
             //экземпляр делегата
             var condition1 = new Condition<int>(IsPositive);
 
@@ -31,24 +34,21 @@ namespace _46_I_SEEK_YOU
 
         public delegate bool Condition<T>(T x);
 
-        public static bool ArrayTryFind<T>(T[] array, T targetElement, out int index)
+        public static T[] ArrayFindAllPositive<T>(T[] array)
         {
-            index = 0;
-            bool found = false;
+            _41_CUSTOM_SORT.Program.NullCheck(array);
+
+            var resultList = new List<T>();
 
             foreach (T element in array)
             {
-                if (element.Equals(targetElement))
+                if (Comparer<T>.Default.Compare(element, default) > 0)
                 {
-                    return true;
-                }
-                else
-                {
-                    index++;
+                    resultList.Add(element);
                 }
             }
 
-            return found;
+            return resultList.ToArray();
         }
 
         public static T[] ArrayFindAll<T>(T[] array, Condition<T> condition)
