@@ -40,9 +40,11 @@ namespace _46_I_SEEK_YOU
 
             var resultList = new List<T>();
 
+            var defaultComparer = Comparer<T>.Default;
+
             foreach (T element in array)
             {
-                if (Comparer<T>.Default.Compare(element, default) > 0)
+                if (defaultComparer.Compare(element, default) > 0)
                 {
                     resultList.Add(element);
                 }
