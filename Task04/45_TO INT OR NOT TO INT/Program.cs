@@ -25,6 +25,8 @@ namespace _45_TO_INT_OR_NOT_TO_INT
         {
             NullCheck(userString);
 
+            userString = userString.Trim();
+
             if (userString.Length == 1 & userString[0] == '0')
             {
                 return false;
