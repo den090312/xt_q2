@@ -12,7 +12,7 @@ namespace _51_BACKUP_SYSTEM
         }
 
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
-        private static void Run()
+        public static void Run()
         {
             string[] args = Environment.GetCommandLineArgs();
 
