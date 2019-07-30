@@ -7,6 +7,7 @@ namespace _51_BACKUP_SYSTEM
     public class Watcher
     {
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
+
         public void Run()
         {
             // Create a new FileSystemWatcher and set its properties.
@@ -21,7 +22,6 @@ namespace _51_BACKUP_SYSTEM
                                      | NotifyFilters.FileName
                                      | NotifyFilters.DirectoryName;
 
-                // Only watch text files.
                 watcher.Filter = "*.txt";
 
                 // Add event handlers.
@@ -33,7 +33,6 @@ namespace _51_BACKUP_SYSTEM
                 // Begin watching.
                 watcher.EnableRaisingEvents = true;
 
-                // Wait for the user to quit the program.
                 Console.WriteLine("Press 'q' to quit the sample.");
                 while (Console.Read() != 'q') ;
             }
@@ -44,9 +43,8 @@ namespace _51_BACKUP_SYSTEM
         // Define the event handlers.
         private void OnChanged(object source, FileSystemEventArgs file)
         {
-            // Specify what is done when a file is changed, created, or deleted.
-            // Duplicated OnChanged event fix
             DateTime lastWriteTime = File.GetLastWriteTime(file.FullPath); 
+
             if (lastWriteTime != lastRead)
             {
                 Console.WriteLine($"File: {file.FullPath} {file.ChangeType}"); 
@@ -56,7 +54,6 @@ namespace _51_BACKUP_SYSTEM
 
         private static void OnRenamed(object source, RenamedEventArgs file)
         {
-            // Specify what is done when a file is renamed.
             Console.WriteLine($"File: {file.OldFullPath} renamed to {file.FullPath}");
         }
     }
