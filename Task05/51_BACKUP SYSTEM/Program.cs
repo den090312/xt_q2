@@ -10,7 +10,8 @@ namespace _51_BACKUP_SYSTEM
     {
         public static void Main(string[] args)
         {
-            Watcher.Run();
+            var watcher = new Watcher();
+            watcher.Run();
         }
     }
 }

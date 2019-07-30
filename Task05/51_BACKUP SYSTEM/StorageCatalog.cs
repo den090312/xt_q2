@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _51_BACKUP_SYSTEM
 {
-    class Catalog : Storage
+    class StorageCatalog : Storage
     {
         public override string FullName { get; protected set; }
     }

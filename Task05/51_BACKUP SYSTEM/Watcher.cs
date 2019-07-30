@@ -4,17 +4,14 @@ using System.Security.Permissions;
 
 namespace _51_BACKUP_SYSTEM
 {
-    public static class Watcher
+    public class Watcher
     {
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
-        public static void Run()
+        public void Run()
         {
-            string[] args = Environment.GetCommandLineArgs();
-
             // Create a new FileSystemWatcher and set its properties.
             using (FileSystemWatcher watcher = new FileSystemWatcher())
             {
-                //watcher.Path = args[1];
                 watcher.Path = Storage.Root;
 
                 // Watch for changes in LastAccess and LastWrite times, and
@@ -42,11 +39,19 @@ namespace _51_BACKUP_SYSTEM
             }
         }
 
+        private DateTime lastRead = DateTime.MinValue;
+        
         // Define the event handlers.
-        private static void OnChanged(object source, FileSystemEventArgs e)
+        private void OnChanged(object source, FileSystemEventArgs e)
         {
             // Specify what is done when a file is changed, created, or deleted.
-            Console.WriteLine($"File: {e.FullPath} {e.ChangeType}");
+            // Duplicated OnChanged event fix
+            DateTime lastWriteTime = File.GetLastWriteTime(e.FullPath);
+            if (lastWriteTime != lastRead)
+            {
+                Console.WriteLine($"File: {e.FullPath} {e.ChangeType}");
+                lastRead = lastWriteTime;
+            }
         }
 
         private static void OnRenamed(object source, RenamedEventArgs e)

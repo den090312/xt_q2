@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _51_BACKUP_SYSTEM
 {
-    class File : Storage
+    class StorageFile : Storage
     {
         public override string FullName { get; protected set; }
         private byte[] byteArray = new byte[0];
