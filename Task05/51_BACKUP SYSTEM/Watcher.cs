@@ -40,7 +40,6 @@ namespace _51_BACKUP_SYSTEM
 
         private DateTime lastRead = DateTime.MinValue;
         
-        // Define the event handlers.
         private void OnChanged(object source, FileSystemEventArgs file)
         {
             DateTime lastWriteTime = File.GetLastWriteTime(file.FullPath); 
