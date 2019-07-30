@@ -42,22 +42,22 @@ namespace _51_BACKUP_SYSTEM
         private DateTime lastRead = DateTime.MinValue;
         
         // Define the event handlers.
-        private void OnChanged(object source, FileSystemEventArgs e)
+        private void OnChanged(object source, FileSystemEventArgs file)
         {
             // Specify what is done when a file is changed, created, or deleted.
             // Duplicated OnChanged event fix
-            DateTime lastWriteTime = File.GetLastWriteTime(e.FullPath);
+            DateTime lastWriteTime = File.GetLastWriteTime(file.FullPath); 
             if (lastWriteTime != lastRead)
             {
-                Console.WriteLine($"File: {e.FullPath} {e.ChangeType}");
+                Console.WriteLine($"File: {file.FullPath} {file.ChangeType}"); 
                 lastRead = lastWriteTime;
             }
         }
 
-        private static void OnRenamed(object source, RenamedEventArgs e)
+        private static void OnRenamed(object source, RenamedEventArgs file)
         {
             // Specify what is done when a file is renamed.
-            Console.WriteLine($"File: {e.OldFullPath} renamed to {e.FullPath}");
+            Console.WriteLine($"File: {file.OldFullPath} renamed to {file.FullPath}");
         }
     }
 }
