@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace _51_BACKUP_SYSTEM
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Watcher.Run();
         }

@@ -6,28 +6,16 @@ namespace _51_BACKUP_SYSTEM
 {
     public static class Watcher
     {
-        public static void Main()
-        {
-            Run();
-        }
-
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
         public static void Run()
         {
             string[] args = Environment.GetCommandLineArgs();
 
-            // If a directory is not specified, exit program.
-            if (args.Length != 2)
-            {
-                // Display the proper way to call the program.
-                Console.WriteLine("Usage: Watcher.exe (directory)");
-                return;
-            }
-
             // Create a new FileSystemWatcher and set its properties.
             using (FileSystemWatcher watcher = new FileSystemWatcher())
             {
-                watcher.Path = args[1];
+                //watcher.Path = args[1];
+                watcher.Path = Storage.Root;
 
                 // Watch for changes in LastAccess and LastWrite times, and
                 // the renaming of files or directories.

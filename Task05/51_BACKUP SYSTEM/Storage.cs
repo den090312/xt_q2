@@ -8,8 +8,9 @@ namespace _51_BACKUP_SYSTEM
 {
     public abstract class Storage
     {
-        private static readonly string root = @"D:\Storage";
-        private static readonly string logDir = @"D:\log.xml";
+        public static string Root { get; } = @"D:\Storage";
+
+        public static string LogDir { get; } = @"D:\log.xml";
 
         public virtual string FullName { get; protected set; }
     }
