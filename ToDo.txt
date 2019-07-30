@@ -1,1 +1,5 @@
-Посмотреть анонимный метод
+FileSystemWatcher - Storage OnChange
+CastStorage in log file (json or xml): date + list of storage objects
+StorageObject: Catalog, File
+File GetHashcode(): char + position
+File Content: binary
