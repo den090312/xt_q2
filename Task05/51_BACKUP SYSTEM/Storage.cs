@@ -12,6 +12,8 @@ namespace _51_BACKUP_SYSTEM
 
         public static string LogDir { get; } = @"D:\log.xml";
 
+        public static string LogName { get; } = "log.xml";
+
         public virtual string FullName { get; protected set; }
     }
 }
