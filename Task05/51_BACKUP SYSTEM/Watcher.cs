@@ -6,31 +6,27 @@ namespace _51_BACKUP_SYSTEM
 {
     public class Watcher
     {
+        private DateTime lastRead = DateTime.MinValue;
+
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
 
         public void Run()
         {
-            // Create a new FileSystemWatcher and set its properties.
             using (FileSystemWatcher watcher = new FileSystemWatcher())
             {
                 watcher.Path = Storage.Root;
-
-                // Watch for changes in LastAccess and LastWrite times, and
-                // the renaming of files or directories.
                 watcher.NotifyFilter = NotifyFilters.LastAccess
                                      | NotifyFilters.LastWrite
-                                     | NotifyFilters.FileName
-                                     | NotifyFilters.DirectoryName;
+                                     | NotifyFilters.DirectoryName
+                                     | NotifyFilters.FileName;
 
                 watcher.Filter = "*.*";
 
-                // Add event handlers.
                 watcher.Changed += OnChanged;
                 watcher.Created += OnChanged;
                 watcher.Deleted += OnChanged;
                 watcher.Renamed += OnRenamed;
 
-                // Begin watching.
                 watcher.EnableRaisingEvents = true;
 
                 Console.WriteLine("Press 'q' to quit the sample.");
@@ -38,8 +34,6 @@ namespace _51_BACKUP_SYSTEM
             }
         }
 
-        private DateTime lastRead = DateTime.MinValue;
-        
         private void OnChanged(object source, FileSystemEventArgs file)
         {
             DateTime lastWriteTime = File.GetLastWriteTime(file.FullPath); 
@@ -47,7 +41,7 @@ namespace _51_BACKUP_SYSTEM
             if (lastWriteTime != lastRead)
             {
                 Console.WriteLine($"File: {file.FullPath} {file.ChangeType}"); 
-                StorageDataTable.DataTableStreamWriter(file, new DirectoryInfo(Storage.Root));
+                StorageLog.LogStreamWriter(file, new DirectoryInfo(Storage.Root));
                 lastRead = lastWriteTime;
             }
         }
