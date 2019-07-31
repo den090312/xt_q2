@@ -54,16 +54,16 @@ namespace _51_BACKUP_SYSTEM
 
             foreach (DataRow row in dataTable.Rows)
             {
-                var array = row.ItemArray;
+                var itemArray = row.ItemArray;
 
                 int i;
 
-                for (i = 0; i < array.Length - 1; i++)
+                for (i = 0; i < itemArray.Length - 1; i++)
                 {
-                    streamWriter.Write($"{array[i].ToString()}|");
+                    streamWriter.Write($"{itemArray[i].ToString()}|");
                 }
 
-                streamWriter.Write(array[i].ToString());
+                streamWriter.Write(itemArray[i].ToString());
                 streamWriter.WriteLine();
             }
 
