@@ -22,7 +22,7 @@ namespace _51_BACKUP_SYSTEM
                                      | NotifyFilters.FileName
                                      | NotifyFilters.DirectoryName;
 
-                watcher.Filter = "*.txt";
+                watcher.Filter = "*.*";
 
                 // Add event handlers.
                 watcher.Changed += OnChanged;
@@ -48,7 +48,7 @@ namespace _51_BACKUP_SYSTEM
             {
                 Console.WriteLine($"File: {file.FullPath} {file.ChangeType}"); 
 
-                StorageXmlWriter.ChangeXmlLog(file);
+                StorageDataTable.CreateDataTable(file, new DirectoryInfo(Storage.Root));
 
                 lastRead = lastWriteTime;
             }

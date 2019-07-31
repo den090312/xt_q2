@@ -10,9 +10,9 @@ namespace _51_BACKUP_SYSTEM
     {
         public static string Root { get; } = @"D:\Storage";
 
-        public static string LogDir { get; } = @"D:\log.xml";
+        public static string LogDir { get; } = @"D:\log.txt";
 
-        public static string LogName { get; } = "log.xml";
+        public static string LogName { get; } = "log.txt";
 
         public virtual string FullName { get; protected set; }
     }
