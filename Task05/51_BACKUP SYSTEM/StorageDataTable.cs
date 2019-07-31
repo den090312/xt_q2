@@ -12,23 +12,38 @@ namespace _51_BACKUP_SYSTEM
 {
     public static class StorageDataTable
     {
-        public static void CreateDataTable(FileSystemEventArgs file, DirectoryInfo rootInfo)
+        public static void DataTableStream(FileSystemEventArgs storageFile, DirectoryInfo storageCatalog)
         {
             var dataTable = new DataTable();
 
+            dataTable.Columns.Add(new DataColumn("StorageType"));
             dataTable.Columns.Add(new DataColumn("Date"));
             dataTable.Columns.Add(new DataColumn("Time"));
             dataTable.Columns.Add(new DataColumn("Path"));
 
-            var directories = rootInfo.GetDirectories();
+            var directories = storageCatalog.GetDirectories();
 
             foreach (var dir in directories)
             {
                 DataRow row = dataTable.NewRow();
 
-                row["Date"] = rootInfo.LastWriteTime.Date;
-                row["Time"] = rootInfo.LastWriteTime.ToString("HH:mm");
+                row["StorageType"] = "Catalog";
+                row["Date"] = storageCatalog.LastWriteTime.Date.ToString("dd.MM.yyyy");
+                row["Time"] = storageCatalog.LastWriteTime.ToString("HH:mm");
                 row["Path"] = dir.FullName;
+
+                dataTable.Rows.Add(row);
+            }
+
+            if (storageFile.Name != "0")
+            {
+                DataRow row = dataTable.NewRow(); 
+
+                row["StorageType"] = "File";
+                var lastWriteTime = File.GetLastWriteTime(storageFile.FullPath).Date;
+                row["Date"] = lastWriteTime.ToString("dd.MM.yyyy");
+                row["Time"] = lastWriteTime.ToString("HH:mm");
+                row["Path"] = storageFile.FullPath;
 
                 dataTable.Rows.Add(row);
             }
@@ -43,7 +58,7 @@ namespace _51_BACKUP_SYSTEM
 
                 for (i = 0; i < array.Length - 1; i++)
                 {
-                    streamWriter.Write($"{array[i].ToString()} |");
+                    streamWriter.Write($"{array[i].ToString()}|");
                 }
 
                 streamWriter.Write(array[i].ToString());
