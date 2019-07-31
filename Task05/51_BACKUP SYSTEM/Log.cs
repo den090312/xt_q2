@@ -37,7 +37,7 @@ namespace _51_BACKUP_SYSTEM
                 rowFile["Date"] = storageCatalog.LastWriteTime.Date.ToString("dd.MM.yyyy");
                 rowFile["Time"] = storageCatalog.LastWriteTime.ToString("HH:mm");
                 rowFile["Path"] = file.FullName;
-                rowFile["Hash"] = string.Empty;
+                rowFile["Hash"] = File.ReadAllText(file.FullName).GetHashCode();
 
                 dataTable.Rows.Add(rowFile);
             }
