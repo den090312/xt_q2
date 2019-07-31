@@ -35,9 +35,10 @@ namespace _51_BACKUP_SYSTEM
                 DataRow rowFile = dataTable.NewRow();
 
                 var fileFullName = file.FullName;
+                var lastWriteDate = File.GetLastWriteTime(fileFullName);
 
-                rowFile["Date"] = File.GetLastWriteTime(fileFullName).ToString("dd.MM.yyyy");
-                rowFile["Time"] = File.GetLastWriteTime(fileFullName).ToString("HH:mm:ss");
+                rowFile["Date"] = lastWriteDate.ToString("dd.MM.yyyy");
+                rowFile["Time"] = lastWriteDate.ToString("HH:mm:ss");
                 rowFile["Path"] = fileFullName;
                 rowFile["Hash"] = File.ReadAllText(fileFullName).GetHashCode();
 
