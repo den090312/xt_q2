@@ -12,14 +12,14 @@ namespace _51_BACKUP_SYSTEM
 {
     public static class StorageDataTable
     {
-        public static void DataTableStream(FileSystemEventArgs storageFile, DirectoryInfo storageCatalog)
+        public static void DataTableStreamWriter(FileSystemEventArgs storageFile, DirectoryInfo storageCatalog)
         {
             var dataTable = new DataTable();
 
-            dataTable.Columns.Add(new DataColumn("StorageType"));
             dataTable.Columns.Add(new DataColumn("Date"));
             dataTable.Columns.Add(new DataColumn("Time"));
             dataTable.Columns.Add(new DataColumn("Path"));
+            dataTable.Columns.Add(new DataColumn("Hash"));
 
             var directories = storageCatalog.GetDirectories();
 
@@ -27,7 +27,6 @@ namespace _51_BACKUP_SYSTEM
             {
                 DataRow row = dataTable.NewRow();
 
-                row["StorageType"] = "Catalog";
                 row["Date"] = storageCatalog.LastWriteTime.Date.ToString("dd.MM.yyyy");
                 row["Time"] = storageCatalog.LastWriteTime.ToString("HH:mm");
                 row["Path"] = dir.FullName;
@@ -37,13 +36,15 @@ namespace _51_BACKUP_SYSTEM
 
             if (storageFile.Name != "0")
             {
-                DataRow row = dataTable.NewRow(); 
+                DataRow row = dataTable.NewRow();
 
-                row["StorageType"] = "File";
-                var lastWriteTime = File.GetLastWriteTime(storageFile.FullPath).Date;
+                var filePath = storageFile.FullPath;
+                var lastWriteTime = File.GetLastWriteTime(filePath).Date;
+
                 row["Date"] = lastWriteTime.ToString("dd.MM.yyyy");
                 row["Time"] = lastWriteTime.ToString("HH:mm");
-                row["Path"] = storageFile.FullPath;
+                row["Path"] = filePath;
+                row["Hash"] = File.ReadAllText(filePath).GetHashCode();
 
                 dataTable.Rows.Add(row);
             }
@@ -67,7 +68,5 @@ namespace _51_BACKUP_SYSTEM
 
             streamWriter.Close();
         }
-
-        //private static byte[] GetBitArray(FileSystemEventArgs file) => File.ReadAllBytes(file.FullPath);
     }
 }

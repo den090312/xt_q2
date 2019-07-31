@@ -47,7 +47,7 @@ namespace _51_BACKUP_SYSTEM
             if (lastWriteTime != lastRead)
             {
                 Console.WriteLine($"File: {file.FullPath} {file.ChangeType}"); 
-                StorageDataTable.DataTableStream(file, new DirectoryInfo(Storage.Root));
+                StorageDataTable.DataTableStreamWriter(file, new DirectoryInfo(Storage.Root));
                 lastRead = lastWriteTime;
             }
         }
