@@ -3,16 +3,16 @@ using System.IO;
 
 namespace _51_BACKUP_SYSTEM
 {
-    public static class StorageLog
+    public static class Log
     {
-        public static void LogStreamWriter(DirectoryInfo storageCatalog)
+        public static void StreamWriter(DirectoryInfo storageCatalog)
         {
             var dataTable = new DataTable();
 
             dataTable.Columns.Add(new DataColumn("Date"));
             dataTable.Columns.Add(new DataColumn("Time"));
             dataTable.Columns.Add(new DataColumn("Path"));
-            //dataTable.Columns.Add(new DataColumn("Hash"));
+            dataTable.Columns.Add(new DataColumn("Hash"));
 
             var directories = storageCatalog.GetDirectories();
 
@@ -23,7 +23,7 @@ namespace _51_BACKUP_SYSTEM
                 rowDir["Date"] = storageCatalog.LastWriteTime.Date.ToString("dd.MM.yyyy");
                 rowDir["Time"] = storageCatalog.LastWriteTime.ToString("HH:mm");
                 rowDir["Path"] = dir.FullName;
-                //row["Hash"] = string.Empty;
+                rowDir["Hash"] = string.Empty;
 
                 dataTable.Rows.Add(rowDir);
             }
@@ -37,7 +37,7 @@ namespace _51_BACKUP_SYSTEM
                 rowFile["Date"] = storageCatalog.LastWriteTime.Date.ToString("dd.MM.yyyy");
                 rowFile["Time"] = storageCatalog.LastWriteTime.ToString("HH:mm");
                 rowFile["Path"] = file.FullName;
-                //row["Hash"] = string.Empty;
+                rowFile["Hash"] = string.Empty;
 
                 dataTable.Rows.Add(rowFile);
             }
