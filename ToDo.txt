@@ -1,2 +1,1 @@
-Разделить папки и файлы в логе
-DirectoryInfo.GetFiles Method
+Hash
