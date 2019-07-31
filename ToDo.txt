@@ -1,3 +1,2 @@
-CastStorage in log file (json or xml): date + list of storage objects
-File GetHashcode(): char + position
-File Content: binary
+Разделить папки и файлы в логе
+DirectoryInfo.GetFiles Method
