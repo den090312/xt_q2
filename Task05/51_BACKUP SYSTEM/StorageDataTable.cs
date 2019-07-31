@@ -30,6 +30,7 @@ namespace _51_BACKUP_SYSTEM
                 row["Date"] = storageCatalog.LastWriteTime.Date.ToString("dd.MM.yyyy");
                 row["Time"] = storageCatalog.LastWriteTime.ToString("HH:mm");
                 row["Path"] = dir.FullName;
+                row["Hash"] = string.Empty;
 
                 dataTable.Rows.Add(row);
             }
@@ -38,13 +39,13 @@ namespace _51_BACKUP_SYSTEM
             {
                 DataRow row = dataTable.NewRow();
 
-                var filePath = storageFile.FullPath;
-                var lastWriteTime = File.GetLastWriteTime(filePath).Date;
+                var fileFullPath = storageFile.FullPath;
+                var lastWriteTime = File.GetLastWriteTime(fileFullPath).Date;
 
                 row["Date"] = lastWriteTime.ToString("dd.MM.yyyy");
                 row["Time"] = lastWriteTime.ToString("HH:mm");
-                row["Path"] = filePath;
-                row["Hash"] = File.ReadAllText(filePath).GetHashCode();
+                row["Path"] = fileFullPath;
+                row["Hash"] = File.ReadAllText(fileFullPath).GetHashCode();
 
                 dataTable.Rows.Add(row);
             }
