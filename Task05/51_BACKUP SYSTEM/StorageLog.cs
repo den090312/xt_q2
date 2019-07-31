@@ -5,7 +5,7 @@ namespace _51_BACKUP_SYSTEM
 {
     public static class StorageLog
     {
-        public static void LogStreamWriter(FileSystemEventArgs storageFile, DirectoryInfo storageCatalog)
+        public static void LogStreamWriter(DirectoryInfo storageCatalog)
         {
             var dataTable = new DataTable();
 
@@ -28,17 +28,19 @@ namespace _51_BACKUP_SYSTEM
                 dataTable.Rows.Add(rowDir);
             }
 
-            DataRow rowFile = dataTable.NewRow();
+            var files = storageCatalog.GetFiles();
 
-            var fileFullPath = storageFile.FullPath;
-            var lastWriteTime = File.GetLastWriteTime(fileFullPath).Date;
+            foreach (var file in files)
+            {
+                DataRow rowFile = dataTable.NewRow();
 
-            rowFile["Date"] = lastWriteTime.ToString("dd.MM.yyyy");
-            rowFile["Time"] = lastWriteTime.ToString("HH:mm");
-            rowFile["Path"] = fileFullPath;
-            //row["Hash"] = File.ReadAllText(fileFullPath).GetHashCode();
+                rowFile["Date"] = storageCatalog.LastWriteTime.Date.ToString("dd.MM.yyyy");
+                rowFile["Time"] = storageCatalog.LastWriteTime.ToString("HH:mm");
+                rowFile["Path"] = file.FullName;
+                //row["Hash"] = string.Empty;
 
-            dataTable.Rows.Add(rowFile);
+                dataTable.Rows.Add(rowFile);
+            }
 
             var streamWriter = new StreamWriter(Storage.LogDir, true);
 
