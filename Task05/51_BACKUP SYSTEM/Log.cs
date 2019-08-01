@@ -7,8 +7,8 @@ namespace _51_BACKUP_SYSTEM
         public static void StreamWriter(DirectoryInfo storageRootCatalog, string session)
         {
             var dataTable = DataTableCreator.Create();
-            var files = storageRootCatalog.GetFiles();
-            var directories = storageRootCatalog.GetDirectories();
+            var files = storageRootCatalog.GetFiles("*.*", SearchOption.AllDirectories);
+            var directories = storageRootCatalog.GetDirectories("*.*", SearchOption.AllDirectories);
 
             dataTable = DataTableCreator.GetDirectories(dataTable, directories, storageRootCatalog, session);
             dataTable = DataTableCreator.GetFiles(dataTable, files, session);

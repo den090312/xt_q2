@@ -20,6 +20,7 @@ namespace _51_BACKUP_SYSTEM
                                      | NotifyFilters.DirectoryName
                                      | NotifyFilters.FileName;
 
+                watcher.IncludeSubdirectories = true;
                 watcher.Filter = "*.*";
 
                 watcher.Changed += OnChanged;
