@@ -31,7 +31,7 @@ namespace _51_BACKUP_SYSTEM
 
         public static void Write(DataTable dataTable)
         {
-            var streamWriter = new StreamWriter(Storage.LogDir, true);
+            var streamWriter = new StreamWriter(Storage.Log, true);
 
             foreach (DataRow rowTable in dataTable.Rows)
             {
