@@ -29,7 +29,8 @@ namespace _51_BACKUP_SYSTEM
 
                 watcher.EnableRaisingEvents = true;
 
-                Console.WriteLine("\t3: выход");
+                Console.Clear();
+                Console.WriteLine("Режим наблюдений включен. Нажмите '3' для выхода");
                 while (Console.Read() != '3') ;
             }
         }
@@ -40,12 +41,9 @@ namespace _51_BACKUP_SYSTEM
 
             if (lastWriteTime != lastRead)
             {
-                if (file.FullPath != Storage.LogDir)
-                {
-                    Console.WriteLine($"File: {file.FullPath} {file.ChangeType}");
-                    Log.StreamWriter(new DirectoryInfo(Storage.Root), Guid.NewGuid().ToString());
-                    lastRead = lastWriteTime;
-                }
+                Console.WriteLine($"File: {file.FullPath} {file.ChangeType}");
+                Log.StreamWriter(new DirectoryInfo(Storage.Root), Guid.NewGuid().ToString());
+                lastRead = lastWriteTime;
             }
         }
 

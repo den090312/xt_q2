@@ -4,21 +4,20 @@ namespace _51_BACKUP_SYSTEM
 {
     public static class Log
     {
-        public static void StreamWriter(DirectoryInfo storageCatalog, string session)
+        public static void StreamWriter(DirectoryInfo storageRootCatalog, string session)
         {
             var dataTable = DataTableCreator.Create();
-            var files = storageCatalog.GetFiles(); 
+            var files = storageRootCatalog.GetFiles();
+            var directories = storageRootCatalog.GetDirectories();
 
-            dataTable = DataTableCreator.GetDirectories(dataTable, storageCatalog.GetDirectories(), storageCatalog, session);
+            dataTable = DataTableCreator.GetDirectories(dataTable, directories, storageRootCatalog, session);
             dataTable = DataTableCreator.GetFiles(dataTable, files, session);
+
             FileWriter.Write(dataTable);
 
             foreach (var file in files)
             {
-                if (file.Name != Storage.Log)
-                {
-                    FileWriter.Write(session, file.Name, File.ReadAllText(file.FullName));
-                }
+                FileWriter.Write(session, file.Name, File.ReadAllText(file.FullName));
             }
         }
     }
