@@ -4,10 +4,6 @@
     {
         public static string Root { get; } = @"D:\Storage";
 
-        public static string LogDir { get; } = @"D:\log.txt";
-
-        //public static string LogName { get; } = "log.txt";
-
-        //public virtual string FullName { get; protected set; }
+        public static string LogDir { get; } = @"D:\Storage\log.txt";
     }
 }
