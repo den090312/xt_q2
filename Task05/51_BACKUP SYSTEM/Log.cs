@@ -15,9 +15,14 @@ namespace _51_BACKUP_SYSTEM
 
             FileWriter.Write(dataTable);
 
+            foreach (var dir in directories)
+            {
+                FileWriter.Write(session, dir.FullName);
+            }
+
             foreach (var file in files)
             {
-                FileWriter.Write(session, file.Name, File.ReadAllText(file.FullName));
+                FileWriter.Write(session, file.FullName, File.ReadAllText(file.FullName));
             }
         }
     }

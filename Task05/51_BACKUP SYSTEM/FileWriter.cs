@@ -5,17 +5,28 @@ namespace _51_BACKUP_SYSTEM
 {
     public static class FileWriter
     {
-        public static void Write(string session, string fileName, string fileContents)
+        public static void Write(string session, string filePath, string fileContents)
         {
             var directory = $"{Storage.BackUp}\\{session}";
 
             Directory.CreateDirectory(directory);
 
-            var fullPath = $"{directory}\\{fileName}";
+            filePath = filePath.Replace(Storage.Root + "\\", string.Empty);
 
-            var streamWriter = new StreamWriter(fullPath, false);
+            var path = Path.Combine(Storage.BackUp, session, filePath);
+
+            var streamWriter = new StreamWriter(path, false);
             streamWriter.Write(fileContents);
             streamWriter.Close();
+        }
+
+        public static void Write(string session, string filePath)
+        {
+            filePath = filePath.Replace(Storage.Root + "\\", string.Empty);
+
+            var path = Path.Combine(Storage.BackUp, session, filePath);
+
+            Directory.CreateDirectory(path);
         }
 
         public static void Write(DataTable dataTable)
