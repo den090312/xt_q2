@@ -5,10 +5,11 @@ namespace _51_BACKUP_SYSTEM
 {
     public static class Log
     {
-        public static void StreamWriter(DirectoryInfo storageCatalog)
+        public static void StreamWriter(DirectoryInfo storageCatalog, string session)
         {
             var dataTable = new DataTable();
 
+            dataTable.Columns.Add(new DataColumn("Session"));
             dataTable.Columns.Add(new DataColumn("Date"));
             dataTable.Columns.Add(new DataColumn("Time"));
             dataTable.Columns.Add(new DataColumn("Path"));
@@ -20,6 +21,7 @@ namespace _51_BACKUP_SYSTEM
             {
                 DataRow rowDir = dataTable.NewRow();
 
+                rowDir["Session"] = session;
                 rowDir["Date"] = storageCatalog.LastWriteTime.Date.ToString("dd.MM.yyyy");
                 rowDir["Time"] = storageCatalog.LastWriteTime.ToString("HH:mm:ss");
                 rowDir["Path"] = dir.FullName;
@@ -37,6 +39,7 @@ namespace _51_BACKUP_SYSTEM
                 var fileFullName = file.FullName;
                 var lastWriteDate = File.GetLastWriteTime(fileFullName);
 
+                rowFile["Session"] = session;
                 rowFile["Date"] = lastWriteDate.ToString("dd.MM.yyyy");
                 rowFile["Time"] = lastWriteDate.ToString("HH:mm:ss");
                 rowFile["Path"] = fileFullName;

@@ -40,8 +40,8 @@ namespace _51_BACKUP_SYSTEM
 
             if (lastWriteTime != lastRead)
             {
-                Console.WriteLine($"File: {file.FullPath} {file.ChangeType}"); 
-                Log.StreamWriter(new DirectoryInfo(Storage.Root));
+                Console.WriteLine($"File: {file.FullPath} {file.ChangeType}");
+                Log.StreamWriter(new DirectoryInfo(Storage.Root), Guid.NewGuid().ToString());
                 lastRead = lastWriteTime;
             }
         }
