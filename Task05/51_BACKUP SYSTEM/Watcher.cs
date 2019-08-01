@@ -29,8 +29,8 @@ namespace _51_BACKUP_SYSTEM
 
                 watcher.EnableRaisingEvents = true;
 
-                Console.WriteLine("Press 'q' to quit the sample.");
-                while (Console.Read() != 'q') ;
+                Console.WriteLine("\t3: выход");
+                while (Console.Read() != '3') ;
             }
         }
 
