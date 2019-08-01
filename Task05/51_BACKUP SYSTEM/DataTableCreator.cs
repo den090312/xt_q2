@@ -38,7 +38,7 @@ namespace _51_BACKUP_SYSTEM
             return dataTable;
         }
 
-        public static DataTable GetFiles(DataTable dataTable, FileInfo[] files, DirectoryInfo storageCatalog, string session)
+        public static DataTable GetFiles(DataTable dataTable, FileInfo[] files, string session)
         {
             foreach (var file in files)
             {
@@ -57,8 +57,6 @@ namespace _51_BACKUP_SYSTEM
                 rowFile["Hash"] = fileContents.GetHashCode();
 
                 dataTable.Rows.Add(rowFile);
-
-                FileWriter.Write(session, fileName, fileContents);
             }
 
             return dataTable;
