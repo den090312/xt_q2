@@ -15,7 +15,10 @@ namespace _51_BACKUP_SYSTEM
 
             foreach (var file in files)
             {
-                FileWriter.Write(session, file.Name, File.ReadAllText(file.Name));
+                if (file.Name != Storage.Log)
+                {
+                    FileWriter.Write(session, file.Name, File.ReadAllText(file.FullName));
+                }
             }
         }
     }

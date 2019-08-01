@@ -7,7 +7,11 @@ namespace _51_BACKUP_SYSTEM
     {
         public static void Write(string session, string fileName, string fileContents)
         {
-            var fullPath = $"{Storage.Root}\"{session}\"{fileName}";
+            var directory = $"{Storage.BackUp}\\{session}";
+
+            Directory.CreateDirectory(directory);
+
+            var fullPath = $"{directory}\\{fileName}";
 
             var streamWriter = new StreamWriter(fullPath, false);
             streamWriter.Write(fileContents);
