@@ -45,6 +45,11 @@ namespace _1._06.FONT_ADJUSTMENT
 
         static Font ChangeFont(Font myFont, int consoleKey)
         {
+            if (consoleKey == 4)
+            {
+                Environment.Exit(0);    
+            }
+            
             if (myFont.HasFlag((Font)consoleKey))
             {
                 myFont ^= (Font)consoleKey;
