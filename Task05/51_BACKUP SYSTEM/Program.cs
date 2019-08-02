@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.IO;
 using System.Text;
 
 namespace _51_BACKUP_SYSTEM
@@ -31,7 +30,7 @@ namespace _51_BACKUP_SYSTEM
                     {
                         inputComplete = true;
 
-                        var userDate = GetDateFromConsole("dd.MM.yyyy");
+                        var userDate = GetDateFromConsole(LogData.DateFormat);
 
                         Storage.RestoreToDate(userDate);
                     }

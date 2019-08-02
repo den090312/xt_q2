@@ -8,6 +8,8 @@ namespace _51_BACKUP_SYSTEM
     {
         public static char Separator { get; } = '|';
 
+        public static string DateFormat { get; } = "dd.MM.yyyy HH:mm:ss";
+
         public static DataTable CreateTable()
         {
             var dataTable = new DataTable();
