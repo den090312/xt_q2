@@ -36,7 +36,15 @@ namespace _51_BACKUP_SYSTEM
 
         public static void RestoreToDate(DateTime date)
         {
+            //получить лог
 
+
+            //получить таблицу
+            //получить строку с учетом даты
+            //получить guid
+            //получить папку в бэкапе
+            //стереть подпапки Storage
+            //накатить бэкап в Storage
         }
     }
 }
