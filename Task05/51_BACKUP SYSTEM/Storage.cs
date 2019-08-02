@@ -8,7 +8,7 @@ namespace _51_BACKUP_SYSTEM
 
         public static string Log { get; } = @"D:\Task05\log.txt";
 
-        public static string BackUp { get; } = @"D:\Task05\backup";
+        public static string Backup { get; } = @"D:\Task05\backup";
 
         public static void CreateBackup(string guid)
         {

@@ -7,13 +7,13 @@ namespace _51_BACKUP_SYSTEM
     {
         public static void Write(string guid, string filePath, string fileContents)
         {
-            var directory = $"{Storage.BackUp}\\{guid}";
+            var directory = $"{Storage.Backup}\\{guid}";
 
             Directory.CreateDirectory(directory);
 
             filePath = filePath.Replace(Storage.Root + "\\", string.Empty);
 
-            var path = Path.Combine(Storage.BackUp, guid, filePath);
+            var path = Path.Combine(Storage.Backup, guid, filePath);
 
             var streamWriter = new StreamWriter(path, false);
             streamWriter.Write(fileContents);
@@ -24,7 +24,7 @@ namespace _51_BACKUP_SYSTEM
         {
             filePath = filePath.Replace(Storage.Root + "\\", string.Empty);
 
-            var path = Path.Combine(Storage.BackUp, guid, filePath);
+            var path = Path.Combine(Storage.Backup, guid, filePath);
 
             Directory.CreateDirectory(path);
         }
