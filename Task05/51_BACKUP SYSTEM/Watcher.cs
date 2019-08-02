@@ -7,6 +7,7 @@ namespace _51_BACKUP_SYSTEM
     public class Watcher
     {
         private DateTime lastRead = DateTime.MinValue;
+        private string guid = string.Empty;
 
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
 
@@ -31,6 +32,8 @@ namespace _51_BACKUP_SYSTEM
 
             watcher.EnableRaisingEvents = true;
 
+            guid = Guid.NewGuid().ToString();
+
             Console.Clear();
             Console.WriteLine("Режим наблюдений включен. Нажмите '3' для выхода");
             while (Console.Read() != '3') ;          
@@ -38,34 +41,34 @@ namespace _51_BACKUP_SYSTEM
 
         private void OnChanged(object source, FileSystemEventArgs onChangedFile)
         {
-            CreateBackup(onChangedFile);
+            StartBackup(onChangedFile);
             Console.WriteLine($"File: {onChangedFile.FullPath} {onChangedFile.ChangeType}");
         }
 
         private void OnRenamed(object source, RenamedEventArgs renamedFile)
         {
-            CreateBackup(renamedFile);
+            StartBackup(renamedFile);
             Console.WriteLine($"File: {renamedFile.FullPath} {renamedFile.ChangeType}");
         }
 
-        private void CreateBackup(RenamedEventArgs renamedFile)
+        private void StartBackup(RenamedEventArgs renamedFile)
         {
             DateTime lastWriteTime = File.GetLastWriteTime(renamedFile.FullPath);
 
             if (lastWriteTime != lastRead)
             {
-                Backup.Create(new DirectoryInfo(Storage.Root), Guid.NewGuid().ToString());
+                Storage.CreateBackup(guid);
                 lastRead = lastWriteTime;
             }
         }
 
-        private void CreateBackup(FileSystemEventArgs onChangedFile)
+        private void StartBackup(FileSystemEventArgs onChangedFile)
         {
             DateTime lastWriteTime = File.GetLastWriteTime(onChangedFile.FullPath);
 
             if (lastWriteTime != lastRead)
             {
-                Backup.Create(new DirectoryInfo(Storage.Root), Guid.NewGuid().ToString());
+                Storage.CreateBackup(guid);
                 lastRead = lastWriteTime;
             }
         }
