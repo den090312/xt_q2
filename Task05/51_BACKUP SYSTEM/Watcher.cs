@@ -12,45 +12,62 @@ namespace _51_BACKUP_SYSTEM
 
         public void Run()
         {
-            using (FileSystemWatcher watcher = new FileSystemWatcher())
+            var watcher = new FileSystemWatcher
             {
-                watcher.Path = Storage.Root;
-                watcher.NotifyFilter = NotifyFilters.LastAccess
-                                     | NotifyFilters.LastWrite
-                                     | NotifyFilters.DirectoryName
-                                     | NotifyFilters.FileName;
+                Path = Storage.Root,
+                NotifyFilter = NotifyFilters.LastAccess
+                             | NotifyFilters.LastWrite
+                             | NotifyFilters.DirectoryName
+                             | NotifyFilters.FileName,
 
-                watcher.IncludeSubdirectories = true;
-                watcher.Filter = "*.*";
+                IncludeSubdirectories = true,
+                Filter = "*.*"
+            };
 
-                watcher.Changed += OnChanged;
-                watcher.Created += OnChanged;
-                watcher.Deleted += OnChanged;
-                watcher.Renamed += OnRenamed;
+            watcher.Changed += OnChanged;
+            watcher.Created += OnChanged;
+            watcher.Deleted += OnChanged;
+            watcher.Renamed += OnRenamed;
 
-                watcher.EnableRaisingEvents = true;
+            watcher.EnableRaisingEvents = true;
 
-                Console.Clear();
-                Console.WriteLine("Режим наблюдений включен. Нажмите '3' для выхода");
-                while (Console.Read() != '3') ;
-            }
+            Console.Clear();
+            Console.WriteLine("Режим наблюдений включен. Нажмите '3' для выхода");
+            while (Console.Read() != '3') ;          
         }
 
-        private void OnChanged(object source, FileSystemEventArgs file)
+        private void OnChanged(object source, FileSystemEventArgs onChangedFile)
         {
-            DateTime lastWriteTime = File.GetLastWriteTime(file.FullPath); 
+            CreateBackup(onChangedFile);
+            Console.WriteLine($"File: {onChangedFile.FullPath} {onChangedFile.ChangeType}");
+        }
+
+        private void OnRenamed(object source, RenamedEventArgs renamedFile)
+        {
+            CreateBackup(renamedFile);
+            Console.WriteLine($"File: {renamedFile.FullPath} {renamedFile.ChangeType}");
+        }
+
+        private void CreateBackup(RenamedEventArgs renamedFile)
+        {
+            DateTime lastWriteTime = File.GetLastWriteTime(renamedFile.FullPath);
 
             if (lastWriteTime != lastRead)
             {
-                Console.WriteLine($"File: {file.FullPath} {file.ChangeType}");
-                Log.StreamWriter(new DirectoryInfo(Storage.Root), Guid.NewGuid().ToString());
+                Backup.Create(new DirectoryInfo(Storage.Root), Guid.NewGuid().ToString());
                 lastRead = lastWriteTime;
             }
         }
 
-        private static void OnRenamed(object source, RenamedEventArgs file)
+        private void CreateBackup(FileSystemEventArgs onChangedFile)
         {
-            Console.WriteLine($"File: {file.OldFullPath} renamed to {file.FullPath}");
+            DateTime lastWriteTime = File.GetLastWriteTime(onChangedFile.FullPath);
+
+            if (lastWriteTime != lastRead)
+            {
+                Backup.Create(new DirectoryInfo(Storage.Root), Guid.NewGuid().ToString());
+                lastRead = lastWriteTime;
+            }
         }
     }
 }

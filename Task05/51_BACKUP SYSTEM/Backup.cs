@@ -2,27 +2,27 @@
 
 namespace _51_BACKUP_SYSTEM
 {
-    public static class Log
+    public static class Backup
     {
-        public static void StreamWriter(DirectoryInfo storageRootCatalog, string session)
+        public static void Create(DirectoryInfo storageRootCatalog, string guid)
         {
             var dataTable = DataTableCreator.Create();
             var files = storageRootCatalog.GetFiles("*.*", SearchOption.AllDirectories);
             var directories = storageRootCatalog.GetDirectories("*.*", SearchOption.AllDirectories);
 
-            dataTable = DataTableCreator.GetDirectories(dataTable, directories, storageRootCatalog, session);
-            dataTable = DataTableCreator.GetFiles(dataTable, files, session);
+            dataTable = DataTableCreator.GetDirectories(dataTable, directories, storageRootCatalog, guid);
+            dataTable = DataTableCreator.GetFiles(dataTable, files, guid);
 
             FileWriter.Write(dataTable);
 
             foreach (var dir in directories)
             {
-                FileWriter.Write(session, dir.FullName);
+                FileWriter.Write(guid, dir.FullName);
             }
 
             foreach (var file in files)
             {
-                FileWriter.Write(session, file.FullName, File.ReadAllText(file.FullName));
+                FileWriter.Write(guid, file.FullName, File.ReadAllText(file.FullName));
             }
         }
     }
