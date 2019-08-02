@@ -34,16 +34,14 @@ namespace _51_BACKUP_SYSTEM
             }
         }
 
-        public static void RestoreToDate(DateTime date)
+        public static void RestoreToDate(DateTime restoreDate)
         {
-            //получить лог
-            var logFile = File.ReadAllText(Log);
+            //заполнить таблицу
+            var logTable = LogData.GetTable();
 
-            //получить таблицу
-
-
-            //получить строку с учетом даты
             //получить guid
+            var restoreGuid = LogData.GetRestoreGuid(logTable, restoreDate);
+
             //получить папку в бэкапе
             //стереть подпапки Storage
             //накатить бэкап в Storage

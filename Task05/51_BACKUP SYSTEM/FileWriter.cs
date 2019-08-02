@@ -41,7 +41,7 @@ namespace _51_BACKUP_SYSTEM
 
                 for (i = 0; i < itemArray.Length - 1; i++)
                 {
-                    streamWriter.Write($"{itemArray[i].ToString()}|");
+                    streamWriter.Write($"{itemArray[i].ToString()}{LogData.Separator}");
                 }
 
                 streamWriter.Write(itemArray[i].ToString());

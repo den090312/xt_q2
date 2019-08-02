@@ -1,32 +1,64 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.IO;
 
 namespace _51_BACKUP_SYSTEM
 {
-    public static class LogData
+    public class LogData
     {
+        public static char Separator { get; } = '|';
+
         public static DataTable CreateTable()
         {
             var dataTable = new DataTable();
 
             dataTable.Columns.Add(new DataColumn("Guid"));
             dataTable.Columns.Add(new DataColumn("Date"));
-            dataTable.Columns.Add(new DataColumn("Time"));
             dataTable.Columns.Add(new DataColumn("Name"));
             dataTable.Columns.Add(new DataColumn("Hash"));
 
             return dataTable;
         }
 
+        public static string GetRestoreGuid(DataTable logTable, DateTime date)
+        {
+            var restoreGuid = string.Empty;
+
+
+
+            return restoreGuid;
+        }
+
+        public static DataTable GetTable()
+        {
+            var logContest = File.ReadAllLines(Storage.Log);
+            var logTable = CreateTable();
+
+            foreach (var logRow in logContest)
+            {
+                var collsArray = logRow.Split(Separator);
+
+                var rowDir = logTable.NewRow();
+
+                rowDir["Guid"] = collsArray[0];
+                rowDir["Date"] = collsArray[1];
+                rowDir["Time"] = collsArray[2];
+                rowDir["Name"] = collsArray[3];
+
+                logTable.Rows.Add(rowDir);
+            }
+
+            return logTable;
+        }
+
         public static DataTable GetDirectories(DataTable dataTable, DirectoryInfo[] directories, DirectoryInfo storageCatalog, string guid)
         {
             foreach (var dir in directories)
             {
-                DataRow rowDir = dataTable.NewRow();
+                var rowDir = dataTable.NewRow();
 
                 rowDir["Guid"] = guid;
-                rowDir["Date"] = storageCatalog.LastWriteTime.Date.ToString("dd.MM.yyyy");
-                rowDir["Time"] = storageCatalog.LastWriteTime.ToString("HH:mm:ss");
+                rowDir["Date"] = storageCatalog.LastWriteTime;
                 rowDir["Name"] = dir.Name;
                 rowDir["Hash"] = string.Empty;
 
@@ -42,16 +74,10 @@ namespace _51_BACKUP_SYSTEM
             {
                 DataRow rowFile = dataTable.NewRow();
 
-                var fileName      = file.Name;
-                var fileFullName  = file.FullName;
-                var lastWriteDate = File.GetLastWriteTime(fileFullName);
-                var fileContents  = File.ReadAllText(fileFullName);
-
                 rowFile["Guid"] = guid;
-                rowFile["Date"] = lastWriteDate.ToString("dd.MM.yyyy");
-                rowFile["Time"] = lastWriteDate.ToString("HH:mm:ss");
-                rowFile["Name"] = fileName;
-                rowFile["Hash"] = fileContents.GetHashCode();
+                rowFile["Date"] = File.GetLastWriteTime(file.FullName);
+                rowFile["Name"] = file.Name;
+                rowFile["Hash"] = File.ReadAllText(file.FullName).GetHashCode();
 
                 dataTable.Rows.Add(rowFile);
             }
