@@ -14,12 +14,12 @@ namespace _51_BACKUP_SYSTEM
         public static void CreateBackup(string guid)
         {
             var storageRoot = new DirectoryInfo(Root);
-            var dataTable = StorageLog.CreateDataTable();
+            var dataTable = LogData.CreateTable();
             var files = storageRoot.GetFiles("*.*", SearchOption.AllDirectories);
             var directories = storageRoot.GetDirectories("*.*", SearchOption.AllDirectories);
 
-            dataTable = StorageLog.GetDirectories(dataTable, directories, storageRoot, guid);
-            dataTable = StorageLog.GetFiles(dataTable, files, guid);
+            dataTable = LogData.GetDirectories(dataTable, directories, storageRoot, guid);
+            dataTable = LogData.GetFiles(dataTable, files, guid);
 
             FileWriter.Write(dataTable);
 
@@ -37,9 +37,11 @@ namespace _51_BACKUP_SYSTEM
         public static void RestoreToDate(DateTime date)
         {
             //получить лог
-
+            var logFile = File.ReadAllText(Log);
 
             //получить таблицу
+
+
             //получить строку с учетом даты
             //получить guid
             //получить папку в бэкапе
