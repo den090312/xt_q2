@@ -12,8 +12,8 @@ namespace _51_BACKUP_SYSTEM
         {
             var dataTable = new DataTable();
 
-            dataTable.Columns.Add(new DataColumn("Guid"));
             dataTable.Columns.Add(new DataColumn("Date"));
+            dataTable.Columns.Add(new DataColumn("Guid"));
             dataTable.Columns.Add(new DataColumn("Name"));
             dataTable.Columns.Add(new DataColumn("Hash"));
 
@@ -40,8 +40,8 @@ namespace _51_BACKUP_SYSTEM
 
                 var rowDir = logTable.NewRow();
 
-                rowDir["Guid"] = collsArray[0];
-                rowDir["Date"] = collsArray[1];
+                rowDir["Date"] = collsArray[0];
+                rowDir["Guid"] = collsArray[1];
                 rowDir["Time"] = collsArray[2];
                 rowDir["Name"] = collsArray[3];
 
@@ -57,8 +57,8 @@ namespace _51_BACKUP_SYSTEM
             {
                 var rowDir = dataTable.NewRow();
 
+                rowDir["Date"] = DateTime.Now; 
                 rowDir["Guid"] = guid;
-                rowDir["Date"] = storageCatalog.LastWriteTime;
                 rowDir["Name"] = dir.Name;
                 rowDir["Hash"] = string.Empty;
 
@@ -74,8 +74,8 @@ namespace _51_BACKUP_SYSTEM
             {
                 DataRow rowFile = dataTable.NewRow();
 
+                rowFile["Date"] = DateTime.Now;
                 rowFile["Guid"] = guid;
-                rowFile["Date"] = File.GetLastWriteTime(file.FullName);
                 rowFile["Name"] = file.Name;
                 rowFile["Hash"] = File.ReadAllText(file.FullName).GetHashCode();
 
