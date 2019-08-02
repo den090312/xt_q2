@@ -42,10 +42,10 @@ namespace _51_BACKUP_SYSTEM
             {
                 DataRow rowFile = dataTable.NewRow();
 
-                var fileName = file.Name;
-                var fileFullName = file.FullName;
+                var fileName      = file.Name;
+                var fileFullName  = file.FullName;
                 var lastWriteDate = File.GetLastWriteTime(fileFullName);
-                var fileContents = File.ReadAllText(fileFullName);
+                var fileContents  = File.ReadAllText(fileFullName);
 
                 rowFile["Guid"] = guid;
                 rowFile["Date"] = lastWriteDate.ToString("dd.MM.yyyy");

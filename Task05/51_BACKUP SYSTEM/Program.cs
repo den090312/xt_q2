@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Text;
 
@@ -28,7 +29,11 @@ namespace _51_BACKUP_SYSTEM
 
                     if (userKey == 2)
                     {
+                        inputComplete = true;
 
+                        var userDate = GetDateFromConsole("dd.MM.yyyy");
+
+                        Storage.RestoreToDate(userDate);
                     }
 
                     if (userKey == 3)
@@ -39,7 +44,21 @@ namespace _51_BACKUP_SYSTEM
             }
         }
 
-        static void WriteMenu()
+        public static DateTime GetDateFromConsole(string dateFormat)
+        {
+            Console.WriteLine($"Введите дату рождения в формате: {dateFormat}:");
+
+            bool isDate = DateTime.TryParseExact(Console.ReadLine(), dateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime userDate);
+
+            if (!isDate)
+            {
+                throw new ArgumentException($"Дата должна быть в формате: {dateFormat}:");
+            }
+
+            return userDate;
+        }
+
+        private static void WriteMenu()
         {
             Console.WriteLine("Сделай свой выбор:");
             Console.WriteLine("\t1: режим наблюдения");
@@ -47,7 +66,7 @@ namespace _51_BACKUP_SYSTEM
             Console.WriteLine("\t3: выход");
         }
 
-        static int GetKeyFromConsole()
+        private static int GetKeyFromConsole()
         {
             bool inputComplete = false;
 

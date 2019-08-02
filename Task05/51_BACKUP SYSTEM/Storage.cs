@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace _51_BACKUP_SYSTEM
 {
@@ -33,7 +34,7 @@ namespace _51_BACKUP_SYSTEM
             }
         }
 
-        public static void RestoreFromBackup()
+        public static void RestoreToDate(DateTime date)
         {
 
         }
