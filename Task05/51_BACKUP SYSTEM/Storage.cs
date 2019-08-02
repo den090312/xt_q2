@@ -14,12 +14,12 @@ namespace _51_BACKUP_SYSTEM
         public static void CreateBackup(string guid)
         {
             var storageRoot = new DirectoryInfo(Root);
-            var dataTable = DataTableCreator.Create();
+            var dataTable = StorageLog.CreateDataTable();
             var files = storageRoot.GetFiles("*.*", SearchOption.AllDirectories);
             var directories = storageRoot.GetDirectories("*.*", SearchOption.AllDirectories);
 
-            dataTable = DataTableCreator.GetDirectories(dataTable, directories, storageRoot, guid);
-            dataTable = DataTableCreator.GetFiles(dataTable, files, guid);
+            dataTable = StorageLog.GetDirectories(dataTable, directories, storageRoot, guid);
+            dataTable = StorageLog.GetFiles(dataTable, files, guid);
 
             FileWriter.Write(dataTable);
 

@@ -3,9 +3,9 @@ using System.IO;
 
 namespace _51_BACKUP_SYSTEM
 {
-    public class DataTableCreator
+    public static class StorageLog
     {
-        public static DataTable Create()
+        public static DataTable CreateDataTable()
         {
             var dataTable = new DataTable();
 
