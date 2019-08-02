@@ -20,13 +20,26 @@ namespace _51_BACKUP_SYSTEM
             return dataTable;
         }
 
-        public static string GetRestoreGuid(DataTable logTable, DateTime date)
+        public static string GetRestoreGuid(DataTable logTable, DateTime date) => BinarySearch(logTable.Rows, date, 1, logTable.Rows.Count);
+
+        private static string BinarySearch(DataRowCollection logRows, DateTime date, int first, int logRowsCount)
         {
-            var restoreGuid = string.Empty;
+            int middle = logRows.Count / 2;
+            var middleRow = logRows[middle].ToString();
 
+            if (middleRow["Date"] == date.ToString())
+            {
+                return middleRow["Guid"];
+            }
 
-
-            return restoreGuid;
+            if (DateTime.Parse(middleRow["Date"]) > date)
+            {
+                return BinarySearch(logRows, date, first, middle - 1);
+            }
+            else
+            {
+                return BinarySearch(logRows, date, middle + 1, logRowsCount);
+            }
         }
 
         public static DataTable GetTable()

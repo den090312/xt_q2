@@ -43,8 +43,26 @@ namespace _51_BACKUP_SYSTEM
             var restoreGuid = LogData.GetRestoreGuid(logTable, restoreDate);
 
             //получить папку в бэкапе
+            var restoreFolder = new DirectoryInfo($"{Backup}\\{restoreGuid}");
+
             //стереть подпапки Storage
+            var storageRoot = new DirectoryInfo(Root);
+            var files = storageRoot.GetFiles("*.*", SearchOption.AllDirectories);
+
+            foreach (var file in files)
+            {
+                file.Delete();
+            }
+
+            var rootSubDirectories = storageRoot.GetDirectories("*.*", SearchOption.AllDirectories);
+
+            foreach (var subDir in rootSubDirectories)
+            {
+                subDir.Delete();
+            }
+
             //накатить бэкап в Storage
+            restoreFolder.MoveTo(Root);
         }
     }
 }
