@@ -9,7 +9,7 @@ namespace _51_BACKUP_SYSTEM
         {
             var dataTable = new DataTable();
 
-            dataTable.Columns.Add(new DataColumn("Session"));
+            dataTable.Columns.Add(new DataColumn("Guid"));
             dataTable.Columns.Add(new DataColumn("Date"));
             dataTable.Columns.Add(new DataColumn("Time"));
             dataTable.Columns.Add(new DataColumn("Name"));
@@ -18,13 +18,13 @@ namespace _51_BACKUP_SYSTEM
             return dataTable;
         }
 
-        public static DataTable GetDirectories(DataTable dataTable, DirectoryInfo[] directories, DirectoryInfo storageCatalog, string session)
+        public static DataTable GetDirectories(DataTable dataTable, DirectoryInfo[] directories, DirectoryInfo storageCatalog, string guid)
         {
             foreach (var dir in directories)
             {
                 DataRow rowDir = dataTable.NewRow();
 
-                rowDir["Session"] = session;
+                rowDir["Guid"] = guid;
                 rowDir["Date"] = storageCatalog.LastWriteTime.Date.ToString("dd.MM.yyyy");
                 rowDir["Time"] = storageCatalog.LastWriteTime.ToString("HH:mm:ss");
                 rowDir["Name"] = dir.Name;
@@ -36,7 +36,7 @@ namespace _51_BACKUP_SYSTEM
             return dataTable;
         }
 
-        public static DataTable GetFiles(DataTable dataTable, FileInfo[] files, string session)
+        public static DataTable GetFiles(DataTable dataTable, FileInfo[] files, string guid)
         {
             foreach (var file in files)
             {
@@ -47,7 +47,7 @@ namespace _51_BACKUP_SYSTEM
                 var lastWriteDate = File.GetLastWriteTime(fileFullName);
                 var fileContents = File.ReadAllText(fileFullName);
 
-                rowFile["Session"] = session;
+                rowFile["Guid"] = guid;
                 rowFile["Date"] = lastWriteDate.ToString("dd.MM.yyyy");
                 rowFile["Time"] = lastWriteDate.ToString("HH:mm:ss");
                 rowFile["Name"] = fileName;
