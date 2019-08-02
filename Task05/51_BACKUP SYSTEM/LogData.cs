@@ -22,11 +22,11 @@ namespace _51_BACKUP_SYSTEM
             return dataTable;
         }
 
-        public static string GetRestoreGuid(DataTable logTable, DateTime date) => BinarySearch(logTable.Rows, date, 1, logTable.Rows.Count);
+        public static string GetRestoreGuid(DataTable logTable, DateTime date) => BinarySearch(logTable.Rows, date, 0, logTable.Rows.Count);
 
-        private static string BinarySearch(DataRowCollection logRows, DateTime date, int first, int logRowsCount)
+        private static string BinarySearch(DataRowCollection logRows, DateTime date, int first, int last)
         {
-            int middle = logRows.Count / 2;
+            int middle = (first + last) / 2;
             var middleRow = logRows[middle].ToString();
 
             if (middleRow["Date"] == date.ToString())
@@ -40,7 +40,7 @@ namespace _51_BACKUP_SYSTEM
             }
             else
             {
-                return BinarySearch(logRows, date, middle + 1, logRowsCount);
+                return BinarySearch(logRows, date, middle + 1, last);
             }
         }
 
