@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 
 namespace _51_BACKUP_SYSTEM
 {
@@ -15,23 +16,30 @@ namespace _51_BACKUP_SYSTEM
         {
             var storageRoot = new DirectoryInfo(Root);
             var dataTable = LogData.CreateTable();
-            var files = storageRoot.GetFiles("*.*", SearchOption.AllDirectories);
-            var directories = storageRoot.GetDirectories("*.*", SearchOption.AllDirectories);
 
-            dataTable = LogData.GetDirectories(dataTable, directories, storageRoot, guid);
-            dataTable = LogData.GetFiles(dataTable, files, guid);
-
-            FileWriter.Write(dataTable);
-
-            foreach (var dir in directories)
+            var thread = new Thread(() =>
             {
-                FileWriter.Write(guid, dir.FullName);
-            }
+                var files = storageRoot.GetFiles("*.*", SearchOption.AllDirectories);
 
-            foreach (var file in files)
-            {
-                FileWriter.Write(guid, file.FullName, File.ReadAllText(file.FullName));
-            }
+                var directories = storageRoot.GetDirectories("*.*", SearchOption.AllDirectories);
+
+                dataTable = LogData.GetDirectories(dataTable, directories, storageRoot, guid);
+                dataTable = LogData.GetFiles(dataTable, files, guid);
+
+                FileWriter.Write(dataTable);
+
+                foreach (var dir in directories)
+                {
+                    FileWriter.Write(guid, dir.FullName);
+                }
+
+                foreach (var file in files)
+                {
+                    FileWriter.Write(guid, file.FullName, File.ReadAllText(file.FullName));
+                }
+            });
+
+            thread.Start();
         }
 
         public static void RestoreToDate(DateTime restoreDate)
