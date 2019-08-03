@@ -9,3 +9,5 @@ Task 03 done
 *Задание 3.3 (DynamicArray) включает в себя 3.4 (Hardcore mode)
 
 Task 04 done
+
+Task 05 done
