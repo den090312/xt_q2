@@ -12,34 +12,42 @@ namespace _51_BACKUP_SYSTEM
 
         public static string Backup { get; } = @"D:\Task05\backup";
 
+        public static void RenameBackup(RenamedEventArgs renamedObject, string guid)
+        {
+            var oldfilename = Path.Combine(Backup, guid, renamedObject.OldName);
+            var newFileName = Path.Combine(Backup, guid, renamedObject.Name);
+
+            if (!File.Exists(oldfilename))
+            {
+                Console.WriteLine($"{oldfilename} не существует!");
+            }
+
+            File.Move(oldfilename, newFileName);
+        }
+
         public static void CreateBackup(string guid)
         {
             var storageRoot = new DirectoryInfo(Root);
             var dataTable = LogData.CreateTable();
 
-            var thread = new Thread(() =>
+            var files = storageRoot.GetFiles("*.*", SearchOption.AllDirectories);
+
+            var directories = storageRoot.GetDirectories("*.*", SearchOption.AllDirectories);
+
+            dataTable = LogData.GetDirectories(dataTable, directories, storageRoot, guid);
+            dataTable = LogData.GetFiles(dataTable, files, guid);
+
+            FileWriter.Write(dataTable);
+
+            foreach (var dir in directories)
             {
-                var files = storageRoot.GetFiles("*.*", SearchOption.AllDirectories);
+                FileWriter.Write(guid, dir.FullName);
+            }
 
-                var directories = storageRoot.GetDirectories("*.*", SearchOption.AllDirectories);
-
-                dataTable = LogData.GetDirectories(dataTable, directories, storageRoot, guid);
-                dataTable = LogData.GetFiles(dataTable, files, guid);
-
-                FileWriter.Write(dataTable);
-
-                foreach (var dir in directories)
-                {
-                    FileWriter.Write(guid, dir.FullName);
-                }
-
-                foreach (var file in files)
-                {
-                    FileWriter.Write(guid, file.FullName, File.ReadAllText(file.FullName));
-                }
-            });
-
-            thread.Start();
+            foreach (var file in files)
+            {
+                FileWriter.Write(guid, file.FullName, File.ReadAllText(file.FullName));
+            }
         }
 
         public static void RestoreToDate(DateTime restoreDate)

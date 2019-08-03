@@ -41,29 +41,6 @@ namespace _51_BACKUP_SYSTEM
 
         private void OnChanged(object source, FileSystemEventArgs onChangedFile)
         {
-            StartBackup(onChangedFile);
-            Console.WriteLine($"File: {onChangedFile.FullPath} {onChangedFile.ChangeType}");
-        }
-
-        private void OnRenamed(object source, RenamedEventArgs renamedFile)
-        {
-            StartBackup(renamedFile);
-            Console.WriteLine($"File: {renamedFile.FullPath} {renamedFile.ChangeType}");
-        }
-
-        private void StartBackup(RenamedEventArgs renamedFile)
-        {
-            DateTime lastWriteTime = File.GetLastWriteTime(renamedFile.FullPath);
-
-            if (lastWriteTime != lastRead)
-            {
-                Storage.CreateBackup(guid);
-                lastRead = lastWriteTime;
-            }
-        }
-
-        private void StartBackup(FileSystemEventArgs onChangedFile)
-        {
             DateTime lastWriteTime = File.GetLastWriteTime(onChangedFile.FullPath);
 
             if (lastWriteTime != lastRead)
@@ -71,6 +48,15 @@ namespace _51_BACKUP_SYSTEM
                 Storage.CreateBackup(guid);
                 lastRead = lastWriteTime;
             }
+
+            Console.WriteLine($"File: {onChangedFile.FullPath} {onChangedFile.ChangeType}");
+        }
+
+        private void OnRenamed(object source, RenamedEventArgs renamedFile)
+        {
+            Storage.CreateBackup(Guid.NewGuid().ToString());
+
+            Console.WriteLine($"File: {renamedFile.FullPath} {renamedFile.ChangeType}");
         }
     }
 }
