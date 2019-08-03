@@ -25,13 +25,13 @@ namespace _51_BACKUP_SYSTEM
         public static string GetRestoreGuid(DataRowCollection logRows, DateTime date, int first, int last)
         {
             int middle = (first + last) / 2;
-            var middleRow = logRows[middle].ToString();
+            var middleRow = logRows[middle];
 
-            if (middleRow["Date"] == date.ToString())
+            if (middleRow["Date"].ToString() == date.ToString())
             {
-                return middleRow["Guid"];
+                return middleRow["Guid"].ToString();
             }
-            else if (DateTime.Parse(middleRow["Date"]) > date)
+            else if (DateTime.Parse(middleRow["Date"].ToString()) > date)
             {
                 return GetRestoreGuid(logRows, date, first, middle - 1);
             }
