@@ -22,8 +22,12 @@ namespace _51_BACKUP_SYSTEM
             return dataTable;
         }
 
-        public static string GetRestoreGuid(DataRowCollection logRows, DateTime restoreDate, int first, int last)
+        public static string GetRestoreGuid(DataTable logTable, DateTime restoreDate)
         {
+            var first = 0;
+            var logRows = logTable.Rows;
+            var last = logRows.Count;
+
             int middle;
 
             do
