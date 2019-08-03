@@ -22,22 +22,28 @@ namespace _51_BACKUP_SYSTEM
             return dataTable;
         }
 
-        public static string GetRestoreGuid(DataRowCollection logRows, DateTime date, int first, int last)
+        public static string GetRestoreGuid(DataRowCollection logRows, DateTime restoreDate, int first, int last)
         {
+            if (first == 1 & last == 2)
+            {
+                return logRows[1]["Guid"].ToString();
+            }
+
             int middle = (first + last) / 2;
             var middleRow = logRows[middle];
-
-            if (middleRow["Date"].ToString() == date.ToString())
+            var middleDate = (DateTime)middleRow["Date"];
+            
+            if (middleDate == restoreDate)
             {
                 return middleRow["Guid"].ToString();
             }
-            else if (DateTime.Parse(middleRow["Date"].ToString()) > date)
+            else if (middleDate > restoreDate)
             {
-                return GetRestoreGuid(logRows, date, first, middle - 1);
+                return GetRestoreGuid(logRows, restoreDate, first, middle - 1);
             }
             else
             {
-                return GetRestoreGuid(logRows, date, middle + 1, last);
+                return GetRestoreGuid(logRows, restoreDate, middle + 1, last);
             }
         }
 
