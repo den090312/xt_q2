@@ -90,14 +90,17 @@ namespace _51_BACKUP_SYSTEM
         {
             foreach (var file in files)
             {
-                DataRow rowFile = dataTable.NewRow();
+                if (file.Extension == Storage.Extension)
+                {
+                    DataRow rowFile = dataTable.NewRow();
 
-                rowFile["Date"] = DateTime.Now;
-                rowFile["Guid"] = guid;
-                rowFile["Name"] = file.Name;
-                rowFile["Hash"] = File.ReadAllText(file.FullName).GetHashCode();
+                    rowFile["Date"] = DateTime.Now;
+                    rowFile["Guid"] = guid;
+                    rowFile["Name"] = file.Name;
+                    rowFile["Hash"] = File.ReadAllText(file.FullName).GetHashCode();
 
-                dataTable.Rows.Add(rowFile);
+                    dataTable.Rows.Add(rowFile);
+                }
             }
 
             return dataTable;

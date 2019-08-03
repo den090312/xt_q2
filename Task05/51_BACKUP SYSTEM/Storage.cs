@@ -12,6 +12,8 @@ namespace _51_BACKUP_SYSTEM
 
         public static string Backup { get; } = @"D:\Task05\backup";
 
+        public static string Extension { get; } = ".txt";
+
         public static void CreateBackup(string guid)
         {
             var storageRoot = new DirectoryInfo(Root);
@@ -35,7 +37,7 @@ namespace _51_BACKUP_SYSTEM
 
                 foreach (var file in files)
                 {
-                    if (file.Extension == ".txt")
+                    if (Extension == ".txt")
                     {
                         FileWriter.Write(guid, file.FullName, File.ReadAllText(file.FullName));
                     }
