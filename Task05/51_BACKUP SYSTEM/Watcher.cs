@@ -54,7 +54,9 @@ namespace _51_BACKUP_SYSTEM
 
         private void OnRenamed(object source, RenamedEventArgs renamedFile)
         {
-            Storage.CreateBackup(Guid.NewGuid().ToString());
+            var newGuid = Guid.NewGuid().ToString();
+
+            Storage.CreateBackup(newGuid);
 
             Console.WriteLine($"File: {renamedFile.FullPath} {renamedFile.ChangeType}");
         }
