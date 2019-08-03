@@ -76,6 +76,8 @@ namespace _51_BACKUP_SYSTEM
 
             //накатить бэкап в Storage
             restoreFolder.MoveTo(Root);
+
+            Console.WriteLine("Бэкап восстановлен");
         }
     }
 }

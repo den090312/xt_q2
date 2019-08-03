@@ -45,7 +45,8 @@ namespace _51_BACKUP_SYSTEM
 
         public static DateTime GetDateFromConsole(string dateFormat)
         {
-            Console.WriteLine($"Введите дату рождения в формате: {dateFormat}:");
+            Console.Clear();
+            Console.WriteLine($"Введите дату в формате: {dateFormat}");
 
             bool isDate = DateTime.TryParseExact(Console.ReadLine(), dateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime userDate);
 

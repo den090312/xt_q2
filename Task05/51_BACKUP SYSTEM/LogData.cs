@@ -24,15 +24,16 @@ namespace _51_BACKUP_SYSTEM
 
         public static string GetRestoreGuid(DataRowCollection logRows, DateTime restoreDate, int first, int last)
         {
-            if (first == 1 & last == 2)
+            int middle = (first + last) / 2;
+
+            if (first == last)
             {
-                return logRows[1]["Guid"].ToString();
+                return logRows[middle]["Guid"].ToString();
             }
 
-            int middle = (first + last) / 2;
             var middleRow = logRows[middle];
-            var middleDate = (DateTime)middleRow["Date"];
-            
+            var middleDate = DateTime.Parse(middleRow["Date"].ToString());
+
             if (middleDate == restoreDate)
             {
                 return middleRow["Guid"].ToString();
@@ -49,8 +50,8 @@ namespace _51_BACKUP_SYSTEM
 
         public static DataTable GetTable()
         {
-            var logContest = File.ReadAllLines(Storage.Log);
             var logTable = CreateTable();
+            var logContest = File.ReadAllLines(Storage.Log);
 
             foreach (var logRow in logContest)
             {
@@ -60,8 +61,8 @@ namespace _51_BACKUP_SYSTEM
 
                 rowDir["Date"] = collsArray[0];
                 rowDir["Guid"] = collsArray[1];
-                rowDir["Time"] = collsArray[2];
-                rowDir["Name"] = collsArray[3];
+                rowDir["Name"] = collsArray[2];
+                rowDir["Hash"] = collsArray[3];
 
                 logTable.Rows.Add(rowDir);
             }
