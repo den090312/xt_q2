@@ -24,28 +24,25 @@ namespace _51_BACKUP_SYSTEM
 
         public static string GetRestoreGuid(DataRowCollection logRows, DateTime restoreDate, int first, int last)
         {
-            int middle = (first + last) / 2;
+            int middle;
 
-            if (first == last)
+            do
             {
-                return logRows[middle]["Guid"].ToString();
-            }
+                middle = (first + last) / 2;
+                var middleDate = DateTime.Parse(logRows[middle]["Date"].ToString());
 
-            var middleRow = logRows[middle];
-            var middleDate = DateTime.Parse(middleRow["Date"].ToString());
+                if (middleDate > restoreDate)
+                {
+                    last = middle - 1;
+                }
+                else
+                {
+                    first = middle + 1;
+                }
+            }
+            while (first != last);
 
-            if (middleDate == restoreDate)
-            {
-                return middleRow["Guid"].ToString();
-            }
-            else if (middleDate > restoreDate)
-            {
-                return GetRestoreGuid(logRows, restoreDate, first, middle - 1);
-            }
-            else
-            {
-                return GetRestoreGuid(logRows, restoreDate, middle + 1, last);
-            }
+            return logRows[middle]["Guid"].ToString();
         }
 
         public static DataTable GetTable()
