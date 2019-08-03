@@ -40,7 +40,7 @@ namespace _51_BACKUP_SYSTEM
             var logTable = LogData.GetTable();
 
             //получить guid
-            var restoreGuid = LogData.GetRestoreGuid(logTable, restoreDate);
+            var restoreGuid = LogData.GetRestoreGuid(logTable.Rows, restoreDate, 0, logTable.Rows.Count);
 
             //получить папку в бэкапе
             var restoreFolder = new DirectoryInfo($"{Backup}\\{restoreGuid}");
