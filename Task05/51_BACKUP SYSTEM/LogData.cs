@@ -31,8 +31,7 @@ namespace _51_BACKUP_SYSTEM
             {
                 return middleRow["Guid"];
             }
-
-            if (DateTime.Parse(middleRow["Date"]) > date)
+            else if (DateTime.Parse(middleRow["Date"]) > date)
             {
                 return GetRestoreGuid(logRows, date, first, middle - 1);
             }
