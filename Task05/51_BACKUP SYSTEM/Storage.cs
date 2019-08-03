@@ -35,7 +35,7 @@ namespace _51_BACKUP_SYSTEM
 
                 foreach (var file in files)
                 {
-                    if (file.Extension == "txt")
+                    if (file.Extension == ".txt")
                     {
                         FileWriter.Write(guid, file.FullName, File.ReadAllText(file.FullName));
                     }
