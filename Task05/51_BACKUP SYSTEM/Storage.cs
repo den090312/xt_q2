@@ -12,19 +12,6 @@ namespace _51_BACKUP_SYSTEM
 
         public static string Backup { get; } = @"D:\Task05\backup";
 
-        public static void RenameBackup(RenamedEventArgs renamedObject, string guid)
-        {
-            var oldfilename = Path.Combine(Backup, guid, renamedObject.OldName);
-            var newFileName = Path.Combine(Backup, guid, renamedObject.Name);
-
-            if (!File.Exists(oldfilename))
-            {
-                Console.WriteLine($"{oldfilename} не существует!");
-            }
-
-            File.Move(oldfilename, newFileName);
-        }
-
         public static void CreateBackup(string guid)
         {
             var storageRoot = new DirectoryInfo(Root);
