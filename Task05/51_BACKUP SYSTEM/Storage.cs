@@ -110,13 +110,16 @@ namespace _51_BACKUP_SYSTEM
             var restoreGuid = LogData.GetRestoreGuid(logTable, restoreDate);
             var restoreFolder = new DirectoryInfo($"{Backup}\\{restoreGuid}");
 
-            CleanStorageRoot();
+            DeleteFiles();
+            DeleteDirectory(Root);
 
-            restoreFolder.MoveTo(Root);
+            Directory.CreateDirectory(Root);
+
+
             Console.WriteLine("Backup is done");
         }
 
-        private static void CleanStorageRoot()
+        private static void DeleteFiles()
         {
             var storageRoot = new DirectoryInfo(Root);
             var files = storageRoot.GetFiles("*.*", SearchOption.AllDirectories);
@@ -125,12 +128,27 @@ namespace _51_BACKUP_SYSTEM
             {
                 file.Delete();
             }
+        }
 
-            var rootSubDirectories = storageRoot.GetDirectories("*.*", SearchOption.AllDirectories);
+        public static void DeleteDirectory(string path)
+        {
+            var storageRoot = new DirectoryInfo(path);
 
-            foreach (var subDir in rootSubDirectories)
+            Thread.Sleep(100);
+            var directories = storageRoot.GetDirectories("*.*", SearchOption.AllDirectories);
+
+            foreach (var dir in directories)
             {
-                subDir.Delete();
+                if (Directory.Exists(dir.FullName))
+                {
+                    DeleteDirectory(dir.FullName);
+                }
+            }
+
+            if (Directory.Exists(path))
+            {
+                Thread.Sleep(100);
+                Directory.Delete(path, true);
             }
         }
 
