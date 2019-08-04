@@ -16,8 +16,6 @@ namespace _51_BACKUP_SYSTEM
 
             dataTable.Columns.Add(new DataColumn("Date"));
             dataTable.Columns.Add(new DataColumn("Guid"));
-            dataTable.Columns.Add(new DataColumn("Name"));
-            dataTable.Columns.Add(new DataColumn("Hash"));
 
             return dataTable;
         }
@@ -64,8 +62,6 @@ namespace _51_BACKUP_SYSTEM
 
                 rowDir["Date"] = collsArray[0];
                 rowDir["Guid"] = collsArray[1];
-                rowDir["Name"] = collsArray[2];
-                rowDir["Hash"] = collsArray[3];
 
                 logTable.Rows.Add(rowDir);
             }
@@ -85,8 +81,6 @@ namespace _51_BACKUP_SYSTEM
 
                 rowDir["Date"] = DateTime.Now; 
                 rowDir["Guid"] = guid;
-                rowDir["Name"] = dir.Name;
-                rowDir["Hash"] = string.Empty;
 
                 dataTable.Rows.Add(rowDir);
             }
