@@ -24,6 +24,8 @@ namespace _51_BACKUP_SYSTEM
 
         public static string GetRestoreGuid(DataTable logTable, DateTime restoreDate)
         {
+            Storage.NullCheck(logTable);
+
             var first = 0;
             var logRows = logTable.Rows;
             var last = logRows.Count;
@@ -71,8 +73,12 @@ namespace _51_BACKUP_SYSTEM
             return logTable;
         }
 
-        public static DataTable GetDirectories(DataTable dataTable, DirectoryInfo[] directories, DirectoryInfo storageCatalog, string guid)
+        public static DataTable GetDirectories(DataTable dataTable, DirectoryInfo[] directories, string guid)
         {
+            Storage.NullCheck(dataTable);
+            Storage.NullCheck(directories);
+            Storage.NullCheck(guid);
+
             foreach (var dir in directories)
             {
                 var rowDir = dataTable.NewRow();
@@ -90,6 +96,10 @@ namespace _51_BACKUP_SYSTEM
 
         public static DataTable GetFiles(DataTable dataTable, FileInfo[] files, string guid)
         {
+            Storage.NullCheck(dataTable);
+            Storage.NullCheck(files);
+            Storage.NullCheck(guid);
+
             foreach (var file in files)
             {
                 if (file.Extension == Storage.Extension)

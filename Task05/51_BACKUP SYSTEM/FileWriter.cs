@@ -1,6 +1,5 @@
 ﻿using System.Data;
 using System.IO;
-using System.Threading;
 
 namespace _51_BACKUP_SYSTEM
 {
@@ -8,6 +7,10 @@ namespace _51_BACKUP_SYSTEM
     {
         public static void Write(string guid, string filePath, string fileContents)
         {
+            Storage.NullCheck(guid);
+            Storage.NullCheck(filePath);
+            Storage.NullCheck(fileContents);
+
             var directory = $"{Storage.Backup}\\{guid}";
 
             Directory.CreateDirectory(directory);
@@ -23,6 +26,9 @@ namespace _51_BACKUP_SYSTEM
 
         public static void Write(string guid, string filePath)
         {
+            Storage.NullCheck(guid);
+            Storage.NullCheck(filePath);
+
             filePath = filePath.Replace(Storage.Root + "\\", string.Empty);
 
             var path = Path.Combine(Storage.Backup, guid, filePath);
@@ -32,6 +38,8 @@ namespace _51_BACKUP_SYSTEM
 
         public static void Write(DataTable dataTable)
         {
+            Storage.NullCheck(dataTable);
+
             var streamWriter = new StreamWriter(Storage.Log, true);
 
             foreach (DataRow rowTable in dataTable.Rows)

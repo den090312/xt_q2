@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.IO;
 using System.Threading;
 
@@ -66,7 +67,7 @@ namespace _51_BACKUP_SYSTEM
 
                 var directories = storageRoot.GetDirectories("*.*", SearchOption.AllDirectories);
 
-                dataTable = LogData.GetDirectories(dataTable, directories, storageRoot, guid);
+                dataTable = LogData.GetDirectories(dataTable, directories, guid);
                 dataTable = LogData.GetFiles(dataTable, files, guid);
 
                 FileWriter.Write(dataTable);
@@ -90,16 +91,18 @@ namespace _51_BACKUP_SYSTEM
 
         public static void RestoreToDate(DateTime restoreDate)
         {
-            //заполнить таблицу
             var logTable = LogData.GetTable();
-
-            //получить guid
             var restoreGuid = LogData.GetRestoreGuid(logTable, restoreDate);
-
-            //получить папку в бэкапе
             var restoreFolder = new DirectoryInfo($"{Backup}\\{restoreGuid}");
 
-            //стереть подпапки Storage
+            CleanStorageRoot();
+
+            restoreFolder.MoveTo(Root);
+            Console.WriteLine("Backup is done");
+        }
+
+        private static void CleanStorageRoot()
+        {
             var storageRoot = new DirectoryInfo(Root);
             var files = storageRoot.GetFiles("*.*", SearchOption.AllDirectories);
 
@@ -114,11 +117,54 @@ namespace _51_BACKUP_SYSTEM
             {
                 subDir.Delete();
             }
+        }
 
-            //накатить бэкап в Storage
-            restoreFolder.MoveTo(Root);
+        public static void NullCheck(string thoseString)
+        {
+            if (thoseString is null)
+            {
+                throw new ArgumentException($"{nameof(thoseString)} is null!");
+            }
+        }
 
-            Console.WriteLine("Backup is done");
+        public static void NullCheck(FileSystemEventArgs onChangedFile)
+        {
+            if (onChangedFile is null)
+            {
+                throw new ArgumentException($"{nameof(onChangedFile)} is null!");
+            }
+        }
+
+        public static void NullCheck(RenamedEventArgs renamedFile)
+        {
+            if (renamedFile is null)
+            {
+                throw new ArgumentException($"{nameof(renamedFile)} is null!");
+            }
+        }
+
+        public static void NullCheck(DataTable dataTable)
+        {
+            if (dataTable is null)
+            {
+                throw new ArgumentException($"{nameof(dataTable)} is null!");
+            }
+        }
+
+        public static void NullCheck(DirectoryInfo[] directories)
+        {
+            if (directories is null)
+            {
+                throw new ArgumentException($"{nameof(directories)} is null!");
+            }
+        }
+
+        public static void NullCheck(FileInfo[] files)
+        {
+            if (files is null)
+            {
+                throw new ArgumentException($"{nameof(files)} is null!");
+            }
         }
     }
 }

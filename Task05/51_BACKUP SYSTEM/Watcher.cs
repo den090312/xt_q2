@@ -43,6 +43,8 @@ namespace _51_BACKUP_SYSTEM
 
         private void OnChanged(object source, FileSystemEventArgs onChangedFile)
         {
+            Storage.NullCheck(onChangedFile);
+
             DateTime lastWriteTime = File.GetLastWriteTime(onChangedFile.FullPath);
 
             if (lastWriteTime != lastRead)
@@ -56,6 +58,8 @@ namespace _51_BACKUP_SYSTEM
 
         private void OnRenamed(object source, RenamedEventArgs renamedFile)
         {
+            Storage.NullCheck(renamedFile);
+
             var newGuid = Guid.NewGuid().ToString();
 
             Storage.CreateBackup(newGuid);
