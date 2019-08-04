@@ -63,36 +63,45 @@ namespace _51_BACKUP_SYSTEM
             var storageRoot = new DirectoryInfo(Root);
             var dataTable = LogData.CreateTable();
 
-            var thread = new Thread(() => 
+            Thread.Sleep(100);
+            var files = storageRoot.GetFiles("*.*", SearchOption.AllDirectories);
+            var directories = storageRoot.GetDirectories("*.*", SearchOption.AllDirectories);
+
+            dataTable = LogData.GetDirectories(dataTable, directories, guid);
+            dataTable = LogData.GetFiles(dataTable, files, guid);
+
+            var thread1 = new Thread(() =>
             {
-                Thread.Sleep(100);
-
-                var files = storageRoot.GetFiles("*.*", SearchOption.AllDirectories);
-                var directories = storageRoot.GetDirectories("*.*", SearchOption.AllDirectories);
-
-                dataTable = LogData.GetDirectories(dataTable, directories, guid);
-                dataTable = LogData.GetFiles(dataTable, files, guid);
-
                 FileWriter.Write(dataTable);
-
-                foreach (var dir in directories)
-                {
-                    FileWriter.Write(guid, dir.FullName);
-                }
-
-                foreach (var file in files)
-                {
-                    if (file.Extension == Extension)
-                    {
-                        if (File.Exists(file.FullName))
-                        {
-                            FileWriter.Write(guid, file.FullName, File.ReadAllText(file.FullName));
-                        }
-                    }
-                }
             });
 
-            thread.Start();
+            thread1.Start();
+            
+            foreach (var dir in directories)
+            {
+                var thread2 = new Thread(() =>
+                {
+                    FileWriter.Write(guid, dir.FullName);
+                });
+
+                thread2.Start();
+            }
+
+            foreach (var file in files)
+            {
+                if (file.Extension == Extension)
+                {
+                    if (File.Exists(file.FullName))
+                    {
+                        var thread3 = new Thread(() =>
+                        {
+                            FileWriter.Write(guid, file.FullName, File.ReadAllText(file.FullName));
+                        });
+
+                        thread3.Start();
+                    }
+                }
+            }
         }
 
         public static void RestoreToDate(DateTime restoreDate)

@@ -18,9 +18,13 @@ namespace _51_BACKUP_SYSTEM
 
             var path = Path.Combine(Storage.Backup, guid, filePath);
 
-            var streamWriter = new StreamWriter(path, false);
-            streamWriter.Write(fileContents);
-            streamWriter.Close();
+            if (File.Exists(path))
+            {
+                var streamWriter = new StreamWriter(path, false);
+
+                streamWriter.Write(fileContents);
+                streamWriter.Close();
+            }
         }
 
         public static void Write(string guid, string filePath)
@@ -39,29 +43,24 @@ namespace _51_BACKUP_SYSTEM
         {
             Storage.NullCheck(dataTable);
 
-            var thread = new Thread(() =>
+            var streamWriter = new StreamWriter(Storage.Log, true);
+
+            foreach (DataRow rowTable in dataTable.Rows)
             {
-                var streamWriter = new StreamWriter(Storage.Log, true);
+                var itemArray = rowTable.ItemArray;
 
-                foreach (DataRow rowTable in dataTable.Rows)
+                int i;
+
+                for (i = 0; i < itemArray.Length - 1; i++)
                 {
-                    var itemArray = rowTable.ItemArray;
-
-                    int i;
-
-                    for (i = 0; i < itemArray.Length - 1; i++)
-                    {
-                        streamWriter.Write($"{itemArray[i].ToString()}{LogData.Separator}");
-                    }
-
-                    streamWriter.Write(itemArray[i].ToString());
-                    streamWriter.WriteLine();
+                    streamWriter.Write($"{itemArray[i].ToString()}{LogData.Separator}");
                 }
 
-                streamWriter.Close();
-            });
+                streamWriter.Write(itemArray[i].ToString());
+                streamWriter.WriteLine();
+            }
 
-            thread.Start();
+            streamWriter.Close();
         }
     }
 }
