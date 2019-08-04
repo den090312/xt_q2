@@ -35,7 +35,7 @@ namespace _51_BACKUP_SYSTEM
             guid = Guid.NewGuid().ToString();
 
             Console.Clear();
-            Console.WriteLine("Режим наблюдений включен. Нажмите '3' для выхода");
+            Console.WriteLine("Watcher mode is on. Press '3' to exit");
             while (Console.Read() != '3') ;          
         }
 

@@ -8,6 +8,8 @@ namespace _51_BACKUP_SYSTEM
     {
         public static void Main(string[] args)
         {
+            Storage.WriteInfo();
+
             WriteMenu();
 
             bool inputComplete = false;
@@ -46,13 +48,13 @@ namespace _51_BACKUP_SYSTEM
         public static DateTime GetDateFromConsole(string dateFormat)
         {
             Console.Clear();
-            Console.WriteLine($"Введите дату в формате: {dateFormat}");
+            Console.WriteLine($"Enter date in format: {dateFormat}");
 
             bool isDate = DateTime.TryParseExact(Console.ReadLine(), dateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime userDate);
 
             if (!isDate)
             {
-                throw new ArgumentException($"Дата должна быть в формате: {dateFormat}:");
+                throw new ArgumentException($"Date must be in format: {dateFormat}:");
             }
 
             return userDate;
@@ -60,10 +62,10 @@ namespace _51_BACKUP_SYSTEM
 
         private static void WriteMenu()
         {
-            Console.WriteLine("Сделай свой выбор:");
-            Console.WriteLine("\t1: режим наблюдения");
-            Console.WriteLine("\t2: режим отката изменений");
-            Console.WriteLine("\t3: выход");
+            Console.WriteLine("It's time to choose:");
+            Console.WriteLine("\t1: watcher mode");
+            Console.WriteLine("\t2: backup mode");
+            Console.WriteLine("\t3: exit");
         }
 
         private static int GetKeyFromConsole()

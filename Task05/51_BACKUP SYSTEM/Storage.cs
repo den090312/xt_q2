@@ -6,6 +6,8 @@ namespace _51_BACKUP_SYSTEM
 {
     public abstract class Storage
     {
+        public static string Main { get; } = @"D:\Task05";
+
         public static string Root { get; } = @"D:\Task05\Storage";
 
         public static string Log { get; } = @"D:\Task05\log.txt";
@@ -13,6 +15,18 @@ namespace _51_BACKUP_SYSTEM
         public static string Backup { get; } = @"D:\Task05\backup";
 
         public static string Extension { get; } = ".txt";
+
+        public static void WriteInfo()
+        {
+            Console.WriteLine("---Task folders---");
+            Console.WriteLine();
+            Console.WriteLine($"Main: {Main}");
+            Console.WriteLine($"Root: {Root}");
+            Console.WriteLine($"Backup: {Backup}");
+            Console.WriteLine($"Extension filter: {Extension}");
+            Console.WriteLine("------------------");
+            Console.WriteLine();
+        }
 
         public static void CreateBackup(string guid)
         {
@@ -77,7 +91,7 @@ namespace _51_BACKUP_SYSTEM
             //накатить бэкап в Storage
             restoreFolder.MoveTo(Root);
 
-            Console.WriteLine("Бэкап восстановлен");
+            Console.WriteLine("Backup is done");
         }
     }
 }
