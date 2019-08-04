@@ -108,15 +108,30 @@ namespace _51_BACKUP_SYSTEM
         {
             var logTable = LogData.GetTable();
             var restoreGuid = LogData.GetRestoreGuid(logTable, restoreDate);
-            var restoreFolder = new DirectoryInfo($"{Backup}\\{restoreGuid}");
+            var restorePath = $"{Backup}\\{restoreGuid}";
+
+            var restoreFolder = new DirectoryInfo(restorePath);
+            var restoreDirectories = restoreFolder.GetDirectories("*.*", SearchOption.AllDirectories);
+            var files = restoreFolder.GetFiles("*.*", SearchOption.AllDirectories);
 
             DeleteFiles();
-            DeleteDirectory(Root);
+            DeleteSubDirectories(Root);
 
-            Directory.CreateDirectory(Root);
+            //foreach (var restoreDir in restoreDirectories)
+            //{
+            //    var path = Path.Combine(Root, restoreDir.FullName.Replace(restorePath, ""));
 
+            //    Directory.CreateDirectory(restoreDir.FullName);
+            //}
 
-            Console.WriteLine("Backup is done");
+            //foreach (var file in files)
+            //{
+            //    var path = Path.Combine(Root, file.FullName.Replace(restorePath, ""));
+
+            //    File.Copy(file.FullName, path);
+            //}
+
+            //Console.WriteLine("Backup is done");
         }
 
         private static void DeleteFiles()
@@ -130,7 +145,7 @@ namespace _51_BACKUP_SYSTEM
             }
         }
 
-        public static void DeleteDirectory(string path)
+        public static void DeleteSubDirectories(string path)
         {
             var storageRoot = new DirectoryInfo(path);
 
@@ -141,11 +156,11 @@ namespace _51_BACKUP_SYSTEM
             {
                 if (Directory.Exists(dir.FullName))
                 {
-                    DeleteDirectory(dir.FullName);
+                    DeleteSubDirectories(dir.FullName);
                 }
             }
 
-            if (Directory.Exists(path))
+            if (Directory.Exists(path) & path != Root)
             {
                 Thread.Sleep(100);
                 Directory.Delete(path, true);
