@@ -35,7 +35,7 @@ namespace _51_BACKUP_SYSTEM
 
             if (!File.Exists(Log))
             {
-                Directory.CreateDirectory(Log);
+                File.Create(Log);
             }
 
             if (!File.Exists(Backup))
