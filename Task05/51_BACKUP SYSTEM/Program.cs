@@ -48,13 +48,13 @@ namespace _51_BACKUP_SYSTEM
         public static DateTime GetDateFromConsole(string dateFormat)
         {
             Console.Clear();
-            Console.WriteLine($"Enter date in format: {dateFormat}");
+            Console.WriteLine($"Enter date in format '{dateFormat}'");
 
             bool isDate = DateTime.TryParseExact(Console.ReadLine(), dateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime userDate);
 
             if (!isDate)
             {
-                throw new ArgumentException($"Date must be in format: {dateFormat}:");
+                throw new ArgumentException($"Date must be in format '{dateFormat}'");
             }
 
             return userDate;

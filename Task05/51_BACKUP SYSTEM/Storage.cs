@@ -18,13 +18,13 @@ namespace _51_BACKUP_SYSTEM
 
         public static void WriteInfo()
         {
-            Console.WriteLine("---Task folders---");
+            Console.WriteLine("---------Task folders--------");
             Console.WriteLine();
-            Console.WriteLine($"Main: {Main}");
-            Console.WriteLine($"Root: {Root}");
-            Console.WriteLine($"Backup: {Backup}");
-            Console.WriteLine($"Extension filter: {Extension}");
-            Console.WriteLine("------------------");
+            Console.WriteLine($"Main {Main}");
+            Console.WriteLine($"Root {Root}");
+            Console.WriteLine($"Backup {Backup}");
+            Console.WriteLine($"Extension filter {Extension}");
+            Console.WriteLine("-----------------------------");
             Console.WriteLine();
         }
 
