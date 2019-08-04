@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Text;
+using System.Threading;
 
 namespace _51_BACKUP_SYSTEM
 {
@@ -8,6 +9,9 @@ namespace _51_BACKUP_SYSTEM
     {
         public static void Main(string[] args)
         {
+            //new Thread(() => Storage.Create()).Start();
+
+            Storage.Create();
             Storage.WriteInfo();
 
             WriteMenu();

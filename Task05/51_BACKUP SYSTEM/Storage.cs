@@ -35,7 +35,9 @@ namespace _51_BACKUP_SYSTEM
 
             if (!File.Exists(Log))
             {
-                File.Create(Log);
+                var streamWriter = new StreamWriter(Log, true);
+                streamWriter.Write("");
+                streamWriter.Close();
             }
 
             if (!File.Exists(Backup))
@@ -63,8 +65,9 @@ namespace _51_BACKUP_SYSTEM
 
             var thread = new Thread(() => 
             {
-                var files = storageRoot.GetFiles("*.*", SearchOption.AllDirectories);
+                Thread.Sleep(100);
 
+                var files = storageRoot.GetFiles("*.*", SearchOption.AllDirectories);
                 var directories = storageRoot.GetDirectories("*.*", SearchOption.AllDirectories);
 
                 dataTable = LogData.GetDirectories(dataTable, directories, guid);
@@ -81,7 +84,10 @@ namespace _51_BACKUP_SYSTEM
                 {
                     if (file.Extension == Extension)
                     {
-                        FileWriter.Write(guid, file.FullName, File.ReadAllText(file.FullName));
+                        if (File.Exists(file.FullName))
+                        {
+                            FileWriter.Write(guid, file.FullName, File.ReadAllText(file.FullName));
+                        }
                     }
                 }
             });

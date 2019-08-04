@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.IO;
+using System.Threading;
 
 namespace _51_BACKUP_SYSTEM
 {
@@ -11,9 +12,7 @@ namespace _51_BACKUP_SYSTEM
             Storage.NullCheck(filePath);
             Storage.NullCheck(fileContents);
 
-            var directory = $"{Storage.Backup}\\{guid}";
-
-            Directory.CreateDirectory(directory);
+            Directory.CreateDirectory($"{Storage.Backup}\\{guid}");
 
             filePath = filePath.Replace(Storage.Root + "\\", string.Empty);
 
@@ -40,24 +39,29 @@ namespace _51_BACKUP_SYSTEM
         {
             Storage.NullCheck(dataTable);
 
-            var streamWriter = new StreamWriter(Storage.Log, true);
-
-            foreach (DataRow rowTable in dataTable.Rows)
+            var thread = new Thread(() =>
             {
-                var itemArray = rowTable.ItemArray;
+                var streamWriter = new StreamWriter(Storage.Log, true);
 
-                int i;
-
-                for (i = 0; i < itemArray.Length - 1; i++)
+                foreach (DataRow rowTable in dataTable.Rows)
                 {
-                    streamWriter.Write($"{itemArray[i].ToString()}{LogData.Separator}");
+                    var itemArray = rowTable.ItemArray;
+
+                    int i;
+
+                    for (i = 0; i < itemArray.Length - 1; i++)
+                    {
+                        streamWriter.Write($"{itemArray[i].ToString()}{LogData.Separator}");
+                    }
+
+                    streamWriter.Write(itemArray[i].ToString());
+                    streamWriter.WriteLine();
                 }
 
-                streamWriter.Write(itemArray[i].ToString());
-                streamWriter.WriteLine();
-            }
+                streamWriter.Close();
+            });
 
-            streamWriter.Close();
+            thread.Start();
         }
     }
 }

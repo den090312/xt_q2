@@ -102,8 +102,6 @@ namespace _51_BACKUP_SYSTEM
 
                     rowFile["Date"] = DateTime.Now;
                     rowFile["Guid"] = guid;
-                    rowFile["Name"] = file.Name;
-                    rowFile["Hash"] = File.ReadAllText(file.FullName).GetHashCode();
 
                     dataTable.Rows.Add(rowFile);
                 }

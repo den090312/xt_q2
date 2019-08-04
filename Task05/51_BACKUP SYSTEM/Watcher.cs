@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Security.Permissions;
+using System.Threading;
 
 namespace _51_BACKUP_SYSTEM
 {
@@ -13,8 +14,6 @@ namespace _51_BACKUP_SYSTEM
 
         public void Run()
         {
-            Storage.Create();
-
             var watcher = new FileSystemWatcher
             {
                 Path = Storage.Root,
