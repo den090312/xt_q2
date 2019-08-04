@@ -13,6 +13,8 @@ namespace _51_BACKUP_SYSTEM
 
         public void Run()
         {
+            Storage.Create();
+
             var watcher = new FileSystemWatcher
             {
                 Path = Storage.Root,

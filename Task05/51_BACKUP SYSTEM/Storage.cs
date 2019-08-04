@@ -6,15 +6,42 @@ namespace _51_BACKUP_SYSTEM
 {
     public abstract class Storage
     {
-        public static string Main { get; } = @"D:\Task05";
+        public static string Disk { get; } = "D";
 
-        public static string Root { get; } = @"D:\Task05\Storage";
+        public static string Tom { get; } = $@"{Disk}:\";
 
-        public static string Log { get; } = @"D:\Task05\log.txt";
+        public static string Main { get; } = $"{Tom}Task05";
 
-        public static string Backup { get; } = @"D:\Task05\backup";
+        public static string Root { get; } = $@"{Main}\Storage";
+
+        public static string Log { get; } = $@"{Main}\log.txt";
+
+        public static string Backup { get; } = $@"{Main}\backup";
 
         public static string Extension { get; } = ".txt";
+
+        public static void Create()
+        {
+            if (!File.Exists(Main))
+            {
+                Directory.CreateDirectory(Main);
+            }
+
+            if (!File.Exists(Root))
+            {
+                Directory.CreateDirectory(Root);
+            }
+
+            if (!File.Exists(Log))
+            {
+                Directory.CreateDirectory(Log);
+            }
+
+            if (!File.Exists(Backup))
+            {
+                Directory.CreateDirectory(Backup);
+            }
+        }
 
         public static void WriteInfo()
         {
