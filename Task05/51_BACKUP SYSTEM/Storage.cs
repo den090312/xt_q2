@@ -170,14 +170,14 @@ namespace _51_BACKUP_SYSTEM
             DeleteFiles();
             DeleteSubDirectories(Root);
 
-            foreach (var restoreDir in restoreDirectories)
-            {
-                var subDirPath = restoreDir.FullName.Replace(restorePath + "\\", "");
-                var path = Path.Combine(Root, subDirPath);
+            RestoreDirs(restoreDirectories, restorePath);
+            RestoreFiles(files, restorePath);
 
-                Directory.CreateDirectory(path);
-            }
+            Console.WriteLine("Backup is done");
+        }
 
+        private static void RestoreFiles(FileInfo[] files, string restorePath)
+        {
             foreach (var file in files)
             {
                 var filePath = file.FullName.Replace(restorePath + "\\", "");
@@ -185,8 +185,17 @@ namespace _51_BACKUP_SYSTEM
 
                 File.Copy(file.FullName, path);
             }
+        }
 
-            Console.WriteLine("Backup is done");
+        private static void RestoreDirs(DirectoryInfo[] restoreDirectories, string restorePath)
+        {
+            foreach (var restoreDir in restoreDirectories)
+            {
+                var subDirPath = restoreDir.FullName.Replace(restorePath + "\\", "");
+                var path = Path.Combine(Root, subDirPath);
+
+                Directory.CreateDirectory(path);
+            }
         }
 
         private static void DeleteFiles()
