@@ -60,26 +60,21 @@ namespace _51_BACKUP_SYSTEM
 
         public static void Write(string guid, FileInfo file)
         {
+            NullCheck(guid);
+            NullCheck(file);
+
             var filePath = file.FullName;
             var fileContents = File.ReadAllText(file.FullName);
-
-            NullCheck(guid);
-            NullCheck(filePath);
-            NullCheck(fileContents);
 
             Directory.CreateDirectory($"{Backup}\\{guid}");
 
             filePath = filePath.Replace(Root + "\\", string.Empty);
 
             var path = Path.Combine(Backup, guid, filePath);
+            var streamWriter = new StreamWriter(path, false);
 
-            if (File.Exists(path))
-            {
-                var streamWriter = new StreamWriter(path, false);
-
-                streamWriter.Write(fileContents);
-                streamWriter.Close();
-            }
+            streamWriter.Write(fileContents);
+            streamWriter.Close();
         }
 
         public static void Write(string guid, DirectoryInfo dir)
@@ -152,15 +147,12 @@ namespace _51_BACKUP_SYSTEM
             {
                 if (file.Extension == Extension)
                 {
-                    //if (File.Exists(file.FullName))
-                    //{
-                        var thread3 = new Thread(() =>
-                        {
-                            Write(guid, file);
-                        });
+                    var thread3 = new Thread(() =>
+                    {
+                        Write(guid, file);
+                    });
 
-                        thread3.Start();
-                    //}
+                    thread3.Start();
                 }
             }
         }
@@ -275,6 +267,14 @@ namespace _51_BACKUP_SYSTEM
             if (files is null)
             {
                 throw new ArgumentException($"{nameof(files)} is null!");
+            }
+        }
+
+        public static void NullCheck(FileInfo file)
+        {
+            if (file is null)
+            {
+                throw new ArgumentException($"{nameof(file)} is null!");
             }
         }
     }
