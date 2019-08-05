@@ -35,8 +35,9 @@ namespace _51_BACKUP_SYSTEM
 
             if (!File.Exists(Log))
             {
-                Thread.Sleep(100);
+                Thread.Sleep(10);
                 var streamWriter = new StreamWriter(Log, true);
+
                 streamWriter.Write("");
                 streamWriter.Close();
             }
@@ -128,6 +129,8 @@ namespace _51_BACKUP_SYSTEM
 
             Thread.Sleep(10);
             var files = storageRoot.GetFiles("*.*", SearchOption.AllDirectories);
+
+            Thread.Sleep(10);
             var directories = storageRoot.GetDirectories("*.*", SearchOption.AllDirectories);
 
             dataTable = LogData.GetDirectories(dataTable, directories, guid);
@@ -165,8 +168,6 @@ namespace _51_BACKUP_SYSTEM
 
             RestoreDirs(restoreDirectories, restorePath);
             RestoreFiles(files, restorePath);
-
-            Console.WriteLine("--------RESTORE IS DONE--------");
         }
 
         private static void RestoreFiles(FileInfo[] files, string restorePath)
@@ -176,6 +177,7 @@ namespace _51_BACKUP_SYSTEM
                 var filePath = file.FullName.Replace(restorePath + "\\", "");
                 var path = Path.Combine(Root, filePath);
 
+                Thread.Sleep(10);
                 File.Copy(file.FullName, path);
             }
         }
@@ -187,6 +189,7 @@ namespace _51_BACKUP_SYSTEM
                 var subDirPath = restoreDir.FullName.Replace(restorePath + "\\", "");
                 var path = Path.Combine(Root, subDirPath);
 
+                Thread.Sleep(10);
                 Directory.CreateDirectory(path);
             }
         }
@@ -195,7 +198,7 @@ namespace _51_BACKUP_SYSTEM
         {
             var storageRoot = new DirectoryInfo(Root);
 
-            Thread.Sleep(100);
+            Thread.Sleep(10);
             var files = storageRoot.GetFiles("*.*", SearchOption.AllDirectories);
 
             foreach (var file in files)
@@ -208,7 +211,7 @@ namespace _51_BACKUP_SYSTEM
         {
             var storageRoot = new DirectoryInfo(path);
 
-            Thread.Sleep(100);
+            Thread.Sleep(10);
             var directories = storageRoot.GetDirectories("*.*", SearchOption.AllDirectories);
 
             foreach (var dir in directories)
@@ -221,7 +224,7 @@ namespace _51_BACKUP_SYSTEM
 
             if (Directory.Exists(path) & path != Root)
             {
-                Thread.Sleep(100);
+                Thread.Sleep(10);
                 Directory.Delete(path, true);
             }
         }

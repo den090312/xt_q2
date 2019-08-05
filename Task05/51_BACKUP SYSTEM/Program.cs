@@ -29,8 +29,10 @@ namespace _51_BACKUP_SYSTEM
                         new Watcher().Run();
 
                         var guid = Guid.NewGuid().ToString();
+
+                        Console.WriteLine("--------START BACKUP--------");
                         Storage.CreateBackup(guid);
-                        Console.WriteLine("--------BACKUP IS DONE--------");
+                        Console.WriteLine("-------BACKUP IS DONE-------");
                     }
 
                     if (userKey == 2)
@@ -38,7 +40,10 @@ namespace _51_BACKUP_SYSTEM
                         inputComplete = true;
 
                         var userDate = GetDateFromConsole(LogData.DateFormat);
+
+                        Console.WriteLine("--------START RESTORE--------");
                         Storage.RestoreToDate(userDate);
+                        Console.WriteLine("-------RESTORE IS DONE-------");
                     }
 
                     if (userKey == 3)

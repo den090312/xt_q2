@@ -54,7 +54,10 @@ namespace _51_BACKUP_SYSTEM
 
                 if (onChangedFile.ChangeType == WatcherChangeTypes.Deleted)
                 {
-                    FilesList.Remove(onChangedFile);
+                    if (FilesList.Exists(x => x == onChangedFile))
+                    {
+                        FilesList.Remove(onChangedFile);
+                    }
                 }
 
                 if (onChangedFile.ChangeType == WatcherChangeTypes.Changed)
