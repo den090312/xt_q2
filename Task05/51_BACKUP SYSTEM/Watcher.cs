@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Security.Permissions;
 
@@ -7,7 +8,8 @@ namespace _51_BACKUP_SYSTEM
     public class Watcher
     {
         private DateTime lastRead = DateTime.MinValue;
-        private string guid = string.Empty;
+
+        public static List<FileSystemEventArgs> FilesList { get; } = new List<FileSystemEventArgs>();
 
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
 
@@ -28,15 +30,13 @@ namespace _51_BACKUP_SYSTEM
             watcher.Changed += OnChanged;
             watcher.Created += OnChanged;
             watcher.Deleted += OnChanged;
-            watcher.Renamed += OnRenamed;
+            watcher.Renamed += OnChanged;
 
             watcher.EnableRaisingEvents = true;
 
-            guid = Guid.NewGuid().ToString();
-
             Console.Clear();
             Console.WriteLine("Watcher mode is on. Press '3' to exit");
-            while (Console.Read() != '3') ;          
+            while (Console.Read() != '3');          
         }
 
         private void OnChanged(object source, FileSystemEventArgs onChangedFile)
@@ -47,21 +47,25 @@ namespace _51_BACKUP_SYSTEM
 
             if (lastWriteTime != lastRead)
             {
-                Storage.CreateBackup(guid);
+                if (onChangedFile.ChangeType == WatcherChangeTypes.Created)
+                {
+                    FilesList.Add(onChangedFile);
+                }
+
+                if (onChangedFile.ChangeType == WatcherChangeTypes.Deleted)
+                {
+                    FilesList.Remove(onChangedFile);
+                }
+
+                if (onChangedFile.ChangeType == WatcherChangeTypes.Changed)
+                {
+
+                }
+
                 lastRead = lastWriteTime;
             }
 
             Console.WriteLine($"File: {onChangedFile.FullPath} {onChangedFile.ChangeType}");
-        }
-
-        private void OnRenamed(object source, RenamedEventArgs renamedFile)
-        {
-            Storage.NullCheck(renamedFile);
-
-            var newGuid = Guid.NewGuid().ToString();
-            Storage.CreateBackup(newGuid);
-
-            Console.WriteLine($"File: {renamedFile.FullPath} {renamedFile.ChangeType}");
         }
     }
 }
