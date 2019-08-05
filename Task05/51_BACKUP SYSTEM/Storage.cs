@@ -58,6 +58,67 @@ namespace _51_BACKUP_SYSTEM
             Console.WriteLine();
         }
 
+        public static void Write(string guid, FileInfo file)
+        {
+            var filePath = file.FullName;
+            var fileContents = File.ReadAllText(file.FullName);
+
+            NullCheck(guid);
+            NullCheck(filePath);
+            NullCheck(fileContents);
+
+            Directory.CreateDirectory($"{Backup}\\{guid}");
+
+            filePath = filePath.Replace(Root + "\\", string.Empty);
+
+            var path = Path.Combine(Backup, guid, filePath);
+
+            if (File.Exists(path))
+            {
+                var streamWriter = new StreamWriter(path, false);
+
+                streamWriter.Write(fileContents);
+                streamWriter.Close();
+            }
+        }
+
+        public static void Write(string guid, DirectoryInfo dir)
+        {
+            NullCheck(guid);
+
+            var dirPath = dir.FullName;
+
+            dirPath = dirPath.Replace(Root + "\\", string.Empty);
+
+            var path = Path.Combine(Backup, guid, dirPath);
+
+            Directory.CreateDirectory(path);
+        }
+
+        public static void Write(DataTable dataTable)
+        {
+            NullCheck(dataTable);
+
+            var streamWriter = new StreamWriter(Log, true);
+
+            foreach (DataRow rowTable in dataTable.Rows)
+            {
+                var itemArray = rowTable.ItemArray;
+
+                int i;
+
+                for (i = 0; i < itemArray.Length - 1; i++)
+                {
+                    streamWriter.Write($"{itemArray[i].ToString()}{LogData.Separator}");
+                }
+
+                streamWriter.Write(itemArray[i].ToString());
+                streamWriter.WriteLine();
+            }
+
+            streamWriter.Close();
+        }
+
         public static void CreateBackup(string guid)
         {
             var storageRoot = new DirectoryInfo(Root);
@@ -72,7 +133,7 @@ namespace _51_BACKUP_SYSTEM
 
             var thread1 = new Thread(() =>
             {
-                FileWriter.Write(dataTable);
+                Write(dataTable);
             });
 
             thread1.Start();
@@ -81,7 +142,7 @@ namespace _51_BACKUP_SYSTEM
             {
                 var thread2 = new Thread(() =>
                 {
-                    FileWriter.Write(guid, dir.FullName);
+                    Write(guid, dir);
                 });
 
                 thread2.Start();
@@ -91,15 +152,15 @@ namespace _51_BACKUP_SYSTEM
             {
                 if (file.Extension == Extension)
                 {
-                    if (File.Exists(file.FullName))
-                    {
+                    //if (File.Exists(file.FullName))
+                    //{
                         var thread3 = new Thread(() =>
                         {
-                            FileWriter.Write(guid, file.FullName, File.ReadAllText(file.FullName));
+                            Write(guid, file);
                         });
 
                         thread3.Start();
-                    }
+                    //}
                 }
             }
         }
