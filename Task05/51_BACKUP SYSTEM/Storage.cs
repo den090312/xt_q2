@@ -131,8 +131,6 @@ namespace _51_BACKUP_SYSTEM
             var directories = storageRoot.GetDirectories("*.*", SearchOption.AllDirectories);
 
             dataTable = LogData.GetDirectories(dataTable, directories, guid);
-            dataTable = LogData.GetFiles(dataTable, files, guid);
-
             new Thread(() => Write(dataTable)).Start();
             
             foreach (var dir in directories)
@@ -154,7 +152,6 @@ namespace _51_BACKUP_SYSTEM
             var logTable = LogData.GetTable();
             var restoreGuid = LogData.GetRestoreGuid(logTable, restoreDate);
             var restorePath = $"{Backup}\\{restoreGuid}";
-
             var restoreFolder = new DirectoryInfo(restorePath);
 
             Thread.Sleep(10);

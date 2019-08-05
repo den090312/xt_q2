@@ -93,27 +93,5 @@ namespace _51_BACKUP_SYSTEM
 
             return dataTable;
         }
-
-        public static DataTable GetFiles(DataTable dataTable, FileInfo[] files, string guid)
-        {
-            Storage.NullCheck(dataTable);
-            Storage.NullCheck(files);
-            Storage.NullCheck(guid);
-
-            foreach (var file in files)
-            {
-                if (file.Extension == Storage.Extension)
-                {
-                    var rowFile = dataTable.NewRow();
-
-                    rowFile["Date"] = DateTime.Now;
-                    rowFile["Guid"] = guid;
-
-                    dataTable.Rows.Add(rowFile);
-                }
-            }
-
-            return dataTable;
-        }
     }
 }
