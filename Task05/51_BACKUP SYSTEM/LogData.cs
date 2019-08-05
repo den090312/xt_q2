@@ -27,13 +27,13 @@ namespace _51_BACKUP_SYSTEM
 
             var first = 0;
             var logRows = logTable.Rows;
-            var last = logRows.Count;
+            var last = logRows.Count - 1;
 
             int middle;
 
             do
             {
-                middle = (first + (last - 1)) / 2;
+                middle = (first + last) / 2;
                 var middleDate = DateTime.Parse(logRows[middle]["Date"].ToString());
 
                 if (middleDate == restoreDate)
