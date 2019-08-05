@@ -62,6 +62,11 @@ namespace _51_BACKUP_SYSTEM
 
                 }
 
+                if (onChangedFile.ChangeType == WatcherChangeTypes.Renamed)
+                {
+
+                }
+
                 lastRead = lastWriteTime;
             }
 
