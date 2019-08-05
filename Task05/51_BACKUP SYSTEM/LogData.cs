@@ -89,8 +89,10 @@ namespace _51_BACKUP_SYSTEM
             foreach (var dir in directories)
             {
                 var rowDir = dataTable.NewRow();
+                var currentDate = DateTime.Now;
 
-                Thread.Sleep(1000);
+                Thread.Sleep(1001 - currentDate.Millisecond);
+
                 rowDir["Date"] = DateTime.Now; 
                 rowDir["Guid"] = guid;
 
@@ -110,9 +112,11 @@ namespace _51_BACKUP_SYSTEM
             {
                 if (file.Extension == Storage.Extension)
                 {
-                    DataRow rowFile = dataTable.NewRow();
+                    var rowFile = dataTable.NewRow();
+                    var currentDate = DateTime.Now;
 
-                    Thread.Sleep(1000);
+                    Thread.Sleep(1001 - currentDate.Millisecond);
+
                     rowFile["Date"] = DateTime.Now;
                     rowFile["Guid"] = guid;
 
