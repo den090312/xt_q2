@@ -30,7 +30,7 @@ namespace _51_BACKUP_SYSTEM
 
                         var guid = Guid.NewGuid().ToString();
                         Storage.CreateBackup(guid);
-                        Console.WriteLine("--------DONE--------");
+                        Console.WriteLine("--------BACKUP IS DONE--------");
                     }
 
                     if (userKey == 2)

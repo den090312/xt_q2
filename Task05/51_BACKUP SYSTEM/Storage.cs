@@ -166,7 +166,7 @@ namespace _51_BACKUP_SYSTEM
             RestoreDirs(restoreDirectories, restorePath);
             RestoreFiles(files, restorePath);
 
-            Console.WriteLine("Backup is done");
+            Console.WriteLine("--------RESTORE IS DONE--------");
         }
 
         private static void RestoreFiles(FileInfo[] files, string restorePath)

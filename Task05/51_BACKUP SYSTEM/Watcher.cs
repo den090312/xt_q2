@@ -71,6 +71,7 @@ namespace _51_BACKUP_SYSTEM
             }
 
             Console.WriteLine($"File: {onChangedFile.FullPath} {onChangedFile.ChangeType}");
+            Console.WriteLine("Press '3' to start backup");
         }
     }
 }
