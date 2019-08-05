@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.IO;
+using System.Threading;
 
 namespace _51_BACKUP_SYSTEM
 {
@@ -89,7 +90,8 @@ namespace _51_BACKUP_SYSTEM
             {
                 var rowDir = dataTable.NewRow();
 
-                rowDir["Date"] = dir.LastWriteTime; 
+                Thread.Sleep(1000);
+                rowDir["Date"] = DateTime.Now; 
                 rowDir["Guid"] = guid;
 
                 dataTable.Rows.Add(rowDir);
@@ -110,7 +112,8 @@ namespace _51_BACKUP_SYSTEM
                 {
                     DataRow rowFile = dataTable.NewRow();
 
-                    rowFile["Date"] = file.LastWriteTime;
+                    Thread.Sleep(1000);
+                    rowFile["Date"] = DateTime.Now;
                     rowFile["Guid"] = guid;
 
                     dataTable.Rows.Add(rowFile);

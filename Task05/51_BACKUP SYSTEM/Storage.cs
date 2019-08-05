@@ -127,7 +127,6 @@ namespace _51_BACKUP_SYSTEM
 
             dataTable = LogData.GetDirectories(dataTable, directories, guid);
             dataTable = LogData.GetFiles(dataTable, files, guid);
-            dataTable = LogData.Sort(dataTable, "Date");
 
             var thread1 = new Thread(() =>
             {
