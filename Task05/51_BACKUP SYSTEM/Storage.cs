@@ -35,6 +35,7 @@ namespace _51_BACKUP_SYSTEM
 
             if (!File.Exists(Log))
             {
+                Thread.Sleep(100);
                 var streamWriter = new StreamWriter(Log, true);
                 streamWriter.Write("");
                 streamWriter.Close();
@@ -64,12 +65,14 @@ namespace _51_BACKUP_SYSTEM
             NullCheck(file);
 
             var filePath = file.FullName;
+
+            Thread.Sleep(100);
             var fileContents = File.ReadAllText(file.FullName);
 
+            Thread.Sleep(100);
             Directory.CreateDirectory($"{Backup}\\{guid}");
 
             filePath = filePath.Replace(Root + "\\", string.Empty);
-
             var path = Path.Combine(Backup, guid, filePath);
 
             Thread.Sleep(100);
@@ -89,6 +92,7 @@ namespace _51_BACKUP_SYSTEM
 
             var path = Path.Combine(Backup, guid, dirPath);
 
+            Thread.Sleep(100);
             Directory.CreateDirectory(path);
         }
 
@@ -96,6 +100,7 @@ namespace _51_BACKUP_SYSTEM
         {
             NullCheck(dataTable);
 
+            Thread.Sleep(100);
             var streamWriter = new StreamWriter(Log, true);
 
             foreach (DataRow rowTable in dataTable.Rows)
@@ -128,33 +133,18 @@ namespace _51_BACKUP_SYSTEM
             dataTable = LogData.GetDirectories(dataTable, directories, guid);
             dataTable = LogData.GetFiles(dataTable, files, guid);
 
-            var thread1 = new Thread(() =>
-            {
-                Write(dataTable);
-            });
-
-            thread1.Start();
+            new Thread(() => Write(dataTable)).Start();
             
             foreach (var dir in directories)
             {
-                var thread2 = new Thread(() =>
-                {
-                    Write(guid, dir);
-                });
-
-                thread2.Start();
+                new Thread(() => Write(guid, dir)).Start();
             }
 
             foreach (var file in files)
             {
                 if (file.Extension == Extension)
                 {
-                    var thread3 = new Thread(() =>
-                    {
-                        Write(guid, file);
-                    });
-
-                    thread3.Start();
+                    new Thread(() => Write(guid, file)).Start();
                 }
             }
         }
@@ -166,7 +156,11 @@ namespace _51_BACKUP_SYSTEM
             var restorePath = $"{Backup}\\{restoreGuid}";
 
             var restoreFolder = new DirectoryInfo(restorePath);
+
+            Thread.Sleep(100);
             var restoreDirectories = restoreFolder.GetDirectories("*.*", SearchOption.AllDirectories);
+
+            Thread.Sleep(100);
             var files = restoreFolder.GetFiles("*.*", SearchOption.AllDirectories);
 
             DeleteFiles();
@@ -203,6 +197,8 @@ namespace _51_BACKUP_SYSTEM
         private static void DeleteFiles()
         {
             var storageRoot = new DirectoryInfo(Root);
+
+            Thread.Sleep(100);
             var files = storageRoot.GetFiles("*.*", SearchOption.AllDirectories);
 
             foreach (var file in files)
@@ -211,7 +207,7 @@ namespace _51_BACKUP_SYSTEM
             }
         }
 
-        public static void DeleteSubDirectories(string path)
+        private static void DeleteSubDirectories(string path)
         {
             var storageRoot = new DirectoryInfo(path);
 

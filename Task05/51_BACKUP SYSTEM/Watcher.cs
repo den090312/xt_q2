@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Security.Permissions;
-using System.Threading;
 
 namespace _51_BACKUP_SYSTEM
 {
@@ -60,7 +59,6 @@ namespace _51_BACKUP_SYSTEM
             Storage.NullCheck(renamedFile);
 
             var newGuid = Guid.NewGuid().ToString();
-
             Storage.CreateBackup(newGuid);
 
             Console.WriteLine($"File: {renamedFile.FullPath} {renamedFile.ChangeType}");

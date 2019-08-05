@@ -25,8 +25,6 @@ namespace _51_BACKUP_SYSTEM
         {
             Storage.NullCheck(logTable);
 
-            //logTable = Sort(logTable, "Date");
-
             var first = 0;
             var logRows = logTable.Rows;
             var last = logRows.Count;
@@ -55,6 +53,8 @@ namespace _51_BACKUP_SYSTEM
         public static DataTable GetTable()
         {
             var logTable = CreateTable();
+
+            Thread.Sleep(100);
             var logContest = File.ReadAllLines(Storage.Log);
 
             foreach (var logRow in logContest)
@@ -70,14 +70,6 @@ namespace _51_BACKUP_SYSTEM
             }
 
             return logTable;
-        }
-
-        public static DataTable Sort(DataTable dataTable, string columnName)
-        {
-            var defaultView = dataTable.DefaultView;
-            defaultView.Sort = $"{columnName} ASC";
-
-            return defaultView.ToTable();
         }
 
         public static DataTable GetDirectories(DataTable dataTable, DirectoryInfo[] directories, string guid)
