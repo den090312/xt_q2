@@ -28,6 +28,10 @@ namespace _51_BACKUP_SYSTEM
                     switch (userKey)
                     {
                         case 1:
+                            Console.Clear();
+                            Console.WriteLine("Watcher mode is on. Press '3' to exit");
+                            while (Console.Read() != '3') ;
+
                             currentOperationBackup = true;
                             inputComplete = true;
                             break;

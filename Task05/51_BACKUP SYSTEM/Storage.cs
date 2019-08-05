@@ -77,10 +77,15 @@ namespace _51_BACKUP_SYSTEM
             var path = Path.Combine(Backup, guid, filePath);
 
             Thread.Sleep(10);
-            var streamWriter = new StreamWriter(path, false);
 
-            streamWriter.Write(fileContents);
-            streamWriter.Close();
+            new Thread(() =>
+            {
+                var streamWriter = new StreamWriter(path, false);
+
+                streamWriter.Write(fileContents);
+                streamWriter.Close();
+
+            }).Start();
         }
 
         public static void Write(string guid, DirectoryInfo dir)
@@ -94,7 +99,10 @@ namespace _51_BACKUP_SYSTEM
             var path = Path.Combine(Backup, guid, dirPath);
 
             Thread.Sleep(10);
-            Directory.CreateDirectory(path);
+
+            new Thread(() => Directory.CreateDirectory(path)).Start();
+
+            //Directory.CreateDirectory(path);
         }
 
         public static void Write(DataTable dataTable)
@@ -133,29 +141,25 @@ namespace _51_BACKUP_SYSTEM
             Thread.Sleep(10);
             var directories = storageRoot.GetDirectories("*.*", SearchOption.AllDirectories);
 
+            Thread.Sleep(10);
             dataTable = LogData.GetDirectories(dataTable, directories, guid);
+
             new Thread(() => Write(dataTable)).Start();
 
-            new Thread(() =>
+            foreach (var dir in directories)
             {
-                foreach (var dir in directories)
-                {
-                    Write(guid, dir);
-                }
-
-            }).Start();
-
-            new Thread(() =>
+                //new Thread(() => Write(guid, dir)).Start();
+                Write(guid, dir);
+            }
+            
+            foreach (var file in files)
             {
-                foreach (var file in files)
+                if (file.Extension == Extension)
                 {
-                    if (file.Extension == Extension)
-                    {
-                        Write(guid, file);
-                    }
+                    //new Thread(() => Write(guid, file)).Start();
+                    Write(guid, file);
                 }
-
-            }).Start();
+            }
         }
 
         public static void RestoreToDate(DateTime restoreDate)
