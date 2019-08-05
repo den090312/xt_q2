@@ -6,12 +6,8 @@ namespace _51_BACKUP_SYSTEM
 {
     public class Program
     {
-        public static bool currentOperationBackup;
-
         public static void Main(string[] args)
         {
-            AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
-
             Storage.Create();
             Storage.WriteInfo();
 
@@ -28,17 +24,17 @@ namespace _51_BACKUP_SYSTEM
                     switch (userKey)
                     {
                         case 1:
+                            inputComplete = true;
+
                             Console.Clear();
                             Console.WriteLine("Watcher mode is on. Press '3' to exit");
                             while (Console.Read() != '3') ;
 
-                            currentOperationBackup = true;
-                            inputComplete = true;
+                            Backup();
                             break;
                         case 2:
-                            currentOperationBackup = false;
                             inputComplete = true;
-                            ProcessRestore();
+                            Restore();
                             break;
                         case 3:
                             Environment.Exit(0);
@@ -48,25 +44,22 @@ namespace _51_BACKUP_SYSTEM
             }
         }
 
-        private static void ProcessRestore()
+        private static void Backup()
+        {
+            var guid = Guid.NewGuid().ToString();
+
+            Console.WriteLine("--------START BACKUP--------");
+            Storage.CreateBackup(guid);
+            Console.WriteLine("-------BACKUP IS DONE-------");
+        }
+
+        private static void Restore()
         {
             var userDate = GetDateFromConsole(LogData.DateFormat);
 
             Console.WriteLine("--------START RESTORE--------");
             Storage.RestoreToDate(userDate);
             Console.WriteLine("-------RESTORE IS DONE-------");
-        }
-
-        private static void OnProcessExit(object sender, EventArgs e)
-        {
-            if (currentOperationBackup)
-            {
-                var guid = Guid.NewGuid().ToString();
-
-                Console.WriteLine("--------START BACKUP--------");
-                Storage.CreateBackup(guid);
-                Console.WriteLine("-------BACKUP IS DONE-------");
-            }
         }
 
         public static DateTime GetDateFromConsole(string dateFormat)
