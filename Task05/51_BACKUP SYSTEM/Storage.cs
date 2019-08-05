@@ -135,19 +135,27 @@ namespace _51_BACKUP_SYSTEM
 
             dataTable = LogData.GetDirectories(dataTable, directories, guid);
             new Thread(() => Write(dataTable)).Start();
-            
-            foreach (var dir in directories)
-            {
-                new Thread(() => Write(guid, dir)).Start();
-            }
 
-            foreach (var file in files)
+            new Thread(() =>
             {
-                if (file.Extension == Extension)
+                foreach (var dir in directories)
                 {
-                    new Thread(() => Write(guid, file)).Start();
+                    Write(guid, dir);
                 }
-            }
+
+            }).Start();
+
+            new Thread(() =>
+            {
+                foreach (var file in files)
+                {
+                    if (file.Extension == Extension)
+                    {
+                        Write(guid, file);
+                    }
+                }
+
+            }).Start();
         }
 
         public static void RestoreToDate(DateTime restoreDate)
