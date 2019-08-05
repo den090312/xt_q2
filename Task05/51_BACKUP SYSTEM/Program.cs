@@ -6,8 +6,12 @@ namespace _51_BACKUP_SYSTEM
 {
     public class Program
     {
+        public static bool currentOperationBackup;
+
         public static void Main(string[] args)
         {
+            AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
+
             Storage.Create();
             Storage.WriteInfo();
 
@@ -21,36 +25,43 @@ namespace _51_BACKUP_SYSTEM
 
                 if (userKey != 0)
                 {
-
-                    if (userKey == 1)
+                    switch (userKey)
                     {
-                        inputComplete = true;
-
-                        new Watcher().Run();
-
-                        var guid = Guid.NewGuid().ToString();
-
-                        Console.WriteLine("--------START BACKUP--------");
-                        Storage.CreateBackup(guid);
-                        Console.WriteLine("-------BACKUP IS DONE-------");
-                    }
-
-                    if (userKey == 2)
-                    {
-                        inputComplete = true;
-
-                        var userDate = GetDateFromConsole(LogData.DateFormat);
-
-                        Console.WriteLine("--------START RESTORE--------");
-                        Storage.RestoreToDate(userDate);
-                        Console.WriteLine("-------RESTORE IS DONE-------");
-                    }
-
-                    if (userKey == 3)
-                    {
-                        Environment.Exit(0);
+                        case 1:
+                            currentOperationBackup = true;
+                            inputComplete = true;
+                            break;
+                        case 2:
+                            currentOperationBackup = false;
+                            inputComplete = true;
+                            ProcessRestore();
+                            break;
+                        case 3:
+                            Environment.Exit(0);
+                            break;
                     }
                 }
+            }
+        }
+
+        private static void ProcessRestore()
+        {
+            var userDate = GetDateFromConsole(LogData.DateFormat);
+
+            Console.WriteLine("--------START RESTORE--------");
+            Storage.RestoreToDate(userDate);
+            Console.WriteLine("-------RESTORE IS DONE-------");
+        }
+
+        private static void OnProcessExit(object sender, EventArgs e)
+        {
+            if (currentOperationBackup)
+            {
+                var guid = Guid.NewGuid().ToString();
+
+                Console.WriteLine("--------START BACKUP--------");
+                Storage.CreateBackup(guid);
+                Console.WriteLine("-------BACKUP IS DONE-------");
             }
         }
 
