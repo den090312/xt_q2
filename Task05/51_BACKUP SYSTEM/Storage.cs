@@ -119,14 +119,16 @@ namespace _51_BACKUP_SYSTEM
 
             foreach (var restoreDir in restoreDirectories)
             {
-                var path = Path.Combine(Root, restoreDir.FullName.Replace(restorePath, ""));
+                var subDirPath = restoreDir.FullName.Replace(restorePath + "\\", "");
+                var path = Path.Combine(Root, subDirPath);
 
                 Directory.CreateDirectory(path);
             }
 
             foreach (var file in files)
             {
-                var path = Path.Combine(Root, file.FullName.Replace(restorePath, ""));
+                var filePath = file.FullName.Replace(restorePath + "\\", "");
+                var path = Path.Combine(Root, filePath);
 
                 File.Copy(file.FullName, path);
             }
