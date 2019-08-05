@@ -78,19 +78,14 @@ namespace _51_BACKUP_SYSTEM
 
             Thread.Sleep(10);
 
-            //new Thread(() =>
-            //{
-            //    var streamWriter = new StreamWriter(path, false);
+            new Thread(() =>
+            {
+                var streamWriter = new StreamWriter(path, false);
 
-            //    streamWriter.Write(fileContents);
-            //    streamWriter.Close();
+                streamWriter.Write(fileContents);
+                streamWriter.Close();
 
-            //}).Start();
-
-            var streamWriter = new StreamWriter(path, false);
-
-            streamWriter.Write(fileContents);
-            streamWriter.Close();
+            }).Start();
         }
 
         public static void Write(string guid, DirectoryInfo dir)
@@ -104,9 +99,6 @@ namespace _51_BACKUP_SYSTEM
             var path = Path.Combine(Backup, guid, dirPath);
 
             Thread.Sleep(10);
-
-            //new Thread(() => Directory.CreateDirectory(path)).Start();
-
             Directory.CreateDirectory(path);
         }
 
@@ -153,7 +145,6 @@ namespace _51_BACKUP_SYSTEM
 
             foreach (var dir in directories)
             {
-                //new Thread(() => Write(guid, dir)).Start();
                 Write(guid, dir);
             }
             
@@ -161,7 +152,6 @@ namespace _51_BACKUP_SYSTEM
             {
                 if (file.Extension == Extension)
                 {
-                    //new Thread(() => Write(guid, file)).Start();
                     Write(guid, file);
                 }
             }
