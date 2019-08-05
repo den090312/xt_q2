@@ -24,6 +24,8 @@ namespace _51_BACKUP_SYSTEM
         {
             Storage.NullCheck(logTable);
 
+            logTable = Sort(logTable, "Date");
+
             var first = 0;
             var logRows = logTable.Rows;
             var last = logRows.Count;
@@ -69,6 +71,14 @@ namespace _51_BACKUP_SYSTEM
             return logTable;
         }
 
+        public static DataTable Sort(DataTable dataTable, string columnName)
+        {
+            var defaultView = dataTable.DefaultView;
+            defaultView.Sort = $"{columnName} ASC";
+
+            return defaultView.ToTable();
+        }
+
         public static DataTable GetDirectories(DataTable dataTable, DirectoryInfo[] directories, string guid)
         {
             Storage.NullCheck(dataTable);
@@ -79,7 +89,7 @@ namespace _51_BACKUP_SYSTEM
             {
                 var rowDir = dataTable.NewRow();
 
-                rowDir["Date"] = DateTime.Now; 
+                rowDir["Date"] = dir.LastWriteTime; 
                 rowDir["Guid"] = guid;
 
                 dataTable.Rows.Add(rowDir);
@@ -100,7 +110,7 @@ namespace _51_BACKUP_SYSTEM
                 {
                     DataRow rowFile = dataTable.NewRow();
 
-                    rowFile["Date"] = DateTime.Now;
+                    rowFile["Date"] = file.LastWriteTime;
                     rowFile["Guid"] = guid;
 
                     dataTable.Rows.Add(rowFile);

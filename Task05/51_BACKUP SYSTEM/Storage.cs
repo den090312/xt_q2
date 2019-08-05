@@ -71,6 +71,8 @@ namespace _51_BACKUP_SYSTEM
             filePath = filePath.Replace(Root + "\\", string.Empty);
 
             var path = Path.Combine(Backup, guid, filePath);
+
+            Thread.Sleep(100);
             var streamWriter = new StreamWriter(path, false);
 
             streamWriter.Write(fileContents);
@@ -125,6 +127,7 @@ namespace _51_BACKUP_SYSTEM
 
             dataTable = LogData.GetDirectories(dataTable, directories, guid);
             dataTable = LogData.GetFiles(dataTable, files, guid);
+            dataTable = LogData.Sort(dataTable, "Date");
 
             var thread1 = new Thread(() =>
             {
