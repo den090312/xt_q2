@@ -25,7 +25,7 @@ namespace _51_BACKUP_SYSTEM
         {
             Storage.NullCheck(logTable);
 
-            logTable = Sort(logTable, "Date");
+            //logTable = Sort(logTable, "Date");
 
             var first = 0;
             var logRows = logTable.Rows;
@@ -47,7 +47,7 @@ namespace _51_BACKUP_SYSTEM
                     first = middle + 1;
                 }
             }
-            while (first != last);
+            while (first < last);
 
             return logRows[middle]["Guid"].ToString();
         }
