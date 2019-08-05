@@ -35,7 +35,7 @@ namespace _51_BACKUP_SYSTEM
 
             do
             {
-                middle = (first + last) / 2;
+                middle = (first + (last - 1)) / 2;
                 var middleDate = DateTime.Parse(logRows[middle]["Date"].ToString());
 
                 if (middleDate > restoreDate)
