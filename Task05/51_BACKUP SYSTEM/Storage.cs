@@ -117,21 +117,21 @@ namespace _51_BACKUP_SYSTEM
             DeleteFiles();
             DeleteSubDirectories(Root);
 
-            //foreach (var restoreDir in restoreDirectories)
-            //{
-            //    var path = Path.Combine(Root, restoreDir.FullName.Replace(restorePath, ""));
+            foreach (var restoreDir in restoreDirectories)
+            {
+                var path = Path.Combine(Root, restoreDir.FullName.Replace(restorePath, ""));
 
-            //    Directory.CreateDirectory(restoreDir.FullName);
-            //}
+                Directory.CreateDirectory(path);
+            }
 
-            //foreach (var file in files)
-            //{
-            //    var path = Path.Combine(Root, file.FullName.Replace(restorePath, ""));
+            foreach (var file in files)
+            {
+                var path = Path.Combine(Root, file.FullName.Replace(restorePath, ""));
 
-            //    File.Copy(file.FullName, path);
-            //}
+                File.Copy(file.FullName, path);
+            }
 
-            //Console.WriteLine("Backup is done");
+            Console.WriteLine("Backup is done");
         }
 
         private static void DeleteFiles()
