@@ -66,16 +66,16 @@ namespace _51_BACKUP_SYSTEM
 
             var filePath = file.FullName;
 
-            Thread.Sleep(100);
+            Thread.Sleep(10);
             var fileContents = File.ReadAllText(file.FullName);
 
-            Thread.Sleep(100);
+            Thread.Sleep(10);
             Directory.CreateDirectory($"{Backup}\\{guid}");
 
             filePath = filePath.Replace(Root + "\\", string.Empty);
             var path = Path.Combine(Backup, guid, filePath);
 
-            Thread.Sleep(100);
+            Thread.Sleep(10);
             var streamWriter = new StreamWriter(path, false);
 
             streamWriter.Write(fileContents);
@@ -92,7 +92,7 @@ namespace _51_BACKUP_SYSTEM
 
             var path = Path.Combine(Backup, guid, dirPath);
 
-            Thread.Sleep(100);
+            Thread.Sleep(10);
             Directory.CreateDirectory(path);
         }
 
@@ -100,7 +100,7 @@ namespace _51_BACKUP_SYSTEM
         {
             NullCheck(dataTable);
 
-            Thread.Sleep(100);
+            Thread.Sleep(10);
             var streamWriter = new StreamWriter(Log, true);
 
             foreach (DataRow rowTable in dataTable.Rows)
@@ -126,7 +126,7 @@ namespace _51_BACKUP_SYSTEM
             var storageRoot = new DirectoryInfo(Root);
             var dataTable = LogData.CreateTable();
 
-            Thread.Sleep(100);
+            Thread.Sleep(10);
             var files = storageRoot.GetFiles("*.*", SearchOption.AllDirectories);
             var directories = storageRoot.GetDirectories("*.*", SearchOption.AllDirectories);
 
@@ -157,10 +157,10 @@ namespace _51_BACKUP_SYSTEM
 
             var restoreFolder = new DirectoryInfo(restorePath);
 
-            Thread.Sleep(100);
+            Thread.Sleep(10);
             var restoreDirectories = restoreFolder.GetDirectories("*.*", SearchOption.AllDirectories);
 
-            Thread.Sleep(100);
+            Thread.Sleep(10);
             var files = restoreFolder.GetFiles("*.*", SearchOption.AllDirectories);
 
             DeleteFiles();

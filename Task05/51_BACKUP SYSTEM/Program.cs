@@ -28,11 +28,9 @@ namespace _51_BACKUP_SYSTEM
 
                         new Watcher().Run();
 
-                        foreach (var file in Watcher.FilesList)
-                        {
-                            var guid = Guid.NewGuid().ToString();
-                            Storage.CreateBackup(guid);
-                        }
+                        var guid = Guid.NewGuid().ToString();
+                        Storage.CreateBackup(guid);
+                        Console.WriteLine("--------DONE--------");
                     }
 
                     if (userKey == 2)

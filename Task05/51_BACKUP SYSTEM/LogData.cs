@@ -36,11 +36,17 @@ namespace _51_BACKUP_SYSTEM
                 middle = (first + (last - 1)) / 2;
                 var middleDate = DateTime.Parse(logRows[middle]["Date"].ToString());
 
+                if (middleDate == restoreDate)
+                {
+                    return logRows[middle]["Guid"].ToString();
+                }
+
                 if (middleDate > restoreDate)
                 {
                     last = middle - 1;
                 }
-                else
+
+                if (middleDate < restoreDate)
                 {
                     first = middle + 1;
                 }
@@ -54,7 +60,7 @@ namespace _51_BACKUP_SYSTEM
         {
             var logTable = CreateTable();
 
-            Thread.Sleep(100);
+            Thread.Sleep(10);
             var logContest = File.ReadAllLines(Storage.Log);
 
             foreach (var logRow in logContest)
@@ -78,18 +84,12 @@ namespace _51_BACKUP_SYSTEM
             Storage.NullCheck(directories);
             Storage.NullCheck(guid);
 
-            foreach (var dir in directories)
-            {
-                var rowDir = dataTable.NewRow();
-                var currentDate = DateTime.Now;
+            var rowDir = dataTable.NewRow();
 
-                Thread.Sleep(1001 - currentDate.Millisecond);
+            rowDir["Date"] = DateTime.Now;
+            rowDir["Guid"] = guid;
 
-                rowDir["Date"] = DateTime.Now; 
-                rowDir["Guid"] = guid;
-
-                dataTable.Rows.Add(rowDir);
-            }
+            dataTable.Rows.Add(rowDir);
 
             return dataTable;
         }
@@ -105,9 +105,6 @@ namespace _51_BACKUP_SYSTEM
                 if (file.Extension == Storage.Extension)
                 {
                     var rowFile = dataTable.NewRow();
-                    var currentDate = DateTime.Now;
-
-                    Thread.Sleep(1001 - currentDate.Millisecond);
 
                     rowFile["Date"] = DateTime.Now;
                     rowFile["Guid"] = guid;
