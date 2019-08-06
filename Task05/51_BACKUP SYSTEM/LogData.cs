@@ -43,7 +43,7 @@ namespace _51_BACKUP_SYSTEM
                 }
             }
 
-            return logRows[rowsCount - 1]["Guid"].ToString();
+            return logRows[rowsCount]["Guid"].ToString();
         }
 
         public static DataTable GetTable()
