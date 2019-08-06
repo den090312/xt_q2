@@ -54,6 +54,7 @@ namespace _51_BACKUP_SYSTEM
             Console.WriteLine();
             Console.WriteLine($"Main {Main}");
             Console.WriteLine($"Root {Root}");
+            Console.WriteLine($"Log {LogFile}");
             Console.WriteLine($"Backup {Backup}");
             Console.WriteLine($"Extension filter {Extension}");
             Console.WriteLine("-----------------------------");
@@ -112,17 +113,20 @@ namespace _51_BACKUP_SYSTEM
 
             Thread.Sleep(1000);
             new Thread(() => Log.Write(dataTable)).Start();
+            Console.Write(".");
 
             foreach (var dirInfo in directories)
             {
                 CreateDir(guid, dirInfo);
+                Console.Write(".");
             }
-            
+
             foreach (var fileInfo in files)
             {
                 if (fileInfo.Extension == Extension)
                 {
                     CreateFile(guid, fileInfo);
+                    Console.Write(".");
                 }
             }
         }

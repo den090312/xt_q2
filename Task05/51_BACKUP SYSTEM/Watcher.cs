@@ -10,7 +10,7 @@ namespace _51_BACKUP_SYSTEM
     {
         private int lastRead = DateTime.MinValue.Millisecond;
 
-        public static long Counter { get; set; }
+        public static long Counter { get; set; } = 1;
 
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
 
