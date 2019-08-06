@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Permissions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _51_BACKUP_SYSTEM
 {
@@ -63,14 +60,14 @@ namespace _51_BACKUP_SYSTEM
                     }
                 }
 
-                if (onChangedFile.ChangeType == WatcherChangeTypes.Changed)
+                if (onChangedFile.ChangeType == WatcherChangeTypes.Changed || onChangedFile.ChangeType == WatcherChangeTypes.Renamed)
                 {
+                    if (FilesList.Exists(x => x == onChangedFile))
+                    {
+                        FilesList.Remove(onChangedFile);
+                    }
 
-                }
-
-                if (onChangedFile.ChangeType == WatcherChangeTypes.Renamed)
-                {
-
+                    FilesList.Add(onChangedFile);
                 }
 
                 lastRead = lastWriteTime;
