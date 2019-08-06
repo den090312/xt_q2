@@ -60,15 +60,15 @@ namespace _51_BACKUP_SYSTEM
             Console.WriteLine();
         }
 
-        public static void Write(string guid, FileInfo file)
+        public static void CreateFile(string guid, FileInfo fileInfo)
         {
             NullCheck(guid);
-            NullCheck(file);
+            NullCheck(fileInfo);
 
-            var filePath = file.FullName;
+            var filePath = fileInfo.FullName;
 
             Thread.Sleep(10);
-            var fileContents = File.ReadAllText(file.FullName);
+            var fileContents = File.ReadAllText(fileInfo.FullName);
 
             Thread.Sleep(10);
             Directory.CreateDirectory($"{Backup}\\{guid}");
@@ -88,11 +88,11 @@ namespace _51_BACKUP_SYSTEM
             }).Start();
         }
 
-        public static void Write(string guid, DirectoryInfo dir)
+        public static void CreateDir(string guid, DirectoryInfo dirInfo)
         {
             NullCheck(guid);
 
-            var dirPath = dir.FullName;
+            var dirPath = dirInfo.FullName;
 
             dirPath = dirPath.Replace(Root + "\\", string.Empty);
 
@@ -100,31 +100,6 @@ namespace _51_BACKUP_SYSTEM
 
             Thread.Sleep(10);
             Directory.CreateDirectory(path);
-        }
-
-        public static void Write(DataTable dataTable)
-        {
-            NullCheck(dataTable);
-
-            Thread.Sleep(10);
-            var streamWriter = new StreamWriter(Log, true);
-
-            foreach (DataRow rowTable in dataTable.Rows)
-            {
-                var itemArray = rowTable.ItemArray;
-
-                int i;
-
-                for (i = 0; i < itemArray.Length - 1; i++)
-                {
-                    streamWriter.Write($"{itemArray[i].ToString()}{LogData.Separator}");
-                }
-
-                streamWriter.Write(itemArray[i].ToString());
-                streamWriter.WriteLine();
-            }
-
-            streamWriter.Close();
         }
 
         public static void CreateBackup(string guid)
@@ -141,18 +116,18 @@ namespace _51_BACKUP_SYSTEM
             Thread.Sleep(10);
             dataTable = LogData.GetDirectories(dataTable, directories, guid);
 
-            new Thread(() => Write(dataTable)).Start();
+            new Thread(() => LogData.Write(dataTable)).Start();
 
-            foreach (var dir in directories)
+            foreach (var dirInfo in directories)
             {
-                Write(guid, dir);
+                CreateDir(guid, dirInfo);
             }
             
-            foreach (var file in files)
+            foreach (var fileInfo in files)
             {
-                if (file.Extension == Extension)
+                if (fileInfo.Extension == Extension)
                 {
-                    Write(guid, file);
+                    CreateFile(guid, fileInfo);
                 }
             }
         }
