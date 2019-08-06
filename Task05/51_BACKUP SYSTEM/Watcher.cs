@@ -12,8 +12,6 @@ namespace _51_BACKUP_SYSTEM
 
         public static long Counter { get; set; }
 
-        public static List<FileSystemEventArgs> FilesList { get; } = new List<FileSystemEventArgs>();
-
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
 
         public void Run()
