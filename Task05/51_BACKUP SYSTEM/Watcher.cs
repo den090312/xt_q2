@@ -44,41 +44,21 @@ namespace _51_BACKUP_SYSTEM
         {
             Storage.NullCheck(onChangedFile);
 
-            Thread.Sleep(1);
-            var lastWriteTime = File.GetLastWriteTime(onChangedFile.FullPath).Millisecond;
+            if (onChangedFile.ChangeType == WatcherChangeTypes.Changed)
+            {
+                Thread.Sleep(1);
+                var lastWriteTime = File.GetLastWriteTime(onChangedFile.FullPath).Millisecond;
 
-            if (lastWriteTime != lastRead)
+                if (lastWriteTime != lastRead)
+                {
+                    Program.Backup();
+                    lastRead = lastWriteTime;
+                }
+            }
+            else
             {
                 Program.Backup();
-
-                //if (onChangedFile.ChangeType == WatcherChangeTypes.Created)
-                //{
-                //    FilesList.Add(onChangedFile);
-                //}
-
-                //if (onChangedFile.ChangeType == WatcherChangeTypes.Deleted)
-                //{
-                //    if (FilesList.Exists(x => x == onChangedFile))
-                //    {
-                //        FilesList.Remove(onChangedFile);
-                //    }
-                //}
-
-                //if (onChangedFile.ChangeType == WatcherChangeTypes.Changed || onChangedFile.ChangeType == WatcherChangeTypes.Renamed)
-                //{
-                //    if (FilesList.Exists(x => x == onChangedFile))
-                //    {
-                //        FilesList.Remove(onChangedFile);
-                //    }
-
-                //    FilesList.Add(onChangedFile);
-                //}
-
-                lastRead = lastWriteTime;
             }
-
-            //Console.WriteLine($"File: {onChangedFile.FullPath} {onChangedFile.ChangeType}");
-            //Console.WriteLine("Press '3' to start backup");
         }
     }
 }
