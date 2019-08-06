@@ -8,7 +8,11 @@ namespace _51_BACKUP_SYSTEM
     {
         public static void Main(string[] args)
         {
-            AppDomain.CurrentDomain.ProcessExit += new EventHandler((object s, EventArgs e) => Backup());
+            AppDomain.CurrentDomain.ProcessExit += new EventHandler((object s, EventArgs e) =>
+            {
+                Console.WriteLine("Last backup is on. Please stand by");
+                Backup();
+            });
 
             Storage.Create();
             Storage.WriteInfo();
