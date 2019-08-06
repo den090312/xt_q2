@@ -25,7 +25,6 @@ namespace _51_BACKUP_SYSTEM
         {
             Storage.NullCheck(dataTable);
 
-            Thread.Sleep(1000);
             var streamWriter = new StreamWriter(Storage.LogFile, true);
 
             foreach (DataRow rowTable in dataTable.Rows)

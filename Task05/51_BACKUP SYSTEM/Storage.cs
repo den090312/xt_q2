@@ -116,6 +116,7 @@ namespace _51_BACKUP_SYSTEM
             Thread.Sleep(10);
             dataTable = Log.AddRow(dataTable, guid);
 
+            Thread.Sleep(1000);
             new Thread(() => Log.Write(dataTable)).Start();
 
             foreach (var dirInfo in directories)
