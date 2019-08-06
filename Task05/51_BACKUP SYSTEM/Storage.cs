@@ -135,21 +135,21 @@ namespace _51_BACKUP_SYSTEM
         public static void RestoreToDate(DateTime restoreDate)
         {
             var logTable = Log.GetTable();
-            var restoreGuid = Log.GetRestoreGuid(logTable, restoreDate);
-            var restorePath = $"{Backup}\\{restoreGuid}";
-            var restoreFolder = new DirectoryInfo(restorePath);
+            var guid = Log.GetRestoreGuid(logTable, restoreDate);
+            var path = $"{Backup}\\{guid}";
+            var pathInfo = new DirectoryInfo(path);
 
             Thread.Sleep(10);
-            var restoreDirectories = restoreFolder.GetDirectories("*.*", SearchOption.AllDirectories);
+            var directories = pathInfo.GetDirectories("*.*", SearchOption.AllDirectories);
 
             Thread.Sleep(10);
-            var files = restoreFolder.GetFiles("*.*", SearchOption.AllDirectories);
+            var files = pathInfo.GetFiles("*.*", SearchOption.AllDirectories);
 
             DeleteFiles();
             DeleteSubDirectories(Root);
 
-            RestoreDirs(restoreDirectories, restorePath);
-            RestoreFiles(files, restorePath);
+            RestoreDirectories(directories, path);
+            RestoreFiles(files, path);
         }
 
         private static void RestoreFiles(FileInfo[] files, string restorePath)
@@ -164,11 +164,11 @@ namespace _51_BACKUP_SYSTEM
             }
         }
 
-        private static void RestoreDirs(DirectoryInfo[] restoreDirectories, string restorePath)
+        private static void RestoreDirectories(DirectoryInfo[] directories, string restorePath)
         {
-            foreach (var restoreDir in restoreDirectories)
+            foreach (var dir in directories)
             {
-                var subDirPath = restoreDir.FullName.Replace(restorePath + "\\", "");
+                var subDirPath = dir.FullName.Replace(restorePath + "\\", "");
                 var path = Path.Combine(Root, subDirPath);
 
                 Thread.Sleep(10);
