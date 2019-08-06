@@ -95,8 +95,9 @@ namespace _51_BACKUP_SYSTEM
             Directory.CreateDirectory(path);
         }
 
-        public static void CreateBackup(string guid)
+        public static void CreateBackup()
         {
+            var guid = Guid.NewGuid().ToString();
             var storageRootInfo = new DirectoryInfo(Root);
             var dataTable = Log.CreateTable();
 
@@ -111,7 +112,6 @@ namespace _51_BACKUP_SYSTEM
 
             Thread.Sleep(1000);
             new Thread(() => Log.Write(dataTable)).Start();
-            Console.Write(".");
 
             foreach (var dirInfo in directories)
             {

@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace _51_BACKUP_SYSTEM
 {
-    public class Watcher
+    public abstract class Watcher
     {
         private int lastRead = DateTime.MinValue.Millisecond;
 
@@ -50,17 +50,14 @@ namespace _51_BACKUP_SYSTEM
 
                 if (lastWriteTime != lastRead)
                 {
-                    var guid = Guid.NewGuid().ToString();
-                    Storage.CreateBackup(guid);
-
+                    Storage.CreateBackup();
                     ConsoleStart();
                     lastRead = lastWriteTime;
                 }
             }
             else
             {
-                var guid = Guid.NewGuid().ToString();
-                Storage.CreateBackup(guid);
+                Storage.CreateBackup();
                 ConsoleStart();           
             }
 

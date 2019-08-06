@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace _51_BACKUP_SYSTEM
 {
-    public class Log
+    public abstract class Log
     {
         public static char Separator { get; } = '|';
 
