@@ -8,6 +8,8 @@ namespace _51_BACKUP_SYSTEM
     {
         public static void Main(string[] args)
         {
+            AppDomain.CurrentDomain.ProcessExit += new EventHandler((object s, EventArgs e) => Backup());
+
             Storage.Create();
             Storage.WriteInfo();
 
@@ -25,10 +27,7 @@ namespace _51_BACKUP_SYSTEM
                     {
                         case 1:
                             inputComplete = true;
-                            Console.WriteLine("--------START BACKUP--------");
                             new Watcher().Run();
-                            Backup();
-                            Console.WriteLine("-------BACKUP IS DONE-------");
                             break;
                         case 2:
                             inputComplete = true;
