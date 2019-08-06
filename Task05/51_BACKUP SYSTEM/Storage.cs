@@ -84,6 +84,7 @@ namespace _51_BACKUP_SYSTEM
         public static void CreateDir(string guid, DirectoryInfo dirInfo)
         {
             NullCheck(guid);
+            NullCheck(dirInfo);
 
             var dirPath = dirInfo.FullName;
 
@@ -213,6 +214,14 @@ namespace _51_BACKUP_SYSTEM
             if (thoseString is null)
             {
                 throw new ArgumentException($"{nameof(thoseString)} is null!");
+            }
+        }
+
+        public static void NullCheck(DirectoryInfo directoryInfo)
+        {
+            if (directoryInfo is null)
+            {
+                throw new ArgumentException($"{nameof(directoryInfo)} is null!");
             }
         }
 

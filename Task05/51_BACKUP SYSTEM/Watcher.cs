@@ -9,7 +9,7 @@ namespace _51_BACKUP_SYSTEM
     {
         private int lastRead = DateTime.MinValue.Millisecond;
 
-        public static long Counter { get; set; } = 1;
+        public static long Counter { get; set; } = 0;
 
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
 
@@ -35,7 +35,7 @@ namespace _51_BACKUP_SYSTEM
             watcher.EnableRaisingEvents = true;
 
             ConsoleStart();
-            Console.WriteLine($"Counter: 0");
+            Console.WriteLine($"Counter: {Counter}");
             while (Console.Read() != '3');
         }
 
@@ -61,9 +61,9 @@ namespace _51_BACKUP_SYSTEM
                 ConsoleStart();           
             }
 
+            Counter++;
             Console.WriteLine($"File: {onChangedFile.FullPath} {onChangedFile.ChangeType}");
             Console.WriteLine($"Counter: {Counter}");
-            Counter++;
         }
 
         private static void ConsoleStart()
