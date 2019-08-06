@@ -15,7 +15,7 @@ namespace _51_BACKUP_SYSTEM
 
         public static string Root { get; } = $@"{Main}\Storage";
 
-        public static string Log { get; } = $@"{Main}\log.txt";
+        public static string LogFile { get; } = $@"{Main}\log.txt";
 
         public static string Backup { get; } = $@"{Main}\backup";
 
@@ -33,10 +33,10 @@ namespace _51_BACKUP_SYSTEM
                 Directory.CreateDirectory(Root);
             }
 
-            if (!File.Exists(Log))
+            if (!File.Exists(LogFile))
             {
                 Thread.Sleep(10);
-                var streamWriter = new StreamWriter(Log, true);
+                var streamWriter = new StreamWriter(LogFile, true);
 
                 streamWriter.Write("");
                 streamWriter.Close();
@@ -105,7 +105,7 @@ namespace _51_BACKUP_SYSTEM
         public static void CreateBackup(string guid)
         {
             var storageRootInfo = new DirectoryInfo(Root);
-            var dataTable = LogData.CreateTable();
+            var dataTable = Log.CreateTable();
 
             Thread.Sleep(10);
             var files = storageRootInfo.GetFiles("*.*", SearchOption.AllDirectories);
@@ -114,9 +114,9 @@ namespace _51_BACKUP_SYSTEM
             var directories = storageRootInfo.GetDirectories("*.*", SearchOption.AllDirectories);
 
             Thread.Sleep(10);
-            dataTable = LogData.AddRow(dataTable, guid);
+            dataTable = Log.AddRow(dataTable, guid);
 
-            new Thread(() => LogData.Write(dataTable)).Start();
+            new Thread(() => Log.Write(dataTable)).Start();
 
             foreach (var dirInfo in directories)
             {
@@ -134,8 +134,8 @@ namespace _51_BACKUP_SYSTEM
 
         public static void RestoreToDate(DateTime restoreDate)
         {
-            var logTable = LogData.GetTable();
-            var restoreGuid = LogData.GetRestoreGuid(logTable, restoreDate);
+            var logTable = Log.GetTable();
+            var restoreGuid = Log.GetRestoreGuid(logTable, restoreDate);
             var restorePath = $"{Backup}\\{restoreGuid}";
             var restoreFolder = new DirectoryInfo(restorePath);
 

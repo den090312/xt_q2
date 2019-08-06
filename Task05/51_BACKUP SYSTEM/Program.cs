@@ -55,7 +55,7 @@ namespace _51_BACKUP_SYSTEM
 
         private static void Restore()
         {
-            var userDate = GetDateFromConsole(LogData.DateFormat);
+            var userDate = GetDateFromConsole(Log.DateFormat);
 
             Console.WriteLine("--------START RESTORE--------");
             Storage.RestoreToDate(userDate);

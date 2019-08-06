@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace _51_BACKUP_SYSTEM
 {
-    public class LogData
+    public class Log
     {
         public static char Separator { get; } = '|';
 
@@ -26,7 +26,7 @@ namespace _51_BACKUP_SYSTEM
             Storage.NullCheck(dataTable);
 
             Thread.Sleep(10);
-            var streamWriter = new StreamWriter(Storage.Log, true);
+            var streamWriter = new StreamWriter(Storage.LogFile, true);
 
             foreach (DataRow rowTable in dataTable.Rows)
             {
@@ -36,7 +36,7 @@ namespace _51_BACKUP_SYSTEM
 
                 for (i = 0; i < itemArray.Length - 1; i++)
                 {
-                    streamWriter.Write($"{itemArray[i].ToString()}{LogData.Separator}");
+                    streamWriter.Write($"{itemArray[i].ToString()}{Log.Separator}");
                 }
 
                 streamWriter.Write(itemArray[i].ToString());
@@ -76,7 +76,7 @@ namespace _51_BACKUP_SYSTEM
             var logTable = CreateTable();
 
             Thread.Sleep(10);
-            var logContest = File.ReadAllLines(Storage.Log);
+            var logContest = File.ReadAllLines(Storage.LogFile);
 
             foreach (var logRow in logContest)
             {
