@@ -37,9 +37,9 @@ namespace _51_BACKUP_SYSTEM
 
             watcher.EnableRaisingEvents = true;
 
-            Console.Clear();
-            Console.WriteLine("Watcher mode is on. Press '3' to exit");
-            while (Console.Read() != '3') ;
+            //Console.Clear();
+            //Console.WriteLine("Watcher mode is on. Press '3' to exit");
+            //while (Console.Read() != '3') ;
         }
 
         private void OnChanged(object source, FileSystemEventArgs onChangedFile)
@@ -76,8 +76,8 @@ namespace _51_BACKUP_SYSTEM
                 lastRead = lastWriteTime;
             }
 
-            Console.WriteLine($"File: {onChangedFile.FullPath} {onChangedFile.ChangeType}");
-            Console.WriteLine("Press '3' to start backup");
+            //Console.WriteLine($"File: {onChangedFile.FullPath} {onChangedFile.ChangeType}");
+            //Console.WriteLine("Press '3' to start backup");
         }
     }
 }
