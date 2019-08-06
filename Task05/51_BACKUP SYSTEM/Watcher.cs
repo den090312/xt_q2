@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace _51_BACKUP_SYSTEM
 {
-    public abstract class Watcher
+    public class Watcher
     {
         private int lastRead = DateTime.MinValue.Millisecond;
 
