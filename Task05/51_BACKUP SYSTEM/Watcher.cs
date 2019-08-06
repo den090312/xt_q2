@@ -59,6 +59,10 @@ namespace _51_BACKUP_SYSTEM
             {
                 Program.Backup();
             }
+
+            Console.WriteLine($"File: {onChangedFile.FullPath} {onChangedFile.ChangeType}");
+            Console.WriteLine($"Counter: {Counter}");
+            Counter++;
         }
     }
 }
