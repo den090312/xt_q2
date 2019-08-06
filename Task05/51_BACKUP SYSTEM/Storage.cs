@@ -77,15 +77,9 @@ namespace _51_BACKUP_SYSTEM
             var path = Path.Combine(Backup, guid, filePath);
 
             Thread.Sleep(10);
-
-            new Thread(() =>
-            {
-                var streamWriter = new StreamWriter(path, false);
-
-                streamWriter.Write(fileContents);
-                streamWriter.Close();
-
-            }).Start();
+            var streamWriter = new StreamWriter(path, false);
+            streamWriter.Write(fileContents);
+            streamWriter.Close();
         }
 
         public static void CreateDir(string guid, DirectoryInfo dirInfo)
