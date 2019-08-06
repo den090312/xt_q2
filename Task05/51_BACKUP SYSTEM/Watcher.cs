@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Permissions;
+using System.Threading;
 
 namespace _51_BACKUP_SYSTEM
 {
     public class Watcher
     {
-        private DateTime lastRead = DateTime.MinValue;
+        private int lastRead = DateTime.MinValue.Millisecond;
 
         public static List<FileSystemEventArgs> FilesList { get; } = new List<FileSystemEventArgs>();
 
@@ -43,7 +44,8 @@ namespace _51_BACKUP_SYSTEM
         {
             Storage.NullCheck(onChangedFile);
 
-            DateTime lastWriteTime = File.GetLastWriteTime(onChangedFile.FullPath);
+            Thread.Sleep(1);
+            var lastWriteTime = File.GetLastWriteTime(onChangedFile.FullPath).Millisecond;
 
             if (lastWriteTime != lastRead)
             {
