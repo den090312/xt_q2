@@ -25,35 +25,25 @@ namespace _51_BACKUP_SYSTEM
         {
             Storage.NullCheck(logTable);
 
-            var first = 0;
             var logRows = logTable.Rows;
-            var last = logRows.Count - 1;
+            var rowsCount = logRows.Count - 1;
 
-            int middle;
-
-            do
+            for (int i = 0; i < rowsCount - 1; i++)
             {
-                middle = (first + last) / 2;
-                var middleDate = DateTime.Parse(logRows[middle]["Date"].ToString());
+                var tableDate = DateTime.Parse(logRows[i]["Date"].ToString());
 
-                if (middleDate == restoreDate)
+                if (tableDate == restoreDate)
                 {
-                    return logRows[middle]["Guid"].ToString();
+                    return logRows[i]["Guid"].ToString();
                 }
 
-                if (middleDate > restoreDate)
+                if (tableDate > restoreDate)
                 {
-                    last = middle - 1;
-                }
-
-                if (middleDate < restoreDate)
-                {
-                    first = middle + 1;
+                    return logRows[i - 1]["Guid"].ToString();
                 }
             }
-            while (first < last);
 
-            return logRows[middle]["Guid"].ToString();
+            return logRows[rowsCount - 1]["Guid"].ToString();
         }
 
         public static DataTable GetTable()
