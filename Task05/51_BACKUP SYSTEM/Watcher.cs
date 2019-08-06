@@ -36,7 +36,8 @@ namespace _51_BACKUP_SYSTEM
 
             Console.Clear();
             Console.WriteLine("Watcher mode is on. Press '3' to exit");
-            Console.WriteLine($"Operation: 0");
+            Console.WriteLine("-------------------------------------");
+            Console.WriteLine($"Counter: 0");
             while (Console.Read() != '3') ;
         }
 
