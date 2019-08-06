@@ -93,10 +93,9 @@ namespace _51_BACKUP_SYSTEM
             return logTable;
         }
 
-        public static DataTable GetDirectories(DataTable dataTable, DirectoryInfo[] directories, string guid)
+        public static DataTable AddRow(DataTable dataTable, string guid)
         {
             Storage.NullCheck(dataTable);
-            Storage.NullCheck(directories);
             Storage.NullCheck(guid);
 
             var rowDir = dataTable.NewRow();

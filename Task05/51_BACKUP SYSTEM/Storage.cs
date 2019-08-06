@@ -104,17 +104,17 @@ namespace _51_BACKUP_SYSTEM
 
         public static void CreateBackup(string guid)
         {
-            var storageRoot = new DirectoryInfo(Root);
+            var storageRootInfo = new DirectoryInfo(Root);
             var dataTable = LogData.CreateTable();
 
             Thread.Sleep(10);
-            var files = storageRoot.GetFiles("*.*", SearchOption.AllDirectories);
+            var files = storageRootInfo.GetFiles("*.*", SearchOption.AllDirectories);
 
             Thread.Sleep(10);
-            var directories = storageRoot.GetDirectories("*.*", SearchOption.AllDirectories);
+            var directories = storageRootInfo.GetDirectories("*.*", SearchOption.AllDirectories);
 
             Thread.Sleep(10);
-            dataTable = LogData.GetDirectories(dataTable, directories, guid);
+            dataTable = LogData.AddRow(dataTable, guid);
 
             new Thread(() => LogData.Write(dataTable)).Start();
 
