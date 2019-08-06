@@ -34,11 +34,9 @@ namespace _51_BACKUP_SYSTEM
 
             watcher.EnableRaisingEvents = true;
 
-            Console.Clear();
-            Console.WriteLine("Watcher mode is on. Press '3' to exit");
-            Console.WriteLine("-------------------------------------");
+            ConsoleStart();
             Console.WriteLine($"Counter: 0");
-            while (Console.Read() != '3') ;
+            while (Console.Read() != '3');
         }
 
         private void OnChanged(object source, FileSystemEventArgs onChangedFile)
@@ -52,18 +50,30 @@ namespace _51_BACKUP_SYSTEM
 
                 if (lastWriteTime != lastRead)
                 {
-                    Program.Backup();
+                    var guid = Guid.NewGuid().ToString();
+                    Storage.CreateBackup(guid);
+
+                    ConsoleStart();
                     lastRead = lastWriteTime;
                 }
             }
             else
             {
-                Program.Backup();
+                var guid = Guid.NewGuid().ToString();
+                Storage.CreateBackup(guid);
+                ConsoleStart();           
             }
 
             Console.WriteLine($"File: {onChangedFile.FullPath} {onChangedFile.ChangeType}");
             Console.WriteLine($"Counter: {Counter}");
             Counter++;
+        }
+
+        private static void ConsoleStart()
+        {
+            Console.Clear();
+            Console.WriteLine("Watcher mode is on. Press '3' to exit");
+            Console.WriteLine("-------------------------------------");
         }
     }
 }

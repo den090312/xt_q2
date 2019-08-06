@@ -25,11 +25,18 @@ namespace _51_BACKUP_SYSTEM
                     {
                         case 1:
                             inputComplete = true;
+
                             new Watcher().Run();
                             break;
                         case 2:
                             inputComplete = true;
-                            Restore();
+
+                            Console.WriteLine("--------START RESTORE--------");
+
+                            var userDate = GetDateFromConsole(Log.DateFormat);
+                            Storage.RestoreToDate(userDate);
+
+                            Console.WriteLine("-------RESTORE IS DONE-------");
                             break;
                         case 3:
                             Environment.Exit(0);
@@ -37,25 +44,6 @@ namespace _51_BACKUP_SYSTEM
                     }
                 }
             }
-        }
-
-        public static void Backup()
-        {
-            var guid = Guid.NewGuid().ToString();
-            Storage.CreateBackup(guid);
-
-            Console.Clear();
-            Console.WriteLine("Watcher mode is on. Press '3' to exit");
-            Console.WriteLine("-------------------------------------");
-        }
-
-        private static void Restore()
-        {
-            var userDate = GetDateFromConsole(Log.DateFormat);
-
-            Console.WriteLine("--------START RESTORE--------");
-            Storage.RestoreToDate(userDate);
-            Console.WriteLine("-------RESTORE IS DONE-------");
         }
 
         public static DateTime GetDateFromConsole(string dateFormat)
