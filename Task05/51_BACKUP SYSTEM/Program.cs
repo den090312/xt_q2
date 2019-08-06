@@ -26,9 +26,11 @@ namespace _51_BACKUP_SYSTEM
                         case 1:
                             inputComplete = true;
 
-                            Console.Clear();
-                            Console.WriteLine("Watcher mode is on. Press '3' to exit");
-                            while (Console.Read() != '3') ;
+                            //Console.Clear();
+                            //Console.WriteLine("Watcher mode is on. Press '3' to exit");
+                            //while (Console.Read() != '3') ;
+
+                            new Watcher().Run();
 
                             Backup();
                             break;
@@ -44,7 +46,7 @@ namespace _51_BACKUP_SYSTEM
             }
         }
 
-        private static void Backup()
+        public static void Backup()
         {
             var guid = Guid.NewGuid().ToString();
 

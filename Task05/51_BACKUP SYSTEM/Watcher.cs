@@ -34,9 +34,9 @@ namespace _51_BACKUP_SYSTEM
 
             watcher.EnableRaisingEvents = true;
 
-            //Console.Clear();
-            //Console.WriteLine("Watcher mode is on. Press '3' to exit");
-            //while (Console.Read() != '3') ;
+            Console.Clear();
+            Console.WriteLine("Watcher mode is on. Press '3' to exit");
+            while (Console.Read() != '3') ;
         }
 
         private void OnChanged(object source, FileSystemEventArgs onChangedFile)
@@ -47,28 +47,30 @@ namespace _51_BACKUP_SYSTEM
 
             if (lastWriteTime != lastRead)
             {
-                if (onChangedFile.ChangeType == WatcherChangeTypes.Created)
-                {
-                    FilesList.Add(onChangedFile);
-                }
+                Program.Backup();
 
-                if (onChangedFile.ChangeType == WatcherChangeTypes.Deleted)
-                {
-                    if (FilesList.Exists(x => x == onChangedFile))
-                    {
-                        FilesList.Remove(onChangedFile);
-                    }
-                }
+                //if (onChangedFile.ChangeType == WatcherChangeTypes.Created)
+                //{
+                //    FilesList.Add(onChangedFile);
+                //}
 
-                if (onChangedFile.ChangeType == WatcherChangeTypes.Changed || onChangedFile.ChangeType == WatcherChangeTypes.Renamed)
-                {
-                    if (FilesList.Exists(x => x == onChangedFile))
-                    {
-                        FilesList.Remove(onChangedFile);
-                    }
+                //if (onChangedFile.ChangeType == WatcherChangeTypes.Deleted)
+                //{
+                //    if (FilesList.Exists(x => x == onChangedFile))
+                //    {
+                //        FilesList.Remove(onChangedFile);
+                //    }
+                //}
 
-                    FilesList.Add(onChangedFile);
-                }
+                //if (onChangedFile.ChangeType == WatcherChangeTypes.Changed || onChangedFile.ChangeType == WatcherChangeTypes.Renamed)
+                //{
+                //    if (FilesList.Exists(x => x == onChangedFile))
+                //    {
+                //        FilesList.Remove(onChangedFile);
+                //    }
+
+                //    FilesList.Add(onChangedFile);
+                //}
 
                 lastRead = lastWriteTime;
             }
