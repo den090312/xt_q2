@@ -25,7 +25,7 @@ namespace _51_BACKUP_SYSTEM
         {
             Storage.NullCheck(dataTable);
 
-            Thread.Sleep(10);
+            Thread.Sleep(1000);
             var streamWriter = new StreamWriter(Storage.LogFile, true);
 
             foreach (DataRow rowTable in dataTable.Rows)
@@ -36,7 +36,7 @@ namespace _51_BACKUP_SYSTEM
 
                 for (i = 0; i < itemArray.Length - 1; i++)
                 {
-                    streamWriter.Write($"{itemArray[i].ToString()}{Log.Separator}");
+                    streamWriter.Write($"{itemArray[i].ToString()}{Separator}");
                 }
 
                 streamWriter.Write(itemArray[i].ToString());

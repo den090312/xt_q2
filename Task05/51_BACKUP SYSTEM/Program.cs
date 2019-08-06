@@ -25,14 +25,10 @@ namespace _51_BACKUP_SYSTEM
                     {
                         case 1:
                             inputComplete = true;
-
-                            //Console.Clear();
-                            //Console.WriteLine("Watcher mode is on. Press '3' to exit");
-                            //while (Console.Read() != '3') ;
-
+                            Console.WriteLine("--------START BACKUP--------");
                             new Watcher().Run();
-
                             Backup();
+                            Console.WriteLine("-------BACKUP IS DONE-------");
                             break;
                         case 2:
                             inputComplete = true;
@@ -49,10 +45,7 @@ namespace _51_BACKUP_SYSTEM
         public static void Backup()
         {
             var guid = Guid.NewGuid().ToString();
-
-            Console.WriteLine("--------START BACKUP--------");
             Storage.CreateBackup(guid);
-            Console.WriteLine("-------BACKUP IS DONE-------");
         }
 
         private static void Restore()
