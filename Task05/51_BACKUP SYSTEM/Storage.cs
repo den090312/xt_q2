@@ -146,7 +146,7 @@ namespace _51_BACKUP_SYSTEM
             var files = pathInfo.GetFiles("*.*", SearchOption.AllDirectories);
 
             DeleteFiles();
-            DeleteSubDirectories(Root);
+            DeleteDirectories(Root);
 
             RestoreDirectories(directories, path);
             RestoreFiles(files, path);
@@ -189,7 +189,7 @@ namespace _51_BACKUP_SYSTEM
             }
         }
 
-        private static void DeleteSubDirectories(string path)
+        private static void DeleteDirectories(string path)
         {
             var storageRoot = new DirectoryInfo(path);
 
@@ -200,7 +200,7 @@ namespace _51_BACKUP_SYSTEM
             {
                 if (Directory.Exists(dir.FullName))
                 {
-                    DeleteSubDirectories(dir.FullName);
+                    DeleteDirectories(dir.FullName);
                 }
             }
 
