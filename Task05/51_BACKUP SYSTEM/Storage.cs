@@ -112,10 +112,12 @@ namespace _51_BACKUP_SYSTEM
                 if (storageObject.IsDirectory)
                 {
                     CreateDir(guid, storageObject.FullName);
+                    Console.Write('.');
                 }
                 else
                 {
                     CreateFile(guid, storageObject);
+                    Console.Write('.');
                 }
             }
 

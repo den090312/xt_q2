@@ -52,18 +52,13 @@ namespace _51_BACKUP_SYSTEM
             var logRows = logTable.Rows;
             var rowsCount = logRows.Count - 1;
 
-            for (int i = 0; i < rowsCount - 1; i++)
+            for (int i = 0; i < rowsCount; i++)
             {
                 var tableDate = DateTime.Parse(logRows[i]["Date"].ToString());
 
-                if (tableDate == restoreDate)
+                if (tableDate >= restoreDate)
                 {
                     return logRows[i]["Guid"].ToString();
-                }
-
-                if (tableDate > restoreDate)
-                {
-                    return logRows[i - 1]["Guid"].ToString();
                 }
             }
 
