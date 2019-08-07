@@ -2,11 +2,11 @@
 {
     public class StorageObject
     {
-        public bool IsDirectory { get; set; }
+        public bool IsDirectory { get; }
 
-        public string FullName { get; set; } = string.Empty;
+        public string FullName { get; } = string.Empty;
 
-        public string Contest { get; private set; } = string.Empty;
+        public string Contest { get; } = string.Empty;
 
         public StorageObject(string fullName, string contest, bool isDirectory)
         {
