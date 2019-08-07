@@ -14,7 +14,7 @@ namespace _51_BACKUP_SYSTEM
 
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
 
-        public void RunEvents()
+        public void CatchEvents()
         {
             var watcher = GetWatcher();
 

@@ -6,7 +6,7 @@
 
         public string FullName { get; set; } = string.Empty;
 
-        public string Contest { get; set; } = string.Empty;
+        public string Contest { get; private set; } = string.Empty;
 
         public StorageObject(string fullName, string contest, bool isDirectory)
         {
