@@ -70,7 +70,7 @@ namespace _51_BACKUP_SYSTEM
             return logRows[rowsCount]["Guid"].ToString();
         }
 
-        private static DataTable GetTable()
+        public static DataTable GetTable()
         {
             var logTable = CreateTable();
 
@@ -92,7 +92,7 @@ namespace _51_BACKUP_SYSTEM
             return logTable;
         }
 
-        private static void AddRecord(string guid)
+        public static void AddRecord(string guid)
         {
             var dataTable = CreateTable();
 

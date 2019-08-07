@@ -49,7 +49,7 @@ namespace _51_BACKUP_SYSTEM
             }
         }
 
-        public static DateTime GetDateFromConsole(string dateFormat)
+        private static DateTime GetDateFromConsole(string dateFormat)
         {
             Console.Clear();
             Console.WriteLine($"Enter date in format '{dateFormat}'");

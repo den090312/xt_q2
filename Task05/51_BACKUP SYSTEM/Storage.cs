@@ -59,7 +59,7 @@ namespace _51_BACKUP_SYSTEM
             Console.WriteLine("-----------------------------");
         }
 
-        public static void CreateFile(string guid, StorageObject storageObject)
+        private static void CreateFile(string guid, StorageObject storageObject)
         {
             NullCheck(guid);
 
@@ -81,7 +81,7 @@ namespace _51_BACKUP_SYSTEM
             streamWriter.Close();
         }
 
-        public static void CreateDir(string guid, string dirPath)
+        private static void CreateDir(string guid, string dirPath)
         {
             NullCheck(guid);
             NullCheck(dirPath);
