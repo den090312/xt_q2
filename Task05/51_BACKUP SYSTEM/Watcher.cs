@@ -16,17 +16,7 @@ namespace _51_BACKUP_SYSTEM
 
         public void RunEvents()
         {
-            var watcher = new FileSystemWatcher
-            {
-                Path = Storage.Root,
-                NotifyFilter = NotifyFilters.LastAccess
-                             | NotifyFilters.LastWrite
-                             | NotifyFilters.DirectoryName
-                             | NotifyFilters.FileName,
-
-                IncludeSubdirectories = true,
-                Filter = "*.*"
-            };
+            var watcher = GetWatcher();
 
             watcher.Changed += OnChangedEvents;
             watcher.Created += OnChangedEvents;
@@ -42,17 +32,7 @@ namespace _51_BACKUP_SYSTEM
 
         public void RunBackup()
         {
-            var watcher = new FileSystemWatcher
-            {
-                Path = Storage.Root,
-                NotifyFilter = NotifyFilters.LastAccess
-                             | NotifyFilters.LastWrite
-                             | NotifyFilters.DirectoryName
-                             | NotifyFilters.FileName,
-
-                IncludeSubdirectories = true,
-                Filter = "*.*"
-            };
+            var watcher = GetWatcher();
 
             watcher.Changed += OnChangedBackup;
             watcher.Created += OnChangedBackup;
@@ -62,18 +42,24 @@ namespace _51_BACKUP_SYSTEM
             watcher.EnableRaisingEvents = true;
         }
 
-        private static void OnChangedEvents(object source, FileSystemEventArgs onChangedFile) => UpdateQueue();
-
-        private static void OnChangedBackup(object source, FileSystemEventArgs onChangedFile)
+        private FileSystemWatcher GetWatcher()
         {
-            Thread.Sleep(1000);
-            Storage.CreateBackup();
+            var watcher = new FileSystemWatcher
+            {
+                Path = Storage.Root,
+                NotifyFilter = NotifyFilters.LastAccess
+                 | NotifyFilters.LastWrite
+                 | NotifyFilters.DirectoryName
+                 | NotifyFilters.FileName,
 
-            Counter++;
-            ConsoleStart();
-            Console.WriteLine($"File: {onChangedFile.FullPath} {onChangedFile.ChangeType}");
-            Console.WriteLine($"Counter: {Counter}");
+                IncludeSubdirectories = true,
+                Filter = "*.*"
+            };
+
+            return watcher;
         }
+
+        private static void OnChangedEvents(object source, FileSystemEventArgs onChangedFile) => UpdateQueue();
 
         private static void UpdateQueue()
         {
@@ -104,6 +90,17 @@ namespace _51_BACKUP_SYSTEM
 
                 StorageObjects.Enqueue(storageObject);
             }
+        }
+
+        private static void OnChangedBackup(object source, FileSystemEventArgs onChangedFile)
+        {
+            Thread.Sleep(1000);
+            Storage.CreateBackup();
+
+            Counter++;
+            ConsoleStart();
+            Console.WriteLine($"File: {onChangedFile.FullPath} {onChangedFile.ChangeType}");
+            Console.WriteLine($"Counter: {Counter}");
         }
 
         public static void ConsoleStart()
