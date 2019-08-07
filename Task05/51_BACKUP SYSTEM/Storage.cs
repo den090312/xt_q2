@@ -53,11 +53,11 @@ namespace _51_BACKUP_SYSTEM
         public static void WriteInfo()
         {
             Console.WriteLine("---------Task folders--------");
-            Console.WriteLine($"Main {Main}");
-            Console.WriteLine($"Root {Root}");
-            Console.WriteLine($"Log {LogFile}");
-            Console.WriteLine($"Backup {Backup}");
-            Console.WriteLine($"Extension filter {Extension}");
+            Console.WriteLine($"Main - {Main}");
+            Console.WriteLine($"Root - {Root}");
+            Console.WriteLine($"Log - {LogFile}");
+            Console.WriteLine($"Backup - {Backup}");
+            Console.WriteLine($"Extension filter - {Extension}");
             Console.WriteLine("-----------------------------");
         }
 
@@ -79,11 +79,14 @@ namespace _51_BACKUP_SYSTEM
 
             Thread.Sleep(10);
 
-            lock (locker)
+            if (File.Exists(path))
             {
-                var streamWriter = new StreamWriter(path, false);
-                streamWriter.Write(fileContents);
-                streamWriter.Close();
+                lock (locker)
+                {
+                    var streamWriter = new StreamWriter(path, false);
+                    streamWriter.Write(fileContents);
+                    streamWriter.Close();
+                }
             }
         }
 
@@ -111,16 +114,18 @@ namespace _51_BACKUP_SYSTEM
             {
                 var storageObject = storageObjects.Dequeue();
 
-
-                if (storageObject.IsDirectory)
+                if (storageObject != null)
                 {
-                    CreateDir(guid, storageObject.FullName);
-                    Program.Processing(ref dotCounter);
-                }
-                else
-                {
-                    CreateFile(guid, storageObject);
-                    Program.Processing(ref dotCounter);
+                    if (storageObject.IsDirectory)
+                    {
+                        CreateDir(guid, storageObject.FullName);
+                        Program.Processing(ref dotCounter);
+                    }
+                    else
+                    {
+                        CreateFile(guid, storageObject);
+                        Program.Processing(ref dotCounter);
+                    }
                 }
             }
 

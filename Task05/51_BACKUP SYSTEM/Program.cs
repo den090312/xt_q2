@@ -53,7 +53,12 @@ namespace _51_BACKUP_SYSTEM
         {
             if (dotCounter == Console.WindowWidth)
             {
-                Console.WriteLine();
+                for (var i = 0; i < Console.WindowWidth; i++)
+                {
+                    Console.Write("\b ");
+                }
+
+                Console.Write("\b");
             }
 
             Console.Write('.');
