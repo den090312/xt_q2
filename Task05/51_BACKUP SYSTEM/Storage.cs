@@ -22,8 +22,6 @@ namespace _51_BACKUP_SYSTEM
 
         public static string Extension { get; } = ".txt";
 
-        //public static Queue<StorageObject> StorageObjects { get; private set; } = new Queue<StorageObject>();
-
         public static void Create()
         {
             if (!File.Exists(Main))
@@ -79,17 +77,6 @@ namespace _51_BACKUP_SYSTEM
             var path = Path.Combine(Backup, guid, filePath);
 
             Thread.Sleep(10);
-
-            //if (File.Exists(path))
-            //{
-            //    lock (locker)
-            //    {
-            //        var streamWriter = new StreamWriter(path, false);
-            //        streamWriter.Write(fileContents);
-            //        streamWriter.Close();
-            //    }
-            //}
-
             var streamWriter = new StreamWriter(path, false);
             streamWriter.Write(fileContents);
             streamWriter.Close();
@@ -110,9 +97,6 @@ namespace _51_BACKUP_SYSTEM
         public static void CreateBackup()
         {
             var guid = Guid.NewGuid().ToString();
-
-            long dotCounter = 1;
-
             var storageObjects = GetQueue();
 
             while (storageObjects.Count != 0)
@@ -122,12 +106,10 @@ namespace _51_BACKUP_SYSTEM
                 if (storageObject.IsDirectory)
                 {
                     CreateDir(guid, storageObject.FullName);
-                    Program.Processing(ref dotCounter);
                 }
                 else
                 {
                     CreateFile(guid, storageObject);
-                    Program.Processing(ref dotCounter);
                 }
             }
 
@@ -155,7 +137,6 @@ namespace _51_BACKUP_SYSTEM
                 var storageObject = new StorageObject(dir.FullName, string.Empty, isDirectory);
 
                 storageQueue.Enqueue(storageObject);
-
             }
 
             Thread.Sleep(10);
@@ -263,59 +244,11 @@ namespace _51_BACKUP_SYSTEM
             }
         }
 
-        public static void NullCheck(DirectoryInfo directoryInfo)
-        {
-            if (directoryInfo is null)
-            {
-                throw new ArgumentException($"{nameof(directoryInfo)} is null!");
-            }
-        }
-
-        public static void NullCheck(FileSystemEventArgs onChangedFile)
-        {
-            if (onChangedFile is null)
-            {
-                throw new ArgumentException($"{nameof(onChangedFile)} is null!");
-            }
-        }
-
-        public static void NullCheck(RenamedEventArgs renamedFile)
-        {
-            if (renamedFile is null)
-            {
-                throw new ArgumentException($"{nameof(renamedFile)} is null!");
-            }
-        }
-
         public static void NullCheck(DataTable dataTable)
         {
             if (dataTable is null)
             {
                 throw new ArgumentException($"{nameof(dataTable)} is null!");
-            }
-        }
-
-        public static void NullCheck(DirectoryInfo[] directories)
-        {
-            if (directories is null)
-            {
-                throw new ArgumentException($"{nameof(directories)} is null!");
-            }
-        }
-
-        public static void NullCheck(FileInfo[] files)
-        {
-            if (files is null)
-            {
-                throw new ArgumentException($"{nameof(files)} is null!");
-            }
-        }
-
-        public static void NullCheck(FileInfo file)
-        {
-            if (file is null)
-            {
-                throw new ArgumentException($"{nameof(file)} is null!");
             }
         }
     }

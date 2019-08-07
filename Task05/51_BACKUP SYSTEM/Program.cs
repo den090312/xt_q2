@@ -27,7 +27,6 @@ namespace _51_BACKUP_SYSTEM
                         case 1:
                             inputComplete = true;
 
-                            //new Thread(() => new Watcher().CatchEvents()).Start();
                             new Thread(() => new Watcher().RunBackup()).Start();
 
                             break;
@@ -46,26 +45,6 @@ namespace _51_BACKUP_SYSTEM
                             break;
                     }
                 }
-            }
-        }
-
-        public static void Processing(ref long dotCounter)
-        {
-            var edge = 10;
-
-            if (dotCounter == edge)
-            {
-                for (var i = 0; i < edge; i++)
-                {
-                    Console.Write("\b");
-                }
-
-                dotCounter = 0;
-            }
-            else
-            {
-                Console.Write(".");
-                dotCounter++;
             }
         }
 
