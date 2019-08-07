@@ -11,7 +11,7 @@ namespace _51_BACKUP_SYSTEM
 
         public static string DateFormat { get; } = "dd.MM.yyyy H:mm:ss";
 
-        public static DataTable CreateTable()
+        private static DataTable CreateTable()
         {
             var dataTable = new DataTable();
 
@@ -21,7 +21,7 @@ namespace _51_BACKUP_SYSTEM
             return dataTable;
         }
 
-        public static void StreamWriter(DataTable dataTable)
+        private static void StreamWriter(DataTable dataTable)
         {
             Storage.NullCheck(dataTable);
 
@@ -70,7 +70,7 @@ namespace _51_BACKUP_SYSTEM
             return logRows[rowsCount]["Guid"].ToString();
         }
 
-        public static DataTable GetTable()
+        private static DataTable GetTable()
         {
             var logTable = CreateTable();
 
@@ -92,7 +92,7 @@ namespace _51_BACKUP_SYSTEM
             return logTable;
         }
 
-        public static void AddRecord(string guid)
+        private static void AddRecord(string guid)
         {
             var dataTable = CreateTable();
 
@@ -102,7 +102,7 @@ namespace _51_BACKUP_SYSTEM
             new Thread(() => StreamWriter(dataTable)).Start();
         }
 
-        public static DataTable AddRow(DataTable dataTable, string guid)
+        private static DataTable AddRow(DataTable dataTable, string guid)
         {
             Storage.NullCheck(guid);
             Storage.NullCheck(dataTable);
