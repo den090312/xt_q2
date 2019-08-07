@@ -53,7 +53,8 @@ namespace _51_BACKUP_SYSTEM
                  | NotifyFilters.FileName,
 
                 IncludeSubdirectories = true,
-                Filter = "*.*"
+                Filter = "*.*",
+                InternalBufferSize = 64000
             };
 
             return watcher;
