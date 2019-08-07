@@ -49,6 +49,17 @@ namespace _51_BACKUP_SYSTEM
             }
         }
 
+        public static void Processing(ref long dotCounter)
+        {
+            if (dotCounter == Console.WindowWidth)
+            {
+                Console.WriteLine();
+            }
+
+            Console.Write('.');
+            dotCounter++;
+        }
+
         private static DateTime GetDateFromConsole(string dateFormat)
         {
             Console.Clear();

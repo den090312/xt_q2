@@ -105,19 +105,22 @@ namespace _51_BACKUP_SYSTEM
 
             var storageObjects = Watcher.StorageObjects;
 
+            long dotCounter = 1;
+
             while (storageObjects.Count != 0)
             {
                 var storageObject = storageObjects.Dequeue();
 
+
                 if (storageObject.IsDirectory)
                 {
                     CreateDir(guid, storageObject.FullName);
-                    Console.Write('.');
+                    Program.Processing(ref dotCounter);
                 }
                 else
                 {
                     CreateFile(guid, storageObject);
-                    Console.Write('.');
+                    Program.Processing(ref dotCounter);
                 }
             }
 

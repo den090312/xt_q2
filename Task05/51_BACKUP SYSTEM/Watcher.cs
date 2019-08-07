@@ -64,6 +64,7 @@ namespace _51_BACKUP_SYSTEM
 
         private static void UpdateQueue()
         {
+            Thread.Sleep(1000);
             var storageRootInfo = new DirectoryInfo(Storage.Root);
 
             Thread.Sleep(10);
