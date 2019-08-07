@@ -8,18 +8,11 @@ namespace _51_BACKUP_SYSTEM
 {
     public class Watcher
     {
-        private static Queue<StorageObject> storageObjects;
-
         private int lastRead = DateTime.MinValue.Millisecond;
 
         public static long Counter { get; private set; } = 0;
 
-        public static Queue<StorageObject> StorageObjects
-        {
-            get => GetQueue();
-
-            private set => storageObjects = value;
-        }
+        public static Queue<StorageObject> StorageObjects { get; private set; }
 
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
 
@@ -78,14 +71,14 @@ namespace _51_BACKUP_SYSTEM
 
             if (lastWriteTime != lastRead)
             {
-                storageObjects = GetQueue();
+                StorageObjects = GetQueue();
                 lastRead = lastWriteTime;
             }
         }
 
         public static Queue<StorageObject> GetQueue()
         {
-            var storageObjects = new Queue<StorageObject>();
+            var storageQueue = new Queue<StorageObject>();
 
             Thread.Sleep(10);
             var storageRootInfo = new DirectoryInfo(Storage.Root);
@@ -98,7 +91,10 @@ namespace _51_BACKUP_SYSTEM
                 var isDirectory = true;
                 var storageObject = new StorageObject(dir.FullName, string.Empty, isDirectory);
 
-                storageObjects.Enqueue(storageObject);
+                if (storageQueue.Peek().GetHashCode() != storageObject.GetHashCode())
+                {
+                    storageQueue.Enqueue(storageObject);
+                }
             }
 
             Thread.Sleep(10);
@@ -113,13 +109,16 @@ namespace _51_BACKUP_SYSTEM
                 var contest = File.ReadAllText(fullName);
                 var storageObject = new StorageObject(fullName, contest, isDirectory);
 
-                storageObjects.Enqueue(storageObject);
+                if (storageQueue.Peek().GetHashCode() != storageObject.GetHashCode())
+                {
+                    storageQueue.Enqueue(storageObject);
+                }
             }
 
-            return storageObjects;
+            return storageQueue;
         }
 
-        public static Queue<StorageObject> GetStorageObjects() => storageObjects;
+        public static Queue<StorageObject> GetStorageObjects() => StorageObjects;
 
         private static void OnBackup(object source, FileSystemEventArgs onChangedFile)
         {

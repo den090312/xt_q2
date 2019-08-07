@@ -81,13 +81,17 @@ namespace _51_BACKUP_SYSTEM
 
             //if (File.Exists(path))
             //{
-            lock (locker)
-            {
-                var streamWriter = new StreamWriter(path, false);
-                streamWriter.Write(fileContents);
-                streamWriter.Close();
-            }
+            //    lock (locker)
+            //    {
+            //        var streamWriter = new StreamWriter(path, false);
+            //        streamWriter.Write(fileContents);
+            //        streamWriter.Close();
+            //    }
             //}
+
+            var streamWriter = new StreamWriter(path, false);
+            streamWriter.Write(fileContents);
+            streamWriter.Close();
         }
 
         private static void CreateDir(string guid, string dirPath)
