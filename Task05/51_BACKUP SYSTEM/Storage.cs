@@ -59,15 +59,15 @@ namespace _51_BACKUP_SYSTEM
             Console.WriteLine("-----------------------------");
         }
 
-        public static void CreateFile(string guid, FileInfo fileInfo)
+        public static void CreateFile(string guid, StorageObject eventObject)
         {
             NullCheck(guid);
-            NullCheck(fileInfo);
 
-            var filePath = fileInfo.FullName;
+            var filePath = eventObject.FullName;
+            NullCheck(filePath);
 
             Thread.Sleep(10);
-            var fileContents = File.ReadAllText(fileInfo.FullName);
+            var fileContents = File.ReadAllText(filePath);
 
             Thread.Sleep(10);
             Directory.CreateDirectory($"{Backup}\\{guid}");
@@ -81,52 +81,45 @@ namespace _51_BACKUP_SYSTEM
             streamWriter.Close();
         }
 
-        public static void CreateDir(string guid, DirectoryInfo dirInfo)
+        public static void CreateDir(string guid, string dirPath)
         {
             NullCheck(guid);
-            NullCheck(dirInfo);
-
-            var dirPath = dirInfo.FullName;
+            NullCheck(dirPath);
 
             dirPath = dirPath.Replace(Root + "\\", string.Empty);
 
             var path = Path.Combine(Backup, guid, dirPath);
 
-            Thread.Sleep(10);
             Directory.CreateDirectory(path);
         }
 
         public static void CreateBackup()
         {
             var guid = Guid.NewGuid().ToString();
-            var storageRootInfo = new DirectoryInfo(Root);
-            var dataTable = Log.CreateTable();
 
-            Thread.Sleep(10);
-            var files = storageRootInfo.GetFiles("*.*", SearchOption.AllDirectories);
+            var eventQueue = Watcher.EventQueue;
 
-            Thread.Sleep(10);
-            var directories = storageRootInfo.GetDirectories("*.*", SearchOption.AllDirectories);
-
-            Thread.Sleep(10);
-            dataTable = Log.AddRow(dataTable, guid);
-
-            Thread.Sleep(1000);
-            new Thread(() => Log.Write(dataTable)).Start();
-
-            foreach (var dirInfo in directories)
+            while (eventQueue.Count != 0)
             {
-                CreateDir(guid, dirInfo);
-                Console.Write(".");
-            }
+                var eventObject = eventQueue.Dequeue();
 
-            foreach (var fileInfo in files)
-            {
-                if (fileInfo.Extension == Extension)
+                if (eventObject.Contest == string.Empty)
                 {
-                    CreateFile(guid, fileInfo);
+                    CreateDir(guid, eventObject.FullName);
                     Console.Write(".");
                 }
+                else
+                {
+                    CreateFile(guid, eventObject);
+                    Console.Write(".");
+                }
+            }
+
+            var guidpath = $"{Backup}\\{guid}";
+
+            if (Directory.Exists(guidpath))
+            {
+                Log.AddRecord(guid);
             }
         }
 

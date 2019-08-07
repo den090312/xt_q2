@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Text;
+using System.Threading;
 
 namespace _51_BACKUP_SYSTEM
 {
@@ -26,7 +27,9 @@ namespace _51_BACKUP_SYSTEM
                         case 1:
                             inputComplete = true;
 
-                            new Watcher().Run();
+                            new Thread(() => new Watcher().RunEvents()).Start();
+                            new Thread(() => new Watcher().RunBackup()).Start();
+
                             break;
                         case 2:
                             inputComplete = true;

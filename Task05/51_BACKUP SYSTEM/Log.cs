@@ -21,7 +21,7 @@ namespace _51_BACKUP_SYSTEM
             return dataTable;
         }
 
-        public static void Write(DataTable dataTable)
+        public static void StreamWriter(DataTable dataTable)
         {
             Storage.NullCheck(dataTable);
 
@@ -92,10 +92,21 @@ namespace _51_BACKUP_SYSTEM
             return logTable;
         }
 
+        public static void AddRecord(string guid)
+        {
+            var dataTable = CreateTable();
+
+            dataTable = AddRow(dataTable, guid);
+
+            Thread.Sleep(1000);
+            //new Thread(() => StreamWriter(dataTable)).Start();
+            StreamWriter(dataTable);
+        }
+
         public static DataTable AddRow(DataTable dataTable, string guid)
         {
-            Storage.NullCheck(dataTable);
             Storage.NullCheck(guid);
+            Storage.NullCheck(dataTable);
 
             var rowDir = dataTable.NewRow();
 
