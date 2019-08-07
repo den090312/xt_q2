@@ -112,9 +112,11 @@ namespace _51_BACKUP_SYSTEM
 
             long dotCounter = 1;
 
-            while (Watcher.StorageObjects.Count != 0)
+            var storageObjects = Watcher.GetQueue();
+
+            while (storageObjects.Count != 0)
             {
-                var storageObject = Watcher.StorageObjects.Dequeue();
+                var storageObject = storageObjects.Dequeue();
 
                 //if (storageObject != null)
                 //{
