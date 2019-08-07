@@ -99,8 +99,7 @@ namespace _51_BACKUP_SYSTEM
             dataTable = AddRow(dataTable, guid);
 
             Thread.Sleep(1000);
-            //new Thread(() => StreamWriter(dataTable)).Start();
-            StreamWriter(dataTable);
+            new Thread(() => StreamWriter(dataTable)).Start();
         }
 
         public static DataTable AddRow(DataTable dataTable, string guid)
