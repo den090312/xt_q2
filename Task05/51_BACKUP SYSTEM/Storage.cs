@@ -81,17 +81,13 @@ namespace _51_BACKUP_SYSTEM
 
             //if (File.Exists(path))
             //{
-            //    lock (locker)
-            //    {
-            //        var streamWriter = new StreamWriter(path, false);
-            //        streamWriter.Write(fileContents);
-            //        streamWriter.Close();
-            //    }
+            lock (locker)
+            {
+                var streamWriter = new StreamWriter(path, false);
+                streamWriter.Write(fileContents);
+                streamWriter.Close();
+            }
             //}
-
-            var streamWriter = new StreamWriter(path, false);
-            streamWriter.Write(fileContents);
-            streamWriter.Close();
         }
 
         private static void CreateDir(string guid, string dirPath)
@@ -117,20 +113,6 @@ namespace _51_BACKUP_SYSTEM
             while (storageObjects.Count != 0)
             {
                 var storageObject = storageObjects.Dequeue();
-
-                //if (storageObject != null)
-                //{
-                //    if (storageObject.IsDirectory)
-                //    {
-                //        CreateDir(guid, storageObject.FullName);
-                //        Program.Processing(ref dotCounter);
-                //    }
-                //    else
-                //    {
-                //        CreateFile(guid, storageObject);
-                //        Program.Processing(ref dotCounter);
-                //    }
-                //}
 
                 if (storageObject.IsDirectory)
                 {

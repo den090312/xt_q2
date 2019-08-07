@@ -10,14 +10,13 @@ namespace _51_BACKUP_SYSTEM
     {
         private static Queue<StorageObject> storageObjects;
 
+        private int lastRead = DateTime.MinValue.Millisecond;
+
         public static long Counter { get; private set; } = 0;
 
         public static Queue<StorageObject> StorageObjects
         {
-            get
-            {
-                return GetQueue();
-            }
+            get => GetQueue();
 
             private set => storageObjects = value;
         }
@@ -58,9 +57,9 @@ namespace _51_BACKUP_SYSTEM
             {
                 Path = Storage.Root,
                 NotifyFilter = NotifyFilters.LastAccess
-                 | NotifyFilters.LastWrite
-                 | NotifyFilters.DirectoryName
-                 | NotifyFilters.FileName,
+                             | NotifyFilters.LastWrite
+                             | NotifyFilters.DirectoryName
+                             | NotifyFilters.FileName,
 
                 IncludeSubdirectories = true,
                 Filter = "*.*",
@@ -70,15 +69,26 @@ namespace _51_BACKUP_SYSTEM
             return watcher;
         }
 
-        private static void OnEvents(object source, FileSystemEventArgs onChangedFile) => UpdateQueue();
+        private void OnEvents(object source, FileSystemEventArgs onEventObject) => UpdateQueue(onEventObject);
 
-        private static void UpdateQueue() => storageObjects = GetQueue();
+        private void UpdateQueue(FileSystemEventArgs onEventObject)
+        {
+            Thread.Sleep(1);
+            var lastWriteTime = File.GetLastWriteTime(onEventObject.FullPath).Millisecond;
+
+            if (lastWriteTime != lastRead)
+            {
+                storageObjects = GetQueue();
+            }
+
+            lastRead = lastWriteTime;
+        }
 
         public static Queue<StorageObject> GetQueue()
         {
             var storageObjects = new Queue<StorageObject>();
 
-            Thread.Sleep(1000);
+            Thread.Sleep(10);
             var storageRootInfo = new DirectoryInfo(Storage.Root);
 
             Thread.Sleep(10);
@@ -92,7 +102,7 @@ namespace _51_BACKUP_SYSTEM
                 storageObjects.Enqueue(storageObject);
             }
 
-            Thread.Sleep(1000);
+            Thread.Sleep(10);
             var files = storageRootInfo.GetFiles("*.*", SearchOption.AllDirectories);
 
             foreach (var file in files)
