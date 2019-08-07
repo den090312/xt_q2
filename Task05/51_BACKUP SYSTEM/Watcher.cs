@@ -66,7 +66,7 @@ namespace _51_BACKUP_SYSTEM
 
         private static void OnChangedBackup(object source, FileSystemEventArgs onChangedFile)
         {
-            //Thread.Sleep(1000);
+            Thread.Sleep(1000);
             Storage.CreateBackup();
 
             Counter++;
