@@ -7,6 +7,8 @@ namespace _51_BACKUP_SYSTEM
 {
     public abstract class Storage
     {
+        private static readonly object locker = new object();
+
         public static string Disk { get; } = "D";
 
         public static string Tom { get; } = $@"{Disk}:\";
@@ -76,9 +78,13 @@ namespace _51_BACKUP_SYSTEM
             var path = Path.Combine(Backup, guid, filePath);
 
             Thread.Sleep(10);
-            var streamWriter = new StreamWriter(path, false);
-            streamWriter.Write(fileContents);
-            streamWriter.Close();
+
+            lock (locker)
+            {
+                var streamWriter = new StreamWriter(path, false);
+                streamWriter.Write(fileContents);
+                streamWriter.Close();
+            }
         }
 
         private static void CreateDir(string guid, string dirPath)
