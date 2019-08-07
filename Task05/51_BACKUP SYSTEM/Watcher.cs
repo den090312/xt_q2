@@ -103,7 +103,7 @@ namespace _51_BACKUP_SYSTEM
             Console.WriteLine($"Counter: {Counter}");
         }
 
-        public static void ConsoleStart()
+        private static void ConsoleStart()
         {
             Console.Clear();
             Console.WriteLine("Watcher mode is on. Press '3' to exit");
