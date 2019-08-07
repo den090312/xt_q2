@@ -97,21 +97,19 @@ namespace _51_BACKUP_SYSTEM
         {
             var guid = Guid.NewGuid().ToString();
 
-            var eventQueue = Watcher.EventQueue;
+            var storageObjects = Watcher.StorageObjects;
 
-            while (eventQueue.Count != 0)
+            while (storageObjects.Count != 0)
             {
-                var eventObject = eventQueue.Dequeue();
+                var storageObject = storageObjects.Dequeue();
 
-                if (eventObject.Contest == string.Empty)
+                if (storageObject.Contest == string.Empty)
                 {
-                    CreateDir(guid, eventObject.FullName);
-                    Console.Write(".");
+                    CreateDir(guid, storageObject.FullName);
                 }
                 else
                 {
-                    CreateFile(guid, eventObject);
-                    Console.Write(".");
+                    CreateFile(guid, storageObject);
                 }
             }
 

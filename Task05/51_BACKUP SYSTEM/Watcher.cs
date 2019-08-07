@@ -8,9 +8,7 @@ namespace _51_BACKUP_SYSTEM
 {
     public class Watcher
     {
-        private int lastRead = DateTime.MinValue.Millisecond;
-
-        public static Queue<StorageObject> EventQueue { get; set; } = new Queue<StorageObject>();
+        public static Queue<StorageObject> StorageObjects { get; set; } = new Queue<StorageObject>();
 
         public static long Counter { get; set; } = 0;
 
@@ -27,8 +25,7 @@ namespace _51_BACKUP_SYSTEM
                              | NotifyFilters.FileName,
 
                 IncludeSubdirectories = true,
-                Filter = "*.*",
-                InternalBufferSize = 64000
+                Filter = "*.*"
             };
 
             watcher.Changed += OnChangedEvents;
@@ -54,8 +51,7 @@ namespace _51_BACKUP_SYSTEM
                              | NotifyFilters.FileName,
 
                 IncludeSubdirectories = true,
-                Filter = "*.*",
-                InternalBufferSize = 64000
+                Filter = "*.*"
             };
 
             watcher.Changed += OnChangedBackup;
@@ -66,28 +62,11 @@ namespace _51_BACKUP_SYSTEM
             watcher.EnableRaisingEvents = true;
         }
 
-        private void OnChangedEvents(object source, FileSystemEventArgs onChangedFile)
+        private static void OnChangedEvents(object source, FileSystemEventArgs onChangedFile) => UpdateQueue();
+
+        private static void OnChangedBackup(object source, FileSystemEventArgs onChangedFile)
         {
-            Storage.NullCheck(onChangedFile);
-
-            if (onChangedFile.ChangeType == WatcherChangeTypes.Changed)
-            {
-                var lastWriteTime = File.GetLastWriteTime(onChangedFile.FullPath).Millisecond;
-
-                if (lastWriteTime != lastRead)
-                {
-                    FillEventQueue(onChangedFile);
-                }
-            }
-            else
-            {
-                FillEventQueue(onChangedFile);            
-            }
-        }
-
-        private void OnChangedBackup(object source, FileSystemEventArgs onChangedFile)
-        {
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
             Storage.CreateBackup();
 
             Counter++;
@@ -96,7 +75,7 @@ namespace _51_BACKUP_SYSTEM
             Console.WriteLine($"Counter: {Counter}");
         }
 
-        private void FillEventQueue(FileSystemEventArgs onChangedFile)
+        private static void UpdateQueue()
         {
             var storageRootInfo = new DirectoryInfo(Storage.Root);
 
@@ -107,7 +86,7 @@ namespace _51_BACKUP_SYSTEM
             {
                 var storageObject = new StorageObject(dir.FullName, string.Empty);
 
-                EventQueue.Enqueue(storageObject);
+                StorageObjects.Enqueue(storageObject);
             }
 
             Thread.Sleep(10);
@@ -118,7 +97,7 @@ namespace _51_BACKUP_SYSTEM
                 var fullName = file.FullName;
                 var storageObject = new StorageObject(fullName, File.ReadAllText(fullName));
 
-                EventQueue.Enqueue(storageObject);
+                StorageObjects.Enqueue(storageObject);
             }
         }
 
