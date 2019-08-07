@@ -84,7 +84,8 @@ namespace _51_BACKUP_SYSTEM
 
             foreach (var dir in directories)
             {
-                var storageObject = new StorageObject(dir.FullName, string.Empty);
+                var isFolder = true;
+                var storageObject = new StorageObject(dir.FullName, string.Empty, isFolder);
 
                 StorageObjects.Enqueue(storageObject);
             }
@@ -95,7 +96,11 @@ namespace _51_BACKUP_SYSTEM
             foreach (var file in files)
             {
                 var fullName = file.FullName;
-                var storageObject = new StorageObject(fullName, File.ReadAllText(fullName));
+                var isFolder = false;
+
+                Thread.Sleep(10);
+                var contest = File.ReadAllText(fullName);
+                var storageObject = new StorageObject(fullName, contest, isFolder);
 
                 StorageObjects.Enqueue(storageObject);
             }

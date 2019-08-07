@@ -59,11 +59,11 @@ namespace _51_BACKUP_SYSTEM
             Console.WriteLine("-----------------------------");
         }
 
-        public static void CreateFile(string guid, StorageObject eventObject)
+        public static void CreateFile(string guid, StorageObject storageObject)
         {
             NullCheck(guid);
 
-            var filePath = eventObject.FullName;
+            var filePath = storageObject.FullName;
             NullCheck(filePath);
 
             Thread.Sleep(10);
@@ -103,7 +103,7 @@ namespace _51_BACKUP_SYSTEM
             {
                 var storageObject = storageObjects.Dequeue();
 
-                if (storageObject.Contest == string.Empty)
+                if (storageObject.IsDirectory)
                 {
                     CreateDir(guid, storageObject.FullName);
                 }
