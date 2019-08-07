@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Threading;
@@ -7,8 +8,6 @@ namespace _51_BACKUP_SYSTEM
 {
     public abstract class Storage
     {
-        private static  object locker = new object();
-
         public static string Disk { get; } = "D";
 
         public static string Tom { get; } = $@"{Disk}:\";
@@ -22,6 +21,8 @@ namespace _51_BACKUP_SYSTEM
         public static string Backup { get; } = $@"{Main}\backup";
 
         public static string Extension { get; } = ".txt";
+
+        //public static Queue<StorageObject> StorageObjects { get; private set; } = new Queue<StorageObject>();
 
         public static void Create()
         {
@@ -105,14 +106,14 @@ namespace _51_BACKUP_SYSTEM
 
             Directory.CreateDirectory(path);
         }
-
+        
         public static void CreateBackup()
         {
             var guid = Guid.NewGuid().ToString();
 
             long dotCounter = 1;
 
-            var storageObjects = Watcher.GetQueue();
+            var storageObjects = GetQueue();
 
             while (storageObjects.Count != 0)
             {
@@ -136,6 +137,43 @@ namespace _51_BACKUP_SYSTEM
             {
                 Log.AddRecord(guid);
             }
+        }
+
+        private static Queue<StorageObject> GetQueue()
+        {
+            var storageQueue = new Queue<StorageObject>();
+
+            Thread.Sleep(10);
+            var storageRootInfo = new DirectoryInfo(Root);
+
+            Thread.Sleep(10);
+            var directories = storageRootInfo.GetDirectories("*.*", SearchOption.AllDirectories);
+
+            foreach (var dir in directories)
+            {
+                var isDirectory = true;
+                var storageObject = new StorageObject(dir.FullName, string.Empty, isDirectory);
+
+                storageQueue.Enqueue(storageObject);
+
+            }
+
+            Thread.Sleep(10);
+            var files = storageRootInfo.GetFiles("*.*", SearchOption.AllDirectories);
+
+            foreach (var file in files)
+            {
+                var fullName = file.FullName;
+                var isDirectory = false;
+
+                Thread.Sleep(10);
+                var contest = File.ReadAllText(fullName);
+                var storageObject = new StorageObject(fullName, contest, isDirectory);
+
+                storageQueue.Enqueue(storageObject);
+            }
+
+            return storageQueue;
         }
 
         public static void RestoreToDate(DateTime restoreDate)

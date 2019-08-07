@@ -27,7 +27,7 @@ namespace _51_BACKUP_SYSTEM
                         case 1:
                             inputComplete = true;
 
-                            new Thread(() => new Watcher().CatchEvents()).Start();
+                            //new Thread(() => new Watcher().CatchEvents()).Start();
                             new Thread(() => new Watcher().RunBackup()).Start();
 
                             break;

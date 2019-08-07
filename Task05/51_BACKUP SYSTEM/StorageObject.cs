@@ -37,8 +37,6 @@ namespace _51_BACKUP_SYSTEM
             }
 
             return true;
-
-            //return base.Equals(obj);
         }
 
         public override int GetHashCode()
@@ -47,6 +45,7 @@ namespace _51_BACKUP_SYSTEM
             hashCode = hashCode * -1521134295 + IsDirectory.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FullName);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Contest);
+
             return hashCode;
         }
     }
