@@ -7,7 +7,7 @@ namespace _51_BACKUP_SYSTEM
 {
     public abstract class Storage
     {
-        private static readonly object locker = new object();
+        private static  object locker = new object();
 
         public static string Disk { get; } = "D";
 
@@ -79,15 +79,19 @@ namespace _51_BACKUP_SYSTEM
 
             Thread.Sleep(10);
 
-            if (File.Exists(path))
-            {
-                lock (locker)
-                {
-                    var streamWriter = new StreamWriter(path, false);
-                    streamWriter.Write(fileContents);
-                    streamWriter.Close();
-                }
-            }
+            //if (File.Exists(path))
+            //{
+            //    lock (locker)
+            //    {
+            //        var streamWriter = new StreamWriter(path, false);
+            //        streamWriter.Write(fileContents);
+            //        streamWriter.Close();
+            //    }
+            //}
+
+            var streamWriter = new StreamWriter(path, false);
+            streamWriter.Write(fileContents);
+            streamWriter.Close();
         }
 
         private static void CreateDir(string guid, string dirPath)
@@ -106,26 +110,35 @@ namespace _51_BACKUP_SYSTEM
         {
             var guid = Guid.NewGuid().ToString();
 
-            var storageObjects = Watcher.StorageObjects;
-
             long dotCounter = 1;
 
-            while (storageObjects.Count != 0)
+            while (Watcher.StorageObjects.Count != 0)
             {
-                var storageObject = storageObjects.Dequeue();
+                var storageObject = Watcher.StorageObjects.Dequeue();
 
-                if (storageObject != null)
+                //if (storageObject != null)
+                //{
+                //    if (storageObject.IsDirectory)
+                //    {
+                //        CreateDir(guid, storageObject.FullName);
+                //        Program.Processing(ref dotCounter);
+                //    }
+                //    else
+                //    {
+                //        CreateFile(guid, storageObject);
+                //        Program.Processing(ref dotCounter);
+                //    }
+                //}
+
+                if (storageObject.IsDirectory)
                 {
-                    if (storageObject.IsDirectory)
-                    {
-                        CreateDir(guid, storageObject.FullName);
-                        Program.Processing(ref dotCounter);
-                    }
-                    else
-                    {
-                        CreateFile(guid, storageObject);
-                        Program.Processing(ref dotCounter);
-                    }
+                    CreateDir(guid, storageObject.FullName);
+                    Program.Processing(ref dotCounter);
+                }
+                else
+                {
+                    CreateFile(guid, storageObject);
+                    Program.Processing(ref dotCounter);
                 }
             }
 

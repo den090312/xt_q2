@@ -2,7 +2,7 @@
 {
     public class StorageObject
     {
-        public bool IsDirectory { get; }
+        public bool IsDirectory { get; } = false;
 
         public string FullName { get; } = string.Empty;
 

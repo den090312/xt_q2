@@ -8,7 +8,7 @@ namespace _51_BACKUP_SYSTEM
 {
     public class Watcher
     {
-        public static Queue<StorageObject> StorageObjects { get; set; } = new Queue<StorageObject>();
+        public static Queue<StorageObject> StorageObjects { get; private set; }
 
         public static long Counter { get; private set; } = 0;
 
@@ -72,23 +72,23 @@ namespace _51_BACKUP_SYSTEM
 
             foreach (var dir in directories)
             {
-                var isFolder = true;
-                var storageObject = new StorageObject(dir.FullName, string.Empty, isFolder);
+                var isDirectory = true;
+                var storageObject = new StorageObject(dir.FullName, string.Empty, isDirectory);
 
                 StorageObjects.Enqueue(storageObject);
             }
 
-            Thread.Sleep(10);
+            Thread.Sleep(1000);
             var files = storageRootInfo.GetFiles("*.*", SearchOption.AllDirectories);
 
             foreach (var file in files)
             {
                 var fullName = file.FullName;
-                var isFolder = false;
+                var isDirectory = false;
 
                 Thread.Sleep(10);
                 var contest = File.ReadAllText(fullName);
-                var storageObject = new StorageObject(fullName, contest, isFolder);
+                var storageObject = new StorageObject(fullName, contest, isDirectory);
 
                 StorageObjects.Enqueue(storageObject);
             }

@@ -51,18 +51,22 @@ namespace _51_BACKUP_SYSTEM
 
         public static void Processing(ref long dotCounter)
         {
-            if (dotCounter == Console.WindowWidth)
+            var edge = 10;
+
+            if (dotCounter == edge)
             {
-                for (var i = 0; i < Console.WindowWidth; i++)
+                for (var i = 0; i < edge; i++)
                 {
-                    Console.Write("\b ");
+                    Console.Write("\b");
                 }
 
-                Console.Write("\b");
+                dotCounter = 0;
             }
-
-            Console.Write('.');
-            dotCounter++;
+            else
+            {
+                Console.Write(".");
+                dotCounter++;
+            }
         }
 
         private static DateTime GetDateFromConsole(string dateFormat)
