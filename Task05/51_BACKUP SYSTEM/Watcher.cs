@@ -91,7 +91,14 @@ namespace _51_BACKUP_SYSTEM
                 var isDirectory = true;
                 var storageObject = new StorageObject(dir.FullName, string.Empty, isDirectory);
 
-                if (storageQueue.Peek().GetHashCode() != storageObject.GetHashCode())
+                if (storageQueue.Count > 0)
+                {
+                    if (!storageQueue.Peek().Equals(storageObject))
+                    {
+                        storageQueue.Enqueue(storageObject);
+                    }
+                }
+                else
                 {
                     storageQueue.Enqueue(storageObject);
                 }
@@ -109,7 +116,14 @@ namespace _51_BACKUP_SYSTEM
                 var contest = File.ReadAllText(fullName);
                 var storageObject = new StorageObject(fullName, contest, isDirectory);
 
-                if (storageQueue.Peek().GetHashCode() != storageObject.GetHashCode())
+                if (storageQueue.Count > 0)
+                {
+                    if (!storageQueue.Peek().Equals(storageObject))
+                    {
+                        storageQueue.Enqueue(storageObject);
+                    }
+                }
+                else
                 {
                     storageQueue.Enqueue(storageObject);
                 }
