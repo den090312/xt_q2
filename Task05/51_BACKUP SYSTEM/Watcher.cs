@@ -10,7 +10,7 @@ namespace _51_BACKUP_SYSTEM
     {
         public static Queue<StorageObject> StorageObjects { get; set; } = new Queue<StorageObject>();
 
-        public static long Counter { get; set; } = 0;
+        public static long Counter { get; private set; } = 0;
 
         [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
 
@@ -18,10 +18,10 @@ namespace _51_BACKUP_SYSTEM
         {
             var watcher = GetWatcher();
 
-            watcher.Changed += OnChangedEvents;
-            watcher.Created += OnChangedEvents;
-            watcher.Deleted += OnChangedEvents;
-            watcher.Renamed += OnChangedEvents;
+            watcher.Changed += OnEvents;
+            watcher.Created += OnEvents;
+            watcher.Deleted += OnEvents;
+            watcher.Renamed += OnEvents;
 
             watcher.EnableRaisingEvents = true;
 
@@ -34,10 +34,10 @@ namespace _51_BACKUP_SYSTEM
         {
             var watcher = GetWatcher();
 
-            watcher.Changed += OnChangedBackup;
-            watcher.Created += OnChangedBackup;
-            watcher.Deleted += OnChangedBackup;
-            watcher.Renamed += OnChangedBackup;
+            watcher.Changed += OnBackup;
+            watcher.Created += OnBackup;
+            watcher.Deleted += OnBackup;
+            watcher.Renamed += OnBackup;
 
             watcher.EnableRaisingEvents = true;
         }
@@ -59,7 +59,7 @@ namespace _51_BACKUP_SYSTEM
             return watcher;
         }
 
-        private static void OnChangedEvents(object source, FileSystemEventArgs onChangedFile) => UpdateQueue();
+        private static void OnEvents(object source, FileSystemEventArgs onChangedFile) => UpdateQueue();
 
         private static void UpdateQueue()
         {
@@ -92,7 +92,7 @@ namespace _51_BACKUP_SYSTEM
             }
         }
 
-        private static void OnChangedBackup(object source, FileSystemEventArgs onChangedFile)
+        private static void OnBackup(object source, FileSystemEventArgs onChangedFile)
         {
             Thread.Sleep(1000);
             Storage.CreateBackup();
