@@ -79,9 +79,8 @@ namespace _51_BACKUP_SYSTEM
             if (lastWriteTime != lastRead)
             {
                 storageObjects = GetQueue();
+                lastRead = lastWriteTime;
             }
-
-            lastRead = lastWriteTime;
         }
 
         public static Queue<StorageObject> GetQueue()
