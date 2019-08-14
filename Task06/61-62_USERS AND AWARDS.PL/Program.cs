@@ -71,7 +71,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
                 {
                     inputComplete = true;
                 }
-                else if (char.IsDigit(key.KeyChar) & (key.KeyChar == '1' || key.KeyChar == '2' || key.KeyChar == '3'))
+                else if ((key.KeyChar == '1' || key.KeyChar == '2' || key.KeyChar == '3'))
                 {
                     if (userKeySB.Length < 1)
                     {
