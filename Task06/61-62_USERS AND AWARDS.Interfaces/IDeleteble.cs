@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace _61_62_USERS_AND_AWARDS.Interfaces
+﻿namespace _61_62_USERS_AND_AWARDS.Interfaces
 {
-    interface IDeleteble
+    public interface IDeleteble
     {
+        void Delete();
     }
 }
