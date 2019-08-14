@@ -58,23 +58,31 @@ namespace _61_62_USERS_AND_AWARDS.DAL
         {
             Console.WriteLine("---------Task folders--------");
 
-            WriteInfoPath(Main);
-            WriteInfoPath(Root);
-            WriteInfoPath(Users);
-            WriteInfoPath(Awards);
+            bool isFolder = true;
+
+            WriteInfoPath(Main, "Main", isFolder);
+            WriteInfoPath(Root, "Root", isFolder);
+
+            isFolder = false;
+            WriteInfoPath(Users, "Users", isFolder);
+            WriteInfoPath(Awards, "Awards", isFolder);
 
             Console.WriteLine("-----------------------------");
         }
 
-        private static void WriteInfoPath(string path)
+        private static void WriteInfoPath(string path, string name, bool isFolder)
         {
-            if (!File.Exists(path))
+            if (isFolder & Directory.Exists(path))
             {
-                Console.WriteLine($"{nameof(path)} - {Main}");
+                Console.WriteLine($"{name} - {path}");
+            }
+            else if (!isFolder & File.Exists(path))
+            {
+                Console.WriteLine($"{name} - {path}");
             }
             else
             {
-                Console.WriteLine($"{nameof(path)} - {messageNotFound}");
+                Console.WriteLine($"{name} - {messageNotFound}");
             }
         }
     }
