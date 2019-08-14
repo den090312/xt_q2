@@ -1,5 +1,4 @@
-﻿using _61_62_USERS_AND_AWARDS.DAL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +10,8 @@ namespace _61_62_USERS_AND_AWARDS.PL
     {
         private static void Main(string[] args)
         {
-            Storage.Create();
-            Storage.WriteInfo();
+            //Storage.Create();
+            //Storage.WriteInfo();
 
             WriteMenu();
 
@@ -99,6 +98,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
             Console.Clear();
             Storage.WriteInfo();
+
             WriteMenu();
 
             Console.Write(userKeySB);
