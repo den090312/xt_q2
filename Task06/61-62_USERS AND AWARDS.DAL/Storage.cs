@@ -9,6 +9,8 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 {
     public static class Storage
     {
+        private static readonly string messageNotFound = "not found";
+
         public static string Disk { get; } = "D";
 
         public static string Tom { get; } = $@"{Disk}:\";
@@ -55,11 +57,25 @@ namespace _61_62_USERS_AND_AWARDS.DAL
         public static void WriteInfo()
         {
             Console.WriteLine("---------Task folders--------");
-            Console.WriteLine($"Main - {Main}");
-            Console.WriteLine($"Root - {Root}");
-            Console.WriteLine($"Users - {Users}");
-            Console.WriteLine($"Awards - {Awards}");
+
+            WriteInfoPath(Main);
+            WriteInfoPath(Root);
+            WriteInfoPath(Users);
+            WriteInfoPath(Awards);
+
             Console.WriteLine("-----------------------------");
+        }
+
+        private static void WriteInfoPath(string path)
+        {
+            if (!File.Exists(path))
+            {
+                Console.WriteLine($"{nameof(path)} - {Main}");
+            }
+            else
+            {
+                Console.WriteLine($"{nameof(path)} - {messageNotFound}");
+            }
         }
     }
 }

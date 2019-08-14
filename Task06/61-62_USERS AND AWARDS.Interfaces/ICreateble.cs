@@ -4,7 +4,8 @@ using System.Text;
 
 namespace _61_62_USERS_AND_AWARDS.Interfaces
 {
-    interface ICreateble
+    public interface ICreateble
     {
+        void Create();
     }
 }

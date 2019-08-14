@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _61_62_USERS_AND_AWARDS.BLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,18 +11,22 @@ namespace _61_62_USERS_AND_AWARDS.PL
     {
         private static void Main(string[] args)
         {
+            var storageManager = new StorageManager();
+            storageManager.Create();
+            storageManager.WriteInfo();
+
             WriteMenu();
 
             bool inputComplete = false;
 
-            RunOperation(ref inputComplete);
+            RunOperation(ref inputComplete, storageManager);
         }
 
-        private static void RunOperation(ref bool inputComplete)
+        private static void RunOperation(ref bool inputComplete, StorageManager storageManager)
         {
             while (!inputComplete)
             {
-                int userKey = GetKeyFromConsole();
+                int userKey = GetKeyFromConsole(storageManager);
 
                 if (userKey != 0)
                 {
@@ -34,7 +39,6 @@ namespace _61_62_USERS_AND_AWARDS.PL
                             inputComplete = true;
                             break;
                         case 3:
-                            //Environment.Exit(0);
                             return;
                     }
                 }
@@ -49,7 +53,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
             Console.WriteLine("\t3: exit");
         }
 
-        private static int GetKeyFromConsole()
+        private static int GetKeyFromConsole(StorageManager storageManager)
         {
             bool inputComplete = false;
 
@@ -61,7 +65,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
                 if (key.Key == ConsoleKey.Backspace)
                 {
-                    EmulateConsoleKeyBackSpace(userKeySB);
+                    EmulateConsoleKeyBackSpace(userKeySB, storageManager);
                 }
                 else if (key.Key == ConsoleKey.Enter)
                 {
@@ -91,7 +95,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
             return result;
         }
 
-        static void EmulateConsoleKeyBackSpace(StringBuilder userKeySB)
+        static void EmulateConsoleKeyBackSpace(StringBuilder userKeySB, StorageManager storageManager)
         {
             if (userKeySB.Length > 0)
             {
@@ -99,7 +103,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
             }
 
             Console.Clear();
-            //Storage.WriteInfo();
+            storageManager.WriteInfo();
 
             WriteMenu();
 

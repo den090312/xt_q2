@@ -3,8 +3,13 @@ using _61_62_USERS_AND_AWARDS.Interfaces;
 
 namespace _61_62_USERS_AND_AWARDS.BLL
 {
-    public class StorageManager : IInfoble
+    public class StorageManager : ICreateble, IInfoble
     {
+        public void Create()
+        {
+            Storage.Create();
+        }
+
         public void WriteInfo()
         {
             Storage.WriteInfo();
