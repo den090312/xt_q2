@@ -11,17 +11,27 @@ namespace _61_62_USERS_AND_AWARDS.DAL
     {
         private static readonly string messageNotFound = "not found";
 
-        public static string Disk { get; } = "D";
+        private static string Disk { get; }
 
-        public static string Tom { get; } = $@"{Disk}:\";
+        private static string Tom { get; }
 
-        public static string Main { get; } = $"{Tom}Task06";
+        private static string Main { get; } 
 
-        public static string Root { get; } = $@"{Main}\Storage";
+        private static string Root { get; }
 
-        public static string Users { get; } = $@"{Main}\Users.txt";
+        private static string Users { get; } 
 
-        public static string Awards { get; } = $@"{Main}\Awards.txt";
+        private static string Awards { get; } 
+
+        static Storage()
+        {
+            Disk   = "D";
+            Tom    = $@"{Disk}:\";
+            Main   = $"{Tom}Task06";
+            Root   = $@"{Main}\Storage";
+            Users  = $@"{Main}\Users.txt";
+            Awards = $@"{Main}\Awards.txt";
+        }
 
         public static void Create()
         {
