@@ -17,6 +17,11 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
             bool inputComplete = false;
 
+            RunOperation(ref inputComplete);
+        }
+
+        private static void RunOperation(ref bool inputComplete)
+        {
             while (!inputComplete)
             {
                 int userKey = GetKeyFromConsole();
@@ -32,8 +37,8 @@ namespace _61_62_USERS_AND_AWARDS.PL
                             inputComplete = true;
                             break;
                         case 3:
-                            Environment.Exit(0);
-                            break;
+                            //Environment.Exit(0);
+                            return;
                     }
                 }
             }
@@ -97,7 +102,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
             }
 
             Console.Clear();
-            Storage.WriteInfo();
+            //Storage.WriteInfo();
 
             WriteMenu();
 
