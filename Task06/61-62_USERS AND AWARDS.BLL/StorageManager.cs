@@ -3,7 +3,7 @@ using _61_62_USERS_AND_AWARDS.Interfaces;
 
 namespace _61_62_USERS_AND_AWARDS.BLL
 {
-    class Buffer : IInfoble
+    public class StorageManager : IInfoble
     {
         public void WriteInfo()
         {
