@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\61-62_USERS AND AWARDS.DAL\61-62_USERS AND AWARDS.DAL.csproj">
+      <Project>{E9E51393-F366-45DE-8325-889A361AB0CA}</Project>
+      <Name>61-62_USERS AND AWARDS.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
