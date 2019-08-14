@@ -4,7 +4,7 @@ using System.Text;
 
 namespace _61_62_USERS_AND_AWARDS.Interfaces
 {
-    interface IInfoble
+    public interface IInfoble
     {
         void WriteInfo();
     }

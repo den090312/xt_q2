@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "61-62_USERS AND AWARDS.DAL"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "61-62_USERS AND AWARDS.Interfaces", "61-62_USERS AND AWARDS.Interfaces\61-62_USERS AND AWARDS.Interfaces.csproj", "{D1467972-3A7D-43F8-9764-D41A9677E175}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "61-62_USERS AND AWARDS.Entities", "61-62_USERS AND AWARDS.Entities\61-62_USERS AND AWARDS.Entities.csproj", "{22E6A0DE-2AE3-4ABD-B0C4-B333B712F77E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{D1467972-3A7D-43F8-9764-D41A9677E175}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1467972-3A7D-43F8-9764-D41A9677E175}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1467972-3A7D-43F8-9764-D41A9677E175}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22E6A0DE-2AE3-4ABD-B0C4-B333B712F77E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22E6A0DE-2AE3-4ABD-B0C4-B333B712F77E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22E6A0DE-2AE3-4ABD-B0C4-B333B712F77E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22E6A0DE-2AE3-4ABD-B0C4-B333B712F77E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

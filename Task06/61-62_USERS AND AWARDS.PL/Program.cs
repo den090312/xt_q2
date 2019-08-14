@@ -10,9 +10,6 @@ namespace _61_62_USERS_AND_AWARDS.PL
     {
         private static void Main(string[] args)
         {
-            //Storage.Create();
-            //Storage.WriteInfo();
-
             WriteMenu();
 
             bool inputComplete = false;
