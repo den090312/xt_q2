@@ -7,20 +7,25 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 {
     public static class StorageManager
     {
-        public static IStorable CurrentStorage { get; } = Dependencies.CurrentStorage;
+        public static IStorable StorageImplementation { get; }
 
-        public static void Create() => CurrentStorage.Create();
+        static StorageManager() => StorageImplementation = Dependencies.StorageImplementation;
 
-        public static void PrintObjects() => CurrentStorage.PrintAllPaths();
+        public static void CreateStorage() => StorageImplementation.CreateStorage();
 
-        public static void AddUser(User user) => CurrentStorage.AddUser(user);
+        public static void PrintStoragePaths() => StorageImplementation.PrintStoragePaths();
+
+        public static void CreateUser(User user) => StorageImplementation.CreateUser(user);
+
+        public static void DeleteUser(string name) => StorageImplementation.DeleteUser(name);
 
         public static void WriteMenu()
         {
             Console.WriteLine("User operations:");
             Console.WriteLine("\t1: create");
             Console.WriteLine("\t2: delete");
-            Console.WriteLine("\t3: exit");
+            Console.WriteLine("\t3: print");
+            Console.WriteLine("\t4: exit");
         }
     }
 }

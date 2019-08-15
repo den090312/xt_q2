@@ -5,8 +5,8 @@ namespace _61_62_USERS_AND_AWARDS.Common
 {
     public static class Dependencies 
     {
-        public static IStorable CurrentStorage { get; }
+        public static IStorable StorageImplementation { get; }
 
-        static Dependencies() => CurrentStorage = new Storage();
+        static Dependencies() => StorageImplementation = new FileStorage();
     }
 }

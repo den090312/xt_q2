@@ -5,14 +5,8 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 {
     public static class UserManager
     {
-        public static readonly string separator;
+        public static void CreateUser(string name, DateTime birthDate) => StorageManager.CreateUser(new User(name, birthDate));
 
-        static UserManager()
-        {
-            separator = " | ";
-        }
-
-        public static void CreateUser(string name, DateTime birthDate) => StorageManager.AddUser(new User(name, birthDate));
-
+        public static void DeleteUser(string name) => StorageManager.DeleteUser(name));
     }
 }

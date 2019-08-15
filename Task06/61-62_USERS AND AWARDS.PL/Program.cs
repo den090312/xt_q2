@@ -11,8 +11,8 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
         private static void Main(string[] args)
         {
-            StorageManager.Create();
-            StorageManager.PrintObjects();
+            StorageManager.CreateStorage();
+            StorageManager.PrintStoragePaths();
             StorageManager.WriteMenu();
 
             bool inputComplete = false;
@@ -36,21 +36,21 @@ namespace _61_62_USERS_AND_AWARDS.PL
                             break;
                         case 2:
                             inputComplete = true;
+                            DeleteUser();
                             break;
                         case 3:
+                            inputComplete = true;
+                            break;
+                        case 4:
                             return;
                     }
                 }
             }
         }
 
-        private static void CreateUser(string dateFormat)
-        {
-            var name = GetNameFromConsole();
-            var birthDate = GetDateFromConsole(dateFormat);
+        private static void CreateUser(string dateFormat) => UserManager.CreateUser(GetName(), GetDate(dateFormat));
 
-            UserManager.CreateUser(name, birthDate);
-        }
+        private static void DeleteUser() => UserManager.DeleteUser(GetName());
 
         private static int GetKeyFromConsole()
         {
@@ -94,8 +94,11 @@ namespace _61_62_USERS_AND_AWARDS.PL
             return result;
         }
 
-        private static string GetNameFromConsole()
+        private static string GetName()
         {
+            Console.Clear();
+            Console.WriteLine("Enter name:");
+
             bool inputComplete = false;
 
             StringBuilder userSB = new StringBuilder();
@@ -122,8 +125,9 @@ namespace _61_62_USERS_AND_AWARDS.PL
             return userSB.ToString();
         }
 
-        public static DateTime GetDateFromConsole(string dateFormat)
+        public static DateTime GetDate(string dateFormat)
         {
+            Console.Clear();
             Console.WriteLine($"Enter date in format: {dateFormat}");
 
             bool isDate = false;
@@ -155,9 +159,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
             }
 
             Console.Clear();
-            StorageManager.PrintObjects();
-            StorageManager.WriteMenu();
-
+            Console.WriteLine("Enter name:");
             Console.Write(userKeySB);
         }
     }

@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace _61_62_USERS_AND_AWARDS.Entities
 {
-    public class User : IEnumerable
+    public class User
     {
         private readonly DateTime currentDateTime = DateTime.Now.Date;
 
@@ -48,7 +48,7 @@ namespace _61_62_USERS_AND_AWARDS.Entities
         {
             get
             {
-                if (DateOfBirth.Year == DateOfBirth.Year)
+                if (DateOfBirth.Year == currentDateTime.Year)
                 {
                     throw new ArgumentException("Age can't be less than 1 year!");
                 }
@@ -93,11 +93,6 @@ namespace _61_62_USERS_AND_AWARDS.Entities
             {
                 throw new ArgumentNullException($"{nameof(userString)} is null!");
             }
-        }
-
-        public IEnumerator GetEnumerator()
-        {
-            return this.GetEnumerator();
         }
     }
 }

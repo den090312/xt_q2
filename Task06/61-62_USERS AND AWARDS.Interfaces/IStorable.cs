@@ -4,10 +4,12 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
 {
     public interface IStorable
     {
-        void Create();
+        void CreateStorage();
 
-        void PrintAllPaths();
+        void PrintStoragePaths();
 
-        void AddUser(User user);
+        void CreateUser(User user);
+
+        void DeleteUser(string name);
     }
 }

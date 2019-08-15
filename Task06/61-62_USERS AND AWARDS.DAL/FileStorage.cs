@@ -6,9 +6,8 @@ using System.Threading;
 
 namespace _61_62_USERS_AND_AWARDS.DAL
 {
-    public class Storage : IStorable
+    public class FileStorage : IStorable
     {
-
         private static string Disk { get; }
 
         private static string Tom { get; }
@@ -21,11 +20,11 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
         private static string Awards { get; }
 
-        public static readonly string separator;
+        public static readonly char separator;
 
         private static readonly string messageNotFound;
 
-        static Storage()
+        static FileStorage()
         {
             Disk = "D";
             Tom = $@"{Disk}:\";
@@ -33,11 +32,11 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             Root = $@"{Main}\Storage";
             Users = $@"{Main}\Users.txt";
             Awards = $@"{Main}\Awards.txt";
-            separator = " | ";
+            separator = '|';
             messageNotFound = "not found";
         }
 
-        public void Create()
+        public void CreateStorage()
         {
             if (!File.Exists(Main))
             {
@@ -68,7 +67,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
         }
 
-        public void PrintAllPaths()
+        public void PrintStoragePaths()
         {
             Console.WriteLine("---------Task folders--------");
 
@@ -100,7 +99,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
         }
 
-        public void AddUser(User user)
+        public void CreateUser(User user)
         {
             CreateUsersFile();
 
@@ -110,7 +109,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             streamWriter.Write(user.UserId + separator);
             streamWriter.Write(user.IdAward + separator);
             streamWriter.Write(user.Name + separator);
-            streamWriter.Write(user.DateOfBirth + separator);
+            streamWriter.Write(user.DateOfBirth.ToString("dd.MM.yyyy") + separator);
             streamWriter.Write(user.Age);
             streamWriter.WriteLine();
 
@@ -138,6 +137,11 @@ namespace _61_62_USERS_AND_AWARDS.DAL
                     File.SetAttributes(Users, FileAttributes.Normal);
                 }
             }
+        }
+
+        public void DeleteUser(string name)
+        {
+
         }
     }
 }
