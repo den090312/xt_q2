@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\61-62_USERS AND AWARDS.Common\61-62_USERS AND AWARDS.Common.csproj" />
+    <ProjectReference Include="..\61-62_USERS AND AWARDS.DAL\61-62_USERS AND AWARDS.DAL.csproj" />
     <ProjectReference Include="..\61-62_USERS AND AWARDS.Entities\61-62_USERS AND AWARDS.Entities.csproj" />
     <ProjectReference Include="..\61-62_USERS AND AWARDS.Interfaces\61-62_USERS AND AWARDS.Interfaces.csproj" />
   </ItemGroup>

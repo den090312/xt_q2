@@ -1,9 +1,6 @@
 ﻿using _61_62_USERS_AND_AWARDS.BLL;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace _61_62_USERS_AND_AWARDS.PL
 {
@@ -13,8 +10,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
         {
             StorageManager.Create();
             StorageManager.PrintObjects();
-
-            WriteMenu();
+            StorageManager.WriteMenu();
 
             bool inputComplete = false;
 
@@ -50,14 +46,6 @@ namespace _61_62_USERS_AND_AWARDS.PL
             var userManager = new UserManager();
         }
 
-        private static void WriteMenu()
-        {
-            Console.WriteLine("User operations:");
-            Console.WriteLine("\t1: create");
-            Console.WriteLine("\t2: delete");
-            Console.WriteLine("\t3: exit");
-        }
-
         private static int GetKeyFromConsole()
         {
             bool inputComplete = false;
@@ -70,7 +58,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
                 if (key.Key == ConsoleKey.Backspace)
                 {
-                    EmulateConsoleKeyBackSpace(userKeySB);
+                    UserManager.EmulateConsoleKeyBackSpace(userKeySB);
                 }
                 else if (key.Key == ConsoleKey.Enter)
                 {
@@ -98,21 +86,6 @@ namespace _61_62_USERS_AND_AWARDS.PL
             }
 
             return result;
-        }
-
-        static void EmulateConsoleKeyBackSpace(StringBuilder userKeySB)
-        {
-            if (userKeySB.Length > 0)
-            {
-                userKeySB.Length--;
-            }
-
-            Console.Clear();
-            StorageManager.PrintObjects();
-
-            WriteMenu();
-
-            Console.Write(userKeySB);
         }
     }
 }

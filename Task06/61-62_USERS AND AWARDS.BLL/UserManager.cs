@@ -1,6 +1,4 @@
-﻿using _61_62_USERS_AND_AWARDS.Interfaces;
-using _61_62_USERS_AND_AWARDS.Common;
-using _61_62_USERS_AND_AWARDS.Entities;
+﻿using _61_62_USERS_AND_AWARDS.Entities;
 using System;
 using System.Globalization;
 using System.Text;
@@ -41,7 +39,7 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             return userSB.ToString();
         }
 
-        static void EmulateConsoleKeyBackSpace(StringBuilder userKeySB)
+        public static void EmulateConsoleKeyBackSpace(StringBuilder userKeySB)
         {
             if (userKeySB.Length > 0)
             {
@@ -50,8 +48,7 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
             Console.Clear();
             StorageManager.PrintObjects();
-
-            WriteMenu();
+            StorageManager.WriteMenu();
 
             Console.Write(userKeySB);
         }
@@ -80,14 +77,5 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
             return userBirthDate;
         }
-
-        private static void WriteMenu()
-        {
-            Console.WriteLine("User operations:");
-            Console.WriteLine("\t1: create");
-            Console.WriteLine("\t2: delete");
-            Console.WriteLine("\t3: exit");
-        }
-
     }
 }

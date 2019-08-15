@@ -1,7 +1,6 @@
 ﻿using _61_62_USERS_AND_AWARDS.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 
 namespace _61_62_USERS_AND_AWARDS.Entities
 {
