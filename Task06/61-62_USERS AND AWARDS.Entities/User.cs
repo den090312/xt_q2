@@ -5,10 +5,8 @@ using System.Globalization;
 
 namespace _61_62_USERS_AND_AWARDS.Entities
 {
-    class User : IDeleteble
+    public class User : IDeleteble
     {
-        public readonly string DateFormat = "dd.MM.yyyy";
-
         private readonly DateTime currentDateTime = DateTime.Now.Date;
 
         private string name = string.Empty;
@@ -79,20 +77,6 @@ namespace _61_62_USERS_AND_AWARDS.Entities
             DateOfBirth = dateOfBirth;
 
             Users.Add(this);
-        }
-
-        private DateTime GetDateFromConsole(string userDate)
-        {
-            NullCheck(userDate);
-
-            bool isDate = DateTime.TryParseExact(userDate, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime userBirthDate);
-
-            if (!isDate)
-            {
-                throw new ArgumentException($"Date of birth must be in format: {DateFormat}:");
-            }
-
-            return userBirthDate;
         }
 
         public void PrintUsers()

@@ -33,6 +33,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
                     {
                         case 1:
                             inputComplete = true;
+                            CreateUser();
                             break;
                         case 2:
                             inputComplete = true;
@@ -42,6 +43,11 @@ namespace _61_62_USERS_AND_AWARDS.PL
                     }
                 }
             }
+        }
+
+        private static void CreateUser()
+        {
+            var userManager = new UserManager();
         }
 
         private static void WriteMenu()
