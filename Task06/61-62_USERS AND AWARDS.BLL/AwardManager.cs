@@ -1,22 +1,10 @@
 ﻿using _61_62_USERS_AND_AWARDS.Interfaces;
+using _61_62_USERS_AND_AWARDS.Common;
 
 namespace _61_62_USERS_AND_AWARDS.BLL
 {
-    public class AwardManager : IStorable, IDeleteble
+    public class AwardManager 
     {
-        public void PrintObjects()
-        {
-            throw new System.NotImplementedException();
-        }
 
-        public void Create()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Delete()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
