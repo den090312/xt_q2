@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace _61_62_USERS_AND_AWARDS.Entities
 {
-    class User : IStorable, IDeleteble
+    class User : IDeleteble
     {
         public readonly string DateFormat = "dd.MM.yyyy";
 
@@ -70,19 +70,15 @@ namespace _61_62_USERS_AND_AWARDS.Entities
 
         public List<User> Users { get; private set; } = new List<User>();
 
-        //public User(string name, DateTime dateOfBirth)
-        //{
-        //    NullCheck(name);
-
-        //    Id = Guid.NewGuid().ToString();
-        //    Name = name;
-        //    DateOfBirth = dateOfBirth;
-
-        //    Users.Add(this);
-        //}
-
-        public User()
+        public User(string name, DateTime dateOfBirth)
         {
+            NullCheck(name);
+
+            Id = Guid.NewGuid().ToString();
+            Name = name;
+            DateOfBirth = dateOfBirth;
+
+            Users.Add(this);
         }
 
         private DateTime GetDateFromConsole(string userDate)
@@ -99,7 +95,7 @@ namespace _61_62_USERS_AND_AWARDS.Entities
             return userBirthDate;
         }
 
-        public void PrintObjects()
+        public void PrintUsers()
         {
             foreach (var user in Users)
             {
@@ -115,8 +111,6 @@ namespace _61_62_USERS_AND_AWARDS.Entities
             Console.Write(user.Age);
             Console.WriteLine();
         }
-
-        public void Create() => Users.Add(new User());
 
         public void Delete()
         {
