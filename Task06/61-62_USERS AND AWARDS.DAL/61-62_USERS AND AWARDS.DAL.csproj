@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\61-62_USERS AND AWARDS.Entities\61-62_USERS AND AWARDS.Entities.csproj" />
     <ProjectReference Include="..\61-62_USERS AND AWARDS.Interfaces\61-62_USERS AND AWARDS.Interfaces.csproj" />
   </ItemGroup>
 

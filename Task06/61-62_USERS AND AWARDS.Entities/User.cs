@@ -1,10 +1,9 @@
-﻿using _61_62_USERS_AND_AWARDS.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace _61_62_USERS_AND_AWARDS.Entities
 {
-    public class User : IDeleteble
+    public class User
     {
         private readonly DateTime currentDateTime = DateTime.Now.Date;
 
@@ -95,11 +94,6 @@ namespace _61_62_USERS_AND_AWARDS.Entities
             Console.WriteLine();
         }
 
-        public void Delete()
-        {
-            throw new NotImplementedException();
-        }
-
         private static void CheckName(string userName, string nameType)
         {
             NullCheck(userName);
@@ -110,14 +104,6 @@ namespace _61_62_USERS_AND_AWARDS.Entities
             if (char.IsLower(userCharArray[0]))
             {
                 throw new ArgumentException($"Filed '{nameType}' must begin from upper case!");
-            }
-
-            foreach (char element in userCharArray)
-            {
-                if (!char.IsLetter(element))
-                {
-                    throw new ArgumentException($"Wrong symbol in field '{nameType}'!");
-                }
             }
         }
 
