@@ -8,9 +8,14 @@ namespace _61_62_USERS_AND_AWARDS.Entities
     class User : IStorable, IDeleteble
     {
         public readonly string DateFormat = "dd.MM.yyyy";
+
         private readonly DateTime currentDateTime = DateTime.Now.Date;
+
         private string name = string.Empty;
+
         private DateTime dateOfBirth;
+
+        private readonly string separator = " | "; 
 
         public string Id { get; } = string.Empty;
 
@@ -94,8 +99,17 @@ namespace _61_62_USERS_AND_AWARDS.Entities
         {
             foreach (var user in Users)
             {
-                Console.WriteLine(user);
+                PrintUser(user);
             }
+        }
+
+        private void PrintUser(User user)
+        {
+            Console.Write(user.Id + separator);
+            Console.Write(user.name + separator);
+            Console.Write(user.dateOfBirth + separator);
+            Console.Write(user.Age);
+            Console.WriteLine();
         }
 
         public void Create()
