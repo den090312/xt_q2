@@ -2,6 +2,8 @@
 {
     public interface IStorable
     {
-        public currentStorage = Storage;
+        void Create();
+
+        void PrintObjects();
     }
 }

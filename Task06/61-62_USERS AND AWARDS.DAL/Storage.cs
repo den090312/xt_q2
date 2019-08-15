@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _61_62_USERS_AND_AWARDS.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -7,7 +8,7 @@ using System.Threading;
 
 namespace _61_62_USERS_AND_AWARDS.DAL
 {
-    public static class Storage
+    public class Storage : IStorable
     {
         private static readonly string messageNotFound = "not found";
 
@@ -33,7 +34,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             Awards = $@"{Main}\Awards.txt";
         }
 
-        public static void Create()
+        public void Create()
         {
             if (!File.Exists(Main))
             {
@@ -64,7 +65,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
         }
 
-        public static void WriteInfo()
+        public void PrintObjects()
         {
             Console.WriteLine("---------Task folders--------");
 

@@ -11,22 +11,21 @@ namespace _61_62_USERS_AND_AWARDS.PL
     {
         private static void Main(string[] args)
         {
-            var storageManager = new StorageManager();
-            storageManager.Create();
-            storageManager.WriteInfo();
+            StorageManager.Create();
+            StorageManager.PrintObjects();
 
             WriteMenu();
 
             bool inputComplete = false;
 
-            RunOperation(ref inputComplete, storageManager);
+            RunOperation(ref inputComplete);
         }
 
-        private static void RunOperation(ref bool inputComplete, StorageManager storageManager)
+        private static void RunOperation(ref bool inputComplete)
         {
             while (!inputComplete)
             {
-                int userKey = GetKeyFromConsole(storageManager);
+                int userKey = GetKeyFromConsole();
 
                 if (userKey != 0)
                 {
@@ -53,7 +52,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
             Console.WriteLine("\t3: exit");
         }
 
-        private static int GetKeyFromConsole(StorageManager storageManager)
+        private static int GetKeyFromConsole()
         {
             bool inputComplete = false;
 
@@ -65,7 +64,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
                 if (key.Key == ConsoleKey.Backspace)
                 {
-                    EmulateConsoleKeyBackSpace(userKeySB, storageManager);
+                    EmulateConsoleKeyBackSpace(userKeySB);
                 }
                 else if (key.Key == ConsoleKey.Enter)
                 {
@@ -95,7 +94,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
             return result;
         }
 
-        static void EmulateConsoleKeyBackSpace(StringBuilder userKeySB, StorageManager storageManager)
+        static void EmulateConsoleKeyBackSpace(StringBuilder userKeySB)
         {
             if (userKeySB.Length > 0)
             {
@@ -103,7 +102,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
             }
 
             Console.Clear();
-            storageManager.WriteInfo();
+            StorageManager.PrintObjects();
 
             WriteMenu();
 
