@@ -31,12 +31,12 @@ namespace _61_62_USERS_AND_AWARDS.Entities
             {
                 if (value > currentDateTime)
                 {
-                    throw new ArgumentException("Дата рождения не может быть больше текущей даты!");
+                    throw new ArgumentException("Date of birth can't be more than current date!");
                 }
 
                 if (value == currentDateTime)
                 {
-                    throw new ArgumentException("Добро пожаловать в наш бренный мир!");
+                    throw new ArgumentException("Welcome to our world!");
                 }
 
                 dateOfBirth = value;
@@ -49,7 +49,7 @@ namespace _61_62_USERS_AND_AWARDS.Entities
             {
                 if (DateOfBirth.Year == DateOfBirth.Year)
                 {
-                    throw new ArgumentException("Возраст не может быть меньше года!");
+                    throw new ArgumentException("Age can't be less than 1 year!");
                 }
 
                 var userAge = currentDateTime.AddYears(-DateOfBirth.Year).Year;
@@ -117,14 +117,14 @@ namespace _61_62_USERS_AND_AWARDS.Entities
 
             if (char.IsLower(userCharArray[0]))
             {
-                throw new ArgumentException($"Поле '{nameType}' должно начинаться с заглавной буквы!");
+                throw new ArgumentException($"Filed '{nameType}' must begin from upper case!");
             }
 
             foreach (char element in userCharArray)
             {
                 if (!char.IsLetter(element))
                 {
-                    throw new ArgumentException($"Недопустимый символ в поле '{nameType}'!");
+                    throw new ArgumentException($"Wrong symbol in field '{nameType}'!");
                 }
             }
         }
