@@ -17,7 +17,7 @@ namespace _61_62_USERS_AND_AWARDS.Entities
 
         private readonly string separator = " | "; 
 
-        public string Id { get; } = string.Empty;
+        public string Id { get; set; } = string.Empty;
 
         public string Name
         {
@@ -70,15 +70,19 @@ namespace _61_62_USERS_AND_AWARDS.Entities
 
         public List<User> Users { get; private set; } = new List<User>();
 
-        public User(string name, DateTime dateOfBirth)
+        //public User(string name, DateTime dateOfBirth)
+        //{
+        //    NullCheck(name);
+
+        //    Id = Guid.NewGuid().ToString();
+        //    Name = name;
+        //    DateOfBirth = dateOfBirth;
+
+        //    Users.Add(this);
+        //}
+
+        public User()
         {
-            NullCheck(name);
-
-            Id = Guid.NewGuid().ToString();
-            Name = name;
-            DateOfBirth = dateOfBirth;
-
-            Users.Add(this);
         }
 
         private DateTime GetDateFromConsole(string userDate)
@@ -112,10 +116,7 @@ namespace _61_62_USERS_AND_AWARDS.Entities
             Console.WriteLine();
         }
 
-        public void Create()
-        {
-            throw new NotImplementedException();
-        }
+        public void Create() => Users.Add(new User());
 
         public void Delete()
         {
