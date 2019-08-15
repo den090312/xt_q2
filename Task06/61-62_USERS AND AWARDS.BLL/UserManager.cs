@@ -8,7 +8,7 @@ namespace _61_62_USERS_AND_AWARDS.BLL
     {
         public static List<User> Users { get; private set; }
 
-        private static readonly string separator;
+        public static readonly string separator;
 
         static UserManager()
         {
@@ -26,7 +26,7 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             }
         }
 
-        private static void PrintSingleUser(User user)
+        public static void PrintSingleUser(User user)
         {
             Console.Write(user.Id + separator);
             Console.Write(user.Name + separator);

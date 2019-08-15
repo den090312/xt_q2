@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace _61_62_USERS_AND_AWARDS.Entities
 {

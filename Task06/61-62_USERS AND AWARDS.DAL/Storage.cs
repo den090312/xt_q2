@@ -17,7 +17,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
         private static string Root { get; }
 
-        private static string Users { get; } 
+        public static string Users { get; } 
 
         private static string Awards { get; } 
 
