@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections;
 
 namespace _61_62_USERS_AND_AWARDS.Entities
 {
-    public class User
+    public class User : IEnumerable
     {
         private readonly DateTime currentDateTime = DateTime.Now.Date;
 
@@ -10,7 +11,9 @@ namespace _61_62_USERS_AND_AWARDS.Entities
 
         private DateTime dateOfBirth;
 
-        public string Id { get; set; } = string.Empty;
+        public string UserId { get; set; } = string.Empty;
+
+        public string IdAward { get; set; } = string.Empty;
 
         public string Name
         {
@@ -65,7 +68,8 @@ namespace _61_62_USERS_AND_AWARDS.Entities
         {
             NullCheck(name);
 
-            Id = Guid.NewGuid().ToString();
+            UserId = Guid.NewGuid().ToString();
+            IdAward = string.Empty;
             Name = name;
             DateOfBirth = dateOfBirth;
         }
@@ -89,6 +93,11 @@ namespace _61_62_USERS_AND_AWARDS.Entities
             {
                 throw new ArgumentNullException($"{nameof(userString)} is null!");
             }
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return this.GetEnumerator();
         }
     }
 }

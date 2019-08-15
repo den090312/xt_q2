@@ -1,8 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>_61_62_USERS_AND_AWARDS.Interfaces</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\61-62_USERS AND AWARDS.Entities\61-62_USERS AND AWARDS.Entities.csproj" />
+  </ItemGroup>
 
 </Project>
