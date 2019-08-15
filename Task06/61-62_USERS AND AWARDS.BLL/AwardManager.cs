@@ -2,8 +2,13 @@
 
 namespace _61_62_USERS_AND_AWARDS.BLL
 {
-    public class AwardManager : ICreateble, IDeleteble
+    public class AwardManager : IStorable, IDeleteble
     {
+        public void PrintObjects()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void Create()
         {
             throw new System.NotImplementedException();
