@@ -19,6 +19,8 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
         public static void DeleteUser(string name) => StorageImplementation.DeleteUser(name);
 
+        public static void PrintAllUsers() => StorageImplementation.PrintAllUsers();
+
         public static void WriteMenu()
         {
             Console.WriteLine("User operations:");

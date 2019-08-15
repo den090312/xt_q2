@@ -11,5 +11,7 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
         void CreateUser(User user);
 
         void DeleteUser(string name);
+
+        void PrintAllUsers();
     }
 }

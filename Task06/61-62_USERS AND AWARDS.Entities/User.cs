@@ -64,6 +64,25 @@ namespace _61_62_USERS_AND_AWARDS.Entities
             }
         }
 
+        public static int GetFieldIndex(string fieldName)
+        {
+            switch (fieldName)
+            {
+                case "UserId":
+                    return 0;
+                case "IdAward":
+                    return 1;
+                case "Name":
+                    return 2;
+                case "DateOfBirth":
+                    return 3;
+                case "Age":
+                    return 4;
+                default:
+                    return -1;
+            }
+        }
+
         public User(string name, DateTime dateOfBirth)
         {
             NullCheck(name);

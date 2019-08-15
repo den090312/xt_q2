@@ -40,6 +40,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
                             break;
                         case 3:
                             inputComplete = true;
+                            PrintAllUsers();
                             break;
                         case 4:
                             return;
@@ -51,6 +52,8 @@ namespace _61_62_USERS_AND_AWARDS.PL
         private static void CreateUser(string dateFormat) => UserManager.CreateUser(GetName(), GetDate(dateFormat));
 
         private static void DeleteUser() => UserManager.DeleteUser(GetName());
+
+        private static void PrintAllUsers() => UserManager.PrintAllUsers();
 
         private static int GetKeyFromConsole()
         {

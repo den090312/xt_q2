@@ -101,7 +101,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
         public void CreateUser(User user)
         {
-            CreateUsersFile();
+            PrepareUsersFile();
 
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(Users, true);
@@ -116,7 +116,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             streamWriter.Close();
         }
 
-        private static void CreateUsersFile()
+        private static void PrepareUsersFile()
         {
             if (!File.Exists(Users))
             {
@@ -141,7 +141,50 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
         public void DeleteUser(string name)
         {
+            PrepareUsersFile();
 
+            Thread.Sleep(10);
+            var lines = File.ReadAllLines(Users);
+
+            File.Delete(Users);
+
+            Thread.Sleep(10);
+            var streamWriter = new StreamWriter(Users, true);
+
+            foreach (var line in lines)
+            {
+                if (NameInLine(line) != name)
+                {
+                    streamWriter.Write(line);
+                    streamWriter.WriteLine();
+                }
+            }
+
+            streamWriter.Close();
+        }
+
+        private static string NameInLine(string line) => line.Split(separator)[User.GetFieldIndex("Name")];
+
+        public void PrintAllUsers()
+        {
+            Console.WriteLine();
+
+            PrepareUsersFile();
+
+            Thread.Sleep(10);
+            var lines = File.ReadLines(Users);
+
+            foreach (var line in lines)
+            {
+                var charArray = line.Split('|');
+
+                for (int i = 2; i < charArray.Length; i++)
+                {
+                    Console.Write(charArray[i] + "---");
+                }
+
+                Console.WriteLine();
+            }
         }
     }
 }
