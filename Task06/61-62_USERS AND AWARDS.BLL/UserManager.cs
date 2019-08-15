@@ -1,81 +1,38 @@
 ﻿using _61_62_USERS_AND_AWARDS.Entities;
 using System;
-using System.Globalization;
-using System.Text;
+using System.Collections.Generic;
 
 namespace _61_62_USERS_AND_AWARDS.BLL
 {
-    public class UserManager
+    public static class UserManager
     {
-        public readonly string DateFormat = "dd.MM.yyyy";
+        public static List<User> Users { get; private set; }
 
-        public User Create() => new User(GetNameFromConsole(), GetDateFromConsole());
+        private static readonly string separator;
 
-        private static string GetNameFromConsole()
+        static UserManager()
         {
-            bool inputComplete = false;
-
-            StringBuilder userSB = new StringBuilder();
-
-            while (!inputComplete)
-            {
-                ConsoleKeyInfo key = Console.ReadKey(true);
-
-                if (key.Key == ConsoleKey.Backspace)
-                {
-                    EmulateConsoleKeyBackSpace(userSB);
-                }
-                else if (key.Key == ConsoleKey.Enter)
-                {
-                    inputComplete = true;
-                }
-                else
-                {
-                    userSB.Append(key.KeyChar);
-                    Console.Write(key.KeyChar);
-                }
-            }
-
-            return userSB.ToString();
+            Users = new List<User>();
+            separator = " | ";
         }
 
-        public static void EmulateConsoleKeyBackSpace(StringBuilder userKeySB)
+        public static void CreateUser(string name, DateTime birthDate) => StorageManager.AddUser(new User(name, birthDate));
+
+        public static void PrintAllUsers()
         {
-            if (userKeySB.Length > 0)
+            foreach (var user in Users)
             {
-                userKeySB.Length--;
+                PrintSingleUser(user);
             }
-
-            Console.Clear();
-            StorageManager.PrintObjects();
-            StorageManager.WriteMenu();
-
-            Console.Write(userKeySB);
         }
 
-        public DateTime GetDateFromConsole()
+        private static void PrintSingleUser(User user)
         {
-            Console.WriteLine($"Enter date in format: {DateFormat}");
-
-            bool isDate = false;
-
-            DateTime userBirthDate = default;
-
-            while (!isDate)
-            {
-                isDate = DateTime.TryParseExact(Console.ReadLine(), DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out userBirthDate);
-
-                if (!isDate)
-                {
-                    Console.WriteLine($"Enter date in format: {DateFormat}");
-                }
-                else
-                {
-                    isDate = true;
-                }
-            }
-
-            return userBirthDate;
+            Console.Write(user.Id + separator);
+            Console.Write(user.Name + separator);
+            Console.Write(user.DateOfBirth + separator);
+            Console.Write(user.Age);
+            Console.WriteLine();
         }
     }
 }

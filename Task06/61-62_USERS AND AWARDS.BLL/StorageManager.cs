@@ -1,4 +1,5 @@
 ﻿using _61_62_USERS_AND_AWARDS.Interfaces;
+using _61_62_USERS_AND_AWARDS.Entities;
 using _61_62_USERS_AND_AWARDS.Common;
 using System;
 
@@ -10,7 +11,12 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
         public static void Create() => CurrentStorage.Create();
 
-        public static void PrintObjects() => CurrentStorage.PrintObjects();
+        public static void PrintObjects() => CurrentStorage.PrintAllPaths();
+
+        public static void AddUser(User user)
+        {
+
+        }
 
         public static void WriteMenu()
         {

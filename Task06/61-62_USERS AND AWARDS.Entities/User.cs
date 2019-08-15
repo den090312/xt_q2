@@ -11,8 +11,6 @@ namespace _61_62_USERS_AND_AWARDS.Entities
 
         private DateTime dateOfBirth;
 
-        private readonly string separator = " | "; 
-
         public string Id { get; set; } = string.Empty;
 
         public string Name
@@ -64,8 +62,6 @@ namespace _61_62_USERS_AND_AWARDS.Entities
             }
         }
 
-        public List<User> Users { get; private set; } = new List<User>();
-
         public User(string name, DateTime dateOfBirth)
         {
             NullCheck(name);
@@ -73,25 +69,6 @@ namespace _61_62_USERS_AND_AWARDS.Entities
             Id = Guid.NewGuid().ToString();
             Name = name;
             DateOfBirth = dateOfBirth;
-
-            Users.Add(this);
-        }
-
-        public void PrintUsers()
-        {
-            foreach (var user in Users)
-            {
-                PrintUser(user);
-            }
-        }
-
-        private void PrintUser(User user)
-        {
-            Console.Write(user.Id + separator);
-            Console.Write(user.name + separator);
-            Console.Write(user.dateOfBirth + separator);
-            Console.Write(user.Age);
-            Console.WriteLine();
         }
 
         private static void CheckName(string userName, string nameType)

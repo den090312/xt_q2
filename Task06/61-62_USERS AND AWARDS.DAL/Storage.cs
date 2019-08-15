@@ -62,23 +62,23 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
         }
 
-        public void PrintObjects()
+        public void PrintAllPaths()
         {
             Console.WriteLine("---------Task folders--------");
 
             bool isFolder = true;
 
-            WriteInfoPath(Main, "Main", isFolder);
-            WriteInfoPath(Root, "Root", isFolder);
+            PrintSinglePath(Main, "Main", isFolder);
+            PrintSinglePath(Root, "Root", isFolder);
 
             isFolder = false;
-            WriteInfoPath(Users, "Users", isFolder);
-            WriteInfoPath(Awards, "Awards", isFolder);
+            PrintSinglePath(Users, "Users", isFolder);
+            PrintSinglePath(Awards, "Awards", isFolder);
 
             Console.WriteLine("-----------------------------");
         }
 
-        private static void WriteInfoPath(string path, string name, bool isFolder)
+        private static void PrintSinglePath(string path, string name, bool isFolder)
         {
             if (isFolder & Directory.Exists(path))
             {

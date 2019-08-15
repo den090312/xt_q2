@@ -4,6 +4,6 @@
     {
         void Create();
 
-        void PrintObjects();
+        void PrintAllPaths();
     }
 }
