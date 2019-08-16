@@ -144,7 +144,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             Thread.Sleep(10);
             var lines = File.ReadAllLines(path);
 
-            File.Delete(Users);
+            File.Delete(path);
 
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(path, true);

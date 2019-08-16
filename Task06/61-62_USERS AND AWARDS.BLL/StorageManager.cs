@@ -34,6 +34,8 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
         public static void AddAward(Award award) => StorageImplementation.AddAward(award);
 
+        public static void RemoveAward(string name) => StorageImplementation.RemoveElement(name, awardsFile);
+
         public static void WriteMenu()
         {
             Console.WriteLine("Users operations:");
