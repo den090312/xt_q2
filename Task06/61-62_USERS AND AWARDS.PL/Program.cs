@@ -9,6 +9,16 @@ namespace _61_62_USERS_AND_AWARDS.PL
     {
         public static readonly string DateFormat = "dd.MM.yyyy";
 
+        private enum ConsoleSegment
+        {
+            None = 0,
+            Main = 1,
+            User = 2,
+            Award = 3
+        }
+
+        private static ConsoleSegment consoleSegment = ConsoleSegment.None;
+
         private static void Main(string[] args)
         {
             StorageManager.CreateStorage();
@@ -188,8 +198,25 @@ namespace _61_62_USERS_AND_AWARDS.PL
             }
 
             Console.Clear();
-            Console.WriteLine("Enter name:");
+            ConsoleRestore();
             Console.Write(userKeySB);
+        }
+
+        private static void ConsoleRestore()
+        {
+            switch (consoleSegment)
+            {
+                case ConsoleSegment.Main:
+                    StorageManager.PrintStoragePaths();
+                    StorageManager.WriteMenu();
+                    break;
+                case ConsoleSegment.User:
+                    Console.WriteLine("Enter name:");
+                    break;
+                case ConsoleSegment.Award:
+                    Console.WriteLine("Enter title:");
+                    break;
+            }
         }
     }
 }
