@@ -175,8 +175,6 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
         public void PrintFileContent(string path)
         {
-            Console.WriteLine();
-
             PrepareFile(path);
 
             Thread.Sleep(10);
@@ -204,7 +202,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             streamWriter.Write(award.AwardID + separator);
             streamWriter.Write(award.UserID + separator);
-            streamWriter.Write(award.Title + separator);
+            streamWriter.Write(award.Title);
             streamWriter.WriteLine();
 
             streamWriter.Close();

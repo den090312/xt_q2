@@ -89,6 +89,8 @@ namespace _61_62_USERS_AND_AWARDS.PL
             {
                 ConsoleKeyInfo key = Console.ReadKey(true);
 
+                char[] keyArray = { '1', '2', '3', '4', '5', '6', '7', '8'};
+
                 if (key.Key == ConsoleKey.Backspace)
                 {
                     EmulateConsoleKeyBackSpace(userKeySB);
@@ -97,7 +99,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
                 {
                     inputComplete = true;
                 }
-                else if ((key.KeyChar == '1' || key.KeyChar == '2' || key.KeyChar == '3' || key.KeyChar == '4'))
+                else if ((Array.Exists(keyArray, x => x == key.KeyChar)))
                 {
                     if (userKeySB.Length < 1)
                     {
