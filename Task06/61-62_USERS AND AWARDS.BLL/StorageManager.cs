@@ -37,19 +37,31 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
         public static void PrintAllAwards() => StorageImplementation.PrintFileContent(awardsFile);
 
+        public static void AddAwardToUser(string user, string award)
+        {
+            if (UserManager.UserExists(user) & AwardManager.AwardExists(award))
+            {
+                StorageImplementation.AddAwardToUser(user, award);
+            }
+        }
+
         public static void WriteMenu()
         {
             Console.WriteLine("Users operations:");
             Console.WriteLine("\t1: create");
             Console.WriteLine("\t2: delete");
             Console.WriteLine("\t3: print");
-
+            Console.WriteLine();
             Console.WriteLine("Awards operations:");
             Console.WriteLine("\t4: create");
             Console.WriteLine("\t5: delete");
             Console.WriteLine("\t6: print");
-
-            Console.WriteLine("\t7: exit");
+            Console.WriteLine();
+            Console.WriteLine("Connect operations:");
+            Console.WriteLine("\t7: add award to user");
+            Console.WriteLine("\t8: add user to award");
+            Console.WriteLine();
+            Console.WriteLine("\t9: exit");
         }
     }
 }

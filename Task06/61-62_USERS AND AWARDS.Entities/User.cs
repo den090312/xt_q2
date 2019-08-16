@@ -64,6 +64,15 @@ namespace _61_62_USERS_AND_AWARDS.Entities
             }
         }
 
+        public User(string name, DateTime dateOfBirth)
+        {
+            NullCheck(name);
+
+            UserID = Guid.NewGuid().ToString();
+            Name = name;
+            DateOfBirth = dateOfBirth;
+        }
+
         public static int GetFieldIndex(string fieldName)
         {
             switch (fieldName)
@@ -81,15 +90,6 @@ namespace _61_62_USERS_AND_AWARDS.Entities
                 default:
                     return -1;
             }
-        }
-
-        public User(string name, DateTime dateOfBirth)
-        {
-            NullCheck(name);
-
-            UserID = Guid.NewGuid().ToString();
-            Name = name;
-            DateOfBirth = dateOfBirth;
         }
 
         private static void CheckName(string userName, string nameType)

@@ -19,5 +19,7 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
         void PrintFileContent(string path);
 
         void AddAward(Award award);
+
+        void AddAwardToUser(string user, string award);
     }
 }

@@ -10,5 +10,14 @@ namespace _61_62_USERS_AND_AWARDS.BLL
         public static void DeleteUser(string name) => StorageManager.RemoveUser(name);
 
         public static void PrintAllUsers() => StorageManager.PrintAllUsers();
+
+        public static bool UserExists(string name)
+        {
+            bool exists = false;
+
+
+
+            return exists;
+        }
     }
 }

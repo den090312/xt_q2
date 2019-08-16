@@ -208,5 +208,10 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             streamWriter.Close();
         }
+
+        public void AddAwardToUser(string user, string award)
+        {
+            
+        }
     }
 }
