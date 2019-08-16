@@ -21,5 +21,7 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
         void AddAward(Award award);
 
         void AddAwardToUser(string user, string award);
+
+        bool ElementExists(string elementName, string filePath, string fileName);
     }
 }

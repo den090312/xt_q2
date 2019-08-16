@@ -211,7 +211,96 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
         public void AddAwardToUser(string user, string award)
         {
-            
+            CheckFileExistance(Users);
+
+            Thread.Sleep(10);
+            var lines = File.ReadAllLines(Users);
+
+            File.Delete(Users);
+
+            Thread.Sleep(10);
+            var streamWriter = new StreamWriter(Users, true);
+
+            foreach (var line in lines)
+            {
+                if (NameInLine(line, Users) != user)
+                {
+                    streamWriter.Write(line);
+                    streamWriter.WriteLine();
+                }
+                else
+                {
+                    var id = GetAwardID(award);
+
+                    if (id != string.Empty)
+                    {
+                        streamWriter.Write(LineWithID(line));
+                    }
+                }
+            }
+
+            streamWriter.Close();
+        }
+
+        public static string LineWithID(string line)
+        {
+            return line;
+        }
+
+        public string GetAwardID(string award)
+        {
+            string guid = string.Empty;
+
+            Thread.Sleep(10);
+            var lines = File.ReadAllLines(Users);
+
+            Thread.Sleep(10);
+            var streamWriter = new StreamWriter(Awards, true);
+
+            foreach (var line in lines)
+            {
+                if (NameInLine(line, Awards) != award)
+                {
+                    return line.Split(separator)[Award.GetFieldIndex("AwardID")];
+                }
+            }
+
+            return guid;
+        }
+
+        public bool ElementExists(string elementName, string filePath, string fileName)
+        {
+            bool exists = false;
+
+            PrepareFile(filePath);
+
+            Thread.Sleep(10);
+            var lines = File.ReadAllLines(filePath);
+
+            File.Delete(filePath);
+
+            Thread.Sleep(10);
+            var streamWriter = new StreamWriter(filePath, true);
+
+            foreach (var line in lines)
+            {
+                if (NameInLine(line, fileName) == elementName)
+                {
+                    return true;
+                }
+            }
+
+            streamWriter.Close();
+
+            return exists;
+        }
+
+        public static void CheckFileExistance(string filePath)
+        {
+            if (!File.Exists(filePath))
+            {
+                throw new FileNotFoundException($"{nameof(filePath)} is not exists!");
+            }
         }
     }
 }

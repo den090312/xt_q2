@@ -10,15 +10,15 @@ namespace _61_62_USERS_AND_AWARDS.BLL
     {
         public static IStorable StorageImplementation { get; }
 
-        private static readonly string usersFile;
+        private static readonly string usersFilePath;
 
-        private static readonly string awardsFile;
+        private static readonly string awardsFilePath;
 
         static StorageManager()
         {
             StorageImplementation = Dependencies.StorageImplementation;
-            usersFile = StorageImplementation.Users;
-            awardsFile = StorageImplementation.Awards;
+            usersFilePath = StorageImplementation.Users;
+            awardsFilePath = StorageImplementation.Awards;
         }
 
         public static void CreateStorage() => StorageImplementation.CreateStorage();
@@ -27,23 +27,37 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
         public static void AddUser(User user) => StorageImplementation.AddUser(user);
 
-        public static void RemoveUser(string name) => StorageImplementation.RemoveElement(name, usersFile, "Users");
+        public static void RemoveUser(string name) => StorageImplementation.RemoveElement(name, usersFilePath, "Users");
 
-        public static void PrintAllUsers() => StorageImplementation.PrintFileContent(usersFile);
+        public static void PrintAllUsers() => StorageImplementation.PrintFileContent(usersFilePath);
 
         public static void AddAward(Award award) => StorageImplementation.AddAward(award);
 
-        public static void RemoveAward(string name) => StorageImplementation.RemoveElement(name, awardsFile, "Awards");
+        public static void RemoveAward(string name) => StorageImplementation.RemoveElement(name, awardsFilePath, "Awards");
 
-        public static void PrintAllAwards() => StorageImplementation.PrintFileContent(awardsFile);
+        public static void PrintAllAwards() => StorageImplementation.PrintFileContent(awardsFilePath);
 
         public static void AddAwardToUser(string user, string award)
         {
-            if (UserManager.UserExists(user) & AwardManager.AwardExists(award))
+            if (!UserExists(user, usersFilePath, "Users"))
             {
-                StorageImplementation.AddAwardToUser(user, award);
+                throw new Exception($"{nameof(user)} not found!");
             }
+
+
+            if (!AwardExists(award, awardsFilePath, "Awards"))
+            {
+                throw new Exception($"{nameof(award)} not found!");
+            }
+
+            StorageImplementation.AddAwardToUser(user, award);
         }
+
+        public static bool UserExists(string elementName, string filePath, string fileName) 
+            => StorageImplementation.ElementExists(elementName, filePath, fileName);
+
+        public static bool AwardExists(string elementName, string filePath, string fileName)
+            => StorageImplementation.ElementExists(elementName, filePath, fileName);
 
         public static void WriteMenu()
         {
