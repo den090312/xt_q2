@@ -241,6 +241,39 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
 
             streamWriter.Close();
+
+            AddUserToAward(award, user);
+        }
+
+        public void AddUserToAward(string award, string user)
+        {
+            CheckFileExistance(Awards);
+
+            Thread.Sleep(10);
+            var lines = File.ReadAllLines(Awards);
+
+            File.Delete(Awards);
+
+            Thread.Sleep(10);
+            var streamWriter = new StreamWriter(Awards, true);
+
+            foreach (var line in lines)
+            {
+                if (NameInLine(line, Awards) != award)
+                {
+                    streamWriter.Write(line);
+                    streamWriter.WriteLine();
+                }
+                else
+                {
+                    var id = GetUserID(user);
+
+                    if (id != string.Empty)
+                    {
+                        streamWriter.Write(LineWithID(line, id));
+                    }
+                }
+            }
         }
 
         public static string LineWithID(string line, string id)
@@ -276,6 +309,24 @@ namespace _61_62_USERS_AND_AWARDS.DAL
                 if (NameInLine(line, Awards) != award)
                 {
                     return line.Split(separator)[Award.GetFieldIndex("AwardID")];
+                }
+            }
+
+            return guid;
+        }
+
+        public string GetUserID(string user)
+        {
+            string guid = string.Empty;
+
+            Thread.Sleep(10);
+            var lines = File.ReadAllLines(Awards);
+
+            foreach (var line in lines)
+            {
+                if (NameInLine(line, Users) != user)
+                {
+                    return line.Split(separator)[User.GetFieldIndex("UserID")];
                 }
             }
 
