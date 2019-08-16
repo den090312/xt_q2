@@ -137,21 +137,21 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
         }
 
-        public void RemoveElement(string name, string path, string fileName)
+        public void RemoveElement(string elementName, string filePath, string fileName)
         {
-            PrepareFile(path);
+            PrepareFile(filePath);
 
             Thread.Sleep(10);
-            var lines = File.ReadAllLines(path);
+            var lines = File.ReadAllLines(filePath);
 
-            File.Delete(path);
+            File.Delete(filePath);
 
             Thread.Sleep(10);
-            var streamWriter = new StreamWriter(path, true);
+            var streamWriter = new StreamWriter(filePath, true);
 
             foreach (var line in lines)
             {
-                if (NameInLine(line, fileName) != name)
+                if (NameInLine(line, fileName) != elementName)
                 {
                     streamWriter.Write(line);
                     streamWriter.WriteLine();
