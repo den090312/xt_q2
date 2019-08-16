@@ -235,7 +235,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
                     if (id != string.Empty)
                     {
-                        streamWriter.Write(LineWithID(line, id));
+                        streamWriter.Write(LineWithID(line, id, "Users"));
                     }
                 }
             }
@@ -270,17 +270,28 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
                     if (id != string.Empty)
                     {
-                        streamWriter.Write(LineWithID(line, id));
+                        streamWriter.Write(LineWithID(line, id, "Awards"));
                     }
                 }
             }
         }
 
-        public static string LineWithID(string line, string id)
+        public static string LineWithID(string line, string id, string fileName)
         {
             var itemArray = line.Split('|');
             var sb = new StringBuilder();
-            var indexID = User.GetFieldIndex("AwardID");
+
+            var indexID = -1;
+
+            switch (fileName)
+            {
+                case "Users":
+                    indexID = User.GetFieldIndex("AwardID");
+                    break;
+                default:
+                    indexID = Award.GetFieldIndex("UserID");
+                    break;
+            }
 
             for (int i = 0; i < itemArray.Length; i++)
             {
