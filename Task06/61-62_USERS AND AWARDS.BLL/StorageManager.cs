@@ -25,7 +25,7 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
         public static void PrintStoragePaths() => StorageImplementation.PrintStoragePaths();
 
-        public static void AddUser(User user)
+        internal static void AddUser(User user)
         {
             NullCheck(user);
 
