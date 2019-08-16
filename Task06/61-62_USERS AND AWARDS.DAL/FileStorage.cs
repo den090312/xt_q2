@@ -137,7 +137,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
         }
 
-        public void RemoveElement(string name, string path)
+        public void RemoveElement(string name, string path, string fileName)
         {
             PrepareFile(path);
 
@@ -151,7 +151,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             foreach (var line in lines)
             {
-                if (NameInLine(line) != name)
+                if (NameInLine(line, fileName) != name)
                 {
                     streamWriter.Write(line);
                     streamWriter.WriteLine();
@@ -161,7 +161,16 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             streamWriter.Close();
         }
 
-        private static string NameInLine(string line) => line.Split(separator)[User.GetFieldIndex("Name")];
+        private static string NameInLine(string line, string fileName)
+        {
+            switch (fileName)
+            {
+                case "Users":
+                    return line.Split(separator)[User.GetFieldIndex("Name")];
+                default:
+                    return line.Split(separator)[Award.GetFieldIndex("Title")];
+            }
+        }
 
         public void PrintFileContent(string path)
         {

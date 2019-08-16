@@ -27,13 +27,13 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
         public static void AddUser(User user) => StorageImplementation.AddUser(user);
 
-        public static void RemoveUser(string name) => StorageImplementation.RemoveElement(name, usersFile);
+        public static void RemoveUser(string name) => StorageImplementation.RemoveElement(name, usersFile, "Users");
 
         public static void PrintAllUsers() => StorageImplementation.PrintFileContent(usersFile);
 
         public static void AddAward(Award award) => StorageImplementation.AddAward(award);
 
-        public static void RemoveAward(string name) => StorageImplementation.RemoveElement(name, awardsFile);
+        public static void RemoveAward(string name) => StorageImplementation.RemoveElement(name, awardsFile, "Awards");
 
         public static void PrintAllAwards() => StorageImplementation.PrintFileContent(awardsFile);
 
