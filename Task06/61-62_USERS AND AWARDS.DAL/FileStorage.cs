@@ -221,6 +221,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
         public void AddAwardToUser(string user, string award)
         {
             CheckFileExistance(Users);
+            SetNormalAttributes(Users);
 
             Thread.Sleep(10);
             var lines = File.ReadAllLines(Users);
@@ -239,7 +240,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
                 }
                 else
                 {
-                    var id = GetAwardID(award);
+                    var id = line.Split(separator)[Award.GetFieldIndex("AwardID")];
 
                     if (id != string.Empty)
                     {
@@ -274,7 +275,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
                 }
                 else
                 {
-                    var id = GetUserID(user);
+                    var id = line.Split(separator)[User.GetFieldIndex("UserID")];
 
                     if (id != string.Empty)
                     {
@@ -331,42 +332,6 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
 
             return sb.ToString();
-        }
-
-        public string GetAwardID(string award)
-        {
-            string guid = string.Empty;
-
-            Thread.Sleep(10);
-            var lines = File.ReadAllLines(Users);
-
-            foreach (var line in lines)
-            {
-                if (NameInLine(line, Awards) != award)
-                {
-                    return line.Split(separator)[Award.GetFieldIndex("AwardID")];
-                }
-            }
-
-            return guid;
-        }
-
-        public string GetUserID(string user)
-        {
-            string guid = string.Empty;
-
-            Thread.Sleep(10);
-            var lines = File.ReadAllLines(Awards);
-
-            foreach (var line in lines)
-            {
-                if (NameInLine(line, Users) != user)
-                {
-                    return line.Split(separator)[User.GetFieldIndex("UserID")];
-                }
-            }
-
-            return guid;
         }
 
         public bool ElementExists(string elementName, string filePath, string fileName)
