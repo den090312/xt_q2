@@ -132,7 +132,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
                 if ((attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
                 {
                     Thread.Sleep(10);
-                    File.SetAttributes(Users, FileAttributes.Normal);
+                    File.SetAttributes(path, FileAttributes.Normal);
                 }
             }
         }
