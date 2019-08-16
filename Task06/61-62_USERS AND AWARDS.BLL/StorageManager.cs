@@ -73,9 +73,8 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             Console.WriteLine();
             Console.WriteLine("Connect operations:");
             Console.WriteLine("\t7: add award to user");
-            Console.WriteLine("\t8: add user to award");
             Console.WriteLine();
-            Console.WriteLine("\t9: exit");
+            Console.WriteLine("\t8: exit");
         }
     }
 }

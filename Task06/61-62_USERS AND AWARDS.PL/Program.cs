@@ -58,7 +58,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
                             inputComplete = true;
                             AddAwardToUser();
                             break;
-                        case 9:
+                        case 8:
                             return;
                     }
                 }
