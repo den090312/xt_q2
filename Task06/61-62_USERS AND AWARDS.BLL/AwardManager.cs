@@ -9,14 +9,5 @@ namespace _61_62_USERS_AND_AWARDS.BLL
         public static void DeleteAward(string name) => StorageManager.RemoveAward(name);
 
         public static void PrintAllAwards() => StorageManager.PrintAllAwards();
-
-        public static bool AwardExists(string name)
-        {
-            bool exists = false;
-
-
-
-            return exists;
-        }
     }
 }

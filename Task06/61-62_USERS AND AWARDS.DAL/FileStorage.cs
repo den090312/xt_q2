@@ -279,7 +279,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             var itemArray = line.Split('|');
             var sb = new StringBuilder();
 
-            int indexID = -1;
+            int indexID;
 
             switch (fileName)
             {
@@ -300,11 +300,21 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             {
                 if (i == indexID)
                 {
-                    sb.Append(id + separator);
+                    sb.Append(id);
+
+                    if (i != itemArray.Length - 1)
+                    {
+                        sb.Append(separator);
+                    }
                 }
                 else
                 {
-                    sb.Append(itemArray[i] + separator);
+                    sb.Append(itemArray[i]);
+
+                    if (i != itemArray.Length - 1)
+                    {
+                        sb.Append(separator);
+                    }
                 }
             }
 

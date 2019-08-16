@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 
 namespace _61_62_USERS_AND_AWARDS.Entities
 {
@@ -9,7 +8,7 @@ namespace _61_62_USERS_AND_AWARDS.Entities
 
         private string name = string.Empty;
 
-        private DateTime dateOfBirth;
+        private DateTime dateOfBirth = default;
 
         public string UserID { get; } = string.Empty;
 
