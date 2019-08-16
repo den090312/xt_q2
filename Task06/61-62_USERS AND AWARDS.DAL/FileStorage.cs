@@ -99,15 +99,15 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
         }
 
-        public void CreateUser(User user)
+        public void AddUser(User user)
         {
             PrepareUsersFile();
 
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(Users, true);
 
-            streamWriter.Write(user.UserId + separator);
-            streamWriter.Write(user.IdAward + separator);
+            streamWriter.Write(user.UserID + separator);
+            streamWriter.Write(user.AwardID + separator);
             streamWriter.Write(user.Name + separator);
             streamWriter.Write(user.DateOfBirth.ToString("dd.MM.yyyy") + separator);
             streamWriter.Write(user.Age);
@@ -139,7 +139,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
         }
 
-        public void DeleteUser(string name)
+        public void RemoveUser(string name)
         {
             PrepareUsersFile();
 
@@ -185,6 +185,11 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
                 Console.WriteLine();
             }
+        }
+
+        public void AddAward(Award award)
+        {
+
         }
     }
 }

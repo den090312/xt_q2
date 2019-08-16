@@ -11,9 +11,9 @@ namespace _61_62_USERS_AND_AWARDS.Entities
 
         private DateTime dateOfBirth;
 
-        public string UserId { get; set; } = string.Empty;
+        public string UserID { get; } = string.Empty;
 
-        public string IdAward { get; set; } = string.Empty;
+        public string AwardID { get; } = string.Empty;
 
         public string Name
         {
@@ -68,9 +68,9 @@ namespace _61_62_USERS_AND_AWARDS.Entities
         {
             switch (fieldName)
             {
-                case "UserId":
+                case "UserID":
                     return 0;
-                case "IdAward":
+                case "AwardID":
                     return 1;
                 case "Name":
                     return 2;
@@ -87,8 +87,7 @@ namespace _61_62_USERS_AND_AWARDS.Entities
         {
             NullCheck(name);
 
-            UserId = Guid.NewGuid().ToString();
-            IdAward = string.Empty;
+            UserID = Guid.NewGuid().ToString();
             Name = name;
             DateOfBirth = dateOfBirth;
         }
@@ -106,7 +105,7 @@ namespace _61_62_USERS_AND_AWARDS.Entities
             }
         }
 
-        private static void NullCheck(string userString)
+        public static void NullCheck(string userString)
         {
             if (userString is null)
             {

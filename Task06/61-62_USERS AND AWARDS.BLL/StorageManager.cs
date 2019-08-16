@@ -15,19 +15,27 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
         public static void PrintStoragePaths() => StorageImplementation.PrintStoragePaths();
 
-        public static void CreateUser(User user) => StorageImplementation.CreateUser(user);
+        public static void AddUser(User user) => StorageImplementation.AddUser(user);
 
-        public static void DeleteUser(string name) => StorageImplementation.DeleteUser(name);
+        public static void RemoveUser(string name) => StorageImplementation.RemoveUser(name);
 
         public static void PrintAllUsers() => StorageImplementation.PrintAllUsers();
 
+        public static void AddAward(Award award) => StorageImplementation.AddAward(award);
+
         public static void WriteMenu()
         {
-            Console.WriteLine("User operations:");
+            Console.WriteLine("Users operations:");
             Console.WriteLine("\t1: create");
             Console.WriteLine("\t2: delete");
             Console.WriteLine("\t3: print");
-            Console.WriteLine("\t4: exit");
+
+            Console.WriteLine("Awards operations:");
+            Console.WriteLine("\t4: create");
+            Console.WriteLine("\t5: delete");
+            Console.WriteLine("\t6: print");
+
+            Console.WriteLine("\t7: exit");
         }
     }
 }

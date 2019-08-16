@@ -43,17 +43,23 @@ namespace _61_62_USERS_AND_AWARDS.PL
                             PrintAllUsers();
                             break;
                         case 4:
+                            inputComplete = true;
+                            CreateAward();
+                            break;
+                        case 7:
                             return;
                     }
                 }
             }
         }
 
-        private static void CreateUser(string dateFormat) => UserManager.CreateUser(GetName(), GetDate(dateFormat));
+        private static void CreateUser(string dateFormat) => UserManager.CreateUser(GetUserString("name"), GetDate(dateFormat));
 
-        private static void DeleteUser() => UserManager.DeleteUser(GetName());
+        private static void DeleteUser() => UserManager.DeleteUser(GetUserString("name"));
 
         private static void PrintAllUsers() => UserManager.PrintAllUsers();
+
+        private static void CreateAward() => UserManager.CreateAward(GetUserString("title"));
 
         private static int GetKeyFromConsole()
         {
@@ -73,7 +79,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
                 {
                     inputComplete = true;
                 }
-                else if ((key.KeyChar == '1' || key.KeyChar == '2' || key.KeyChar == '3'))
+                else if ((key.KeyChar == '1' || key.KeyChar == '2' || key.KeyChar == '3' || key.KeyChar == '4'))
                 {
                     if (userKeySB.Length < 1)
                     {
@@ -97,10 +103,10 @@ namespace _61_62_USERS_AND_AWARDS.PL
             return result;
         }
 
-        private static string GetName()
+        private static string GetUserString(string parameterName)
         {
             Console.Clear();
-            Console.WriteLine("Enter name:");
+            Console.WriteLine($"Enter {parameterName}:");
 
             bool inputComplete = false;
 
