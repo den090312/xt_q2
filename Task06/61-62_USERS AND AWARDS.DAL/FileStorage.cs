@@ -281,7 +281,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             var itemArray = line.Split('|');
             var sb = new StringBuilder();
 
-            var indexID = -1;
+            int indexID = -1;
 
             switch (fileName)
             {
@@ -291,6 +291,11 @@ namespace _61_62_USERS_AND_AWARDS.DAL
                 default:
                     indexID = Award.GetFieldIndex("UserID");
                     break;
+            }
+
+            if (indexID == -1)
+            {
+                throw new Exception("indexID is not found!");
             }
 
             for (int i = 0; i < itemArray.Length; i++)
