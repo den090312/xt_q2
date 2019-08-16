@@ -1,7 +1,9 @@
 ﻿using _61_62_USERS_AND_AWARDS.Interfaces;
 using _61_62_USERS_AND_AWARDS.Entities;
 using _61_62_USERS_AND_AWARDS.Common;
+using _61_62_USERS_AND_AWARDS.DAL;
 using System;
+
 
 namespace _61_62_USERS_AND_AWARDS.BLL
 {
@@ -9,7 +11,16 @@ namespace _61_62_USERS_AND_AWARDS.BLL
     {
         public static IStorable StorageImplementation { get; }
 
-        static StorageManager() => StorageImplementation = Dependencies.StorageImplementation;
+        private static readonly string usersFile;
+
+        private static readonly string awardsFile;
+
+        static StorageManager()
+        {
+            StorageImplementation = Dependencies.StorageImplementation;
+            usersFile = StorageImplementation.Users;
+            awardsFile = StorageImplementation.Awards;
+        }
 
         public static void CreateStorage() => StorageImplementation.CreateStorage();
 
@@ -17,9 +28,9 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
         public static void AddUser(User user) => StorageImplementation.AddUser(user);
 
-        public static void RemoveUser(string name) => StorageImplementation.RemoveUser(name);
+        public static void RemoveUser(string name) => StorageImplementation.RemoveElement(name, usersFile);
 
-        public static void PrintAllUsers() => StorageImplementation.PrintAllUsers();
+        public static void PrintAllUsers() => StorageImplementation.PrintFileContent(usersFile);
 
         public static void AddAward(Award award) => StorageImplementation.AddAward(award);
 

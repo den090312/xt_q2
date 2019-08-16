@@ -16,9 +16,9 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
         private static string Root { get; }
 
-        public static string Users { get; } 
+        public string Users { get; } = $@"{Main}\Users.txt";
 
-        private static string Awards { get; }
+        public string Awards { get; } = $@"{Main}\Awards.txt";
 
         public static readonly char separator;
 
@@ -30,8 +30,6 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             Tom = $@"{Disk}:\";
             Main = $"{Tom}Task06";
             Root = $@"{Main}\Storage";
-            Users = $@"{Main}\Users.txt";
-            Awards = $@"{Main}\Awards.txt";
             separator = '|';
             messageNotFound = "not found";
         }
@@ -101,7 +99,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
         public void AddUser(User user)
         {
-            PrepareUsersFile();
+            PrepareFile(Users);
 
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(Users, true);
@@ -116,12 +114,12 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             streamWriter.Close();
         }
 
-        private static void PrepareUsersFile()
+        private static void PrepareFile(string path)
         {
-            if (!File.Exists(Users))
+            if (!File.Exists(path))
             {
                 Thread.Sleep(10);
-                var streamWriter = new StreamWriter(Users, true);
+                var streamWriter = new StreamWriter(path, true);
 
                 streamWriter.Write("");
                 streamWriter.Close();
@@ -129,7 +127,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             else
             {
                 Thread.Sleep(10);
-                var attributes = File.GetAttributes(Users);
+                var attributes = File.GetAttributes(path);
 
                 if ((attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
                 {
@@ -139,17 +137,17 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
         }
 
-        public void RemoveUser(string name)
+        public void RemoveElement(string name, string path)
         {
-            PrepareUsersFile();
+            PrepareFile(path);
 
             Thread.Sleep(10);
-            var lines = File.ReadAllLines(Users);
+            var lines = File.ReadAllLines(path);
 
             File.Delete(Users);
 
             Thread.Sleep(10);
-            var streamWriter = new StreamWriter(Users, true);
+            var streamWriter = new StreamWriter(path, true);
 
             foreach (var line in lines)
             {
@@ -165,14 +163,14 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
         private static string NameInLine(string line) => line.Split(separator)[User.GetFieldIndex("Name")];
 
-        public void PrintAllUsers()
+        public void PrintFileContent(string path)
         {
             Console.WriteLine();
 
-            PrepareUsersFile();
+            PrepareFile(path);
 
             Thread.Sleep(10);
-            var lines = File.ReadLines(Users);
+            var lines = File.ReadLines(path);
 
             foreach (var line in lines)
             {
@@ -189,7 +187,17 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
         public void AddAward(Award award)
         {
+            PrepareFile(Awards);
 
+            Thread.Sleep(10);
+            var streamWriter = new StreamWriter(Awards, true);
+
+            streamWriter.Write(award.AwardID + separator);
+            streamWriter.Write(award.UserID + separator);
+            streamWriter.Write(award.Title + separator);
+            streamWriter.WriteLine();
+
+            streamWriter.Close();
         }
     }
 }
