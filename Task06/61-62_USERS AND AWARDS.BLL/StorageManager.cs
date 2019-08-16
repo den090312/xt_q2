@@ -25,20 +25,43 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
         public static void PrintStoragePaths() => StorageImplementation.PrintStoragePaths();
 
-        public static void AddUser(User user) => StorageImplementation.AddUser(user);
+        public static void AddUser(User user)
+        {
+            NullCheck(user);
 
-        public static void RemoveUser(string name) => StorageImplementation.RemoveElement(name, usersFilePath, "Users");
+            StorageImplementation.AddUser(user);
+        }
+
+        public static void RemoveUser(string name)
+        {
+            NullCheck(name);
+
+            StorageImplementation.RemoveElement(name, usersFilePath, "Users");
+        }
 
         public static void PrintAllUsers() => StorageImplementation.PrintFileContent(usersFilePath);
 
-        public static void AddAward(Award award) => StorageImplementation.AddAward(award);
+        public static void AddAward(Award award)
+        {
+            NullCheck(award);
 
-        public static void RemoveAward(string name) => StorageImplementation.RemoveElement(name, awardsFilePath, "Awards");
+            StorageImplementation.AddAward(award);
+        }
+
+        public static void RemoveAward(string name)
+        {
+            NullCheck(name);
+
+            StorageImplementation.RemoveElement(name, awardsFilePath, "Awards");
+        }
 
         public static void PrintAllAwards() => StorageImplementation.PrintFileContent(awardsFilePath);
 
         public static void AddAwardToUser(string user, string award)
         {
+            NullCheck(user);
+            NullCheck(award);
+
             if (!UserExists(user, usersFilePath, "Users"))
             {
                 throw new Exception($"{nameof(user)} not found!");
@@ -53,11 +76,23 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             StorageImplementation.AddAwardToUser(user, award);
         }
 
-        public static bool UserExists(string elementName, string filePath, string fileName) 
-            => StorageImplementation.ElementExists(elementName, filePath, fileName);
+        public static bool UserExists(string elementName, string filePath, string fileName)
+        {
+            NullCheck(elementName);
+            NullCheck(filePath);
+            NullCheck(fileName);
+
+            return StorageImplementation.ElementExists(elementName, filePath, fileName);
+        }
 
         public static bool AwardExists(string elementName, string filePath, string fileName)
-            => StorageImplementation.ElementExists(elementName, filePath, fileName);
+        {
+            NullCheck(elementName);
+            NullCheck(filePath);
+            NullCheck(fileName);
+
+            return StorageImplementation.ElementExists(elementName, filePath, fileName);
+        }
 
         public static void WriteMenu()
         {
@@ -75,6 +110,14 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             Console.WriteLine("\t7: add award to user");
             Console.WriteLine();
             Console.WriteLine("\t8: exit");
+        }
+
+        public static void NullCheck<T>(T classObject) where T : class
+        {
+            if (classObject is null)
+            {
+                throw new ArgumentNullException($"{nameof(classObject)} is null!");
+            }
         }
     }
 }
