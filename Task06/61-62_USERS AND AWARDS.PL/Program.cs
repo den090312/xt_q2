@@ -21,6 +21,8 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
         private static void Main(string[] args)
         {
+            consoleSegment = ConsoleSegment.Main;
+
             StorageManager.CreateStorage();
             StorageManager.PrintStoragePaths();
             StorageManager.WriteMenu();
@@ -42,10 +44,12 @@ namespace _61_62_USERS_AND_AWARDS.PL
                     {
                         case 1:
                             inputComplete = true;
+                            consoleSegment = ConsoleSegment.User;
                             CreateUser(DateFormat);
                             break;
                         case 2:
                             inputComplete = true;
+                            consoleSegment = ConsoleSegment.User;
                             DeleteUser();
                             break;
                         case 3:
@@ -54,10 +58,12 @@ namespace _61_62_USERS_AND_AWARDS.PL
                             break;
                         case 4:
                             inputComplete = true;
+                            consoleSegment = ConsoleSegment.Award;
                             CreateAward();
                             break;
                         case 5:
                             inputComplete = true;
+                            consoleSegment = ConsoleSegment.Award;
                             DeleteAward();
                             break;
                         case 6:
@@ -66,6 +72,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
                             break;
                         case 7:
                             inputComplete = true;
+                            consoleSegment = ConsoleSegment.User;
                             AddAwardToUser();
                             break;
                         case 8:
