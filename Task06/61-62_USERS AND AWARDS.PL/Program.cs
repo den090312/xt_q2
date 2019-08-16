@@ -170,6 +170,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
                 else if (key.Key == ConsoleKey.Enter)
                 {
                     inputComplete = true;
+                    Console.WriteLine();
                 }
                 else
                 {
