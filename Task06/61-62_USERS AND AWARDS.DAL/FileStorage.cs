@@ -2,6 +2,7 @@
 using _61_62_USERS_AND_AWARDS.Interfaces;
 using System;
 using System.IO;
+using System.Text;
 using System.Threading;
 
 namespace _61_62_USERS_AND_AWARDS.DAL
@@ -234,7 +235,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
                     if (id != string.Empty)
                     {
-                        streamWriter.Write(LineWithID(line));
+                        streamWriter.Write(LineWithID(line, id));
                     }
                 }
             }
@@ -242,9 +243,25 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             streamWriter.Close();
         }
 
-        public static string LineWithID(string line)
+        public static string LineWithID(string line, string id)
         {
-            return line;
+            var itemArray = line.Split('|');
+            var sb = new StringBuilder();
+            var indexID = User.GetFieldIndex("AwardID");
+
+            for (int i = 0; i < itemArray.Length; i++)
+            {
+                if (i == indexID)
+                {
+                    sb.Append(id + separator);
+                }
+                else
+                {
+                    sb.Append(itemArray[i] + separator);
+                }
+            }
+
+            return sb.ToString();
         }
 
         public string GetAwardID(string award)
@@ -253,9 +270,6 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             Thread.Sleep(10);
             var lines = File.ReadAllLines(Users);
-
-            Thread.Sleep(10);
-            var streamWriter = new StreamWriter(Awards, true);
 
             foreach (var line in lines)
             {
