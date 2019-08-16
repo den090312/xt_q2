@@ -1,7 +1,6 @@
 ﻿using _61_62_USERS_AND_AWARDS.Interfaces;
 using _61_62_USERS_AND_AWARDS.Entities;
 using _61_62_USERS_AND_AWARDS.Common;
-using _61_62_USERS_AND_AWARDS.DAL;
 using System;
 
 
@@ -35,6 +34,8 @@ namespace _61_62_USERS_AND_AWARDS.BLL
         public static void AddAward(Award award) => StorageImplementation.AddAward(award);
 
         public static void RemoveAward(string name) => StorageImplementation.RemoveElement(name, awardsFile);
+
+        public static void PrintAllAwards() => StorageImplementation.PrintFileContent(awardsFile);
 
         public static void WriteMenu()
         {

@@ -50,6 +50,10 @@ namespace _61_62_USERS_AND_AWARDS.PL
                             inputComplete = true;
                             DeleteAward();
                             break;
+                        case 6:
+                            inputComplete = true;
+                            PrintAllAwards();
+                            break;
                         case 7:
                             return;
                     }
@@ -63,9 +67,11 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
         private static void PrintAllUsers() => UserManager.PrintAllUsers();
 
-        private static void CreateAward() => UserManager.CreateAward(GetUserString("title"));
+        private static void CreateAward() => AwardManager.CreateAward(GetUserString("title"));
 
-        private static void DeleteAward() => UserManager.DeleteAward(GetUserString("award"));
+        private static void DeleteAward() => AwardManager.DeleteAward(GetUserString("award"));
+
+        private static void PrintAllAwards() => AwardManager.PrintAllAwards();
 
         private static int GetKeyFromConsole()
         {
