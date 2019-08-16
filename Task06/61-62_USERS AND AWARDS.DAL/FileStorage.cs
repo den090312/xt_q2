@@ -127,14 +127,19 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
             else
             {
-                Thread.Sleep(10);
-                var attributes = File.GetAttributes(path);
+                SetNormalAttributes(path);           
+            }
+        }
 
-                if ((attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
-                {
-                    Thread.Sleep(10);
-                    File.SetAttributes(path, FileAttributes.Normal);
-                }
+        private static void SetNormalAttributes(string path)
+        {
+            Thread.Sleep(10);
+            var attributes = File.GetAttributes(path);
+
+            if ((attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+            {
+                Thread.Sleep(10);
+                File.SetAttributes(path, FileAttributes.Normal);
             }
         }
 
@@ -368,12 +373,11 @@ namespace _61_62_USERS_AND_AWARDS.DAL
         {
             bool exists = false;
 
-            PrepareFile(filePath);
+            CheckFileExistance(filePath);
+            SetNormalAttributes(filePath);
 
             Thread.Sleep(10);
             var lines = File.ReadAllLines(filePath);
-
-            File.Delete(filePath);
 
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(filePath, true);
@@ -382,6 +386,8 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             {
                 if (NameInLine(line, fileName) == elementName)
                 {
+                    streamWriter.Close();
+
                     return true;
                 }
             }
