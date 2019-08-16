@@ -54,6 +54,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
                             break;
                         case 3:
                             inputComplete = true;
+                            Console.WriteLine();
                             PrintAllUsers();
                             break;
                         case 4:
@@ -68,11 +69,11 @@ namespace _61_62_USERS_AND_AWARDS.PL
                             break;
                         case 6:
                             inputComplete = true;
+                            Console.WriteLine();
                             PrintAllAwards();
                             break;
                         case 7:
                             inputComplete = true;
-                            consoleSegment = ConsoleSegment.User;
                             AddAwardToUser();
                             break;
                         case 8:
@@ -94,7 +95,16 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
         private static void PrintAllAwards() => AwardManager.PrintAllAwards();
 
-        private static void AddAwardToUser() => StorageManager.AddAwardToUser(GetUserString("user name"), GetUserString("award"));
+        private static void AddAwardToUser()
+        {
+            consoleSegment = ConsoleSegment.User;
+            var name = GetUserString("name");
+
+            consoleSegment = ConsoleSegment.Award;
+            var award = GetUserString("title");
+
+            StorageManager.AddAwardToUser(name, award);
+        }
 
         private static int GetKeyFromConsole()
         {

@@ -186,7 +186,12 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
                 for (int i = 2; i < charArray.Length; i++)
                 {
-                    Console.Write(charArray[i] + "---");
+                    Console.Write(charArray[i]);
+
+                    if (i != charArray.Length - 1)
+                    {
+                        Console.Write("---");
+                    }
                 }
 
                 Console.WriteLine();
