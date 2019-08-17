@@ -32,6 +32,8 @@ namespace _61_62_USERS_AND_AWARDS.Entities
         {
             UserID = Guid.NewGuid().ToString();
             Name = name;
+
+            CheckDateOfBirth(dateOfBirth);
             DateOfBirth = dateOfBirth;
         }
 
@@ -51,6 +53,21 @@ namespace _61_62_USERS_AND_AWARDS.Entities
                     return 4;
                 default:
                     return -1;
+            }
+        }
+
+        private static void CheckDateOfBirth(DateTime birthDate)
+        {
+            DateTime currentDateTime = DateTime.Now.Date;
+
+            if (birthDate > currentDateTime)
+            {
+                throw new ArgumentException("Date of birth can't be more than current date!");
+            }
+
+            if (birthDate == currentDateTime)
+            {
+                throw new ArgumentException("Welcome to our world!");
             }
         }
     }

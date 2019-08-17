@@ -1,50 +1,44 @@
-﻿using _61_62_USERS_AND_AWARDS.Entities;
+﻿using _61_62_USERS_AND_AWARDS.Common;
+using _61_62_USERS_AND_AWARDS.Entities;
+using _61_62_USERS_AND_AWARDS.Interfaces;
 using System;
 
 namespace _61_62_USERS_AND_AWARDS.BLL
 {
-    public static class UserManager
+    public class UserManager : IStorable, IUserable
     {
-        public static void CreateUser(string name, DateTime birthDate)
+        public static IUserable UserImplementation { get; } = Dependencies.UserImplementation;
+
+        public static IStorable StorageImplementation { get; } = Dependencies.StorageImplementation;
+
+        public void CreateStorage() => StorageImplementation.CreateStorage();
+
+        public void AddUser(User user)
         {
-            StorageManager.NullCheck(name);
-
-            CheckName(name);
-            CheckDateOfBirth(birthDate);
-
-            StorageManager.AddUser(new User(name, birthDate));
+            NullCheck(user);
+            UserImplementation.AddUser(user);
         }
 
-        public static void DeleteUser(string name)
+        public void RemoveUser(string userName)
         {
-            StorageManager.NullCheck(name);
-            StorageManager.RemoveUser(name);
+            NullCheck(userName);
+            UserImplementation.RemoveUser(userName);
         }
 
-        public static void PrintAllUsers() => StorageManager.PrintAllUsers();
-
-        private static void CheckName(string name)
+        public bool UserExists(string userName)
         {
-            var userCharArray = name.ToCharArray();
+            NullCheck(userName);
 
-            if (char.IsLower(userCharArray[0]))
-            {
-                throw new ArgumentException($"Filed '{name}' must begin from upper case!");
-            }
+            return UserImplementation.UserExists(userName);
         }
 
-        private static void CheckDateOfBirth(DateTime birthDate)
+        public void PrintUsers() => UserImplementation.PrintUsers();
+
+        public static void NullCheck<T>(T classObject) where T : class
         {
-            DateTime currentDateTime = DateTime.Now.Date;
-
-            if (birthDate > currentDateTime)
+            if (classObject is null)
             {
-                throw new ArgumentException("Date of birth can't be more than current date!");
-            }
-
-            if (birthDate == currentDateTime)
-            {
-                throw new ArgumentException("Welcome to our world!");
+                throw new ArgumentNullException($"{nameof(classObject)} is null!");
             }
         }
     }

@@ -23,9 +23,10 @@ namespace _61_62_USERS_AND_AWARDS.PL
         {
             consoleSegment = ConsoleSegment.Main;
 
-            StorageManager.CreateStorage();
-            StorageManager.PrintStoragePaths();
-            StorageManager.WriteMenu();
+            //StorageManager.CreateStorage();
+            //StorageManager.PrintStoragePaths();
+
+            WriteMenu();
 
             bool inputComplete = false;
 
@@ -83,7 +84,32 @@ namespace _61_62_USERS_AND_AWARDS.PL
             }
         }
 
-        private static void CreateUser(string dateFormat) => UserManager.CreateUser(GetUserString("name"), GetDate(dateFormat));
+        public static void WriteMenu()
+        {
+            Console.WriteLine("Users operations:");
+            Console.WriteLine("\t1: create");
+            Console.WriteLine("\t2: delete");
+            Console.WriteLine("\t3: print");
+            Console.WriteLine();
+            Console.WriteLine("Awards operations:");
+            Console.WriteLine("\t4: create");
+            Console.WriteLine("\t5: delete");
+            Console.WriteLine("\t6: print");
+            Console.WriteLine();
+            Console.WriteLine("Connect operations:");
+            Console.WriteLine("\t7: add award to user");
+            Console.WriteLine();
+            Console.WriteLine("\t8: exit");
+        }
+
+        private static void CreateUser(string dateFormat)
+        {
+            var name = GetUserString("name");
+
+            NameCheck(name);
+
+            UserManager.CreateUser(GetUserString("name"), GetDate(dateFormat));
+        }
 
         private static void DeleteUser() => UserManager.DeleteUser(GetUserString("name"));
 
@@ -98,12 +124,12 @@ namespace _61_62_USERS_AND_AWARDS.PL
         private static void AddAwardToUser()
         {
             consoleSegment = ConsoleSegment.User;
-            var name = GetUserString("name");
+            var userName = GetUserString("name");
 
             consoleSegment = ConsoleSegment.Award;
             var award = GetUserString("title");
 
-            StorageManager.AddAwardToUser(name, award);
+            StorageManager.AddAwardToUser(userName, award);
         }
 
         private static int GetKeyFromConsole()
@@ -226,7 +252,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
             {
                 case ConsoleSegment.Main:
                     StorageManager.PrintStoragePaths();
-                    StorageManager.WriteMenu();
+                    WriteMenu();
                     break;
                 case ConsoleSegment.User:
                     Console.WriteLine("Enter name:");
@@ -234,6 +260,16 @@ namespace _61_62_USERS_AND_AWARDS.PL
                 case ConsoleSegment.Award:
                     Console.WriteLine("Enter title:");
                     break;
+            }
+        }
+
+        private static void NameCheck(string name)
+        {
+            var userCharArray = name.ToCharArray();
+
+            if (char.IsLower(userCharArray[0]))
+            {
+                throw new ArgumentException($"Filed '{name}' must begin from upper case!");
             }
         }
     }
