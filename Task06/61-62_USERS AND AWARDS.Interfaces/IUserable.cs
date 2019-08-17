@@ -11,5 +11,7 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
         bool UserExists(string userName);
 
         void PrintUsers();
+
+        void AddAwardToUser(string award);
     }
 }

@@ -6,34 +6,23 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 {
     public class FileStorage : IStorable
     {
+        private readonly string messageNotFound = "not found!";
+
         private static string Disk { get; }
 
-        private static string Tom { get; }
-
-        private static string Main { get; } 
-
-        public static string Root { get; }
-
-        private string MessageNotFound { get; } = "not found";
+        public static string TaskPath { get; }
 
         static FileStorage()
         {
             Disk = "D";
-            Tom = $@"{Disk}:\";
-            Main = $"{Tom}Task06";
-            Root = $@"{Main}\Storage";
+            TaskPath = $@"{Disk}:\Task06";
         }
 
         public void CreateStorage()
         {
-            if (!File.Exists(Main))
+            if (!File.Exists(TaskPath))
             {
-                Directory.CreateDirectory(Main);
-            }
-
-            if (!File.Exists(Root))
-            {
-                Directory.CreateDirectory(Root);
+                Directory.CreateDirectory(TaskPath);
             }
         }
 
@@ -42,8 +31,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             Console.WriteLine("---------Task folders--------");
 
             bool isFolder = true;
-            PrintSinglePath(Main, "Main", isFolder);
-            PrintSinglePath(Root, "Root", isFolder);
+            PrintSinglePath(TaskPath, "Main", isFolder);
 
             isFolder = false;
             PrintSinglePath(UserFileStorage.FilePath, "Users", isFolder);
@@ -64,7 +52,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
             else
             {
-                Console.WriteLine($"{name} - {MessageNotFound}");
+                Console.WriteLine($"{name} - {messageNotFound}");
             }
         }
     }

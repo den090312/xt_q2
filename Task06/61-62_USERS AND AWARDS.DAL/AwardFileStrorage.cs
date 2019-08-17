@@ -9,17 +9,17 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 {
     public class AwardFileStrorage : IStorable, IAwardable
     {
+        private readonly string messageNotFound = "not found!";
+
         public static string FilePath { get; private set; }
 
         public static string FileName { get; private set; }
 
         public static char Separator { get; private set; }
 
-        private string MessageNotFound { get; } = "not found";
-
         static AwardFileStrorage()
         {
-            FilePath = $@"{FileStorage.Root}\Awards.txt";
+            FilePath = $@"{FileStorage.TaskPath}\Awards.txt";
             FileName = "Awards.txt";
             Separator = '|';
         }
@@ -44,7 +44,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
             else
             {
-                Console.WriteLine($"{FileName} - {MessageNotFound}");
+                Console.WriteLine($"{FileName} - {messageNotFound}");
             }
         }
 
