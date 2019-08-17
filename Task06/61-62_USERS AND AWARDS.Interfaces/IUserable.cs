@@ -1,5 +1,4 @@
 ﻿using _61_62_USERS_AND_AWARDS.Entities;
-using System;
 
 namespace _61_62_USERS_AND_AWARDS.Interfaces
 {

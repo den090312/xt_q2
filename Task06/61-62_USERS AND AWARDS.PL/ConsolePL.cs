@@ -5,9 +5,9 @@ using System.Text;
 
 namespace _61_62_USERS_AND_AWARDS.PL
 {
-    public class Console
+    public class ConsolePL
     {
-        public static readonly string DateFormat = "dd.MM.yyyy";
+        public static readonly string dateFormat = "dd.MM.yyyy";
 
         private enum ConsoleSegment
         {
@@ -21,7 +21,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
         private static void Main(string[] args)
         {
-            consoleSegment = ConsoleSegment.Main;
+            consoleSegment = ConsoleSegment.Main; 
 
             var storageManager = new StorageManager();
             storageManager.CreateStorage();
@@ -47,7 +47,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
                         case 1:
                             inputComplete = true;
                             consoleSegment = ConsoleSegment.User;
-                            AddUser(DateFormat);
+                            AddUser(dateFormat);
                             break;
                         case 2:
                             inputComplete = true;
@@ -87,20 +87,20 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
         public static void WriteMenu()
         {
-            System.Console.WriteLine("Users operations:");
-            System.Console.WriteLine("\t1: create");
-            System.Console.WriteLine("\t2: delete");
-            System.Console.WriteLine("\t3: print");
-            System.Console.WriteLine();
-            System.Console.WriteLine("Awards operations:");
-            System.Console.WriteLine("\t4: create");
-            System.Console.WriteLine("\t5: delete");
-            System.Console.WriteLine("\t6: print");
-            System.Console.WriteLine();
-            System.Console.WriteLine("Connect operations:");
-            System.Console.WriteLine("\t7: add award to user");
-            System.Console.WriteLine();
-            System.Console.WriteLine("\t8: exit");
+            Console.WriteLine("Users operations:");
+            Console.WriteLine("\t1: create");
+            Console.WriteLine("\t2: delete");
+            Console.WriteLine("\t3: print");
+            Console.WriteLine();
+            Console.WriteLine("Awards operations:");
+            Console.WriteLine("\t4: create");
+            Console.WriteLine("\t5: delete");
+            Console.WriteLine("\t6: print");
+            Console.WriteLine();
+            Console.WriteLine("Connect operations:");
+            Console.WriteLine("\t7: add award to user");
+            Console.WriteLine();
+            Console.WriteLine("\t8: exit");
         }
 
         private static void AddUser(string dateFormat)
@@ -115,11 +115,11 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
         private static void PrintUsers() => new UserManager().PrintUsers();
 
-        private static void CreateAward() => AwardManager.CreateAward(GetUserString("title"));
+        private static void CreateAward() => new AwardManager().CreateAward(GetUserString("title"));
 
-        private static void DeleteAward() => AwardManager.DeleteAward(GetUserString("award"));
+        private static void DeleteAward() => new AwardManager().RemoveAward(GetUserString("award"));
 
-        private static void PrintAllAwards() => AwardManager.PrintAllAwards();
+        private static void PrintAllAwards() => new AwardManager().PrintAwards();
 
         private static void AddAwardToUser()
         {
@@ -129,7 +129,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
             consoleSegment = ConsoleSegment.Award;
             var award = GetUserString("title");
 
-            StorageManager.AddAwardToUser(userName, award);
+            new StorageManager().AddAwardToUser(userName, award);
         }
 
         private static int GetKeyFromConsole()
