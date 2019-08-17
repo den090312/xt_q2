@@ -1,12 +1,11 @@
 ﻿using _61_62_USERS_AND_AWARDS.BLL;
-using _61_62_USERS_AND_AWARDS.Common;
 using System;
 using System.Globalization;
 using System.Text;
 
 namespace _61_62_USERS_AND_AWARDS.PL
 {
-    public class Program
+    public class Console
     {
         public static readonly string DateFormat = "dd.MM.yyyy";
 
@@ -48,7 +47,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
                         case 1:
                             inputComplete = true;
                             consoleSegment = ConsoleSegment.User;
-                            CreateUser(DateFormat);
+                            AddUser(DateFormat);
                             break;
                         case 2:
                             inputComplete = true;
@@ -57,8 +56,8 @@ namespace _61_62_USERS_AND_AWARDS.PL
                             break;
                         case 3:
                             inputComplete = true;
-                            Console.WriteLine();
-                            PrintAllUsers();
+                            System.Console.WriteLine();
+                            PrintUsers();
                             break;
                         case 4:
                             inputComplete = true;
@@ -72,7 +71,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
                             break;
                         case 6:
                             inputComplete = true;
-                            Console.WriteLine();
+                            System.Console.WriteLine();
                             PrintAllAwards();
                             break;
                         case 7:
@@ -88,27 +87,33 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
         public static void WriteMenu()
         {
-            Console.WriteLine("Users operations:");
-            Console.WriteLine("\t1: create");
-            Console.WriteLine("\t2: delete");
-            Console.WriteLine("\t3: print");
-            Console.WriteLine();
-            Console.WriteLine("Awards operations:");
-            Console.WriteLine("\t4: create");
-            Console.WriteLine("\t5: delete");
-            Console.WriteLine("\t6: print");
-            Console.WriteLine();
-            Console.WriteLine("Connect operations:");
-            Console.WriteLine("\t7: add award to user");
-            Console.WriteLine();
-            Console.WriteLine("\t8: exit");
+            System.Console.WriteLine("Users operations:");
+            System.Console.WriteLine("\t1: create");
+            System.Console.WriteLine("\t2: delete");
+            System.Console.WriteLine("\t3: print");
+            System.Console.WriteLine();
+            System.Console.WriteLine("Awards operations:");
+            System.Console.WriteLine("\t4: create");
+            System.Console.WriteLine("\t5: delete");
+            System.Console.WriteLine("\t6: print");
+            System.Console.WriteLine();
+            System.Console.WriteLine("Connect operations:");
+            System.Console.WriteLine("\t7: add award to user");
+            System.Console.WriteLine();
+            System.Console.WriteLine("\t8: exit");
         }
 
-        private static void CreateUser(string dateFormat) => new UserManager().CreateUser(GetUserString("name"), GetUserDate(dateFormat));
+        private static void AddUser(string dateFormat)
+        {
+            var usermanager = new UserManager();
+            var user = usermanager.CreateUser(GetUserString("name"), GetUserDate(dateFormat));
 
-        private static void DeleteUser() => UserManager.DeleteUser(GetUserString("name"));
+            usermanager.AddUser(user);
+        }
 
-        private static void PrintAllUsers() => UserManager.PrintAllUsers();
+        private static void DeleteUser() => new UserManager().RemoveUser(GetUserString("name"));
+
+        private static void PrintUsers() => new UserManager().PrintUsers();
 
         private static void CreateAward() => AwardManager.CreateAward(GetUserString("title"));
 
@@ -135,7 +140,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
             while (!inputComplete)
             {
-                ConsoleKeyInfo key = Console.ReadKey(true);
+                ConsoleKeyInfo key = System.Console.ReadKey(true);
 
                 char[] keyArray = { '1', '2', '3', '4', '5', '6', '7', '8'};
 
@@ -152,7 +157,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
                     if (userKeySB.Length < 1)
                     {
                         userKeySB.Append(key.KeyChar);
-                        Console.Write(key.KeyChar);
+                        System.Console.Write(key.KeyChar);
                     }
                 }
             }
@@ -173,8 +178,8 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
         private static string GetUserString(string parameterName)
         {
-            Console.Clear();
-            Console.WriteLine($"Enter {parameterName}:");
+            System.Console.Clear();
+            System.Console.WriteLine($"Enter {parameterName}:");
 
             bool inputComplete = false;
 
@@ -182,7 +187,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
             while (!inputComplete)
             {
-                ConsoleKeyInfo key = Console.ReadKey(true);
+                ConsoleKeyInfo key = System.Console.ReadKey(true);
 
                 if (key.Key == ConsoleKey.Backspace)
                 {
@@ -193,13 +198,13 @@ namespace _61_62_USERS_AND_AWARDS.PL
                     if (userSB.Length > 0)
                     {
                         inputComplete = true;
-                        Console.WriteLine();
+                        System.Console.WriteLine();
                     }
                 }
                 else
                 {
                     userSB.Append(key.KeyChar);
-                    Console.Write(key.KeyChar);
+                    System.Console.Write(key.KeyChar);
                 }
             }
 
@@ -208,8 +213,8 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
         public static DateTime GetUserDate(string dateFormat)
         {
-            Console.Clear();
-            Console.WriteLine($"Enter date in format: {dateFormat}");
+            System.Console.Clear();
+            System.Console.WriteLine($"Enter date in format: {dateFormat}");
 
             bool isDate = false;
 
@@ -217,11 +222,11 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
             while (!isDate)
             {
-                isDate = DateTime.TryParseExact(Console.ReadLine(), dateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out userBirthDate);
+                isDate = DateTime.TryParseExact(System.Console.ReadLine(), dateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out userBirthDate);
 
                 if (!isDate)
                 {
-                    Console.WriteLine($"Enter date in format: {dateFormat}");
+                    System.Console.WriteLine($"Enter date in format: {dateFormat}");
                 }
                 else
                 {
@@ -239,9 +244,9 @@ namespace _61_62_USERS_AND_AWARDS.PL
                 userKeySB.Length--;
             }
 
-            Console.Clear();
+            System.Console.Clear();
             ConsoleRestore();
-            Console.Write(userKeySB);
+            System.Console.Write(userKeySB);
         }
 
         private static void ConsoleRestore()
@@ -249,14 +254,14 @@ namespace _61_62_USERS_AND_AWARDS.PL
             switch (consoleSegment)
             {
                 case ConsoleSegment.Main:
-                    StorageManager.PrintStoragePaths();
+                    new StorageManager().PrintStorageInfo();
                     WriteMenu();
                     break;
                 case ConsoleSegment.User:
-                    Console.WriteLine("Enter name:");
+                    System.Console.WriteLine("Enter name:");
                     break;
                 case ConsoleSegment.Award:
-                    Console.WriteLine("Enter title:");
+                    System.Console.WriteLine("Enter title:");
                     break;
             }
         }

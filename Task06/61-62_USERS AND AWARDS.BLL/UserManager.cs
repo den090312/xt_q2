@@ -21,12 +21,13 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             CheckName(name);
             CheckDateOfBirth(dateBirth);
 
-            return Implementation.CreateUser(name, dateBirth);
+            return new User(name, dateBirth);
         }
 
         public void AddUser(User user)
         {
             NullCheck(user);
+
             Implementation.AddUser(user);
         }
 

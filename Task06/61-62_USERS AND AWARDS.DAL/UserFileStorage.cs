@@ -48,8 +48,6 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
         }
 
-        public User CreateUser(string name, DateTime dateBirth) => new User(name, dateBirth);
-
         public void AddUser(User user)
         {
             PrepareFile();
