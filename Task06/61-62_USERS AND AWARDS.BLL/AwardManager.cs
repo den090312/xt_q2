@@ -1,21 +1,55 @@
-﻿using _61_62_USERS_AND_AWARDS.Entities;
+﻿using _61_62_USERS_AND_AWARDS.Common;
+using _61_62_USERS_AND_AWARDS.Entities;
+using _61_62_USERS_AND_AWARDS.Interfaces;
+using System;
 
 namespace _61_62_USERS_AND_AWARDS.BLL
 {
-    public static class AwardManager 
+    public class AwardManager : IStorable, IAwardable
     {
-        public static void CreateAward(string name)
+        private static IAwardable Implementation { get; } = Dependencies.AwardImplementation;
+
+        private static IStorable StorageImplementation { get; } = Dependencies.StorageImplementation;
+
+        public void CreateStorage() => StorageImplementation.CreateStorage();
+
+        public void PrintStorageInfo() => StorageImplementation.PrintStorageInfo();
+
+        public Award CreateAward(string title)
         {
-            StorageManager.NullCheck(name);
-            StorageManager.AddAward(new Award(name));
+            NullCheck(title);
+
+            return new Award(title);
         }
 
-        public static void DeleteAward(string name)
+        public void AddAward(Award award)
         {
-            StorageManager.NullCheck(name);
-            StorageManager.RemoveAward(name);
+            NullCheck(award);
+
+            Implementation.AddAward(award);
         }
 
-        public static void PrintAllAwards() => StorageManager.PrintAllAwards();
+        public void RemoveAward(string awardName)
+        {
+            NullCheck(awardName);
+            Implementation.RemoveAward(awardName);
+        }
+
+        public bool AwardExists(string awardName)
+        {
+            NullCheck(awardName);
+
+            return Implementation.AwardExists(awardName);
+        }
+
+        public void PrintAwards() => Implementation.PrintAwards();
+
+        public static void NullCheck<T>(T classObject) where T : class
+        {
+            if (classObject is null)
+            {
+                throw new ArgumentNullException($"{nameof(classObject)} is null!");
+            }
+        }
     }
 }
