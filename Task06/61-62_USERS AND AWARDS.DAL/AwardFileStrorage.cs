@@ -9,9 +9,20 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 {
     public class AwardFileStrorage : IStorable, IAwardable
     {
-        public static string FilePath { get; } = $@"{FileStorage.Root}\Awards.txt";
+        public static string FilePath { get; private set; }
 
-        public static readonly char separator;
+        public static string FileName { get; private set; }
+
+        public static char Separator { get; private set; }
+
+        private string MessageNotFound { get; } = "not found";
+
+        static AwardFileStrorage()
+        {
+            FilePath = $@"{FileStorage.Root}\Awards.txt";
+            FileName = "Awards.txt";
+            Separator = '|';
+        }
 
         public void CreateStorage()
         {
@@ -25,15 +36,27 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
         }
 
+        public void PrintStorageInfo()
+        {
+            if (Directory.Exists(FilePath))
+            {
+                Console.WriteLine($"{FileName} - {FilePath}");
+            }
+            else
+            {
+                Console.WriteLine($"{FileName} - {MessageNotFound}");
+            }
+        }
+
         public void AddAward(Award award)
         {
-            PrepareFile(Awards);
+            PrepareFile();
 
             Thread.Sleep(10);
-            var streamWriter = new StreamWriter(Awards, true);
+            var streamWriter = new StreamWriter(FilePath, true);
 
-            streamWriter.Write(award.AwardID + separator);
-            streamWriter.Write(award.UserID + separator);
+            streamWriter.Write(award.AwardID + Separator);
+            streamWriter.Write(award.UserID + Separator);
             streamWriter.Write(award.Title);
             streamWriter.WriteLine();
 
@@ -76,7 +99,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
                 }
                 else
                 {
-                    var id = line.Split(separator)[User.GetFieldIndex("UserID")];
+                    var id = line.Split(Separator)[User.GetFieldIndex("UserID")];
 
                     if (id != string.Empty)
                     {
@@ -88,7 +111,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             streamWriter.Close();
         }
 
-        private static string NameInLine(string line) => line.Split(separator)[Award.GetFieldIndex("Title")];
+        private static string NameInLine(string line) => line.Split(Separator)[Award.GetFieldIndex("Title")];
 
         public static string LineWithID(string line, string id, string fileName)
         {
@@ -110,7 +133,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
                     if (i != itemArray.Length - 1)
                     {
-                        sb.Append(separator);
+                        sb.Append(Separator);
                     }
                 }
                 else
@@ -119,7 +142,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
                     if (i != itemArray.Length - 1)
                     {
-                        sb.Append(separator);
+                        sb.Append(Separator);
                     }
                 }
             }
