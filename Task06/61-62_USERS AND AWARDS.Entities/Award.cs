@@ -12,8 +12,6 @@ namespace _61_62_USERS_AND_AWARDS.Entities
 
         public Award(string title)
         {
-            User.NullCheck(title);
-
             AwardID = Guid.NewGuid().ToString();
             Title = title;
         }

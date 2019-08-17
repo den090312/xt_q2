@@ -6,52 +6,18 @@ namespace _61_62_USERS_AND_AWARDS.Entities
     {
         private readonly DateTime currentDateTime = DateTime.Now.Date;
 
-        private string name = string.Empty;
-
-        private DateTime dateOfBirth = default;
-
         public string UserID { get; } = string.Empty;
 
         public string AwardID { get; } = string.Empty;
 
-        public string Name
-        {
-            get => name;
-            set
-            {
-                CheckName(value, "Имя");
-                name = value;
-            }
-        }
+        public string Name { get; } = string.Empty;
 
-        public DateTime DateOfBirth
-        {
-            get => dateOfBirth;
-            set
-            {
-                if (value > currentDateTime)
-                {
-                    throw new ArgumentException("Date of birth can't be more than current date!");
-                }
-
-                if (value == currentDateTime)
-                {
-                    throw new ArgumentException("Welcome to our world!");
-                }
-
-                dateOfBirth = value;
-            }
-        }
+        public DateTime DateOfBirth { get; }
 
         public int Age
         {
             get
             {
-                if (DateOfBirth.Year == currentDateTime.Year)
-                {
-                    throw new ArgumentException("Age can't be less than 1 year!");
-                }
-
                 var userAge = currentDateTime.AddYears(-DateOfBirth.Year).Year;
 
                 if (currentDateTime.Month < DateOfBirth.Month)
@@ -65,7 +31,8 @@ namespace _61_62_USERS_AND_AWARDS.Entities
 
         public User(string name, DateTime dateOfBirth)
         {
-            NullCheck(name);
+            CheckName(name);
+            CheckDateOfBirth(dateOfBirth);
 
             UserID = Guid.NewGuid().ToString();
             Name = name;
@@ -91,24 +58,26 @@ namespace _61_62_USERS_AND_AWARDS.Entities
             }
         }
 
-        private static void CheckName(string userName, string nameType)
+        private static void CheckName(string name)
         {
-            NullCheck(userName);
-            NullCheck(nameType);
-
-            var userCharArray = userName.ToCharArray();
+            var userCharArray = name.ToCharArray();
 
             if (char.IsLower(userCharArray[0]))
             {
-                throw new ArgumentException($"Filed '{nameType}' must begin from upper case!");
+                throw new ArgumentException($"Filed '{name}' must begin from upper case!");
             }
         }
 
-        public static void NullCheck(string userString)
+        private void CheckDateOfBirth(DateTime date)
         {
-            if (userString is null)
+            if (date > currentDateTime)
             {
-                throw new ArgumentNullException($"{nameof(userString)} is null!");
+                throw new ArgumentException("Date of birth can't be more than current date!");
+            }
+
+            if (date == currentDateTime)
+            {
+                throw new ArgumentException("Welcome to our world!");
             }
         }
     }
