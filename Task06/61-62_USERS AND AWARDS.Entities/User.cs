@@ -32,7 +32,6 @@ namespace _61_62_USERS_AND_AWARDS.Entities
         {
             UserID = Guid.NewGuid().ToString();
             Name = name;
-
             DateOfBirth = dateOfBirth;
         }
 

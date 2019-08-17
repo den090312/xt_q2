@@ -52,6 +52,12 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
         public void PrintUsers() => implementation.PrintUsers();
 
+        public void AddAwardToUser(string award)
+        {
+            NullCheck(award);
+            implementation.AddAwardToUser(award);
+        }
+
         public static void CheckName(string name)
         {
             var userCharArray = name.ToCharArray();

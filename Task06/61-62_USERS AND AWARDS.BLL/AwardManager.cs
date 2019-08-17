@@ -50,6 +50,12 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
         public void PrintAwards() => implementation.PrintAwards();
 
+        public void AddUserToAward(string user)
+        {
+            NullCheck(user);
+            implementation.AddUserToAward(user);
+        }
+
         public static void NullCheck<T>(T classObject) where T : class
         {
             if (classObject is null)
