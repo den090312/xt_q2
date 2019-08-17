@@ -4,8 +4,6 @@ namespace _61_62_USERS_AND_AWARDS.Entities
 {
     public class User
     {
-        private readonly DateTime currentDateTime = DateTime.Now.Date;
-
         public string UserID { get; } = string.Empty;
 
         public string AwardID { get; } = string.Empty;
@@ -18,6 +16,7 @@ namespace _61_62_USERS_AND_AWARDS.Entities
         {
             get
             {
+                var currentDateTime = DateTime.Now.Date;
                 var userAge = currentDateTime.AddYears(-DateOfBirth.Year).Year;
 
                 if (currentDateTime.Month < DateOfBirth.Month)
@@ -31,9 +30,6 @@ namespace _61_62_USERS_AND_AWARDS.Entities
 
         public User(string name, DateTime dateOfBirth)
         {
-            CheckName(name);
-            CheckDateOfBirth(dateOfBirth);
-
             UserID = Guid.NewGuid().ToString();
             Name = name;
             DateOfBirth = dateOfBirth;
@@ -55,29 +51,6 @@ namespace _61_62_USERS_AND_AWARDS.Entities
                     return 4;
                 default:
                     return -1;
-            }
-        }
-
-        private static void CheckName(string name)
-        {
-            var userCharArray = name.ToCharArray();
-
-            if (char.IsLower(userCharArray[0]))
-            {
-                throw new ArgumentException($"Filed '{name}' must begin from upper case!");
-            }
-        }
-
-        private void CheckDateOfBirth(DateTime date)
-        {
-            if (date > currentDateTime)
-            {
-                throw new ArgumentException("Date of birth can't be more than current date!");
-            }
-
-            if (date == currentDateTime)
-            {
-                throw new ArgumentException("Welcome to our world!");
             }
         }
     }
