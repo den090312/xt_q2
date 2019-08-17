@@ -1,4 +1,5 @@
 ﻿using _61_62_USERS_AND_AWARDS.BLL;
+using _61_62_USERS_AND_AWARDS.Common;
 using System;
 using System.Globalization;
 using System.Text;
@@ -23,8 +24,9 @@ namespace _61_62_USERS_AND_AWARDS.PL
         {
             consoleSegment = ConsoleSegment.Main;
 
-            //StorageManager.CreateStorage();
-            //StorageManager.PrintStoragePaths();
+            var storageManager = new StorageManager();
+            storageManager.CreateStorage();
+            storageManager.PrintStorageInfo();
 
             WriteMenu();
 
@@ -102,14 +104,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
             Console.WriteLine("\t8: exit");
         }
 
-        private static void CreateUser(string dateFormat)
-        {
-            var name = GetUserString("name");
-
-            NameCheck(name);
-
-            UserManager.CreateUser(GetUserString("name"), GetDate(dateFormat));
-        }
+        private static void CreateUser(string dateFormat) => new UserManager().CreateUser(GetUserString("name"), GetUserDate(dateFormat));
 
         private static void DeleteUser() => UserManager.DeleteUser(GetUserString("name"));
 
@@ -195,8 +190,11 @@ namespace _61_62_USERS_AND_AWARDS.PL
                 }
                 else if (key.Key == ConsoleKey.Enter)
                 {
-                    inputComplete = true;
-                    Console.WriteLine();
+                    if (userSB.Length > 0)
+                    {
+                        inputComplete = true;
+                        Console.WriteLine();
+                    }
                 }
                 else
                 {
@@ -208,7 +206,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
             return userSB.ToString();
         }
 
-        public static DateTime GetDate(string dateFormat)
+        public static DateTime GetUserDate(string dateFormat)
         {
             Console.Clear();
             Console.WriteLine($"Enter date in format: {dateFormat}");
@@ -260,16 +258,6 @@ namespace _61_62_USERS_AND_AWARDS.PL
                 case ConsoleSegment.Award:
                     Console.WriteLine("Enter title:");
                     break;
-            }
-        }
-
-        private static void NameCheck(string name)
-        {
-            var userCharArray = name.ToCharArray();
-
-            if (char.IsLower(userCharArray[0]))
-            {
-                throw new ArgumentException($"Filed '{name}' must begin from upper case!");
             }
         }
     }

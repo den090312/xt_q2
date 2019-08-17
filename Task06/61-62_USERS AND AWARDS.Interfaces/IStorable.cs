@@ -3,5 +3,7 @@
     public interface IStorable
     {
         void CreateStorage();
+
+        void PrintStorageInfo();
     }
 }

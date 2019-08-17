@@ -54,6 +54,18 @@
       <Project>{aae1fbd7-23be-4977-be89-6c995ec096c8}</Project>
       <Name>61-62_USERS AND AWARDS.BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\61-62_USERS AND AWARDS.Common\61-62_USERS AND AWARDS.Common.csproj">
+      <Project>{02905b2d-9cfe-4d79-b398-849835692893}</Project>
+      <Name>61-62_USERS AND AWARDS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\61-62_USERS AND AWARDS.Entities\61-62_USERS AND AWARDS.Entities.csproj">
+      <Project>{22E6A0DE-2AE3-4ABD-B0C4-B333B712F77E}</Project>
+      <Name>61-62_USERS AND AWARDS.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\61-62_USERS AND AWARDS.Interfaces\61-62_USERS AND AWARDS.Interfaces.csproj">
+      <Project>{d1467972-3a7d-43f8-9764-d41a9677e175}</Project>
+      <Name>61-62_USERS AND AWARDS.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

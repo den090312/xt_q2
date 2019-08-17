@@ -9,13 +9,18 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 {
     public class UserFileStorage : IStorable, IUserable
     {
-        public static string FilePath { get; private set; } 
+        public static string FilePath { get; private set; }
+
+        public static string FileName{ get; private set; }
 
         public static char Separator { get; private set; }
+
+        private string MessageNotFound { get; } = "not found";
 
         static UserFileStorage()
         {
             FilePath = $@"{FileStorage.Root}\Users.txt";
+            FileName = "Users.txt";
             Separator = '|';
         }
 
@@ -30,6 +35,20 @@ namespace _61_62_USERS_AND_AWARDS.DAL
                 streamWriter.Close();
             }
         }
+
+        public void PrintStorageInfo()
+        {
+            if (Directory.Exists(FilePath))
+            {
+                Console.WriteLine($"{FileName} - {FilePath}");
+            }
+            else
+            {
+                Console.WriteLine($"{FileName} - {MessageNotFound}");
+            }
+        }
+
+        public User CreateUser(string name, DateTime dateBirth) => new User(name, dateBirth);
 
         public void AddUser(User user)
         {

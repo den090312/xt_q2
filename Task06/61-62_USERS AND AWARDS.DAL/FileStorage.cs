@@ -14,7 +14,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
         public static string Root { get; }
 
-        private static readonly string messageNotFound;
+        private string MessageNotFound { get; } = "not found";
 
         static FileStorage()
         {
@@ -22,7 +22,6 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             Tom = $@"{Disk}:\";
             Main = $"{Tom}Task06";
             Root = $@"{Main}\Storage";
-            messageNotFound = "not found";
         }
 
         public void CreateStorage()
@@ -38,7 +37,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
         }
 
-        public void PrintStoragePaths()
+        public void PrintStorageInfo()
         {
             Console.WriteLine("---------Task folders--------");
 
@@ -53,7 +52,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             Console.WriteLine("-----------------------------");
         }
 
-        private static void PrintSinglePath(string path, string name, bool isFolder)
+        private void PrintSinglePath(string path, string name, bool isFolder)
         {
             if (isFolder & Directory.Exists(path))
             {
@@ -65,7 +64,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
             else
             {
-                Console.WriteLine($"{name} - {messageNotFound}");
+                Console.WriteLine($"{name} - {MessageNotFound}");
             }
         }
     }
