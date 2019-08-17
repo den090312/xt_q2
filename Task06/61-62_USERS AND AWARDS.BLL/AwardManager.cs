@@ -7,13 +7,19 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 {
     public class AwardManager : IStorable, IAwardable
     {
-        private static IAwardable Implementation { get; } = Dependencies.AwardImplementation;
+        private static readonly IAwardable implementation;
 
-        private static IStorable StorageImplementation { get; } = Dependencies.StorageImplementation;
+        private static readonly IStorable storageImplementation;
 
-        public void CreateStorage() => StorageImplementation.CreateStorage();
+        public void CreateStorage() => storageImplementation.CreateStorage();
 
-        public void PrintStorageInfo() => StorageImplementation.PrintStorageInfo();
+        public void PrintStorageInfo() => storageImplementation.PrintStorageInfo();
+
+        static AwardManager()
+        {
+            implementation = Dependencies.AwardImplementation;
+            storageImplementation = Dependencies.StorageImplementation;
+        }
 
         public Award CreateAward(string title)
         {
@@ -26,23 +32,23 @@ namespace _61_62_USERS_AND_AWARDS.BLL
         {
             NullCheck(award);
 
-            Implementation.AddAward(award);
+            implementation.AddAward(award);
         }
 
         public void RemoveAward(string awardName)
         {
             NullCheck(awardName);
-            Implementation.RemoveAward(awardName);
+            implementation.RemoveAward(awardName);
         }
 
         public bool AwardExists(string awardName)
         {
             NullCheck(awardName);
 
-            return Implementation.AwardExists(awardName);
+            return implementation.AwardExists(awardName);
         }
 
-        public void PrintAwards() => Implementation.PrintAwards();
+        public void PrintAwards() => implementation.PrintAwards();
 
         public static void NullCheck<T>(T classObject) where T : class
         {

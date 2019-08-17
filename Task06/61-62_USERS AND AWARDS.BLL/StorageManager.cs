@@ -5,10 +5,12 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 {
     public class StorageManager : IStorable
     {
-        private static IStorable Implementation { get; } = Dependencies.StorageImplementation;
+        private static readonly IStorable implementation;
 
-        public void CreateStorage() => Implementation.CreateStorage();
+        public void CreateStorage() => implementation.CreateStorage();
 
-        public void PrintStorageInfo() => Implementation.PrintStorageInfo();
+        public void PrintStorageInfo() => implementation.PrintStorageInfo();
+
+        static StorageManager() => implementation = Dependencies.StorageImplementation;
     }
 }

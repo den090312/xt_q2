@@ -7,13 +7,19 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 {
     public class UserManager : IStorable, IUserable
     {
-        private static IUserable Implementation { get; } = Dependencies.UserImplementation;
+        private static readonly IUserable implementation;
 
-        private static IStorable StorageImplementation { get; } = Dependencies.StorageImplementation;
+        private static readonly IStorable storageImplementation;
 
-        public void CreateStorage() => StorageImplementation.CreateStorage();
+        public void CreateStorage() => storageImplementation.CreateStorage();
 
-        public void PrintStorageInfo() => StorageImplementation.PrintStorageInfo();
+        public void PrintStorageInfo() => storageImplementation.PrintStorageInfo();
+
+        static UserManager()
+        {
+            implementation = Dependencies.UserImplementation;
+            storageImplementation = Dependencies.StorageImplementation;
+        }
 
         public User CreateUser(string name, DateTime dateBirth)
         {
@@ -28,23 +34,23 @@ namespace _61_62_USERS_AND_AWARDS.BLL
         {
             NullCheck(user);
 
-            Implementation.AddUser(user);
+            implementation.AddUser(user);
         }
 
         public void RemoveUser(string userName)
         {
             NullCheck(userName);
-            Implementation.RemoveUser(userName);
+            implementation.RemoveUser(userName);
         }
 
         public bool UserExists(string userName)
         {
             NullCheck(userName);
 
-            return Implementation.UserExists(userName);
+            return implementation.UserExists(userName);
         }
 
-        public void PrintUsers() => Implementation.PrintUsers();
+        public void PrintUsers() => implementation.PrintUsers();
 
         public static void CheckName(string name)
         {
