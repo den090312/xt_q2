@@ -65,20 +65,83 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
         public bool AwardExists(string awardName)
         {
-            throw new NotImplementedException();
+            bool exists = false;
+
+            CheckFileExistance();
+            SetNormalAttributes();
+
+            Thread.Sleep(10);
+            var lines = File.ReadAllLines(FilePath);
+
+            Thread.Sleep(10);
+            using (var streamWriter = new StreamWriter(FilePath, true))
+            {
+                foreach (var line in lines)
+                {
+                    if (NameInLine(line) == awardName)
+                    {
+                        streamWriter.Close();
+
+                        return true;
+                    }
+                }
+
+                streamWriter.Close();
+            }
+
+            return exists;
         }
 
-        public void RemoveAward(string id)
+        public void RemoveAward(string awardName)
         {
-            throw new NotImplementedException();
+            PrepareFile();
+
+            Thread.Sleep(10);
+            var lines = File.ReadAllLines(FilePath);
+
+            File.Delete(FilePath);
+
+            Thread.Sleep(10);
+            var streamWriter = new StreamWriter(FilePath, true);
+
+            foreach (var line in lines)
+            {
+                if (NameInLine(line) != awardName)
+                {
+                    streamWriter.Write(line);
+                    streamWriter.WriteLine();
+                }
+            }
+
+            streamWriter.Close();
         }
 
         public void PrintAwards()
         {
-            throw new NotImplementedException();
+            PrepareFile();
+
+            Thread.Sleep(10);
+            var lines = File.ReadLines(FilePath);
+
+            foreach (var line in lines)
+            {
+                var charArray = line.Split('|');
+
+                for (int i = 2; i < charArray.Length; i++)
+                {
+                    Console.Write(charArray[i]);
+
+                    if (i != charArray.Length - 1)
+                    {
+                        Console.Write("---");
+                    }
+                }
+
+                Console.WriteLine();
+            }
         }
 
-        public void AddAwardToUser(string user)
+        public void AddUserToAward(string user)
         {
             CheckFileExistance();
 
@@ -103,7 +166,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
                     if (id != string.Empty)
                     {
-                        streamWriter.Write(LineWithID(line, id, "Awards"));
+                        streamWriter.Write(LineWithID(line, id));
                     }
                 }
             }
@@ -113,7 +176,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
         private static string NameInLine(string line) => line.Split(Separator)[Award.GetFieldIndex("Title")];
 
-        public static string LineWithID(string line, string id, string fileName)
+        public static string LineWithID(string line, string id)
         {
             var itemArray = line.Split('|');
             var sb = new StringBuilder();
