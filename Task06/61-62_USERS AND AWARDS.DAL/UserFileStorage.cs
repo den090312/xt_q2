@@ -130,7 +130,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             foreach (var line in lines)
             {
-                var lineArray = line.Split('|');
+                var lineArray = line.Split(Separator);
 
                 if (currentUserID != lineArray[0])
                 {
@@ -221,7 +221,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
         private static string LineWithID(string line, string id)
         {
-            var itemArray = line.Split('|');
+            var itemArray = line.Split(Separator);
             var sb = new StringBuilder();
 
             int indexID = User.GetFieldIndex("AwardID");
