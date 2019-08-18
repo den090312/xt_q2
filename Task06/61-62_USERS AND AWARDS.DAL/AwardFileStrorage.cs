@@ -141,7 +141,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
         }
 
-        public void AddUserToAward(string userID, string awardName)
+        public void AddUserToAward(string userID, string awardID)
         {
             CheckFileExistance();
             SetNormalAttributes();
@@ -156,7 +156,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             foreach (var awardLine in awardLines)
             {
-                if (Name(awardLine) == awardName)
+                if (AwardID(awardLine) == awardID)
                 {
                     streamWriter.Write(LineWithID(awardLine, userID));
                 }
@@ -172,6 +172,8 @@ namespace _61_62_USERS_AND_AWARDS.DAL
         }
 
         private static string Name(string line) => line.Split(Separator)[Award.GetFieldIndex("Title")];
+
+        private static string AwardID(string line) => line.Split(Separator)[Award.GetFieldIndex("AwardID")];
 
         private static string LineWithID(string line, string id)
         {

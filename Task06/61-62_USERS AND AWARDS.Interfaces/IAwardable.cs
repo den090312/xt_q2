@@ -16,7 +16,7 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
 
         void PrintAwards();
 
-        void AddUserToAward(string user, string awardName);
+        void AddUserToAward(string userID, string awardID);
 
         string GetID(string awardName);
     }

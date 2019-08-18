@@ -57,7 +57,10 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
             var userID = userImplementation.GetID(userName);
             NullCheck(userID);
-            implementation.AddUserToAward(userID, awardName);
+            var awardID = implementation.GetID(awardName);
+            NullCheck(awardID);
+
+            implementation.AddUserToAward(userID, awardID);
         }
 
         public static void NullCheck<T>(T classObject) where T : class
