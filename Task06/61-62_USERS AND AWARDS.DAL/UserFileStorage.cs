@@ -228,9 +228,6 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
         private static string LineWithID(string line, string id)
         {
-            var itemArray = line.Split(Separator);
-            var sb = new StringBuilder();
-
             int indexID = User.GetFieldIndex("AwardID");
 
             if (indexID == -1)
@@ -238,6 +235,16 @@ namespace _61_62_USERS_AND_AWARDS.DAL
                 throw new Exception("indexID is not found!");
             }
 
+            var itemArray = line.Split(Separator);
+            var sb = new StringBuilder();
+
+            FillLine(ref id, itemArray, ref sb, ref indexID);
+
+            return sb.ToString();
+        }
+
+        private static void FillLine(ref string id, string[] itemArray, ref StringBuilder sb, ref int indexID)
+        {
             for (int i = 0; i < itemArray.Length; i++)
             {
                 if (i == indexID)
@@ -259,8 +266,6 @@ namespace _61_62_USERS_AND_AWARDS.DAL
                     }
                 }
             }
-
-            return sb.ToString();
         }
 
         private void PrepareFile()
