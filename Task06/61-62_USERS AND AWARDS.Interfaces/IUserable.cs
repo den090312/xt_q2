@@ -19,5 +19,7 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
         void AddAwardToUser(string awardID, string userID);
 
         string GetID(string userName);
+
+        bool RecordExists(string awardID, string userID);
     }
 }

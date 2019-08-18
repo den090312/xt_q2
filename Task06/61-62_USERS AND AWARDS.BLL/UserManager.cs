@@ -65,7 +65,7 @@ namespace _61_62_USERS_AND_AWARDS.BLL
                 var userID = implementation.GetID(userName);
                 NullCheck(userID);
 
-                if (userID != string.Empty)
+                if (userID != string.Empty && !RecordExists(awardID, userID))
                 {
                     implementation.AddAwardToUser(awardID, userID);
                     awardImplementation.AddUserToAward(userID, awardID);
@@ -97,6 +97,15 @@ namespace _61_62_USERS_AND_AWARDS.BLL
                 throw new ArgumentException("Welcome to our world!");
             }
         }
+        public string GetID(string userName) => implementation.GetID(userName);
+
+        public bool RecordExists(string awardID, string userID)
+        {
+            NullCheck(awardID);
+            NullCheck(userID);
+
+            return implementation.RecordExists(awardID, userID);
+        }
 
         public static void NullCheck<T>(T classObject) where T : class
         {
@@ -105,7 +114,5 @@ namespace _61_62_USERS_AND_AWARDS.BLL
                 throw new ArgumentNullException($"{nameof(classObject)} is null!");
             }
         }
-
-        public string GetID(string userName) => implementation.GetID(userName);
     }
 }

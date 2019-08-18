@@ -287,5 +287,25 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             return userID;
         }
+
+        public bool RecordExists(string awardID, string userID)
+        {
+            bool recordExists = false;
+
+            PrepareFile();
+
+            Thread.Sleep(10);
+            var userLines = File.ReadAllLines(FilePath);
+
+            foreach (var userLine in userLines)
+            {
+                if (AwardID(userLine) == awardID & UserID(userLine) == userID)
+                {
+                    return true;
+                }
+            }
+
+            return recordExists;
+        }
     }
 }
