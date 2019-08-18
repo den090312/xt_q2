@@ -4,6 +4,10 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
 {
     public interface IUserable
     {
+        void CreateStorage();
+
+        void PrintStorageInfo();
+
         void AddUser(User user);
 
         void RemoveUser(string userName);
@@ -12,6 +16,6 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
 
         void PrintUsers();
 
-        void AddAwardToUser(string award);
+        void AddAwardToUser(string awardName, string userName);
     }
 }

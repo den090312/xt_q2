@@ -5,21 +5,15 @@ using System;
 
 namespace _61_62_USERS_AND_AWARDS.BLL
 {
-    public class AwardManager : IStorable, IAwardable
+    public class AwardManager : IAwardable
     {
         private static readonly IAwardable implementation;
 
-        private static readonly IStorable storageImplementation;
+        static AwardManager() => implementation = Dependencies.AwardImplementation;
 
-        public void CreateStorage() => storageImplementation.CreateStorage();
+        public void CreateStorage() => implementation.CreateStorage();
 
-        public void PrintStorageInfo() => storageImplementation.PrintStorageInfo();
-
-        static AwardManager()
-        {
-            implementation = Dependencies.AwardImplementation;
-            storageImplementation = Dependencies.StorageImplementation;
-        }
+        public void PrintStorageInfo() => implementation.PrintStorageInfo();
 
         public Award CreateAward(string title)
         {
@@ -50,10 +44,12 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
         public void PrintAwards() => implementation.PrintAwards();
 
-        public void AddUserToAward(string user)
+        public void AddUserToAward(string userName, string awardName)
         {
-            NullCheck(user);
-            implementation.AddUserToAward(user);
+            NullCheck(userName);
+            NullCheck(awardName);
+
+            implementation.AddUserToAward(userName, awardName);
         }
 
         public static void NullCheck<T>(T classObject) where T : class

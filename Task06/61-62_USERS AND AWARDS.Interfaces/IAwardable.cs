@@ -4,6 +4,10 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
 {
     public interface IAwardable
     {
+        void CreateStorage();
+
+        void PrintStorageInfo();
+
         void AddAward(Award award);
 
         void RemoveAward(string awardName);
@@ -12,6 +16,6 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
 
         void PrintAwards();
 
-        void AddUserToAward(string user);
+        void AddUserToAward(string userName, string awardName);
     }
 }

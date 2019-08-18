@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace _61_62_USERS_AND_AWARDS.DAL
 {
-    public class AwardFileStrorage : IStorable, IAwardable
+    public class AwardFileStrorage : IAwardable
     {
         private readonly string messageNotFound = "not found!";
 
@@ -19,7 +19,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
         static AwardFileStrorage()
         {
-            FilePath = $@"{FileStorage.TaskPath}\Awards.txt";
+            FilePath = $@"D:\Task06\Awards.txt";
             FileName = "Awards.txt";
             Separator = '|';
         }
@@ -141,7 +141,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
         }
 
-        public void AddUserToAward(string user)
+        public void AddUserToAward(string userName, string awardName)
         {
             CheckFileExistance();
 
@@ -155,7 +155,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             foreach (var line in lines)
             {
-                if (NameInLine(line) != user)
+                if (NameInLine(line) != awardName)
                 {
                     streamWriter.Write(line);
                     streamWriter.WriteLine();

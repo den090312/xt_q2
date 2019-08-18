@@ -23,10 +23,6 @@ namespace _61_62_USERS_AND_AWARDS.PL
         {
             consoleSegment = ConsoleSegment.Main; 
 
-            var storageManager = new StorageManager();
-            storageManager.CreateStorage();
-            storageManager.PrintStorageInfo();
-
             WriteMenu();
 
             bool inputComplete = false;
@@ -127,9 +123,9 @@ namespace _61_62_USERS_AND_AWARDS.PL
             var userName = GetUserString("name");
 
             consoleSegment = ConsoleSegment.Award;
-            var award = GetUserString("title");
+            var awardName = GetUserString("title");
 
-            new StorageManager().AddAwardToUser(userName, award);
+            new UserManager().AddAwardToUser(awardName, userName);
         }
 
         private static int GetKeyFromConsole()
@@ -226,7 +222,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
                 if (!isDate)
                 {
-                    System.Console.WriteLine($"Enter date in format: {dateFormat}");
+                    Console.WriteLine($"Enter date in format: {dateFormat}");
                 }
                 else
                 {
@@ -254,7 +250,8 @@ namespace _61_62_USERS_AND_AWARDS.PL
             switch (consoleSegment)
             {
                 case ConsoleSegment.Main:
-                    new StorageManager().PrintStorageInfo();
+                    new UserManager().PrintStorageInfo();
+                    new AwardManager().PrintStorageInfo();
                     WriteMenu();
                     break;
                 case ConsoleSegment.User:

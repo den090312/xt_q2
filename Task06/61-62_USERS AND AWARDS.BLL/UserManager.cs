@@ -5,21 +5,15 @@ using System;
 
 namespace _61_62_USERS_AND_AWARDS.BLL
 {
-    public class UserManager : IStorable, IUserable
+    public class UserManager : IUserable
     {
         private static readonly IUserable implementation;
 
-        private static readonly IStorable storageImplementation;
+        static UserManager() => implementation = Dependencies.UserImplementation;
 
-        public void CreateStorage() => storageImplementation.CreateStorage();
+        public void CreateStorage() => implementation.CreateStorage();
 
-        public void PrintStorageInfo() => storageImplementation.PrintStorageInfo();
-
-        static UserManager()
-        {
-            implementation = Dependencies.UserImplementation;
-            storageImplementation = Dependencies.StorageImplementation;
-        }
+        public void PrintStorageInfo() => implementation.PrintStorageInfo();
 
         public User CreateUser(string name, DateTime dateBirth)
         {
@@ -52,10 +46,11 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
         public void PrintUsers() => implementation.PrintUsers();
 
-        public void AddAwardToUser(string award)
+        public void AddAwardToUser(string awardName, string userName)
         {
-            NullCheck(award);
-            implementation.AddAwardToUser(award);
+            NullCheck(awardName);
+            NullCheck(userName);
+            implementation.AddAwardToUser(awardName, userName);
         }
 
         public static void CheckName(string name)
