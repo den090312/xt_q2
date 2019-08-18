@@ -9,6 +9,8 @@ namespace _61_62_USERS_AND_AWARDS.BLL
     {
         private static readonly IAwardable implementation;
 
+        private static readonly IUserable userImplementation;
+
         static AwardManager() => implementation = Dependencies.AwardImplementation;
 
         public void CreateStorage() => implementation.CreateStorage();
@@ -50,6 +52,7 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             NullCheck(awardName);
 
             implementation.AddUserToAward(userName, awardName);
+            userImplementation.AddAwardToUser(awardName, userName);
         }
 
         public static void NullCheck<T>(T classObject) where T : class
