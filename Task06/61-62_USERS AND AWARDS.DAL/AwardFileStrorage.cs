@@ -167,7 +167,6 @@ namespace _61_62_USERS_AND_AWARDS.DAL
                     else
                     {
                         streamWriter.Write(awardLine);
-                        streamWriter.WriteLine();
 
                         if (!recorded)
                         {

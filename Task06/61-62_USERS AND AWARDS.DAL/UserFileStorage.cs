@@ -134,16 +134,6 @@ namespace _61_62_USERS_AND_AWARDS.DAL
                 {
                     Console.Write(charArray[i]);
 
-                    var userID = UserID(charArray[i]);
-
-                    foreach (var kvPair in awardsList)
-                    {
-                        if (kvPair.Key == userID)
-                        {
-                            Console.WriteLine($"------{kvPair.Value}");
-                        }
-                    }
-
                     if (i != charArray.Length - 1)
                     {
                         Console.Write("---");
@@ -151,6 +141,16 @@ namespace _61_62_USERS_AND_AWARDS.DAL
                 }
 
                 Console.WriteLine();
+
+                var userID = UserID(charArray[0]);
+
+                foreach (var kvPair in awardsList)
+                {
+                    if (kvPair.Key == userID)
+                    {
+                        Console.WriteLine($"------{kvPair.Value}");
+                    }
+                }
             }
         }
 
@@ -179,7 +179,6 @@ namespace _61_62_USERS_AND_AWARDS.DAL
                     else
                     {
                         streamWriter.Write(userLine);
-                        streamWriter.WriteLine();
 
                         if (!recorded)
                         {
