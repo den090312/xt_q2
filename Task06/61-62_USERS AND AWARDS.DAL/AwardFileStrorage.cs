@@ -124,21 +124,33 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             Thread.Sleep(10);
             var lines = File.ReadLines(FilePath);
 
+            var currentUserID = string.Empty;
+
             foreach (var line in lines)
             {
-                var charArray = line.Split('|');
+                var lineArray = line.Split(Separator);
 
-                for (int i = 2; i < charArray.Length; i++)
+                if (currentUserID != lineArray[0])
                 {
-                    Console.Write(charArray[i]);
+                    PrintAward(ref lineArray);
 
-                    if (i != charArray.Length - 1)
-                    {
-                        Console.Write("---");
-                    }
+                    Console.WriteLine();
                 }
 
-                Console.WriteLine();
+                currentUserID = lineArray[0];
+            }
+        }
+
+        private static void PrintAward(ref string[] lineArray)
+        {
+            for (int i = 2; i < lineArray.Length; i++)
+            {
+                Console.Write(lineArray[i]);
+
+                if (i != lineArray.Length - 1)
+                {
+                    Console.Write("---");
+                }
             }
         }
 
@@ -196,7 +208,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
         private static string LineWithID(string line, string id)
         {
-            var itemArray = line.Split('|');
+            var itemArray = line.Split(Separator);
             var sb = new StringBuilder();
 
             int indexID = Award.GetFieldIndex("UserID");
