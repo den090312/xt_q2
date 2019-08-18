@@ -52,7 +52,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
                             break;
                         case 3:
                             inputComplete = true;
-                            System.Console.WriteLine();
+                            Console.WriteLine();
                             PrintUsers();
                             break;
                         case 4:
@@ -67,7 +67,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
                             break;
                         case 6:
                             inputComplete = true;
-                            System.Console.WriteLine();
+                            Console.WriteLine();
                             PrintAllAwards();
                             break;
                         case 7:
@@ -136,7 +136,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
             while (!inputComplete)
             {
-                ConsoleKeyInfo key = System.Console.ReadKey(true);
+                ConsoleKeyInfo key = Console.ReadKey(true);
 
                 char[] keyArray = { '1', '2', '3', '4', '5', '6', '7', '8'};
 
@@ -153,7 +153,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
                     if (userKeySB.Length < 1)
                     {
                         userKeySB.Append(key.KeyChar);
-                        System.Console.Write(key.KeyChar);
+                        Console.Write(key.KeyChar);
                     }
                 }
             }
@@ -174,8 +174,8 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
         private static string GetUserString(string parameterName)
         {
-            System.Console.Clear();
-            System.Console.WriteLine($"Enter {parameterName}:");
+            Console.Clear();
+            Console.WriteLine($"Enter {parameterName}:");
 
             bool inputComplete = false;
 
@@ -183,7 +183,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
             while (!inputComplete)
             {
-                ConsoleKeyInfo key = System.Console.ReadKey(true);
+                ConsoleKeyInfo key = Console.ReadKey(true);
 
                 if (key.Key == ConsoleKey.Backspace)
                 {
@@ -194,13 +194,13 @@ namespace _61_62_USERS_AND_AWARDS.PL
                     if (userSB.Length > 0)
                     {
                         inputComplete = true;
-                        System.Console.WriteLine();
+                        Console.WriteLine();
                     }
                 }
                 else
                 {
                     userSB.Append(key.KeyChar);
-                    System.Console.Write(key.KeyChar);
+                    Console.Write(key.KeyChar);
                 }
             }
 
@@ -209,8 +209,8 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
         public static DateTime GetUserDate(string dateFormat)
         {
-            System.Console.Clear();
-            System.Console.WriteLine($"Enter date in format: {dateFormat}");
+            Console.Clear();
+            Console.WriteLine($"Enter date in format: {dateFormat}");
 
             bool isDate = false;
 
@@ -218,7 +218,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
             while (!isDate)
             {
-                isDate = DateTime.TryParseExact(System.Console.ReadLine(), dateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out userBirthDate);
+                isDate = DateTime.TryParseExact(Console.ReadLine(), dateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out userBirthDate);
 
                 if (!isDate)
                 {
@@ -240,9 +240,9 @@ namespace _61_62_USERS_AND_AWARDS.PL
                 userKeySB.Length--;
             }
 
-            System.Console.Clear();
+            Console.Clear();
             ConsoleRestore();
-            System.Console.Write(userKeySB);
+            Console.Write(userKeySB);
         }
 
         private static void ConsoleRestore()
@@ -255,10 +255,10 @@ namespace _61_62_USERS_AND_AWARDS.PL
                     WriteMenu();
                     break;
                 case ConsoleSegment.User:
-                    System.Console.WriteLine("Enter name:");
+                    Console.WriteLine("Enter name:");
                     break;
                 case ConsoleSegment.Award:
-                    System.Console.WriteLine("Enter title:");
+                    Console.WriteLine("Enter title:");
                     break;
             }
         }
