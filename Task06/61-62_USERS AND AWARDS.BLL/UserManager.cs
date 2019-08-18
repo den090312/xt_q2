@@ -59,11 +59,18 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
             var awardID = awardImplementation.GetID(awardName);
             NullCheck(awardID);
-            var userID = implementation.GetID(userName);
-            NullCheck(userID);
 
-            implementation.AddAwardToUser(awardID, userID);
-            awardImplementation.AddUserToAward(userID, awardID);
+            if (awardID != string.Empty)
+            {
+                var userID = implementation.GetID(userName);
+                NullCheck(userID);
+
+                if (userID != string.Empty)
+                {
+                    implementation.AddAwardToUser(awardID, userID);
+                    awardImplementation.AddUserToAward(userID, awardID);
+                }
+            }
         }
 
         public static void CheckName(string name)
