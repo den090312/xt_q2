@@ -148,36 +148,17 @@ namespace _61_62_USERS_AND_AWARDS.DAL
                     }
 
                     Console.WriteLine();
+
+                    var selectedList = awardsList.FindAll(x => x.Key == UserID(charArray[0]));
+
+                    foreach (var kvPair in selectedList)
+                    {
+                        Console.WriteLine($"------{kvPair.Value}");
+                    }
                 }
 
                 curentUserID = charArray[0];
             }
-
-            //foreach (var line in lines)
-            //{
-            //    var charArray = line.Split('|');
-
-            //    //var selectedArray = Array.FindAll(charArray, x => x == Name(line));
-
-            //    for (int i = 2; i < charArray.Length; i++)
-            //    {
-            //        Console.Write(charArray[i]);
-
-            //        if (i != charArray.Length - 1)
-            //        {
-            //            Console.Write("---");
-            //        }
-            //    }
-
-            //    Console.WriteLine();
-
-            //    var selectedList = awardsList.FindAll(x => x.Key == UserID(charArray[0]));
-
-            //    foreach (var kvPair in selectedList)
-            //    {
-            //        Console.WriteLine($"------{kvPair.Value}");
-            //    }
-            //}
         }
 
         public void AddAwardToUser(string awardID, string userID)
