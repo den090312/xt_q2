@@ -124,34 +124,60 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             PrepareFile();
 
             Thread.Sleep(10);
-            var lines = File.ReadLines(FilePath);
+            var lines = File.ReadAllLines(FilePath);
+
+            var curentUserID = string.Empty;
 
             foreach (var line in lines)
             {
                 var charArray = line.Split('|');
 
-                for (int i = 2; i < charArray.Length; i++)
+                if (curentUserID != charArray[0])
                 {
-                    Console.Write(charArray[i]);
-
-                    if (i != charArray.Length - 1)
+                    for (int i = 2; i < charArray.Length; i++)
                     {
-                        Console.Write("---");
+                        curentUserID = charArray[0];
+
+                        Console.Write(charArray[i]);
+
+                        if (i != charArray.Length - 1)
+                        {
+                            Console.Write("---");
+                        }
+
                     }
+
+                    Console.WriteLine();
                 }
 
-                Console.WriteLine();
-
-                var userID = UserID(charArray[0]);
-
-                foreach (var kvPair in awardsList)
-                {
-                    if (kvPair.Key == userID)
-                    {
-                        Console.WriteLine($"------{kvPair.Value}");
-                    }
-                }
+                curentUserID = charArray[0];
             }
+
+            //foreach (var line in lines)
+            //{
+            //    var charArray = line.Split('|');
+
+            //    //var selectedArray = Array.FindAll(charArray, x => x == Name(line));
+
+            //    for (int i = 2; i < charArray.Length; i++)
+            //    {
+            //        Console.Write(charArray[i]);
+
+            //        if (i != charArray.Length - 1)
+            //        {
+            //            Console.Write("---");
+            //        }
+            //    }
+
+            //    Console.WriteLine();
+
+            //    var selectedList = awardsList.FindAll(x => x.Key == UserID(charArray[0]));
+
+            //    foreach (var kvPair in selectedList)
+            //    {
+            //        Console.WriteLine($"------{kvPair.Value}");
+            //    }
+            //}
         }
 
         public void AddAwardToUser(string awardID, string userID)
