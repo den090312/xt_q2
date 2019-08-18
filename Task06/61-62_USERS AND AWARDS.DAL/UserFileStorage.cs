@@ -158,16 +158,17 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             foreach (var userLine in userLines)
             {
-                var awardIDInLine = AwardID(userLine);
+                var awardIDLine = AwardID(userLine);
 
                 if (Name(userLine) == userName)
                 {
-                    if (awardIDInLine != string.Empty)
+                    if (awardIDLine != string.Empty)
                     {
                         streamWriter.Write(userLine);
                         streamWriter.WriteLine();
                     }
-                    else
+
+                    if (awardIDLine != awardID)
                     {
                         streamWriter.Write(LineWithID(userLine, awardID));
                     }
