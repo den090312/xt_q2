@@ -8,19 +8,19 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 {
     public class UserManager : IUserable
     {
-        private static readonly IUserable implementation;
+        private static readonly IUserable userImplement;
 
-        private static readonly IAwardable awardImplementation;
+        private static readonly IAwardable awardImplement;
 
         static UserManager()
         {
-            implementation = Dependencies.UserImplementation;
-            awardImplementation = Dependencies.AwardImplementation;
+            userImplement = Dependencies.UserImplementation;
+            awardImplement = Dependencies.AwardImplementation;
         }
 
-        public void CreateStorage() => implementation.CreateStorage();
+        public void CreateStorage() => userImplement.CreateStorage();
 
-        public void PrintStorageInfo() => implementation.PrintStorageInfo();
+        public void PrintStorageInfo() => userImplement.PrintStorageInfo();
 
         public User CreateUser(string name, DateTime dateBirth)
         {
@@ -35,41 +35,41 @@ namespace _61_62_USERS_AND_AWARDS.BLL
         {
             NullCheck(user);
 
-            implementation.AddUser(user);
+            userImplement.AddUser(user);
         }
 
         public void RemoveUser(string userName)
         {
             NullCheck(userName);
-            implementation.RemoveUser(userName);
+            userImplement.RemoveUser(userName);
         }
 
         public bool UserExists(string userName)
         {
             NullCheck(userName);
 
-            return implementation.UserExists(userName);
+            return userImplement.UserExists(userName);
         }
 
-        public void PrintUsers(List<KeyValuePair<string, string>> awardsList) => implementation.PrintUsers(awardImplementation.GetAwards());
+        public void PrintUsers(List<KeyValuePair<string, string>> awardsList) => userImplement.PrintUsers(awardImplement.GetAwards());
 
         public void AddAwardToUser(string awardName, string userName)
         {
             NullCheck(awardName);
             NullCheck(userName);
 
-            var awardID = awardImplementation.GetID(awardName);
+            var awardID = awardImplement.GetID(awardName);
             NullCheck(awardID);
 
             if (awardID != string.Empty)
             {
-                var userID = implementation.GetID(userName);
+                var userID = userImplement.GetID(userName);
                 NullCheck(userID);
 
                 if (userID != string.Empty && !RecordExists(awardID, userID))
                 {
-                    implementation.AddAwardToUser(awardID, userID);
-                    awardImplementation.AddUserToAward(userID, awardID);
+                    userImplement.AddAwardToUser(awardID, userID);
+                    awardImplement.AddUserToAward(userID, awardID);
                 }
             }
         }
@@ -80,7 +80,7 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
             if (char.IsLower(userCharArray[0]))
             {
-                throw new ArgumentException($"Filed '{name}' must begin from upper case!");
+                throw new ArgumentException($"Field '{name}' must begin from upper case!");
             }
         }
 
@@ -98,14 +98,14 @@ namespace _61_62_USERS_AND_AWARDS.BLL
                 throw new ArgumentException("Welcome to our world!");
             }
         }
-        public string GetID(string userName) => implementation.GetID(userName);
+        public string GetID(string userName) => userImplement.GetID(userName);
 
         public bool RecordExists(string awardID, string userID)
         {
             NullCheck(awardID);
             NullCheck(userID);
 
-            return implementation.RecordExists(awardID, userID);
+            return userImplement.RecordExists(awardID, userID);
         }
 
         public static void NullCheck<T>(T classObject) where T : class

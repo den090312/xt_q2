@@ -8,19 +8,19 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 {
     public class AwardManager : IAwardable
     {
-        private static readonly IAwardable implementation;
+        private static readonly IAwardable awardImplement;
 
-        private static readonly IUserable userImplementation;
+        private static readonly IUserable userImplement;
 
         static AwardManager()
         {
-            implementation = Dependencies.AwardImplementation;
-            userImplementation = Dependencies.UserImplementation;
+            awardImplement = Dependencies.AwardImplementation;
+            userImplement = Dependencies.UserImplementation;
         }
 
-        public void CreateStorage() => implementation.CreateStorage();
+        public void CreateStorage() => awardImplement.CreateStorage();
 
-        public void PrintStorageInfo() => implementation.PrintStorageInfo();
+        public void PrintStorageInfo() => awardImplement.PrintStorageInfo();
 
         public Award CreateAward(string title)
         {
@@ -33,40 +33,40 @@ namespace _61_62_USERS_AND_AWARDS.BLL
         {
             NullCheck(award);
 
-            implementation.AddAward(award);
+            awardImplement.AddAward(award);
         }
 
         public void RemoveAward(string awardName)
         {
             NullCheck(awardName);
-            implementation.RemoveAward(awardName);
+            awardImplement.RemoveAward(awardName);
         }
 
         public bool AwardExists(string awardName)
         {
             NullCheck(awardName);
 
-            return implementation.AwardExists(awardName);
+            return awardImplement.AwardExists(awardName);
         }
 
-        public void PrintAwards() => implementation.PrintAwards();
+        public void PrintAwards() => awardImplement.PrintAwards();
 
         public void AddUserToAward(string userName, string awardName)
         {
             NullCheck(userName);
             NullCheck(awardName);
 
-            var userID = userImplementation.GetID(userName);
+            var userID = userImplement.GetID(userName);
             NullCheck(userID);
 
             if (userID != string.Empty)
             {
-                var awardID = implementation.GetID(awardName);
+                var awardID = awardImplement.GetID(awardName);
                 NullCheck(awardID);
 
                 if (awardID != string.Empty)
                 {
-                    implementation.AddUserToAward(userID, awardID);
+                    awardImplement.AddUserToAward(userID, awardID);
                 }
             }
         }
@@ -79,8 +79,8 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             }
         }
 
-        public string GetID(string awardName) => implementation.GetID(awardName);
+        public string GetID(string awardName) => awardImplement.GetID(awardName);
 
-        public List<KeyValuePair<string, string>> GetAwards() => implementation.GetAwards();
+        public List<KeyValuePair<string, string>> GetAwards() => awardImplement.GetAwards();
     }
 }
