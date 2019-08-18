@@ -168,13 +168,13 @@ namespace _61_62_USERS_AND_AWARDS.DAL
                     else
                     {
                         streamWriter.Write(userLine);
+                        streamWriter.WriteLine();
 
-                        if (!recorded)
+                        if (!recorded || (UserID(userLine) != userID | AwardID(userLine) != awardID))
                         {
                             streamWriter.Write(LineWithID(userLine, awardID));
+                            recorded = true;
                         }
-
-                        recorded = true;
                     }
                 }
                 else
