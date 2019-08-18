@@ -75,7 +75,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
                             break;
                         case 7:
                             inputComplete = true;
-                            AddAwardToUser();
+                            PinAwardToUser();
                             break;
                         case 8:
                             return;
@@ -126,7 +126,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
         private static void PrintAllAwards() => new AwardManager().PrintAwards();
 
-        private static void AddAwardToUser()
+        private static void PinAwardToUser()
         {
             consoleSegment = ConsoleSegment.User;
             var userName = GetUserString("name");

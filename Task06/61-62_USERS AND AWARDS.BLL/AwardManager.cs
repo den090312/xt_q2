@@ -51,7 +51,9 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             NullCheck(userName);
             NullCheck(awardName);
 
-            implementation.AddUserToAward(userName, awardName);
+            var userID = userImplementation.GetID(userName);
+
+            implementation.AddUserToAward(userID, awardName);
             userImplementation.AddAwardToUser(awardName, userName);
         }
 
@@ -62,5 +64,7 @@ namespace _61_62_USERS_AND_AWARDS.BLL
                 throw new ArgumentNullException($"{nameof(classObject)} is null!");
             }
         }
+
+        public string GetID(string awardName) => implementation.GetID(awardName);
     }
 }

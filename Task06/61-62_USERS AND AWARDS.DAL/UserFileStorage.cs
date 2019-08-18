@@ -79,7 +79,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             foreach (var line in lines)
             {
-                if (NameInLine(line) != userName)
+                if (NameIn(line) != userName)
                 {
                     streamWriter.Write(line);
                     streamWriter.WriteLine();
@@ -104,7 +104,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             {
                 foreach (var line in lines)
                 {
-                    if (NameInLine(line) == userName)
+                    if (NameIn(line) == userName)
                     {
                         streamWriter.Close();
 
@@ -143,41 +143,37 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
         }
 
-        public void AddAwardToUser(string awardName, string userName)
+        public void AddAwardToUser(string awardID, string userName)
         {
             CheckFileExistance();
             SetNormalAttributes();
 
             Thread.Sleep(10);
-            var lines = File.ReadAllLines(FilePath);
+            var userLines = File.ReadAllLines(FilePath);
 
             File.Delete(FilePath);
 
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(FilePath, true);
 
-            foreach (var line in lines)
+            foreach (var userLine in userLines)
             {
-                if (NameInLine(line) != awardName)
+                if (NameIn(userLine) == userName)
                 {
-                    streamWriter.Write(line);
-                    streamWriter.WriteLine();
+                    streamWriter.Write(LineWithID(userLine, awardID));
                 }
                 else
                 {
-                    var id = line.Split(Separator)[Award.GetFieldIndex("AwardID")];
-
-                    if (id != string.Empty)
-                    {
-                        streamWriter.Write(LineWithID(line, id));
-                    }
+                    streamWriter.Write(userLine);
                 }
+
+                streamWriter.WriteLine();
             }
 
             streamWriter.Close();
         }
 
-        private static string NameInLine(string line) => line.Split(Separator)[User.GetFieldIndex("Name")];
+        private static string NameIn(string line) => line.Split(Separator)[User.GetFieldIndex("Name")];
 
         private static string LineWithID(string line, string id)
         {
@@ -250,6 +246,26 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             {
                 throw new FileNotFoundException($"{nameof(FilePath)} is not exists!");
             }
+        }
+
+        public string GetID(string userName)
+        {
+            var userID = string.Empty;
+
+            CheckFileExistance();
+
+            Thread.Sleep(10);
+            var userLines = File.ReadAllLines(FilePath);
+
+            foreach (var userLine in userLines)
+            {
+                if (NameIn(userLine) == userName)
+                {
+                    return userLine.Split(Separator)[Award.GetFieldIndex("AwardID")];
+                }
+            }
+
+            return userID;
         }
     }
 }
