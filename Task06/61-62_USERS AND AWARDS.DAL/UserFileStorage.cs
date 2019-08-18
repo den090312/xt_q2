@@ -274,7 +274,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             {
                 if (Name(userLine) == userName)
                 {
-                    return userLine.Split(Separator)[Award.GetFieldIndex("AwardID")];
+                    return userLine.Split(Separator)[User.GetFieldIndex("UserID")];
                 }
             }
 
