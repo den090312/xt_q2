@@ -178,39 +178,46 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             File.Delete(FilePath);
 
             Thread.Sleep(10);
-            var streamWriter = new StreamWriter(FilePath, true);
+            var sw = new StreamWriter(FilePath, true);
             var recorded = false;
 
             foreach (var userLine in userLines)
             {
-                if (UserID(userLine) == userID)
+                recorded = RunRecord(ref awardID, ref userID, ref sw, recorded, userLine);
+
+                sw.WriteLine();
+            }
+
+            sw.Close();
+        }
+
+        private static bool RunRecord(ref string awardID, ref string userID, ref StreamWriter sw, bool recorded, string userLine)
+        {
+            if (UserID(userLine) == userID)
+            {
+                if (AwardID(userLine) == string.Empty)
                 {
-                    if (AwardID(userLine) == string.Empty)
-                    {
-                        streamWriter.Write(LineWithID(userLine, awardID));
-                    }
-                    else
-                    {
-                        streamWriter.Write(userLine);
-
-                        if (!recorded)
-                        {
-                            streamWriter.WriteLine();
-                            streamWriter.Write(LineWithID(userLine, awardID));
-                        }
-
-                        recorded = true;
-                    }
+                    sw.Write(LineWithID(userLine, awardID));
                 }
                 else
                 {
-                    streamWriter.Write(userLine);
-                }
+                    sw.Write(userLine);
 
-                streamWriter.WriteLine();
+                    if (!recorded)
+                    {
+                        sw.WriteLine();
+                        sw.Write(LineWithID(userLine, awardID));
+                    }
+
+                    recorded = true;
+                }
+            }
+            else
+            {
+                sw.Write(userLine);
             }
 
-            streamWriter.Close();
+            return recorded;
         }
 
         private static string Name(string line) => line.Split(Separator)[User.GetFieldIndex("Name")];

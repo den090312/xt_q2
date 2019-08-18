@@ -165,35 +165,35 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             File.Delete(FilePath);
 
             Thread.Sleep(10);
-            var streamWriter = new StreamWriter(FilePath, true);
+            var sw = new StreamWriter(FilePath, true);
             var recorded = false;
 
             foreach (var awardLine in awardLines)
             {
-                recorded = RunRecord(ref userID, ref awardID, streamWriter, recorded, awardLine);
+                recorded = RunRecord(ref userID, ref awardID, ref sw, recorded, awardLine);
 
-                streamWriter.WriteLine();
+                sw.WriteLine();
             }
 
-            streamWriter.Close();
+            sw.Close();
         }
 
-        private static bool RunRecord(ref string userID, ref string awardID, StreamWriter streamWriter, bool recorded, string awardLine)
+        private static bool RunRecord(ref string userID, ref string awardID, ref StreamWriter sw, bool recorded, string awardLine)
         {
             if (AwardID(awardLine) == awardID)
             {
                 if (UserID(awardLine) == string.Empty)
                 {
-                    streamWriter.Write(LineWithID(awardLine, userID));
+                    sw.Write(LineWithID(awardLine, userID));
                 }
                 else
                 {
-                    streamWriter.Write(awardLine);
+                    sw.Write(awardLine);
 
                     if (!recorded)
                     {
-                        streamWriter.WriteLine();
-                        streamWriter.Write(LineWithID(awardLine, userID));
+                        sw.WriteLine();
+                        sw.Write(LineWithID(awardLine, userID));
                     }
 
                     recorded = true;
@@ -201,7 +201,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
             else
             {
-                streamWriter.Write(awardLine);
+                sw.Write(awardLine);
             }
 
             return recorded;
