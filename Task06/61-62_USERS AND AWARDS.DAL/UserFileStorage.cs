@@ -155,6 +155,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(FilePath, true);
+            var recorded = false;
 
             foreach (var userLine in userLines)
             {
@@ -167,8 +168,13 @@ namespace _61_62_USERS_AND_AWARDS.DAL
                     else
                     {
                         streamWriter.Write(userLine);
-                        streamWriter.WriteLine();
-                        streamWriter.Write(LineWithID(userLine, awardID));
+
+                        if (!recorded)
+                        {
+                            streamWriter.Write(LineWithID(userLine, awardID));
+                        }
+
+                        recorded = true;
                     }
                 }
                 else

@@ -66,7 +66,7 @@ namespace _61_62_USERS_AND_AWARDS.BLL
                 if (awardID != string.Empty)
                 {
                     implementation.AddUserToAward(userID, awardID);
-                    userImplementation.AddAwardToUser(awardID, userID);
+                    //userImplementation.AddAwardToUser(awardID, userID);
                 }
             }
         }
