@@ -126,38 +126,44 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             Thread.Sleep(10);
             var lines = File.ReadAllLines(FilePath);
 
-            var curentUserID = string.Empty;
+            var currentUserID = string.Empty;
 
             foreach (var line in lines)
             {
-                var charArray = line.Split('|');
+                var lineArray = line.Split('|');
 
-                if (curentUserID != charArray[0])
+                if (currentUserID != lineArray[0])
                 {
-                    for (int i = 2; i < charArray.Length; i++)
-                    {
-                        curentUserID = charArray[0];
-
-                        Console.Write(charArray[i]);
-
-                        if (i != charArray.Length - 1)
-                        {
-                            Console.Write("---");
-                        }
-
-                    }
-
-                    Console.WriteLine();
-
-                    var selectedList = awardsList.FindAll(x => x.Key == UserID(charArray[0]));
-
-                    foreach (var kvPair in selectedList)
-                    {
-                        Console.WriteLine($"------{kvPair.Value}");
-                    }
+                    PrintUser(ref lineArray);
+                    PrintAwards(ref awardsList, UserID(lineArray[0]));
                 }
 
-                curentUserID = charArray[0];
+                currentUserID = lineArray[0];
+            }
+        }
+
+        private static void PrintUser(ref string[] lineArray)
+        {
+            for (int i = 2; i < lineArray.Length; i++)
+            {
+                Console.Write(lineArray[i]);
+
+                if (i != lineArray.Length - 1)
+                {
+                    Console.Write("---");
+                }
+            }
+        }
+
+        private static void PrintAwards(ref List<KeyValuePair<string, string>> awardsList, string userID)
+        {
+            Console.WriteLine();
+
+            var selectedList = awardsList.FindAll(x => x.Key == userID);
+
+            foreach (var kvPair in selectedList)
+            {
+                Console.WriteLine($"------{kvPair.Value}");
             }
         }
 
