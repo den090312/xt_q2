@@ -158,7 +158,16 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             {
                 if (AwardID(awardLine) == awardID)
                 {
-                    streamWriter.Write(LineWithID(awardLine, userID));
+                    if (UserID(awardLine) == string.Empty)
+                    {
+                        streamWriter.Write(LineWithID(awardLine, userID));
+                    }
+                    else
+                    {
+                        streamWriter.Write(awardLine);
+                        streamWriter.WriteLine();
+                        streamWriter.Write(LineWithID(awardLine, userID));
+                    }
                 }
                 else
                 {
@@ -174,6 +183,8 @@ namespace _61_62_USERS_AND_AWARDS.DAL
         private static string Name(string line) => line.Split(Separator)[Award.GetFieldIndex("Title")];
 
         private static string AwardID(string line) => line.Split(Separator)[Award.GetFieldIndex("AwardID")];
+
+        private static string UserID(string line) => line.Split(Separator)[Award.GetFieldIndex("UserID")];
 
         private static string LineWithID(string line, string id)
         {

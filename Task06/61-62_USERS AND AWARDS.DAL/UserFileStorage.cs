@@ -158,13 +158,24 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             foreach (var userLine in userLines)
             {
-                streamWriter.Write(userLine);
-                streamWriter.WriteLine();
-            }
+                if (UserID(userLine) == userID)
+                {
+                    if (AwardID(userLine) == string.Empty)
+                    {
+                        streamWriter.Write(LineWithID(userLine, awardID));
+                    }
+                    else
+                    {
+                        streamWriter.Write(userLine);
+                        streamWriter.WriteLine();
+                        streamWriter.Write(LineWithID(userLine, awardID));
+                    }
+                }
+                else
+                {
+                    streamWriter.Write(userLine);
+                }
 
-            if (userLines.Length > 0)
-            {
-                streamWriter.Write(LineWithID(userLines[0], awardID));
                 streamWriter.WriteLine();
             }
 
@@ -174,6 +185,8 @@ namespace _61_62_USERS_AND_AWARDS.DAL
         private static string Name(string line) => line.Split(Separator)[User.GetFieldIndex("Name")];
 
         private static string UserID(string line) => line.Split(Separator)[User.GetFieldIndex("UserID")];
+
+        private static string AwardID(string line) => line.Split(Separator)[User.GetFieldIndex("AwardID")];
 
         private static string LineWithID(string line, string id)
         {
