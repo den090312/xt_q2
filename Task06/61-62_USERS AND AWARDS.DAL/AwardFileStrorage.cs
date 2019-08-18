@@ -170,34 +170,41 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             foreach (var awardLine in awardLines)
             {
-                if (AwardID(awardLine) == awardID)
-                {
-                    if (UserID(awardLine) == string.Empty)
-                    {
-                        streamWriter.Write(LineWithID(awardLine, userID));
-                    }
-                    else
-                    {
-                        streamWriter.Write(awardLine);
-
-                        if (!recorded)
-                        {
-                            streamWriter.WriteLine();
-                            streamWriter.Write(LineWithID(awardLine, userID));
-                        }
-
-                        recorded = true;
-                    }
-                }
-                else
-                {
-                    streamWriter.Write(awardLine);
-                }
+                recorded = RunRecord(ref userID, ref awardID, streamWriter, recorded, awardLine);
 
                 streamWriter.WriteLine();
             }
 
             streamWriter.Close();
+        }
+
+        private static bool RunRecord(ref string userID, ref string awardID, StreamWriter streamWriter, bool recorded, string awardLine)
+        {
+            if (AwardID(awardLine) == awardID)
+            {
+                if (UserID(awardLine) == string.Empty)
+                {
+                    streamWriter.Write(LineWithID(awardLine, userID));
+                }
+                else
+                {
+                    streamWriter.Write(awardLine);
+
+                    if (!recorded)
+                    {
+                        streamWriter.WriteLine();
+                        streamWriter.Write(LineWithID(awardLine, userID));
+                    }
+
+                    recorded = true;
+                }
+            }
+            else
+            {
+                streamWriter.Write(awardLine);
+            }
+
+            return recorded;
         }
 
         private static string Name(string line) => line.Split(Separator)[Award.GetFieldIndex("Title")];
