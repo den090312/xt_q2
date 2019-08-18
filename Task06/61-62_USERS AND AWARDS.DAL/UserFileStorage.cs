@@ -182,6 +182,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
                         if (!recorded)
                         {
+                            streamWriter.WriteLine();
                             streamWriter.Write(LineWithID(userLine, awardID));
                         }
 
