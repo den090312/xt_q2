@@ -78,7 +78,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             {
                 foreach (var line in lines)
                 {
-                    if (NameIn(line) == awardName)
+                    if (Name(line) == awardName)
                     {
                         streamWriter.Close();
 
@@ -106,7 +106,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             foreach (var line in lines)
             {
-                if (NameIn(line) != awardName)
+                if (Name(line) != awardName)
                 {
                     streamWriter.Write(line);
                     streamWriter.WriteLine();
@@ -144,6 +144,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
         public void AddUserToAward(string userID, string awardName)
         {
             CheckFileExistance();
+            SetNormalAttributes();
 
             Thread.Sleep(10);
             var awardLines = File.ReadAllLines(FilePath);
@@ -155,7 +156,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             foreach (var awardLine in awardLines)
             {
-                if (NameIn(awardLine) == awardName)
+                if (Name(awardLine) == awardName)
                 {
                     streamWriter.Write(LineWithID(awardLine, userID));
                 }
@@ -170,9 +171,9 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             streamWriter.Close();
         }
 
-        private static string NameIn(string line) => line.Split(Separator)[Award.GetFieldIndex("Title")];
+        private static string Name(string line) => line.Split(Separator)[Award.GetFieldIndex("Title")];
 
-        public static string LineWithID(string line, string id)
+        private static string LineWithID(string line, string id)
         {
             var itemArray = line.Split('|');
             var sb = new StringBuilder();
@@ -256,7 +257,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             foreach (var awardLine in awardLines)
             {
-                if (NameIn(awardLine) == awardName)
+                if (Name(awardLine) == awardName)
                 {
                     return awardLine.Split(Separator)[Award.GetFieldIndex("AwardID")];
                 }

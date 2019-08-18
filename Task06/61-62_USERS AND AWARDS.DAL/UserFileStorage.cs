@@ -79,7 +79,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             foreach (var line in lines)
             {
-                if (NameIn(line) != userName)
+                if (Name(line) != userName)
                 {
                     streamWriter.Write(line);
                     streamWriter.WriteLine();
@@ -104,7 +104,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             {
                 foreach (var line in lines)
                 {
-                    if (NameIn(line) == userName)
+                    if (Name(line) == userName)
                     {
                         streamWriter.Close();
 
@@ -158,9 +158,19 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             foreach (var userLine in userLines)
             {
-                if (NameIn(userLine) == userName)
+                var awardIDInLine = AwardID(userLine);
+
+                if (Name(userLine) == userName)
                 {
-                    streamWriter.Write(LineWithID(userLine, awardID));
+                    if (awardIDInLine != string.Empty)
+                    {
+                        streamWriter.Write(userLine);
+                        streamWriter.WriteLine();
+                    }
+                    else
+                    {
+                        streamWriter.Write(LineWithID(userLine, awardID));
+                    }
                 }
                 else
                 {
@@ -173,7 +183,9 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             streamWriter.Close();
         }
 
-        private static string NameIn(string line) => line.Split(Separator)[User.GetFieldIndex("Name")];
+        private static string Name(string line) => line.Split(Separator)[User.GetFieldIndex("Name")];
+
+        private static string AwardID(string line) => line.Split(Separator)[User.GetFieldIndex("AwardID")];
 
         private static string LineWithID(string line, string id)
         {
@@ -259,7 +271,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             foreach (var userLine in userLines)
             {
-                if (NameIn(userLine) == userName)
+                if (Name(userLine) == userName)
                 {
                     return userLine.Split(Separator)[Award.GetFieldIndex("AwardID")];
                 }

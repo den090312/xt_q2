@@ -14,7 +14,7 @@ namespace _61_62_USERS_AND_AWARDS.BLL
         static AwardManager()
         {
             implementation = Dependencies.AwardImplementation;
-            userImplementation = Dependencies.UserImplementation;
+            //userImplementation = Dependencies.UserImplementation;
         }
 
         public void CreateStorage() => implementation.CreateStorage();
@@ -58,10 +58,6 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             var userID = userImplementation.GetID(userName);
             NullCheck(userID);
             implementation.AddUserToAward(userID, awardName);
-
-            var awardID = implementation.GetID(awardName);
-            NullCheck(awardID);
-            userImplementation.AddAwardToUser(awardID, userName);
         }
 
         public static void NullCheck<T>(T classObject) where T : class
