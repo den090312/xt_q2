@@ -38,7 +38,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
         public void PrintStorageInfo()
         {
-            if (Directory.Exists(FilePath))
+            if (File.Exists(FilePath))
             {
                 Console.WriteLine($"{FileName} - {FilePath}");
             }

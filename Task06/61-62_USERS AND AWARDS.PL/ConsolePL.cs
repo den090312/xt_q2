@@ -21,7 +21,10 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
         private static void Main(string[] args)
         {
-            consoleSegment = ConsoleSegment.Main; 
+            consoleSegment = ConsoleSegment.Main;
+
+            new UserManager().PrintStorageInfo();
+            new AwardManager().PrintStorageInfo();
 
             WriteMenu();
 
@@ -43,7 +46,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
                         case 1:
                             inputComplete = true;
                             consoleSegment = ConsoleSegment.User;
-                            AddUser(dateFormat);
+                            CreateUser(dateFormat);
                             break;
                         case 2:
                             inputComplete = true;
@@ -99,19 +102,25 @@ namespace _61_62_USERS_AND_AWARDS.PL
             Console.WriteLine("\t8: exit");
         }
 
-        private static void AddUser(string dateFormat)
+        private static void CreateUser(string dateFormat)
         {
-            var usermanager = new UserManager();
-            var user = usermanager.CreateUser(GetUserString("name"), GetUserDate(dateFormat));
+            var userManager = new UserManager();
+            var user = userManager.CreateUser(GetUserString("name"), GetUserDate(dateFormat));
 
-            usermanager.AddUser(user);
+            userManager.AddUser(user);
         }
 
         private static void DeleteUser() => new UserManager().RemoveUser(GetUserString("name"));
 
         private static void PrintUsers() => new UserManager().PrintUsers();
 
-        private static void CreateAward() => new AwardManager().CreateAward(GetUserString("title"));
+        private static void CreateAward()
+        {
+            var awardManager = new AwardManager();
+            var award = awardManager.CreateAward(GetUserString("title"));
+
+            awardManager.AddAward(award);
+        }
 
         private static void DeleteAward() => new AwardManager().RemoveAward(GetUserString("award"));
 
