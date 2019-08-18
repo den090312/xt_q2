@@ -15,7 +15,7 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
 
         bool UserExists(string userName);
 
-        void PrintUsers(Dictionary<string, string> awardDict);
+        void PrintUsers(List<KeyValuePair<string, string>> awardList);
 
         void AddAwardToUser(string awardID, string userID);
 

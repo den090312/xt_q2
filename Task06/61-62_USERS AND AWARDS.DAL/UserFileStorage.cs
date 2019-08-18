@@ -119,7 +119,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             return exists;
         }
 
-        public void PrintUsers(Dictionary<string, string> awardsDict)
+        public void PrintUsers(List<KeyValuePair<string, string>> awardsList)
         {
             PrepareFile();
 
@@ -136,7 +136,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
                     var userID = UserID(charArray[i]);
 
-                    foreach (var kvPair in awardsDict)
+                    foreach (var kvPair in awardsList)
                     {
                         if (kvPair.Key == userID)
                         {
