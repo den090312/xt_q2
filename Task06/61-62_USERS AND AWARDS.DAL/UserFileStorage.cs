@@ -1,6 +1,7 @@
 ﻿using _61_62_USERS_AND_AWARDS.Entities;
 using _61_62_USERS_AND_AWARDS.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -118,7 +119,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             return exists;
         }
 
-        public void PrintUsers()
+        public void PrintUsers(Dictionary<string, string> awardsDict)
         {
             PrepareFile();
 
@@ -132,6 +133,16 @@ namespace _61_62_USERS_AND_AWARDS.DAL
                 for (int i = 2; i < charArray.Length; i++)
                 {
                     Console.Write(charArray[i]);
+
+                    var userID = UserID(charArray[i]);
+
+                    foreach (var kvPair in awardsDict)
+                    {
+                        if (kvPair.Key == userID)
+                        {
+                            Console.WriteLine($"------{kvPair.Value}");
+                        }
+                    }
 
                     if (i != charArray.Length - 1)
                     {

@@ -1,6 +1,7 @@
 ﻿using _61_62_USERS_AND_AWARDS.Entities;
 using _61_62_USERS_AND_AWARDS.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -284,6 +285,23 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
 
             return awardID;
+        }
+
+        public Dictionary<string, string> GetAwards()
+        {
+            CheckFileExistance();
+
+            var awardsDict = new Dictionary<string, string>();
+
+            Thread.Sleep(10);
+            var awardLines = File.ReadAllLines(FilePath);
+
+            foreach (var awardLine in awardLines)
+            {
+                awardsDict.Add(UserID(awardLine), Name(awardLine));
+            }
+
+            return awardsDict;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using _61_62_USERS_AND_AWARDS.Entities;
+using System.Collections.Generic;
 
 namespace _61_62_USERS_AND_AWARDS.Interfaces
 {
@@ -19,5 +20,7 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
         void AddUserToAward(string userID, string awardID);
 
         string GetID(string awardName);
+
+        Dictionary<string, string> GetAwards();
     }
 }

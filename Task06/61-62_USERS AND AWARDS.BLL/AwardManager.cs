@@ -2,6 +2,7 @@
 using _61_62_USERS_AND_AWARDS.Entities;
 using _61_62_USERS_AND_AWARDS.Interfaces;
 using System;
+using System.Collections.Generic;
 
 namespace _61_62_USERS_AND_AWARDS.BLL
 {
@@ -14,7 +15,7 @@ namespace _61_62_USERS_AND_AWARDS.BLL
         static AwardManager()
         {
             implementation = Dependencies.AwardImplementation;
-            //userImplementation = Dependencies.UserImplementation;
+            userImplementation = Dependencies.UserImplementation;
         }
 
         public void CreateStorage() => implementation.CreateStorage();
@@ -66,7 +67,6 @@ namespace _61_62_USERS_AND_AWARDS.BLL
                 if (awardID != string.Empty)
                 {
                     implementation.AddUserToAward(userID, awardID);
-                    //userImplementation.AddAwardToUser(awardID, userID);
                 }
             }
         }
@@ -80,5 +80,7 @@ namespace _61_62_USERS_AND_AWARDS.BLL
         }
 
         public string GetID(string awardName) => implementation.GetID(awardName);
+
+        public Dictionary<string, string> GetAwards() => implementation.GetAwards();
     }
 }

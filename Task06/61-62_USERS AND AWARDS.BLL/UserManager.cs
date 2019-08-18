@@ -2,6 +2,7 @@
 using _61_62_USERS_AND_AWARDS.Entities;
 using _61_62_USERS_AND_AWARDS.Interfaces;
 using System;
+using System.Collections.Generic;
 
 namespace _61_62_USERS_AND_AWARDS.BLL
 {
@@ -50,7 +51,7 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             return implementation.UserExists(userName);
         }
 
-        public void PrintUsers() => implementation.PrintUsers();
+        public void PrintUsers(Dictionary<string, string> awardsDict) => implementation.PrintUsers(awardImplementation.GetAwards());
 
         public void AddAwardToUser(string awardName, string userName)
         {

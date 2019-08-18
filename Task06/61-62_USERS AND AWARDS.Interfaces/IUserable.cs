@@ -1,4 +1,5 @@
 ﻿using _61_62_USERS_AND_AWARDS.Entities;
+using System.Collections.Generic;
 
 namespace _61_62_USERS_AND_AWARDS.Interfaces
 {
@@ -14,7 +15,7 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
 
         bool UserExists(string userName);
 
-        void PrintUsers();
+        void PrintUsers(Dictionary<string, string> awardDict);
 
         void AddAwardToUser(string awardID, string userID);
 
