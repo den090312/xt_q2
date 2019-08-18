@@ -112,7 +112,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
 
         private static void DeleteUser() => new UserManager().RemoveUser(GetUserString("name"));
 
-        private static void PrintUsers() => new UserManager().PrintUsers();
+        private static void PrintUsers() => new UserManager().PrintUsers(new AwardManager().GetAwards());
 
         private static void CreateAward()
         {

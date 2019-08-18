@@ -51,7 +51,7 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             return implementation.UserExists(userName);
         }
 
-        public void PrintUsers(Dictionary<string, string> awardsDict) => implementation.PrintUsers(awardImplementation.GetAwards());
+        public void PrintUsers(List<KeyValuePair<string, string>> awardsDict) => implementation.PrintUsers(awardImplementation.GetAwards());
 
         public void AddAwardToUser(string awardName, string userName)
         {

@@ -81,6 +81,6 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
         public string GetID(string awardName) => implementation.GetID(awardName);
 
-        public Dictionary<string, string> GetAwards() => implementation.GetAwards();
+        public List<KeyValuePair<string, string>> GetAwards() => implementation.GetAwards();
     }
 }

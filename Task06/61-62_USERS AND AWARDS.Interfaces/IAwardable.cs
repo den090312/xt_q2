@@ -21,6 +21,6 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
 
         string GetID(string awardName);
 
-        Dictionary<string, string> GetAwards();
+        List<KeyValuePair<string, string>> GetAwards();
     }
 }

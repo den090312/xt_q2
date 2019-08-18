@@ -287,18 +287,18 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             return awardID;
         }
 
-        public Dictionary<string, string> GetAwards()
+        public List<KeyValuePair<string, string>> GetAwards()
         {
             CheckFileExistance();
 
-            var awardsDict = new Dictionary<string, string>();
+            var awardsDict = new List<KeyValuePair<string, string>>();
 
             Thread.Sleep(10);
             var awardLines = File.ReadAllLines(FilePath);
 
             foreach (var awardLine in awardLines)
             {
-                awardsDict.Add(UserID(awardLine), Name(awardLine));
+                awardsDict.Add(new KeyValuePair<string, string>(UserID(awardLine), Name(awardLine)));
             }
 
             return awardsDict;
