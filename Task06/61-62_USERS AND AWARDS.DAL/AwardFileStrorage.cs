@@ -64,7 +64,7 @@ namespace Task06.DAL
             streamWriter.Close();
         }
 
-        public bool AwardsExists(string awardName)
+        public bool AwardsExists(string awardTitle)
         {
             bool exists = false;
 
@@ -79,7 +79,7 @@ namespace Task06.DAL
             {
                 foreach (var line in lines)
                 {
-                    if (Title(line) == awardName)
+                    if (Title(line) == awardTitle)
                     {
                         streamWriter.Close();
 
@@ -93,7 +93,7 @@ namespace Task06.DAL
             return exists;
         }
 
-        public void RemoveAwards(string awardName)
+        public void RemoveAwards(string awardTitle)
         {
             PrepareFile();
 
@@ -107,7 +107,7 @@ namespace Task06.DAL
 
             foreach (var line in lines)
             {
-                if (Title(line) != awardName)
+                if (Title(line) != awardTitle)
                 {
                     streamWriter.Write(line);
                     streamWriter.WriteLine();
@@ -225,7 +225,6 @@ namespace Task06.DAL
             }
         }
 
-
         private static string NewLine(string line, string id)
         {
             int indexID = Award.GetFieldIndex("UserID");
@@ -304,7 +303,7 @@ namespace Task06.DAL
             }
         }
 
-        public string[] GetAwardIDArray(string awardName)
+        public string[] GetAwardIDArray(string awardTitle)
         {
             var awardIDList = new List<string>();
 
@@ -315,7 +314,7 @@ namespace Task06.DAL
 
             foreach (var awardLine in awardLines)
             {
-                if (Title(awardLine) == awardName)
+                if (Title(awardLine) == awardTitle)
                 {
                     awardIDList.Add(awardLine.Split(Separator)[Award.GetFieldIndex("AwardID")]);
                 }
@@ -346,18 +345,18 @@ namespace Task06.DAL
             PrepareFile();
 
             Thread.Sleep(10);
-            var lines = File.ReadAllLines(FilePath);
+            var awardLines = File.ReadAllLines(FilePath);
 
             File.Delete(FilePath);
 
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(FilePath, true);
 
-            foreach (var line in lines)
+            foreach (var awardLine in awardLines)
             {
-                if (UserID(line) != userID)
+                if (UserID(awardLine) != userID)
                 {
-                    streamWriter.Write(line);
+                    streamWriter.Write(awardLine);
                     streamWriter.WriteLine();
                 }
             }

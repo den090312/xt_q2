@@ -361,18 +361,18 @@ namespace Task06.DAL
             PrepareFile();
 
             Thread.Sleep(10);
-            var lines = File.ReadAllLines(FilePath);
+            var userLines = File.ReadAllLines(FilePath);
 
             File.Delete(FilePath);
 
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(FilePath, true);
 
-            foreach (var line in lines)
+            foreach (var userLine in userLines)
             {
-                if (AwardID(line) != awardID)
+                if (AwardID(userLine) != awardID)
                 {
-                    streamWriter.Write(line);
+                    streamWriter.Write(userLine);
                     streamWriter.WriteLine();
                 }
             }
