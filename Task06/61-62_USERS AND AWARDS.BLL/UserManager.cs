@@ -14,8 +14,8 @@ namespace Task06.BLL
 
         static UserManager()
         {
-            userImplement = Dependencies.UserImplementation;
-            awardImplement = Dependencies.AwardImplementation;
+            userImplement = Dependencies.UserImplement;
+            awardImplement = Dependencies.AwardImplement;
         }
 
         public void CreateStorage() => userImplement.CreateStorage();

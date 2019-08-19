@@ -5,14 +5,14 @@ namespace Task06.Common
 {
     public static class Dependencies 
     {
-        public static IUserable UserImplementation { get; }
+        public static IUserable UserImplement { get; }
 
-        public static IAwardable AwardImplementation { get; }
+        public static IAwardable AwardImplement { get; }
 
         static Dependencies()
         {
-            AwardImplementation = new AwardFileStrorage();
-            UserImplementation = new UserFileStorage();
+            AwardImplement = new AwardFileStrorage();
+            UserImplement = new UserFileStorage();
         }
     }
 }

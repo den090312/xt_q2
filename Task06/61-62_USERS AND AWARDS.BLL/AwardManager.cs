@@ -14,8 +14,8 @@ namespace Task06.BLL
 
         static AwardManager()
         {
-            awardImplement = Dependencies.AwardImplementation;
-            userImplement = Dependencies.UserImplementation;
+            awardImplement = Dependencies.AwardImplement;
+            userImplement = Dependencies.UserImplement;
         }
 
         public void CreateStorage() => awardImplement.CreateStorage();
