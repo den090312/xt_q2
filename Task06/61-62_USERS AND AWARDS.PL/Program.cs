@@ -51,25 +51,25 @@ namespace Task06.PL
                     switch (userKey)
                     {
                         case 1:
-                            inputComplete = CreateUserStart();
+                            inputComplete = StartUserCreation();
                             break;
                         case 2:
-                            inputComplete = RemoveUserStart();
+                            inputComplete = StartUserRemoving();
                             break;
                         case 3:
-                            inputComplete = PrintUsersStart();
+                            inputComplete = StartUserPrinting();
                             break;
                         case 4:
-                            inputComplete = CreateAwardStart();
+                            inputComplete = StartAwardCreation();
                             break;
                         case 5:
-                            inputComplete = RemoveAwardStart();
+                            inputComplete = StartAwardRemoving();
                             break;
                         case 6:
-                            inputComplete = PrintAwardsStart();
+                            inputComplete = StartAwardPrinting();
                             break;
                         case 7:
-                            inputComplete = Join();
+                            inputComplete = StartJoin();
                             break;
                         case 8:
                             return true;
@@ -80,7 +80,7 @@ namespace Task06.PL
             return inputComplete;
         }
 
-        private static bool Join()
+        private static bool StartJoin()
         {
             JoinAwardToUser();
             Console.WriteLine("---Done---");
@@ -88,7 +88,7 @@ namespace Task06.PL
             return RunOperation();
         }
 
-        private static bool PrintAwardsStart()
+        private static bool StartAwardPrinting()
         {
             Console.WriteLine();
             PrintAwards();
@@ -97,7 +97,7 @@ namespace Task06.PL
             return RunOperation();
         }
 
-        private static bool RemoveAwardStart()
+        private static bool StartAwardRemoving()
         {
             consoleSegment = ConsoleSegment.Award;
             RemoveAward();
@@ -106,7 +106,7 @@ namespace Task06.PL
             return RunOperation();
         }
 
-        private static bool CreateAwardStart()
+        private static bool StartAwardCreation()
         {
             consoleSegment = ConsoleSegment.Award;
             CreateAward();
@@ -115,7 +115,7 @@ namespace Task06.PL
             return RunOperation();
         }
 
-        private static bool PrintUsersStart()
+        private static bool StartUserPrinting()
         {
             Console.WriteLine();
             PrintUsers();
@@ -124,7 +124,7 @@ namespace Task06.PL
             return RunOperation();
         }
 
-        private static bool RemoveUserStart()
+        private static bool StartUserRemoving()
         {
             consoleSegment = ConsoleSegment.User;
             RemoveUser();
@@ -133,7 +133,7 @@ namespace Task06.PL
             return RunOperation();
         }
 
-        private static bool CreateUserStart()
+        private static bool StartUserCreation()
         {
             consoleSegment = ConsoleSegment.User;
             CreateUser(dateFormat);
