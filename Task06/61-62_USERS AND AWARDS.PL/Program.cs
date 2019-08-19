@@ -51,45 +51,25 @@ namespace Task06.PL
                     switch (userKey)
                     {
                         case 1:
-                            consoleSegment = ConsoleSegment.User;
-                            CreateUser(dateFormat);
-                            Console.WriteLine("---Done---");
-                            inputComplete = RunOperation();                           
+                            inputComplete = CreateUserStart();
                             break;
                         case 2:
-                            consoleSegment = ConsoleSegment.User;
-                            RemoveUser();
-                            Console.WriteLine("---Done---");
-                            inputComplete = RunOperation();
+                            inputComplete = RemoveUserStart();
                             break;
                         case 3:
-                            Console.WriteLine();
-                            PrintUsers();
-                            Console.WriteLine("---Done---");
-                            inputComplete = RunOperation();
+                            inputComplete = PrintUsersStart();
                             break;
                         case 4:
-                            consoleSegment = ConsoleSegment.Award;
-                            CreateAward();
-                            Console.WriteLine("---Done---");
-                            inputComplete = RunOperation();
+                            inputComplete = CreateAwardStart();
                             break;
                         case 5:
-                            consoleSegment = ConsoleSegment.Award;
-                            RemoveAward();
-                            Console.WriteLine("---Done---");
-                            inputComplete = RunOperation();
+                            inputComplete = RemoveAwardStart();
                             break;
                         case 6:
-                            Console.WriteLine();
-                            PrintAwards();
-                            Console.WriteLine("---Done---");
-                            inputComplete = RunOperation();
+                            inputComplete = PrintAwardsStart();
                             break;
                         case 7:
-                            JoinAwardToUser();
-                            Console.WriteLine("---Done---");
-                            inputComplete = RunOperation();
+                            inputComplete = Join();
                             break;
                         case 8:
                             return true;
@@ -98,6 +78,68 @@ namespace Task06.PL
             }
 
             return inputComplete;
+        }
+
+        private static bool Join()
+        {
+            JoinAwardToUser();
+            Console.WriteLine("---Done---");
+
+            return RunOperation();
+        }
+
+        private static bool PrintAwardsStart()
+        {
+            Console.WriteLine();
+            PrintAwards();
+            Console.WriteLine("---Done---");
+
+            return RunOperation();
+        }
+
+        private static bool RemoveAwardStart()
+        {
+            consoleSegment = ConsoleSegment.Award;
+            RemoveAward();
+            Console.WriteLine("---Done---");
+
+            return RunOperation();
+        }
+
+        private static bool CreateAwardStart()
+        {
+            consoleSegment = ConsoleSegment.Award;
+            CreateAward();
+            Console.WriteLine("---Done---");
+
+            return RunOperation();
+        }
+
+        private static bool PrintUsersStart()
+        {
+            Console.WriteLine();
+            PrintUsers();
+            Console.WriteLine("---Done---");
+
+            return RunOperation();
+        }
+
+        private static bool RemoveUserStart()
+        {
+            consoleSegment = ConsoleSegment.User;
+            RemoveUser();
+            Console.WriteLine("---Done---");
+
+            return RunOperation();
+        }
+
+        private static bool CreateUserStart()
+        {
+            consoleSegment = ConsoleSegment.User;
+            CreateUser(dateFormat);
+            Console.WriteLine("---Done---");
+
+            return RunOperation();
         }
 
         public static void WriteMenu()
