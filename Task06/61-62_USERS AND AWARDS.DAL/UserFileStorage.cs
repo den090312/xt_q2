@@ -80,7 +80,7 @@ namespace Task06.DAL
 
             foreach (var line in lines)
             {
-                if (NameInLine(line) != userName)
+                if (Name(line) != userName)
                 {
                     streamWriter.Write(line);
                     streamWriter.WriteLine();
@@ -105,7 +105,7 @@ namespace Task06.DAL
             {
                 foreach (var line in lines)
                 {
-                    if (NameInLine(line) == userName)
+                    if (Name(line) == userName)
                     {
                         streamWriter.Close();
 
@@ -219,11 +219,24 @@ namespace Task06.DAL
             return recorded;
         }
 
-        private static string NameInLine(string line) => line.Split(Separator)[User.GetFieldIndex("Name")];
+        private static string Name(string line) => GetItemInLine("Name", line);
 
-        private static string UserID(string line) => line.Split(Separator)[User.GetFieldIndex("UserID")];
+        private static string UserID(string line) => GetItemInLine("UserID", line);
 
-        private static string AwardID(string line) => line.Split(Separator)[User.GetFieldIndex("AwardID")];
+        private static string AwardID(string line) => GetItemInLine("AwardID", line);
+
+        private static string GetItemInLine(string itemName, string line)
+        {
+            var fieldIndex = User.GetFieldIndex(itemName);
+
+            switch (fieldIndex)
+            {
+                case -1:
+                    return string.Empty;
+                default:
+                    return line.Split(Separator)[fieldIndex];
+            }
+        }
 
         private static string NewLine(string line, string id)
         {
@@ -314,7 +327,7 @@ namespace Task06.DAL
 
             foreach (var userLine in userLines)
             {
-                if (NameInLine(userLine) == userName)
+                if (Name(userLine) == userName)
                 {
                     userIDList.Add(userLine.Split(Separator)[User.GetFieldIndex("UserID")]);
                 }

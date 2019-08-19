@@ -79,7 +79,7 @@ namespace Task06.DAL
             {
                 foreach (var line in lines)
                 {
-                    if (NameInLIne(line) == awardName)
+                    if (Title(line) == awardName)
                     {
                         streamWriter.Close();
 
@@ -107,7 +107,7 @@ namespace Task06.DAL
 
             foreach (var line in lines)
             {
-                if (NameInLIne(line) != awardName)
+                if (Title(line) != awardName)
                 {
                     streamWriter.Write(line);
                     streamWriter.WriteLine();
@@ -206,11 +206,25 @@ namespace Task06.DAL
             return recorded;
         }
 
-        private static string NameInLIne(string line) => line.Split(Separator)[Award.GetFieldIndex("Title")];
+        private static string Title(string line) => GetItemInLine("Title", line);
 
-        private static string AwardID(string line) => line.Split(Separator)[Award.GetFieldIndex("AwardID")];
+        private static string UserID(string line) => GetItemInLine("UserID", line);
 
-        private static string UserID(string line) => line.Split(Separator)[Award.GetFieldIndex("UserID")];
+        private static string AwardID(string line) => GetItemInLine("AwardID", line);
+
+        private static string GetItemInLine(string itemName, string line)
+        {
+            var fieldIndex = Award.GetFieldIndex(itemName);
+
+            switch (fieldIndex)
+            {
+                case -1:
+                    return string.Empty;
+                default:
+                    return line.Split(Separator)[fieldIndex];
+            }
+        }
+
 
         private static string NewLine(string line, string id)
         {
@@ -301,7 +315,7 @@ namespace Task06.DAL
 
             foreach (var awardLine in awardLines)
             {
-                if (NameInLIne(awardLine) == awardName)
+                if (Title(awardLine) == awardName)
                 {
                     awardIDList.Add(awardLine.Split(Separator)[Award.GetFieldIndex("AwardID")]);
                 }
@@ -321,7 +335,7 @@ namespace Task06.DAL
 
             foreach (var awardLine in awardLines)
             {
-                awardsList.Add(new KeyValuePair<string, string>(UserID(awardLine), NameInLIne(awardLine)));
+                awardsList.Add(new KeyValuePair<string, string>(UserID(awardLine), Title(awardLine)));
             }
 
             return awardsList;
