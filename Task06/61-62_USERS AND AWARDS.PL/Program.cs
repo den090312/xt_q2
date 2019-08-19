@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Task06.PL
 {
-    public class ConsolePL
+    public class Program
     {
         public static readonly string dateFormat = "dd.MM.yyyy";
 
