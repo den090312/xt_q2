@@ -13,7 +13,7 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
 
         void RemoveUsers(string userName);
 
-        bool UserExists(string userName);
+        bool UsersExists(string userName);
 
         void PrintUsers(List<KeyValuePair<string, string>> awardList);
 

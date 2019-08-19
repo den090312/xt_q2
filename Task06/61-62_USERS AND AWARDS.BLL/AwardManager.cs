@@ -54,11 +54,11 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             }
         }
 
-        public bool AwardExists(string awardName)
+        public bool AwardsExists(string awardName)
         {
             NullCheck(awardName);
 
-            return awardImplement.AwardExists(awardName);
+            return awardImplement.AwardsExists(awardName);
         }
 
         public void PrintAwards() => awardImplement.PrintAwards();

@@ -56,11 +56,11 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             }
         }
 
-        public bool UserExists(string userName)
+        public bool UsersExists(string userName)
         {
             NullCheck(userName);
 
-            return userImplement.UserExists(userName);
+            return userImplement.UsersExists(userName);
         }
 
         public void PrintUsers(List<KeyValuePair<string, string>> awardsList) => userImplement.PrintUsers(awardImplement.GetAwardList());

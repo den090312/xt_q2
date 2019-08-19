@@ -90,7 +90,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             streamWriter.Close();
         }
 
-        public bool UserExists(string userName)
+        public bool UsersExists(string userName)
         {
             bool exists = false;
 

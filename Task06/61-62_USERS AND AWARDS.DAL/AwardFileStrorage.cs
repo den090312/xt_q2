@@ -64,7 +64,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             streamWriter.Close();
         }
 
-        public bool AwardExists(string awardName)
+        public bool AwardsExists(string awardName)
         {
             bool exists = false;
 
