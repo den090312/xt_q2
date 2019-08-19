@@ -50,13 +50,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\61-62_USERS AND AWARDS.BLL\61-62_USERS AND AWARDS.BLL.csproj">
+    <ProjectReference Include="..\61-62_USERS AND AWARDS.BLL\BLL.csproj">
       <Project>{aae1fbd7-23be-4977-be89-6c995ec096c8}</Project>
-      <Name>61-62_USERS AND AWARDS.BLL</Name>
+      <Name>BLL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\61-62_USERS AND AWARDS.Entities\61-62_USERS AND AWARDS.Entities.csproj">
+    <ProjectReference Include="..\61-62_USERS AND AWARDS.Entities\Entities.csproj">
       <Project>{22E6A0DE-2AE3-4ABD-B0C4-B333B712F77E}</Project>
-      <Name>61-62_USERS AND AWARDS.Entities</Name>
+      <Name>Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

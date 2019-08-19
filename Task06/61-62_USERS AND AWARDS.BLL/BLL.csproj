@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>_61_62_USERS_AND_AWARDS.Common</RootNamespace>
+    <RootNamespace>_61_62_USERS_AND_AWARDS.BLL</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\61-62_USERS AND AWARDS.DAL\61-62_USERS AND AWARDS.DAL.csproj" />
+    <ProjectReference Include="..\61-62_USERS AND AWARDS.Common\Common.csproj" />
   </ItemGroup>
 
 </Project>
