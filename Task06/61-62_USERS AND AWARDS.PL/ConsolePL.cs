@@ -27,62 +27,77 @@ namespace Task06.PL
             new AwardManager().PrintStorageInfo();
             Console.WriteLine();
 
-            WriteMenu();
+            var inputComplete = false;
 
-            bool inputComplete = false;
-
-            RunOperation(ref inputComplete);
+            do
+            {
+                inputComplete = RunOperation();
+            }
+            while (!inputComplete);
         }
 
-        private static void RunOperation(ref bool inputComplete)
+        private static bool RunOperation()
         {
+            WriteMenu();
+
+            var userKey = GetKeyFromConsole();
+
+            var inputComplete = false;
+
             while (!inputComplete)
             {
-                int userKey = GetKeyFromConsole();
-
                 if (userKey != 0)
                 {
                     switch (userKey)
                     {
                         case 1:
-                            inputComplete = true;
                             consoleSegment = ConsoleSegment.User;
                             CreateUser(dateFormat);
+                            Console.WriteLine("---Done---");
+                            inputComplete = RunOperation();                           
                             break;
                         case 2:
-                            inputComplete = true;
                             consoleSegment = ConsoleSegment.User;
                             RemoveUser();
+                            Console.WriteLine("---Done---");
+                            inputComplete = RunOperation();
                             break;
                         case 3:
-                            inputComplete = true;
                             Console.WriteLine();
                             PrintUsers();
+                            Console.WriteLine("---Done---");
+                            inputComplete = RunOperation();
                             break;
                         case 4:
-                            inputComplete = true;
                             consoleSegment = ConsoleSegment.Award;
                             CreateAward();
+                            Console.WriteLine("---Done---");
+                            inputComplete = RunOperation();
                             break;
                         case 5:
-                            inputComplete = true;
                             consoleSegment = ConsoleSegment.Award;
                             RemoveAward();
+                            Console.WriteLine("---Done---");
+                            inputComplete = RunOperation();
                             break;
                         case 6:
-                            inputComplete = true;
                             Console.WriteLine();
                             PrintAwards();
+                            Console.WriteLine("---Done---");
+                            inputComplete = RunOperation();
                             break;
                         case 7:
-                            inputComplete = true;
                             JoinAwardToUser();
+                            Console.WriteLine("---Done---");
+                            inputComplete = RunOperation();
                             break;
                         case 8:
-                            return;
+                            return true;
                     }
                 }
             }
+
+            return inputComplete;
         }
 
         public static void WriteMenu()
