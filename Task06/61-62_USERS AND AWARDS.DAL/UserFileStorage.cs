@@ -119,7 +119,7 @@ namespace Task06.DAL
             return exists;
         }
 
-        public void PrintUsers(List<KeyValuePair<string, string>> awardsList)
+        public void PrintUsers(List<KeyValuePair<string, string>> awardList)
         {
             PrepareFile();
 
@@ -135,7 +135,7 @@ namespace Task06.DAL
                 if (currentUserID != lineArray[0])
                 {
                     PrintUser(ref lineArray);
-                    PrintAwards(ref awardsList, UserID(lineArray[0]));
+                    PrintAwards(ref awardList, UserID(lineArray[0]));
                 }
 
                 currentUserID = lineArray[0];
@@ -155,11 +155,11 @@ namespace Task06.DAL
             }
         }
 
-        private static void PrintAwards(ref List<KeyValuePair<string, string>> awardsList, string userID)
+        private static void PrintAwards(ref List<KeyValuePair<string, string>> awardList, string userID)
         {
             Console.WriteLine();
 
-            var selectedList = awardsList.FindAll(x => x.Key == userID);
+            var selectedList = awardList.FindAll(x => x.Key == userID);
 
             foreach (var kvPair in selectedList)
             {
@@ -228,6 +228,11 @@ namespace Task06.DAL
         private static string GetItemInLine(string itemName, string line)
         {
             var fieldIndex = User.GetFieldIndex(itemName);
+
+            if (fieldIndex == -1)
+            {
+                throw new Exception("fieldIndex is not found!");
+            }
 
             switch (fieldIndex)
             {

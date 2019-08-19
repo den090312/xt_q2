@@ -210,7 +210,7 @@ namespace Task06.PL
 
                 if (key.Key == ConsoleKey.Backspace)
                 {
-                    EmulateConsoleKeyBackSpace(userKeySB);
+                    EmulateBackspace(userKeySB);
                 }
                 else if (key.Key == ConsoleKey.Enter)
                 {
@@ -255,7 +255,7 @@ namespace Task06.PL
 
                 if (key.Key == ConsoleKey.Backspace)
                 {
-                    EmulateConsoleKeyBackSpace(userSB);
+                    EmulateBackspace(userSB);
                 }
                 else if (key.Key == ConsoleKey.Enter)
                 {
@@ -301,7 +301,7 @@ namespace Task06.PL
             return userBirthDate;
         }
 
-        public static void EmulateConsoleKeyBackSpace(StringBuilder userKeySB)
+        public static void EmulateBackspace(StringBuilder userKeySB)
         {
             if (userKeySB.Length > 0)
             {
