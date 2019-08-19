@@ -20,7 +20,7 @@ namespace Task06.DAL
 
         static UserFileStorage()
         {
-            FilePath = $@"D:\Task06\Users.txt";
+            FilePath = @"D:\Task06\Users.txt";
             FileName = "Users.txt";
             Separator = '|';
         }

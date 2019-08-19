@@ -20,7 +20,7 @@ namespace Task06.DAL
 
         static AwardFileStrorage()
         {
-            FilePath = $@"D:\Task06\Awards.txt";
+            FilePath = @"D:\Task06\Awards.txt";
             FileName = "Awards.txt";
             Separator = '|';
         }
