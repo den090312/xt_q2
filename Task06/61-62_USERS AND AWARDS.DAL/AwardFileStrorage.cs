@@ -290,7 +290,7 @@ namespace Task06.DAL
             }
         }
 
-        public string[] GetArrayID(string awardName)
+        public string[] GetAwardArrayID(string awardName)
         {
             var awardIDList = new List<string>();
 

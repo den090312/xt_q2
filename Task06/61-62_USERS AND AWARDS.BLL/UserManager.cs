@@ -41,7 +41,7 @@ namespace Task06.BLL
         {
             NullCheck(userName);
 
-            var userArrayID = userImplement.GetArrayID(userName);
+            var userArrayID = userImplement.GetUserArrayID(userName);
             NullCheck(userArrayID);
 
             userImplement.RemoveUsers(userName);
@@ -69,10 +69,10 @@ namespace Task06.BLL
             NullCheck(awardName);
             NullCheck(userName);
 
-            var awardArrayID = awardImplement.GetArrayID(awardName);
+            var awardArrayID = awardImplement.GetAwardArrayID(awardName);
             NullCheck(awardArrayID);
 
-            var userArrayID = userImplement.GetArrayID(userName);
+            var userArrayID = userImplement.GetUserArrayID(userName);
             NullCheck(userArrayID);
 
             foreach (var awardID in awardArrayID)
@@ -121,7 +121,7 @@ namespace Task06.BLL
             }
         }
 
-        public string[] GetArrayID(string userName) => userImplement.GetArrayID(userName);
+        public string[] GetUserArrayID(string userName) => userImplement.GetUserArrayID(userName);
 
         public bool RecordExists(string awardID, string userID)
         {
