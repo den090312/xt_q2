@@ -39,7 +39,16 @@ namespace _61_62_USERS_AND_AWARDS.BLL
         public void RemoveAward(string awardName)
         {
             NullCheck(awardName);
+
+            var awardID = awardImplement.GetID(awardName);
+            NullCheck(awardID);
+
             awardImplement.RemoveAward(awardName);
+
+            if (awardID != string.Empty)
+            {
+                userImplement.RemoveAward(awardID);
+            }
         }
 
         public bool AwardExists(string awardName)
@@ -74,6 +83,12 @@ namespace _61_62_USERS_AND_AWARDS.BLL
         public string GetID(string awardName) => awardImplement.GetID(awardName);
 
         public List<KeyValuePair<string, string>> GetAwards() => awardImplement.GetAwards();
+
+        public void RemoveUser(string userID)
+        {
+            NullCheck(userID);
+            awardImplement.RemoveUser(userID);
+        }
 
         public static void NullCheck<T>(T classObject) where T : class
         {

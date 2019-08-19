@@ -22,5 +22,7 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
         string GetID(string userName);
 
         bool RecordExists(string awardID, string userID);
+
+        void RemoveAward(string awardID);
     }
 }

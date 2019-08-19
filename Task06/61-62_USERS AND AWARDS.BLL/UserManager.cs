@@ -41,7 +41,16 @@ namespace _61_62_USERS_AND_AWARDS.BLL
         public void RemoveUser(string userName)
         {
             NullCheck(userName);
+
+            var userID = userImplement.GetID(userName);
+            NullCheck(userID);
+
             userImplement.RemoveUser(userName);
+
+            if (userID != string.Empty)
+            {
+                awardImplement.RemoveUser(userID);
+            }
         }
 
         public bool UserExists(string userName)
@@ -106,6 +115,12 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             NullCheck(userID);
 
             return userImplement.RecordExists(awardID, userID);
+        }
+
+        public void RemoveAward(string awardID)
+        {
+            NullCheck(awardID);
+            userImplement.RemoveAward(awardID);
         }
 
         public static void NullCheck<T>(T classObject) where T : class

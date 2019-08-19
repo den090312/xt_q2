@@ -22,5 +22,7 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
         string GetID(string awardName);
 
         List<KeyValuePair<string, string>> GetAwards();
+
+        void RemoveUser(string userID);
     }
 }

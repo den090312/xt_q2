@@ -324,5 +324,29 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             return awardsList;
         }
+
+        public void RemoveUser(string userID)
+        {
+            PrepareFile();
+
+            Thread.Sleep(10);
+            var lines = File.ReadAllLines(FilePath);
+
+            File.Delete(FilePath);
+
+            Thread.Sleep(10);
+            var streamWriter = new StreamWriter(FilePath, true);
+
+            foreach (var line in lines)
+            {
+                if (UserID(line) != userID)
+                {
+                    streamWriter.Write(line);
+                    streamWriter.WriteLine();
+                }
+            }
+
+            streamWriter.Close();
+        }
     }
 }
