@@ -93,7 +93,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             return exists;
         }
 
-        public void RemoveAward(string awardName)
+        public void RemoveAwards(string awardName)
         {
             PrepareFile();
 
@@ -310,7 +310,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             return awardIDList.ToArray();
         }
 
-        public List<KeyValuePair<string, string>> GetAwards()
+        public List<KeyValuePair<string, string>> GetAwardList()
         {
             CheckFileExistance();
 

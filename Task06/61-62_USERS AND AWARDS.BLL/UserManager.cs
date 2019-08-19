@@ -38,14 +38,14 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             userImplement.AddUser(user);
         }
 
-        public void RemoveUser(string userName)
+        public void RemoveUsers(string userName)
         {
             NullCheck(userName);
 
             var userArrayID = userImplement.GetArrayID(userName);
             NullCheck(userArrayID);
 
-            userImplement.RemoveUser(userName);
+            userImplement.RemoveUsers(userName);
 
             foreach (var userID in userArrayID)
             {
@@ -63,7 +63,7 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             return userImplement.UserExists(userName);
         }
 
-        public void PrintUsers(List<KeyValuePair<string, string>> awardsList) => userImplement.PrintUsers(awardImplement.GetAwards());
+        public void PrintUsers(List<KeyValuePair<string, string>> awardsList) => userImplement.PrintUsers(awardImplement.GetAwardList());
 
         public void PinAwardToUser(string awardName, string userName)
         {

@@ -11,7 +11,7 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
 
         void AddAward(Award award);
 
-        void RemoveAward(string awardName);
+        void RemoveAwards(string awardName);
 
         bool AwardExists(string awardName);
 
@@ -21,7 +21,7 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
 
         string[] GetArrayID(string awardName);
 
-        List<KeyValuePair<string, string>> GetAwards();
+        List<KeyValuePair<string, string>> GetAwardList();
 
         void EraseUser(string userID);
     }

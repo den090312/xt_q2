@@ -110,9 +110,9 @@ namespace _61_62_USERS_AND_AWARDS.PL
             userManager.AddUser(user);
         }
 
-        private static void RemoveUser() => new UserManager().RemoveUser(GetUserString("name"));
+        private static void RemoveUser() => new UserManager().RemoveUsers(GetUserString("name"));
 
-        private static void PrintUsers() => new UserManager().PrintUsers(new AwardManager().GetAwards());
+        private static void PrintUsers() => new UserManager().PrintUsers(new AwardManager().GetAwardList());
 
         private static void CreateAward()
         {
@@ -122,7 +122,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
             awardManager.AddAward(award);
         }
 
-        private static void RemoveAward() => new AwardManager().RemoveAward(GetUserString("award"));
+        private static void RemoveAward() => new AwardManager().RemoveAwards(GetUserString("award"));
 
         private static void PrintAwards() => new AwardManager().PrintAwards();
 

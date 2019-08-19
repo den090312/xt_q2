@@ -36,14 +36,14 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             awardImplement.AddAward(award);
         }
 
-        public void RemoveAward(string awardName)
+        public void RemoveAwards(string awardName)
         {
             NullCheck(awardName);
 
             var awardArrayID = awardImplement.GetArrayID(awardName);
             NullCheck(awardArrayID);
 
-            awardImplement.RemoveAward(awardName);
+            awardImplement.RemoveAwards(awardName);
 
             foreach (var awardID in awardArrayID)
             {
@@ -95,7 +95,7 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
         public string[] GetArrayID(string awardName) => awardImplement.GetArrayID(awardName);
 
-        public List<KeyValuePair<string, string>> GetAwards() => awardImplement.GetAwards();
+        public List<KeyValuePair<string, string>> GetAwardList() => awardImplement.GetAwardList();
 
         public void EraseUser(string userID)
         {

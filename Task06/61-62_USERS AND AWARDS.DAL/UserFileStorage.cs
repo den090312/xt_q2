@@ -66,7 +66,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             streamWriter.Close();
         }
 
-        public void RemoveUser(string userName)
+        public void RemoveUsers(string userName)
         {
             PrepareFile();
 

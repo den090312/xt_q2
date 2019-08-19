@@ -11,7 +11,7 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
 
         void AddUser(User user);
 
-        void RemoveUser(string userName);
+        void RemoveUsers(string userName);
 
         bool UserExists(string userName);
 
