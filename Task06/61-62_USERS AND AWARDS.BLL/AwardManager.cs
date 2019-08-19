@@ -71,12 +71,13 @@ namespace Task06.BLL
             var userArrayID = userImplement.GetArrayID(userName);
             NullCheck(userArrayID);
 
+            var awardArrayID = awardImplement.GetArrayID(awardName);
+            NullCheck(awardArrayID);
+
             foreach (var userID in userArrayID)
             {
                 if (userID != string.Empty)
                 {
-                    var awardArrayID = awardImplement.GetArrayID(awardName);
-                    NullCheck(awardArrayID);
                     Join(userID, awardArrayID);
                 }
             }
