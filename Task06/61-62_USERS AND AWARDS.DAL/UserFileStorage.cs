@@ -71,14 +71,14 @@ namespace Task06.DAL
             PrepareFile();
 
             Thread.Sleep(10);
-            var lines = File.ReadAllLines(FilePath);
+            var userLines = File.ReadAllLines(FilePath);
 
             File.Delete(FilePath);
 
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(FilePath, true);
 
-            foreach (var line in lines)
+            foreach (var line in userLines)
             {
                 if (Name(line) != userName)
                 {
@@ -98,12 +98,12 @@ namespace Task06.DAL
             SetNormalAttributes();
 
             Thread.Sleep(10);
-            var lines = File.ReadAllLines(FilePath);
+            var userLines = File.ReadAllLines(FilePath);
 
             Thread.Sleep(10);
             using (var streamWriter = new StreamWriter(FilePath, true))
             {
-                foreach (var line in lines)
+                foreach (var line in userLines)
                 {
                     if (Name(line) == userName)
                     {
@@ -124,11 +124,11 @@ namespace Task06.DAL
             PrepareFile();
 
             Thread.Sleep(10);
-            var lines = File.ReadAllLines(FilePath);
+            var userLines = File.ReadAllLines(FilePath);
 
             var currentUserID = string.Empty;
 
-            foreach (var line in lines)
+            foreach (var line in userLines)
             {
                 var lineArray = line.Split(Separator);
 
@@ -325,11 +325,11 @@ namespace Task06.DAL
             Thread.Sleep(10);
             var userLines = File.ReadAllLines(FilePath);
 
-            foreach (var userLine in userLines)
+            foreach (var line in userLines)
             {
-                if (Name(userLine) == userName)
+                if (Name(line) == userName)
                 {
-                    userIDList.Add(userLine.Split(Separator)[User.GetFieldIndex("UserID")]);
+                    userIDList.Add(line.Split(Separator)[User.GetFieldIndex("UserID")]);
                 }
             }
 
@@ -345,9 +345,9 @@ namespace Task06.DAL
             Thread.Sleep(10);
             var userLines = File.ReadAllLines(FilePath);
 
-            foreach (var userLine in userLines)
+            foreach (var line in userLines)
             {
-                if (AwardID(userLine) == awardID & UserID(userLine) == userID)
+                if (AwardID(line) == awardID & UserID(line) == userID)
                 {
                     return true;
                 }
@@ -368,11 +368,11 @@ namespace Task06.DAL
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(FilePath, true);
 
-            foreach (var userLine in userLines)
+            foreach (var line in userLines)
             {
-                if (AwardID(userLine) != awardID)
+                if (AwardID(line) != awardID)
                 {
-                    streamWriter.Write(userLine);
+                    streamWriter.Write(line);
                     streamWriter.WriteLine();
                 }
             }

@@ -72,12 +72,12 @@ namespace Task06.DAL
             SetNormalAttributes();
 
             Thread.Sleep(10);
-            var lines = File.ReadAllLines(FilePath);
+            var userLines = File.ReadAllLines(FilePath);
 
             Thread.Sleep(10);
             using (var streamWriter = new StreamWriter(FilePath, true))
             {
-                foreach (var line in lines)
+                foreach (var line in userLines)
                 {
                     if (Title(line) == awardTitle)
                     {
@@ -98,14 +98,14 @@ namespace Task06.DAL
             PrepareFile();
 
             Thread.Sleep(10);
-            var lines = File.ReadAllLines(FilePath);
+            var userLines = File.ReadAllLines(FilePath);
 
             File.Delete(FilePath);
 
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(FilePath, true);
 
-            foreach (var line in lines)
+            foreach (var line in userLines)
             {
                 if (Title(line) != awardTitle)
                 {
@@ -122,11 +122,11 @@ namespace Task06.DAL
             PrepareFile();
 
             Thread.Sleep(10);
-            var lines = File.ReadLines(FilePath);
+            var userLines = File.ReadLines(FilePath);
 
             var currentUserID = string.Empty;
 
-            foreach (var line in lines)
+            foreach (var line in userLines)
             {
                 var lineArray = line.Split(Separator);
 
@@ -312,11 +312,11 @@ namespace Task06.DAL
             Thread.Sleep(10);
             var awardLines = File.ReadAllLines(FilePath);
 
-            foreach (var awardLine in awardLines)
+            foreach (var line in awardLines)
             {
-                if (Title(awardLine) == awardTitle)
+                if (Title(line) == awardTitle)
                 {
-                    awardIDList.Add(awardLine.Split(Separator)[Award.GetFieldIndex("AwardID")]);
+                    awardIDList.Add(line.Split(Separator)[Award.GetFieldIndex("AwardID")]);
                 }
             }
 
@@ -332,9 +332,9 @@ namespace Task06.DAL
             Thread.Sleep(10);
             var awardLines = File.ReadAllLines(FilePath);
 
-            foreach (var awardLine in awardLines)
+            foreach (var line in awardLines)
             {
-                awardsList.Add(new KeyValuePair<string, string>(UserID(awardLine), Title(awardLine)));
+                awardsList.Add(new KeyValuePair<string, string>(UserID(line), Title(line)));
             }
 
             return awardsList;
@@ -352,11 +352,11 @@ namespace Task06.DAL
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(FilePath, true);
 
-            foreach (var awardLine in awardLines)
+            foreach (var line in awardLines)
             {
-                if (UserID(awardLine) != userID)
+                if (UserID(line) != userID)
                 {
-                    streamWriter.Write(awardLine);
+                    streamWriter.Write(line);
                     streamWriter.WriteLine();
                 }
             }
