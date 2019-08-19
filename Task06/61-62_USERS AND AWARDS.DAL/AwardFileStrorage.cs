@@ -312,17 +312,17 @@ namespace _61_62_USERS_AND_AWARDS.DAL
         {
             CheckFileExistance();
 
-            var awardsDict = new List<KeyValuePair<string, string>>();
+            var awardsList = new List<KeyValuePair<string, string>>();
 
             Thread.Sleep(10);
             var awardLines = File.ReadAllLines(FilePath);
 
             foreach (var awardLine in awardLines)
             {
-                awardsDict.Add(new KeyValuePair<string, string>(UserID(awardLine), NameInLIne(awardLine)));
+                awardsList.Add(new KeyValuePair<string, string>(UserID(awardLine), NameInLIne(awardLine)));
             }
 
-            return awardsDict;
+            return awardsList;
         }
     }
 }
