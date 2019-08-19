@@ -7,6 +7,8 @@ namespace Task06.PL
 {
     public class Program
     {
+        private static ConsoleSegment consoleSegment = ConsoleSegment.None;
+
         public static readonly string dateFormat = "dd.MM.yyyy";
 
         private enum ConsoleSegment
@@ -16,8 +18,6 @@ namespace Task06.PL
             User = 2,
             Award = 3
         }
-
-        private static ConsoleSegment consoleSegment = ConsoleSegment.None;
 
         private static void Main(string[] args)
         {
