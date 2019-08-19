@@ -19,7 +19,7 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
 
         void PinUserToAward(string userID, string awardID);
 
-        string GetID(string awardName);
+        string[] GetArrayID(string awardName);
 
         List<KeyValuePair<string, string>> GetAwards();
 

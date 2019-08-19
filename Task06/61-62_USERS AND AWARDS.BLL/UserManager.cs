@@ -42,14 +42,17 @@ namespace _61_62_USERS_AND_AWARDS.BLL
         {
             NullCheck(userName);
 
-            var userID = userImplement.GetID(userName);
-            NullCheck(userID);
+            var userArrayID = userImplement.GetArrayID(userName);
+            NullCheck(userArrayID);
 
             userImplement.RemoveUser(userName);
 
-            if (userID != string.Empty)
+            foreach (var userID in userArrayID)
             {
-                awardImplement.EraseUser(userID);
+                if (userID != string.Empty)
+                {
+                    awardImplement.EraseUser(userID);
+                }
             }
         }
 
@@ -67,14 +70,24 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             NullCheck(awardName);
             NullCheck(userName);
 
-            var awardID = awardImplement.GetID(awardName);
-            NullCheck(awardID);
+            var awardArrayID = awardImplement.GetArrayID(awardName);
+            NullCheck(awardArrayID);
 
-            if (awardID != string.Empty)
+            foreach (var awardID in awardArrayID)
             {
-                var userID = userImplement.GetID(userName);
-                NullCheck(userID);
+                if (awardID != string.Empty)
+                {
+                    var userArrayID = userImplement.GetArrayID(userName);
+                    NullCheck(userArrayID);
+                    PinProcessing(awardID, userArrayID);
+                }
+            }
+        }
 
+        private void PinProcessing(string awardID, string[] userArrayID)
+        {
+            foreach (var userID in userArrayID)
+            {
                 if (userID != string.Empty && !RecordExists(awardID, userID))
                 {
                     userImplement.PinAwardToUser(awardID, userID);
@@ -107,7 +120,8 @@ namespace _61_62_USERS_AND_AWARDS.BLL
                 throw new ArgumentException("Welcome to our world!");
             }
         }
-        public string GetID(string userName) => userImplement.GetID(userName);
+
+        public string[] GetArrayID(string userName) => userImplement.GetArrayID(userName);
 
         public bool RecordExists(string awardID, string userID)
         {

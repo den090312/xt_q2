@@ -19,7 +19,7 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
 
         void PinAwardToUser(string awardID, string userID);
 
-        string GetID(string userName);
+        string[] GetArrayID(string userName);
 
         bool RecordExists(string awardID, string userID);
 

@@ -40,14 +40,17 @@ namespace _61_62_USERS_AND_AWARDS.BLL
         {
             NullCheck(awardName);
 
-            var awardID = awardImplement.GetID(awardName);
-            NullCheck(awardID);
+            var awardArrayID = awardImplement.GetArrayID(awardName);
+            NullCheck(awardArrayID);
 
             awardImplement.RemoveAward(awardName);
 
-            if (awardID != string.Empty)
+            foreach (var awardID in awardArrayID)
             {
-                userImplement.EraseAward(awardID);
+                if (awardID != string.Empty)
+                {
+                    userImplement.EraseAward(awardID);
+                }
             }
         }
 
@@ -65,22 +68,32 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             NullCheck(userName);
             NullCheck(awardName);
 
-            var userID = userImplement.GetID(userName);
-            NullCheck(userID);
+            var userArrayID = userImplement.GetArrayID(userName);
+            NullCheck(userArrayID);
 
-            if (userID != string.Empty)
+            foreach (var userID in userArrayID)
             {
-                var awardID = awardImplement.GetID(awardName);
-                NullCheck(awardID);
-
-                if (awardID != string.Empty)
+                if (userID != string.Empty)
                 {
-                    awardImplement.PinUserToAward(userID, awardID);
+                    var awardArrayID = awardImplement.GetArrayID(awardName);
+                    NullCheck(awardArrayID);
+                    PinProcessing(userID, awardArrayID);
                 }
             }
         }
 
-        public string GetID(string awardName) => awardImplement.GetID(awardName);
+        private static void PinProcessing(string userID, string[] awardArrayID)
+        {
+            foreach (var arrayID in awardArrayID)
+            {
+                if (arrayID != string.Empty)
+                {
+                    awardImplement.PinUserToAward(userID, arrayID);
+                }
+            }
+        }
+
+        public string[] GetArrayID(string awardName) => awardImplement.GetArrayID(awardName);
 
         public List<KeyValuePair<string, string>> GetAwards() => awardImplement.GetAwards();
 
