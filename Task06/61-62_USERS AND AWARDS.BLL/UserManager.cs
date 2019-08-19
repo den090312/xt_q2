@@ -79,12 +79,12 @@ namespace Task06.BLL
                 {
                     var userArrayID = userImplement.GetArrayID(userName);
                     NullCheck(userArrayID);
-                    JoinProcessing(awardID, userArrayID);
+                    Join(awardID, userArrayID);
                 }
             }
         }
 
-        private void JoinProcessing(string awardID, string[] userArrayID)
+        private void Join(string awardID, string[] userArrayID)
         {
             foreach (var userID in userArrayID)
             {

@@ -77,12 +77,12 @@ namespace Task06.BLL
                 {
                     var awardArrayID = awardImplement.GetArrayID(awardName);
                     NullCheck(awardArrayID);
-                    JoinProcessing(userID, awardArrayID);
+                    Join(userID, awardArrayID);
                 }
             }
         }
 
-        private static void JoinProcessing(string userID, string[] awardArrayID)
+        private static void Join(string userID, string[] awardArrayID)
         {
             foreach (var arrayID in awardArrayID)
             {
