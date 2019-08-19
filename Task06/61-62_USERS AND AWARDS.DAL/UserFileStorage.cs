@@ -183,14 +183,14 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             foreach (var userLine in userLines)
             {
-                RunRecord(ref awardID, ref userID, ref sw, recorded, userLine);
+                recorded = RunRecord(ref awardID, ref userID, ref sw, recorded, userLine);
                 sw.WriteLine();
             }
 
             sw.Close();
         }
 
-        private static void RunRecord(ref string awardID, ref string userID, ref StreamWriter sw, bool recorded, string userLine)
+        private static bool RunRecord(ref string awardID, ref string userID, ref StreamWriter sw, bool recorded, string userLine)
         {
             if (UserID(userLine) == userID)
             {
@@ -215,6 +215,8 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             {
                 sw.Write(userLine);
             }
+
+            return recorded;
         }
 
         private static string NameInLine(string line) => line.Split(Separator)[User.GetFieldIndex("Name")];
