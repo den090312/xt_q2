@@ -1,10 +1,10 @@
-﻿using _61_62_USERS_AND_AWARDS.Common;
-using _61_62_USERS_AND_AWARDS.Entities;
-using _61_62_USERS_AND_AWARDS.Interfaces;
+﻿using Task06.Common;
+using Task06.Entities;
+using Task06.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace _61_62_USERS_AND_AWARDS.BLL
+namespace Task06.BLL
 {
     public class UserManager : IUserable
     {

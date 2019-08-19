@@ -1,7 +1,7 @@
-﻿using _61_62_USERS_AND_AWARDS.Entities;
+﻿using Task06.Entities;
 using System.Collections.Generic;
 
-namespace _61_62_USERS_AND_AWARDS.Interfaces
+namespace Task06.Interfaces
 {
     public interface IUserable
     {

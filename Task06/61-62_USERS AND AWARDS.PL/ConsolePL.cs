@@ -1,9 +1,9 @@
-﻿using _61_62_USERS_AND_AWARDS.BLL;
+﻿using Task06.BLL;
 using System;
 using System.Globalization;
 using System.Text;
 
-namespace _61_62_USERS_AND_AWARDS.PL
+namespace Task06.PL
 {
     public class ConsolePL
     {

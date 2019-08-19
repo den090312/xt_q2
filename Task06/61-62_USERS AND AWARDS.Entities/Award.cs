@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _61_62_USERS_AND_AWARDS.Entities
+namespace Task06.Entities
 {
     public class Award
     {

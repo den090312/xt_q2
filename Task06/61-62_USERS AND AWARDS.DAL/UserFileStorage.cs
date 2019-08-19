@@ -1,12 +1,12 @@
-﻿using _61_62_USERS_AND_AWARDS.Entities;
-using _61_62_USERS_AND_AWARDS.Interfaces;
+﻿using Task06.Entities;
+using Task06.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
 
-namespace _61_62_USERS_AND_AWARDS.DAL
+namespace Task06.DAL
 {
     public class UserFileStorage : IUserable
     {

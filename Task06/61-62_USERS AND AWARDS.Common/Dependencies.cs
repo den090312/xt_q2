@@ -1,7 +1,7 @@
-﻿using _61_62_USERS_AND_AWARDS.Interfaces;
-using _61_62_USERS_AND_AWARDS.DAL;
+﻿using Task06.Interfaces;
+using Task06.DAL;
 
-namespace _61_62_USERS_AND_AWARDS.Common
+namespace Task06.Common
 {
     public static class Dependencies 
     {
