@@ -19,7 +19,7 @@ namespace Task06.Interfaces
 
         void JoinUserToAward(string userID, string awardID);
 
-        string[] GetAwardArrayID(string awardName);
+        string[] GetAwardIDArray(string awardName);
 
         List<KeyValuePair<string, string>> GetAwardList();
 

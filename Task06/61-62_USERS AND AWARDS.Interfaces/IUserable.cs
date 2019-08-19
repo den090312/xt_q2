@@ -19,7 +19,7 @@ namespace Task06.Interfaces
 
         void JoinAwardToUser(string awardID, string userID);
 
-        string[] GetUserArrayID(string userName);
+        string[] GetUserIDArray(string userName);
 
         bool RecordExists(string awardID, string userID);
 

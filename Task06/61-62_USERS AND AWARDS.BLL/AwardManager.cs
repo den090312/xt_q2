@@ -39,7 +39,7 @@ namespace Task06.BLL
         {
             NullCheck(awardName);
 
-            var awardArrayID = awardImplement.GetAwardArrayID(awardName);
+            var awardArrayID = awardImplement.GetAwardIDArray(awardName);
             NullCheck(awardArrayID);
 
             awardImplement.RemoveAwards(awardName);
@@ -67,10 +67,10 @@ namespace Task06.BLL
             NullCheck(userName);
             NullCheck(awardName);
 
-            var userArrayID = userImplement.GetUserArrayID(userName);
+            var userArrayID = userImplement.GetUserIDArray(userName);
             NullCheck(userArrayID);
 
-            var awardArrayID = awardImplement.GetAwardArrayID(awardName);
+            var awardArrayID = awardImplement.GetAwardIDArray(awardName);
             NullCheck(awardArrayID);
 
             foreach (var userID in userArrayID)
@@ -93,7 +93,7 @@ namespace Task06.BLL
             }
         }
 
-        public string[] GetAwardArrayID(string awardName) => awardImplement.GetAwardArrayID(awardName);
+        public string[] GetAwardIDArray(string awardName) => awardImplement.GetAwardIDArray(awardName);
 
         public List<KeyValuePair<string, string>> GetAwardList() => awardImplement.GetAwardList();
 

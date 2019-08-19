@@ -303,7 +303,7 @@ namespace Task06.DAL
             }
         }
 
-        public string[] GetUserArrayID(string userName)
+        public string[] GetUserIDArray(string userName)
         {
             var userIDList = new List<string>();
 
