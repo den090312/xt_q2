@@ -72,6 +72,7 @@ namespace Task06.PL
                             inputComplete = StartJoin();
                             break;
                         case 8:
+                            Console.WriteLine();
                             return true;
                     }
                 }
