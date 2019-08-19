@@ -31,12 +31,12 @@ namespace Task06.PL
 
             do
             {
-                inputComplete = InputCompleted();
+                inputComplete = InputComplete();
             }
             while (!inputComplete);
         }
 
-        private static bool InputCompleted()
+        private static bool InputComplete()
         {
             WriteMenu();
 
@@ -85,7 +85,7 @@ namespace Task06.PL
             JoinAwardToUser();
             Console.WriteLine("---Done---");
 
-            return InputCompleted();
+            return InputComplete();
         }
 
         private static bool StartAwardPrinting()
@@ -94,7 +94,7 @@ namespace Task06.PL
             PrintAwards();
             Console.WriteLine("---Done---");
 
-            return InputCompleted();
+            return InputComplete();
         }
 
         private static bool StartAwardRemoving()
@@ -103,7 +103,7 @@ namespace Task06.PL
             RemoveAward();
             Console.WriteLine("---Done---");
 
-            return InputCompleted();
+            return InputComplete();
         }
 
         private static bool StartAwardCreation()
@@ -112,7 +112,7 @@ namespace Task06.PL
             CreateAward();
             Console.WriteLine("---Done---");
 
-            return InputCompleted();
+            return InputComplete();
         }
 
         private static bool StartUserPrinting()
@@ -121,7 +121,7 @@ namespace Task06.PL
             PrintUsers();
             Console.WriteLine("---Done---");
 
-            return InputCompleted();
+            return InputComplete();
         }
 
         private static bool StartUserRemoving()
@@ -130,7 +130,7 @@ namespace Task06.PL
             RemoveUser();
             Console.WriteLine("---Done---");
 
-            return InputCompleted();
+            return InputComplete();
         }
 
         private static bool StartUserCreation()
@@ -139,7 +139,7 @@ namespace Task06.PL
             CreateUser(dateFormat);
             Console.WriteLine("---Done---");
 
-            return InputCompleted();
+            return InputComplete();
         }
 
         public static void WriteMenu()
