@@ -17,7 +17,7 @@ namespace Task06.Interfaces
 
         void PrintAwards();
 
-        void PinUserToAward(string userID, string awardID);
+        void JoinUserToAward(string userID, string awardID);
 
         string[] GetArrayID(string awardName);
 

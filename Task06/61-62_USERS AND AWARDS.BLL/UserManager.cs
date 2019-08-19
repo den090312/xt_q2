@@ -65,7 +65,7 @@ namespace Task06.BLL
 
         public void PrintUsers(List<KeyValuePair<string, string>> awardsList) => userImplement.PrintUsers(awardImplement.GetAwardList());
 
-        public void PinAwardToUser(string awardName, string userName)
+        public void JoinAwardToUser(string awardName, string userName)
         {
             NullCheck(awardName);
             NullCheck(userName);
@@ -79,19 +79,19 @@ namespace Task06.BLL
                 {
                     var userArrayID = userImplement.GetArrayID(userName);
                     NullCheck(userArrayID);
-                    PinProcessing(awardID, userArrayID);
+                    JoinProcessing(awardID, userArrayID);
                 }
             }
         }
 
-        private void PinProcessing(string awardID, string[] userArrayID)
+        private void JoinProcessing(string awardID, string[] userArrayID)
         {
             foreach (var userID in userArrayID)
             {
                 if (userID != string.Empty && !RecordExists(awardID, userID))
                 {
-                    userImplement.PinAwardToUser(awardID, userID);
-                    awardImplement.PinUserToAward(userID, awardID);
+                    userImplement.JoinAwardToUser(awardID, userID);
+                    awardImplement.JoinUserToAward(userID, awardID);
                 }
             }
         }

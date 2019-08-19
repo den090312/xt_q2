@@ -63,7 +63,7 @@ namespace Task06.BLL
 
         public void PrintAwards() => awardImplement.PrintAwards();
 
-        public void PinUserToAward(string userName, string awardName)
+        public void JoinUserToAward(string userName, string awardName)
         {
             NullCheck(userName);
             NullCheck(awardName);
@@ -77,18 +77,18 @@ namespace Task06.BLL
                 {
                     var awardArrayID = awardImplement.GetArrayID(awardName);
                     NullCheck(awardArrayID);
-                    PinProcessing(userID, awardArrayID);
+                    JoinProcessing(userID, awardArrayID);
                 }
             }
         }
 
-        private static void PinProcessing(string userID, string[] awardArrayID)
+        private static void JoinProcessing(string userID, string[] awardArrayID)
         {
             foreach (var arrayID in awardArrayID)
             {
                 if (arrayID != string.Empty)
                 {
-                    awardImplement.PinUserToAward(userID, arrayID);
+                    awardImplement.JoinUserToAward(userID, arrayID);
                 }
             }
         }

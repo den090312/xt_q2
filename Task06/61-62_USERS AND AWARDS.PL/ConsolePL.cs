@@ -25,6 +25,7 @@ namespace Task06.PL
 
             new UserManager().PrintStorageInfo();
             new AwardManager().PrintStorageInfo();
+            Console.WriteLine();
 
             WriteMenu();
 
@@ -75,7 +76,7 @@ namespace Task06.PL
                             break;
                         case 7:
                             inputComplete = true;
-                            PinAwardToUser();
+                            JoinAwardToUser();
                             break;
                         case 8:
                             return;
@@ -96,8 +97,8 @@ namespace Task06.PL
             Console.WriteLine("\t5: delete");
             Console.WriteLine("\t6: print");
             Console.WriteLine();
-            Console.WriteLine("Connect operations:");
-            Console.WriteLine("\t7: pin award to user");
+            Console.WriteLine("Join operations:");
+            Console.WriteLine("\t7: join award to user");
             Console.WriteLine();
             Console.WriteLine("\t8: exit");
         }
@@ -126,7 +127,7 @@ namespace Task06.PL
 
         private static void PrintAwards() => new AwardManager().PrintAwards();
 
-        private static void PinAwardToUser()
+        private static void JoinAwardToUser()
         {
             consoleSegment = ConsoleSegment.User;
             var userName = GetUserString("name");
@@ -134,7 +135,7 @@ namespace Task06.PL
             consoleSegment = ConsoleSegment.Award;
             var awardName = GetUserString("title");
 
-            new UserManager().PinAwardToUser(awardName, userName);
+            new UserManager().JoinAwardToUser(awardName, userName);
         }
 
         private static int GetKeyFromConsole()

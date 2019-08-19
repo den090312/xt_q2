@@ -167,7 +167,7 @@ namespace Task06.DAL
             }
         }
 
-        public void PinAwardToUser(string awardID, string userID)
+        public void JoinAwardToUser(string awardID, string userID)
         {
             CheckFileExistance();
             SetNormalAttributes();

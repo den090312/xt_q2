@@ -17,7 +17,7 @@ namespace Task06.Interfaces
 
         void PrintUsers(List<KeyValuePair<string, string>> awardList);
 
-        void PinAwardToUser(string awardID, string userID);
+        void JoinAwardToUser(string awardID, string userID);
 
         string[] GetArrayID(string userName);
 
