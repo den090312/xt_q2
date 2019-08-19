@@ -329,7 +329,7 @@ namespace Task06.DAL
             {
                 if (Name(line) == userName)
                 {
-                    userIDList.Add(line.Split(Separator)[User.GetFieldIndex("UserID")]);
+                    userIDList.Add(UserID(line));
                 }
             }
 

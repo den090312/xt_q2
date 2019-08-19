@@ -316,7 +316,7 @@ namespace Task06.DAL
             {
                 if (Title(line) == awardTitle)
                 {
-                    awardIDList.Add(line.Split(Separator)[Award.GetFieldIndex("AwardID")]);
+                    awardIDList.Add(AwardID(line));
                 }
             }
 
