@@ -221,32 +221,32 @@ namespace Task06.DAL
                 throw new Exception("indexID is not found!");
             }
 
-            var itemArray = line.Split(Separator);
+            var lineArray = line.Split(Separator);
             var sb = new StringBuilder();
 
-            FillLine(ref id, itemArray, ref sb, ref indexID);
+            FillLine(ref id, lineArray, ref sb, ref indexID);
 
             return sb.ToString();
         }
 
-        private static void FillLine(ref string id, string[] itemArray, ref StringBuilder sb, ref int indexID)
+        private static void FillLine(ref string id, string[] lineArray, ref StringBuilder sb, ref int indexID)
         {
-            for (int i = 0; i < itemArray.Length; i++)
+            for (int i = 0; i < lineArray.Length; i++)
             {
                 if (i == indexID)
                 {
                     sb.Append(id);
 
-                    if (i != itemArray.Length - 1)
+                    if (i != lineArray.Length - 1)
                     {
                         sb.Append(Separator);
                     }
                 }
                 else
                 {
-                    sb.Append(itemArray[i]);
+                    sb.Append(lineArray[i]);
 
-                    if (i != itemArray.Length - 1)
+                    if (i != lineArray.Length - 1)
                     {
                         sb.Append(Separator);
                     }
