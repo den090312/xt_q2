@@ -143,7 +143,7 @@ namespace Task06.PL
             return InputComplete();
         }
 
-        public static void WriteMenu()
+        private static void WriteMenu()
         {
             Console.WriteLine("Users operations:");
             Console.WriteLine("\t1: create");
@@ -275,7 +275,7 @@ namespace Task06.PL
             return userSB.ToString();
         }
 
-        public static DateTime GetUserDate(string dateFormat)
+        private static DateTime GetUserDate(string dateFormat)
         {
             Console.Clear();
             Console.WriteLine($"Enter date in format: {dateFormat}");
@@ -301,7 +301,7 @@ namespace Task06.PL
             return userBirthDate;
         }
 
-        public static void EmulateBackspace(StringBuilder userKeySB)
+        private static void EmulateBackspace(StringBuilder userKeySB)
         {
             if (userKeySB.Length > 0)
             {

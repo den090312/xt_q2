@@ -300,7 +300,7 @@ namespace Task06.DAL
             }
         }
 
-        public void CheckFileExistance()
+        private void CheckFileExistance()
         {
             if (!File.Exists(FilePath))
             {
