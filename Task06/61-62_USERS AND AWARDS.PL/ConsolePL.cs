@@ -134,7 +134,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
             consoleSegment = ConsoleSegment.Award;
             var awardName = GetUserString("title");
 
-            new UserManager().AddAwardToUser(awardName, userName);
+            new UserManager().PinAwardToUser(awardName, userName);
         }
 
         private static int GetKeyFromConsole()

@@ -17,12 +17,12 @@ namespace _61_62_USERS_AND_AWARDS.Interfaces
 
         void PrintUsers(List<KeyValuePair<string, string>> awardList);
 
-        void AddAwardToUser(string awardID, string userID);
+        void PinAwardToUser(string awardID, string userID);
 
         string GetID(string userName);
 
         bool RecordExists(string awardID, string userID);
 
-        void RemoveAward(string awardID);
+        void EraseAward(string awardID);
     }
 }

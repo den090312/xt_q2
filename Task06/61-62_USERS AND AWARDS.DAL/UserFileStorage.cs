@@ -167,7 +167,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
         }
 
-        public void AddAwardToUser(string awardID, string userID)
+        public void PinAwardToUser(string awardID, string userID)
         {
             CheckFileExistance();
             SetNormalAttributes();
@@ -341,7 +341,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             return recordExists;
         }
 
-        public void RemoveAward(string awardID)
+        public void EraseAward(string awardID)
         {
             PrepareFile();
 

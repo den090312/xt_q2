@@ -49,7 +49,7 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
             if (userID != string.Empty)
             {
-                awardImplement.RemoveUser(userID);
+                awardImplement.EraseUser(userID);
             }
         }
 
@@ -62,7 +62,7 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
         public void PrintUsers(List<KeyValuePair<string, string>> awardsList) => userImplement.PrintUsers(awardImplement.GetAwards());
 
-        public void AddAwardToUser(string awardName, string userName)
+        public void PinAwardToUser(string awardName, string userName)
         {
             NullCheck(awardName);
             NullCheck(userName);
@@ -77,8 +77,8 @@ namespace _61_62_USERS_AND_AWARDS.BLL
 
                 if (userID != string.Empty && !RecordExists(awardID, userID))
                 {
-                    userImplement.AddAwardToUser(awardID, userID);
-                    awardImplement.AddUserToAward(userID, awardID);
+                    userImplement.PinAwardToUser(awardID, userID);
+                    awardImplement.PinUserToAward(userID, awardID);
                 }
             }
         }
@@ -117,10 +117,10 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             return userImplement.RecordExists(awardID, userID);
         }
 
-        public void RemoveAward(string awardID)
+        public void EraseAward(string awardID)
         {
             NullCheck(awardID);
-            userImplement.RemoveAward(awardID);
+            userImplement.EraseAward(awardID);
         }
 
         public static void NullCheck<T>(T classObject) where T : class

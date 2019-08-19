@@ -154,7 +154,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
         }
 
-        public void AddUserToAward(string userID, string awardID)
+        public void PinUserToAward(string userID, string awardID)
         {
             CheckFileExistance();
             SetNormalAttributes();
@@ -325,7 +325,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             return awardsList;
         }
 
-        public void RemoveUser(string userID)
+        public void EraseUser(string userID)
         {
             PrepareFile();
 
