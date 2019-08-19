@@ -80,7 +80,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             foreach (var line in lines)
             {
-                if (Name(line) != userName)
+                if (NameInLine(line) != userName)
                 {
                     streamWriter.Write(line);
                     streamWriter.WriteLine();
@@ -105,7 +105,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             {
                 foreach (var line in lines)
                 {
-                    if (Name(line) == userName)
+                    if (NameInLine(line) == userName)
                     {
                         streamWriter.Close();
 
@@ -183,21 +183,20 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             foreach (var userLine in userLines)
             {
-                recorded = RunRecord(ref awardID, ref userID, ref sw, recorded, userLine);
-
+                RunRecord(ref awardID, ref userID, ref sw, recorded, userLine);
                 sw.WriteLine();
             }
 
             sw.Close();
         }
 
-        private static bool RunRecord(ref string awardID, ref string userID, ref StreamWriter sw, bool recorded, string userLine)
+        private static void RunRecord(ref string awardID, ref string userID, ref StreamWriter sw, bool recorded, string userLine)
         {
             if (UserID(userLine) == userID)
             {
                 if (AwardID(userLine) == string.Empty)
                 {
-                    sw.Write(LineWithID(userLine, awardID));
+                    sw.Write(NewLine(userLine, awardID));
                 }
                 else
                 {
@@ -206,7 +205,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
                     if (!recorded)
                     {
                         sw.WriteLine();
-                        sw.Write(LineWithID(userLine, awardID));
+                        sw.Write(NewLine(userLine, awardID));
                     }
 
                     recorded = true;
@@ -216,17 +215,15 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             {
                 sw.Write(userLine);
             }
-
-            return recorded;
         }
 
-        private static string Name(string line) => line.Split(Separator)[User.GetFieldIndex("Name")];
+        private static string NameInLine(string line) => line.Split(Separator)[User.GetFieldIndex("Name")];
 
         private static string UserID(string line) => line.Split(Separator)[User.GetFieldIndex("UserID")];
 
         private static string AwardID(string line) => line.Split(Separator)[User.GetFieldIndex("AwardID")];
 
-        private static string LineWithID(string line, string id)
+        private static string NewLine(string line, string id)
         {
             int indexID = User.GetFieldIndex("AwardID");
 
@@ -315,7 +312,7 @@ namespace _61_62_USERS_AND_AWARDS.DAL
 
             foreach (var userLine in userLines)
             {
-                if (Name(userLine) == userName)
+                if (NameInLine(userLine) == userName)
                 {
                     return userLine.Split(Separator)[User.GetFieldIndex("UserID")];
                 }

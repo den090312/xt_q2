@@ -51,7 +51,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
                         case 2:
                             inputComplete = true;
                             consoleSegment = ConsoleSegment.User;
-                            DeleteUser();
+                            RemoveUser();
                             break;
                         case 3:
                             inputComplete = true;
@@ -66,12 +66,12 @@ namespace _61_62_USERS_AND_AWARDS.PL
                         case 5:
                             inputComplete = true;
                             consoleSegment = ConsoleSegment.Award;
-                            DeleteAward();
+                            RemoveAward();
                             break;
                         case 6:
                             inputComplete = true;
                             Console.WriteLine();
-                            PrintAllAwards();
+                            PrintAwards();
                             break;
                         case 7:
                             inputComplete = true;
@@ -97,7 +97,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
             Console.WriteLine("\t6: print");
             Console.WriteLine();
             Console.WriteLine("Connect operations:");
-            Console.WriteLine("\t7: add award to user");
+            Console.WriteLine("\t7: pin award to user");
             Console.WriteLine();
             Console.WriteLine("\t8: exit");
         }
@@ -110,7 +110,7 @@ namespace _61_62_USERS_AND_AWARDS.PL
             userManager.AddUser(user);
         }
 
-        private static void DeleteUser() => new UserManager().RemoveUser(GetUserString("name"));
+        private static void RemoveUser() => new UserManager().RemoveUser(GetUserString("name"));
 
         private static void PrintUsers() => new UserManager().PrintUsers(new AwardManager().GetAwards());
 
@@ -122,9 +122,9 @@ namespace _61_62_USERS_AND_AWARDS.PL
             awardManager.AddAward(award);
         }
 
-        private static void DeleteAward() => new AwardManager().RemoveAward(GetUserString("award"));
+        private static void RemoveAward() => new AwardManager().RemoveAward(GetUserString("award"));
 
-        private static void PrintAllAwards() => new AwardManager().PrintAwards();
+        private static void PrintAwards() => new AwardManager().PrintAwards();
 
         private static void PinAwardToUser()
         {

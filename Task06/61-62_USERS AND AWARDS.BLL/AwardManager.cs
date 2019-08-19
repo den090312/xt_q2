@@ -71,6 +71,10 @@ namespace _61_62_USERS_AND_AWARDS.BLL
             }
         }
 
+        public string GetID(string awardName) => awardImplement.GetID(awardName);
+
+        public List<KeyValuePair<string, string>> GetAwards() => awardImplement.GetAwards();
+
         public static void NullCheck<T>(T classObject) where T : class
         {
             if (classObject is null)
@@ -78,9 +82,5 @@ namespace _61_62_USERS_AND_AWARDS.BLL
                 throw new ArgumentNullException($"{nameof(classObject)} is null!");
             }
         }
-
-        public string GetID(string awardName) => awardImplement.GetID(awardName);
-
-        public List<KeyValuePair<string, string>> GetAwards() => awardImplement.GetAwards();
     }
 }
