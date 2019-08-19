@@ -32,7 +32,6 @@ namespace Task06.BLL
         public void AddAward(Award award)
         {
             NullCheck(award);
-
             awardImplement.AddAward(award);
         }
 

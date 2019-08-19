@@ -34,7 +34,6 @@ namespace Task06.BLL
         public void AddUser(User user)
         {
             NullCheck(user);
-
             userImplement.AddUser(user);
         }
 
