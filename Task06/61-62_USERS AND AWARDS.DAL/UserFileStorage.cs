@@ -303,9 +303,9 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             }
         }
 
-        public string GetID(string userName)
+        public string[] GetArrayID(string userName)
         {
-            var userID = string.Empty;
+            var userIDList = new List<string>();
 
             CheckFileExistance();
 
@@ -316,11 +316,11 @@ namespace _61_62_USERS_AND_AWARDS.DAL
             {
                 if (NameInLine(userLine) == userName)
                 {
-                    return userLine.Split(Separator)[User.GetFieldIndex("UserID")];
+                    userIDList.Add(userLine.Split(Separator)[User.GetFieldIndex("UserID")]);
                 }
             }
 
-            return userID;
+            return userIDList.ToArray();
         }
 
         public bool RecordExists(string awardID, string userID)
