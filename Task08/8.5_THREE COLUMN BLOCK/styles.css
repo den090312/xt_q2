@@ -28,7 +28,7 @@ body
 	color: #f56332;
 	font-weight: bold;
 	margin-block-start: 0;
-    margin-block-end: 0;
+	margin-block-end: 0;
 }
 
 img
@@ -37,7 +37,7 @@ img
 }
 
 .element_description
-{
+	{
 	font-size: 13px;
 	margin-top: 5px;
 	text-align: center;	
@@ -45,11 +45,11 @@ img
 
 .separator
 {
-    display: inline-block;
-    float: left;
-    border-left: 1px solid #0000001f;
-    height: 150px;
-    margin-top: 15px;
+	display: inline-block;
+	float: left;
+	border-left: 1px solid #0000001f;
+	height: 150px;
+	margin-top: 15px;
 }
 
 .button
