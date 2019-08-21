@@ -3,15 +3,17 @@ body
 	background-color: #333333 
 }
 
-.block {
-    color: white;
+.block 
+{
+    	color: white;
 	margin: auto;
 	padding: 5px;
 	z-index: 1;
 }
 
-.pointer {
-	position: relative;
+.pointer 
+{
+    position: relative;
     display: flex;
     margin: 55px 10px 0 10px;
     height: 60px;
@@ -20,7 +22,8 @@ body
 }
 
 
-.pointer::before, .pointer::after {
+.pointer::before, .pointer::after 
+{
     content: "";
     position: absolute;  
     background-color: #88b7d5;
@@ -36,8 +39,9 @@ body
     z-index: -1;
 }
 
-.pointer::after {
-	width: 55px;
+.pointer::after 
+{
+    width: 55px;
     height: 55px;
     left: calc(50% - 33px);
     top: -25px;
