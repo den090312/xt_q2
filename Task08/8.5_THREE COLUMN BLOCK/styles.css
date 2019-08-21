@@ -29,11 +29,12 @@ body
 	font-weight: bold;
 	margin-block-start: 0;
 	margin-block-end: 0;
+	text-align: center;
 }
 
 img
 {
-	padding-left: 28%;
+	padding-left: 27%;
 }
 
 .element_description
@@ -55,8 +56,8 @@ img
 .button
 {
 	height: 26px;
-	width: 85px;
-	margin-left: calc(41% - 28px);
+	width: 90px;
+	margin-left: calc(40% - 31px);
 	margin-bottom: 0;
 	background-color: #f56332;
 	border: none;
