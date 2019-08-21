@@ -3,6 +3,16 @@ body
 	background-color: #4e6379;
 }
 
+p
+{
+	text-align: center;
+}
+
+img
+{
+	padding-left: 27%;
+}
+
 .main
 {
 	background-color: white;
@@ -23,25 +33,18 @@ body
 	padding: 15px;
 }
 
-.element_caption
+.caption
 {
 	color: #f56332;
 	font-weight: bold;
 	margin-block-start: 0;
 	margin-block-end: 0;
-	text-align: center;
 }
 
-img
-{
-	padding-left: 27%;
-}
-
-.element_description
+.description
 {
 	font-size: 13px;
 	margin-top: 5px;
-	text-align: center;	
 }
 
 .separator
@@ -53,7 +56,7 @@ img
 	margin-top: 15px;
 }
 
-.button
+input[type="button"]
 {
 	height: 26px;
 	width: 90px;
