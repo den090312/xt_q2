@@ -14,10 +14,10 @@
 	border-top: 13px solid transparent;
 	border-bottom: 13px solid transparent;
 	display: inline-block;
-	content: '';
+    content: "";
 	position: absolute;
 	right: -13px;
-	z-index: 4;
+	z-index: 2;
 	margin-right: -4px;
 }
 
@@ -37,10 +37,10 @@
     border-top: 13px solid transparent;
     border-bottom: 13px solid transparent;
     display: inline-block;
-    content: '';
+    content: "";
     position: absolute;
     right: -13px;
-    z-index: 4;
+    z-index: 2;
     margin-right: 104px;
 }
 
@@ -76,9 +76,9 @@
     border-top: 13px solid transparent;
     border-bottom: 13px solid transparent;
     display: inline-block;
-    content: '';
+    content: "";
     position: absolute;
     right: -13px;
-    z-index: 4;
+    z-index: 2;
     margin-right: 100px;
 }
