@@ -1,0 +1,49 @@
+body
+{
+	background-color: #000000;
+	padding-left: 35px;
+	padding-right: 35px;
+	width: 25%;
+	font-family: arial;
+	border-radius: 0 0 10px 10px;
+}
+
+.main
+{
+	background-color: white;
+	border-radius: 0 0 10px 10px;
+}
+
+.caption
+{
+    float: left;
+    display: inline-block;
+	color: #ffb163;
+    padding: 5px;
+    padding-left: 15px;
+    background-color: black;
+    font-size: 25px;
+    font-weight: bold;
+    width: 25%;
+}
+
+.square
+{
+    display: inline-block;
+    float: left;
+    width: 50px;
+    height: 50px;
+    transform: rotate(45deg);
+    margin-top: 10px;
+    margin-right: -55px;
+    background-color: white;
+    z-index: 1;
+}
+
+.description
+{
+	background-color: white;
+	padding: 15px;
+	border-radius: 0 0 10px 10px;
+	z-index: 2;
+}
