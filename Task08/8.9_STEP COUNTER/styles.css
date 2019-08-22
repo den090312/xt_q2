@@ -3,13 +3,19 @@
 	
 }
 
-.step1 
+.step1, .step2, .step3, .pointer
 {
 	display: inline-block;
-	position: relative;
+    position: relative;
 	background-color: black;
-	width: 100px;
-	height: 26px;
+    width: 100px;
+    height: 26px;
+}
+
+.step3
+{
+    margin-left: -22px;
+    z-index: 0;
 }
 
 .step1:after, .step2:after, .step3:after 
@@ -19,39 +25,33 @@
 	border-left: 13px solid;
 	border-top: 13px solid transparent;
 	border-bottom: 13px solid transparent;
+	right: -13px;
     content: "";
 }
 
 .step1:after 
 {
 	color: white;
-	right: -13px;
 	margin-right: -4px;
 	z-index: 2;
-}
-
-.step2 
-{
-	display: inline-block;
-	position: relative;
-	background-color: black;
-	width: 100px;
-	height: 26px;
 }
 
 .step2:after
 {
 	color: black;
-    right: -13px;
     margin-right: 104px;
+    z-index: 2;
+}
+
+.step3:after 
+{
+	color: white;
+    margin-right: 100px;
     z-index: 2;
 }
 
 .pointer 
 {
-    display: inline-block;
-    position: relative;
-	background-color: black;
     width: 18px;
     height: 18px;
     transform: 45deg;
@@ -59,23 +59,4 @@
     right: 13px;
     bottom: 4px;
 	z-index: 1;
-}
-
-.step3
-{
-    display: inline-block;
-    position: relative;
-	background-color: black;
-    width: 100px;
-    height: 26px;
-    margin-left: -22px;
-    z-index: 0;
-}
-
-.step3:after 
-{
-	color: white;
-    right: -13px;
-    margin-right: 100px;
-    z-index: 2;
 }
