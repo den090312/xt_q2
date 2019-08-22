@@ -1,0 +1,25 @@
+body
+{
+	padding: 10px;
+	width: 410px;
+}
+
+.caption
+{
+	background-color: #008b66;
+	color: #deefea;
+	font-size: 20px;
+	padding: 5px;
+	box-shadow: 0 0 0 10px #008b66, -1px -1px 0 10px #008b6673;
+}
+
+.description
+{
+	background-color: #dfe6e1;
+	padding: 10px;
+	width: 93%;
+	float: right;
+	margin-right: -11px;
+	font-size: 17px;
+	box-shadow: inset 0 0 0 1px white, 0 0 0 1px #ffffff2e;
+}
