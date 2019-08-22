@@ -3,17 +3,17 @@ body
 	font-family: Arial;
 }
 
-.main 
+ul 
 {
 	list-style: none;
 	display: flex;
 	overflow: hidden;
 }
 
-li 
+li
 {
     width: 120px;
-    background: linear-gradient(#d5dedc, #c3c7c4);
+    background: linear-gradient(#dee8e5, #c3c7c4);
     text-align: center;
     position: relative;
 }
@@ -41,12 +41,12 @@ li:not(:last-child)::after
 	z-index: 1;
 }
 
-li:hover 
+li:hover, li:active
 {
 	background: linear-gradient(#74da2b, #337107);
 }
 
-li:hover a 
+li:hover a, li.current a:active
 {
 	color: white;
 }
