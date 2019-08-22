@@ -23,6 +23,7 @@ body
 	padding-right: 35px;
 	padding-left: 25px;
 	padding-bottom: 5px;
+	border-bottom: 1px inset #ffb1636b;
 }
 
 .caption:before
@@ -35,12 +36,14 @@ body
 	transform: skewX(-20deg);
 	transform-origin: 0 0;
 	left: 100%;
+	border-left: 1px inset #ffb1636b;
+	border-top: 1px inset #ffb1636b;
 }
 
 .description
 {
-	background-color: white;
+	background: linear-gradient(to bottom right, white, #ffb1633d);
 	padding: 15px;
 	border-radius: 0 0 10px 10px;
-	z-index: 2;
+	border: 1px inset #ffb1636b;
 }
