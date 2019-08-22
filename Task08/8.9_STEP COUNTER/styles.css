@@ -12,10 +12,10 @@ body
 
 li 
 {
-    width: 120px;
-    background: linear-gradient(#d5dedc, #c3c7c4);
-    text-align: center;
-    position: relative;
+	width: 120px;
+	background: linear-gradient(#d5dedc, #c3c7c4);
+	text-align: center;
+	position: relative;
 }
 
 li a 
