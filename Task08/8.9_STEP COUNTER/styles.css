@@ -41,12 +41,12 @@ li:not(:last-child)::after
 	z-index: 1;
 }
 
-li:hover, li:active
+li:hover, ul.tabs li.current a:active
 {
 	background: linear-gradient(#74da2b, #337107);
 }
 
-li:hover a, li.current a:active
+li:hover a, ul.tabs li.current a:active
 {
 	color: white;
 }
