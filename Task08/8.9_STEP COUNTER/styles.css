@@ -12,15 +12,19 @@
 	height: 26px;
 }
 
-.step1:after 
+.step1:after, .step2:after, .step3:after 
 {
 	display: inline-block;
 	position: absolute;
-	color: white;
 	border-left: 13px solid;
 	border-top: 13px solid transparent;
 	border-bottom: 13px solid transparent;
     content: "";
+}
+
+.step1:after 
+{
+	color: white;
 	right: -13px;
 	margin-right: -4px;
 	z-index: 2;
@@ -37,13 +41,7 @@
 
 .step2:after
 {
-    display: inline-block;
 	color: black;
-    border-left: 13px solid;
-    border-top: 13px solid transparent;
-    border-bottom: 13px solid transparent;
-    content: "";
-    position: absolute;
     right: -13px;
     margin-right: 104px;
     z-index: 2;
@@ -76,13 +74,7 @@
 
 .step3:after 
 {
-	display: inline-block;
-    position: absolute;
 	color: white;
-    border-left: 13px solid;
-    border-top: 13px solid transparent;
-    border-bottom: 13px solid transparent;
-    content: "";
     right: -13px;
     margin-right: 100px;
     z-index: 2;
