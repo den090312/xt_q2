@@ -6,11 +6,32 @@
 	<link rel="stylesheet" href="styles.css">
 </head>
 	<body>
-		<ul class="current">
+		<div class="menu">
 			<li><a href="#">Шаг 1</a></li>
 			<li><a href="#">Шаг 2</a></li>
 			<li><a href="#">Шаг 3</a></li>
 			<li><a href="#">Шаг 4</a></li>
-		</ul>
+		</div>
 	</body> 
 </html>
+
+<script>
+	
+	var menu = document.querySelectorAll(".menu li");
+
+	active = function () 
+	{
+		for (var i = 0; i < menu.length; i++)
+		{
+			menu[i].classList.remove("active");
+		}
+
+		this.classList.add("active");
+	};
+
+	for (var i = 0; i < menu.length; i++)
+	{
+		menu[i].addEventListener("mousedown", active);
+	}
+	
+</script>
