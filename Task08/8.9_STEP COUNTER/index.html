@@ -18,17 +18,16 @@
 <script>
 	
 	var menu = document.querySelectorAll(".menu li");
-
+	
 	active = function () 
 	{
 		for (var i = 0; i < menu.length; i++)
 		{
 			menu[i].classList.remove("active");
 		}
-
 		this.classList.add("active");
 	};
-
+	
 	for (var i = 0; i < menu.length; i++)
 	{
 		menu[i].addEventListener("mouseup", active);
