@@ -37,7 +37,7 @@ li:not(:last-child)::after
 	border-bottom: 7px solid white;
 	border-right: 7px solid white;
 	box-sizing: border-box;
-	transform: rotate(-60deg) skew(-34deg);
+	transform: rotate(-61deg) skew(-30deg);
 	z-index: 1;
 }
 
