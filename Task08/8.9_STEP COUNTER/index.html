@@ -19,18 +19,19 @@
 	
 	var menu = document.querySelectorAll(".menu li");
 	
-	active = function () 
+	current = function () 
 	{
 		for (var i = 0; i < menu.length; i++)
 		{
-			menu[i].classList.remove("active");
+			menu[i].classList.remove("current");
 		}
-		this.classList.add("active");
+		
+		this.classList.add("current");
 	};
 	
 	for (var i = 0; i < menu.length; i++)
 	{
-		menu[i].addEventListener("mouseup", active);
+		menu[i].addEventListener("mouseup", current);
 	}
 	
 </script>
