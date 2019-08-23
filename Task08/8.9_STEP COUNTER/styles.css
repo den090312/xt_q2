@@ -3,7 +3,7 @@ body
 	font-family: Arial;
 }
 
-ul 
+.menu 
 {
 	list-style: none;
 	display: flex;
@@ -41,12 +41,12 @@ li:not(:last-child)::after
 	z-index: 1;
 }
 
-li:hover, li:active
+li.active
 {
 	background: linear-gradient(#74da2b, #337107);
 }
 
-li:hover a, li.current a:active
+li.active a
 {
 	color: white;
 }
