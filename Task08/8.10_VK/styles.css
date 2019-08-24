@@ -812,3 +812,17 @@ h2, h3
     border-radius: 0 0 4px 4px;
     text-align: center;
 }
+
+.footer_wrap 
+{
+    line-height: 1.36em;
+    padding: 16px 10px 35px;
+    text-align: center;
+    width: 795px;
+    box-sizing: border-box;
+}
+
+.footer_wrap:empty 
+{
+    padding: 15px 0 0;
+}
