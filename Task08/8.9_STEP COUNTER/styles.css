@@ -3,7 +3,11 @@ body
 	font-family: Arial;
 }
 
+<<<<<<< HEAD
 ul 
+=======
+.menu 
+>>>>>>> 7cd1f19c683eecce28077013b6bea9147953eb2a
 {
 	list-style: none;
 	display: flex;
@@ -12,10 +16,17 @@ ul
 
 li
 {
+<<<<<<< HEAD
     width: 120px;
     background: linear-gradient(#dee8e5, #c3c7c4);
     text-align: center;
     position: relative;
+=======
+	width: 120px;
+	background: linear-gradient(#dee8e5, #c3c7c4);
+	text-align: center;
+	position: relative;
+>>>>>>> 7cd1f19c683eecce28077013b6bea9147953eb2a
 }
 
 li a 
@@ -33,20 +44,29 @@ li:not(:last-child)::after
 	width: 28px;
 	height: 28px;
 	top: -1px;
-	right: -6px;
-	border-bottom: 6px solid white;
-	border-right: 6px solid white;
+	right: -7px;
+	border-bottom: 7px solid white;
+	border-right: 7px solid white;
 	box-sizing: border-box;
-	transform: rotate(-60deg) skew(-30deg);
+	transform: rotate(-61deg) skew(-30deg);
 	z-index: 1;
 }
 
+<<<<<<< HEAD
 li:hover, ul.tabs li.current a:active
+=======
+li.current, li:hover
+>>>>>>> 7cd1f19c683eecce28077013b6bea9147953eb2a
 {
 	background: linear-gradient(#74da2b, #337107);
+	cursor: pointer;
 }
 
+<<<<<<< HEAD
 li:hover a, ul.tabs li.current a:active
+=======
+li.current a, li:hover a 
+>>>>>>> 7cd1f19c683eecce28077013b6bea9147953eb2a
 {
 	color: white;
 }

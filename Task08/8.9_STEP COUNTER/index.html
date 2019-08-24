@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="styles.css">
 </head>
 	<body>
+<<<<<<< HEAD
 		<ul class="tabs">
             <li class="current"><a href="#">Шаг1</a></li>
             <li><a href="#">Шаг2</a></li>
@@ -13,5 +14,34 @@
             <li><a href="#">Шаг4</a></li>
          </ul>
 		</ul>
+=======
+		<div class="menu">
+			<li><a href="#">Шаг 1</a></li>
+			<li><a href="#">Шаг 2</a></li>
+			<li><a href="#">Шаг 3</a></li>
+			<li><a href="#">Шаг 4</a></li>
+		</div>
+>>>>>>> 7cd1f19c683eecce28077013b6bea9147953eb2a
 	</body> 
 </html>
+
+<script>
+	
+	var menu = document.querySelectorAll(".menu li");
+	
+	current = function () 
+	{
+		for (var i = 0; i < menu.length; i++)
+		{
+			menu[i].classList.remove("current");
+		}
+		
+		this.classList.add("current");
+	};
+	
+	for (var i = 0; i < menu.length; i++)
+	{
+		menu[i].addEventListener("mouseup", current);
+	}
+	
+</script>
