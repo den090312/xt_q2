@@ -385,3 +385,67 @@ a
 {
     background-position: 7px -21px;
 }
+
+#side_bar #l_fr .left_icon 
+{
+    background-position: 7px -77px;
+}
+
+#side_bar #l_gr .left_icon, #side_bar .l_comm .left_icon 
+{
+    background-position: 7px -105px;
+}
+
+#side_bar #l_ph .left_icon 
+{
+    background-position: 7px -133px;
+}
+
+#side_bar #l_aud .left_icon 
+{
+    background-position: 7px -161px;
+}
+
+#side_bar #l_vid .left_icon 
+{
+    background-position: 7px -189px;
+}
+
+#side_bar #l_ap .left_icon, #side_bar #l_apm .left_icon 
+{
+    background-position: 7px -217px;
+}
+
+#side_bar .more_div 
+{
+    margin-top: 9px;
+    margin-left: 27px;
+    margin-right: 6px;
+    padding-top: 9px;
+    border-top: 1px solid #dfe2e8;
+}
+
+#side_bar #l_vkp .left_icon 
+{
+    background-position: 7px -1023px;
+}
+
+#side_bar #l_mk .left_icon 
+{
+    background-position: 7px -944px;
+}
+
+#side_bar #l_doc .left_icon 
+{
+    background-position: 7px -273px;
+}
+
+#side_bar #l_ads .left_icon 
+{
+    background-position: 7px -329px;
+}
+
+side_bar #shop .left_icon
+{
+    background-position: 7px -693px;
+}
