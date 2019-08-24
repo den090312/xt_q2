@@ -110,7 +110,7 @@ input.text.ts_input
     width: 20px;
 }
 
-.top_nav_btn, .top_nav_btn_icon 
+#top_notify
 {
     background-image: url(ic_head_notify.svg);
 }
@@ -137,6 +137,16 @@ input.text.ts_input
     opacity: 1;
     -o-transition: opacity 100ms linear;
     transition: opacity 100ms linear;
+}
+
+.top_nav_btn_audio_group 
+{
+    display: inline-block;
+}
+
+#top_audio
+{
+    background-image: url(ic_head_audio.svg);
 }
 
 .top_nav_btn_icon 
