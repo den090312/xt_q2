@@ -253,6 +253,7 @@ input.text.ts_input
 
 .top_profile_name 
 {
+    padding-right: 10px;
     display: inline-block;
     vertical-align: top;
 }
