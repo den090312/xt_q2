@@ -449,3 +449,41 @@ side_bar #shop .left_icon
 {
     background-position: 7px -693px;
 }
+
+.left_menu_nav_wrap 
+{
+    line-height: 19px;
+    padding: 14px 0 4px;
+    font-size: 12px;
+    text-align: left;
+}
+
+.left_menu_nav 
+{
+    padding-right: 10px;
+    color: #939699;
+    white-space: nowrap;
+}
+
+.left_menu_nav_wrap .ui_actions_menu_wrap 
+{
+    position: relative;
+    display: inline-block;
+}
+
+.ui_actions_menu_wrap 
+{
+    cursor: pointer;
+}
+
+.left_menu_more:after 
+{
+    display: inline-block;
+    content: '';
+    background: url(menu_arrow.png) no-repeat;
+    background-position: right 0;
+    height: 5px;
+    width: 13px;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    margin-right: -10px;
