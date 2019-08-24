@@ -715,3 +715,34 @@ h2, h3
 {
     outline: none;
 }
+
+.settings_narrow_row 
+{
+    margin-bottom: 10px;
+}
+
+.blind_label, div#utils 
+{
+    position: absolute;
+    overflow: hidden;
+}
+
+.blind_label 
+{
+    height: 1px;
+    width: 1px;
+    clip: rect(1px, 1px, 1px, 1px);
+    opacity: 0;
+    outline: none;
+}
+
+.settings_narrow_row input[type=checkbox]+label:before 
+{
+    display: block;
+    content: '';
+    float: left;
+    background: url(checkbox.svg) no-repeat 0;
+    margin: 0 7px 0 0;
+    width: 15px;
+    height: 15px;
+}
