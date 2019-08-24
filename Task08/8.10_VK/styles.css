@@ -803,3 +803,13 @@ h2, h3
 {
     color: #656565;
 }
+
+.settings_block_footer 
+{
+    border-top: 1px solid #e7e8ec;
+    background: #fafbfc;
+    line-height: 140%;
+    padding: 15px 0 17px;
+    border-radius: 0 0 4px 4px;
+    text-align: center;
+}
