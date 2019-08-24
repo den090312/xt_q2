@@ -208,11 +208,6 @@ input.text.ts_input
     background: url(play.svg) no-repeat;
 }
 
-.top_nav_link, .top_profile_link 
-{
-    padding-right: 0;
-}
-
 .top_nav_link 
 {
     display: inline-block;
@@ -237,6 +232,11 @@ input.text.ts_input
     filter: alpha(opacity=45);
 }
 
+.top_nav_link, .top_profile_link 
+{
+    padding-right: 0;
+}
+
 .top_profile_img, .top_profile_arrow 
 {
     display: inline-block;
@@ -253,7 +253,6 @@ input.text.ts_input
 
 .top_profile_name 
 {
-    padding-right: 10px;
     display: inline-block;
     vertical-align: top;
 }
