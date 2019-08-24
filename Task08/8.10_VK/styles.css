@@ -781,3 +781,20 @@ h2, h3
 {
     padding-top: 4px;
 }
+
+.settings_labeled_text 
+{
+    padding-top: 6px;
+    margin: 0 0 8px 155px;
+}
+
+.settings_right_control, .settings_tabindex_link 
+{
+    outline: none;
+}
+
+.settings_right_control 
+{
+    float: right;
+    padding: 6px 0 0;
+}
