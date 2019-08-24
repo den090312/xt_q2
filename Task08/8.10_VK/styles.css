@@ -77,6 +77,11 @@ header
     float: left;
 }
 
+.fl_r 
+{
+    float: right;
+}
+
 input.text.ts_input 
 {
     border: 0;
@@ -204,4 +209,55 @@ input.text.ts_input
     top: 5px;
     left: 8px;
     background: url(play.svg) no-repeat;
+}
+
+.top_nav_link, .top_profile_link 
+{
+    padding-right: 0;
+}
+
+.top_nav_link 
+{
+    display: inline-block;
+    white-space: nowrap;
+    line-height: 42px;
+    height: 42px;
+    overflow: hidden;
+    padding: 0 10px;
+    color: #fff;
+    font-weight: 700;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.top_profile_arrow 
+{
+    background: url(profile_arrow.svg) no-repeat;
+    background-position: right 0;
+    margin: 20px 8px 0 7px;
+    width: 8px;
+    height: 4px;
+    opacity: 0.45;
+    filter: alpha(opacity=45);
+}
+
+.top_profile_img, .top_profile_arrow 
+{
+    display: inline-block;
+    vertical-align: top;
+}
+
+.top_profile_img 
+{
+    width: 28px;
+    height: 28px;
+    border-radius: 14px;
+    margin: 7px 5px;
+	margin-right: 0;
+}
+
+img 
+{
+    border: 0;
+    color: transparent;
 }
