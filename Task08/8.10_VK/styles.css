@@ -798,3 +798,8 @@ h2, h3
     float: right;
     padding: 6px 0 0;
 }
+
+.settings_text_grey 
+{
+    color: #656565;
+}

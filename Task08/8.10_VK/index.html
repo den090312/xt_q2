@@ -289,7 +289,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="settings_line" id="chgpass" onclick="Settings.toggleBlock(event, 'settings_old_pwd');">
+										<div class="settings_line" id="chgpass">
 											<div class="settings_info_block">
 												<div class="settings_label">Пароль</div>
 												<a class="settings_right_control" tabindex="0" role="link">Изменить</a>
@@ -299,7 +299,7 @@
 												<div id="settings_error_pwd"></div>
 											</div>
 										</div>
-										<div id="chgmail" class="settings_line" onclick="Settings.toggleBlock(event, 'settings_new_mail');">
+										<div id="chgmail" class="settings_line">
 											<div class="settings_info_block">
 											<div id="settings_email_msg"></div>
 											<div class="settings_label">Электронная почта</div>
@@ -307,13 +307,20 @@
 											<div class="settings_labeled_text">de***@yandex.ru</div>
 											</div>
 										</div>	
-										<div id="cphone" class="settings_line" onclick="Settings.phoneSubmit();">
+										<div id="cphone" class="settings_line">
 											<div class="settings_info_block">
 											<div class="settings_label">Номер телефона</div>
 											<a class="settings_right_control">Изменить</a>
 											<div class="settings_labeled_text">+7&nbsp;***&nbsp;***&nbsp;**&nbsp;94</div>
 											</div>
-										</div>										
+										</div>	
+										<div class="settings_line" id="chgaddr">
+											<div class="settings_info_block">
+											<div class="settings_label">Адрес страницы</div>
+											<a class="settings_right_control" tabindex="0" role="link">Изменить</a>
+											<div class="settings_labeled_text"><span class="settings_text_grey">https://vk.com/</span>id99231903<span class="hint_icon" data-title="Вы можете изменить короткий адрес Вашей страницы на более удобный и запоминающийся. Для этого введите имя страницы, состоящее из латинских букв, цифр или знаков «_»." onmouseover="showHint(this);"></span></div>
+											</div>
+										</div>									
 									</div>
 								</div>
 							</div>
