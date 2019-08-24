@@ -35,16 +35,9 @@ body
 
 header 
 {
+    background-color: #4a76a8;
+    margin: 0 auto;
     position: fixed;
-    height: 42px;
-    width: 100%;
-    left: 0;
-    top: 0;
-    z-index: 120;
-    direction: ltr;
-	background-color: #4a76a8;
-	margin: 0 auto;
-	position: fixed;
     height: 42px;
     width: 100%;
     left: 0;
@@ -351,4 +344,44 @@ img
     opacity: 0.75;
     filter: alpha(opacity=75);
     background: url(nav_icons.svg) no-repeat 7px -441px;
+}
+
+#side_bar .left_label 
+{
+    height: 28px;
+    line-height: 27px;
+    font-size: 12.5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#side_bar ol li .left_row 
+{
+    color: #285473;
+    border: 0;
+    display: block;
+    white-space: nowrap;
+}
+
+a 
+{
+    color: #2a5885;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#side_bar .inl_bl 
+{
+    vertical-align: baseline;
+	padding-top: 1px;
+}
+
+#side_bar #l_nwsf .left_icon 
+{
+    background-position: 7px -917px;
+}
+
+#side_bar #l_msg .left_icon 
+{
+    background-position: 7px -21px;
 }
