@@ -1,0 +1,92 @@
+body
+{
+	background: #edeef0;
+    color: #000;
+    margin: 0;
+    padding: 0;
+    direction: ltr;
+    font-size: 13px;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Geneva,Noto Sans Armenian,Noto Sans Bengali,Noto Sans Cherokee,Noto Sans Devanagari,Noto Sans Ethiopic,Noto Sans Georgian,Noto Sans Hebrew,Noto Sans Kannada,Noto Sans Khmer,Noto Sans Lao,Noto Sans Osmanya,Noto Sans Tamil,Noto Sans Telugu,Noto Sans Thai,sans-serif;
+    line-height: 1.154;
+    font-weight: 400;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+	text-align: left;
+}
+
+.scroll_fix 
+{
+    position: relative;
+    text-align: left;
+	width: 960px;
+}
+
+.page_layout
+{
+	padding: 0 15px;
+    margin: 0 auto;
+    position: relative;
+    width: 960px;
+}
+
+header 
+{
+    position: fixed;
+    height: 42px;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 120;
+    direction: ltr;
+	background-color: #4a76a8;
+	margin: 0 auto;
+}
+
+.page_header 
+{
+    width: 960px;
+	position: relative;
+    height: 42px;
+    margin: 0 auto;
+    font-size: 12.5px;
+    padding: 0 15px;
+}
+
+.top_home_logo 
+{
+    background: url(ic_head_logo.svg) no-repeat 50% / contain;
+    height: 19px;
+    width: 34px;
+    margin: 11px 10px 0 0;
+}
+
+.top_home_link 
+{
+    width: 165px;
+    height: 42px;
+    display: block;
+}
+
+.fl_l 
+{
+    float: left;
+}
+
+input.text.ts_input 
+{
+    border: 0;
+    box-sizing: border-box;
+    padding: 6px 6px 6px 19px;
+    margin: 7px 0;
+    height: 28px;
+    line-height: 16px;
+    width: 230px;
+    border-radius: 14px;
+    -o-transition: background-color 0.05s, color 0.05s;
+    transition: background-color 0.05s, color 0.05s;
+    background: #224b7a url(ic_head_loupe.svg) no-repeat;
+    padding-left: 19px;
+    border-left: 8px solid transparent;
+    background-position: left 8px;
+    color: #d9e2ec;
+}
