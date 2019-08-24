@@ -247,21 +247,45 @@
 											<div class="settings_label">Настройки профиля</div>
 												<div class="settings_labeled_text">
 												<div class="settings_narrow_row">
-												<input class="blind_label" type="checkbox" id="settings_hide_gifts" onchange=" Settings.giftsCheck()">
+												<input class="blind_label" type="checkbox" id="settings_hide_gifts">
 												<label for="settings_hide_gifts">Скрывать блок подарков</label>
 
 												</div><div class="settings_narrow_row">
-												<input class="blind_label" type="checkbox" id="settings_status_default" onchange=" Settings.microblogCheck('status_default')">
+												<input class="blind_label" type="checkbox" id="settings_status_default">
 												<label for="settings_status_default">При открытии профиля показывать мои записи</label>
 
 												</div><div class="settings_narrow_row">
-												<input class="blind_label" type="checkbox" id="settings_no_wall_replies" onchange=" Settings.microblogCheck('no_wall_replies')">
+												<input class="blind_label" type="checkbox" id="settings_no_wall_replies">
 												<label for="settings_no_wall_replies">Отключить комментирование записей</label>
 
 												</div><div class="settings_narrow_row">
-												<input class="blind_label" type="checkbox" id="settings_a11y" onchange=" Settings.accessCheck()">
+												<input class="blind_label" type="checkbox" id="settings_a11y">
 												<label for="settings_a11y">Специальные возможности</label>
 												<span class="hint_icon"></span>
+												</div>
+											</div>
+										</div>
+										<div id="" class="settings_line">
+											<div class="settings_label">Настройки контента</div>
+												<div class="settings_labeled_text">
+												<div class="settings_narrow_row">
+												<input class="blind_label" type="checkbox" id="settings_video_autoplay" checked="">
+												<label for="settings_video_autoplay">Автоматически воспроизводить видео</label>
+
+												</div><div class="settings_narrow_row">
+												<input class="blind_label" type="checkbox" id="settings_gif_autoplay" checked="">
+												<label for="settings_gif_autoplay">Автоматически воспроизводить GIF-анимации </label>
+
+												</div><div class="settings_narrow_row">
+												<input class="blind_label" type="checkbox" id="settings_stickers_hints" checked="">
+												<label for="settings_stickers_hints">Подсказывать стикеры в полях ввода</label>
+
+												</div><div class="settings_narrow_row">
+												<input class="blind_label" type="checkbox" id="settings_autotag_friends">
+												<label for="settings_autotag_friends">Автоматически отмечать друзей на фотографиях</label>
+
+												</div><div class="settings_narrow_row">Сортировка комментариев: <div class="idd_wrap settings_replies_order" id="settings_replies_order"><div class="idd_selected_value " tabindex="0" role="link">сначала интересные</div><input type="hidden" id="settings_replies_order_input" name="settings_replies_order" value="smart"></div></div><div class="settings_link_row">
+												<a href="#">Посмотреть заблокированные приложения</a>
 												</div>
 											</div>
 										</div>

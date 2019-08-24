@@ -766,3 +766,18 @@ h2, h3
     filter: alpha(opacity=90);
     cursor: pointer;
 }
+
+.idd_wrap, .idd_selected_value 
+{
+    margin: 0;
+    padding: 0;
+    line-height: 1em;
+    display: inline-block;
+    outline: none;
+    color: #2a5885;
+}
+
+.settings_link_row 
+{
+    padding-top: 4px;
+}
