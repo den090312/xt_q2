@@ -165,6 +165,7 @@ input.text.ts_input
     height: 42px;
     display: inline-block;
     vertical-align: top;
+	right: 5px;
 }
 
 .top_audio_play__button 
@@ -197,7 +198,8 @@ input.text.ts_input
     border-radius: 1px;
 }
 
-.top_audio_play__button:after {
+.top_audio_play__button:after 
+{
     display: block;
     content: '';
     position: absolute;
