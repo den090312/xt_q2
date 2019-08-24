@@ -7,44 +7,67 @@
 	<link rel="stylesheet" href="styles.css">
 </head>
 	<body>
-		<div class="scroll_fix" style="width: 960px;">
-			<header>
-				<div class="page_header" style="width: 960px;">
-					<div class="head_nav_item fl_l">
-						<a class="top_home_link fl_l" href="" aria-label="На главную" accesskey="1">
-							<div class="top_home_logo"></div>
-						</a>
-					</div>
-					<div class="head_nav_item fl_l">
-						<input type="text" class="text ts_input" id="ts_input" autocomplete="off" name="disable-autofill" placeholder="Поиск">
-					</div>
-					<div class="head_nav_item fl_l head_nav_btns">
-						<a id="top_notify" class="top_nav_btn"><div class="top_nav_btn_icon"></div></a>
-						<div id="top_audio_btn_group" class="top_nav_btn_audio_group" style="">
-							<a id="top_audio" class="top_nav_btn _top_nav_audio_btn">
-								<div id="top_nav_btn_audio" class="top_nav_btn_icon"></div>
+		<div>
+			<div class="scroll_fix" style="width: 1048px;">
+				<header>
+					<div class="page_header" style="width: 960px;">
+						<div class="head_nav_item fl_l">
+							<a class="top_home_link fl_l" href="" aria-label="На главную" accesskey="1">
+								<div class="top_home_logo"></div>
 							</a>
-							<div class="top_audio_play" id="top_audio_play">
-							  <button class="top_audio_play__button"></button>
+						</div>
+						<div class="head_nav_item fl_l">
+							<input type="text" class="text ts_input" id="ts_input" autocomplete="off" name="disable-autofill" placeholder="Поиск">
+						</div>
+						<div class="head_nav_item fl_l head_nav_btns">
+							<a id="top_notify" class="top_nav_btn"><div class="top_nav_btn_icon"></div></a>
+							<div id="top_audio_btn_group" class="top_nav_btn_audio_group" style="">
+								<a id="top_audio" class="top_nav_btn _top_nav_audio_btn">
+									<div id="top_nav_btn_audio" class="top_nav_btn_icon"></div>
+								</a>
+								<div class="top_audio_play" id="top_audio_play">
+								  <button class="top_audio_play__button"></button>
+								</div>
 							</div>
 						</div>
+						<div class="head_nav_item fl_r">
+							<a id="top_profile_link" class="top_nav_link top_profile_link" accesskey="4">
+							  <div class="top_profile_name">Денис<img class="top_profile_img" src="me.jpg" alt="Денис">
+									<div class="top_profile_arrow"></div>
+							  </div>
+							</a>
+						</div>
 					</div>
-					<div class="head_nav_item fl_r">
-						<a id="top_profile_link" class="top_nav_link top_profile_link" accesskey="4">
-						  <div class="top_profile_name">Денис						  <img class="top_profile_img" src="me.jpg" alt="Денис">
-						  <div class="top_profile_arrow"></div></div>
-
-						</a>
+				</header>
+				<div id="page_layout" style="width: 960px;">
+					<div id="side_bar" class="side_bar fl_l" style="top: 0px;">
+						<div id="side_bar_inner" class="side_bar_inner">
+							<nav>
+								<ol>
+									<li id="l_pr" class="">
+										<a href="#" class="left_row">
+										<span class="left_fixer">
+											<span class="left_count_wrap fl_r left_void"><span class="inl_bl left_count_sign">0</span></span>
+											<span class="left_icon fl_l"></span>
+											<span class="left_label inl_bl">Моя страница</span>
+										</span>
+										</a>
+										<div class="left_settings" onclick="menuSettings(0)">
+											<div class="left_settings_inner"></div>
+										</div>
+									</li>
+								</ol>
+							</nav>
+						</div>
 					</div>
+					<!--<div id="page_body" class="fl_r " style="width: 795px;">
+						
+					</div>-->
+					<!--<section>
+					</section>
+					<aside>
+					</aside>-->
 				</div>
-			</header>
-			<div class="page_layout" style="width: 960px;">
-				<nav>
-				</nav>
-				<section>
-				</section>
-				<aside>
-				</aside>
 			</div>
 		</div>
 	</body> 
