@@ -673,3 +673,45 @@ h2, h3
     clear: both;
     visibility: hidden;
 }
+
+.settings_panel 
+{
+    margin: 0 20px;
+}
+
+.settings_line 
+{
+    margin: 0;
+    padding: 15px 0 14px;
+    border-bottom: 1px solid #e7e8ec;
+}
+
+.settings_info_block 
+{
+    line-height: 16px;
+}
+
+.settings_label 
+{
+    color: #656565;
+    width: 145px;
+    padding: 6px 10px 6px 0;
+    float: left;
+    line-height: 16px;
+}
+
+.settings_labeled_text 
+{
+    padding-top: 6px;
+    margin: 0 0 8px 155px;
+}
+
+.settings_menu_link:first-child 
+{
+    padding-top: 0;
+}
+
+.settings_right_control, .settings_tabindex_link 
+{
+    outline: none;
+}
