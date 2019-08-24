@@ -156,3 +156,52 @@ input.text.ts_input
     height: 20px;
     width: 20px;
 }
+
+.top_audio_play 
+{
+    position: relative;
+    height: 42px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.top_audio_play__button 
+{
+    position: relative;
+    display: block;
+    -webkit-appearance: none;
+    cursor: pointer;
+    width: 22px;
+    top: 11px;
+    height: 20px;
+    border: none;
+    border-radius: 3px;
+    background-color: #224b7a;
+    overflow: visible;
+}
+
+.top_audio_play__button:before 
+{
+    position: absolute;
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: #224b7a;
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    top: 6px;
+    left: -2px;
+    border-radius: 1px;
+}
+
+.top_audio_play__button:after {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 7px;
+    height: 10px;
+    top: 5px;
+    left: 8px;
+    background: url(play.svg) no-repeat;
+}
