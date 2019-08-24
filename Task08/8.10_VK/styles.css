@@ -648,12 +648,12 @@ h2, h3
     filter: alpha(opacity=70);
 }
 
-.wide_column_left .wide_column_wrap 
+.wide_column_left, .wide_column_wrap 
 {
     margin-right: 245px;
 }
 
-.wide_column_left .wide_column 
+.wide_column_left, .wide_column 
 {
     float: left;
 }
