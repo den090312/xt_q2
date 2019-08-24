@@ -23,7 +23,6 @@ body
 {
     position: relative;
     text-align: left;
-	width: 960px;
 }
 
 .page_layout
@@ -31,7 +30,6 @@ body
 	padding: 0 15px;
     margin: 0 auto;
     position: relative;
-    width: 960px;
 }
 
 header 
@@ -49,13 +47,11 @@ header
 
 .page_header 
 {
-    width: 960px;
 	position: relative;
     height: 42px;
     margin: 0 auto;
     font-size: 12.5px;
     padding: 0 15px;
-
 }
 
 .top_home_logo 
