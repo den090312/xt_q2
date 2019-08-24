@@ -250,7 +250,7 @@ input.text.ts_input
     width: 28px;
     height: 28px;
     border-radius: 14px;
-    margin: 7px 0;
+    margin: 7px -3px 0 0;
 }
 
 .top_profile_name 
