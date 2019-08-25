@@ -17,11 +17,11 @@ namespace _71_DATE_EXISTANCE
 
             if (userText.HasDate())
             {
-                Console.WriteLine($"There is date in text: {userText}");
+                Console.WriteLine($"There is date in text: '{userText}'");
             }
             else
             {
-                Console.WriteLine($"There is NO date in text: {userText}");
+                Console.WriteLine($"There is NO date in text: '{userText}'");
             }
         }
     }
