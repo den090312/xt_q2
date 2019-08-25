@@ -560,7 +560,6 @@ h2, h3
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-	font-size: 15px;
 }
 
 .clear_fix:after 
