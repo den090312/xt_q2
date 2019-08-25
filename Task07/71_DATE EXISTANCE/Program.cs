@@ -9,11 +9,9 @@ namespace _71_DATE_EXISTANCE
 {
     public class Program
     {
-        private static readonly string dateFormat = "dd-mm-yyyy";
-
         private static void Main(string[] args)
         {
-            Console.WriteLine($"Enter text with date in format: {dateFormat}");
+            Console.WriteLine("Enter text with date in format: 'dd-mm-yyyy'");
 
             var userText = Console.ReadLine();
 
