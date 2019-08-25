@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace _71_DATE_EXISTANCE
@@ -16,7 +17,7 @@ namespace _71_DATE_EXISTANCE
 
             var userText = Console.ReadLine();
 
-            if (userText.HasDate(dateFormat))
+            if (userText.HasDate())
             {
                 Console.WriteLine($"There is date in text: {userText}");
             }
@@ -29,11 +30,7 @@ namespace _71_DATE_EXISTANCE
 
     public static class DateExtensions
     {
-        public static bool HasDate(this string userString, string dateFormat)
-        {
-            bool hasDate = false;
-
-            return hasDate;
-        }
+        public static bool HasDate(this string userString) 
+            => new Regex(@"((0[1-9]|[12]\d|3[01])-(0[1-9]|1[0-2])-[12]\d{3})").IsMatch(userString); 
     }
 }
