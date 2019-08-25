@@ -14,6 +14,6 @@ Task 05 done
 
 Task 06 done
 
-Task 07 in process
+Task 07 in progress
 
 Task 08 done
