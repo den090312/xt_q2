@@ -8,9 +8,9 @@ namespace _72_HTML_REPLACER
         private static void Main(string[] args)
         {
             Console.WriteLine("Enter text");
-            Console.WriteLine(RemoveHTMLTags(Console.ReadLine()));
+            Console.WriteLine(ReplaceHTMLTags(Console.ReadLine()));
         }
 
-        public static string RemoveHTMLTags(string userString) => Regex.Replace(userString, @"<\s*[^<]*>", "_");
+        public static string ReplaceHTMLTags(string userString) => Regex.Replace(userString, @"<\s*[^<]*>", "_");
     }
 }
