@@ -1,0 +1,21 @@
+.headBlock{
+    background-color: #236A62;
+    display: flex;
+    color: white;
+    padding: 10px;
+}
+.textBlock{
+    background-color: #ABE0DB;
+    display: inline-block;
+    position: relative;
+    top: -20px;
+    margin-left: 150px;
+    border: solid 1px white;
+    padding: 10px;
+    border-right: none;
+    line-height: 21px;
+    font-family: sans-serif;
+}
+body{
+    height: 1050px;
+}
