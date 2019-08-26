@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<title>STEP COUNTER</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+	<body>
+		<div class="menu">
+			<li><a href="#">Шаг 1</a></li>
+			<li><a href="#">Шаг 2</a></li>
+			<li><a href="#">Шаг 3</a></li>
+			<li><a href="#">Шаг 4</a></li>
+		</div>
+	</body> 
+</html>
+
+<script>
+	
+	var menu = document.querySelectorAll(".menu li");
+	
+	current = function () 
+	{
+		for (var i = 0; i < menu.length; i++)
+		{
+			menu[i].classList.remove("current");
+		}
+		
+		this.classList.add("current");
+	};
+	
+	for (var i = 0; i < menu.length; i++)
+	{
+		menu[i].addEventListener("mouseup", current);
+	}
+	
+</script>

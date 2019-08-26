@@ -216,6 +216,11 @@ namespace Task06.DAL
         {
             var fieldIndex = Award.GetFieldIndex(itemName);
 
+            if (fieldIndex == -1)
+            {
+                throw new Exception("fieldIndex is not found!");
+            }
+
             switch (fieldIndex)
             {
                 case -1:
@@ -295,7 +300,7 @@ namespace Task06.DAL
             }
         }
 
-        public void CheckFileExistance()
+        private void CheckFileExistance()
         {
             if (!File.Exists(FilePath))
             {
@@ -316,7 +321,7 @@ namespace Task06.DAL
             {
                 if (Title(line) == awardTitle)
                 {
-                    awardIDList.Add(line.Split(Separator)[Award.GetFieldIndex("AwardID")]);
+                    awardIDList.Add(AwardID(line));
                 }
             }
 
@@ -327,17 +332,17 @@ namespace Task06.DAL
         {
             CheckFileExistance();
 
-            var awardsList = new List<KeyValuePair<string, string>>();
+            var awardList = new List<KeyValuePair<string, string>>();
 
             Thread.Sleep(10);
             var awardLines = File.ReadAllLines(FilePath);
 
             foreach (var line in awardLines)
             {
-                awardsList.Add(new KeyValuePair<string, string>(UserID(line), Title(line)));
+                awardList.Add(new KeyValuePair<string, string>(UserID(line), Title(line)));
             }
 
-            return awardsList;
+            return awardList;
         }
 
         public void EraseUser(string userID)

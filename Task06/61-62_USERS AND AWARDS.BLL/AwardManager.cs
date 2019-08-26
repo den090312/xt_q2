@@ -93,7 +93,11 @@ namespace Task06.BLL
             }
         }
 
-        public string[] GetAwardIDArray(string awardName) => awardImplement.GetAwardIDArray(awardName);
+        public string[] GetAwardIDArray(string awardName)
+        {
+            NullCheck(awardName);
+            return awardImplement.GetAwardIDArray(awardName);
+        }
 
         public List<KeyValuePair<string, string>> GetAwardList() => awardImplement.GetAwardList();
 
@@ -103,7 +107,7 @@ namespace Task06.BLL
             awardImplement.EraseUser(userID);
         }
 
-        public static void NullCheck<T>(T classObject) where T : class
+        private static void NullCheck<T>(T classObject) where T : class
         {
             if (classObject is null)
             {

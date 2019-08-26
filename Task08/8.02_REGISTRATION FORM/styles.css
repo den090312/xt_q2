@@ -1,0 +1,58 @@
+body
+{
+	font-family: Arial;
+}
+
+form
+{
+	padding-bottom: 25px;
+	background-color: #0690cf;
+	color: white;
+	width: 400px;
+}
+
+p
+{
+	padding: 25px;
+	padding-bottom: 0;
+	margin: 0;
+	font-size: 25px;
+}
+
+hr
+{
+	margin-bottom: 25px;
+}
+
+.email 
+{
+	padding-left: 25px;
+	padding-bottom: 25px;
+}
+
+.input_email
+{
+	width: 315px;
+}
+
+.password
+{
+	padding-left: 25px;	
+	width: 140px; 
+	display: inline-block;
+}
+
+.input_password
+{
+	width: 145px;
+}
+
+.input_submit
+{
+	height: 26px;
+	width: 85px;
+	margin: 25px;
+	margin-bottom: 0;
+	background-color: #ffdf7f;
+	border: none;
+}

@@ -1,18 +1,361 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="8.7 styles.css">
-    <title>Document</title>
+  <meta charset="utf-8">
+  <meta name="description" content="" />
+  <link rel="shortcut icon" href="fav_logo.ico" />
+  <title>Мои настройки</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" type="text/css" href="fonts_utf.css" />
 </head>
+
 <body>
-        <div class="headBlock">
-            <h1>Анапест как композиционный анализ</h1>
+  <div>
+    <div class="scroll_fix">
+      <header>
+        <div class="page_header" style="width: 960px;">
+          <div class="head_nav_item fl_l">
+            <a class="top_home_link fl_l" href="" aria-label="На главную" accesskey="1">
+              <div class="top_home_logo"></div>
+            </a>
+          </div>
+          <div class="head_nav_item fl_l">
+            <input type="text" class="text ts_input" id="ts_input" autocomplete="off" name="disable-autofill" placeholder="Поиск">
+          </div>
+          <div class="head_nav_item fl_l head_nav_btns">
+            <a id="top_notify" class="top_nav_btn">
+              <div class="top_nav_btn_icon"></div>
+            </a>
+            <div id="top_audio_btn_group" class="top_nav_btn_audio_group" style="margin-left: -3px;">
+              <a id="top_audio" class="top_nav_btn _top_nav_audio_btn">
+                <div id="top_nav_btn_audio" class="top_nav_btn_icon"></div>
+              </a>
+              <div class="top_audio_play" id="top_audio_play">
+                <button class="top_audio_play__button"></button>
+              </div>
+            </div>
+          </div>
+          <div class="head_nav_item fl_r">
+            <a id="top_profile_link" class="top_nav_link top_profile_link" accesskey="4">
+              <div class="top_profile_name">Денис</div><img class="top_profile_img" src="me.jpg" alt="Денис">
+              <div class="top_profile_arrow"></div>
+            </a>
+          </div>
         </div>
-        <div class="textBlock">
-            <p>Рифма существенно осознаёт лирический дактиль, несмотря на отсутствие единого пунктуационного алгоритма. Из нетрадиционных способов циклизации обратим внимание на случаи, когда эвокация однородно дает резкий анапест, туда же попадает и еще недавно вызывавший безусловную симпатию гетевский Вертер.</p>
+      </header>
+      <div id="page_layout" style="width: 960px;">
+        <div id="side_bar" class="side_bar fl_l" style="top: 0px;">
+          <div id="side_bar_inner" class="side_bar_inner">
+            <nav>
+              <ol>
+                <li id="l_pr" class="">
+                  <a href="#" class="left_row">
+                    <span class="left_fixer">
+                    <span class="left_count_wrap fl_r left_void"><span class="inl_bl left_count_sign">0</span></span>
+                    <span class="left_icon fl_l"></span>
+                    <span class="left_label inl_bl">Моя страница</span>
+                    </span>
+                  </a>
+                  <div class="left_settings">
+                    <div class="left_settings_inner"></div>
+                  </div>
+                </li>
+                <li id="l_nwsf" class="">
+                  <a href="#" class="left_row">
+                    <span class="left_fixer">
+                    <span class="left_count_wrap fl_r left_void"><span class="inl_bl left_count_sign">0</span></span>
+                    <span class="left_icon fl_l"></span>
+                    <span class="left_label inl_bl">Новости</span>
+                    </span>
+                  </a>
+                </li>
+                <li id="l_msg" class="">
+                  <a href="#" class="left_row">
+                    <span class="left_fixer">
+                    <span class="left_count_wrap fl_r left_void"><span class="inl_bl left_count_sign">0</span></span>
+                    <span class="left_icon fl_l"></span>
+                    <span class="left_label inl_bl">Сообщения</span>
+                    </span>
+                  </a>
+                </li>
+                <li id="l_fr" class="">
+                  <a href="#" class="left_row">
+                    <span class="left_fixer">
+                    <span class="left_count_wrap fl_r left_void"><span class="inl_bl left_count_sign">0</span></span>
+                    <span class="left_icon fl_l"></span>
+                    <span class="left_label inl_bl">Друзья</span>
+                    </span>
+                  </a>
+                </li>
+                <li id="l_gr" class="">
+                  <a href="#" class="left_row">
+                    <span class="left_fixer">
+                    <span class="left_count_wrap fl_r left_void"><span class="inl_bl left_count_sign">0</span></span>
+                    <span class="left_icon fl_l"></span>
+                    <span class="left_label inl_bl">Сообщества</span>
+                    </span>
+                  </a>
+                </li>
+                <li id="l_ph" class="">
+                  <a href="#" class="left_row">
+                    <span class="left_fixer">
+                    <span class="left_count_wrap fl_r left_void"><span class="inl_bl left_count_sign">0</span></span>
+                    <span class="left_icon fl_l"></span>
+                    <span class="left_label inl_bl">Фотографии</span>
+                    </span>
+                  </a>
+                </li>
+                <li id="l_aud" class="">
+                  <a href="#" class="left_row">
+                    <span class="left_fixer">
+                    <span class="left_count_wrap fl_r left_void"><span class="inl_bl left_count_sign">0</span></span>
+                    <span class="left_icon fl_l"></span>
+                    <span class="left_label inl_bl">Музыка</span>
+                    </span>
+                  </a>
+                </li>
+                <li id="l_vid" class="">
+                  <a href="#" class="left_row">
+                    <span class="left_fixer">
+                    <span class="left_count_wrap fl_r left_void"><span class="inl_bl left_count_sign">0</span></span>
+                    <span class="left_icon fl_l"></span>
+                    <span class="left_label inl_bl">Видео</span>
+                    </span>
+                  </a>
+                </li>
+                <li id="l_ap" class="">
+                  <a href="#" class="left_row">
+                    <span class="left_fixer">
+                    <span class="left_count_wrap fl_r left_void"><span class="inl_bl left_count_sign">0</span></span>
+                    <span class="left_icon fl_l"></span>
+                    <span class="left_label inl_bl">Игры</span>
+                    </span>
+                  </a>
+                </li>
+                <div class="more_div l_main"></div>
+                <li id="l_vkp" class="">
+                  <a href="#" class="left_row">
+                    <span class="left_fixer">
+                    <span class="left_count_wrap fl_r left_void"><span class="inl_bl left_count_sign">0</span></span>
+                    <span class="left_icon fl_l"></span>
+                    <span class="left_label inl_bl">VK Pay</span>
+                    </span>
+                  </a>
+                </li>
+                <div class="more_div l_main"></div>
+                <li id="l_mk" class="">
+                  <a href="#" class="left_row">
+                    <span class="left_fixer">
+                    <span class="left_count_wrap fl_r left_void"><span class="inl_bl left_count_sign">0</span></span>
+                    <span class="left_icon fl_l"></span>
+                    <span class="left_label inl_bl">Товары</span>
+                    </span>
+                  </a>
+                </li>
+                <li id="l_doc" class="">
+                  <a href="#" class="left_row">
+                    <span class="left_fixer">
+                    <span class="left_count_wrap fl_r left_void"><span class="inl_bl left_count_sign">0</span></span>
+                    <span class="left_icon fl_l"></span>
+                    <span class="left_label inl_bl">Документы</span>
+                    </span>
+                  </a>
+                </li>
+                <li id="l_ads" class="">
+                  <a href="#" class="left_row">
+                    <span class="left_fixer">
+                    <span class="left_count_wrap fl_r left_void"><span class="inl_bl left_count_sign">0</span></span>
+                    <span class="left_icon fl_l"></span>
+                    <span class="left_label inl_bl">Реклама</span>
+                    </span>
+                  </a>
+                </li>
+                <div class="more_div l_main"></div>
+                <li id="l_gr" class="">
+                  <a href="#" class="left_row">
+                    <span class="left_fixer">
+                    <span class="left_count_wrap fl_r left_void"><span class="inl_bl left_count_sign">0</span></span>
+                    <span class="left_icon fl_l"></span>
+                    <span class="left_label inl_bl">C# vs JS</span>
+                    </span>
+                  </a>
+                </li>
+                <div class="more_div l_main"></div>
+                <li id="shop" class="">
+                  <a href="#" class="left_row">
+                    <span class="left_fixer">
+                    <span class="left_count_wrap fl_r left_void"><span class="inl_bl left_count_sign">0</span></span>
+                    <span class="left_icon fl_l"></span>
+                    <span class="left_label inl_bl">Магазин</span>
+                    </span>
+                  </a>
+                </li>
+              </ol>
+            </nav>
+            <div class="left_menu_nav_wrap">
+              <a class="left_menu_nav" href="#">Блог</a>
+              <a class="left_menu_nav" href="#">Разработчикам</a>
+              <a class="left_menu_nav" href="#">Реклама</a>
+              <a class="left_menu_nav left_menu_more" id="left_menu_more">Ещё</a>
+            </div>
+          </div>
         </div>
+        <div id="page_body" class="fl_r " style="width: 795px;">
+          <aside>
+            <div class="narrow_column_wrap">
+              <div class="narrow_column" id="narrow_column" style="margin-top: 0px;">
+                <div class="page_block ui_rmenu ui_rmenu_pr" role="list">
+                  <a href="#" class="ui_rmenu_item _ui_item_general ui_rmenu_item_sel" style="padding-left: 18px;">
+                    <span style="color: black; ">Общее</span>
+                  </a>
+                  <a href="#" class="ui_rmenu_item _ui_item_security"><span>Безопасность</span>
+                  </a>
+                  <a href="#" class="ui_rmenu_item _ui_item_security"><span>Приватность</span>
+                  </a>
+                  <a href="#" class="ui_rmenu_item _ui_item_security"><span>Уведомления</span>
+                    <div class="ui_actions_menu_icons" tabindex="0" aria-label="Действия" role="button"></div>
+                  </a>
+                  <a href="#" class="ui_rmenu_item _ui_item_security"><span>Чёрный список</span>
+                  </a>
+                  <a href="#" class="ui_rmenu_item _ui_item_security"><span>Настройки приложений</span>
+                  </a>
+                  <a href="#" class="ui_rmenu_item _ui_item_security"><span>Мобильные сервисы</span>
+                  </a>
+                  <a href="#" class="ui_rmenu_item _ui_item_security"><span>Платежи, подписки, переводы</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </aside>
+          <section>
+            <div class="wide_column_wrap" style="">
+              <div class="wide_column" id="wide_column" style="">
+                <div class="page_block" style="">
+                  <h2 class="page_block_h2">
+                    <div class="page_block_header clear_fix">
+                    <div class="page_block_header_extra_left _header_extra_left"></div>
+                    <div class="page_block_header_extra _header_extra"></div>
+                    <div class="page_block_header_inner _header_inner">Общее</div>
+                    </div>
+                  </h2>
+                  <div class="settings_panel clear_fix settings_general">
+                    <div class="settings_line">
+                      <div class="settings_info_block">
+                        <div class="settings_label">Меню сайта</div>
+                        <div class="settings_labeled_text">
+                          <div class="settings_menu_link">
+                            <a class="settings_tabindex_link" role="link" tabindex="0">Настроить отображение пунктов меню</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="cposts" class="settings_line">
+                      <div class="settings_label">Настройки профиля</div>
+                      <div class="settings_labeled_text">
+                        <div class="settings_narrow_row">
+                          <input class="blind_label" type="checkbox" id="settings_hide_gifts">
+                          <label for="settings_hide_gifts">Скрывать блок подарков</label>
+                        </div>
+                        <div class="settings_narrow_row">
+                          <input class="blind_label" type="checkbox" id="settings_status_default">
+                          <label for="settings_status_default">При открытии профиля показывать мои записи</label>
+                        </div>
+                        <div class="settings_narrow_row">
+                          <input class="blind_label" type="checkbox" id="settings_no_wall_replies">
+                          <label for="settings_no_wall_replies">Отключить комментирование записей</label>
+                        </div>
+                        <div class="settings_narrow_row">
+                          <input class="blind_label" type="checkbox" id="settings_a11y">
+                          <label for="settings_a11y">Специальные возможности</label>
+                          <span class="hint_icon"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="" class="settings_line">
+                      <div class="settings_label">Настройки контента</div>
+                      <div class="settings_labeled_text">
+                        <div class="settings_narrow_row">
+                          <input class="blind_label" type="checkbox" id="settings_video_autoplay" checked="">
+                          <label for="settings_video_autoplay">Автоматически воспроизводить видео</label>
+                        </div>
+                        <div class="settings_narrow_row">
+                          <input class="blind_label" type="checkbox" id="settings_gif_autoplay" checked="">
+                          <label for="settings_gif_autoplay">Автоматически воспроизводить GIF-анимации </label>
+                        </div>
+                        <div class="settings_narrow_row">
+                          <input class="blind_label" type="checkbox" id="settings_stickers_hints" checked="">
+                          <label for="settings_stickers_hints">Подсказывать стикеры в полях ввода</label>
+                        </div>
+                        <div class="settings_narrow_row">
+                          <input class="blind_label" type="checkbox" id="settings_autotag_friends">
+                          <label for="settings_autotag_friends">Автоматически отмечать друзей на фотографиях</label>
+                        </div>
+                        <div class="settings_narrow_row">Сортировка комментариев:
+                          <div class="idd_wrap settings_replies_order" id="settings_replies_order">
+                            <div class="idd_selected_value " tabindex="0" role="link">сначала интересные</div>
+                            <input type="hidden" id="settings_replies_order_input" name="settings_replies_order" value="smart">
+                          </div>
+                        </div>
+                        <div class="settings_link_row">
+                          <a href="#">Посмотреть заблокированные приложения</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="settings_line" id="chgpass">
+                      <div class="settings_info_block">
+                        <div class="settings_label">Пароль</div>
+                        <a class="settings_right_control" tabindex="0" role="link">Изменить</a>
+                        <div class="settings_labeled_text">обновлён год назад</div>
+                      </div>
+                      <div class="settings_change_block">
+                        <div id="settings_error_pwd"></div>
+                      </div>
+                    </div>
+                    <div id="chgmail" class="settings_line">
+                      <div class="settings_info_block">
+                        <div id="settings_email_msg"></div>
+                        <div class="settings_label">Электронная почта</div>
+                        <a class="settings_right_control" tabindex="0" role="link">Изменить</a>
+                        <div class="settings_labeled_text">de***@yandex.ru</div>
+                      </div>
+                    </div>
+                    <div id="cphone" class="settings_line">
+                      <div class="settings_info_block">
+                        <div class="settings_label">Номер телефона</div>
+                        <a class="settings_right_control">Изменить</a>
+                        <div class="settings_labeled_text">+7&nbsp;***&nbsp;***&nbsp;**&nbsp;94</div>
+                      </div>
+                    </div>
+                    <div class="settings_line" id="chgaddr">
+                      <div class="settings_info_block">
+                        <div class="settings_label">Адрес страницы</div>
+                        <a class="settings_right_control" tabindex="0" role="link">Изменить</a>
+                        <div class="settings_labeled_text"><span class="settings_text_grey">https://vk.com/</span>id99231903<span class="hint_icon" data-title="Вы можете изменить короткий адрес Вашей страницы на более удобный и запоминающийся. Для этого введите имя страницы, состоящее из латинских букв, цифр или знаков «_»." onmouseover="showHint(this);"></span></div>
+                      </div>
+                    </div>
+                    <div id="chglang" class="settings_line">
+                      <div class="settings_info_block">
+                        <div class="settings_label">Язык</div>
+                        <a class="settings_right_control" tabindex="0" role="link">Изменить</a>
+                        <div class="settings_labeled_text">Русский</div>
+                      </div>
+                    </div>
+                  </div>
+                  <footer>
+                    <div class="settings_block_footer">
+                      Вы можете <a href="/settings?act=deactivate">удалить свою страницу</a>.
+                    </div>
+                  </footer>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <div id="footer_wrap" class="footer_wrap fl_r" style="width: 795px;"></div>
+      </div>
+    </div>
+  </div>
 </body>
+
 </html>

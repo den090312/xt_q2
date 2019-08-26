@@ -62,7 +62,11 @@ namespace Task06.BLL
             return userImplement.UsersExists(userName);
         }
 
-        public void PrintUsers(List<KeyValuePair<string, string>> awardsList) => userImplement.PrintUsers(awardImplement.GetAwardList());
+        public void PrintUsers(List<KeyValuePair<string, string>> awardsList)
+        {
+            NullCheck(awardsList);
+            userImplement.PrintUsers(awardsList);
+        }
 
         public void JoinAwardToUser(string awardName, string userName)
         {
@@ -96,7 +100,7 @@ namespace Task06.BLL
             }
         }
 
-        public static void CheckName(string name)
+        private static void CheckName(string name)
         {
             var userCharArray = name.ToCharArray();
 
@@ -106,7 +110,7 @@ namespace Task06.BLL
             }
         }
 
-        public static void CheckDateOfBirth(DateTime birthDate)
+        private static void CheckDateOfBirth(DateTime birthDate)
         {
             DateTime currentDateTime = DateTime.Now.Date;
 
@@ -121,7 +125,12 @@ namespace Task06.BLL
             }
         }
 
-        public string[] GetUserIDArray(string userName) => userImplement.GetUserIDArray(userName);
+        public string[] GetUserIDArray(string userName)
+        {
+            NullCheck(userName);
+
+            return userImplement.GetUserIDArray(userName);
+        }
 
         public bool RecordExists(string awardID, string userID)
         {
@@ -137,7 +146,7 @@ namespace Task06.BLL
             userImplement.EraseAward(awardID);
         }
 
-        public static void NullCheck<T>(T classObject) where T : class
+        private static void NullCheck<T>(T classObject) where T : class
         {
             if (classObject is null)
             {

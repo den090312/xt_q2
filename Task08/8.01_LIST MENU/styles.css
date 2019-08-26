@@ -1,0 +1,18 @@
+ul 
+{
+	list-style-type: none;
+	padding-inline-start: 0;
+	border: 1px solid black;
+	border-radius: 11px;
+	background-color: #f9e497;
+	width: 200px;
+	box-shadow: 6px 7px 0 #880000;
+}
+
+li
+{
+	color: #880000;
+	margin: 10px;
+	font-size: 13px;
+	font-weight: bold;
+}

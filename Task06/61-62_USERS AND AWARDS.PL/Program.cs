@@ -143,7 +143,7 @@ namespace Task06.PL
             return InputComplete();
         }
 
-        public static void WriteMenu()
+        private static void WriteMenu()
         {
             Console.WriteLine("Users operations:");
             Console.WriteLine("\t1: create");
@@ -210,7 +210,7 @@ namespace Task06.PL
 
                 if (key.Key == ConsoleKey.Backspace)
                 {
-                    EmulateConsoleKeyBackSpace(userKeySB);
+                    EmulateBackspace(userKeySB);
                 }
                 else if (key.Key == ConsoleKey.Enter)
                 {
@@ -255,7 +255,7 @@ namespace Task06.PL
 
                 if (key.Key == ConsoleKey.Backspace)
                 {
-                    EmulateConsoleKeyBackSpace(userSB);
+                    EmulateBackspace(userSB);
                 }
                 else if (key.Key == ConsoleKey.Enter)
                 {
@@ -275,7 +275,7 @@ namespace Task06.PL
             return userSB.ToString();
         }
 
-        public static DateTime GetUserDate(string dateFormat)
+        private static DateTime GetUserDate(string dateFormat)
         {
             Console.Clear();
             Console.WriteLine($"Enter date in format: {dateFormat}");
@@ -301,7 +301,7 @@ namespace Task06.PL
             return userBirthDate;
         }
 
-        public static void EmulateConsoleKeyBackSpace(StringBuilder userKeySB)
+        private static void EmulateBackspace(StringBuilder userKeySB)
         {
             if (userKeySB.Length > 0)
             {
