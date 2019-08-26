@@ -9,22 +9,34 @@ namespace _73_EMAIL_FINDER
         {
             Console.WriteLine("Enter text");
 
-            //var emailMatches = new Regex(@"[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]*@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])*(?:\.[a-zA-Z](?:[a-zA-Z]*[a-zA-Z]))+")
-            //var emailMatches = new Regex(@"[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9]+(?:\.[a-zA-Z]{2,6}\b)+")
-            var emailMatches = new Regex(@"[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9]+\.[a-zA-Z]*\.[a-zA-Z]{2,6}\b")
-                .Matches(Console.ReadLine());
-
             Console.WriteLine();
             Console.WriteLine("Emails found:");
             Console.WriteLine("------------");
 
+            //two domains
+            WriteMatches
+            (
+                new Regex(@"[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9]+(\.[a-zA-Z]{2,6}\b)+(\.[a-zA-Z]{2,6}\b)+")
+                    .Matches(Console.ReadLine())
+            );
+
+            //one domain
+            WriteMatches
+            (
+                new Regex(@"[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9]+(\.[a-zA-Z]{2,6}\b)+(\.[a-zA-Z]{2,6}\b)+")
+                    .Matches(Console.ReadLine())
+            );
+
+            Console.WriteLine("------------");
+            Console.WriteLine();
+        }
+
+        private static void WriteMatches(MatchCollection emailMatches)
+        {
             foreach (var match in emailMatches)
             {
                 Console.WriteLine(match);
             }
-
-            Console.WriteLine("------------");
-            Console.WriteLine();
         }
     }
 }
