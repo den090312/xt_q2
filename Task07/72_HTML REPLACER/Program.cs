@@ -11,6 +11,6 @@ namespace _72_HTML_REPLACER
             Console.WriteLine(ReplaceHTMLTags(Console.ReadLine()));
         }
 
-        public static string ReplaceHTMLTags(string userString) => Regex.Replace(userString, @"<\s*[^<]*>", "_");
+        public static string ReplaceHTMLTags(string userString) => Regex.Replace(userString, @"<[^<>]+>", "_");
     }
 }
