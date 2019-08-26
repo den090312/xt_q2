@@ -9,9 +9,7 @@ namespace _73_EMAIL_FINDER
         {
             Console.WriteLine("Enter text");
 
-            //var emailMatches = new Regex(@"[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]*@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])*(?:\.[a-zA-Z](?:[a-zA-Z]*[a-zA-Z]))+")
-            var emailMatches = new Regex(@"[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9]+(?:\.[a-zA-Z]{2,6}\b)+")
-                .Matches(Console.ReadLine());
+            var emailMatches = new Regex(@"[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9]+(?:\.[a-zA-Z]{2,6}\b)+").Matches(Console.ReadLine());
 
             Console.WriteLine();
             Console.WriteLine("Emails found:");
