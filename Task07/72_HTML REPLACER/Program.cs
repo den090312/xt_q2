@@ -1,15 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace _72_HTML_REPLACER
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
+            Console.WriteLine("Enter text");
+            Console.WriteLine(ReplaceHTMLTags(Console.ReadLine()));
         }
+
+        public static string ReplaceHTMLTags(string userString) => Regex.Replace(userString, @"<\s*[^<]*>", "_");
     }
 }

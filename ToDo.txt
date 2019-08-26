@@ -1,2 +1,1 @@
-Вернуть FileSystemWatcher
-Создавать бэкап по событиям watcher
+

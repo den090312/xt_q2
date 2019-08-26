@@ -30,7 +30,7 @@ body
 {
 	content: "";
 	width: 20%;
-	height: 101%;
+	height: 100%;
 	position: absolute;
 	background: white;
 	transform: skewX(-20deg);

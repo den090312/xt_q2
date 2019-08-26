@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace _71_DATE_EXISTANCE
 {
@@ -29,6 +25,6 @@ namespace _71_DATE_EXISTANCE
     public static class StringExtensions
     {
         public static bool HasDate(this string userString) 
-            => new Regex(@"((0[1-9]|[12]\d|3[01])-(0[1-9]|1[0-2])-[12]\d{3})").IsMatch(userString); 
+            => new Regex(@"((0[1-9]|[1-2]\d|3[0-1])-(0[1-9]|1[0-2])-\d{4})").IsMatch(userString); 
     }
 }
