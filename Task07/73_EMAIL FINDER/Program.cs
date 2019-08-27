@@ -40,10 +40,10 @@ namespace _73_EMAIL_FINDER
 
             //var emailMatches = new Regex(@"[a-z\d]+[._-]*[a-z\d]+@[a-z\d]+(.[a-z]{2,6}\b)+").Matches(Console.ReadLine());
 
-            var emailMatches = new Regex(@"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*").Matches(Console.ReadLine());
+            var emailMatches = new Regex(@"[a-z\d]+[._-]*[a-z\d]+@[a-z\d]+(\.([a-z\d])+)+").Matches(Console.ReadLine());
 
             //получить по регулярке список адресов
-            //написать функцию, которая будет определять кол-во букв в домене верхнего уровня
+            //написать функцию, которая будет определять кол-во букв и наличие не-букв в домене верхнего уровня
 
             WriteMatches(emailMatches);
 
