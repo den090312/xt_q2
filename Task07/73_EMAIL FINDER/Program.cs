@@ -12,30 +12,30 @@ namespace _73_EMAIL_FINDER
 
             var emailMatches = new Regex(@"[a-z\d]+[._-]*[a-z\d]+@[a-z\d]+(\.([a-z\d])+)+").Matches(Console.ReadLine());
 
-            var listMatches = new List<string>();
+            var listEmailMatches = new List<string>();
 
-            foreach (var match in emailMatches)
+            foreach (var emailMatch in emailMatches)
             {
-                var stringMatch = match.ToString();
+                var stringEmail = emailMatch.ToString();
 
-                if (stringMatch.HasCorrectTopLvlDomain())
+                if (stringEmail.HasCorrectTopLvlDomain())
                 {
-                    listMatches.Add(stringMatch);
+                    listEmailMatches.Add(stringEmail);
                 }
             }
 
-            WriteMatches(listMatches);
+            WriteEmailMatches(listEmailMatches);
         }
 
-        private static void WriteMatches(List<string> emailMatches)
+        private static void WriteEmailMatches(List<string> listEmailMatches)
         {
             Console.WriteLine();
             Console.WriteLine("Emails found:");
             Console.WriteLine("------------");
 
-            foreach (var match in emailMatches)
+            foreach (var emailMatch in listEmailMatches)
             {
-                Console.WriteLine(match);
+                Console.WriteLine(emailMatch);
             }
 
             Console.WriteLine("------------");
