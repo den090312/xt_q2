@@ -38,9 +38,14 @@ namespace _73_EMAIL_FINDER
 
             //var matchAll = new Regex(@"[a-z\d]+[._-]*[a-z\d]+@[a-z\d]+(.[a-z]{2,6}\b)+").Matches(sb.ToString());
 
-            var emailMatches = new Regex(@"[a-z\d]+[._-]*[a-z\d]+@[a-z\d]+(.[a-z]{2,6}\b)+").Matches(Console.ReadLine());
+            //var emailMatches = new Regex(@"[a-z\d]+[._-]*[a-z\d]+@[a-z\d]+(.[a-z]{2,6}\b)+").Matches(Console.ReadLine());
 
-            //WriteMatches(matchOneDomain);
+            var emailMatches = new Regex(@"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*").Matches(Console.ReadLine());
+
+            //получить по регулярке список адресов
+            //написать функцию, которая будет определять кол-во букв в домене верхнего уровня
+
+            WriteMatches(emailMatches);
 
             Console.WriteLine("------------");
             Console.WriteLine();
