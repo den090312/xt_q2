@@ -34,9 +34,12 @@ namespace _73_EMAIL_FINDER
 
             //var matchOneDomain = new Regex(@"^[a-z\d]+[._-]*[a-z\d]+@[a-z\d]+.[a-z\d]{2,6}\b$").Matches(sb.ToString());
 
-            var matchOneDomain = new Regex(@"[a-z\d]+[a-z\d]+@[a-z\d]+\.[a-z\d]{2,6}\b").Matches(sb.ToString());
+            //var matchOneDomain = new Regex(@"[a-z\d]+[._-]*[a-z\d]+@[a-z\d]+.[a-z]{2,6}\b").Matches(sb.ToString());
 
-            WriteMatches(matchOneDomain);
+            var matchAll = new Regex(@"[a-z\d]+[._-]*[a-z\d]+@[a-z\d]+(.[a-z]{2,6}\b)+").Matches(sb.ToString());
+
+
+            //WriteMatches(matchOneDomain);
 
             Console.WriteLine("------------");
             Console.WriteLine();
