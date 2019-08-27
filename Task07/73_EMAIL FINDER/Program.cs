@@ -10,7 +10,7 @@ namespace _73_EMAIL_FINDER
         {
             Console.WriteLine("Enter text");
 
-            var emailMatchCollection = new Regex(@"[a-z\d]+[._-]*[a-z\d]+@[a-z\d]+(\.([a-z\d])+)+").Matches(Console.ReadLine());
+            var emailMatchCollection = new Regex(@"[a-z\d]+[._-]*[a-z\d]+@[a-z\d-]+(\.([a-z-])+)+").Matches(Console.ReadLine());
 
             var emailStringList = new List<string>();
 
