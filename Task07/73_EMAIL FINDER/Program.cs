@@ -9,48 +9,27 @@ namespace _73_EMAIL_FINDER
         private static void Main(string[] args)
         {
             Console.WriteLine("Enter text");
-            var userString = Console.ReadLine();
 
+            WriteEmailMatches
+            (
+                new Regex(@"[a-z\d]+[._-]*[a-z\d]+@[a-z\d]+(.[a-z]{2,6}\b)+").Matches(Console.ReadLine())
+            );
+
+        }
+
+        private static void WriteEmailMatches(MatchCollection emailMatches)
+        {
             Console.WriteLine();
             Console.WriteLine("Emails found:");
             Console.WriteLine("------------");
 
-            var matchTwoDomains = new Regex(@"[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z]+(\.[a-zA-Z]{2,6}\b)").Matches(userString);
-
-            WriteMatches(matchTwoDomains);
-
-            var sb = new StringBuilder(userString);
-
-            foreach (var match in matchTwoDomains)
-            {
-                sb.Replace(match.ToString(), string.Empty);            
-            }
-
-            //var matchOneDomain = new Regex(@"[\w\d.-]+@[a-zA-Z\d]+\.[a-zA-Z\d]{2,6}\b").Matches(sb.ToString());
-
-            //var matchOneDomain = new Regex(@"[a-z\d]+([._-][a-z\d]+)*@[a-z\d]+([._-][a-z\d]+)*\.[a-z]{2,6}\b").Matches(sb.ToString());
-
-            //var matchOneDomain = new Regex(@"([a-z\d]+[._-]*[a-z\d]+)+(@[a-z\d]+.[a-z]{2,6}\b)").Matches(sb.ToString());
-
-            //var matchOneDomain = new Regex(@"^[a-z\d]+[._-]*[a-z\d]+@[a-z\d]+.[a-z\d]{2,6}\b$").Matches(sb.ToString());
-
-            //var matchOneDomain = new Regex(@"[a-z\d]+[._-]*[a-z\d]+@[a-z\d]+.[a-z]{2,6}\b").Matches(sb.ToString());
-
-            var matchAll = new Regex(@"[a-z\d]+[._-]*[a-z\d]+@[a-z\d]+(.[a-z]{2,6}\b)+").Matches(sb.ToString());
-
-
-            //WriteMatches(matchOneDomain);
-
-            Console.WriteLine("------------");
-            Console.WriteLine();
-        }
-
-        private static void WriteMatches(MatchCollection emailMatches)
-        {
             foreach (var match in emailMatches)
             {
                 Console.WriteLine(match);
             }
+
+            Console.WriteLine("------------");
+            Console.WriteLine();
         }
     }
 }
