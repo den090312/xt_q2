@@ -10,32 +10,32 @@ namespace _73_EMAIL_FINDER
         {
             Console.WriteLine("Enter text");
 
-            var emailMatches = new Regex(@"[a-z\d]+[._-]*[a-z\d]+@[a-z\d]+(\.([a-z\d])+)+").Matches(Console.ReadLine());
+            var emailMatchCollection = new Regex(@"[a-z\d]+[._-]*[a-z\d]+@[a-z\d]+(\.([a-z\d])+)+").Matches(Console.ReadLine());
 
-            var listEmailMatches = new List<string>();
+            var emailStringList = new List<string>();
 
-            foreach (var emailMatch in emailMatches)
+            foreach (var emailMatch in emailMatchCollection)
             {
-                var stringEmail = emailMatch.ToString();
+                var emailMatchString = emailMatch.ToString();
 
-                if (stringEmail.HasCorrectTopLvlDomain())
+                if (emailMatchString.HasCorrectTopLvlDomain())
                 {
-                    listEmailMatches.Add(stringEmail);
+                    emailStringList.Add(emailMatchString);
                 }
             }
 
-            WriteEmailMatches(listEmailMatches);
+            WriteEmails(emailStringList);
         }
 
-        private static void WriteEmailMatches(List<string> listEmailMatches)
+        private static void WriteEmails(List<string> emailStringList)
         {
             Console.WriteLine();
             Console.WriteLine("Emails found:");
             Console.WriteLine("------------");
 
-            foreach (var emailMatch in listEmailMatches)
+            foreach (var emailMatchString in emailStringList)
             {
-                Console.WriteLine(emailMatch);
+                Console.WriteLine(emailMatchString);
             }
 
             Console.WriteLine("------------");
@@ -45,11 +45,11 @@ namespace _73_EMAIL_FINDER
 
     public static class StringExtensions
     {
-        public static bool HasCorrectTopLvlDomain(this string stringEmail)
+        public static bool HasCorrectTopLvlDomain(this string emailMatchString)
         {
-            var lastIndexOf = stringEmail.LastIndexOf('.');
+            var lastIndexOf = emailMatchString.LastIndexOf('.');
 
-            var topLvlDomain = stringEmail.Substring(lastIndexOf + 1, stringEmail.Length - lastIndexOf - 1);
+            var topLvlDomain = emailMatchString.Substring(lastIndexOf + 1, emailMatchString.Length - lastIndexOf - 1);
 
             return Regex.IsMatch(topLvlDomain, "^[a-z]{2,6}$");
         }
