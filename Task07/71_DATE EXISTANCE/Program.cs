@@ -25,6 +25,6 @@ namespace _71_DATE_EXISTANCE
     public static class StringExtensions
     {
         public static bool HasDate(this string userString) 
-            => new Regex(@"((0[1-9]|[1-2]\d|3[0-1])-(0[1-9]|1[0-2])-\d{4})").IsMatch(userString); 
+            => Regex.IsMatch(userString, @"((0[1-9]|[1-2]\d|3[0-1])-(0[1-9]|1[0-2])-\d{4})");
     }
 }
