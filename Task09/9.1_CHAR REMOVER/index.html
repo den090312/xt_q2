@@ -7,7 +7,7 @@
 	<body>
 		<input type="text" id="inputString" placeholder="Ввод" value="У: попа? 	была; собака	">
 		<input type="button" value="Получить результат" onclick="PrintResultString()">
-		<input type="text" id="result" placeholder="Результат">
+		<input type="text" id="outputString" placeholder="Результат">
 	</body>
 </html>
 
@@ -55,10 +55,19 @@
 			}
 		}
 		
-		for (var i = 0; i < duplicateLetterArray.length; i++) 
+		inputString = document.getElementById("inputString").value;
+				
+		var resultString = "";
+		
+		for (var i = 0; i < inputString.length; i++) 
 		{
-			alert(duplicateLetterArray[i]);
+			if (duplicateLetterArray.indexOf(inputString[i]) == -1)
+			{
+				resultString += inputString[i]; 
+			}			
 		}
+		
+		document.getElementById("outputString").value = resultString; 
 	}
 	
 </script>
