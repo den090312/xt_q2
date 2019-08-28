@@ -26,14 +26,17 @@ function PrintResult()
 	{
 		output.value = GetResult(duplicateLetterArray); 
 	}
+	else
+	{
+		alert("Expression is not correct!");
+	}
 }
 
 function ExpressionIsCorrect()
 {
 	var inputString = document.getElementById("inputString").value;
-	var regExp = new RegExp('^((\s*(\d+(\.\d)*)\s*)*(\s*[+\-*/]\s*)*)+=$');
 
-	return inputString.match(regExp) ? true : false; 	
+	return inputString.match(new RegExp('^((\\s*(\\d+(\\.\\d)*)\\s*)*(\\s*[+\\-*/]\\s*)*)+=$')); 	
 }
 	
 </script>
