@@ -47,23 +47,26 @@
 		
 		for (var i = 0; i < wordArray.length; i++) 
 		{
-			var word = wordArray[i];
-			
-			for (var j = 0; j < word.length; j++)
-			{
-				var letter = word[j];
-				
-				if (word.indexOf(letter) != word.lastIndexOf(letter))
-				{
-					if (!duplicateLetterArray.includes(letter))
-					{
-						duplicateLetterArray.push(letter);
-					}
-				}
-			}
+			PushDuplicateLetter(wordArray[i], duplicateLetterArray);
 		}
 		
 		return duplicateLetterArray; 
+	}
+	
+	function PushDuplicateLetter(word, duplicateLetterArray)
+	{
+		for (var i = 0; i < word.length; i++)
+		{
+			var letter = word[i];
+			
+			if (word.indexOf(letter) != word.lastIndexOf(letter))
+			{
+				if (!duplicateLetterArray.includes(letter))
+				{
+					duplicateLetterArray.push(letter);
+				}
+			}
+		}
 	}
 	
 	function GetResultString(duplicateLetterArray)
