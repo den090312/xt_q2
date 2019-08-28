@@ -19,6 +19,14 @@
 
 	function PrintResultString() 
 	{
+		var wordArray = GetWordArray();
+		var duplicateLetterArray = GetDuplicateLetterArray(wordArray);
+		
+		document.getElementById("outputString").value = GetResultString(duplicateLetterArray); 
+	}
+	
+	function GetWordArray()
+	{
 		inputString = document.getElementById("inputString").value.trim();
 		var punctuations  = " \t?!:;,.";
 		
@@ -30,8 +38,11 @@
 			}
 		}
 		
-		var wordArray = inputString.split(' ').filter(element => element != '');
-		
+		return inputString.split(' ').filter(element => element != '');
+	}
+	
+	function GetDuplicateLetterArray(wordArray)
+	{
 		var duplicateLetterArray = [];
 		
 		for (var i = 0; i < wordArray.length; i++) 
@@ -52,8 +63,13 @@
 			}
 		}
 		
+		return duplicateLetterArray; 
+	}
+	
+	function GetResultString(duplicateLetterArray)
+	{
 		inputString = document.getElementById("inputString").value;
-				
+		
 		var resultString = "";
 		
 		for (var i = 0; i < inputString.length; i++) 
@@ -64,7 +80,7 @@
 			}			
 		}
 		
-		document.getElementById("outputString").value = resultString; 
+		return resultString;
 	}
 	
 </script>
