@@ -21,21 +21,19 @@ function PrintResult()
 {
 	var output = document.getElementById("outputString");
 	output.value = "";
-	output.value = GetResult(duplicateLetterArray); 
+
+	if (ExpressionIsCorrect())
+	{
+		output.value = GetResult(duplicateLetterArray); 
+	}
 }
 
-function GetResult()
+function ExpressionIsCorrect()
 {
 	var inputString = document.getElementById("inputString").value;
-
 	var regExp = new RegExp('^((\s*(\d+(\.\d)*)\s*)*(\s*[+\-*/]\s*)*)+=$');
 
-	if (inputString.match(regExp))
-	{
-				
-	}
-
-	return "";
+	return inputString.match(regExp) ? true : false; 	
 }
 	
 </script>
