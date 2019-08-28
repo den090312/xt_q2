@@ -8,9 +8,7 @@ namespace _72_HTML_REPLACER
         private static void Main(string[] args)
         {
             Console.WriteLine("Enter text");
-
             var userText = Console.ReadLine();
-
             Console.WriteLine(userText.ReplaceHTMLTags("_"));
         }
     }
