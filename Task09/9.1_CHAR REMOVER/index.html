@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>CHAR REMOVER</title>
+	</head>
+	<body>
+		<input type="text" id="inputString" placeholder="Ввод" value="У: попа? 	была; собака	">
+		<input type="button" value="Получить результат" onclick="PrintResultString()">
+		<input type="text" id="result" placeholder="Результат">
+	</body>
+</html>
+
+<script>
+
+	function PrintResultString() 
+	{
+		inputString = document.getElementById("inputString").value.trim();
+		puncArray = [' ', '\t', '?', '!', ':', ';', ',', '.'];
+		
+		for (var i = 0; i < puncArray.length; i++) 
+		{
+			inputString = inputString.replace(puncArray[i], '|');
+		}
+		
+		charArray = inputString.split('|');
+
+		var wordArray = [];	
+		
+		for (var i = 0; i < charArray.length; i++) 
+		{
+			if (charArray[i] != '' & charArray[i] != ' ')
+			{
+				wordArray.push(charArray[i].trim());
+			}
+		}
+		
+		alert(wordArray.length);
+	}
+	
+</script>
