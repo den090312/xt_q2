@@ -32,7 +32,7 @@
 		
 		for (var i = 0; i < inputString.length; i++) 
 		{
-			if (!punctuations.includes(inputString[i]))
+			if (punctuations.includes(inputString[i]))
 			{
 				inputString = inputString.replace(inputString[i], ' ');
 			}
