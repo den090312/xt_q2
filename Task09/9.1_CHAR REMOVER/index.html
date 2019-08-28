@@ -11,7 +11,7 @@
 		<input type="button" value="Напечатать результат" onclick="PrintResultString()">
 		<br>
 		<br>		
-		<input type="text" id="outputString" placeholder="Результат" style="width: 500px;">
+		<input type="text" id="outputString" placeholder="Результат" style="width: 500px;" readonly = true;>
 	</body>
 </html>
 
@@ -19,10 +19,13 @@
 
 	function PrintResultString() 
 	{
+		var output = document.getElementById("outputString");
+		output.value = "";
+		
 		var wordArray = GetWordArray();
 		var duplicateLetterArray = GetDuplicateLetterArray(wordArray);
 		
-		document.getElementById("outputString").value = GetResultString(duplicateLetterArray); 
+		output.value = GetResultString(duplicateLetterArray); 
 	}
 	
 	function GetWordArray()
