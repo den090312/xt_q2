@@ -16,6 +16,21 @@ namespace _73_EMAIL_FINDER
             );
         }
 
+        private static void WriteEmailMatchList(List<string> emailMatchList)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Emails found:");
+            Console.WriteLine("------------");
+
+            foreach (var emailMatch in emailMatchList)
+            {
+                Console.WriteLine(emailMatch);
+            }
+
+            Console.WriteLine("------------");
+            Console.WriteLine();
+        }
+
         private static List<string> GetEmailMatchList(MatchCollection emailMatchCollection)
         {
             var emailMatchList = new List<string>();
@@ -31,21 +46,6 @@ namespace _73_EMAIL_FINDER
             }
 
             return emailMatchList;
-        }
-
-        private static void WriteEmailMatchList(List<string> emailMatchList)
-        {
-            Console.WriteLine();
-            Console.WriteLine("Emails found:");
-            Console.WriteLine("------------");
-
-            foreach (var emailMatch in emailMatchList)
-            {
-                Console.WriteLine(emailMatch);
-            }
-
-            Console.WriteLine("------------");
-            Console.WriteLine();
         }
     }
 
