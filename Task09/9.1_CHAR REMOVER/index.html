@@ -28,18 +28,7 @@
 			}
 		}
 		
-		charArray = inputString.split(' ');
-		charArray = charArray.filter(element => element != '');
-
-		var wordArray = [];	
-		
-		for (var i = 0; i < charArray.length; i++) 
-		{
-			if (charArray[i] != '' & charArray[i] != ' ')
-			{
-				wordArray.push(charArray[i].trim());
-			}
-		}
+		var wordArray = inputString.split(' ').filter(element => element != '');
 		
 		var duplicateLetterArray = [];
 		
@@ -67,7 +56,7 @@
 		
 		for (var i = 0; i < inputString.length; i++) 
 		{
-			if (duplicateLetterArray.indexOf(inputString[i]) == -1)
+			if (duplicateLetterArray.indexOf(inputString[i]) == -1 )
 			{
 				resultString += inputString[i]; 
 			}			
