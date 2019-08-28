@@ -54,7 +54,6 @@ namespace _73_EMAIL_FINDER
         public static bool HasCorrectTopLvlDomain(this string emailString)
         {
             var lastIndexOf = emailString.LastIndexOf('.');
-
             var topLvlDomain = emailString.Substring(lastIndexOf + 1, emailString.Length - lastIndexOf - 1);
 
             return Regex.IsMatch(topLvlDomain, "^[a-z]{2,6}$");
