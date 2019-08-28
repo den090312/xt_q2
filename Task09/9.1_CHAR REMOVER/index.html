@@ -5,8 +5,10 @@
 		<title>CHAR REMOVER</title>
 	</head>
 	<body>
-		<input type="text" id="inputString" placeholder="Ввод" value="У: попа? 	была; собака	">
-		<input type="button" value="Получить результат" onclick="PrintResultString()">
+		<input type="text" id="inputString" placeholder="Ввод" value="У!!!? попа:;;; была, собака.,.,.,.,">
+		<br>
+		<input type="button" value="Напечатать результат" onclick="PrintResultString()">
+		<br>
 		<input type="text" id="outputString" placeholder="Результат">
 	</body>
 </html>
@@ -16,14 +18,18 @@
 	function PrintResultString() 
 	{
 		inputString = document.getElementById("inputString").value.trim();
-		puncArray = [' ', '\t', '?', '!', ':', ';', ',', '.'];
+		var punctuations  = " \t?!:;,.";
 		
-		for (var i = 0; i < puncArray.length; i++) 
+		for (var i = 0; i < inputString.length; i++) 
 		{
-			inputString = inputString.replace(puncArray[i], '|');
+			if (punctuations.indexOf(inputString[i]) != -1)
+			{
+				inputString = inputString.replace(inputString[i], ' ');
+			}
 		}
 		
-		charArray = inputString.split('|');
+		charArray = inputString.split(' ');
+		charArray = charArray.filter(element => element != '');
 
 		var wordArray = [];	
 		
