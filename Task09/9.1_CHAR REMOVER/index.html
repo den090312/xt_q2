@@ -17,76 +17,76 @@
 
 <script>
 
-	function PrintResultString() 
+function PrintResultString() 
+{
+	var output = document.getElementById("outputString");
+	output.value = "";
+
+	var wordArray = GetWordArray();
+	var duplicateLetterArray = GetDuplicateLetterArray(wordArray);
+
+	output.value = GetResultString(duplicateLetterArray); 
+}
+
+function GetWordArray()
+{
+	inputString = document.getElementById("inputString").value.trim();
+	var punctuations = " \t?!:;,.";
+
+	for (var i = 0; i < inputString.length; i++) 
 	{
-		var output = document.getElementById("outputString");
-		output.value = "";
-		
-		var wordArray = GetWordArray();
-		var duplicateLetterArray = GetDuplicateLetterArray(wordArray);
-		
-		output.value = GetResultString(duplicateLetterArray); 
-	}
-	
-	function GetWordArray()
-	{
-		inputString = document.getElementById("inputString").value.trim();
-		var punctuations = " \t?!:;,.";
-		
-		for (var i = 0; i < inputString.length; i++) 
+		if (punctuations.includes(inputString[i]))
 		{
-			if (punctuations.includes(inputString[i]))
+			inputString = inputString.replace(inputString[i], ' ');
+		}
+	}
+
+	return inputString.split(' ').filter(element => element != '');
+}
+
+function GetDuplicateLetterArray(wordArray)
+{
+	var duplicateLetterArray = [];
+
+	for (var i = 0; i < wordArray.length; i++) 
+	{
+		PushDuplicateLetter(wordArray[i], duplicateLetterArray);
+	}
+
+	return duplicateLetterArray; 
+}
+
+function PushDuplicateLetter(word, duplicateLetterArray)
+{
+	for (var i = 0; i < word.length; i++)
+	{
+		var letter = word[i];
+
+		if (word.indexOf(letter) != word.lastIndexOf(letter))
+		{
+			if (!duplicateLetterArray.includes(letter))
 			{
-				inputString = inputString.replace(inputString[i], ' ');
+				duplicateLetterArray.push(letter);
 			}
 		}
-		
-		return inputString.split(' ').filter(element => element != '');
 	}
-	
-	function GetDuplicateLetterArray(wordArray)
+}
+
+function GetResultString(duplicateLetterArray)
+{
+	inputString = document.getElementById("inputString").value;
+
+	var resultString = "";
+
+	for (var i = 0; i < inputString.length; i++) 
 	{
-		var duplicateLetterArray = [];
-		
-		for (var i = 0; i < wordArray.length; i++) 
+		if (!duplicateLetterArray.includes(inputString[i]))
 		{
-			PushDuplicateLetter(wordArray[i], duplicateLetterArray);
-		}
-		
-		return duplicateLetterArray; 
+			resultString += inputString[i]; 
+		}			
 	}
-	
-	function PushDuplicateLetter(word, duplicateLetterArray)
-	{
-		for (var i = 0; i < word.length; i++)
-		{
-			var letter = word[i];
-			
-			if (word.indexOf(letter) != word.lastIndexOf(letter))
-			{
-				if (!duplicateLetterArray.includes(letter))
-				{
-					duplicateLetterArray.push(letter);
-				}
-			}
-		}
-	}
-	
-	function GetResultString(duplicateLetterArray)
-	{
-		inputString = document.getElementById("inputString").value;
-		
-		var resultString = "";
-		
-		for (var i = 0; i < inputString.length; i++) 
-		{
-			if (!duplicateLetterArray.includes(inputString[i]))
-			{
-				resultString += inputString[i]; 
-			}			
-		}
-		
-		return resultString;
-	}
+
+	return resultString;
+}
 	
 </script>
