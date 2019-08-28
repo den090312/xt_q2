@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>CHAR REMOVER</title>
+	</head>
+	<body style="padding: 25px;">
+		<input type="text" id="inputString" placeholder="Введите строку" value="" style="width: 500px;">
+		<br>
+		<br>
+		<input type="button" value="Напечатать результат" onclick="PrintResultString()">
+		<br>
+		<br>		
+		<input type="text" id="outputString" placeholder="Результат" style="width: 500px;" readonly = true;>
+	</body>
+</html>
+
+<script>
+
+function PrintResultString() 
+{
+	var output = document.getElementById("outputString");
+	output.value = "";
+
+	var wordArray = GetWordArray();
+	var duplicateLetterArray = GetDuplicateLetterArray(wordArray);
+
+	output.value = GetResultString(duplicateLetterArray); 
+}
+
+function GetWordArray()
+{
+	inputString = document.getElementById("inputString").value.trim();
+	var punctuations = " \t?!:;,.";
+
+	for (var i = 0; i < inputString.length; i++) 
+	{
+		if (punctuations.includes(inputString[i]))
+		{
+			inputString = inputString.replace(inputString[i], ' ');
+		}
+	}
+
+	return inputString.split(' ').filter(element => element != '');
+}
+
+function GetDuplicateLetterArray(wordArray)
+{
+	var duplicateLetterArray = [];
+
+	for (var i = 0; i < wordArray.length; i++) 
+	{
+		PushDuplicateLetter(wordArray[i], duplicateLetterArray);
+	}
+
+	return duplicateLetterArray; 
+}
+
+function PushDuplicateLetter(word, duplicateLetterArray)
+{
+	for (var i = 0; i < word.length; i++)
+	{
+		var letter = word[i];
+
+		if (word.indexOf(letter) != word.lastIndexOf(letter))
+		{
+			if (!duplicateLetterArray.includes(letter))
+			{
+				duplicateLetterArray.push(letter);
+			}
+		}
+	}
+}
+
+function GetResultString(duplicateLetterArray)
+{
+	inputString = document.getElementById("inputString").value;
+
+	var resultString = "";
+
+	for (var i = 0; i < inputString.length; i++) 
+	{
+		if (!duplicateLetterArray.includes(inputString[i]))
+		{
+			resultString += inputString[i]; 
+		}			
+	}
+
+	return resultString;
+}
+	
+</script>
