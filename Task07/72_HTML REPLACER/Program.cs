@@ -17,6 +17,7 @@ namespace _72_HTML_REPLACER
 
     public static class StringExtensions
     {
-        public static string ReplaceHTMLTags(this string userString, string replaceString) => Regex.Replace(userString, @"<[^<>]+>", replaceString);
+        public static string ReplaceHTMLTags(this string userString, string replaceString) 
+            => Regex.Replace(userString, @"<[^<>]+>", replaceString);
     }
 }
