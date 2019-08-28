@@ -5,7 +5,7 @@
 		<title>CHAR REMOVER</title>
 	</head>
 	<body style="padding: 25px;">
-		<input type="text" id="inputString" placeholder="Ввод" value="У!!!? попа:;;; была, собака.,.,.,.," style="width: 500px;">
+		<input type="text" id="inputString" placeholder="Введите строку" value="" style="width: 500px;">
 		<br>
 		<br>
 		<input type="button" value="Напечатать результат" onclick="PrintResultString()">
@@ -32,7 +32,7 @@
 		
 		for (var i = 0; i < inputString.length; i++) 
 		{
-			if (punctuations.indexOf(inputString[i]) != -1)
+			if (!punctuations.includes(inputString[i]))
 			{
 				inputString = inputString.replace(inputString[i], ' ');
 			}
@@ -55,7 +55,7 @@
 				
 				if (word.indexOf(letter) != word.lastIndexOf(letter))
 				{
-					if (duplicateLetterArray.indexOf(letter) == -1)
+					if (!duplicateLetterArray.includes(letter))
 					{
 						duplicateLetterArray.push(letter);
 					}
@@ -74,7 +74,7 @@
 		
 		for (var i = 0; i < inputString.length; i++) 
 		{
-			if (duplicateLetterArray.indexOf(inputString[i]) == -1 )
+			if (!duplicateLetterArray.includes(inputString[i]))
 			{
 				resultString += inputString[i]; 
 			}			
