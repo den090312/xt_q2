@@ -28,7 +28,12 @@ function GetResult()
 {
 	var inputString = document.getElementById("inputString").value;
 
-	
+	var regExp = new RegExp('^((\s*(\d+(\.\d)*)\s*)*(\s*[+\-*/]\s*)*)+=$');
+
+	if (inputString.match(regExp))
+	{
+				
+	}
 
 	return "";
 }
