@@ -34,6 +34,8 @@ function GetResult()
 {
 	var inputString = document.getElementById("inputString").value;
 
+	inputString = inputString.split(' ').filter(element => element != '').join("");
+
 	if (IsOperator(inputString[0])) 
 	{
 		inputString = "0" + inputString;
@@ -41,7 +43,7 @@ function GetResult()
 
 	if (IsOperator(inputString[inputString.length - 2])) 
 	{
-		inputString = inputString.slice(0, -1) + inputString[inputString.length - 3] + "=";
+		inputString = inputString.slice(0, -1) + inputString.slice(0, -2) + "=";
 	} 
 
 	alert(inputString);
