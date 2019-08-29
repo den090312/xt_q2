@@ -35,7 +35,7 @@ function GetInputStringValue()
 	return document.getElementById("inputString").value;
 }
 
-function GetNumberArray()
+function GetNumberArray(inputString)
 {
 	var numbers = inputString.match(/\d+(\.\d)*/g);
 
@@ -52,14 +52,20 @@ function GetNumberArray()
 	return numbers; 
 }
 
+function GetOperatorArray(inputString)
+{
+	return inputString.match(/[+\-*/=]/g); 
+}
+
 function GetResult()
 {
 	inputString = GetInputStringValue().split(' ').filter(element => element != '').join("");
 
-	var numbers = GetNumberArray();
-	
-	var operators = inputString.match(/[+\-*/=]/g);
-		
+	return Result(GetNumberArray(inputString), GetOperatorArray(inputString)); 
+}
+
+function Result(numbers, operators)
+{		
 	var result = numbers[0];
 	var i = 0;
 
@@ -78,7 +84,7 @@ function GetResult()
 	}
 	while (operators[i] != "=");
 
-	return result.toFixed(2); 
+	return result.toFixed(2) 
 }
 
 function IsOperator(inputChar)
