@@ -33,8 +33,24 @@ function ExpressionIsCorrect()
 function GetResult()
 {
 	var inputString = document.getElementById("inputString").value;
-	var numArray = inputString.match(/\d+(\.\d)*/g);
-	var puncArray = inputString.match(/[+\-*/]/g);
+
+	if (IsOperator(inputString[0])) 
+	{
+		inputString = "0" + inputString;
+	} 
+
+	if (IsOperator(inputString[inputString.length - 1])) 
+	{
+		inputString += inputString[inputString.length - 2];
+	} 
+
+	var numberArray = inputString.match(/\d+(\.\d)*/g);
+	var operatorArray = inputString.match(/[+\-*/]/g);
+}
+
+function IsOperator(inputChar)
+{
+	return inputChar.match(/[+\-*/]/g) != null;
 }
 	
 </script>
