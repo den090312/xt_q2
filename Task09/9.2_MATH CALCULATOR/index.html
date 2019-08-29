@@ -46,7 +46,7 @@ function GetResult()
 
 	if (operators == null)
 	{
-		return Number(numbers[0]);	
+		return Number(numbers[0]).toFixed(2);	
 	}
 
 	numbersLength = numbers.length;
@@ -67,7 +67,7 @@ function GetResult()
 		result = OperationResult(result, numbers[i], operators[i]);
 	}
 
-	return result; 
+	return result.toFixed(2); 
 }
 
 function IsOperator(inputChar)
