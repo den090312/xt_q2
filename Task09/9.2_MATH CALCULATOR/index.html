@@ -40,7 +40,7 @@ function GetResult()
 
 	if (numbers.length == 1)
 	{
-		return numbers[0];	
+		return Number(numbers[0]).toFixed(2);	
 	}
 
 	var operators = inputString.match(/[+\-*/=]/g);
@@ -56,7 +56,15 @@ function GetResult()
 
 	do
 	{
-		result = OperationResult(result, numbers[i+1], operators[i]);
+		if (i < numbers.length - 2)
+		{
+			result = OperationResult(result, numbers[i + 1], operators[i]);
+		}
+		else
+		{
+			result = OperationResult(result, result, operators[i]);
+		}
+
 		i++;
 	}
 	while (operators[i] != "=");
