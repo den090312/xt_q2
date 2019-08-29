@@ -55,6 +55,11 @@ function GetResult()
 	var numbers = inputString.match(/\d+(\.\d)*/g);
 	var operators = inputString.match(/[+\-*/]/g);
 
+	if (operators == null)
+	{
+		return numbers[0];	
+	}
+
 	loopLength = GetLoopLength(numbers.length, operators.length);
 
 	var i = 0;
