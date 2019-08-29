@@ -28,9 +28,14 @@ function PrintResultString()
 	output.value = GetResultString(duplicateLetterArray); 
 }
 
+function GetInputStringValue()
+{
+	return document.getElementById("inputString").value; 
+}
+
 function GetWordArray()
 {
-	inputString = document.getElementById("inputString").value.trim();
+	inputString = GetInputStringValue().trim();
 	var punctuations = " \t?!:;,.";
 
 	for (var i = 0; i < inputString.length; i++) 
@@ -74,7 +79,7 @@ function PushDuplicateLetter(word, duplicateLetterArray)
 
 function GetResultString(duplicateLetterArray)
 {
-	inputString = document.getElementById("inputString").value;
+	inputString = GetInputStringValue();
 
 	var resultString = "";
 
