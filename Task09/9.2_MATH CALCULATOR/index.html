@@ -17,26 +17,23 @@
 
 <script>
 
-function PrintResult() 
+function PrintResult()
 {
 	var output = document.getElementById("outputString");
 	output.value = "";
-
-	if (ExpressionIsCorrect())
-	{
-		output.value = GetResult(duplicateLetterArray); 
-	}
-	else
-	{
-		alert("Expression is not correct!");
-	}
+	
+	ExpressionIsCorrect() ? output.value = GetResult() : alert("Expression is not correct!");  	
 }
 
-function ExpressionIsCorrect()
+function ExpressionIsCorrect() 
+{
+	return document.getElementById("inputString").value.match(/^((\s*(\d+(\.\d)*)\s*)*(\s*[+\-*/]\s*)*)+=$/g);
+}	
+
+function GetResult()
 {
 	var inputString = document.getElementById("inputString").value;
-
-	return inputString.match(new RegExp('^((\\s*(\\d+(\\.\\d)*)\\s*)*(\\s*[+\\-*/]\\s*)*)+=$')); 	
+	var puncArray = inputString.match(/[+\-*/]/g);
 }
 	
 </script>
