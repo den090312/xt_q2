@@ -40,24 +40,31 @@ function GetResult()
 	{
 		inputString = "0" + inputString;
 	}
+
+	if (IsNumber(inputString[0])) 
+	{
+		inputString = inputString.slice(1, 2) + inputString;
+	}
 	
 	var result = 0;
 
-	if (IsNumber(inputString[inputString.length - 2])) 
+	/*if (IsNumber(inputString[inputString.length - 2])) 
 	{
 		inputString = inputString.slice(0, -1) + inputString[inputString.length - 3] + "=";
 	}
 	else
 	{
 		result = Number(numbers[0]);	
-	}
+	}*/
+
+	alert(inputString);
 
 	var numbers = inputString.match(/\d+(\.\d)*/g);
 	var operators = inputString.match(/[+\-*/]/g);
 
 	if (operators == null)
 	{
-		return numbers[0];	
+		return Number(numbers[0]);	
 	}
 
 	loopLength = GetLoopLength(numbers.length, operators.length);
