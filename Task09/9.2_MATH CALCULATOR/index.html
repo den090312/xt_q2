@@ -37,6 +37,12 @@ function GetResult()
 	inputString = inputString.split(' ').filter(element => element != '').join("");
 
 	var numbers = inputString.match(/\d+(\.\d)*/g);
+
+	if (numbers.length == 1)
+	{
+		return Number(numbers[0]).toFixed(2);	
+	}
+
 	var operators = inputString.match(/[+\-*/=]/g);
 		
 	var result = numbers[0];
