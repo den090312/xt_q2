@@ -41,24 +41,6 @@ function GetResult()
 		inputString = "0" + inputString;
 	}
 
-	if (IsNumber(inputString[0])) 
-	{
-		inputString = inputString.slice(1, 2) + inputString;
-	}
-	
-	var result = 0;
-
-	/*if (IsNumber(inputString[inputString.length - 2])) 
-	{
-		inputString = inputString.slice(0, -1) + inputString[inputString.length - 3] + "=";
-	}
-	else
-	{
-		result = Number(numbers[0]);	
-	}*/
-
-	alert(inputString);
-
 	var numbers = inputString.match(/\d+(\.\d)*/g);
 	var operators = inputString.match(/[+\-*/]/g);
 
@@ -67,8 +49,17 @@ function GetResult()
 		return Number(numbers[0]);	
 	}
 
-	loopLength = GetLoopLength(numbers.length, operators.length);
+	numbersLength = numbers.length;
+	operatorsLength = operators.length;
+	
+	if (numbersLength > operatorsLength)
+	{
+		operators.unshift(operators[0]);	
+	}
 
+	loopLength = GetLoopLength(numbers.length, operators.length);
+		
+	var result = 0;
 	var i = 0;
 
 	for (var i = 0; i < loopLength; i++)
