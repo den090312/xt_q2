@@ -40,10 +40,16 @@ function GetResult()
 
 	if (numbers.length == 1)
 	{
-		return Number(numbers[0]).toFixed(2);	
+		return numbers[0];	
 	}
 
 	var operators = inputString.match(/[+\-*/=]/g);
+
+	if (IsOperator(inputString[0]))
+	{
+		inputString = "0" + inputString; 
+		numbers.unshift(0);
+	}
 		
 	var result = numbers[0];
 	var i = 0;
