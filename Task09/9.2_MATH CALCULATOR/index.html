@@ -36,6 +36,11 @@ function GetResult()
 
 	inputString = inputString.split(' ').filter(element => element != '').join("");
 
+	if (inputString[0].match(/[+\-*/]/g) != null) 
+	{
+		inputString = "0" + inputString;
+	} 
+
 	var numbers = inputString.match(/\d+(\.\d)*/g);
 	var operators = inputString.match(/[+\-*=/]/g);
 
@@ -49,7 +54,12 @@ function GetResult()
 	}
 	while (operators[i] != "=")
 
-	return OperationResult(result, numbers[i], operators[i-1]); 
+	/*if (operators.length > numbers.length)
+	{
+		result = OperationResult(result, numbers[i], operators[i-1]);
+	}*/
+
+	return result; 
 }
 
 function OperationResult(result, number, operator) 
