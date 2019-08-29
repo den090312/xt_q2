@@ -21,7 +21,7 @@ function PrintResult()
 {
 	var output = document.getElementById("outputString");
 	output.value = "";
-	
+
 	ExpressionIsCorrect() ? output.value = GetResult() : alert("Expression is not correct!");  	
 }
 
@@ -33,6 +33,7 @@ function ExpressionIsCorrect()
 function GetResult()
 {
 	var inputString = document.getElementById("inputString").value;
+	var numArray = inputString.match(/\d+(\.\d)*/g);
 	var puncArray = inputString.match(/[+\-*/]/g);
 }
 	
