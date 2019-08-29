@@ -36,36 +36,13 @@ function GetResult()
 
 	inputString = inputString.split(' ').filter(element => element != '').join("");
 
-	if (IsOperator(inputString[0])) 
-	{
-		inputString = "0" + inputString;
-	}
-
 	var numbers = inputString.match(/\d+(\.\d)*/g);
 	var operators = inputString.match(/[+\-*/]/g);
-
-	if (operators == null)
-	{
-		return Number(numbers[0]).toFixed(2);	
-	}
-
-	numbersLength = numbers.length;
-	operatorsLength = operators.length;
-	
-	if (numbersLength > operatorsLength)
-	{
-		operators.unshift(operators[0]);	
-	}
-
-	loopLength = GetLoopLength(numbers.length, operators.length);
 		
 	var result = 0;
 	var i = 0;
 
-	for (var i = 0; i < loopLength; i++)
-	{
-		result = OperationResult(result, numbers[i], operators[i]);
-	}
+	result = OperationResult(result, numbers[i], operators[i]);
 
 	return result.toFixed(2); 
 }
