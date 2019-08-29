@@ -57,11 +57,6 @@ function IsNumber(inputChar)
 	return inputChar.match(/\d+(\.\d)*/g) != null;	
 }
 
-function GetLoopLength(numbersLength, operatorsLength) 
-{
-	return numbersLength > operatorsLength ? numbersLength : operatorsLength;   
-}
-
 function OperationResult(result, number, operator) 
 {
 	switch (operator) 
