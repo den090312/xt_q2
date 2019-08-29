@@ -44,7 +44,7 @@ function GetResult()
 	var numbers = inputString.match(/\d+(\.\d)*/g);
 	var operators = inputString.match(/[+\-*/]/g);
 
-	var result = numbers[i];
+	var result = Number(numbers[0]);
 	var i = 0;
 	
 	result = OperationResult(result, numbers[i], operators[i]);
