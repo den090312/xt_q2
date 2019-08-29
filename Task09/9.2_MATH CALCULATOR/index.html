@@ -44,15 +44,12 @@ function GetResult()
 
 	do
 	{
-		alert(numbers[i]);
-		alert(operators[i]);
-
 		result = OperationResult(result, numbers[i], operators[i]);
 		i++;
 	}
 	while (operators[i] != "=")
 
-	return result; 
+	return OperationResult(result, numbers[i], operators[i-1]); 
 }
 
 function OperationResult(result, number, operator) 
