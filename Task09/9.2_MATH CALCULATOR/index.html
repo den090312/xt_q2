@@ -90,18 +90,18 @@ function IsOperator(inputChar)
 	return inputChar.match(/[+\-*/]/g) != null;	
 }
 
-function OperationResult(result, number, operator) 
+function OperationResult(number1, number2, operator) 
 {
 	switch (operator) 
 	{
 		case "+":
-			return Number(result) + Number(number);		
+			return Number(number1) + Number(number2);		
 		case "-":
-			return Number(result) - Number(number);		
+			return Number(number1) - Number(number2);		
 		case "*":
-			return Number(result) * Number(number);		
+			return Number(number1) * Number(number2);		
 		case "/":
-			return Number(result) / Number(number);	
+			return Number(number1) / Number(number2);	
 	}
 }
 	
