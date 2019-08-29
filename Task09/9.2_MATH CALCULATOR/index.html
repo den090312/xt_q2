@@ -56,7 +56,14 @@ function GetResult()
 
 	do
 	{
-		result = OperationResult(result, numbers[i + 1], operators[i]);
+		if (typeof numbers[i + 1] != "undefined")
+		{
+			result = OperationResult(result, numbers[i + 1], operators[i]);
+		}
+		else
+		{
+			result = OperationResult(result, result, operators[i]);
+		}
 
 		i++;
 	}
