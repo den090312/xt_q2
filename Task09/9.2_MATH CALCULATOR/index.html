@@ -36,18 +36,38 @@ function GetResult()
 
 	inputString = inputString.split(' ').filter(element => element != '').join("");
 
-	if (IsOperator(inputString[0])) 
-	{
-		inputString = "0" + inputString;
-	} 
+	var numbers = inputString.match(/\d+(\.\d)*/g);
+	var operators = inputString.match(/[+\-*=/]/g);
 
-	var numberArray = inputString.match(/\d+(\.\d)*/g);
-	var operatorArray = inputString.match(/[+\-*/]/g);
+	var result = 0;
+	var i = 0;
+
+	do
+	{
+		alert(numbers[i]);
+		alert(operators[i]);
+
+		result = OperationResult(result, numbers[i], operators[i]);
+		i++;
+	}
+	while (operators[i] != "=")
+
+	return result; 
 }
 
-function IsOperator(inputChar)
+function OperationResult(result, number, operator) 
 {
-	return inputChar.match(/[+\-*/]/g) != null;
+	switch (operator) 
+	{
+		case "+":
+			return result + Number(number);		
+		case "-":
+			return result - Number(number);		
+		case "*":
+			return result * Number(number);		
+		case "/":
+			return result / Number(number);	
+	}
 }
 	
 </script>
