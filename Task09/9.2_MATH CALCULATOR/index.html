@@ -40,13 +40,23 @@ function GetResult()
 	{
 		inputString = "0" + inputString;
 	}
+	
+	var result = 0;
+
+	if (IsNumber(inputString[inputString.length - 2])) 
+	{
+		inputString = inputString.slice(0, -1) + inputString[inputString.length - 3] + "=";
+	}
+	else
+	{
+		result = Number(numbers[0]);	
+	}
 
 	var numbers = inputString.match(/\d+(\.\d)*/g);
 	var operators = inputString.match(/[+\-*/]/g);
 
 	loopLength = GetLoopLength(numbers.length, operators.length);
 
-	var result = Number(numbers[0]);
 	var i = 0;
 
 	for (var i = 0; i < loopLength; i++)
@@ -59,7 +69,12 @@ function GetResult()
 
 function IsOperator(inputChar)
 {
-	return inputString[0].match(/[+\-*/]/g) != null;	
+	return inputChar.match(/[+\-*/]/g) != null;	
+}
+
+function IsNumber(inputChar)
+{
+	return inputChar.match(/\d+(\.\d)*/g) != null;	
 }
 
 function GetLoopLength(numbersLength, operatorsLength) 
