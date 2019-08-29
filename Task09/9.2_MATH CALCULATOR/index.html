@@ -41,13 +41,6 @@ function GetResult()
 		inputString = "0" + inputString;
 	} 
 
-	if (IsOperator(inputString[inputString.length - 2])) 
-	{
-		inputString = inputString.slice(0, -1) + inputString.slice(0, -2) + "=";
-	} 
-
-	alert(inputString);
-
 	var numberArray = inputString.match(/\d+(\.\d)*/g);
 	var operatorArray = inputString.match(/[+\-*/]/g);
 }
