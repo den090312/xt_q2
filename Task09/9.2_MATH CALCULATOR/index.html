@@ -26,16 +26,25 @@ function PrintResult()
 
 function ExpressionIsCorrect() 
 {
-	return document.getElementById("inputString").value.match(/^((\s*(\d+(\.\d)*)\s*)*(\s*[+\-*/]\s*)*)+=$/g);
+	return GetInputStringValue().match(/^((\s*(\d+(\.\d)*)\s*)*(\s*[+\-*/]\s*)*)+=$/g);
 }	
+
+function GetInputStringValue()
+{
+	return document.getElementById("inputString").value; 
+}
+
+function GetExpressionString()
+{
+	return GetInputStringValue().split(' ').filter(element => element != '').join(""); 
+}
 
 function GetResult()
 {
-	var inputString = document.getElementById("inputString").value;
-	inputString = inputString.split(' ').filter(element => element != '').join("");
+	var expressionString = GetExpressionString();
 	
-	var numbers = inputString.match(/\d+(\.\d)*/g);
-	var operators = inputString.match(/[+\-*/=]/g);
+	var numbers = expressionString.match(/\d+(\.\d)*/g);
+	var operators = expressionString.match(/[+\-*/=]/g);
 	
 	if (numbers.length == 1)
 	{
@@ -45,12 +54,16 @@ function GetResult()
 		}
 	}
 	
-	if (IsOperator(inputString[0]))
+	if (IsOperator(expressionString[0]))
 	{
-		inputString = "0" + inputString; 
 		numbers.unshift(0);
 	}
-		
+	
+	return Result(numbers, operators); 
+}
+
+function Result(numbers, operators)
+{
 	var result = numbers[0];
 	var i = 0;
 	
@@ -64,6 +77,7 @@ function GetResult()
 		{
 			result = OperationResult(result, result, operators[i]);
 		}
+
 		i++;
 	}
 	while (operators[i] != "=");
@@ -74,11 +88,6 @@ function GetResult()
 function IsOperator(inputChar)
 {
 	return inputChar.match(/[+\-*/]/g) != null;	
-}
-
-function IsNumber(inputChar)
-{
-	return inputChar.match(/\d+(\.\d)*/g) != null;	
 }
 
 function OperationResult(result, number, operator) 
