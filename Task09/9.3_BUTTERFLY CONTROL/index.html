@@ -52,9 +52,11 @@ function MoveFullRight(obj)
 	var selectedSelect = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
 
 	CleanSelectbox(selectedSelect);
+
+	var availableSelectLength = availableSelect.options.length; 
 	CleanSelectbox(availableSelect);
 
-	AddAllToSelectbox(selectedSelect);
+	AddAllToSelectbox(selectedSelect, availableSelectLength);
 } 
 
 function MoveFullLeft(obj)
@@ -63,9 +65,11 @@ function MoveFullLeft(obj)
 	var selectedSelect = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
 
 	CleanSelectbox(availableSelect);
+
+	var selectedSelectLength = selectedSelect.options.length; 
 	CleanSelectbox(selectedSelect);
 
-	AddAllToSelectbox(availableSelect);	
+	AddAllToSelectbox(availableSelect, selectedSelectLength);	
 } 
 
 function GetDivElement(obj, className)
@@ -91,9 +95,9 @@ function CleanSelectbox(selectbox)
     }
 } 
 
-function AddAllToSelectbox(selectbox)
+function AddAllToSelectbox(selectbox, length)
 {
-	for (var i = 1; i < 6; i++)
+	for (var i = 1; i <= length; i++)
 	{
 		var option = document.createElement("option");
 
