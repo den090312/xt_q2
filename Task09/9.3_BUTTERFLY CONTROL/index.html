@@ -49,7 +49,22 @@
 function MoveFullRight(obj)
 {
 	var butterfly = obj.parentNode.parentNode.parentNode;
-	alert(butterfly.children);
+
+	for (let child of butterfly.children)
+	{
+		if (child.className == "available")
+		{
+			var availableDiv = child;  
+		}
+
+		if (child.className == "selected")
+		{
+			var selectedDiv = child;  
+		}
+	}
+
+	//alert(availableDiv.className);
+	//alert(selectedDiv.className);
 } 
 
 function MoveRight(obj)
