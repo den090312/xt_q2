@@ -48,13 +48,13 @@
 
 function MoveFullRight(obj)
 {
-	var availableSelectbox = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
-	var selectedSelectbox = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
+	var availableBox = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
+	var selectedBox = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
 
-	CleanSelectbox(selectedSelectbox);
-	CleanSelectbox(availableSelectbox);
+	CleanSelectbox(selectedBox);
+	CleanSelectbox(availableBox);
 
-	AddAllToSelectbox(selectedSelectbox);
+	AddAllToSelectbox(selectedBox);
 } 
 
 function CleanSelectbox(selectbox)
