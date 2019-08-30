@@ -50,26 +50,28 @@ function MoveFullRight(obj)
 {
 	var availableSelect = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
 	var selectedSelect = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
-
-	CleanSelectbox(selectedSelect);
-
 	var length = availableSelect.options.length; 
-	CleanSelectbox(availableSelect);
 
-	AddAllToSelectbox(selectedSelect, length);
+	if (length > 0)
+	{
+		CleanSelectbox(selectedSelect);
+		CleanSelectbox(availableSelect);
+		AddAllToSelectbox(selectedSelect, length);
+	}
 } 
 
 function MoveFullLeft(obj)
 {
 	var availableSelect = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
 	var selectedSelect = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
-
-	CleanSelectbox(availableSelect);
-
 	var length = selectedSelect.options.length; 
-	CleanSelectbox(selectedSelect);
 
-	AddAllToSelectbox(availableSelect, length);	
+	if (length > 0)
+	{
+		CleanSelectbox(availableSelect);
+		CleanSelectbox(selectedSelect);
+		AddAllToSelectbox(availableSelect, length);	
+	}
 } 
 
 function MoveSelectedRight(obj)
@@ -83,6 +85,24 @@ function MoveSelectedRight(obj)
 
 		AddOptions(options, selectedSelect);
 		RemoveOptions(options, availableSelect);
+	}
+	else
+	{
+		alert("No options selected!");
+	}
+} 
+
+function MoveSelectedLeft(obj)
+{
+	var selectedSelect = GetDivElement(obj, "selected").getElementsByTagName("select")[0]; 
+
+	if (SelectExists(selectedSelect))
+	{
+		var options = GetSelectedOptions(selectedSelect);
+		var availableSelect = GetDivElement(obj, "available").getElementsByTagName("select")[0];
+
+		AddOptions(options, availableSelect);
+		RemoveOptions(options, availableSelect);	
 	}
 	else
 	{
@@ -131,20 +151,6 @@ function GetSelectedOptions(selectbox)
 	return selectedOptions; 
 } 
 
-function MoveSelectedLeft(obj)
-{
-	var selectedSelect = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
-
-	if (SelectExists(selectedSelect))
-	{
-		MoveLeft(selectedSelect);
-	}
-	else
-	{
-		alert("No options selected!");
-	}
-} 
-
 function SelectExists(selectbox)
 {
 	return selectbox.selectedIndex != -1;
@@ -176,16 +182,17 @@ function AddAllToSelectbox(selectbox, length)
 {
 	for (var i = 1; i <= length; i++)
 	{
-		AddOption(selectbox, i);	
+		AddNewOption(selectbox, i);	
 	} 
 }
 
-function AddOption(selectbox, i)
+function AddNewOption(selectbox, i)
 {
 	var option = document.createElement("option");
 
 	option.value = "Option " + i;
 	option.innerHTML = "Option " + i;
+	
 	selectbox.appendChild(option);		
 }
 	
