@@ -20,16 +20,16 @@
 			</div>
 			<div class="arrow_block">
 				<div class="arrow">
-					<input type="button" class="arrow_fullright" onlick="MoveFullRight(this)" value=">>" />	
+					<input type="button" class="arrow_fullright" onclick="MoveFullRight(this)" value=">>" />	
 				</div>
 				<div class="arrow">
-					<input type="button" class="arrow_right" onlick="MoveRight(this)" value=">" />	
+					<input type="button" class="arrow_right" onclick="MoveRight(this)" value=">" />	
 				</div>
 				<div class="arrow">
-					<input type="button" class="arrow_left" onlick="MoveLeft(this)"value="<" />	
+					<input type="button" class="arrow_left" onclick="MoveLeft(this)"value="<" />	
 				</div>
 				<div class="arrow">
-					<input type="button" class="arrow_fullleft" onlick="MoveFullLeft(this)" value=">>" />	
+					<input type="button" class="arrow_fullleft" onclick="MoveFullLeft(this)" value=">>" />	
 				</div>	
 			</div>
 			<div class="selected">
@@ -48,7 +48,8 @@
 
 function MoveFullRight(obj)
 {
-
+	var parentDiv = obj.parentNode;
+	alert(parentDiv); 
 } 
 
 function MoveRight(obj)
