@@ -1,0 +1,34 @@
+select
+{
+	overflow: hidden;
+    height: 125px;
+	width: 75px;
+}
+
+.selection
+{
+    display: inline-block;
+	float: left;
+	height: 125px;
+	margin-right: 10px;
+	text-align: center;
+}
+
+.arrow_block
+{
+    display: inline-block;
+	float: left;
+	margin-right: 10px;
+	padding-top: 20px;
+}
+
+.arrow
+{
+
+}
+
+.arrow_button
+{
+	width: 30px;
+	margin-bottom: 10px;
+}
