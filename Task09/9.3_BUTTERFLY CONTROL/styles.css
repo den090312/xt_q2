@@ -1,11 +1,11 @@
 select
 {
 	overflow: hidden;
-   	height: 125px;
+    	height: 125px;
 	width: 75px;
 }
 
-.selection
+.available, .selected
 {
     	display: inline-block;
 	float: left;
@@ -19,7 +19,7 @@ select
     	display: inline-block;
 	float: left;
 	margin-right: 10px;
-	padding-top: 20px;
+	padding-top: 24px;
 }
 
 .arrow_fullright, .arrow_right, .arrow_left, .arrow_fullleft
