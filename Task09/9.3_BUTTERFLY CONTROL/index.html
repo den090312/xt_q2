@@ -48,23 +48,8 @@
 
 function MoveFullRight(obj)
 {
-	var butterfly = obj.parentNode.parentNode.parentNode;
-
-	for (let child of butterfly.children)
-	{
-		if (child.className == "available")
-		{
-			var availableDiv = child;  
-		}
-
-		if (child.className == "selected")
-		{
-			var selectedDiv = child;  
-		}
-	}
-
-	//alert(availableDiv.className);
-	//alert(selectedDiv.className);
+	var availableDiv = GetAvailableDiv(obj); 
+	var selectedDiv = GetSelectedDiv(obj);  
 } 
 
 function MoveRight(obj)
@@ -81,5 +66,31 @@ function MoveFullLeft(obj)
 {
 	
 } 
+
+function GetAvailableDiv(obj)
+{
+	var butterfly = obj.parentNode.parentNode.parentNode;
+
+	for (let child of butterfly.children)
+	{
+		if (child.className == "available")
+		{
+			return child;  
+		}
+	}	
+}
+
+function GetSelectedDiv(obj)
+{
+	var butterfly = obj.parentNode.parentNode.parentNode;
+
+	for (let child of butterfly.children)
+	{
+		if (child.className == "selected")
+		{
+			return child;
+		}
+	}	
+}
 	
 </script>
