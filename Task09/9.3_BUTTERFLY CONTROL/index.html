@@ -29,7 +29,7 @@
 					<input type="button" class="arrow_left" onclick="MoveLeft(this)"value="<" />	
 				</div>
 				<div class="arrow">
-					<input type="button" class="arrow_fullleft" onclick="MoveFullLeft(this)" value=">>" />	
+					<input type="button" class="arrow_fullleft" onclick="MoveFullLeft(this)" value="<<" />	
 				</div>	
 			</div>
 			<div class="selected">
@@ -48,37 +48,33 @@
 
 function MoveFullRight(obj)
 {
-	var availableDiv = GetDivElement(obj, "available");
-	var availableSelect = availableDiv.getElementsByTagName("select")[0]; 
+	var availableSelect = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
+	var selectedSelect = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
 
-
-	
-	var selectedDiv = GetDivElement(obj, "selected"); 
-	var selectedSelect = availableDiv.getElementsByTagName("select")[0];
-
-	//CleanSelectbox(selectedSelect);
+	CleanSelectbox(selectedSelect);
 	CleanSelectbox(availableSelect);
-	//AddAllToSelectbox(selectedSelect);
+	
+	AddAllToSelectbox(selectedSelect);
 } 
 
 function CleanSelectbox(selectbox)
 {
-	var length = selectbox.options.length;
+    var i;
 
-	for (var i = 0; i <= length; i++)
-	{
-		selectbox.remove(i);	
-	}   
+    for (i = selectbox.options.length - 1; i >= 0 ; i--)
+    {
+        selectbox.remove(i);
+    }
 } 
 
 function AddAllToSelectbox(selectbox)
 {
-	for (var i = 0; i < 4; i++)
+	for (var i = 1; i < 6; i++)
 	{
 		var option = document.createElement("option");
 
-		option.value = "Option" + i;
-		//option.innerHTML = i;
+		option.value = "Option " + i;
+		option.innerHTML = "Option " + i;
 		selectbox.appendChild(option);	
 	} 
 }
