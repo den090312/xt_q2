@@ -82,7 +82,7 @@ function MoveSelectedRight(obj)
 		var selectedSelect = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
 
 		AddOptions(options, selectedSelect);
-		DeleteOptions(selectedSelect, availableSelect);
+		DeleteOptions(options, availableSelect);
 	}
 	else
 	{
@@ -101,12 +101,22 @@ function AddOptions(options, selectbox)
 	}
 }
 
-function DeleteOptions(selectSubject, selectObject)
+function DeleteOptions(options, selectObject)
 {
-	/*for (let option of options)
+	//alert(selectSubject);
+	var length = selectObject.options.length;
+	CleanSelectbox(selectObject);
+
+	for (var i = 0; i < length; i++)
 	{
-		selectbox.remove(option.value);
-	}	*/
+		var innerHTML = "Option " + i;
+
+		if (!options.includes(innerHTML))
+		{
+			AddOption(selectObject, i);	
+		}
+		//alert(options[i]);
+	} 
 }
 
 function GetSelectedOptions(selectbox)
@@ -179,7 +189,6 @@ function AddOption(selectbox, i)
 {
 	var option = document.createElement("option");
 
-	option.value = i;
 	option.innerHTML = "Option " + i;
 	selectbox.appendChild(option);		
 }
