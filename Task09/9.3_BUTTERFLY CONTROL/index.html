@@ -48,8 +48,13 @@
 
 function MoveFullRight(obj)
 {
-	var availableDiv = GetDivElement(obj, "available"); 
-	var selectedDiv = GetDivElement(obj, "selected");  
+	var availableDiv = GetDivElement(obj, "available");
+	var availableSelect = availableDiv.getElementsByTagName("select")[0]; 
+
+	
+	
+	var selectedDiv = GetDivElement(obj, "selected"); 
+	var selectedSelect = availableDiv.getElementsByTagName("select")[0];
 } 
 
 function MoveRight(obj)
