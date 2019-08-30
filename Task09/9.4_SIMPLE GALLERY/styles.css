@@ -10,12 +10,21 @@ p
     margin-block-end: 0;
 }
 
-.button
+.goToPrevPage, .countdownAction
 {
-    width: 100px;
     height: 110px;
     margin-top: 210px;
     font-size: 100px;
+}
+
+.goToPrevPage
+{
+    width: 100px;
+}
+
+.countdownAction
+{
+    width: 290px;
 }
 
 p 

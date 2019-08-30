@@ -18,6 +18,19 @@ function RunCountdown()
     }, 1000);
 }
 
+function CountdownAction(obj)
+{
+    if (obj.value = "pause")
+    {
+        ResumeCountdown();
+    }
+
+    if (obj.value = "resume")
+    {
+        PauseCountdown();
+    }
+}
+
 function GoToLocation()
 {
     var pageName = GetCurrentPageName(window.location);
