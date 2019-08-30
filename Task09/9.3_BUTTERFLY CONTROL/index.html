@@ -90,14 +90,14 @@ function MoveSingleRight(obj)
 	}
 } 
 
-function AddOptions(options, selectedSelect)
+function AddOptions(options, selectbox)
 {
 	for (let option of options)
 	{
 		var newOption = document.createElement("option");
 
 		newOption.innerHTML = option;
-		selectedSelect.appendChild(newOption);
+		selectbox.appendChild(newOption);
 	}
 }
 
