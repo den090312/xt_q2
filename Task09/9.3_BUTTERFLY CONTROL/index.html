@@ -103,7 +103,39 @@ function AddOptions(options, selectbox)
 
 function DeleteOptions(options, selectbox)
 {
+	var length = selectbox.options.length; 
+	CleanSelectbox(selectbox);
 
+	for (var i = 1; i <= length; i++)
+	{
+		var innerHTML = "Option " + i;   
+
+		if (!OptionExists(options, innerHTML))
+		{
+			AddOption(selectbox, i);	
+		}
+	}
+}
+
+function OptionExists(options, innerHTML)
+{
+	for (let option of options)
+	{
+		if (option == innerHTML)
+		{
+			return true;
+		}
+	}
+
+	return false;
+} 
+
+function RemoveSelection(options, selectbox)
+{
+	for (let option of options)
+	{
+		options.setAttribute("selected", false);
+	}
 }
 
 function GetSelectedOptions(selectbox)
@@ -168,11 +200,16 @@ function AddAllToSelectbox(selectbox, length)
 {
 	for (var i = 1; i <= length; i++)
 	{
-		var option = document.createElement("option");
-
-		option.innerHTML = "Option " + i;
-		selectbox.appendChild(option);	
+		AddOption(selectbox, i);	
 	} 
+}
+
+function AddOption(selectbox, i)
+{
+	var option = document.createElement("option");
+
+	option.innerHTML = "Option " + i;
+	selectbox.appendChild(option);		
 }
 	
 </script>
