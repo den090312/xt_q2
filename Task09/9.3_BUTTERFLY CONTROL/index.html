@@ -56,18 +56,31 @@ function MoveFullRight(obj)
 	var selectedDiv = GetDivElement(obj, "selected"); 
 	var selectedSelect = availableDiv.getElementsByTagName("select")[0];
 
-	CleanSelected(selectedSelect);
-	AddAllToSelected(selectedSelect);
+	//CleanSelectbox(selectedSelect);
+	CleanSelectbox(availableSelect);
+	//AddAllToSelectbox(selectedSelect);
 } 
 
-function CleanSelected(selectedSelect)
+function CleanSelectbox(selectbox)
 {
+	var length = selectbox.options.length;
 
+	for (var i = 0; i <= length; i++)
+	{
+		selectbox.remove(i);	
+	}   
 } 
 
-function AddAllToSelected(selectedSelect)
+function AddAllToSelectbox(selectbox)
 {
-	
+	for (var i = 0; i < 4; i++)
+	{
+		var option = document.createElement("option");
+
+		option.value = "Option" + i;
+		//option.innerHTML = i;
+		selectbox.appendChild(option);	
+	} 
 }
 
 function MoveRight(obj)
