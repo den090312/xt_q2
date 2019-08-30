@@ -51,11 +51,24 @@ function MoveFullRight(obj)
 	var availableDiv = GetDivElement(obj, "available");
 	var availableSelect = availableDiv.getElementsByTagName("select")[0]; 
 
-	
+
 	
 	var selectedDiv = GetDivElement(obj, "selected"); 
 	var selectedSelect = availableDiv.getElementsByTagName("select")[0];
+
+	CleanSelected(selectedSelect);
+	AddAllToSelected(selectedSelect);
 } 
+
+function CleanSelected(selectedSelect)
+{
+
+} 
+
+function AddAllToSelected(selectedSelect)
+{
+	
+}
 
 function MoveRight(obj)
 {
