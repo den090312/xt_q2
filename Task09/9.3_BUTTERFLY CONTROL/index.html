@@ -46,6 +46,8 @@
 
 <script>
 
+var optionQuantity = 5;
+
 function MoveFullRight(obj)
 {
 	var availableSelect = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
@@ -57,7 +59,7 @@ function MoveFullRight(obj)
 	{
 		CleanSelectbox(selectedSelect);
 		CleanSelectbox(availableSelect);
-		AddAllToSelectbox(selectedSelect, 5);
+		AddAllToSelectbox(selectedSelect, optionQuantity);
 	}
 } 
 
@@ -72,7 +74,7 @@ function MoveFullLeft(obj)
 	{
 		CleanSelectbox(availableSelect);
 		CleanSelectbox(selectedSelect);
-		AddAllToSelectbox(availableSelect, 5);	
+		AddAllToSelectbox(availableSelect, optionQuantity);	
 	}
 } 
 

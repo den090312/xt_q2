@@ -1,13 +1,12 @@
 select
 {
 	overflow: hidden;
-    	height: 125px;
+    height: 125px;
 	width: 75px;
 }
 
 .available, .selected
 {
-    	display: inline-block;
 	float: left;
 	height: 125px;
 	margin-right: 10px;
@@ -16,7 +15,6 @@ select
 
 .arrow_block
 {
-    	display: inline-block;
 	float: left;
 	margin-right: 10px;
 	padding-top: 24px;
