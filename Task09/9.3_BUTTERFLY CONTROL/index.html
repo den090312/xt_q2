@@ -48,14 +48,38 @@
 
 function MoveFullRight(obj)
 {
-	var availableBox = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
-	var selectedBox = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
+	var availableSelect = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
+	var selectedSelect = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
 
-	CleanSelectbox(selectedBox);
-	CleanSelectbox(availableBox);
+	CleanSelectbox(selectedSelect);
+	CleanSelectbox(availableSelect);
 
-	AddAllToSelectbox(selectedBox);
+	AddAllToSelectbox(selectedSelect);
 } 
+
+function MoveFullLeft(obj)
+{
+	var availableSelect = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
+	var selectedSelect = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
+
+	CleanSelectbox(availableSelect);
+	CleanSelectbox(selectedSelect);
+
+	AddAllToSelectbox(availableSelect);	
+} 
+
+function GetDivElement(obj, className)
+{
+	var butterfly = obj.parentNode.parentNode.parentNode;
+
+	for (let child of butterfly.children)
+	{
+		if (child.className == className)
+		{
+			return child;  
+		}
+	}	
+}
 
 function CleanSelectbox(selectbox)
 {
@@ -88,23 +112,5 @@ function MoveLeft(obj)
 {
 	
 } 
-
-function MoveFullLeft(obj)
-{
-	
-} 
-
-function GetDivElement(obj, className)
-{
-	var butterfly = obj.parentNode.parentNode.parentNode;
-
-	for (let child of butterfly.children)
-	{
-		if (child.className == className)
-		{
-			return child;  
-		}
-	}	
-}
 	
 </script>
