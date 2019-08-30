@@ -1,8 +1,26 @@
-setTimeout(function () 
+RunCountdown();
+
+function RunCountdown()
+{
+    var seconds = 9;
+
+    var interval = setInterval(function() 
+    {
+        document.getElementById("timer").innerHTML = seconds;
+        seconds--;
+    
+        if (seconds < 0) 
+        {
+            clearInterval(interval);
+            GoToLocation();
+        }
+      
+    }, 1000);
+}
+
+function GoToLocation()
 {
     var pageName = window.location.pathname.split("/").pop().split(".").shift();
-
-    //alert(pageName);
 
     if (pageName == "index")
     {
@@ -18,5 +36,4 @@ setTimeout(function ()
 
         window.location.href = nextPageNumber + ".html"; 
     }
-
-}, 2000);
+}

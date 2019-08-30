@@ -1,4 +1,27 @@
-body
+div
 {
-    padding: 100px;
+    float: left;
+}
+
+p
+{
+    float: inline-start;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.button
+{
+    width: 100px;
+    height: 110px;
+    margin-top: 210px;
+    font-size: 100px;
+}
+
+p 
+{
+    text-align: center;
+    font-size: 60px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
