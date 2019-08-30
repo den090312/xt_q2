@@ -2,7 +2,7 @@ RunCountdown();
 
 function RunCountdown()
 {
-    var seconds = 9;
+    var seconds = 10;
 
     var interval = setInterval(function() 
     {
@@ -28,7 +28,17 @@ function GoToLocation()
     }
     else if (pageName == "5")
     {
-        window.location.href = "index.html";        
+        if (confirm("Continue?")) 
+        {
+            window.location.href = "index.html";  
+        } 
+        else 
+        {
+            window.open('', '_self', ''); 
+            window.close();    
+        }     
+
+        confirm("Continue?") ?  window.location.href = "index.html" : close(); 
     }
     else
     {
