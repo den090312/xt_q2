@@ -50,13 +50,14 @@ function MoveFullRight(obj)
 {
 	var availableSelect = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
 	var selectedSelect = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
+	
 	var length = availableSelect.options.length; 
 
 	if (length > 0)
 	{
 		CleanSelectbox(selectedSelect);
 		CleanSelectbox(availableSelect);
-		AddAllToSelectbox(selectedSelect, length);
+		AddAllToSelectbox(selectedSelect, 5);
 	}
 } 
 
@@ -64,13 +65,14 @@ function MoveFullLeft(obj)
 {
 	var availableSelect = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
 	var selectedSelect = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
+	
 	var length = selectedSelect.options.length; 
 
 	if (length > 0)
 	{
 		CleanSelectbox(availableSelect);
 		CleanSelectbox(selectedSelect);
-		AddAllToSelectbox(availableSelect, length);	
+		AddAllToSelectbox(availableSelect, 5);	
 	}
 } 
 
