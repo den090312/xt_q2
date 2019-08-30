@@ -87,12 +87,11 @@ function GetDivElement(obj, className)
 
 function CleanSelectbox(selectbox)
 {
-    var i;
-
-    for (i = selectbox.options.length - 1; i >= 0 ; i--)
-    {
-        selectbox.remove(i);
-    }
+	do
+	{
+		selectbox.remove(0);
+	}
+	while (selectbox.options.length > 0);
 } 
 
 function AddAllToSelectbox(selectbox, length)
