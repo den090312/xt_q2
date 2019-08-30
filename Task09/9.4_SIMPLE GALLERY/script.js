@@ -20,7 +20,7 @@ function RunCountdown()
 
 function GoToLocation()
 {
-    var pageName = window.location.pathname.split("/").pop().split(".").shift();
+    var pageName = GetCurrentPageName(window.location);
 
     if (pageName == "index")
     {
@@ -40,8 +40,35 @@ function GoToLocation()
     }
     else
     {
-        var nextPageNumber = Number(pageName) + 1; 
-
-        window.location.href = nextPageNumber + ".html"; 
+        GoToNextPage(pageName);
     }
+}
+
+function GoToPrevPage()
+{
+    var pageName = GetCurrentPageName(window.location); 
+
+    if (pageName == 1)
+    {
+        window.location.href = "index.html";          
+    }
+    else
+    {
+        var nextPageNumber = Number(pageName) - 1; 
+
+        window.location.href = nextPageNumber + ".html";  
+    } 
+}
+
+function GoToNextPage(pageName)
+{
+    var nextPageNumber = Number(pageName) + 1; 
+
+    window.location.href = nextPageNumber + ".html"; 
+}
+
+
+function GetCurrentPageName(location)
+{
+    return location.pathname.split("/").pop().split(".").shift(); 
 }
