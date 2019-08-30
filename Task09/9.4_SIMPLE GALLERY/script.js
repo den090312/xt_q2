@@ -37,8 +37,6 @@ function GoToLocation()
             window.open('', '_self', ''); 
             window.close();    
         }     
-
-        confirm("Continue?") ?  window.location.href = "index.html" : close(); 
     }
     else
     {
