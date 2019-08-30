@@ -23,10 +23,10 @@
 					<input type="button" class="arrow_fullright" onclick="MoveFullRight(this)" value=">>" />	
 				</div>
 				<div class="arrow">
-					<input type="button" class="arrow_right" onclick="MoveRight(this)" value=">" />	
+					<input type="button" class="arrow_right" onclick="MoveSingleRight(this)" value=">" />	
 				</div>
 				<div class="arrow">
-					<input type="button" class="arrow_left" onclick="MoveLeft(this)" value="<" />	
+					<input type="button" class="arrow_left" onclick="MoveSingleLeft(this)" value="<" />	
 				</div>
 				<div class="arrow">
 					<input type="button" class="arrow_fullleft" onclick="MoveFullLeft(this)" value="<<" />	
@@ -72,15 +72,75 @@ function MoveFullLeft(obj)
 	AddAllToSelectbox(availableSelect, length);	
 } 
 
-function MoveRight(obj)
+function MoveSingleRight(obj)
 {
-	
+	var availableSelect = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
+
+	if (SelectExists(availableSelect))
+	{
+		var options = GetSelectedOptions(availableSelect);
+		var selectedSelect = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
+
+		AddOptions(options, selectedSelect);
+		DeleteOptions(options, availableSelect);
+	}
+	else
+	{
+		alert("No options selected!");
+	}
 } 
 
-function MoveLeft(obj)
+function AddOptions(options, selectedSelect)
 {
-	
+	for (let option of options)
+	{
+		var newOption = document.createElement("option");
+
+		newOption.innerHTML = option;
+		selectedSelect.appendChild(newOption);
+	}
+}
+
+function DeleteOptions(options, selectbox)
+{
+
+}
+
+function GetSelectedOptions(selectbox)
+{
+    var selectedOptions = [];
+
+    for (var i = 0; i < selectbox.length; i++) 
+	{
+        var option = selectbox.options[i];
+
+		if (option.selected) 
+		{
+			selectedOptions.push(option.value);
+		}
+    }
+
+	return selectedOptions; 
 } 
+
+function MoveSingleLeft(obj)
+{
+	var selectedSelect = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
+
+	if (SelectExists(selectedSelect))
+	{
+		MoveLeft(selectedSelect);
+	}
+	else
+	{
+		alert("No options selected!");
+	}
+} 
+
+function SelectExists(selectbox)
+{
+	return selectbox.selectedIndex != -1;
+}
 
 function GetDivElement(obj, className)
 {
