@@ -53,10 +53,10 @@ function MoveFullRight(obj)
 
 	CleanSelectbox(selectedSelect);
 
-	var availableSelectLength = availableSelect.options.length; 
+	var length = availableSelect.options.length; 
 	CleanSelectbox(availableSelect);
 
-	AddAllToSelectbox(selectedSelect, availableSelectLength);
+	AddAllToSelectbox(selectedSelect, length);
 } 
 
 function MoveFullLeft(obj)
@@ -66,10 +66,10 @@ function MoveFullLeft(obj)
 
 	CleanSelectbox(availableSelect);
 
-	var selectedSelectLength = selectedSelect.options.length; 
+	var length = selectedSelect.options.length; 
 	CleanSelectbox(selectedSelect);
 
-	AddAllToSelectbox(availableSelect, selectedSelectLength);	
+	AddAllToSelectbox(availableSelect, length);	
 } 
 
 function GetDivElement(obj, className)
