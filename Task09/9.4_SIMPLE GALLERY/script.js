@@ -1,20 +1,25 @@
 RunCountdown();
 
+var paused = false;
+
 function RunCountdown()
 {
     var seconds = 10;
 
     var interval = setInterval(function() 
     {
-        document.getElementById("timer").innerHTML = seconds;
-        seconds--;
-    
-        if (seconds < 0) 
+        if (!paused)
         {
-            clearInterval(interval);
-            GoToLocation();
+            document.getElementById("timer").innerHTML = seconds;
+            seconds--;
+        
+            if (seconds < 0) 
+            {
+                clearInterval(interval);
+                GoToLocation();
+            }
         }
-      
+     
     }, 1000);
 }
 
@@ -25,10 +30,12 @@ function CountdownAction(obj)
 
     if (id == "countdownActionPause")
     {
+        paused = true;
         document.getElementById("countdownActionPlay").style.display = "block";
     }
     else
     {
+        paused = false;
         document.getElementById("countdownActionPause").style.display = "block";
     }
 }
