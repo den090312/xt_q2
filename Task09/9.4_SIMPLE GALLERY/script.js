@@ -1,6 +1,7 @@
-RunCountdown();
 
 var paused = false;
+
+RunCountdown();
 
 function RunCountdown()
 {
