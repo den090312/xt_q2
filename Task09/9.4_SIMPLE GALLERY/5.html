@@ -8,13 +8,14 @@
 	</head>
 	<body>
 		<div>
-			<input type="button" class="GoToPrevPage" value="<" onclick="GoToPrevPage()">
+			<input type="button" class="goToPrevPage" value="<" onclick="GoToPrevPage()">
 		</div>
 		<div>
 			<img src="5.jpg">
 		</div>
 		<div>
-			<input type="button" class="countdownAction" value="pause" onclick="CountdownAction(this)">
+            <input id="countdownActionPause" type="button" class="countdownAction" value="pause" onclick="CountdownAction(this)">
+			<input id="countdownActionPlay" type="button" class="countdownAction" value="play" onclick="CountdownAction(this)" style="display: none;">		
 		</div>
 		<p id="timer"></p>
 	</body>

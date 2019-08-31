@@ -20,14 +20,16 @@ function RunCountdown()
 
 function CountdownAction(obj)
 {
-    if (obj.value = "pause")
-    {
-        ResumeCountdown();
-    }
+    var id = obj.id;
+    document.getElementById(id).style.display = "none";
 
-    if (obj.value = "resume")
+    if (id == "countdownActionPause")
     {
-        PauseCountdown();
+        document.getElementById("countdownActionPlay").style.display = "block";
+    }
+    else
+    {
+        document.getElementById("countdownActionPause").style.display = "block";
     }
 }
 
