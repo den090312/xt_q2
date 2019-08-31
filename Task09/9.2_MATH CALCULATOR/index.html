@@ -16,6 +16,7 @@
 </html>
 
 <script>
+	
 function PrintResult()
 {
 	var output = document.getElementById("outputString");
@@ -27,16 +28,11 @@ function PrintResult()
 function ExpressionIsCorrect() 
 {
 	return GetInputStringValue().match(/^((\s*(\d+(\.\d)*)\s*)*(\s*[+\-*/]\s*)*)+=$/g);
-}	
+}
 
 function GetInputStringValue()
 {
 	return document.getElementById("inputString").value; 
-}
-
-function GetExpressionString()
-{
-	return GetInputStringValue().split(' ').filter(element => element != '').join(""); 
 }
 
 function GetResult()
@@ -62,6 +58,16 @@ function GetResult()
 	return Result(numbers, operators); 
 }
 
+function GetExpressionString()
+{
+	return GetInputStringValue().split(' ').filter(element => element != '').join(""); 
+}
+
+function IsOperator(inputChar)
+{
+	return inputChar.match(/[+\-*/]/g) != null;	
+}
+
 function Result(numbers, operators)
 {
 	var result = numbers[0];
@@ -83,11 +89,6 @@ function Result(numbers, operators)
 	while (operators[i] != "=");
 	
 	return result.toFixed(2); 
-}
-
-function IsOperator(inputChar)
-{
-	return inputChar.match(/[+\-*/]/g) != null;	
 }
 
 function OperationResult(number1, number2, operator) 

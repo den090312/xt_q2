@@ -116,12 +116,12 @@ function AddAllToSelectbox(selectbox, length)
 	} 
 }
 
-function AddNewOption(selectbox, i)
+function AddNewOption(selectbox, index)
 {
 	var option = document.createElement("option");
 	
-	option.value = "Option " + i;
-	option.text = "Option " + i;
+	option.value = "Option " + index;
+	option.text = "Option " + index;
 	
 	selectbox.appendChild(option);		
 }
