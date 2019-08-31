@@ -41,22 +41,18 @@ function GoToLocation()
     }
 }
 
-function CountdownAction(obj)
+function CountdownPause(obj)
 {
-    var id = obj.id;
+    HideCurrentButton(obj.id);
+    paused = true;
+    DisplayButtonPlay();
+}
 
-    HideCurrentButton(id);
-
-    if (id == "countdownActionPause")
-    {
-        paused = true;
-        DisplayButtonPlay();
-    }
-    else
-    {
-        paused = false;
-        DisplayButtonAction();
-    }
+function CountdownResume(obj)
+{
+    HideCurrentButton(obj.id);
+    paused = false;
+    DisplayButtonPause();
 }
 
 function ActionPrevPage()
@@ -73,10 +69,10 @@ function ConfirmContinue()
 
 function DisplayButtonPlay()
 {
-    document.getElementById("countdownActionPlay").style.display = "block";    
+    document.getElementById("countdownActionResume").style.display = "block";    
 }
 
-function DisplayButtonAction()
+function DisplayButtonPause()
 {
     document.getElementById("countdownActionPause").style.display = "block";    
 }
