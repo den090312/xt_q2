@@ -43,15 +43,15 @@ function GoToLocation()
 
 function CountdownPause(obj)
 {
-    HideCurrentButton(obj.id);
     paused = true;
+    HideCurrentButton(obj.id);
     DisplayButtonPlay();
 }
 
 function CountdownResume(obj)
 {
-    HideCurrentButton(obj.id);
     paused = false;
+    HideCurrentButton(obj.id);
     DisplayButtonPause();
 }
 
