@@ -1,4 +1,3 @@
-
 var paused = false;
 
 RunCountdown();
