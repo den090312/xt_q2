@@ -1,4 +1,4 @@
-var optionQuantity = 5;
+//var optionQuantity = 5;
 
 function MoveFullRight(obj)
 {
@@ -9,9 +9,8 @@ function MoveFullRight(obj)
 
 	if (length > 0)
 	{
-		CleanSelectbox(selectedSelect);
+		AddAllToSelectbox(availableSelect, selectedSelect);
 		CleanSelectbox(availableSelect);
-		AddAllToSelectbox(selectedSelect, optionQuantity);
 	}
 } 
 
@@ -24,9 +23,8 @@ function MoveFullLeft(obj)
 
 	if (length > 0)
 	{
-		CleanSelectbox(availableSelect);
+		AddAllToSelectbox(selectedSelect, availableSelect);	
 		CleanSelectbox(selectedSelect);
-		AddAllToSelectbox(availableSelect, optionQuantity);	
 	}
 } 
 
@@ -66,6 +64,42 @@ function MoveSelectedLeft(obj)
 	}
 } 
 
+function AddAllToSelectbox(selectboxFrom, selectboxTo)
+{
+	AddOptions(GetAllOptions(selectboxFrom), selectboxTo);
+}
+
+function GetAllOptions(selectbox)
+{
+    var selectedOptions = [];
+
+    for (var i = 0; i < selectbox.length; i++) 
+	{
+		var option = selectbox.options[i];
+		
+		selectedOptions.push(option.text);
+    }
+
+	return selectedOptions; 
+}
+
+function GetSelectedOptions(selectbox)
+{
+    var selectedOptions = [];
+
+    for (var i = 0; i < selectbox.length; i++) 
+	{
+        var option = selectbox.options[i];
+
+		if (option.selected) 
+		{
+			selectedOptions.push(option.text);
+		}
+    }
+
+	return selectedOptions; 
+} 
+
 function AddOptions(options, selectbox)
 {
 	for (let option of options)
@@ -89,31 +123,6 @@ function RemoveOptions(options, selectObject)
 			i--;
 		}
 	}
-}
-
-function GetSelectedOptions(selectbox)
-{
-    var selectedOptions = [];
-
-    for (var i = 0; i < selectbox.length; i++) 
-	{
-        var option = selectbox.options[i];
-
-		if (option.selected) 
-		{
-			selectedOptions.push(option.value);
-		}
-    }
-
-	return selectedOptions; 
-} 
-
-function AddAllToSelectbox(selectbox, length)
-{
-	for (var i = 1; i <= length; i++)
-	{
-		AddNewOption(selectbox, i);	
-	} 
 }
 
 function AddNewOption(selectbox, index)
