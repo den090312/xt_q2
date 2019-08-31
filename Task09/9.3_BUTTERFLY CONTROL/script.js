@@ -71,7 +71,6 @@ function AddOptions(options, selectbox)
 	for (let option of options)
 	{
 		var newOption = document.createElement("option");
-		
 		newOption.text = option;
 		
 		selectbox.appendChild(newOption);
@@ -82,11 +81,12 @@ function RemoveOptions(options, selectObject)
 {
 	for (var i = 0; i < selectObject.length; i++) 
 	{
-		var value = selectObject.options[i].value; 
+		var text = selectObject.options[i].text; 
 
-		if (options.includes(value))
+		if (options.includes(text))
 		{
 			selectObject.remove(i);
+			i--;
 		}
 	}
 }
@@ -119,10 +119,8 @@ function AddAllToSelectbox(selectbox, length)
 function AddNewOption(selectbox, index)
 {
 	var option = document.createElement("option");
-	
-	option.value = "Option " + index;
 	option.text = "Option " + index;
-	
+
 	selectbox.appendChild(option);		
 }
 
