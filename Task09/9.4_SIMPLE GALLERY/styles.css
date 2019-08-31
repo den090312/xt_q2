@@ -7,6 +7,10 @@ p
 {
     margin-block-start: 0;
     margin-block-end: 0;
+    text-align: center;
+    font-size: 60px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 .goToPrevPage, .countdownAction
@@ -24,12 +28,4 @@ p
 .countdownAction
 {
     width: 290px;
-}
-
-p 
-{
-    text-align: center;
-    font-size: 60px;
-    margin-top: 0px;
-    margin-bottom: 0px;
 }
