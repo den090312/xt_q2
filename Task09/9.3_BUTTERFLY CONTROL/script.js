@@ -1,44 +1,42 @@
-//var optionQuantity = 5;
-
 function MoveFullRight(obj)
 {
-	var availableSelect = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
-	var selectedSelect = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
+	var availableSelectbox = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
+	var selectedSelectbox = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
 	
-	var length = availableSelect.options.length; 
+	var length = availableSelectbox.options.length; 
 
 	if (length > 0)
 	{
-		AddAllToSelectbox(availableSelect, selectedSelect);
-		CleanSelectbox(availableSelect);
+		AddAllToSelectbox(availableSelectbox, selectedSelectbox);
+		CleanSelectbox(availableSelectbox);
 	}
 } 
 
 function MoveFullLeft(obj)
 {
-	var availableSelect = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
-	var selectedSelect = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
+	var availableSelectbox = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
+	var selectedSelectbox = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
 	
-	var length = selectedSelect.options.length; 
+	var length = selectedSelectbox.options.length; 
 
 	if (length > 0)
 	{
-		AddAllToSelectbox(selectedSelect, availableSelect);	
-		CleanSelectbox(selectedSelect);
+		AddAllToSelectbox(selectedSelectbox, availableSelectbox);	
+		CleanSelectbox(selectedSelectbox);
 	}
 } 
 
-function MoveSelectedRight(obj)
+function MoveSelectedLeft(obj)
 {
-	var availableSelect = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
+	var selectedSelectbox = GetDivElement(obj, "selected").getElementsByTagName("select")[0]; 
 
-	if (SelectExists(availableSelect))
+	if (SelectionExists(selectedSelectbox))
 	{
-		var options = GetSelectedOptions(availableSelect);
-		var selectedSelect = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
+		var options = GetSelectedOptions(selectedSelectbox);
+		var availableSelectbox = GetDivElement(obj, "available").getElementsByTagName("select")[0];
 
-		AddOptions(options, selectedSelect);
-		RemoveOptions(options, availableSelect);
+		AddOptions(options, availableSelectbox);
+		RemoveOptions(options, selectedSelectbox);	
 	}
 	else
 	{
@@ -46,17 +44,17 @@ function MoveSelectedRight(obj)
 	}
 } 
 
-function MoveSelectedLeft(obj)
+function MoveSelectedRight(obj)
 {
-	var selectedSelect = GetDivElement(obj, "selected").getElementsByTagName("select")[0]; 
+	var availableSelectbox = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
 
-	if (SelectExists(selectedSelect))
+	if (SelectionExists(availableSelectbox))
 	{
-		var options = GetSelectedOptions(selectedSelect);
-		var availableSelect = GetDivElement(obj, "available").getElementsByTagName("select")[0];
+		var options = GetSelectedOptions(availableSelectbox);
+		var selectedSelectbox = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
 
-		AddOptions(options, availableSelect);
-		RemoveOptions(options, selectedSelect);	
+		AddOptions(options, selectedSelectbox);
+		RemoveOptions(options, availableSelectbox);
 	}
 	else
 	{
@@ -111,26 +109,18 @@ function AddOptions(options, selectbox)
 	}
 }
 
-function RemoveOptions(options, selectObject)
+function RemoveOptions(options, selectbox)
 {
-	for (var i = 0; i < selectObject.length; i++) 
+	for (var i = 0; i < selectbox.length; i++) 
 	{
-		var text = selectObject.options[i].text; 
+		var text = selectbox.options[i].text; 
 
 		if (options.includes(text))
 		{
-			selectObject.remove(i);
+			selectbox.remove(i);
 			i--;
 		}
 	}
-}
-
-function AddNewOption(selectbox, index)
-{
-	var option = document.createElement("option");
-	option.text = "Option " + index;
-
-	selectbox.appendChild(option);		
 }
 
 function CleanSelectbox(selectbox)
@@ -142,7 +132,7 @@ function CleanSelectbox(selectbox)
 	while (selectbox.options.length > 0);
 } 
 
-function SelectExists(selectbox)
+function SelectionExists(selectbox)
 {
 	return selectbox.selectedIndex != -1;
 }
