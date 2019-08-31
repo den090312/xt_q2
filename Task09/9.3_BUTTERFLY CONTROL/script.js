@@ -71,8 +71,9 @@ function AddOptions(options, selectbox)
 	for (let option of options)
 	{
 		var newOption = document.createElement("option");
-
-		newOption.innerHTML = option;
+		
+		newOption.text = option;
+		
 		selectbox.appendChild(newOption);
 	}
 }
@@ -118,9 +119,9 @@ function AddAllToSelectbox(selectbox, length)
 function AddNewOption(selectbox, i)
 {
 	var option = document.createElement("option");
-
+	
 	option.value = "Option " + i;
-	option.innerHTML = "Option " + i;
+	option.text = "Option " + i;
 	
 	selectbox.appendChild(option);		
 }
