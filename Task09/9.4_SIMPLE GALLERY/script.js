@@ -23,42 +23,17 @@ function RunCountdown()
     }, 1000);
 }
 
-function CountdownAction(obj)
-{
-    var id = obj.id;
-    document.getElementById(id).style.display = "none";
-
-    if (id == "countdownActionPause")
-    {
-        paused = true;
-        document.getElementById("countdownActionPlay").style.display = "block";
-    }
-    else
-    {
-        paused = false;
-        document.getElementById("countdownActionPause").style.display = "block";
-    }
-}
-
 function GoToLocation()
 {
     var pageName = GetCurrentPageName(window.location);
 
     if (pageName == "index")
     {
-        window.location.href = "1.html";    
+        GoToFirstPage();    
     }
     else if (pageName == "5")
     {
-        if (confirm("Continue?")) 
-        {
-            window.location.href = "index.html";  
-        } 
-        else 
-        {
-            window.open('', '_self', ''); 
-            window.close();    
-        }     
+        ConfirmContinue();    
     }
     else
     {
@@ -66,20 +41,51 @@ function GoToLocation()
     }
 }
 
-function GoToPrevPage()
+function CountdownAction(obj)
 {
-    var pageName = GetCurrentPageName(window.location); 
+    var id = obj.id;
 
-    if (pageName == 1)
+    HideCurrentButton(id);
+
+    if (id == "countdownActionPause")
     {
-        window.location.href = "index.html";          
+        paused = true;
+        DisplayButtonPlay();
     }
     else
     {
-        var nextPageNumber = Number(pageName) - 1; 
+        paused = false;
+        DisplayButtonAction();
+    }
+}
 
-        window.location.href = nextPageNumber + ".html";  
-    } 
+function ActionPrevPage()
+{
+    var pageName = GetCurrentPageName(window.location); 
+
+    pageName == 1 ? GoToIndexPage() : GoToPrevPage(pageName);  
+}
+
+function ConfirmContinue()
+{
+    confirm("Continue?") ? GoToIndexPage() : CloseCurrentTab();  
+}
+
+function DisplayButtonPlay()
+{
+    document.getElementById("countdownActionPlay").style.display = "block";    
+}
+
+function DisplayButtonAction()
+{
+    document.getElementById("countdownActionPause").style.display = "block";    
+}
+
+function GoToPrevPage(pageName)
+{
+    var nextPageNumber = Number(pageName) - 1; 
+
+    window.location.href = nextPageNumber + ".html"; 
 }
 
 function GoToNextPage(pageName)
@@ -89,8 +95,28 @@ function GoToNextPage(pageName)
     window.location.href = nextPageNumber + ".html"; 
 }
 
+function GoToIndexPage()
+{
+    window.location.href = "index.html";     
+}
+
+function GoToFirstPage()
+{
+    window.location.href = "1.html"; 
+}
 
 function GetCurrentPageName(location)
 {
     return location.pathname.split("/").pop().split(".").shift(); 
+}
+
+function HideCurrentButton(id)
+{
+    document.getElementById(id).style.display = "none";
+}
+
+function CloseCurrentTab()
+{
+    window.open('', '_self', ''); 
+    window.close();     
 }
