@@ -1,3 +1,4 @@
+var interval;
 var paused = false;
 
 RunCountdown();
@@ -6,7 +7,7 @@ function RunCountdown()
 {
     var seconds = 10;
 
-    var interval = setInterval(function() 
+    interval = setInterval(function() 
     {
         if (!paused)
         {
@@ -113,6 +114,7 @@ function HideCurrentButton(id)
 
 function CloseCurrentTab()
 {
-    window.open('', '_self', ''); 
-    window.close();     
+    clearInterval(interval);
+    
+    window.close();  
 }
