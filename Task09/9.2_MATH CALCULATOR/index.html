@@ -41,6 +41,11 @@ function GetResult()
 	
 	var numbers = expressionString.match(/\d+(\.\d)*/g);
 	var operators = expressionString.match(/[+\-*/=]/g);
+
+	if (numbers == null)
+	{
+		return "0.00";
+	}
 	
 	if (numbers.length == 1)
 	{
@@ -65,7 +70,7 @@ function GetExpressionString()
 
 function IsOperator(inputChar)
 {
-	return inputChar.match(/[+\-*/=]/g) != null;	
+	return inputChar.match(/[+\-*/]/g) != null;	
 }
 	
 function Result(numbers, operators)
