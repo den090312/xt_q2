@@ -1,18 +1,15 @@
-body
-{
+body {
 	background-color: #333333 
 }
 
-.block 
-{
+.block {
 	color: white;
 	margin: auto;
 	padding: 5px;
 	z-index: 1;
 }
 
-.pointer 
-{
+.pointer {
 	position: relative;
 	display: flex;
 	margin: 55px 10px 0 10px;
@@ -22,16 +19,14 @@ body
 }
 
 
-.pointer::before, .pointer::after 
-{
+.pointer::before, .pointer::after {
 	content: "";
 	position: absolute;  
 	background-color: #88b7d5;
 	transform: rotate(45deg);
 }
 
-.pointer::before 
-{
+.pointer::before {
 	width: 40px;
 	height: 40px;
 	border: 8px solid #c2e1f5;
@@ -40,8 +35,7 @@ body
 	z-index: -1;
 }
 
-.pointer::after 
-{
+.pointer::after {
 	width: 55px;
 	height: 55px;
 	left: calc(50% - 33px);

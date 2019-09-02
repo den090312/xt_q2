@@ -1,20 +1,16 @@
-body
-{
+body {
 	background-color: #4e6379;
 }
 
-p
-{
+p {
 	text-align: center;
 }
 
-img
-{
+img {
 	padding-left: 27%;
 }
 
-.main
-{
+.main {
 	background-color: white;
 	border-radius: 5px;
 	width: 680px;
@@ -24,40 +20,32 @@ img
 	margin: auto;
 }
 
-.element
-{
-	display: inline-block;
+.element {
 	float: left;
-	margin-right: 26px;
-	margin-left: 22px;
+	margin: 0 26px 0 22px;
 	padding: 15px;
 }
 
-.caption
-{
+.caption {
 	color: #f56332;
 	font-weight: bold;
 	margin-block-start: 0;
 	margin-block-end: 0;
 }
 
-.description
-{
+.description {
 	font-size: 13px;
 	margin-top: 5px;
 }
 
-.separator
-{
-	display: inline-block;
+.separator {
 	float: left;
 	border-left: 1px solid #0000001f;
 	height: 150px;
 	margin-top: 15px;
 }
 
-input[type="button"]
-{
+input[type="button"] {
 	height: 26px;
 	width: 90px;
 	margin-left: calc(40% - 31px);
