@@ -1,37 +1,30 @@
-div, p
-{
+div, p {
     float: left;
 }
 
-p
-{
+p {
     margin-block-start: 0;
     margin-block-end: 0;
     text-align: center;
     font-size: 60px;
-    margin-top: 0px;
-    margin-bottom: 0px;
+    margin: auto;
 }
 
-img
-{
+img {
     width: 960px;
     height: 600px;
 }
 
-.goToPrevPage, .countdownAction
-{
+.goToPrevPage, .countdownAction {
     height: 110px;
     margin-top: 210px;
     font-size: 100px;
 }
 
-.goToPrevPage
-{
+.goToPrevPage {
     width: 100px;
 }
 
-.countdownAction
-{
+.countdownAction {
     width: 290px;
 }
