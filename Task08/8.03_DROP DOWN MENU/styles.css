@@ -21,15 +21,13 @@
 	display: none;
 	position: absolute;
 	min-width: 160px;
-	z-index: 1;
 	padding: 4px;
 	z-index: -1;
 }
 
 .dropdown_li a {
 	color: blue;
-	padding: 4px;
-	padding-left: 0;
+	padding: 4px 4px 4px 0;
 	text-decoration: none;
 	display: block;
 }
