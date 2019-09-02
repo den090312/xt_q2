@@ -10,8 +10,7 @@ form {
 }
 
 p {
-	padding: 25px;
-	padding-bottom: 0;
+	padding: 25px 25px 0 25px;
 	margin: 0;
 	font-size: 25px;
 }
@@ -21,12 +20,12 @@ hr {
 }
 
 .email {
-	padding-left: 25px;
-	padding-bottom: 25px;
+	padding: 0 0 25px 25px;
 }
 
 .input_email {
 	width: 315px;
+	display: flex;
 }
 
 .password {
@@ -42,8 +41,7 @@ hr {
 .input_submit {
 	height: 26px;
 	width: 85px;
-	margin: 25px;
-	margin-bottom: 0;
+	margin: 25px 25px 0 25px;
 	background-color: #ffdf7f;
 	border: none;
 }
