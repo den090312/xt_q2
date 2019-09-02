@@ -4,7 +4,8 @@ body {
 }
 
 div {
-	background: repeating-linear-gradient(to bottom, transparent, transparent 19px, #333333 19px, #333333 23px), linear-gradient(to bottom, #e2bd61, #e29d49);
+	background: repeating-linear-gradient(to bottom, transparent, transparent 19px, #333333 19px, #333333 23px), 
+	linear-gradient(to bottom, #e2bd61, #e29d49);
     	width: 40px;
     	display: inline-block;
     	border-radius: 5px 5px 0 0;

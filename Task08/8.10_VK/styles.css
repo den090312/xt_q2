@@ -1,6 +1,6 @@
 body {
     background: #edeef0;
-    color: #000;
+    color: #000000;
     margin: 0;
     padding: 0;
     direction: ltr;
@@ -8,8 +8,6 @@ body {
     font-family: -apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Geneva,Noto Sans Armenian,Noto Sans Bengali,Noto Sans Cherokee,Noto Sans Devanagari,Noto Sans Ethiopic,Noto Sans Georgian,Noto Sans Hebrew,Noto Sans Kannada,Noto Sans Khmer,Noto Sans Lao,Noto Sans Osmanya,Noto Sans Tamil,Noto Sans Telugu,Noto Sans Thai,sans-serif;
     line-height: 1.154;
     font-weight: 400;
-    -webkit-font-smoothing: subpixel-antialiased;
-    -moz-osx-font-smoothing: auto;
     text-align: left;
 }
 
@@ -108,7 +106,7 @@ input.text.ts_input {
     width: 46px;
     position: relative;
     display: inline-block;
-    color: #000;
+    color: #000000;
     opacity: 1;
     -o-transition: opacity 100ms linear;
     transition: opacity 100ms linear;
@@ -119,7 +117,7 @@ input.text.ts_input {
     width: 46px;
     position: relative;
     display: inline-block;
-    color: #000;
+    color: #000000;
     opacity: 1;
     -o-transition: opacity 100ms linear;
     transition: opacity 100ms linear;
@@ -151,7 +149,6 @@ input.text.ts_input {
 .top_audio_play__button {
     position: relative;
     display: block;
-    -webkit-appearance: none;
     cursor: pointer;
     width: 22px;
     top: 11px;
@@ -193,10 +190,8 @@ input.text.ts_input {
     line-height: 42px;
     height: 42px;
     overflow: hidden;
-    color: #fff;
+    color: #ffffff;
     font-weight: 700;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 .top_profile_arrow {
@@ -298,13 +293,10 @@ img {
     color: #5b6e85;
     background: #d1d9e0;
     font-weight: 700;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     font-size: 11px;
     line-height: 17px;
     height: 16px;
     border-radius: 2px;
-    -o-transition: background-color 200ms linear, color 200ms linear;
     transition: background-color 200ms linear, color 200ms linear;
 }
 
@@ -372,9 +364,7 @@ a {
 }
 
 #side_bar .more_div {
-    margin-top: 9px;
-    margin-left: 27px;
-    margin-right: 6px;
+    margin: 9px 6px 0 27px;
     padding-top: 9px;
     border-top: 1px solid #dfe2e8;
 }
@@ -471,7 +461,7 @@ h2, h3 {
     border-radius: 4px 4px 0 0;
     font-size: 16px;
     outline: none;
-    color: #000;
+    color: #000000;
 }
 
 .page_block_header_extra_left {
@@ -516,10 +506,8 @@ h2, h3 {
 }
 
 .ui_rmenu_item_sel {
-    color: #000;
+    color: #000000;
     font-weight: 500;
-    -webkit-font-smoothing: subpixel-antialiased;
-    -moz-osx-font-smoothing: auto;
     padding-left: 18px;
     border-left: 2px solid #5181b8;
 }
@@ -544,10 +532,6 @@ h2, h3 {
     color: #2a5885;
     -ms-user-select: none;
     user-select: none;
-    -o-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
     outline: none;
     cursor: pointer;
 }
