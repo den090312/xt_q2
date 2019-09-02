@@ -11,7 +11,7 @@ function RunCountdown()
     {
         if (!paused)
         {
-            document.getElementById("timer").innerHTML = seconds;
+            document.getElementById("timer").textContent = seconds;
             seconds--;
         
             if (seconds < 0) 
