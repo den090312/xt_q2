@@ -1,11 +1,9 @@
-body
-{
+body {
 	padding: 10px;
 	width: 410px;
 }
 
-.caption
-{
+.caption {
 	background-color: #008b66;
 	color: #deefea;
 	font-size: 20px;
@@ -13,8 +11,7 @@ body
 	box-shadow: 0 0 0 10px #008b66, -1px -1px 0 10px #008b6673;
 }
 
-.description
-{
+.description {
 	background-color: #dfe6e1;
 	padding: 10px;
 	width: 93%;
