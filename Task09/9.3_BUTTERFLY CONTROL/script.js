@@ -1,5 +1,7 @@
 function MoveFullRight(obj)
 {
+	CleanErrorMessage(obj);
+
 	var availableSelectbox = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
 	var selectedSelectbox = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
 	
@@ -14,6 +16,8 @@ function MoveFullRight(obj)
 
 function MoveFullLeft(obj)
 {
+	CleanErrorMessage(obj);
+
 	var availableSelectbox = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
 	var selectedSelectbox = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
 	
@@ -28,6 +32,8 @@ function MoveFullLeft(obj)
 
 function MoveSelectedLeft(obj)
 {
+	CleanErrorMessage(obj);
+
 	var selectedSelectbox = GetDivElement(obj, "selected").getElementsByTagName("select")[0]; 
 
 	if (SelectionExists(selectedSelectbox))
@@ -37,15 +43,18 @@ function MoveSelectedLeft(obj)
 
 		AddOptions(options, availableSelectbox);
 		RemoveOptions(options, selectedSelectbox);	
+		CleanErrorMessage(obj);
 	}
 	else
 	{
-		alert("No options selected!");
+		PrintErrorMessage(obj, "No options selected!");
 	}
 } 
 
 function MoveSelectedRight(obj)
 {
+	CleanErrorMessage(obj);
+
 	var availableSelectbox = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
 
 	if (SelectionExists(availableSelectbox))
@@ -55,10 +64,11 @@ function MoveSelectedRight(obj)
 
 		AddOptions(options, selectedSelectbox);
 		RemoveOptions(options, availableSelectbox);
+		CleanErrorMessage(obj);
 	}
 	else
 	{
-		alert("No options selected!");
+		PrintErrorMessage(obj, "No options selected!");
 	}
 } 
 
@@ -148,4 +158,14 @@ function GetDivElement(obj, className)
 			return child;  
 		}
 	}	
+}
+
+function PrintErrorMessage(obj, errorText)
+{
+	GetDivElement(obj, "error_message").textContent = errorText;
+}
+
+function CleanErrorMessage(obj)
+{
+	GetDivElement(obj, "error_message").textContent  = "";	
 }
