@@ -1,17 +1,14 @@
-body 
-{
+body {
 	font-family: Arial;
 }
 
-.menu 
-{
+.menu {
 	list-style: none;
 	display: flex;
 	overflow: hidden;
 }
 
-li
-{
+li {
 	width: 120px;
 	background: linear-gradient(#dee8e5, #c3c7c4);
 	text-align: center;
@@ -22,16 +19,14 @@ li
 	position: relative;
 }
 
-li a 
-{
+li a {
 	display: block;
 	text-decoration: none;
 	padding: 5px 0; 
 	color: black;
 }
 
-li:not(:last-child)::after 
-{
+li:not(:last-child)::after {
 	content: '';
 	position: absolute;
 	width: 28px;
@@ -45,13 +40,11 @@ li:not(:last-child)::after
 	z-index: 1;
 }
 
-li.current, li:hover
-{
+li.current, li:hover {
 	background: linear-gradient(#74da2b, #337107);
 	cursor: pointer;
 }
 
-li.current a, li:hover a 
-{
+li.current a, li:hover a {
 	color: white;
 }
