@@ -40,7 +40,7 @@ function GetResult()
 	var expressionString = GetExpressionString();
 	
 	var numbers = expressionString.match(/\d+(\.\d)*/g);
-	var operators = expressionString.match(GetOperatorRegExp());
+	var operators = expressionString.match(/[+\-*/=]/g);
 	
 	if (numbers.length == 1)
 	{
@@ -65,12 +65,7 @@ function GetExpressionString()
 
 function IsOperator(inputChar)
 {
-	return inputChar.match(GetOperatorRegExp()) != null;	
-}
-	
-function GetOperatorRegExp()
-{
-	return "/[+\-*/=]/g";
+	return inputChar.match(/[+\-*/=]/g) != null;	
 }
 	
 function Result(numbers, operators)
