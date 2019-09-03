@@ -1,7 +1,50 @@
 var interval;
 var paused = false;
 
-RunCountdown();
+window.onload = function()
+{
+    RunCountdown();
+
+    AddEventPause();
+    AddEventResume();
+    AddEventPrevPage();
+}
+
+function AddEventPause()
+{
+    var buttonPause = document.getElementById("countdownActionPause");
+
+	if (buttonPause)
+	{
+		buttonPause.addEventListener("click", function(){
+			CountdownPause(buttonPause)
+		});
+    }
+}
+
+function AddEventResume()
+{  
+    var buttonResume= document.getElementById("countdownActionResume");
+
+	if (buttonResume)
+	{
+		buttonResume.addEventListener("click", function(){
+			CountdownResume(buttonResume)
+		});
+	}
+}
+
+function AddEventPrevPage()
+{
+    var buttonPrevPage = document.getElementById("goToPrevPage");
+
+	if (buttonPrevPage)
+	{
+		buttonPrevPage.addEventListener("click", function(){
+			ActionPrevPage()
+		});
+	}
+} 
 
 function RunCountdown()
 {
@@ -42,17 +85,17 @@ function GoToLocation()
     }
 }
 
-function CountdownPause(obj)
+function CountdownPause(buttonPause)
 {
     paused = true;
-    HideCurrentButton(obj.id);
+    HideCurrentButton(buttonPause.id);
     DisplayButtonPlay();
 }
 
-function CountdownResume(obj)
+function CountdownResume(buttonResume)
 {
     paused = false;
-    HideCurrentButton(obj.id);
+    HideCurrentButton(buttonResume.id);
     DisplayButtonPause();
 }
 
