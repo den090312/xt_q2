@@ -10,8 +10,8 @@ select {
 
 .available, .selected {
 	float: left;
-	height: 125px;
 	margin-right: 10px;
+	height: 125px;
 }
 
 .arrow_block {
@@ -21,8 +21,8 @@ select {
 }
 
 .arrow_fullright, .arrow_right, .arrow_left, .arrow_fullleft {
-	width: 30px;
 	margin-bottom: 10px;
+	width: 30px;
 }
 
 b {

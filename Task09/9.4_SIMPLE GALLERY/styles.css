@@ -16,8 +16,8 @@ img {
 }
 
 .goToPrevPage, .countdownAction {
-    height: 110px;
     margin-top: 210px;
+    height: 110px;
     font-size: 100px;
 }
 
