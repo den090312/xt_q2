@@ -13,13 +13,16 @@
 
 <script>
 
-var buttonPrint = document.getElementById("buttonPrint");
-
-if (buttonPrint)
+window.onload = function()
 {
-	buttonPrint.addEventListener("click", function(){
-		PrintResultString()
-	});
+	var buttonPrint = document.getElementById("buttonPrint");
+
+	if (buttonPrint)
+	{
+		buttonPrint.addEventListener("click", function(){
+			PrintResultString()
+		});
+	}
 }
 
 function PrintResultString() 
