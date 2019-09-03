@@ -1,9 +1,73 @@
-function MoveFullRight(obj)
-{
-	CleanErrorMessage(obj);
+window.onload = function()
+{	
+	var butterflyList = document.getElementsByClassName("butterfly"); 
 
-	var availableSelectbox = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
-	var selectedSelectbox = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
+	if (butterflyList)
+	{
+		for (let butterfly of butterflyList)
+		{
+			AddEventFullRight(butterfly);
+			AddEventSelectedRight(butterfly);
+			AddEventSelectedLeft(butterfly);
+			AddEventFullLeft(butterfly);
+		}
+	}
+}
+
+function AddEventFullRight(butterfly)
+{
+	var buttonFullRight = butterfly.getElementsByClassName("arrow_fullright")[0];
+	
+	if (buttonFullRight)
+	{
+		buttonFullRight.addEventListener("click", function(){
+			MoveFullRight(butterfly)
+		});			
+	}
+}
+
+function AddEventSelectedRight(butterfly)
+{
+	var buttonRight = butterfly.getElementsByClassName("arrow_right")[0];
+	
+	if (buttonRight)
+	{
+		buttonRight.addEventListener("click", function(){
+			MoveSelectedRight(butterfly)
+		});			
+	}
+}
+
+function AddEventSelectedLeft(butterfly)
+{
+	var buttonLeft = butterfly.getElementsByClassName("arrow_left")[0];
+	
+	if (buttonLeft)
+	{
+		buttonLeft.addEventListener("click", function(){
+			MoveSelectedLeft(butterfly)
+		});			
+	}
+}
+
+function AddEventFullLeft(butterfly)
+{
+	var buttonFullLeft = butterfly.getElementsByClassName("arrow_fullleft")[0];
+	
+	if (buttonFullLeft)
+	{
+		buttonFullLeft.addEventListener("click", function(){
+			MoveFullLeft(butterfly)
+		});			
+	}
+}
+
+function MoveFullRight(butterfly)
+{
+	CleanErrorMessage(butterfly);
+
+	var availableSelectbox = GetButterflyChild(butterfly, "available").getElementsByTagName("select")[0]; 
+	var selectedSelectbox = GetButterflyChild(butterfly, "selected").getElementsByTagName("select")[0];
 	
 	var length = availableSelectbox.options.length; 
 
@@ -14,12 +78,54 @@ function MoveFullRight(obj)
 	}
 } 
 
-function MoveFullLeft(obj)
+function MoveSelectedRight(butterfly)
 {
-	CleanErrorMessage(obj);
+	CleanErrorMessage(butterfly);
 
-	var availableSelectbox = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
-	var selectedSelectbox = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
+	var availableSelectbox = GetButterflyChild(butterfly, "available").getElementsByTagName("select")[0]; 
+
+	if (SelectionExists(availableSelectbox))
+	{
+		var options = GetSelectedOptions(availableSelectbox);
+		var selectedSelectbox = GetButterflyChild(butterfly, "selected").getElementsByTagName("select")[0];
+
+		AddOptions(options, selectedSelectbox);
+		RemoveOptions(options, availableSelectbox);
+		CleanErrorMessage(butterfly);
+	}
+	else
+	{
+		PrintErrorMessage(butterfly, "No options selected!");
+	}
+} 
+
+function MoveSelectedLeft(butterfly)
+{
+	CleanErrorMessage(butterfly);
+
+	var selectedSelectbox = GetButterflyChild(butterfly, "selected").getElementsByTagName("select")[0]; 
+
+	if (SelectionExists(selectedSelectbox))
+	{
+		var options = GetSelectedOptions(selectedSelectbox);
+		var availableSelectbox = GetButterflyChild(butterfly, "available").getElementsByTagName("select")[0];
+
+		AddOptions(options, availableSelectbox);
+		RemoveOptions(options, selectedSelectbox);	
+		CleanErrorMessage(butterfly);
+	}
+	else
+	{
+		PrintErrorMessage(butterfly, "No options selected!");
+	}
+} 
+
+function MoveFullLeft(butterfly)
+{
+	CleanErrorMessage(butterfly);
+
+	var availableSelectbox = GetButterflyChild(butterfly, "available").getElementsByTagName("select")[0]; 
+	var selectedSelectbox = GetButterflyChild(butterfly, "selected").getElementsByTagName("select")[0];
 	
 	var length = selectedSelectbox.options.length; 
 
@@ -27,48 +133,6 @@ function MoveFullLeft(obj)
 	{
 		AddAllToSelectbox(selectedSelectbox, availableSelectbox);	
 		CleanSelectbox(selectedSelectbox);
-	}
-} 
-
-function MoveSelectedLeft(obj)
-{
-	CleanErrorMessage(obj);
-
-	var selectedSelectbox = GetDivElement(obj, "selected").getElementsByTagName("select")[0]; 
-
-	if (SelectionExists(selectedSelectbox))
-	{
-		var options = GetSelectedOptions(selectedSelectbox);
-		var availableSelectbox = GetDivElement(obj, "available").getElementsByTagName("select")[0];
-
-		AddOptions(options, availableSelectbox);
-		RemoveOptions(options, selectedSelectbox);	
-		CleanErrorMessage(obj);
-	}
-	else
-	{
-		PrintErrorMessage(obj, "No options selected!");
-	}
-} 
-
-function MoveSelectedRight(obj)
-{
-	CleanErrorMessage(obj);
-
-	var availableSelectbox = GetDivElement(obj, "available").getElementsByTagName("select")[0]; 
-
-	if (SelectionExists(availableSelectbox))
-	{
-		var options = GetSelectedOptions(availableSelectbox);
-		var selectedSelectbox = GetDivElement(obj, "selected").getElementsByTagName("select")[0];
-
-		AddOptions(options, selectedSelectbox);
-		RemoveOptions(options, availableSelectbox);
-		CleanErrorMessage(obj);
-	}
-	else
-	{
-		PrintErrorMessage(obj, "No options selected!");
 	}
 } 
 
@@ -147,10 +211,8 @@ function SelectionExists(selectbox)
 	return selectbox.selectedIndex != -1;
 }
 
-function GetDivElement(obj, className)
+function GetButterflyChild(butterfly, className)
 {
-	var butterfly = obj.parentNode.parentNode.parentNode;
-
 	for (let child of butterfly.children)
 	{
 		if (child.className == className)
@@ -160,12 +222,12 @@ function GetDivElement(obj, className)
 	}	
 }
 
-function PrintErrorMessage(obj, errorText)
+function PrintErrorMessage(butterfly, errorText)
 {
-	GetDivElement(obj, "error_message").textContent = errorText;
+	GetButterflyChild(butterfly, "error_message").textContent = errorText;
 }
 
-function CleanErrorMessage(obj)
+function CleanErrorMessage(butterfly)
 {
-	GetDivElement(obj, "error_message").textContent  = "";	
+	GetButterflyChild(butterfly, "error_message").textContent  = "";	
 }
