@@ -6,12 +6,21 @@
 	</head>
 	<body style="padding: 25px;">
 		<input type="text" id="inputString" placeholder="Enter arithmetic expression" value="" style="width: 500px;">
-		<input type="button" value="Сount" onclick="PrintResult()" style="display: flex; margin: 25px 0;">
+		<input type="button" id="buttonCount" value="Сount" style="display: flex; margin: 25px 0;">
 		<input type="text" id="outputString" placeholder="Result" style="width: 500px;" readonly = true;>
 	</body>
 </html>
 
 <script>
+
+var buttonCount = document.getElementById("buttonCount");
+
+if (buttonCount)
+{
+	buttonCount.addEventListener("click", function(){
+		PrintResult()
+	});
+}	
 	
 function PrintResult()
 {
