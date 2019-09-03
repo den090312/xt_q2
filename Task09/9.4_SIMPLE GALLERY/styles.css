@@ -3,11 +3,11 @@ div, p {
 }
 
 p {
+    margin: auto;
     margin-block-start: 0;
     margin-block-end: 0;
     text-align: center;
     font-size: 60px;
-    margin: auto;
 }
 
 img {
