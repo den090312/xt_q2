@@ -13,15 +13,18 @@
 
 <script>
 
-var buttonCount = document.getElementById("buttonCount");
-
-if (buttonCount)
+window.onload = function()
 {
-	buttonCount.addEventListener("click", function(){
-		PrintResult()
-	});
-}	
-	
+	var buttonCount = document.getElementById("buttonCount");
+
+	if (buttonCount)
+	{
+		buttonCount.addEventListener("click", function(){
+			PrintResult()
+		});
+	}	
+}
+
 function PrintResult()
 {
 	var output = document.getElementById("outputString");
