@@ -6,12 +6,21 @@
 	</head>
 	<body style="padding: 25px;">
 		<input type="text" id="inputString" placeholder="Enter string" value="" style="width: 500px;">
-		<input type="button" value="Print result" onclick="PrintResultString()" style="display: flex; margin: 25px 0;">
+		<input type="button" id="buttonPrint" value="Print result" style="display: flex; margin: 25px 0;">
 		<input type="text" id="outputString" placeholder="Result" style="width: 500px;" readonly = true;>
 	</body>
 </html>
 
 <script>
+
+var buttonPrint = document.getElementById("buttonPrint");
+
+if (buttonPrint)
+{
+	buttonPrint.addEventListener("click", function(){
+		PrintResultString()
+	});
+}
 
 function PrintResultString() 
 {
