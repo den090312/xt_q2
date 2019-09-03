@@ -1,122 +1,233 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>MATH CALCULATOR</title>
-	</head>
-	<body style="padding: 25px;">
-		<input type="text" id="inputString" placeholder="Enter arithmetic expression" value="" style="width: 500px;">
-		<input type="button" id="buttonCount" value="Сount" style="display: flex; margin: 25px 0;">
-		<input type="text" id="outputString" placeholder="Result" style="width: 500px;" readonly = true;>
-	</body>
-</html>
-
-<script>
-
 window.onload = function()
-{
-	var buttonCount = document.getElementById("buttonCount");
+{	
+	var butterflyList = document.getElementsByClassName("butterfly"); 
 
-	if (buttonCount)
+	if (butterflyList)
 	{
-		buttonCount.addEventListener("click", function(){
-			PrintResult()
-		});
+		for (let butterfly of butterflyList)
+		{
+			AddEventFullRight(butterfly);
+			AddEventSelectedRight(butterfly);
+			AddEventSelectedLeft(butterfly);
+			AddEventFullLeft(butterfly);
+		}
+	}
+}
+
+function AddEventFullRight(butterfly)
+{
+	var buttonFullRight = butterfly.getElementsByClassName("arrow_fullright")[0];
+	
+	if (buttonFullRight)
+	{
+		buttonFullRight.addEventListener("click", function(){
+			MoveFullRight(butterfly)
+		});			
+	}
+}
+
+function AddEventSelectedRight(butterfly)
+{
+	var buttonRight = butterfly.getElementsByClassName("arrow_right")[0];
+	
+	if (buttonRight)
+	{
+		buttonRight.addEventListener("click", function(){
+			MoveSelectedRight(butterfly)
+		});			
+	}
+}
+
+function AddEventSelectedLeft(butterfly)
+{
+	var buttonLeft = butterfly.getElementsByClassName("arrow_left")[0];
+	
+	if (buttonLeft)
+	{
+		buttonLeft.addEventListener("click", function(){
+			MoveSelectedLeft(butterfly)
+		});			
+	}
+}
+
+function AddEventFullLeft(butterfly)
+{
+	var buttonFullLeft = butterfly.getElementsByClassName("arrow_fullleft")[0];
+	
+	if (buttonFullLeft)
+	{
+		buttonFullLeft.addEventListener("click", function(){
+			MoveFullLeft(butterfly)
+		});			
+	}
+}
+
+function MoveFullRight(butterfly)
+{
+	CleanErrorMessage(butterfly);
+
+	var availableSelectbox = GetButterflyChild(butterfly, "available").getElementsByTagName("select")[0]; 
+	var selectedSelectbox = GetButterflyChild(butterfly, "selected").getElementsByTagName("select")[0];
+	
+	var length = availableSelectbox.options.length; 
+
+	if (length > 0)
+	{
+		AddAllToSelectbox(availableSelectbox, selectedSelectbox);
+		CleanSelectbox(availableSelectbox);
+	}
+} 
+
+function MoveSelectedRight(butterfly)
+{
+	CleanErrorMessage(butterfly);
+
+	var availableSelectbox = GetButterflyChild(butterfly, "available").getElementsByTagName("select")[0]; 
+
+	if (SelectionExists(availableSelectbox))
+	{
+		var options = GetSelectedOptions(availableSelectbox);
+		var selectedSelectbox = GetButterflyChild(butterfly, "selected").getElementsByTagName("select")[0];
+
+		AddOptions(options, selectedSelectbox);
+		RemoveOptions(options, availableSelectbox);
+		CleanErrorMessage(butterfly);
+	}
+	else
+	{
+		PrintErrorMessage(butterfly, "No options selected!");
+	}
+} 
+
+function MoveSelectedLeft(butterfly)
+{
+	CleanErrorMessage(butterfly);
+
+	var selectedSelectbox = GetButterflyChild(butterfly, "selected").getElementsByTagName("select")[0]; 
+
+	if (SelectionExists(selectedSelectbox))
+	{
+		var options = GetSelectedOptions(selectedSelectbox);
+		var availableSelectbox = GetButterflyChild(butterfly, "available").getElementsByTagName("select")[0];
+
+		AddOptions(options, availableSelectbox);
+		RemoveOptions(options, selectedSelectbox);	
+		CleanErrorMessage(butterfly);
+	}
+	else
+	{
+		PrintErrorMessage(butterfly, "No options selected!");
+	}
+} 
+
+function MoveFullLeft(butterfly)
+{
+	CleanErrorMessage(butterfly);
+
+	var availableSelectbox = GetButterflyChild(butterfly, "available").getElementsByTagName("select")[0]; 
+	var selectedSelectbox = GetButterflyChild(butterfly, "selected").getElementsByTagName("select")[0];
+	
+	var length = selectedSelectbox.options.length; 
+
+	if (length > 0)
+	{
+		AddAllToSelectbox(selectedSelectbox, availableSelectbox);	
+		CleanSelectbox(selectedSelectbox);
+	}
+} 
+
+function AddAllToSelectbox(selectboxFrom, selectboxTo)
+{
+	AddOptions(GetAllOptions(selectboxFrom), selectboxTo);
+}
+
+function GetAllOptions(selectbox)
+{
+    var selectedOptions = [];
+
+    for (var i = 0; i < selectbox.length; i++) 
+	{
+		var option = selectbox.options[i];
+		
+		selectedOptions.push(option.text);
+    }
+
+	return selectedOptions; 
+}
+
+function GetSelectedOptions(selectbox)
+{
+    var selectedOptions = [];
+
+    for (var i = 0; i < selectbox.length; i++) 
+	{
+        var option = selectbox.options[i];
+
+		if (option.selected) 
+		{
+			selectedOptions.push(option.text);
+		}
+    }
+
+	return selectedOptions; 
+} 
+
+function AddOptions(options, selectbox)
+{
+	for (let option of options)
+	{
+		var newOption = document.createElement("option");
+		newOption.text = option;
+		
+		selectbox.appendChild(newOption);
+	}
+}
+
+function RemoveOptions(options, selectbox)
+{
+	for (var i = 0; i < selectbox.length; i++) 
+	{
+		var text = selectbox.options[i].text; 
+
+		if (options.includes(text))
+		{
+			selectbox.remove(i);
+			i--;
+		}
+	}
+}
+
+function CleanSelectbox(selectbox)
+{
+	do
+	{
+		selectbox.remove(0);
+	}
+	while (selectbox.options.length > 0);
+} 
+
+function SelectionExists(selectbox)
+{
+	return selectbox.selectedIndex != -1;
+}
+
+function GetButterflyChild(butterfly, className)
+{
+	for (let child of butterfly.children)
+	{
+		if (child.className == className)
+		{
+			return child;  
+		}
 	}	
 }
 
-function PrintResult()
+function PrintErrorMessage(butterfly, errorText)
 {
-	var output = document.getElementById("outputString");
-	output.value = "";
-	
-	ExpressionIsCorrect() ? output.value = GetResult() : output.setAttribute("placeholder", "Expression is not correct!");  	
+	GetButterflyChild(butterfly, "error_message").textContent = errorText;
 }
 
-function ExpressionIsCorrect() 
+function CleanErrorMessage(butterfly)
 {
-	return GetInputStringValue().match(/^((\s*(\d+(\.\d)*)\s*)*(\s*[+\-*/]\s*)*)+=$/g);
+	GetButterflyChild(butterfly, "error_message").textContent  = "";	
 }
-
-function GetInputStringValue()
-{
-	return document.getElementById("inputString").value; 
-}
-
-function GetResult()
-{
-	var expressionString = GetExpressionString();
-	
-	var numbers = expressionString.match(/\d+(\.\d)*/g);
-	var operators = expressionString.match(/[+\-*/=]/g);
-
-	if (numbers == null)
-	{
-		return "0.00";
-	}
-	
-	if (numbers.length == 1)
-	{
-		if (operators.length == 1)
-		{
-			return Number(numbers[0]).toFixed(2);	
-		}
-	}
-	
-	if (IsOperator(expressionString[0]))
-	{
-		numbers.unshift(0);
-	}
-	
-	return Result(numbers, operators); 
-}
-
-function GetExpressionString()
-{
-	return GetInputStringValue().split(' ').filter(element => element != '').join(""); 
-}
-
-function IsOperator(inputChar)
-{
-	return inputChar.match(/[+\-*/]/g) != null;	
-}
-	
-function Result(numbers, operators)
-{
-	var result = numbers[0];
-	var i = 0;
-	
-	do
-	{
-		if (typeof numbers[i + 1] != "undefined")
-		{
-			result = OperationResult(result, numbers[i + 1], operators[i]);
-		}
-		else
-		{
-			result = OperationResult(result, result, operators[i]);
-		}
-
-		i++;
-	}
-	while (operators[i] != "=");
-	
-	return result.toFixed(2); 
-}
-
-function OperationResult(number1, number2, operator) 
-{
-	switch (operator) 
-	{
-		case "+":
-			return Number(number1) + Number(number2);		
-		case "-":
-			return Number(number1) - Number(number2);		
-		case "*":
-			return Number(number1) * Number(number2);		
-		case "/":
-			return Number(number1) / Number(number2);	
-	}
-}
-	
-</script>
