@@ -1,47 +1,44 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>BUTTERFLY CONTROL</title>
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
-    <div class="butterfly">
-        <div class="available">
-            <b>Available</b>
-            <select multiple>
-                <option>Option 1</option>
-                <option>Option 2</option>
-                <option>Option 3</option>
-                <option>Option 4</option>
-                <option>Option 5</option>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>BUTTERFLY CONTROL</title>
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="butterfly">
+            <div class="available">
+                <b>Available</b>
+                <select multiple>
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                    <option>Option 4</option>
+                    <option>Option 5</option>
+                </select>
+            </div>
+            <div class="arrow_block">
+                <div class="arrow">
+                    <input type="button" class="arrow_fullright" value=">>" />
+                </div>
+                <div class="arrow">
+                    <input type="button" class="arrow_right" value=">" />
+                </div>
+                <div class="arrow">
+                    <input type="button" class="arrow_left" value="<" />
+                </div>
+                <div class="arrow">
+                    <input type="button" class="arrow_fullleft" value="<<" />
+                </div>
+            </div>
+            <div class="selected">
+                <b>Selected</b>
+                <select multiple>
+                </select>
+            </div>
             </select>
+            <p class="error_message"></p>
         </div>
-        <div class="arrow_block">
-            <div class="arrow">
-                <input type="button" class="arrow_fullright" value=">>" />
-            </div>
-            <div class="arrow">
-                <input type="button" class="arrow_right" value=">" />
-            </div>
-            <div class="arrow">
-                <input type="button" class="arrow_left" value="<" />
-            </div>
-            <div class="arrow">
-                <input type="button" class="arrow_fullleft" value="<<" />
-            </div>
-        </div>
-        <div class="selected">
-            <b>Selected</b>
-            <select multiple>
-            </select>
-        </div>
-        </select>
-        <p class="error_message"></p>
-    </div>
-</body>
-
+    </body>
 </html>
