@@ -8,13 +8,13 @@ window.onload = function()
 		{
 			butterfly.getElementsByClassName("arrow_block")[0].onclick = function(event)
 			{
-				AddButtonEvent(butterfly, event.target.className);
+				RunButtonAction(butterfly, event.target.className);
 			};		
 		} 
 	}
 }
 
-function AddButtonEvent(butterfly, className)
+function RunButtonAction(butterfly, className)
 {
 	switch (className)
 	{
