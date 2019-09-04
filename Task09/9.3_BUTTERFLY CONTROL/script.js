@@ -6,59 +6,30 @@ window.onload = function()
 	{
 		for (let butterfly of butterflyList)
 		{
-			AddEventFullRight(butterfly);
-			AddEventSelectedRight(butterfly);
-			AddEventSelectedLeft(butterfly);
-			AddEventFullLeft(butterfly);
-		}
+			butterfly.onclick = function(event) 
+			{
+				AddEvent(butterfly, event.target.className);	
+			};		
+		} 
 	}
 }
 
-function AddEventFullRight(butterfly)
+function AddEvent(butterfly, className)
 {
-	var buttonFullRight = butterfly.getElementsByClassName("arrow_fullright")[0];
-	
-	if (buttonFullRight)
+	switch (className)
 	{
-		buttonFullRight.addEventListener("click", function(){
-			MoveFullRight(butterfly)
-		});			
-	}
-}
-
-function AddEventSelectedRight(butterfly)
-{
-	var buttonRight = butterfly.getElementsByClassName("arrow_right")[0];
-	
-	if (buttonRight)
-	{
-		buttonRight.addEventListener("click", function(){
-			MoveSelectedRight(butterfly)
-		});			
-	}
-}
-
-function AddEventSelectedLeft(butterfly)
-{
-	var buttonLeft = butterfly.getElementsByClassName("arrow_left")[0];
-	
-	if (buttonLeft)
-	{
-		buttonLeft.addEventListener("click", function(){
-			MoveSelectedLeft(butterfly)
-		});			
-	}
-}
-
-function AddEventFullLeft(butterfly)
-{
-	var buttonFullLeft = butterfly.getElementsByClassName("arrow_fullleft")[0];
-	
-	if (buttonFullLeft)
-	{
-		buttonFullLeft.addEventListener("click", function(){
-			MoveFullLeft(butterfly)
-		});			
+		case "arrow_fullright":
+			MoveFullRight(butterfly);
+			break;						
+		case "arrow_right":
+			MoveSelectedRight(butterfly);	
+			break;							
+		case "arrow_left":
+			MoveSelectedLeft(butterfly);
+			break;						
+		case "arrow_fullleft":
+			MoveFullLeft(butterfly);
+			break;									
 	}
 }
 
