@@ -6,15 +6,20 @@ window.onload = function()
 	{
 		for (let butterfly of butterflyList)
 		{
-			butterfly.onclick = function(event) 
+			butterfly.onclick = function(event)
 			{
-				AddEvent(butterfly, event.target.className);	
+				let target = event.target;
+
+				if (target.type == "button")
+				{
+					AddButtonEvent(butterfly, target.className);
+				}
 			};		
 		} 
 	}
 }
 
-function AddEvent(butterfly, className)
+function AddButtonEvent(butterfly, className)
 {
 	switch (className)
 	{
