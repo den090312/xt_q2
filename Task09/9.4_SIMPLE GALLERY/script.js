@@ -19,7 +19,7 @@ function AddEventPause()
 		buttonPause.addEventListener("click", function(){
 			CountdownPause(buttonPause)
 		});
-    }
+    	}
 }
 
 function AddEventResume()
