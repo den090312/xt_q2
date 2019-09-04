@@ -6,14 +6,9 @@ window.onload = function()
 	{
 		for (let butterfly of butterflyList)
 		{
-			butterfly.onclick = function(event)
+			butterfly.getElementsByClassName("arrow_block")[0].onclick = function(event)
 			{
-				let target = event.target;
-
-				if (target.type == "button")
-				{
-					AddButtonEvent(butterfly, target.className);
-				}
+				AddButtonEvent(butterfly, event.target.className);
 			};		
 		} 
 	}
