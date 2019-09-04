@@ -6,12 +6,27 @@ window.onload = function()
 	{
 		for (let butterfly of butterflyList)
 		{
-			butterfly.getElementsByClassName("arrow_block")[0].onclick = function(event)
+			var arrow_block = butterfly.getElementsByClassName("arrow_block")[0];
+
+			if (arrow_block)
 			{
-				RunButtonAction(butterfly, event.target.className);
-			};		
+				ArrowBlockOnclick(butterfly, arrow_block);		
+			}
 		} 
 	}
+}
+
+function ArrowBlockOnclick(butterfly, arrow_block)
+{
+	arrow_block.onclick = function(event)
+	{
+		var target = event.target;
+
+		if (target)
+		{
+			RunButtonAction(butterfly, target.className);
+		}
+	};
 }
 
 function RunButtonAction(butterfly, className)
