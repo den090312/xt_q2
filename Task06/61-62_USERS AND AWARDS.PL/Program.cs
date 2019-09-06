@@ -7,9 +7,18 @@ namespace Task06.PL
 {
     public class Program
     {
+        private readonly static UserManager userManager;
+        private readonly static AwardManager awardManager;
+
         private static ConsoleSegment consoleSegment = ConsoleSegment.None;
 
         public static readonly string dateFormat = "dd.MM.yyyy";
+
+        static Program()
+        {
+            userManager = new UserManager();
+            awardManager = new AwardManager();
+        }
 
         private enum ConsoleSegment
         {
@@ -23,8 +32,8 @@ namespace Task06.PL
         {
             consoleSegment = ConsoleSegment.Main;
 
-            new UserManager().PrintStorageInfo();
-            new AwardManager().PrintStorageInfo();
+            CreateStorage();
+            PrintStorageInfo();
             Console.WriteLine();
 
             var inputComplete = false;
@@ -34,6 +43,18 @@ namespace Task06.PL
                 inputComplete = InputComplete();
             }
             while (!inputComplete);
+        }
+
+        private static void CreateStorage()
+        {
+            userManager.CreateStorage();
+            awardManager.CreateStorage();
+        }
+
+        private static void PrintStorageInfo()
+        {
+            userManager.PrintStorageInfo();
+            awardManager.PrintStorageInfo();
         }
 
         private static bool InputComplete()
@@ -163,27 +184,25 @@ namespace Task06.PL
 
         private static void CreateUser(string dateFormat)
         {
-            var userManager = new UserManager();
             var user = userManager.CreateUser(GetUserString("name"), GetUserDate(dateFormat));
 
             userManager.AddUser(user);
         }
 
-        private static void RemoveUser() => new UserManager().RemoveUsers(GetUserString("name"));
+        private static void RemoveUser() => userManager.RemoveUsers(GetUserString("name"));
 
-        private static void PrintUsers() => new UserManager().PrintUsers(new AwardManager().GetAwardList());
+        private static void PrintUsers() => userManager.PrintUsers(awardManager.GetAwardList());
 
         private static void CreateAward()
         {
-            var awardManager = new AwardManager();
             var award = awardManager.CreateAward(GetUserString("title"));
 
             awardManager.AddAward(award);
         }
 
-        private static void RemoveAward() => new AwardManager().RemoveAwards(GetUserString("award"));
+        private static void RemoveAward() => awardManager.RemoveAwards(GetUserString("award"));
 
-        private static void PrintAwards() => new AwardManager().PrintAwards();
+        private static void PrintAwards() => awardManager.PrintAwards();
 
         private static void JoinAwardToUser()
         {
@@ -193,7 +212,7 @@ namespace Task06.PL
             consoleSegment = ConsoleSegment.Award;
             var awardName = GetUserString("title");
 
-            new UserManager().JoinAwardToUser(awardName, userName);
+            userManager.JoinAwardToUser(awardName, userName);
         }
 
         private static int GetKeyFromConsole()
@@ -318,8 +337,8 @@ namespace Task06.PL
             switch (consoleSegment)
             {
                 case ConsoleSegment.Main:
-                    new UserManager().PrintStorageInfo();
-                    new AwardManager().PrintStorageInfo();
+                    userManager.PrintStorageInfo();
+                    awardManager.PrintStorageInfo();
                     WriteMenu();
                     break;
                 case ConsoleSegment.User:
