@@ -96,6 +96,7 @@ namespace Task06.BLL
         public string[] GetAwardIDArray(string awardName)
         {
             NullCheck(awardName);
+
             return AwardImplement.GetAwardIDArray(awardName);
         }
 
