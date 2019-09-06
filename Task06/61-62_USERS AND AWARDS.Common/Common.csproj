@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\61-62_USERS AND AWARDS.BLL\BLL.csproj" />
     <ProjectReference Include="..\61-62_USERS AND AWARDS.DAL\DAL.csproj" />
   </ItemGroup>
 

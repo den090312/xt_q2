@@ -1,8 +1,8 @@
-﻿using Task06.Entities;
+﻿using Task06.Common;
+using Task06.Entities;
 using Task06.Interfaces;
 using System;
 using System.Collections.Generic;
-using Task06.DAL;
 
 namespace Task06.BLL
 {
@@ -14,8 +14,8 @@ namespace Task06.BLL
 
         static UserManager()
         {
-            userImplement = new UserFileStorage();
-            awardImplement = new AwardFileStrorage();
+            userImplement = Dependencies.UserImplement;
+            awardImplement = Dependencies.AwardImplement;
         }
 
         public void CreateStorage() => userImplement.CreateStorage();

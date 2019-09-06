@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Text;
-using Task06.Common;
+using Task06.BLL;
 using Task06.Interfaces;
 
 namespace Task06.PL
@@ -17,8 +17,8 @@ namespace Task06.PL
 
         static Program()
         {
-            userManager = Dependencies.UserManager;
-            awardManager = Dependencies.AwardManager;
+            userManager = UserManager.userImplement;
+            awardManager = AwardManager.awardImplement;
         }
 
         private enum ConsoleSegment
