@@ -17,8 +17,8 @@ namespace Task06.PL
 
         static Program()
         {
-            userManager = UserManager.userImplement;
-            awardManager = AwardManager.awardImplement;
+            userManager = UserManager.UserImplement;
+            awardManager = AwardManager.AwardImplement;
         }
 
         private enum ConsoleSegment

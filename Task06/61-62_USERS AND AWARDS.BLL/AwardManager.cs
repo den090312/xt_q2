@@ -8,41 +8,41 @@ namespace Task06.BLL
 {
     public class AwardManager : IAwardable
     {
-        public static readonly IAwardable awardImplement;
-
         private static readonly IUserable userImplement;
+
+        public static IAwardable AwardImplement { get; private set; }
 
         static AwardManager()
         {
-            awardImplement = Dependencies.AwardImplement;
+            AwardImplement = Dependencies.AwardImplement;
             userImplement = Dependencies.UserImplement;
         }
 
-        public void CreateStorage() => awardImplement.CreateStorage();
+        public void CreateStorage() => AwardImplement.CreateStorage();
 
-        public void PrintStorageInfo() => awardImplement.PrintStorageInfo();
+        public void PrintStorageInfo() => AwardImplement.PrintStorageInfo();
 
         public Award CreateAward(string title)
         {
             NullCheck(title);
 
-            return awardImplement.CreateAward(title);
+            return AwardImplement.CreateAward(title);
         }
 
         public void AddAward(Award award)
         {
             NullCheck(award);
-            awardImplement.AddAward(award);
+            AwardImplement.AddAward(award);
         }
 
         public void RemoveAwards(string awardName)
         {
             NullCheck(awardName);
 
-            var awardArrayID = awardImplement.GetAwardIDArray(awardName);
+            var awardArrayID = AwardImplement.GetAwardIDArray(awardName);
             NullCheck(awardArrayID);
 
-            awardImplement.RemoveAwards(awardName);
+            AwardImplement.RemoveAwards(awardName);
 
             foreach (var awardID in awardArrayID)
             {
@@ -57,10 +57,10 @@ namespace Task06.BLL
         {
             NullCheck(awardName);
 
-            return awardImplement.AwardsExists(awardName);
+            return AwardImplement.AwardsExists(awardName);
         }
 
-        public void PrintAwards() => awardImplement.PrintAwards();
+        public void PrintAwards() => AwardImplement.PrintAwards();
 
         public void JoinUserToAward(string userName, string awardName)
         {
@@ -70,7 +70,7 @@ namespace Task06.BLL
             var userArrayID = userImplement.GetUserIDArray(userName);
             NullCheck(userArrayID);
 
-            var awardArrayID = awardImplement.GetAwardIDArray(awardName);
+            var awardArrayID = AwardImplement.GetAwardIDArray(awardName);
             NullCheck(awardArrayID);
 
             foreach (var userID in userArrayID)
@@ -88,7 +88,7 @@ namespace Task06.BLL
             {
                 if (arrayID != string.Empty)
                 {
-                    awardImplement.JoinUserToAward(userID, arrayID);
+                    AwardImplement.JoinUserToAward(userID, arrayID);
                 }
             }
         }
@@ -96,15 +96,15 @@ namespace Task06.BLL
         public string[] GetAwardIDArray(string awardName)
         {
             NullCheck(awardName);
-            return awardImplement.GetAwardIDArray(awardName);
+            return AwardImplement.GetAwardIDArray(awardName);
         }
 
-        public List<KeyValuePair<string, string>> GetAwardList() => awardImplement.GetAwardList();
+        public List<KeyValuePair<string, string>> GetAwardList() => AwardImplement.GetAwardList();
 
         public void EraseUser(string userID)
         {
             NullCheck(userID);
-            awardImplement.EraseUser(userID);
+            AwardImplement.EraseUser(userID);
         }
 
         private static void NullCheck<T>(T classObject) where T : class

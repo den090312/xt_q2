@@ -8,19 +8,19 @@ namespace Task06.BLL
 {
     public class UserManager : IUserable
     {
-        public static readonly IUserable userImplement;
-
         private static readonly IAwardable awardImplement;
+
+        public static IUserable UserImplement { get; private set; }
 
         static UserManager()
         {
-            userImplement = Dependencies.UserImplement;
+            UserImplement = Dependencies.UserImplement;
             awardImplement = Dependencies.AwardImplement;
         }
 
-        public void CreateStorage() => userImplement.CreateStorage();
+        public void CreateStorage() => UserImplement.CreateStorage();
 
-        public void PrintStorageInfo() => userImplement.PrintStorageInfo();
+        public void PrintStorageInfo() => UserImplement.PrintStorageInfo();
 
         public User CreateUser(string name, DateTime dateBirth)
         {
@@ -28,23 +28,23 @@ namespace Task06.BLL
             CheckName(name);
             CheckDateOfBirth(dateBirth);
 
-            return userImplement.CreateUser(name, dateBirth);
+            return UserImplement.CreateUser(name, dateBirth);
         }
 
         public void AddUser(User user)
         {
             NullCheck(user);
-            userImplement.AddUser(user);
+            UserImplement.AddUser(user);
         }
 
         public void RemoveUsers(string userName)
         {
             NullCheck(userName);
 
-            var userArrayID = userImplement.GetUserIDArray(userName);
+            var userArrayID = UserImplement.GetUserIDArray(userName);
             NullCheck(userArrayID);
 
-            userImplement.RemoveUsers(userName);
+            UserImplement.RemoveUsers(userName);
 
             foreach (var userID in userArrayID)
             {
@@ -59,13 +59,13 @@ namespace Task06.BLL
         {
             NullCheck(userName);
 
-            return userImplement.UsersExists(userName);
+            return UserImplement.UsersExists(userName);
         }
 
         public void PrintUsers(List<KeyValuePair<string, string>> awardsList)
         {
             NullCheck(awardsList);
-            userImplement.PrintUsers(awardsList);
+            UserImplement.PrintUsers(awardsList);
         }
 
         public void JoinAwardToUser(string awardName, string userName)
@@ -76,7 +76,7 @@ namespace Task06.BLL
             var awardArrayID = awardImplement.GetAwardIDArray(awardName);
             NullCheck(awardArrayID);
 
-            var userArrayID = userImplement.GetUserIDArray(userName);
+            var userArrayID = UserImplement.GetUserIDArray(userName);
             NullCheck(userArrayID);
 
             foreach (var awardID in awardArrayID)
@@ -94,7 +94,7 @@ namespace Task06.BLL
             {
                 if (userID != string.Empty && !RecordExists(awardID, userID))
                 {
-                    userImplement.JoinAwardToUser(awardID, userID);
+                    UserImplement.JoinAwardToUser(awardID, userID);
                     awardImplement.JoinUserToAward(userID, awardID);
                 }
             }
@@ -129,7 +129,7 @@ namespace Task06.BLL
         {
             NullCheck(userName);
 
-            return userImplement.GetUserIDArray(userName);
+            return UserImplement.GetUserIDArray(userName);
         }
 
         public bool RecordExists(string awardID, string userID)
@@ -137,13 +137,13 @@ namespace Task06.BLL
             NullCheck(awardID);
             NullCheck(userID);
 
-            return userImplement.RecordExists(awardID, userID);
+            return UserImplement.RecordExists(awardID, userID);
         }
 
         public void EraseAward(string awardID)
         {
             NullCheck(awardID);
-            userImplement.EraseAward(awardID);
+            UserImplement.EraseAward(awardID);
         }
 
         private static void NullCheck<T>(T classObject) where T : class
