@@ -1,5 +1,6 @@
 ﻿using Task06.Entities;
 using System.Collections.Generic;
+using System;
 
 namespace Task06.Interfaces
 {
@@ -8,6 +9,8 @@ namespace Task06.Interfaces
         void CreateStorage();
 
         void PrintStorageInfo();
+
+        User CreateUser(string name, DateTime dateBirth);
 
         void AddUser(User user);
 

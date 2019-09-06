@@ -49,6 +49,8 @@ namespace Task06.DAL
             }
         }
 
+        public Award CreateAward(string title) => new Award(title);
+
         public void AddAward(Award award)
         {
             PrepareFile();

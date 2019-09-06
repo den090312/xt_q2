@@ -8,7 +8,7 @@ namespace Task06.BLL
 {
     public class AwardManager : IAwardable
     {
-        private static readonly IAwardable awardImplement;
+        public static readonly IAwardable awardImplement;
 
         private static readonly IUserable userImplement;
 
@@ -26,7 +26,7 @@ namespace Task06.BLL
         {
             NullCheck(title);
 
-            return new Award(title);
+            return awardImplement.CreateAward(title);
         }
 
         public void AddAward(Award award)

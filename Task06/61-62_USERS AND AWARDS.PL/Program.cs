@@ -1,14 +1,15 @@
-﻿using Task06.BLL;
-using System;
+﻿using System;
 using System.Globalization;
 using System.Text;
+using Task06.BLL;
+using Task06.Interfaces;
 
 namespace Task06.PL
 {
     public class Program
     {
-        private readonly static UserManager userManager;
-        private readonly static AwardManager awardManager;
+        private readonly static IUserable userImplement;
+        private readonly static IAwardable awardImplement;
 
         private static ConsoleSegment consoleSegment = ConsoleSegment.None;
 
@@ -16,8 +17,8 @@ namespace Task06.PL
 
         static Program()
         {
-            userManager = new UserManager();
-            awardManager = new AwardManager();
+            userImplement = UserManager.userImplement;
+            awardImplement = AwardManager.awardImplement;
         }
 
         private enum ConsoleSegment
@@ -47,14 +48,14 @@ namespace Task06.PL
 
         private static void CreateStorage()
         {
-            userManager.CreateStorage();
-            awardManager.CreateStorage();
+            userImplement.CreateStorage();
+            awardImplement.CreateStorage();
         }
 
         private static void PrintStorageInfo()
         {
-            userManager.PrintStorageInfo();
-            awardManager.PrintStorageInfo();
+            userImplement.PrintStorageInfo();
+            awardImplement.PrintStorageInfo();
         }
 
         private static bool InputComplete()
@@ -184,25 +185,25 @@ namespace Task06.PL
 
         private static void CreateUser(string dateFormat)
         {
-            var user = userManager.CreateUser(GetUserString("name"), GetUserDate(dateFormat));
+            var user = userImplement.CreateUser(GetUserString("name"), GetUserDate(dateFormat));
 
-            userManager.AddUser(user);
+            userImplement.AddUser(user);
         }
 
-        private static void RemoveUser() => userManager.RemoveUsers(GetUserString("name"));
+        private static void RemoveUser() => userImplement.RemoveUsers(GetUserString("name"));
 
-        private static void PrintUsers() => userManager.PrintUsers(awardManager.GetAwardList());
+        private static void PrintUsers() => userImplement.PrintUsers(awardImplement.GetAwardList());
 
         private static void CreateAward()
         {
-            var award = awardManager.CreateAward(GetUserString("title"));
+            var award = awardImplement.CreateAward(GetUserString("title"));
 
-            awardManager.AddAward(award);
+            awardImplement.AddAward(award);
         }
 
-        private static void RemoveAward() => awardManager.RemoveAwards(GetUserString("award"));
+        private static void RemoveAward() => awardImplement.RemoveAwards(GetUserString("award"));
 
-        private static void PrintAwards() => awardManager.PrintAwards();
+        private static void PrintAwards() => awardImplement.PrintAwards();
 
         private static void JoinAwardToUser()
         {
@@ -212,7 +213,7 @@ namespace Task06.PL
             consoleSegment = ConsoleSegment.Award;
             var awardName = GetUserString("title");
 
-            userManager.JoinAwardToUser(awardName, userName);
+            userImplement.JoinAwardToUser(awardName, userName);
         }
 
         private static int GetKeyFromConsole()

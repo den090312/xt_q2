@@ -49,6 +49,8 @@ namespace Task06.DAL
             }
         }
 
+        public User CreateUser(string name, DateTime dateBirth) => new User(name, dateBirth);
+
         public void AddUser(User user)
         {
             PrepareFile();

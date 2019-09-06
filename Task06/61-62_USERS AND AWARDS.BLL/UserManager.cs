@@ -8,7 +8,7 @@ namespace Task06.BLL
 {
     public class UserManager : IUserable
     {
-        private static readonly IUserable userImplement;
+        public static readonly IUserable userImplement;
 
         private static readonly IAwardable awardImplement;
 
@@ -28,7 +28,7 @@ namespace Task06.BLL
             CheckName(name);
             CheckDateOfBirth(dateBirth);
 
-            return new User(name, dateBirth);
+            return userImplement.CreateUser(name, dateBirth);
         }
 
         public void AddUser(User user)
