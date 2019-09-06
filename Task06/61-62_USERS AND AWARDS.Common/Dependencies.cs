@@ -1,18 +1,18 @@
 ﻿using Task06.Interfaces;
-using Task06.DAL;
+using Task06.BLL;
 
 namespace Task06.Common
 {
     public static class Dependencies 
     {
-        public static IUserable UserImplement { get; }
+        public static IUserable UserManager { get; }
 
-        public static IAwardable AwardImplement { get; }
+        public static IAwardable AwardManager { get; }
 
         static Dependencies()
         {
-            AwardImplement = new AwardFileStrorage();
-            UserImplement = new UserFileStorage();
+            UserManager = new UserManager();
+            AwardManager = new AwardManager();
         }
     }
 }
