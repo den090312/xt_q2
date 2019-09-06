@@ -18,34 +18,39 @@ namespace _51_BACKUP_SYSTEM
 
             while (!inputComplete)
             {
-                int userKey = GetKeyFromConsole();
+                inputComplete = GoToOperation(inputComplete, GetKeyFromConsole());
+            }
+        }
 
-                if (userKey != 0)
+        private static bool GoToOperation(bool inputComplete, int userKey)
+        {
+            if (userKey != 0)
+            {
+                switch (userKey)
                 {
-                    switch (userKey)
-                    {
-                        case 1:
-                            inputComplete = true;
+                    case 1:
+                        inputComplete = true;
 
-                            new Thread(() => new Watcher().RunBackup()).Start();
+                        new Thread(() => new Watcher().RunBackup()).Start();
 
-                            break;
-                        case 2:
-                            inputComplete = true;
+                        break;
+                    case 2:
+                        inputComplete = true;
 
-                            Console.WriteLine("--------START RESTORE--------");
+                        Console.WriteLine("--------START RESTORE--------");
 
-                            var userDate = GetDateFromConsole(Log.DateFormat);
-                            Storage.RestoreToDate(userDate);
+                        var userDate = GetDateFromConsole(Log.DateFormat);
+                        Storage.RestoreToDate(userDate);
 
-                            Console.WriteLine("-------RESTORE IS DONE-------");
-                            break;
-                        case 3:
-                            Environment.Exit(0);
-                            break;
-                    }
+                        Console.WriteLine("-------RESTORE IS DONE-------");
+                        break;
+                    case 3:
+                        Environment.Exit(0);
+                        break;
                 }
             }
+
+            return inputComplete;
         }
 
         private static DateTime GetDateFromConsole(string dateFormat)
