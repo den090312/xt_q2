@@ -1,8 +1,8 @@
-﻿using Task06.Common;
+﻿using System;
+using System.Collections.Generic;
+using Task06.Common;
 using Task06.Entities;
 using Task06.Interfaces;
-using System;
-using System.Collections.Generic;
 
 namespace Task06.BLL
 {
