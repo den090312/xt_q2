@@ -1,10 +1,10 @@
-﻿using Task06.Entities;
-using Task06.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
+using Task06.Entities;
+using Task06.Interfaces;
 
 namespace Task06.DAL
 {

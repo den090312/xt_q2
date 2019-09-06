@@ -1,6 +1,6 @@
-﻿using Task06.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
+using Task06.Entities;
 
 namespace Task06.Interfaces
 {
