@@ -337,8 +337,7 @@ namespace Task06.PL
             switch (consoleSegment)
             {
                 case ConsoleSegment.Main:
-                    userManager.PrintStorageInfo();
-                    awardManager.PrintStorageInfo();
+                    PrintStorageInfo();
                     WriteMenu();
                     break;
                 case ConsoleSegment.User:
