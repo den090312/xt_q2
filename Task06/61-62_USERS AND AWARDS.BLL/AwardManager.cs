@@ -18,6 +18,10 @@ namespace Task06.BLL
             userImplement = Dependencies.UserImplement;
         }
 
+        private AwardManager()
+        {
+        }
+
         public void CreateStorage() => AwardImplement.CreateStorage();
 
         public void PrintStorageInfo() => AwardImplement.PrintStorageInfo();
