@@ -19,7 +19,7 @@ namespace Task06.Interfaces
 
         void PrintAwards();
 
-        void JoinUserToAward(string userID, string awardID);
+        void Join(string userID, string awardID);
 
         string[] GetAwardIDArray(string awardName);
 

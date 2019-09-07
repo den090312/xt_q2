@@ -99,7 +99,7 @@ namespace Task06.BLL
                 if (userID != string.Empty && !RecordExists(awardID, userID))
                 {
                     UserImplement.Join(awardID, userID);
-                    awardImplement.JoinUserToAward(userID, awardID);
+                    awardImplement.Join(userID, awardID);
                 }
             }
         }

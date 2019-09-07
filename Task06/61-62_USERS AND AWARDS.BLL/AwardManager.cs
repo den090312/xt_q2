@@ -66,7 +66,7 @@ namespace Task06.BLL
 
         public void PrintAwards() => AwardImplement.PrintAwards();
 
-        public void JoinUserToAward(string userName, string awardName)
+        public void Join(string userName, string awardName)
         {
             NullCheck(userName);
             NullCheck(awardName);
@@ -81,18 +81,18 @@ namespace Task06.BLL
             {
                 if (userID != string.Empty)
                 {
-                    Join(userID, awardArrayID);
+                    RunJoin(userID, awardArrayID);
                 }
             }
         }
 
-        private static void Join(string userID, string[] awardArrayID)
+        private static void RunJoin(string userID, string[] awardArrayID)
         {
             foreach (var arrayID in awardArrayID)
             {
                 if (arrayID != string.Empty)
                 {
-                    AwardImplement.JoinUserToAward(userID, arrayID);
+                    AwardImplement.Join(userID, arrayID);
                 }
             }
         }
