@@ -91,7 +91,7 @@ namespace Task06.PL
                             inputComplete = AwardsPrinted();
                             break;
                         case 7:
-                            inputComplete = Joined();
+                            inputComplete = AwardToUserJoined();
                             break;
                         case 8:
                             Console.WriteLine();
@@ -103,7 +103,7 @@ namespace Task06.PL
             return inputComplete;
         }
 
-        private static bool Joined()
+        private static bool AwardToUserJoined()
         {
             JoinAwardToUser();
             Console.WriteLine("---Done---");
@@ -224,29 +224,7 @@ namespace Task06.PL
 
             while (!inputComplete)
             {
-                ConsoleKeyInfo key = Console.ReadKey(true);
-
-                char[] keyArray = { '1', '2', '3', '4', '5', '6', '7', '8'};
-
-                if (key.Key == ConsoleKey.Backspace)
-                {
-                    EmulateBackspace(userKeySB);
-                }
-                else if (key.Key == ConsoleKey.Enter)
-                {
-                    if (userKeySB.Length > 0)
-                    {
-                        inputComplete = true;
-                    }
-                }
-                else if ((Array.Exists(keyArray, x => x == key.KeyChar)))
-                {
-                    if (userKeySB.Length < 1)
-                    {
-                        userKeySB.Append(key.KeyChar);
-                        Console.Write(key.KeyChar);
-                    }
-                }
+                inputComplete = KeyTaken(inputComplete, userKeySB);
             }
 
             int result;
@@ -261,6 +239,35 @@ namespace Task06.PL
             }
 
             return result;
+        }
+
+        private static bool KeyTaken(bool inputComplete, StringBuilder userKeySB)
+        {
+            ConsoleKeyInfo key = Console.ReadKey(true);
+
+            char[] keyArray = { '1', '2', '3', '4', '5', '6', '7', '8' };
+
+            if (key.Key == ConsoleKey.Backspace)
+            {
+                EmulateBackspace(userKeySB);
+            }
+            else if (key.Key == ConsoleKey.Enter)
+            {
+                if (userKeySB.Length > 0)
+                {
+                    inputComplete = true;
+                }
+            }
+            else if ((Array.Exists(keyArray, x => x == key.KeyChar)))
+            {
+                if (userKeySB.Length < 1)
+                {
+                    userKeySB.Append(key.KeyChar);
+                    Console.Write(key.KeyChar);
+                }
+            }
+
+            return inputComplete;
         }
 
         private static string GetUserString(string parameterName)
