@@ -73,25 +73,25 @@ namespace Task06.PL
                     switch (userKey)
                     {
                         case 1:
-                            inputComplete = StartUserCreation();
+                            inputComplete = UserCreated();
                             break;
                         case 2:
-                            inputComplete = StartUserRemoving();
+                            inputComplete = UserRemoved();
                             break;
                         case 3:
-                            inputComplete = StartUserPrinting();
+                            inputComplete = UsersPrinted();
                             break;
                         case 4:
-                            inputComplete = StartAwardCreation();
+                            inputComplete = AwardCreated();
                             break;
                         case 5:
-                            inputComplete = StartAwardRemoving();
+                            inputComplete = AwardRemoved();
                             break;
                         case 6:
-                            inputComplete = StartAwardPrinting();
+                            inputComplete = AwardsPrinted();
                             break;
                         case 7:
-                            inputComplete = StartJoin();
+                            inputComplete = Joined();
                             break;
                         case 8:
                             Console.WriteLine();
@@ -103,7 +103,7 @@ namespace Task06.PL
             return inputComplete;
         }
 
-        private static bool StartJoin()
+        private static bool Joined()
         {
             JoinAwardToUser();
             Console.WriteLine("---Done---");
@@ -111,7 +111,7 @@ namespace Task06.PL
             return InputComplete();
         }
 
-        private static bool StartAwardPrinting()
+        private static bool AwardsPrinted()
         {
             Console.WriteLine();
             PrintAwards();
@@ -120,7 +120,7 @@ namespace Task06.PL
             return InputComplete();
         }
 
-        private static bool StartAwardRemoving()
+        private static bool AwardRemoved()
         {
             consoleSegment = ConsoleSegment.Award;
             RemoveAward();
@@ -129,7 +129,7 @@ namespace Task06.PL
             return InputComplete();
         }
 
-        private static bool StartAwardCreation()
+        private static bool AwardCreated()
         {
             consoleSegment = ConsoleSegment.Award;
             CreateAward();
@@ -138,7 +138,7 @@ namespace Task06.PL
             return InputComplete();
         }
 
-        private static bool StartUserPrinting()
+        private static bool UsersPrinted()
         {
             Console.WriteLine();
             PrintUsers();
@@ -147,7 +147,7 @@ namespace Task06.PL
             return InputComplete();
         }
 
-        private static bool StartUserRemoving()
+        private static bool UserRemoved()
         {
             consoleSegment = ConsoleSegment.User;
             RemoveUser();
@@ -156,7 +156,7 @@ namespace Task06.PL
             return InputComplete();
         }
 
-        private static bool StartUserCreation()
+        private static bool UserCreated()
         {
             consoleSegment = ConsoleSegment.User;
             CreateUser(dateFormat);
@@ -234,7 +234,10 @@ namespace Task06.PL
                 }
                 else if (key.Key == ConsoleKey.Enter)
                 {
-                    inputComplete = true;
+                    if (userKeySB.Length > 0)
+                    {
+                        inputComplete = true;
+                    }
                 }
                 else if ((Array.Exists(keyArray, x => x == key.KeyChar)))
                 {
@@ -271,28 +274,35 @@ namespace Task06.PL
 
             while (!inputComplete)
             {
-                ConsoleKeyInfo key = Console.ReadKey(true);
-
-                if (key.Key == ConsoleKey.Backspace)
-                {
-                    EmulateBackspace(userSB);
-                }
-                else if (key.Key == ConsoleKey.Enter)
-                {
-                    if (userSB.Length > 0)
-                    {
-                        inputComplete = true;
-                        Console.WriteLine();
-                    }
-                }
-                else
-                {
-                    userSB.Append(key.KeyChar);
-                    Console.Write(key.KeyChar);
-                }
+                inputComplete = InputComplete(inputComplete, userSB);
             }
 
             return userSB.ToString();
+        }
+
+        private static bool InputComplete(bool inputComplete, StringBuilder userSB)
+        {
+            ConsoleKeyInfo key = Console.ReadKey(true);
+
+            if (key.Key == ConsoleKey.Backspace)
+            {
+                EmulateBackspace(userSB);
+            }
+            else if (key.Key == ConsoleKey.Enter)
+            {
+                if (userSB.Length > 0)
+                {
+                    inputComplete = true;
+                    Console.WriteLine();
+                }
+            }
+            else
+            {
+                userSB.Append(key.KeyChar);
+                Console.Write(key.KeyChar);
+            }
+
+            return inputComplete;
         }
 
         private static DateTime GetUserDate(string dateFormat)
