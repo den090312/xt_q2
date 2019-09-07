@@ -108,7 +108,9 @@ namespace Task06.PL
         private static bool UserAdded()
         {
             consoleSegment = ConsoleSegment.User;
-            AddUser(CreateUser(GetUserString("name"), GetUserDate(dateFormat)));
+
+            var user = userManager.CreateUser(GetUserString("name"), GetUserDate(dateFormat));
+            userManager.AddUser(user);
             Console.WriteLine("---Done---");
 
             return InputComplete();
@@ -117,7 +119,8 @@ namespace Task06.PL
         private static bool UsersRemoved()
         {
             consoleSegment = ConsoleSegment.User;
-            RemoveUsers(GetUserString("name"));
+
+            userManager.RemoveUsers(GetUserString("name"));
             Console.WriteLine("---Done---");
 
             return InputComplete();
@@ -126,7 +129,9 @@ namespace Task06.PL
         private static bool AwardAdded()
         {
             consoleSegment = ConsoleSegment.Award;
-            AddAward(CreateAward(GetUserString("title")));
+
+            var award = awardManager.CreateAward(GetUserString("title"));
+            awardManager.AddAward(award);
             Console.WriteLine("---Done---");
 
             return InputComplete();
@@ -140,7 +145,7 @@ namespace Task06.PL
             consoleSegment = ConsoleSegment.Award;
             var awardName = GetUserString("title");
 
-            Join(userName, awardName);
+            userManager.Join(userName, awardName);
             Console.WriteLine("---Done---");
 
             return InputComplete();
@@ -149,7 +154,7 @@ namespace Task06.PL
         private static bool AwardsPrinted()
         {
             Console.WriteLine();
-            PrintAwards();
+            awardManager.PrintAwards();
             Console.WriteLine("---Done---");
 
             return InputComplete();
@@ -158,7 +163,8 @@ namespace Task06.PL
         private static bool AwardsRemoved()
         {
             consoleSegment = ConsoleSegment.Award;
-            RemoveAwards(GetUserString("award"));
+
+            awardManager.RemoveAwards(GetUserString("award"));
             Console.WriteLine("---Done---");
 
             return InputComplete();
@@ -167,7 +173,7 @@ namespace Task06.PL
         private static bool UsersPrinted()
         {
             Console.WriteLine();
-            PrintUsers(GetAwardList());
+            userManager.PrintUsers(awardManager.GetAwardList());
             Console.WriteLine("---Done---");
 
             return InputComplete();
@@ -190,26 +196,6 @@ namespace Task06.PL
             Console.WriteLine();
             Console.WriteLine("\t8: exit");
         }
-
-        private static User CreateUser(string name, DateTime dateFormat) => userManager.CreateUser(name, dateFormat);
-
-        private static void AddUser(User user) => userManager.AddUser(user);
-
-        private static void RemoveUsers(string name) => userManager.RemoveUsers(name);
-
-        private static List<KeyValuePair<string, string>> GetAwardList() => awardManager.GetAwardList();
-
-        private static void PrintUsers(List<KeyValuePair<string, string>> awardList) => userManager.PrintUsers(awardList);
-
-        private static Award CreateAward(string title) => awardManager.CreateAward(title);
-
-        private static void AddAward(Award award) => awardManager.AddAward(award);
-
-        private static void RemoveAwards(string title) => awardManager.RemoveAwards(title);
-
-        private static void PrintAwards() => awardManager.PrintAwards();
-
-        private static void Join(string awardID, string userID) => userManager.Join(awardID, userID);
 
         private static int GetKeyFromConsole()
         {
