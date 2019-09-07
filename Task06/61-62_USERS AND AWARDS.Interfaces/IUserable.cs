@@ -20,7 +20,7 @@ namespace Task06.Interfaces
 
         void PrintUsers(List<KeyValuePair<string, string>> awardList);
 
-        void JoinAwardToUser(string awardID, string userID);
+        void Join(string awardID, string userID);
 
         string[] GetUserIDArray(string userName);
 

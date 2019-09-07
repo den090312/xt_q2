@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using Task06.BLL;
+using Task06.Entities;
 using Task06.Interfaces;
 
 namespace Task06.PL
@@ -13,7 +15,7 @@ namespace Task06.PL
 
         private static ConsoleSegment consoleSegment = ConsoleSegment.None;
 
-        public static readonly string dateFormat = "dd.MM.yyyy";
+        private static readonly string dateFormat = "dd.MM.yyyy";
 
         static Program()
         {
@@ -73,19 +75,19 @@ namespace Task06.PL
                     switch (userKey)
                     {
                         case 1:
-                            inputComplete = UserCreated();
+                            inputComplete = UserAdded();
                             break;
                         case 2:
-                            inputComplete = UserRemoved();
+                            inputComplete = UsersRemoved();
                             break;
                         case 3:
                             inputComplete = UsersPrinted();
                             break;
                         case 4:
-                            inputComplete = AwardCreated();
+                            inputComplete = AwardAdded();
                             break;
                         case 5:
-                            inputComplete = AwardRemoved();
+                            inputComplete = AwardsRemoved();
                             break;
                         case 6:
                             inputComplete = AwardsPrinted();
@@ -103,9 +105,42 @@ namespace Task06.PL
             return inputComplete;
         }
 
+        private static bool UserAdded()
+        {
+            consoleSegment = ConsoleSegment.User;
+            AddUser(CreateUser(GetUserString("name"), GetUserDate(dateFormat)));
+            Console.WriteLine("---Done---");
+
+            return InputComplete();
+        }
+
+        private static bool UsersRemoved()
+        {
+            consoleSegment = ConsoleSegment.User;
+            RemoveUsers(GetUserString("name"));
+            Console.WriteLine("---Done---");
+
+            return InputComplete();
+        }
+
+        private static bool AwardAdded()
+        {
+            consoleSegment = ConsoleSegment.Award;
+            AddAward(CreateAward(GetUserString("title")));
+            Console.WriteLine("---Done---");
+
+            return InputComplete();
+        }
+
         private static bool AwardToUserJoined()
         {
-            JoinAwardToUser();
+            consoleSegment = ConsoleSegment.User;
+            var userName = GetUserString("name");
+
+            consoleSegment = ConsoleSegment.Award;
+            var awardName = GetUserString("title");
+
+            Join(userName, awardName);
             Console.WriteLine("---Done---");
 
             return InputComplete();
@@ -120,19 +155,10 @@ namespace Task06.PL
             return InputComplete();
         }
 
-        private static bool AwardRemoved()
+        private static bool AwardsRemoved()
         {
             consoleSegment = ConsoleSegment.Award;
-            RemoveAward();
-            Console.WriteLine("---Done---");
-
-            return InputComplete();
-        }
-
-        private static bool AwardCreated()
-        {
-            consoleSegment = ConsoleSegment.Award;
-            CreateAward();
+            RemoveAwards(GetUserString("award"));
             Console.WriteLine("---Done---");
 
             return InputComplete();
@@ -141,25 +167,7 @@ namespace Task06.PL
         private static bool UsersPrinted()
         {
             Console.WriteLine();
-            PrintUsers();
-            Console.WriteLine("---Done---");
-
-            return InputComplete();
-        }
-
-        private static bool UserRemoved()
-        {
-            consoleSegment = ConsoleSegment.User;
-            RemoveUser();
-            Console.WriteLine("---Done---");
-
-            return InputComplete();
-        }
-
-        private static bool UserCreated()
-        {
-            consoleSegment = ConsoleSegment.User;
-            CreateUser(dateFormat);
+            PrintUsers(GetAwardList());
             Console.WriteLine("---Done---");
 
             return InputComplete();
@@ -183,38 +191,25 @@ namespace Task06.PL
             Console.WriteLine("\t8: exit");
         }
 
-        private static void CreateUser(string dateFormat)
-        {
-            var user = userManager.CreateUser(GetUserString("name"), GetUserDate(dateFormat));
+        private static User CreateUser(string name, DateTime dateFormat) => userManager.CreateUser(name, dateFormat);
 
-            userManager.AddUser(user);
-        }
+        private static void AddUser(User user) => userManager.AddUser(user);
 
-        private static void RemoveUser() => userManager.RemoveUsers(GetUserString("name"));
+        private static void RemoveUsers(string name) => userManager.RemoveUsers(name);
 
-        private static void PrintUsers() => userManager.PrintUsers(awardManager.GetAwardList());
+        private static List<KeyValuePair<string, string>> GetAwardList() => awardManager.GetAwardList();
 
-        private static void CreateAward()
-        {
-            var award = awardManager.CreateAward(GetUserString("title"));
+        private static void PrintUsers(List<KeyValuePair<string, string>> awardList) => userManager.PrintUsers(awardList);
 
-            awardManager.AddAward(award);
-        }
+        private static Award CreateAward(string title) => awardManager.CreateAward(title);
 
-        private static void RemoveAward() => awardManager.RemoveAwards(GetUserString("award"));
+        private static void AddAward(Award award) => awardManager.AddAward(award);
+
+        private static void RemoveAwards(string title) => awardManager.RemoveAwards(title);
 
         private static void PrintAwards() => awardManager.PrintAwards();
 
-        private static void JoinAwardToUser()
-        {
-            consoleSegment = ConsoleSegment.User;
-            var userName = GetUserString("name");
-
-            consoleSegment = ConsoleSegment.Award;
-            var awardName = GetUserString("title");
-
-            userManager.JoinAwardToUser(awardName, userName);
-        }
+        private static void Join(string awardID, string userID) => userManager.Join(awardID, userID);
 
         private static int GetKeyFromConsole()
         {

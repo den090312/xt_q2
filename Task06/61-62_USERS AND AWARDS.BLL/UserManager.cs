@@ -72,7 +72,7 @@ namespace Task06.BLL
             UserImplement.PrintUsers(awardsList);
         }
 
-        public void JoinAwardToUser(string awardName, string userName)
+        public void Join(string awardName, string userName)
         {
             NullCheck(awardName);
             NullCheck(userName);
@@ -87,18 +87,18 @@ namespace Task06.BLL
             {
                 if (awardID != string.Empty)
                 {
-                    Join(awardID, userArrayID);
+                    RunJoin(awardID, userArrayID);
                 }
             }
         }
 
-        private void Join(string awardID, string[] userArrayID)
+        private void RunJoin(string awardID, string[] userArrayID)
         {
             foreach (var userID in userArrayID)
             {
                 if (userID != string.Empty && !RecordExists(awardID, userID))
                 {
-                    UserImplement.JoinAwardToUser(awardID, userID);
+                    UserImplement.Join(awardID, userID);
                     awardImplement.JoinUserToAward(userID, awardID);
                 }
             }
