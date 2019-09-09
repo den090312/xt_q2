@@ -18,4 +18,4 @@ Task 08 done
 
 Task 09 done
 
-*Задание 3.3 (DynamicArray) включает в себя 3.4 (Hardcore mode)
+*Задание 3.3 (Dynamic array) включает в себя 3.4 (Hardcore mode)
