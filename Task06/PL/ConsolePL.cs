@@ -5,7 +5,7 @@ namespace PL
 {
     public class ConsolePL
     {
-        private static ConsoleSegment consoleSegment = ConsoleSegment.None;
+        private ConsoleSegment consoleSegment = ConsoleSegment.None;
 
         private enum ConsoleSegment
         {

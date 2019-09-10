@@ -1,12 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities
 {
-    class Award
+    public class Award
     {
+        public string AwardID { get; } = string.Empty;
+
+        public string Title { get; } = string.Empty;
+
+        public Award(string title)
+        {
+            AwardID = Guid.NewGuid().ToString();
+            Title = title;
+        }
+
+        public static int GetFieldIndex(string fieldName)
+        {
+            switch (fieldName)
+            {
+                case "AwardID":
+                    return 0;
+                case "Title":
+                    return 1;
+                default:
+                    return -1;
+            }
+        }
     }
 }
