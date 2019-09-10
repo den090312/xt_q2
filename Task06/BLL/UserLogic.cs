@@ -7,9 +7,9 @@ namespace BLL
 {
     public class UserLogic : IUserLogic
     {
-        private readonly IUserDAO iUserDAO;
+        private readonly IUserDFO iUserDAO;
 
-        public UserLogic(IUserDAO iUserDAO)
+        public UserLogic(IUserDFO iUserDAO)
         {
             this.iUserDAO = iUserDAO;
         }

@@ -2,7 +2,7 @@
 
 namespace DAL
 {
-    public class UserAwardDAO : IUserAwardDAO
+    public class UserAwardDFO : IUserAwardDFO
     {
 
     }

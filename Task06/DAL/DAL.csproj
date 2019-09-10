@@ -41,12 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AwardDAO.cs" />
+    <Compile Include="AwardDFO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserAwardDAO.cs" />
-    <Compile Include="UserDAO.cs" />
+    <Compile Include="UserAwardDFO.cs" />
+    <Compile Include="UserDFO.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{030F46AD-2DA9-4556-A51B-5EA5F76C82AB}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InterfacesDAL\InterfacesDAL.csproj">
       <Project>{847D29C2-3216-4E63-9013-B8D2F8BCA814}</Project>
       <Name>InterfacesDAL</Name>
