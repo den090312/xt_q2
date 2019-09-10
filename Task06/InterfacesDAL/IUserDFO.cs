@@ -8,10 +8,6 @@ namespace InterfacesDAL
 
         void RemoveUsers(string userName);
 
-        bool UsersExists(string userName);
-
-        string[] GetUserIDArray(string userName);
-
         void PrintUsers();
 
         void EraseUser(string userID);

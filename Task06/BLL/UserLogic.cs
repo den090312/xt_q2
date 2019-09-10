@@ -7,11 +7,11 @@ namespace BLL
 {
     public class UserLogic : IUserLogic
     {
-        private readonly IUserDFO iUserDAO;
+        private readonly IUserDFO iUserDFO;
 
-        public UserLogic(IUserDFO iUserDAO)
+        public UserLogic(IUserDFO iUserDFO)
         {
-            this.iUserDAO = iUserDAO;
+            this.iUserDFO = iUserDFO;
         }
 
         public User CreateUser(string name, DateTime dateBirth)
@@ -26,25 +26,10 @@ namespace BLL
         {
             NullCheck(user);
 
-            iUserDAO.AddUser(user);
+            iUserDFO.AddUser(user);
         }
 
-        public void EraseUser(string userID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string[] GetUserIDArray(string userName)
-        {
-            NullCheck(userName);
-
-            throw new NotImplementedException();
-        }
-
-        public void PrintUsers()
-        {
-            throw new NotImplementedException();
-        }
+        public void PrintUsers() => iUserDFO.PrintUsers();
 
         public void RemoveUsers(string userName)
         {
@@ -53,11 +38,11 @@ namespace BLL
             throw new NotImplementedException();
         }
 
-        public bool UsersExists(string userName)
+        public void EraseUser(string userID)
         {
-            NullCheck(userName);
+            NullCheck(userID);
 
-            throw new NotImplementedException();
+            iUserDFO.EraseUser(userID);
         }
 
         private static void CheckDateOfBirth(DateTime birthDate)

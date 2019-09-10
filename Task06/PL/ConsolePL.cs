@@ -145,7 +145,7 @@ namespace PL
         private bool StartUserRemoving()
         {
             consoleSegment = ConsoleSegment.User;
-            //RemoveUser();
+            RemoveUser();
             Console.WriteLine("---Done---");
 
             return InputComplete();
@@ -177,6 +177,8 @@ namespace PL
 
             userBLL.AddUser(user);
         }
+
+        private void RemoveUser() => userBLL.RemoveUsers(GetUserString("name"));
 
         private void PrintUsers() => userBLL.PrintUsers();
 
