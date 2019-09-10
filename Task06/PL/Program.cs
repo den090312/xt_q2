@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PL
+﻿namespace PL
 {
     public class Program
     {
         private static void Main(string[] args)
         {
-
+            new ConsolePL().Run();
         }
     }
 }
