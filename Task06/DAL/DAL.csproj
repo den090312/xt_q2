@@ -46,5 +46,11 @@
     <Compile Include="UserAwardDAO.cs" />
     <Compile Include="UserDAO.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InterfacesDAL\InterfacesDAL.csproj">
+      <Project>{847D29C2-3216-4E63-9013-B8D2F8BCA814}</Project>
+      <Name>InterfacesDAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

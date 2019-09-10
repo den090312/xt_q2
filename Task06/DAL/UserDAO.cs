@@ -1,6 +1,8 @@
-﻿namespace DAL
+﻿using InterfacesDAL;
+
+namespace DAL
 {
-    public class UserDAO
+    public class UserDAO : IUserDAO
     {
 
     }
