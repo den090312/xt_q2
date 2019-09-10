@@ -4,12 +4,12 @@ namespace BLL
 {
     public class UserAwardLogic : IUserAwardLogic
     {
-        public void JoinRecords(string awardID, string userID)
+        public void JoinAwardToUser(string awardID, string userID)
         {
             throw new System.NotImplementedException();
         }
 
-        public void PrintRecords()
+        public void PrintUserAwards()
         {
             throw new System.NotImplementedException();
         }

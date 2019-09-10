@@ -2,9 +2,9 @@
 {
     public interface IUserAwardLogic
     {
-        void JoinRecords(string awardID, string userID);
+        void JoinAwardToUser(string awardID, string userID);
 
-        void PrintRecords();
+        void PrintUserAwards();
 
         bool RecordExists(string awardID, string userID);
     }
