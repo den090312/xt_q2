@@ -41,7 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AwardDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserAwardDAO.cs" />
+    <Compile Include="UserDAO.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

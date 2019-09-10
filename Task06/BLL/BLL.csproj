@@ -41,7 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AwardLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserAwardLogic.cs" />
+    <Compile Include="UserLogic.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InterfacesBLL\InterfacesBLL.csproj">
+      <Project>{53911CD3-40C3-4177-BBF5-4B2C65E21106}</Project>
+      <Name>InterfacesBLL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

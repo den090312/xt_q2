@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BLL;
+using InterfacesBLL;
+using DAL;
+using InterfacesDAL;
 
 namespace Common
 {
-    class DependencyResolver
+    public class DependencyResolver
     {
+        public readonly IUserLogic UserBLL = new UserLogic();
+        public readonly IAwardLogic AwardBLL = new AwardLogic();
     }
 }

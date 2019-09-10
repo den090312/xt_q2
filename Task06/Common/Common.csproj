@@ -44,5 +44,23 @@
     <Compile Include="DependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{50fb4d5e-e94b-42be-806a-f343efc4c225}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{3eb13b25-dbb9-428b-b03f-9c3cc340cab9}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InterfacesBLL\InterfacesBLL.csproj">
+      <Project>{53911CD3-40C3-4177-BBF5-4B2C65E21106}</Project>
+      <Name>InterfacesBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InterfacesDAL\InterfacesDAL.csproj">
+      <Project>{847d29c2-3216-4e63-9013-b8d2f8bca814}</Project>
+      <Name>InterfacesDAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
