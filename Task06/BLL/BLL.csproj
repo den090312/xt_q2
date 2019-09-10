@@ -55,6 +55,10 @@
       <Project>{53911CD3-40C3-4177-BBF5-4B2C65E21106}</Project>
       <Name>InterfacesBLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\InterfacesDAL\InterfacesDAL.csproj">
+      <Project>{847d29c2-3216-4e63-9013-b8d2f8bca814}</Project>
+      <Name>InterfacesDAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

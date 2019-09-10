@@ -1,6 +1,7 @@
 ﻿
 using Entities;
 using InterfacesBLL;
+using System;
 
 namespace BLL
 {
@@ -8,37 +9,57 @@ namespace BLL
     {
         public void AddAward(Award award)
         {
-            throw new System.NotImplementedException();
+            NullCheck(award);
+
+            throw new NotImplementedException();
         }
 
         public bool AwardsExists(string awardName)
         {
-            throw new System.NotImplementedException();
+            NullCheck(awardName);
+
+            throw new NotImplementedException();
         }
 
         public Award CreateAward(string title)
         {
-            throw new System.NotImplementedException();
+            NullCheck(title);
+
+            throw new NotImplementedException();
         }
 
         public void EraseAward(string awardID)
         {
-            throw new System.NotImplementedException();
+            NullCheck(awardID);
+
+            throw new NotImplementedException();
         }
 
         public string[] GetAwardIDArray(string awardName)
         {
-            throw new System.NotImplementedException();
+            NullCheck(awardName);
+
+            throw new NotImplementedException();
         }
 
         public void PrintAwards()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void RemoveAwards(string awardName)
         {
-            throw new System.NotImplementedException();
+            NullCheck(awardName);
+
+            throw new NotImplementedException();
+        }
+
+        private static void NullCheck<T>(T classObject) where T : class
+        {
+            if (classObject is null)
+            {
+                throw new ArgumentNullException($"{nameof(classObject)} is null!");
+            }
         }
     }
 }
