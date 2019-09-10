@@ -59,6 +59,10 @@
       <Project>{5275cae9-2388-4e4e-961b-ceac0946d040}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{030F46AD-2DA9-4556-A51B-5EA5F76C82AB}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InterfacesBLL\InterfacesBLL.csproj">
       <Project>{53911CD3-40C3-4177-BBF5-4B2C65E21106}</Project>
       <Name>InterfacesBLL</Name>

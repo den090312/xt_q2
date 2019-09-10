@@ -1,6 +1,7 @@
 ﻿using Common;
 using InterfacesBLL;
 using System;
+using System.Globalization;
 using System.Text;
 
 namespace PL
@@ -13,6 +14,8 @@ namespace PL
 
         private ConsoleSegment consoleSegment = ConsoleSegment.None;
 
+        public static readonly string dateFormat = "dd.MM.yyyy";
+
         private enum ConsoleSegment
         {
             None = 0,
@@ -23,27 +26,31 @@ namespace PL
 
         public void Run()
         {
-            RunBLL();
-
-            consoleSegment = ConsoleSegment.Main;
-            Console.WriteLine();
-
-            var inputComplete = false;
-
-            do
-            {
-                inputComplete = InputComplete();
-            }
-            while (!inputComplete);
+            SetBLL();
+            RunInput();
         }
 
-        private void RunBLL()
+        private void SetBLL()
         {
             var dr = new DependencyResolver();
 
             userBLL = dr.UserBLL;
             awardBLL = dr.AwardBLL;
             userAwardBLL = dr.UserAwardBLL;
+        }
+
+        private void RunInput()
+        {
+            consoleSegment = ConsoleSegment.Main;
+            Console.WriteLine();
+
+            bool inputComplete;
+
+            do
+            {
+                inputComplete = InputComplete();
+            }
+            while (!inputComplete);
         }
 
         private bool InputComplete()
@@ -102,7 +109,7 @@ namespace PL
         private bool StartAwardPrinting()
         {
             Console.WriteLine();
-            PrintAwards();
+            //PrintAwards();
             Console.WriteLine("---Done---");
 
             return InputComplete();
@@ -111,7 +118,7 @@ namespace PL
         private bool StartAwardRemoving()
         {
             consoleSegment = ConsoleSegment.Award;
-            RemoveAward();
+            //RemoveAward();
             Console.WriteLine("---Done---");
 
             return InputComplete();
@@ -120,7 +127,7 @@ namespace PL
         private bool StartAwardCreation()
         {
             consoleSegment = ConsoleSegment.Award;
-            CreateAward();
+            //CreateAward();
             Console.WriteLine("---Done---");
 
             return InputComplete();
@@ -129,7 +136,7 @@ namespace PL
         private bool StartUserPrinting()
         {
             Console.WriteLine();
-            PrintUsers();
+            //PrintUsers();
             Console.WriteLine("---Done---");
 
             return InputComplete();
@@ -138,7 +145,7 @@ namespace PL
         private bool StartUserRemoving()
         {
             consoleSegment = ConsoleSegment.User;
-            RemoveUser();
+            //RemoveUser();
             Console.WriteLine("---Done---");
 
             return InputComplete();
@@ -161,7 +168,14 @@ namespace PL
             consoleSegment = ConsoleSegment.Award;
             var awardName = GetUserString("title");
 
-            userManager.JoinAwardToUser(awardName, userName);
+            userAwardBLL.JoinAwardToUser(awardName, userName);
+        }
+
+        private void CreateUser(string dateFormat)
+        {
+            var user = userBLL.CreateUser(GetUserString("name"), GetUserDate(dateFormat));
+
+            userBLL.AddUser(user);
         }
 
         private void WriteMenu()
@@ -217,6 +231,32 @@ namespace PL
             return userSB.ToString();
         }
 
+        private static DateTime GetUserDate(string dateFormat)
+        {
+            Console.Clear();
+            Console.WriteLine($"Enter date in format: {dateFormat}");
+
+            bool isDate = false;
+
+            DateTime userBirthDate = default;
+
+            while (!isDate)
+            {
+                isDate = DateTime.TryParseExact(Console.ReadLine(), dateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out userBirthDate);
+
+                if (!isDate)
+                {
+                    Console.WriteLine($"Enter date in format: {dateFormat}");
+                }
+                else
+                {
+                    isDate = true;
+                }
+            }
+
+            return userBirthDate;
+        }
+
         private int GetKeyFromConsole()
         {
             bool inputComplete = false;
@@ -225,26 +265,7 @@ namespace PL
 
             while (!inputComplete)
             {
-                ConsoleKeyInfo key = Console.ReadKey(true);
-
-                char[] keyArray = { '1', '2', '3', '4', '5', '6', '7', '8' };
-
-                if (key.Key == ConsoleKey.Backspace)
-                {
-                    EmulateBackspace(userKeySB);
-                }
-                else if (key.Key == ConsoleKey.Enter)
-                {
-                    inputComplete = true;
-                }
-                else if ((Array.Exists(keyArray, x => x == key.KeyChar)))
-                {
-                    if (userKeySB.Length < 1)
-                    {
-                        userKeySB.Append(key.KeyChar);
-                        Console.Write(key.KeyChar);
-                    }
-                }
+                inputComplete = KeyTaken(inputComplete, userKeySB);
             }
 
             int result;
@@ -259,6 +280,35 @@ namespace PL
             }
 
             return result;
+        }
+
+        private bool KeyTaken(bool inputComplete, StringBuilder userKeySB)
+        {
+            ConsoleKeyInfo key = Console.ReadKey(true);
+
+            char[] keyArray = { '1', '2', '3', '4', '5', '6', '7', '8' };
+
+            if (key.Key == ConsoleKey.Backspace)
+            {
+                EmulateBackspace(userKeySB);
+            }
+            else if (key.Key == ConsoleKey.Enter)
+            {
+                if (userKeySB.Length > 0)
+                {
+                    inputComplete = true;
+                }
+            }
+            else if ((Array.Exists(keyArray, x => x == key.KeyChar)))
+            {
+                if (userKeySB.Length < 1)
+                {
+                    userKeySB.Append(key.KeyChar);
+                    Console.Write(key.KeyChar);
+                }
+            }
+
+            return inputComplete;
         }
 
         private void EmulateBackspace(StringBuilder userKeySB)
