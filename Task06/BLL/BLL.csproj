@@ -47,6 +47,10 @@
     <Compile Include="UserLogic.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{030f46ad-2da9-4556-a51b-5ea5f76c82ab}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InterfacesBLL\InterfacesBLL.csproj">
       <Project>{53911CD3-40C3-4177-BBF5-4B2C65E21106}</Project>
       <Name>InterfacesBLL</Name>
