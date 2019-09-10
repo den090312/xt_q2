@@ -1,10 +1,16 @@
-﻿using System;
+﻿using Common;
+using InterfacesBLL;
+using System;
 using System.Text;
 
 namespace PL
 {
     public class ConsolePL
     {
+        private IUserLogic userBLL;
+        private IAwardLogic awardBLL;
+        private IUserAwardLogic userAwardBLL;
+
         private ConsoleSegment consoleSegment = ConsoleSegment.None;
 
         private enum ConsoleSegment
@@ -17,8 +23,9 @@ namespace PL
 
         public void Run()
         {
-            consoleSegment = ConsoleSegment.Main;
+            RunBLL();
 
+            consoleSegment = ConsoleSegment.Main;
             Console.WriteLine();
 
             var inputComplete = false;
@@ -28,6 +35,15 @@ namespace PL
                 inputComplete = InputComplete();
             }
             while (!inputComplete);
+        }
+
+        private void RunBLL()
+        {
+            var dr = new DependencyResolver();
+
+            userBLL = dr.UserBLL;
+            awardBLL = dr.AwardBLL;
+            userAwardBLL = dr.UserAwardBLL;
         }
 
         private bool InputComplete()
