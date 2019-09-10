@@ -74,12 +74,13 @@ namespace DAL
                 var lineArray = line.Split(Separator);
 
                 PrintSingleUser(ref lineArray);
+                Console.WriteLine();
             }
         }
 
         private void PrintSingleUser(ref string[] lineArray)
         {
-            for (int i = 2; i < lineArray.Length; i++)
+            for (int i = 1; i < lineArray.Length; i++)
             {
                 Console.Write(lineArray[i]);
 

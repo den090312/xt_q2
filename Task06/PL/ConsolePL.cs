@@ -42,7 +42,7 @@ namespace PL
         private void RunInput()
         {
             consoleSegment = ConsoleSegment.Main;
-            Console.WriteLine();
+            //Console.WriteLine();
 
             bool inputComplete;
 
@@ -133,15 +133,6 @@ namespace PL
             return InputComplete();
         }
 
-        private bool StartUserPrinting()
-        {
-            Console.WriteLine();
-            PrintUsers();
-            Console.WriteLine("---Done---");
-
-            return InputComplete();
-        }
-
         private bool StartUserRemoving()
         {
             consoleSegment = ConsoleSegment.User;
@@ -156,6 +147,16 @@ namespace PL
             consoleSegment = ConsoleSegment.User;
             CreateUser(dateFormat);
             Console.WriteLine("---Done---");
+
+            return InputComplete();
+        }
+
+        private bool StartUserPrinting()
+        {
+            consoleSegment = ConsoleSegment.User;
+            Console.Clear();
+            PrintUsers();
+            Console.WriteLine();
 
             return InputComplete();
         }
