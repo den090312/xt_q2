@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PL
+namespace Common
 {
-    public class Program
+    class DependencyResolver
     {
-        private static void Main(string[] args)
-        {
-
-        }
     }
 }

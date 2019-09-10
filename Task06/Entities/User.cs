@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PL
+namespace Entities
 {
-    public class Program
+    class User
     {
-        private static void Main(string[] args)
-        {
-
-        }
     }
 }
