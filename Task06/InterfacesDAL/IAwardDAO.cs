@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InterfacesDAL
 {
-    public class Class1
+    interface IAwardDAO
     {
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InterfacesBLL
 {
-    public class Class1
+    interface IUserAwardLogic
     {
     }
 }
