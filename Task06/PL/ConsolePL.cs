@@ -127,7 +127,7 @@ namespace PL
         private bool StartAwardCreation()
         {
             consoleSegment = ConsoleSegment.Award;
-            //CreateAward();
+            CreateAward();
             Console.WriteLine("---Done---");
 
             return InputComplete();
@@ -136,7 +136,7 @@ namespace PL
         private bool StartUserPrinting()
         {
             Console.WriteLine();
-            //PrintUsers();
+            PrintUsers();
             Console.WriteLine("---Done---");
 
             return InputComplete();
@@ -176,6 +176,15 @@ namespace PL
             var user = userBLL.CreateUser(GetUserString("name"), GetUserDate(dateFormat));
 
             userBLL.AddUser(user);
+        }
+
+        private void PrintUsers() => userBLL.PrintUsers();
+
+        private void CreateAward()
+        {
+            var award = awardBLL.CreateAward(GetUserString("title"));
+
+            awardBLL.AddAward(award);
         }
 
         private void WriteMenu()
