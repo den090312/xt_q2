@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{22F4C7BB-74BA-46AE-B266-A81C2A002DE7}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>_61_62_USERS_AND_AWARDS.PL</RootNamespace>
-    <AssemblyName>61-62_USERS AND AWARDS.PL</AssemblyName>
+    <ProjectGuid>{90166AA8-E7AD-40EA-B688-A8E12E08828C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DAL</RootNamespace>
+    <AssemblyName>DAL</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,29 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\61-62_USERS AND AWARDS.BLL\BLL.csproj">
-      <Project>{AAE1FBD7-23BE-4977-BE89-6C995EC096C8}</Project>
-      <Name>BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\61-62_USERS AND AWARDS.Common\Common.csproj">
-      <Project>{02905B2D-9CFE-4D79-B398-849835692893}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\61-62_USERS AND AWARDS.Entities\Entities.csproj">
-      <Project>{22E6A0DE-2AE3-4ABD-B0C4-B333B712F77E}</Project>
-      <Name>Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\61-62_USERS AND AWARDS.Interfaces\Interfaces.csproj">
-      <Project>{D1467972-3A7D-43F8-9764-D41A9677E175}</Project>
-      <Name>Interfaces</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
