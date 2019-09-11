@@ -4,7 +4,7 @@ namespace DAL
 {
     public class UserAwardDaoFile : IUserAwardDao
     {
-        public void JoinAwardToUser(string awardID, string userID)
+        public void JoinAwardsToUsers(string[] awardIdArray, string[] userIdArray)
         {
             throw new System.NotImplementedException();
         }

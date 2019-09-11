@@ -60,5 +60,12 @@ namespace BLL
                 throw new ArgumentNullException($"{nameof(classObject)} is null!");
             }
         }
+
+        public string[] GetUserIdArray(string userName)
+        {
+            NullCheck(userName);
+
+            return iUserDao.GetUserIdArray(userName);
+        }
     }
 }

@@ -5,10 +5,10 @@ namespace BLL
 {
     public class UserAwardLogic : IUserAwardLogic
     {
-        public void JoinAwardToUser(string awardID, string userID)
+        public void JoinAwardsToUsers(string[] awardIdArray, string[] userIdArray)
         {
-            NullCheck(awardID);
-            NullCheck(userID);
+            NullCheck(awardIdArray);
+            NullCheck(userIdArray);
 
             throw new NotImplementedException();
         }

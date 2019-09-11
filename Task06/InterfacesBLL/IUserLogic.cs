@@ -12,5 +12,7 @@ namespace InterfacesBLL
         void RemoveUsers(string userName);
 
         void PrintUsers();
+
+        string[] GetUserIdArray(string userName);
     }
 }
