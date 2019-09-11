@@ -35,7 +35,7 @@ namespace BLL
         {
             NullCheck(userName);
 
-            throw new NotImplementedException();
+            iUserDFO.RemoveUsers(userName);
         }
 
         public void EraseUser(string userID)

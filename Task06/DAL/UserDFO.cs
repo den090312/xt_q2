@@ -53,8 +53,7 @@ namespace DAL
                 {
                     if (UserID(line) != userID)
                     {
-                        streamWriter.Write(line);
-                        streamWriter.WriteLine();
+                        streamWriter.WriteLine(line);
                     }
                 }
 
@@ -107,8 +106,7 @@ namespace DAL
             {
                 if (Name(line) != userName)
                 {
-                    streamWriter.Write(line);
-                    streamWriter.WriteLine();
+                    streamWriter.WriteLine(line);
                 }
             }
 
@@ -142,7 +140,7 @@ namespace DAL
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(FilePath, true);
 
-            streamWriter.Write("");
+            streamWriter.Write(string.Empty);
             streamWriter.Close();
         }
 
@@ -164,7 +162,7 @@ namespace DAL
 
         private static string GetItemInLine(string itemName, string line)
         {
-            var fieldIndex = Award.GetFieldIndex(itemName);
+            var fieldIndex = User.GetFieldIndex(itemName);
 
             if (fieldIndex == -1)
             {
