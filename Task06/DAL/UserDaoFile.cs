@@ -171,17 +171,21 @@ namespace DAL
             return userIdList.ToArray();
         }
 
+        public string[] GetAllUsers()
+        {
+            CheckFileExistance();
+
+            Thread.Sleep(10);
+
+            return File.ReadAllLines(FilePath);
+        }
+
         private void CheckFileExistance()
         {
             if (!File.Exists(FilePath))
             {
                 throw new FileNotFoundException($"{nameof(FilePath)} is not exists!");
             }
-        }
-
-        public string[] GetAllUsers()
-        {
-            throw new NotImplementedException();
         }
     }
 }
