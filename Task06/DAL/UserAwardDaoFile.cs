@@ -42,21 +42,39 @@ namespace DAL
 
         public void PrintUsersAwards(string[] userLines, string[] awardLines)
         {
-            var userAwardsList = GetUserAwardsList();
+            var userAwardsDict = GetUserAwardsDict();
 
-            foreach (var kvPair in userAwardsList)
+            foreach (var userLine in userLines)
             {
-                var userId = kvPair.Key;
+                var userId = userLine.Split(Separator)[0];
 
-                var userLine = GetUserLine(userLines, userId);
+                PrintUserLine(userLine);
 
-                if (userLine != string.Empty)
+                foreach (var kvPair in userAwardsDict)
                 {
-                    PrintUserLine(userLine);
+                    if (userId == kvPair.Key)
+                    {
+                        PrintAwards(awardLines, kvPair);
+                    }
                 }
-
-                PrintAwards(awardLines, kvPair);
             }
+        }
+
+        private void PrintUserLine(string userLine)
+        {
+            var userLineArray = userLine.Split(Separator);
+
+            for (int i = 1; i < userLineArray.Length; i++)
+            {
+                Console.Write(userLineArray[i]);
+
+                if (i != userLineArray.Length - 1)
+                {
+                    Console.Write("---");
+                }
+            }
+
+            Console.WriteLine();
         }
 
         private void PrintAwards(string[] awardLines, KeyValuePair<string, string[]> kvPair)
@@ -69,23 +87,10 @@ namespace DAL
 
                 if (awardIdArray.Contains(awardId))
                 {
-                    Console.Write("---" + awardName + "---");
+                    Console.Write("---" + awardName);
                 }
 
                 Console.WriteLine();
-            }
-        }
-
-        private void PrintUserLine(string userLine)
-        {
-            for (int i = 1; i < userLine.Length; i++)
-            {
-                Console.Write(userLine[i]);
-
-                if (i != userLine.Length - 1)
-                {
-                    Console.Write("---");
-                }
             }
         }
 
@@ -102,9 +107,9 @@ namespace DAL
             return string.Empty;
         }
 
-        private List<KeyValuePair<string, string[]>> GetUserAwardsList()
+        private Dictionary<string, string[]> GetUserAwardsDict()
         {
-            var userAwardsList = new List<KeyValuePair<string, string[]>>();
+            var userAwardsDict = new Dictionary<string, string[]>();
 
             if (File.Exists(FilePath))
             {
@@ -118,11 +123,14 @@ namespace DAL
                     var userId = userAwardLine.Split(Separator)[0];
                     var awardIdArray = GetAwardIdArray(userAwardLines, userId);
 
-                    userAwardsList.Add(new KeyValuePair<string, string[]>(userId, awardIdArray));
+                    if (!userAwardsDict.ContainsKey(userId))
+                    {
+                        userAwardsDict.Add(userId, awardIdArray);
+                    }
                 }
             }
 
-            return userAwardsList;
+            return userAwardsDict;
         }
 
         private string[] GetAwardIdArray(string[] userAwardLines, string userId)
