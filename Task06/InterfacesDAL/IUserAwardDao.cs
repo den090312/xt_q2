@@ -2,7 +2,7 @@
 {
     public interface IUserAwardDao
     {
-        void JoinAwardsToUsers(string[] awardIdArray, string[] userIdArray);
+        void JoinAwardsToUsers(string[] userIdArray, string[] awardIdArray);
 
         void PrintUsersAwards();
     }

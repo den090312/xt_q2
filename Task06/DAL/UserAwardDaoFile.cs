@@ -19,7 +19,7 @@ namespace DAL
             Separator = '|';
         }
 
-        public void JoinAwardsToUsers(string[] awardIdArray, string[] userIdArray)
+        public void JoinAwardsToUsers(string[] userIdArray, string[] awardIdArray)
         {
             PrepareUserAwardFile();
 

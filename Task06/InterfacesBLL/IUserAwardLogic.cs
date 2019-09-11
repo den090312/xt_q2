@@ -2,7 +2,7 @@
 {
     public interface IUserAwardLogic
     {
-        void JoinAwardToUser(string awardName, string userName);
+        void JoinAwardToUser(string userName, string awardName);
 
         void PrintUsersAwards();
     }
