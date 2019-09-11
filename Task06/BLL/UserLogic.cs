@@ -29,14 +29,14 @@ namespace BLL
             iUserDao.AddUser(user);
         }
 
-        public void PrintUsers() => iUserDao.PrintUsers();
-
         public void RemoveUsers(string userName)
         {
             NullCheck(userName);
 
             iUserDao.RemoveUsers(userName);
         }
+
+        public void PrintUsers() => iUserDao.PrintUsers();
 
         private static void CheckDateOfBirth(DateTime birthDate)
         {

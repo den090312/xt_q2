@@ -126,8 +126,6 @@ namespace DAL
             }
         }
 
-        private static string AwardID(string line) => GetItemInLine("AwardID", line);
-
         private static string Title(string line) => GetItemInLine("Title", line);
 
         private static string GetItemInLine(string itemName, string line)

@@ -28,14 +28,13 @@ namespace BLL
             iAwardDao.AddAward(award);
         }
 
-        public void PrintAwards() => iAwardDao.PrintAwards();
-
         public void RemoveAwards(string title)
         {
             NullCheck(title);
 
             iAwardDao.RemoveAwards(title);
         }
+        public void PrintAwards() => iAwardDao.PrintAwards();
 
         private static void NullCheck<T>(T classObject) where T : class
         {

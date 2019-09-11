@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Entities
+﻿namespace Entities
 {
-    class UserAward
+    public class UserAward
     {
+        public string UserID { get; } = string.Empty;
+
+        public string AwardID { get; } = string.Empty;
+
+        public UserAward(string userID, string awardID)
+        {
+            UserID = userID;
+            AwardID = awardID;
+        }
     }
 }
