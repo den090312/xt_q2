@@ -11,6 +11,8 @@ namespace BLL
 
         public UserLogic(IUserDao iUserDao)
         {
+            NullCheck(iUserDao);
+
             this.iUserDao = iUserDao;
         }
 

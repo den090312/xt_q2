@@ -29,7 +29,7 @@ namespace DAL
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(FilePath, true);
 
-            streamWriter.Write(award.AwardID + Separator);
+            streamWriter.Write(award.AwardId + Separator);
             streamWriter.Write(award.Title);
             streamWriter.WriteLine();
 

@@ -29,7 +29,7 @@ namespace DAL
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(FilePath, true);
 
-            streamWriter.Write(user.UserID + Separator);
+            streamWriter.Write(user.UserId + Separator);
             streamWriter.Write(user.Name + Separator);
             streamWriter.Write(user.DateOfBirth.ToString("dd.MM.yyyy") + Separator);
             streamWriter.Write(user.Age);

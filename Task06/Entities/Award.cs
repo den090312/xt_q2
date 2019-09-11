@@ -4,13 +4,13 @@ namespace Entities
 {
     public class Award
     {
-        public string AwardID { get; } = string.Empty;
+        public string AwardId { get; } = string.Empty;
 
         public string Title { get; } = string.Empty;
 
         public Award(string title)
         {
-            AwardID = Guid.NewGuid().ToString();
+            AwardId = Guid.NewGuid().ToString();
             Title = title;
         }
 

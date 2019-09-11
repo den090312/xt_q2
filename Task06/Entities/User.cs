@@ -4,7 +4,7 @@ namespace Entities
 {
     public class User
     {
-        public string UserID { get; } = string.Empty;
+        public string UserId { get; } = string.Empty;
 
         public string Name { get; } = string.Empty;
 
@@ -28,7 +28,7 @@ namespace Entities
 
         public User(string name, DateTime dateOfBirth)
         {
-            UserID = Guid.NewGuid().ToString();
+            UserId = Guid.NewGuid().ToString();
             Name = name;
             DateOfBirth = dateOfBirth;
         }
