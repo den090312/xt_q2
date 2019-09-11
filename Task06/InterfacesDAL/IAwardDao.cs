@@ -11,5 +11,7 @@ namespace InterfacesDAL
         void PrintAwards();
 
         string[] GetAwardIdArray(string awardName);
+
+        string[] GetAllAwards();
     }
 }

@@ -33,7 +33,13 @@ namespace BLL
 
         public void PrintUsersAwards()
         {
-            throw new NotImplementedException();
+            var userLines = iUserDao.GetAllUsers();
+            var awardLines = iAwardDao.GetAllAwards();
+
+            NullCheck(userLines);
+            NullCheck(awardLines);
+
+            iUserAwardDao.PrintUsersAwards(userLines, awardLines);
         }
 
         private static void NullCheck<T>(T classObject) where T : class

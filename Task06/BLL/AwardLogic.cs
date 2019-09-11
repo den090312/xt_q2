@@ -51,5 +51,10 @@ namespace BLL
                 throw new ArgumentNullException($"{nameof(classObject)} is null!");
             }
         }
+
+        public string[] GetAllAwards()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

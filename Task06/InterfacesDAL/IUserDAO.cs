@@ -11,5 +11,7 @@ namespace InterfacesDAL
         void PrintUsers();
 
         string[] GetUserIdArray(string userName);
+
+        string[] GetAllUsers();
     }
 }

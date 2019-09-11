@@ -67,5 +67,10 @@ namespace BLL
 
             return iUserDao.GetUserIdArray(userName);
         }
+
+        public string[] GetAllUsers()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using InterfacesDAL;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 
 namespace DAL
@@ -38,9 +40,64 @@ namespace DAL
             streamWriter.Close();
         }
 
-        public void PrintUsersAwards()
+        public void PrintUsersAwards(string[] userLines, string[] awardLines)
         {
             var userAwardsDict = GetUserAwardsDict();
+
+            foreach (var kvPair in userAwardsDict)
+            {
+                var userId = kvPair.Key;
+
+                var userLine = GetUserLine(userLines, userId);
+
+                if (userLine != string.Empty)
+                {
+                    PrintUserLine(userLine);
+                }
+
+                PrintAwards(awardLines, kvPair);
+            }
+        }
+
+        private void PrintAwards(string[] awardLines, KeyValuePair<string, string[]> kvPair)
+        {
+            foreach (var awardLine in awardLines)
+            {
+                var awardIdArray = kvPair.Value;
+                var awardId = awardLine.Split(Separator)[0];
+                var awardName = awardLine.Split(Separator)[1];
+
+                if (awardIdArray.Contains(awardId))
+                {
+                    Console.WriteLine("---" + awardName + "---");
+                }
+            }
+        }
+
+        private void PrintUserLine(string userLine)
+        {
+            for (int i = 1; i < userLine.Length; i++)
+            {
+                Console.Write(userLine[i]);
+
+                if (i != userLine.Length - 1)
+                {
+                    Console.Write("---");
+                }
+            }
+        }
+
+        private string GetUserLine(string[] userLines, string userId)
+        {
+            foreach (var userLine in userLines)
+            {
+                if (userLine.Split(Separator)[0] == userId)
+                {
+                    return userLine;
+                }
+            }
+
+            return string.Empty;
         }
 
         private Dictionary<string, string[]> GetUserAwardsDict()

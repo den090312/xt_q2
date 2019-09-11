@@ -13,5 +13,7 @@ namespace InterfacesBLL
         void PrintAwards();
 
         string[] GetAwardIdArray(string awardName);
+
+        string[] GetAllAwards();
     }
 }
