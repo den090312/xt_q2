@@ -6,19 +6,19 @@ namespace BLL
 {
     public class UserAwardLogic : IUserAwardLogic
     {
-        private readonly IUserAwardDao iUserAwardDao;
-        private readonly IUserDao iUserDao;
-        private readonly IAwardDao iAwardDao;
+        private readonly IUserAwardDao _userAwardDao;
+        private readonly IUserDao _userDao;
+        private readonly IAwardDao _awardDao;
 
-        public UserAwardLogic(IUserAwardDao iUserAwardDao, IUserDao iUserDao, IAwardDao iAwardDao)
+        public UserAwardLogic(IUserAwardDao userAwardDao, IUserDao userDao, IAwardDao awardDao)
         {
-            NullCheck(iUserAwardDao);
-            NullCheck(iUserDao);
-            NullCheck(iAwardDao);
+            NullCheck(userAwardDao);
+            NullCheck(userDao);
+            NullCheck(awardDao);
 
-            this.iUserAwardDao = iUserAwardDao;
-            this.iUserDao = iUserDao;
-            this.iAwardDao = iAwardDao;
+            _userAwardDao = userAwardDao;
+            _userDao = userDao;
+            _awardDao = awardDao;
         }
 
         public void JoinAwardToUser(string userName, string awardName)
@@ -26,24 +26,24 @@ namespace BLL
             NullCheck(userName);
             NullCheck(awardName);
 
-            var userIdArray = iUserDao.GetUserIdArray(userName);
-            var awardIdArray = iAwardDao.GetAwardIdArray(awardName);
+            var userIdArray = _userDao.GetUserIdArray(userName);
+            var awardIdArray = _awardDao.GetAwardIdArray(awardName);
 
             NullCheck(userIdArray);
             NullCheck(awardIdArray);
 
-            iUserAwardDao.JoinAwardsToUsers(userIdArray, awardIdArray);
+            _userAwardDao.JoinAwardsToUsers(userIdArray, awardIdArray);
         }
 
         public void PrintUsersAwards()
         {
-            var userLines = iUserDao.GetAllUsers();
-            var awardLines = iAwardDao.GetAllAwards();
+            var userLines = _userDao.GetAllUsers();
+            var awardLines = _awardDao.GetAllAwards();
 
             NullCheck(userLines);
             NullCheck(awardLines);
 
-            iUserAwardDao.PrintUsersAwards(userLines, awardLines);
+            _userAwardDao.PrintUsersAwards(userLines, awardLines);
         }
 
         private static void NullCheck<T>(T classObject) where T : class

@@ -7,11 +7,11 @@ namespace BLL
 {
     public class AwardLogic : IAwardLogic
     {
-        private readonly IAwardDao iAwardDao;
+        private readonly IAwardDao _awardDao;
 
-        public AwardLogic(IAwardDao iAwardDao)
+        public AwardLogic(IAwardDao awardDao)
         {
-            this.iAwardDao = iAwardDao;
+            _awardDao = awardDao;
         }
 
         public Award CreateAward(string title)
@@ -25,23 +25,23 @@ namespace BLL
         {
             NullCheck(award);
 
-            iAwardDao.AddAward(award);
+            _awardDao.AddAward(award);
         }
 
         public void RemoveAwards(string title)
         {
             NullCheck(title);
 
-            iAwardDao.RemoveAwards(title);
+            _awardDao.RemoveAwards(title);
         }
 
-        public void PrintAwards() => iAwardDao.PrintAwards();
+        public void PrintAwards() => _awardDao.PrintAwards();
 
         public string[] GetAwardIdArray(string awardName)
         {
             NullCheck(awardName);
 
-            return iAwardDao.GetAwardIdArray(awardName);
+            return _awardDao.GetAwardIdArray(awardName);
         }
 
         private static void NullCheck<T>(T classObject) where T : class
