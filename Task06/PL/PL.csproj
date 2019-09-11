@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsolePL.cs" />
+    <Compile Include="ConsolePl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -63,9 +63,9 @@
       <Project>{030F46AD-2DA9-4556-A51B-5EA5F76C82AB}</Project>
       <Name>Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\InterfacesBLL\InterfacesBLL.csproj">
+    <ProjectReference Include="..\InterfacesBLL\InterfacesBll.csproj">
       <Project>{53911CD3-40C3-4177-BBF5-4B2C65E21106}</Project>
-      <Name>InterfacesBLL</Name>
+      <Name>InterfacesBll</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

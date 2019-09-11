@@ -53,13 +53,13 @@
       <Project>{3eb13b25-dbb9-428b-b03f-9c3cc340cab9}</Project>
       <Name>DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\InterfacesBLL\InterfacesBLL.csproj">
+    <ProjectReference Include="..\InterfacesBLL\InterfacesBll.csproj">
       <Project>{53911CD3-40C3-4177-BBF5-4B2C65E21106}</Project>
-      <Name>InterfacesBLL</Name>
+      <Name>InterfacesBll</Name>
     </ProjectReference>
-    <ProjectReference Include="..\InterfacesDAL\InterfacesDAL.csproj">
+    <ProjectReference Include="..\InterfacesDAL\InterfacesDal.csproj">
       <Project>{847D29C2-3216-4E63-9013-B8D2F8BCA814}</Project>
-      <Name>InterfacesDAL</Name>
+      <Name>InterfacesDal</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

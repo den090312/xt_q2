@@ -4,13 +4,13 @@ using System;
 using System.Globalization;
 using System.Text;
 
-namespace PL
+namespace Pl
 {
-    public class ConsolePL
+    public class ConsolePl
     {
-        private IUserLogic userBLL;
-        private IAwardLogic awardBLL;
-        private IUserAwardLogic userAwardBLL;
+        private IUserLogic userBll;
+        private IAwardLogic awardBll;
+        private IUserAwardLogic userAwardBll;
 
         private ConsoleSegment consoleSegment = ConsoleSegment.None;
 
@@ -26,17 +26,17 @@ namespace PL
 
         public void Run()
         {
-            SetBLL();
+            SetBll();
             RunInput();
         }
 
-        private void SetBLL()
+        private void SetBll()
         {
             var dr = new DependencyResolver();
 
-            userBLL = dr.UserBLL;
-            awardBLL = dr.AwardBLL;
-            userAwardBLL = dr.UserAwardBLL;
+            userBll = dr.UserBll;
+            awardBll = dr.AwardBll;
+            userAwardBll = dr.UserAwardBll;
         }
 
         private void RunInput()
@@ -169,30 +169,30 @@ namespace PL
             consoleSegment = ConsoleSegment.Award;
             var awardName = GetUserString("title");
 
-            userAwardBLL.JoinAwardToUser(userName, awardName);
+            userAwardBll.JoinAwardToUser(userName, awardName);
         }
 
         private void CreateUser(string dateFormat)
         {
-            var user = userBLL.CreateUser(GetUserString("name"), GetUserDate(dateFormat));
+            var user = userBll.CreateUser(GetUserString("name"), GetUserDate(dateFormat));
 
-            userBLL.AddUser(user);
+            userBll.AddUser(user);
         }
 
-        private void RemoveUsers() => userBLL.RemoveUsers(GetUserString("name"));
+        private void RemoveUsers() => userBll.RemoveUsers(GetUserString("name"));
 
-        private void PrintUsersAwards() => userAwardBLL.PrintUsersAwards();
+        private void PrintUsersAwards() => userAwardBll.PrintUsersAwards();
 
         private void CreateAward()
         {
-            var award = awardBLL.CreateAward(GetUserString("title"));
+            var award = awardBll.CreateAward(GetUserString("title"));
 
-            awardBLL.AddAward(award);
+            awardBll.AddAward(award);
         }
 
-        private void RemoveAwards() => awardBLL.RemoveAwards(GetUserString("award"));
+        private void RemoveAwards() => awardBll.RemoveAwards(GetUserString("award"));
 
-        private void PrintAwards() => awardBLL.PrintAwards();
+        private void PrintAwards() => awardBll.PrintAwards();
 
         private void WriteMenu()
         {

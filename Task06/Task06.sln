@@ -21,9 +21,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{2D130B30-49E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PL", "PL", "{5D52DC33-CBFC-4115-8F57-CA1BF886F1AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfacesBLL", "InterfacesBLL\InterfacesBLL.csproj", "{53911CD3-40C3-4177-BBF5-4B2C65E21106}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfacesBll", "InterfacesBLL\InterfacesBll.csproj", "{53911CD3-40C3-4177-BBF5-4B2C65E21106}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfacesDAL", "InterfacesDAL\InterfacesDAL.csproj", "{847D29C2-3216-4E63-9013-B8D2F8BCA814}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfacesDal", "InterfacesDAL\InterfacesDal.csproj", "{847D29C2-3216-4E63-9013-B8D2F8BCA814}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
