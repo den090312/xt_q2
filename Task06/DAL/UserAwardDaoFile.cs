@@ -31,13 +31,18 @@ namespace DAL
 
             foreach (var userId in userIdArray)
             {
-                foreach (var awardId in awardIdArray)
-                {
-                    streamWriter.WriteLine(userId + Separator + awardId);
-                }
+                WriteUserAwardLine(awardIdArray, streamWriter, userId);
             }
 
             streamWriter.Close();
+        }
+
+        private void WriteUserAwardLine(string[] awardIdArray, StreamWriter streamWriter, string userId)
+        {
+            foreach (var awardId in awardIdArray)
+            {
+                streamWriter.WriteLine(userId + Separator + awardId);
+            }
         }
 
         public void PrintUsersAwards(string[] userLines, string[] awardLines)
@@ -49,62 +54,8 @@ namespace DAL
                 var userId = userLine.Split(Separator)[0];
 
                 PrintUserLine(userLine);
-
-                foreach (var kvPair in userAwardsDict)
-                {
-                    if (userId == kvPair.Key)
-                    {
-                        PrintAwards(awardLines, kvPair);
-                    }
-                }
+                PrintAwardLines(awardLines, userAwardsDict, userId);
             }
-        }
-
-        private void PrintUserLine(string userLine)
-        {
-            var userLineArray = userLine.Split(Separator);
-
-            for (int i = 1; i < userLineArray.Length; i++)
-            {
-                Console.Write(userLineArray[i]);
-
-                if (i != userLineArray.Length - 1)
-                {
-                    Console.Write("---");
-                }
-            }
-
-            Console.WriteLine();
-        }
-
-        private void PrintAwards(string[] awardLines, KeyValuePair<string, string[]> kvPair)
-        {
-            foreach (var awardLine in awardLines)
-            {
-                var awardIdArray = kvPair.Value;
-                var awardId = awardLine.Split(Separator)[0];
-                var awardName = awardLine.Split(Separator)[1];
-
-                if (awardIdArray.Contains(awardId))
-                {
-                    Console.Write("---" + awardName);
-                }
-
-                Console.WriteLine();
-            }
-        }
-
-        private string GetUserLine(string[] userLines, string userId)
-        {
-            foreach (var userLine in userLines)
-            {
-                if (userLine.Split(Separator)[0] == userId)
-                {
-                    return userLine;
-                }
-            }
-
-            return string.Empty;
         }
 
         private Dictionary<string, string[]> GetUserAwardsDict()
@@ -131,6 +82,51 @@ namespace DAL
             }
 
             return userAwardsDict;
+        }
+
+        private void PrintUserLine(string userLine)
+        {
+            var userLineArray = userLine.Split(Separator);
+
+            for (int i = 1; i < userLineArray.Length; i++)
+            {
+                Console.Write(userLineArray[i]);
+
+                if (i != userLineArray.Length - 1)
+                {
+                    Console.Write("---");
+                }
+            }
+
+            Console.WriteLine();
+        }
+
+        private void PrintAwardLines(string[] awardLines, Dictionary<string, string[]> userAwardsDict, string userId)
+        {
+            foreach (var kvPair in userAwardsDict)
+            {
+                if (userId == kvPair.Key)
+                {
+                    PrintAwards(awardLines, kvPair);
+                }
+            }
+        }
+
+        private void PrintAwards(string[] awardLines, KeyValuePair<string, string[]> kvPair)
+        {
+            foreach (var awardLine in awardLines)
+            {
+                var awardIdArray = kvPair.Value;
+                var awardId = awardLine.Split(Separator)[0];
+                var awardName = awardLine.Split(Separator)[1];
+
+                if (awardIdArray.Contains(awardId))
+                {
+                    Console.Write("---" + awardName);
+                }
+
+                Console.WriteLine();
+            }
         }
 
         private string[] GetAwardIdArray(string[] userAwardLines, string userId)
