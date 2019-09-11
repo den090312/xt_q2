@@ -1,9 +1,11 @@
-﻿namespace InterfacesDAL
+﻿using System.Collections.Generic;
+
+namespace InterfacesDAL
 {
     public interface IUserAwardDao
     {
         void JoinAwardsToUsers(string[] userIdArray, string[] awardIdArray);
 
-        void PrintUsersAwards();
+        void PrintUsersAwards(Dictionary<string, string[]> userAwardsDict);
     }
 }

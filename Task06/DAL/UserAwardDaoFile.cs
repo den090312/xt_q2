@@ -38,8 +38,10 @@ namespace DAL
             streamWriter.Close();
         }
 
-        public void PrintUsersAwards()
+        public Dictionary<string, string[]> GetUserAwardsDict()
         {
+            var userAwardsDict = new Dictionary<string, string[]>();
+
             if (File.Exists(FilePath))
             {
                 SetNormalAttributes();
@@ -51,8 +53,17 @@ namespace DAL
                 {
                     var userId = userAwardLine.Split(Separator)[0];
                     var awardIdArray = GetAwardIdArray(userAwardLines, userId);
+
+                    userAwardsDict.Add(userId, awardIdArray);
                 }
             }
+
+            return userAwardsDict;
+        }
+
+        public void PrintUsersAwards(Dictionary<string, string[]> userAwardsDict)
+        {
+
         }
 
         private string[] GetAwardIdArray(string[] userAwardLines, string userId)
