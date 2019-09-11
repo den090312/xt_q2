@@ -37,7 +37,7 @@ namespace DAL
             streamWriter.Close();
         }
 
-        public void PrintUserAwards()
+        public void PrintUsersAwards()
         {
             throw new System.NotImplementedException();
         }

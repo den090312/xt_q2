@@ -73,7 +73,7 @@ namespace PL
                             inputComplete = UserRemoving();
                             break;
                         case 3:
-                            inputComplete = UserPrinting();
+                            inputComplete = UsersAwardsPrint();
                             break;
                         case 4:
                             inputComplete = AwardCreation();
@@ -82,7 +82,7 @@ namespace PL
                             inputComplete = AwardRemoving();
                             break;
                         case 6:
-                            inputComplete = AwardPrinting();
+                            inputComplete = AwardPrint();
                             break;
                         case 7:
                             inputComplete = JoinAwardToUser();
@@ -115,11 +115,11 @@ namespace PL
             return InputComplete();
         }
 
-        private bool UserPrinting()
+        private bool UsersAwardsPrint()
         {
             consoleSegment = ConsoleSegment.User;
             Console.Clear();
-            PrintUsers();
+            PrintUsersAwards();
             Console.WriteLine();
 
             return InputComplete();
@@ -143,7 +143,7 @@ namespace PL
             return InputComplete();
         }
 
-        private bool AwardPrinting()
+        private bool AwardPrint()
         {
             consoleSegment = ConsoleSegment.Award;
             Console.Clear();
@@ -169,7 +169,7 @@ namespace PL
             consoleSegment = ConsoleSegment.Award;
             var awardName = GetUserString("title");
 
-            userAwardBLL.JoinAwardsToUsers(awardBLL.GetAwardIdArray(awardName), userBLL.GetUserIdArray(userName));
+            userAwardBLL.JoinAwardsToUsers(awardName, userName);
         }
 
         private void CreateUser(string dateFormat)
@@ -181,7 +181,7 @@ namespace PL
 
         private void RemoveUsers() => userBLL.RemoveUsers(GetUserString("name"));
 
-        private void PrintUsers() => userBLL.PrintUsers();
+        private void PrintUsersAwards() => userAwardBLL.PrintUsersAwards();
 
         private void CreateAward()
         {

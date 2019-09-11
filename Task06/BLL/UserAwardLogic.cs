@@ -7,21 +7,31 @@ namespace BLL
     public class UserAwardLogic : IUserAwardLogic
     {
         private readonly IUserAwardDao iUserAwardDao;
+        private readonly IUserDao iUserDao;
+        private readonly IAwardDao iAwardDao;
 
-        public UserAwardLogic(IUserAwardDao iUserAwardDao)
+        public UserAwardLogic(IUserAwardDao iUserAwardDao, IUserDao iUserDao, IAwardDao iAwardDao)
         {
             this.iUserAwardDao = iUserAwardDao;
+            this.iUserDao = iUserDao;
+            this.iAwardDao = iAwardDao;
         }
 
-        public void JoinAwardsToUsers(string[] awardIdArray, string[] userIdArray)
+        public void JoinAwardsToUsers(string userName, string awardName)
         {
-            NullCheck(awardIdArray);
-            NullCheck(userIdArray);
+            NullCheck(userName);
+            NullCheck(awardName);
 
-            iUserAwardDao.JoinAwardsToUsers(awardIdArray, userIdArray);
+            var userIdArray = iUserDao.GetUserIdArray(userName);
+            var awardIdArray = iAwardDao.GetAwardIdArray(awardName);
+
+            NullCheck(userIdArray);
+            NullCheck(awardIdArray);
+
+            iUserAwardDao.JoinAwardsToUsers(userIdArray, awardIdArray);
         }
 
-        public void PrintUserAwards()
+        public void PrintUsersAwards()
         {
             throw new NotImplementedException();
         }

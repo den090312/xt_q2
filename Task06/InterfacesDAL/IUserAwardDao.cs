@@ -4,6 +4,6 @@
     {
         void JoinAwardsToUsers(string[] awardIdArray, string[] userIdArray);
 
-        void PrintUserAwards();
+        void PrintUsersAwards();
     }
 }

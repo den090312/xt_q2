@@ -2,8 +2,8 @@
 {
     public interface IUserAwardLogic
     {
-        void JoinAwardsToUsers(string[] awardIdArray, string[] userIdArray);
+        void JoinAwardsToUsers(string awardName, string userName);
 
-        void PrintUserAwards();
+        void PrintUsersAwards();
     }
 }
