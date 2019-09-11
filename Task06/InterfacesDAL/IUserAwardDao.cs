@@ -6,6 +6,6 @@ namespace InterfacesDAL
     {
         void JoinAwardsToUsers(string[] userIdArray, string[] awardIdArray);
 
-        void PrintUsersAwards(Dictionary<string, string[]> userAwardsDict);
+        void PrintUsersAwards();
     }
 }

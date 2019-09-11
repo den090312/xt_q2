@@ -38,7 +38,12 @@ namespace DAL
             streamWriter.Close();
         }
 
-        public Dictionary<string, string[]> GetUserAwardsDict()
+        public void PrintUsersAwards()
+        {
+            var userAwardsDict = GetUserAwardsDict();
+        }
+
+        private Dictionary<string, string[]> GetUserAwardsDict()
         {
             var userAwardsDict = new Dictionary<string, string[]>();
 
@@ -59,11 +64,6 @@ namespace DAL
             }
 
             return userAwardsDict;
-        }
-
-        public void PrintUsersAwards(Dictionary<string, string[]> userAwardsDict)
-        {
-
         }
 
         private string[] GetAwardIdArray(string[] userAwardLines, string userId)
