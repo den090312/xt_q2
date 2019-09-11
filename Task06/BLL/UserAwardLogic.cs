@@ -12,6 +12,10 @@ namespace BLL
 
         public UserAwardLogic(IUserAwardDao iUserAwardDao, IUserDao iUserDao, IAwardDao iAwardDao)
         {
+            NullCheck(iUserAwardDao);
+            NullCheck(iUserDao);
+            NullCheck(iAwardDao);
+
             this.iUserAwardDao = iUserAwardDao;
             this.iUserDao = iUserDao;
             this.iAwardDao = iAwardDao;
