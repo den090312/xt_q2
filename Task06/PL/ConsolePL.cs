@@ -68,25 +68,25 @@ namespace PL
                     switch (userKey)
                     {
                         case 1:
-                            inputComplete = StartUserCreation();
+                            inputComplete = UserCreation();
                             break;
                         case 2:
-                            inputComplete = StartUserRemoving();
+                            inputComplete = UserRemoving();
                             break;
                         case 3:
-                            inputComplete = StartUserPrinting();
+                            inputComplete = UserPrinting();
                             break;
                         case 4:
-                            inputComplete = StartAwardCreation();
+                            inputComplete = AwardCreation();
                             break;
                         case 5:
-                            inputComplete = StartAwardRemoving();
+                            inputComplete = AwardRemoving();
                             break;
                         case 6:
-                            inputComplete = StartAwardPrinting();
+                            inputComplete = AwardPrinting();
                             break;
                         case 7:
-                            inputComplete = StartJoin();
+                            inputComplete = JoinAwardToUser();
                             break;
                         case 8:
                             Console.WriteLine();
@@ -98,51 +98,7 @@ namespace PL
             return inputComplete;
         }
 
-        private bool StartJoin()
-        {
-            JoinAwardToUser();
-            Console.WriteLine("---Done---");
-
-            return InputComplete();
-        }
-
-        private bool StartAwardPrinting()
-        {
-            Console.WriteLine();
-            //PrintAwards();
-            Console.WriteLine("---Done---");
-
-            return InputComplete();
-        }
-
-        private bool StartAwardRemoving()
-        {
-            consoleSegment = ConsoleSegment.Award;
-            //RemoveAward();
-            Console.WriteLine("---Done---");
-
-            return InputComplete();
-        }
-
-        private bool StartAwardCreation()
-        {
-            consoleSegment = ConsoleSegment.Award;
-            CreateAward();
-            Console.WriteLine("---Done---");
-
-            return InputComplete();
-        }
-
-        private bool StartUserRemoving()
-        {
-            consoleSegment = ConsoleSegment.User;
-            RemoveUser();
-            Console.WriteLine("---Done---");
-
-            return InputComplete();
-        }
-
-        private bool StartUserCreation()
+        private bool UserCreation()
         {
             consoleSegment = ConsoleSegment.User;
             CreateUser(dateFormat);
@@ -151,7 +107,16 @@ namespace PL
             return InputComplete();
         }
 
-        private bool StartUserPrinting()
+        private bool UserRemoving()
+        {
+            consoleSegment = ConsoleSegment.User;
+            RemoveUsers();
+            Console.WriteLine("---Done---");
+
+            return InputComplete();
+        }
+
+        private bool UserPrinting()
         {
             consoleSegment = ConsoleSegment.User;
             Console.Clear();
@@ -161,7 +126,43 @@ namespace PL
             return InputComplete();
         }
 
-        private void JoinAwardToUser()
+        private bool AwardCreation()
+        {
+            consoleSegment = ConsoleSegment.Award;
+            CreateAward();
+            Console.WriteLine("---Done---");
+
+            return InputComplete();
+        }
+
+        private bool AwardRemoving()
+        {
+            consoleSegment = ConsoleSegment.Award;
+            RemoveAwards();
+            Console.WriteLine("---Done---");
+
+            return InputComplete();
+        }
+
+        private bool AwardPrinting()
+        {
+            consoleSegment = ConsoleSegment.Award;
+            Console.Clear();
+            PrintAwards();
+            Console.WriteLine();
+
+            return InputComplete();
+        }
+
+        private bool JoinAwardToUser()
+        {
+            Join();
+            Console.WriteLine("---Done---");
+
+            return InputComplete();
+        }
+
+        private void Join()
         {
             consoleSegment = ConsoleSegment.User;
             var userName = GetUserString("name");
@@ -179,7 +180,7 @@ namespace PL
             userBLL.AddUser(user);
         }
 
-        private void RemoveUser() => userBLL.RemoveUsers(GetUserString("name"));
+        private void RemoveUsers() => userBLL.RemoveUsers(GetUserString("name"));
 
         private void PrintUsers() => userBLL.PrintUsers();
 
@@ -189,6 +190,10 @@ namespace PL
 
             awardBLL.AddAward(award);
         }
+
+        private void RemoveAwards() => awardBLL.RemoveAwards(GetUserString("award"));
+
+        private void PrintAwards() => awardBLL.PrintAwards();
 
         private void WriteMenu()
         {

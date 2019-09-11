@@ -37,7 +37,7 @@ namespace DAL
             streamWriter.Close();
         }
 
-        public void EraseUser(string userID)
+        public void RemoveUsers(string userName)
         {
             if (File.Exists(FilePath))
             {
@@ -53,7 +53,7 @@ namespace DAL
 
                 foreach (var line in userLines)
                 {
-                    if (UserID(line) != userID)
+                    if (Name(line) != userName)
                     {
                         streamWriter.WriteLine(line);
                     }
@@ -92,32 +92,6 @@ namespace DAL
                 {
                     Console.Write("---");
                 }
-            }
-        }
-
-        public void RemoveUsers(string userName)
-        {
-            if (File.Exists(FilePath))
-            {
-                SetNormalAttributes();
-
-                Thread.Sleep(10);
-                var userLines = File.ReadAllLines(FilePath);
-
-                File.Delete(FilePath);
-
-                Thread.Sleep(10);
-                var streamWriter = new StreamWriter(FilePath, true);
-
-                foreach (var line in userLines)
-                {
-                    if (Name(line) != userName)
-                    {
-                        streamWriter.WriteLine(line);
-                    }
-                }
-
-                streamWriter.Close();
             }
         }
 

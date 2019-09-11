@@ -9,7 +9,5 @@ namespace InterfacesDAL
         void RemoveAwards(string title);
 
         void PrintAwards();
-
-        void EraseAward(string awardID);
     }
 }

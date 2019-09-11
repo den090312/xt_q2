@@ -9,7 +9,7 @@ namespace Common
     {
         public readonly IUserLogic UserBLL = new UserLogic(new UserDaoFile());
 
-        public readonly IAwardLogic AwardBLL = new AwardLogic();
+        public readonly IAwardLogic AwardBLL = new AwardLogic(new AwardDaoFile());
 
         public readonly IUserAwardLogic UserAwardBLL = new UserAwardLogic();
 

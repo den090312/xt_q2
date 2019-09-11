@@ -37,13 +37,6 @@ namespace BLL
             iAwardDao.RemoveAwards(title);
         }
 
-        public void EraseAward(string awardID)
-        {
-            NullCheck(awardID);
-
-            iAwardDao.EraseAward(awardID);
-        }
-
         private static void NullCheck<T>(T classObject) where T : class
         {
             if (classObject is null)

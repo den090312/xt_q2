@@ -29,16 +29,18 @@ namespace DAL
             var streamWriter = new StreamWriter(FilePath, true);
 
             streamWriter.Write(award.AwardID + Separator);
-            streamWriter.Write(award.Title + Separator);
+            streamWriter.Write(award.Title);
             streamWriter.WriteLine();
 
             streamWriter.Close();
         }
 
-        public void EraseAward(string awardID)
+        public void RemoveAwards(string title)
         {
             if (File.Exists(FilePath))
             {
+                SetNormalAttributes();
+
                 Thread.Sleep(10);
                 var awardLines = File.ReadAllLines(FilePath);
 
@@ -49,7 +51,7 @@ namespace DAL
 
                 foreach (var line in awardLines)
                 {
-                    if (AwardID(line) != awardID)
+                    if (Title(line) != title)
                     {
                         streamWriter.WriteLine(line);
                     }
@@ -91,33 +93,6 @@ namespace DAL
             }
         }
 
-        public void RemoveAwards(string title)
-        {
-            if (File.Exists(FilePath))
-            {
-                SetNormalAttributes();
-
-                Thread.Sleep(10);
-                var awardLines = File.ReadAllLines(FilePath);
-
-                File.Delete(FilePath);
-
-                Thread.Sleep(10);
-                var streamWriter = new StreamWriter(FilePath, true);
-
-                foreach (var line in awardLines)
-                {
-                    if (Title(line) != title)
-                    {
-                        streamWriter.WriteLine(line);
-                    }
-                }
-
-                streamWriter.Close();
-            }
-        }
-
-
         private void PrepareUserFile()
         {
             if (File.Exists(FilePath))
@@ -151,14 +126,13 @@ namespace DAL
             }
         }
 
-
         private static string AwardID(string line) => GetItemInLine("AwardID", line);
 
         private static string Title(string line) => GetItemInLine("Title", line);
 
         private static string GetItemInLine(string itemName, string line)
         {
-            var fieldIndex = User.GetFieldIndex(itemName);
+            var fieldIndex = Award.GetFieldIndex(itemName);
 
             if (fieldIndex == -1)
             {

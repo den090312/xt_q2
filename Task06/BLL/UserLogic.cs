@@ -38,13 +38,6 @@ namespace BLL
             iUserDao.RemoveUsers(userName);
         }
 
-        public void EraseUser(string userID)
-        {
-            NullCheck(userID);
-
-            iUserDao.EraseUser(userID);
-        }
-
         private static void CheckDateOfBirth(DateTime birthDate)
         {
             DateTime currentDateTime = DateTime.Now.Date;
