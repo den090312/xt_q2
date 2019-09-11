@@ -40,46 +40,50 @@ namespace DAL
 
         public void RemoveUsers(string userName)
         {
-            if (File.Exists(FilePath))
+            if (!File.Exists(FilePath))
             {
-                SetNormalAttributes();
-
-                Thread.Sleep(10);
-                var userLines = File.ReadAllLines(FilePath);
-
-                File.Delete(FilePath);
-
-                Thread.Sleep(10);
-                var streamWriter = new StreamWriter(FilePath, true);
-
-                foreach (var line in userLines)
-                {
-                    if (Name(line) != userName)
-                    {
-                        streamWriter.WriteLine(line);
-                    }
-                }
-
-                streamWriter.Close();
+                return;
             }
+
+            SetNormalAttributes();
+
+            Thread.Sleep(10);
+            var userLines = File.ReadAllLines(FilePath);
+
+            File.Delete(FilePath);
+
+            Thread.Sleep(10);
+            var streamWriter = new StreamWriter(FilePath, true);
+
+            foreach (var line in userLines)
+            {
+                if (Name(line) != userName)
+                {
+                    streamWriter.WriteLine(line);
+                }
+            }
+
+            streamWriter.Close();
         }
 
         public void PrintUsers()
         {
-            if (File.Exists(FilePath))
+            if (!File.Exists(FilePath))
             {
-                SetNormalAttributes();
+                return;
+            }
 
-                Thread.Sleep(10);
-                var userLines = File.ReadAllLines(FilePath);
+            SetNormalAttributes();
 
-                foreach (var line in userLines)
-                {
-                    var lineArray = line.Split(Separator);
+            Thread.Sleep(10);
+            var userLines = File.ReadAllLines(FilePath);
 
-                    PrintSingleUser(ref lineArray);
-                    Console.WriteLine();
-                }
+            foreach (var line in userLines)
+            {
+                var lineArray = line.Split(Separator);
+
+                PrintSingleUser(ref lineArray);
+                Console.WriteLine();
             }
         }
 

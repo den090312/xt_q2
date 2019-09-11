@@ -62,22 +62,24 @@ namespace DAL
         {
             var userAwardsDict = new Dictionary<string, string[]>();
 
-            if (File.Exists(FilePath))
+            if (!File.Exists(FilePath))
             {
-                SetNormalAttributes();
+                return userAwardsDict;
+            }
 
-                Thread.Sleep(10);
-                var userAwardLines = File.ReadAllLines(FilePath);
+            SetNormalAttributes();
 
-                foreach (var userAwardLine in userAwardLines)
+            Thread.Sleep(10);
+            var userAwardLines = File.ReadAllLines(FilePath);
+
+            foreach (var userAwardLine in userAwardLines)
+            {
+                var userId = userAwardLine.Split(Separator)[0];
+                var awardIdArray = GetAwardIdArray(userAwardLines, userId);
+
+                if (!userAwardsDict.ContainsKey(userId))
                 {
-                    var userId = userAwardLine.Split(Separator)[0];
-                    var awardIdArray = GetAwardIdArray(userAwardLines, userId);
-
-                    if (!userAwardsDict.ContainsKey(userId))
-                    {
-                        userAwardsDict.Add(userId, awardIdArray);
-                    }
+                    userAwardsDict.Add(userId, awardIdArray);
                 }
             }
 

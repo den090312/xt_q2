@@ -38,46 +38,50 @@ namespace DAL
 
         public void RemoveAwards(string title)
         {
-            if (File.Exists(FilePath))
+            if (!File.Exists(FilePath))
             {
-                SetNormalAttributes();
-
-                Thread.Sleep(10);
-                var awardLines = File.ReadAllLines(FilePath);
-
-                File.Delete(FilePath);
-
-                Thread.Sleep(10);
-                var streamWriter = new StreamWriter(FilePath, true);
-
-                foreach (var line in awardLines)
-                {
-                    if (Title(line) != title)
-                    {
-                        streamWriter.WriteLine(line);
-                    }
-                }
-
-                streamWriter.Close();
+                return;
             }
+
+            SetNormalAttributes();
+
+            Thread.Sleep(10);
+            var awardLines = File.ReadAllLines(FilePath);
+
+            File.Delete(FilePath);
+
+            Thread.Sleep(10);
+            var streamWriter = new StreamWriter(FilePath, true);
+
+            foreach (var line in awardLines)
+            {
+                if (Title(line) != title)
+                {
+                    streamWriter.WriteLine(line);
+                }
+            }
+
+            streamWriter.Close();
         }
 
         public void PrintAwards()
         {
-            if (File.Exists(FilePath))
+            if (!File.Exists(FilePath))
             {
-                SetNormalAttributes();
+                return;
+            }
 
-                Thread.Sleep(10);
-                var awardLines = File.ReadAllLines(FilePath);
+            SetNormalAttributes();
 
-                foreach (var line in awardLines)
-                {
-                    var lineArray = line.Split(Separator);
+            Thread.Sleep(10);
+            var awardLines = File.ReadAllLines(FilePath);
 
-                    PrintSingleAward(ref lineArray);
-                    Console.WriteLine();
-                }
+            foreach (var line in awardLines)
+            {
+                var lineArray = line.Split(Separator);
+
+                PrintSingleAward(ref lineArray);
+                Console.WriteLine();
             }
         }
 
