@@ -2,7 +2,7 @@
 
 namespace InterfacesDAL
 {
-    public interface IUserDFO
+    public interface IUserDao
     {
         void AddUser(User user);
 

@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace DAL
 {
-    public class UserDFO : IUserDFO
+    public class UserDaoFile : IUserDao
     {
         public static string FilePath { get; private set; }
 
@@ -14,7 +14,7 @@ namespace DAL
 
         public static char Separator { get; private set; }
 
-        static UserDFO()
+        static UserDaoFile()
         {
             FilePath = @"D:\Task06\Users.txt";
             FileName = "Users.txt";
@@ -111,16 +111,6 @@ namespace DAL
             }
 
             streamWriter.Close();
-        }
-
-        public string[] GetUserIDArray(string userName)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public bool UsersExists(string userName)
-        {
-            throw new System.NotImplementedException();
         }
 
         private void PrepareUserFile()

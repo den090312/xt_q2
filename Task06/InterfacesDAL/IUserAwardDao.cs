@@ -1,6 +1,6 @@
 ﻿namespace InterfacesDAL
 {
-    public interface IUserAwardDFO
+    public interface IUserAwardDao
     {
 
     }

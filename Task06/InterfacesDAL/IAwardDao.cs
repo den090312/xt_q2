@@ -1,6 +1,6 @@
 ﻿namespace InterfacesDAL
 {
-    public interface IAwardDFO
+    public interface IAwardDao
     {
 
     }

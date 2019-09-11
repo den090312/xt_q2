@@ -7,11 +7,11 @@ namespace BLL
 {
     public class UserLogic : IUserLogic
     {
-        private readonly IUserDFO iUserDFO;
+        private readonly IUserDao iUserDao;
 
-        public UserLogic(IUserDFO iUserDFO)
+        public UserLogic(IUserDao iUserDao)
         {
-            this.iUserDFO = iUserDFO;
+            this.iUserDao = iUserDao;
         }
 
         public User CreateUser(string name, DateTime dateBirth)
@@ -26,23 +26,23 @@ namespace BLL
         {
             NullCheck(user);
 
-            iUserDFO.AddUser(user);
+            iUserDao.AddUser(user);
         }
 
-        public void PrintUsers() => iUserDFO.PrintUsers();
+        public void PrintUsers() => iUserDao.PrintUsers();
 
         public void RemoveUsers(string userName)
         {
             NullCheck(userName);
 
-            iUserDFO.RemoveUsers(userName);
+            iUserDao.RemoveUsers(userName);
         }
 
         public void EraseUser(string userID)
         {
             NullCheck(userID);
 
-            iUserDFO.EraseUser(userID);
+            iUserDao.EraseUser(userID);
         }
 
         private static void CheckDateOfBirth(DateTime birthDate)

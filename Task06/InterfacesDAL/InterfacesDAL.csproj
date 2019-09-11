@@ -41,9 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IAwardDFO.cs" />
-    <Compile Include="IUserAwardDFO.cs" />
-    <Compile Include="IUserDFO.cs" />
+    <Compile Include="IAwardDao.cs" />
+    <Compile Include="IUserAwardDao.cs" />
+    <Compile Include="IUserDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

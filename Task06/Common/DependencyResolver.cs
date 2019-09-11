@@ -7,16 +7,16 @@ namespace Common
 {
     public class DependencyResolver
     {
-        public readonly IUserLogic UserBLL = new UserLogic(new UserDFO());
+        public readonly IUserLogic UserBLL = new UserLogic(new UserDaoFile());
 
         public readonly IAwardLogic AwardBLL = new AwardLogic();
 
         public readonly IUserAwardLogic UserAwardBLL = new UserAwardLogic();
 
-        public readonly IUserDFO UserDAL = new UserDFO();
+        public readonly IUserDao UserDAL = new UserDaoFile();
 
-        public readonly IAwardDFO AwardDAL = new AwardDFO();
+        public readonly IAwardDao AwardDAL = new AwardDaoFile();
 
-        public readonly IUserAwardDFO UserAwardDAL = new UserAwardDFO();
+        public readonly IUserAwardDao UserAwardDAL = new UserAwardDaoFile();
     }
 }
