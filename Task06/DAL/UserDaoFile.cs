@@ -153,7 +153,7 @@ namespace DAL
 
         public string[] GetUserIdArray(string userName)
         {
-            var userIDList = new List<string>();
+            var userIdList = new List<string>();
 
             CheckFileExistance();
 
@@ -164,11 +164,11 @@ namespace DAL
             {
                 if (Name(line) == userName)
                 {
-                    userIDList.Add(UserID(line));
+                    userIdList.Add(UserID(line));
                 }
             }
 
-            return userIDList.ToArray();
+            return userIdList.ToArray();
         }
 
         private void CheckFileExistance()

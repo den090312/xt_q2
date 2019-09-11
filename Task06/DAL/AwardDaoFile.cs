@@ -151,7 +151,7 @@ namespace DAL
 
         public string[] GetAwardIdArray(string awardName)
         {
-            var userIDList = new List<string>();
+            var userIdList = new List<string>();
 
             CheckFileExistance();
 
@@ -162,11 +162,11 @@ namespace DAL
             {
                 if (Title(line) == awardName)
                 {
-                    userIDList.Add(AwardID(line));
+                    userIdList.Add(AwardID(line));
                 }
             }
 
-            return userIDList.ToArray();
+            return userIdList.ToArray();
         }
 
         private void CheckFileExistance()

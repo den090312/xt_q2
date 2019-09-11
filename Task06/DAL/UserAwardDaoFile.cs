@@ -1,4 +1,5 @@
 ﻿using InterfacesDAL;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 
@@ -39,7 +40,36 @@ namespace DAL
 
         public void PrintUsersAwards()
         {
-            throw new System.NotImplementedException();
+            if (File.Exists(FilePath))
+            {
+                SetNormalAttributes();
+
+                Thread.Sleep(10);
+                var userAwardLines = File.ReadAllLines(FilePath);
+
+                foreach (var userAwardLine in userAwardLines)
+                {
+                    var userId = userAwardLine.Split(Separator)[0];
+                    var awardIdArray = GetAwardIdArray(userAwardLines, userId);
+                }
+            }
+        }
+
+        private string[] GetAwardIdArray(string[] userAwardLines, string userId)
+        {
+            var awardIdList = new List<string>();
+
+            foreach (var userAwardLine in userAwardLines)
+            {
+                var charArray = userAwardLine.Split(Separator);
+
+                if (charArray[0] == userId)
+                {
+                    awardIdList.Add(charArray[1]);
+                }
+            }
+
+            return awardIdList.ToArray();
         }
 
         private void PrepareUserAwardFile()
