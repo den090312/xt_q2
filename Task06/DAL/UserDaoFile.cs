@@ -41,6 +41,8 @@ namespace DAL
         {
             if (File.Exists(FilePath))
             {
+                SetNormalAttributes();
+
                 Thread.Sleep(10);
                 var userLines = File.ReadAllLines(FilePath);
 
@@ -63,17 +65,20 @@ namespace DAL
 
         public void PrintUsers()
         {
-            PrepareUserFile();
-
-            Thread.Sleep(10);
-            var userLines = File.ReadAllLines(FilePath);
-
-            foreach (var line in userLines)
+            if (File.Exists(FilePath))
             {
-                var lineArray = line.Split(Separator);
+                SetNormalAttributes();
 
-                PrintSingleUser(ref lineArray);
-                Console.WriteLine();
+                Thread.Sleep(10);
+                var userLines = File.ReadAllLines(FilePath);
+
+                foreach (var line in userLines)
+                {
+                    var lineArray = line.Split(Separator);
+
+                    PrintSingleUser(ref lineArray);
+                    Console.WriteLine();
+                }
             }
         }
 
@@ -92,25 +97,28 @@ namespace DAL
 
         public void RemoveUsers(string userName)
         {
-            PrepareUserFile();
-
-            Thread.Sleep(10);
-            var userLines = File.ReadAllLines(FilePath);
-
-            File.Delete(FilePath);
-
-            Thread.Sleep(10);
-            var streamWriter = new StreamWriter(FilePath, true);
-
-            foreach (var line in userLines)
+            if (File.Exists(FilePath))
             {
-                if (Name(line) != userName)
-                {
-                    streamWriter.WriteLine(line);
-                }
-            }
+                SetNormalAttributes();
 
-            streamWriter.Close();
+                Thread.Sleep(10);
+                var userLines = File.ReadAllLines(FilePath);
+
+                File.Delete(FilePath);
+
+                Thread.Sleep(10);
+                var streamWriter = new StreamWriter(FilePath, true);
+
+                foreach (var line in userLines)
+                {
+                    if (Name(line) != userName)
+                    {
+                        streamWriter.WriteLine(line);
+                    }
+                }
+
+                streamWriter.Close();
+            }
         }
 
         private void PrepareUserFile()
