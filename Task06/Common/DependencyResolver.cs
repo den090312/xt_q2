@@ -10,6 +10,6 @@ namespace Common
 
         public readonly IAwardLogic AwardBLL = new AwardLogic(new AwardDaoFile());
 
-        public readonly IUserAwardLogic UserAwardBLL = new UserAwardLogic(new UserAwardDaoFile());
+        public readonly IUserAwardLogic UserAwardBLL = new UserAwardLogic(new UserAwardDaoFile(), new UserDaoFile(), new AwardDaoFile());
     }
 }

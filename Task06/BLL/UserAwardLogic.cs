@@ -17,7 +17,7 @@ namespace BLL
             this.iAwardDao = iAwardDao;
         }
 
-        public void JoinAwardsToUsers(string userName, string awardName)
+        public void JoinAwardToUser(string userName, string awardName)
         {
             NullCheck(userName);
             NullCheck(awardName);

@@ -169,7 +169,7 @@ namespace PL
             consoleSegment = ConsoleSegment.Award;
             var awardName = GetUserString("title");
 
-            userAwardBLL.JoinAwardsToUsers(awardName, userName);
+            userAwardBLL.JoinAwardToUser(awardName, userName);
         }
 
         private void CreateUser(string dateFormat)
