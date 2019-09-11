@@ -178,5 +178,10 @@ namespace DAL
                 throw new FileNotFoundException($"{nameof(FilePath)} is not exists!");
             }
         }
+
+        public string[] GetAllUsers()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
