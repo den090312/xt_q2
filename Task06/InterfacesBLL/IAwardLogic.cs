@@ -8,7 +8,7 @@ namespace InterfacesBLL
 
         void AddAward(Award award);
 
-        void RemoveAwards(string awardName);
+        void RemoveAwards(string title);
 
         void PrintAwards();
 
