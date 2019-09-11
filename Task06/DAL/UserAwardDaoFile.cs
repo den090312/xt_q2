@@ -42,9 +42,9 @@ namespace DAL
 
         public void PrintUsersAwards(string[] userLines, string[] awardLines)
         {
-            var userAwardsDict = GetUserAwardsDict();
+            var userAwardsList = GetUserAwardsList();
 
-            foreach (var kvPair in userAwardsDict)
+            foreach (var kvPair in userAwardsList)
             {
                 var userId = kvPair.Key;
 
@@ -102,9 +102,9 @@ namespace DAL
             return string.Empty;
         }
 
-        private Dictionary<string, string[]> GetUserAwardsDict()
+        private List<KeyValuePair<string, string[]>> GetUserAwardsList()
         {
-            var userAwardsDict = new Dictionary<string, string[]>();
+            var userAwardsList = new List<KeyValuePair<string, string[]>>();
 
             if (File.Exists(FilePath))
             {
@@ -118,11 +118,11 @@ namespace DAL
                     var userId = userAwardLine.Split(Separator)[0];
                     var awardIdArray = GetAwardIdArray(userAwardLines, userId);
 
-                    userAwardsDict.Add(userId, awardIdArray);
+                    userAwardsList.Add(new KeyValuePair<string, string[]>(userId, awardIdArray));
                 }
             }
 
-            return userAwardsDict;
+            return userAwardsList;
         }
 
         private string[] GetAwardIdArray(string[] userAwardLines, string userId)
