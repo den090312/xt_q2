@@ -69,8 +69,10 @@ namespace DAL
 
                 if (awardIdArray.Contains(awardId))
                 {
-                    Console.WriteLine("---" + awardName + "---");
+                    Console.Write("---" + awardName + "---");
                 }
+
+                Console.WriteLine();
             }
         }
 
