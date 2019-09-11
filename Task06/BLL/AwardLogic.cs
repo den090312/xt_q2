@@ -34,7 +34,15 @@ namespace BLL
 
             iAwardDao.RemoveAwards(title);
         }
+
         public void PrintAwards() => iAwardDao.PrintAwards();
+
+        public string[] GetAwardIdArray(string awardName)
+        {
+            NullCheck(awardName);
+
+            return iAwardDao.GetAwardIdArray(awardName);
+        }
 
         private static void NullCheck<T>(T classObject) where T : class
         {

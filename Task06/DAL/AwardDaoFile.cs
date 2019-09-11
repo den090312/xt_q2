@@ -1,6 +1,7 @@
 ﻿using Entities;
 using InterfacesDAL;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 
@@ -126,6 +127,8 @@ namespace DAL
             }
         }
 
+        private static string AwardID(string line) => GetItemInLine("AwardID", line);
+
         private static string Title(string line) => GetItemInLine("Title", line);
 
         private static string GetItemInLine(string itemName, string line)
@@ -143,6 +146,34 @@ namespace DAL
                     return string.Empty;
                 default:
                     return line.Split(Separator)[fieldIndex];
+            }
+        }
+
+        public string[] GetAwardIdArray(string awardName)
+        {
+            var userIDList = new List<string>();
+
+            CheckFileExistance();
+
+            Thread.Sleep(10);
+            var userLines = File.ReadAllLines(FilePath);
+
+            foreach (var line in userLines)
+            {
+                if (Title(line) == awardName)
+                {
+                    userIDList.Add(AwardID(line));
+                }
+            }
+
+            return userIDList.ToArray();
+        }
+
+        private void CheckFileExistance()
+        {
+            if (!File.Exists(FilePath))
+            {
+                throw new FileNotFoundException($"{nameof(FilePath)} is not exists!");
             }
         }
     }

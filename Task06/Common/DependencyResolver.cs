@@ -11,7 +11,7 @@ namespace Common
 
         public readonly IAwardLogic AwardBLL = new AwardLogic(new AwardDaoFile());
 
-        public readonly IUserAwardLogic UserAwardBLL = new UserAwardLogic();
+        public readonly IUserAwardLogic UserAwardBLL = new UserAwardLogic(new UserAwardDaoFile());
 
         public readonly IUserDao UserDAL = new UserDaoFile();
 

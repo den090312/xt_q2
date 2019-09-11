@@ -1,16 +1,24 @@
 ﻿using InterfacesBLL;
+using InterfacesDAL;
 using System;
 
 namespace BLL
 {
     public class UserAwardLogic : IUserAwardLogic
     {
+        private readonly IUserAwardDao iUserAwardDao;
+
+        public UserAwardLogic(IUserAwardDao iUserAwardDao)
+        {
+            this.iUserAwardDao = iUserAwardDao;
+        }
+
         public void JoinAwardsToUsers(string[] awardIdArray, string[] userIdArray)
         {
             NullCheck(awardIdArray);
             NullCheck(userIdArray);
 
-            throw new NotImplementedException();
+            iUserAwardDao.JoinAwardsToUsers(awardIdArray, userIdArray);
         }
 
         public void PrintUserAwards()
