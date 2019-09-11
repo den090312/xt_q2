@@ -42,7 +42,6 @@ namespace PL
         private void RunInput()
         {
             consoleSegment = ConsoleSegment.Main;
-            //Console.WriteLine();
 
             bool inputComplete;
 

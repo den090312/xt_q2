@@ -1,7 +1,6 @@
 ﻿using BLL;
 using InterfacesBLL;
 using DAL;
-using InterfacesDAL;
 
 namespace Common
 {
@@ -12,11 +11,5 @@ namespace Common
         public readonly IAwardLogic AwardBLL = new AwardLogic(new AwardDaoFile());
 
         public readonly IUserAwardLogic UserAwardBLL = new UserAwardLogic(new UserAwardDaoFile());
-
-        public readonly IUserDao UserDAL = new UserDaoFile();
-
-        public readonly IAwardDao AwardDAL = new AwardDaoFile();
-
-        public readonly IUserAwardDao UserAwardDAL = new UserAwardDaoFile();
     }
 }

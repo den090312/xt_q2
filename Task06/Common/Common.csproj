@@ -58,7 +58,7 @@
       <Name>InterfacesBLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\InterfacesDAL\InterfacesDAL.csproj">
-      <Project>{847d29c2-3216-4e63-9013-b8d2f8bca814}</Project>
+      <Project>{847D29C2-3216-4E63-9013-B8D2F8BCA814}</Project>
       <Name>InterfacesDAL</Name>
     </ProjectReference>
   </ItemGroup>
