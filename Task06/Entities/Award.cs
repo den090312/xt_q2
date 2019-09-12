@@ -10,8 +10,18 @@ namespace Entities
 
         public Award(string title)
         {
+            NullCheck(title);
+
             AwardGuid = Guid.NewGuid();
             Title = title;
+        }
+
+        private static void NullCheck<T>(T classObject) where T : class
+        {
+            if (classObject is null)
+            {
+                throw new ArgumentNullException($"{nameof(classObject)} is null!");
+            }
         }
     }
 }

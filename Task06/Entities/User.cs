@@ -10,7 +10,7 @@ namespace Entities
 
         public DateTime DateOfBirth { get; }
 
-        public static string DateFormat { get; } = "dd.MM.yyyy";
+        public readonly static string DateFormat = "dd.MM.yyyy";
 
         public int Age
         {
@@ -30,9 +30,19 @@ namespace Entities
 
         public User(string name, DateTime dateOfBirth)
         {
+            NullCheck(name);
+
             UserGuid = Guid.NewGuid();
             Name = name;
             DateOfBirth = dateOfBirth;
+        }
+
+        private static void NullCheck<T>(T classObject) where T : class
+        {
+            if (classObject is null)
+            {
+                throw new ArgumentNullException($"{nameof(classObject)} is null!");
+            }
         }
     }
 }
