@@ -11,5 +11,7 @@ namespace InterfacesDAL
         bool AwardRemoved(Guid awardGuid);
 
         IEnumerable<Award> GetAll();
+
+        Award GetAwardByGuid(Guid awardGuid);
     }
 }

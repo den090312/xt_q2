@@ -33,6 +33,21 @@ namespace BLL
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Award> GetAwardsByUser(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UserRemoved(Guid userGuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AwardRemoved(Guid awardGuid)
+        {
+            throw new NotImplementedException();
+        }
+
         private static void NullCheck<T>(T classObject) where T : class
         {
             if (classObject is null)

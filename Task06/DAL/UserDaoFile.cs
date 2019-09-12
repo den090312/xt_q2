@@ -62,6 +62,11 @@ namespace DAL
             throw new NotImplementedException();
         }
 
+        public User GetUserByGuid(Guid userGuid)
+        {
+            throw new NotImplementedException();
+        }
+
         private void PrepareUserFile()
         {
             if (File.Exists(FilePath))

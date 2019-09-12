@@ -99,6 +99,11 @@ namespace DAL
             throw new NotImplementedException();
         }
 
+        public Award GetAwardByGuid(Guid awardGuid)
+        {
+            throw new NotImplementedException();
+        }
+
         private void PrepareAwardFile()
         {
             if (File.Exists(FilePath))

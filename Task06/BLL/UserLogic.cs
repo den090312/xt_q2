@@ -64,5 +64,10 @@ namespace BLL
         {
             throw new NotImplementedException();
         }
+
+        public User GetUserByGuid(Guid userGuid)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

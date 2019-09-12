@@ -13,5 +13,7 @@ namespace InterfacesBLL
         bool UserRemoved(Guid userGuid);
 
         IEnumerable<User> GetAll();
+
+        User GetUserByGuid(Guid userGuid);
     }
 }

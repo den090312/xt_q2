@@ -8,6 +8,10 @@ namespace InterfacesBLL
     {
         bool JoinedAwardToUser(Guid userGuid, Guid awardGuid);
 
+        bool UserRemoved(Guid userGuid);
+
+        bool AwardRemoved(Guid awardGuid);
+
         IEnumerable<UserAward> GetAll();
 
         IEnumerable<Award> GetAwardsByUser(User user);

@@ -58,7 +58,7 @@ namespace Pl
         {
             WriteMenu();
 
-            var userKey = GetKeyFromConsole();
+            var userKey = GetKeyFromConsole(GetKeyArray(8));
 
             var inputComplete = false;
 
@@ -140,30 +140,37 @@ namespace Pl
 
         private void PrintUserAwards(IEnumerable<User> users)
         {
+            var userNum = 1;
+
             foreach (var user in users)
             {
-                PrintUser(user);
+                PrintUser(user, userNum);
+                userNum++;
+
                 PrintAwardsByUser(user);
             }
+        }
+
+        private void PrintUser(User user, int userNum)
+        {
+            Console.WriteLine($"{userNum}.{user.Name}---{user.DateOfBirth}---{user.Age}");
         }
 
         private void PrintAwardsByUser(User user)
         {
             var awards = userAwardBll.GetAwardsByUser(user);
+            var awardNum = 1;
 
             foreach (var award in awards)
             {
-                PrintAward(award);
+                PrintAward(award, awardNum);
+                awardNum++;
             }
         }
 
-        private void PrintUser(User user)
+        private void PrintAward(Award award, int awardNum)
         {
-            throw new NotImplementedException();
-        }
-        private void PrintAward(Award award)
-        {
-            throw new NotImplementedException();
+            Console.WriteLine($"---{awardNum}.{award.Title}");
         }
 
         private bool AwardCreation()
@@ -204,9 +211,91 @@ namespace Pl
 
         private bool JoinAwardToUser()
         {
-            //Join();
+            Console.WriteLine("Choose user by number:");
+            Console.WriteLine("----------------------");
+
+            var userGuid = GetChosenUserGuid();
+            Console.WriteLine();
+
+            Console.WriteLine("Choose award by number:");
+            Console.WriteLine("----------------------");
+
+            var awardGuid = GetChosenAwardGuid();
+            Console.WriteLine();
+
+            var userName = GetUserNameByGuid(userGuid);
+            var awardName = GetAwardNameByGuid(awardGuid);
+
+            if (userAwardBll.JoinedAwardToUser(userGuid, awardGuid))
+            {
+                Console.WriteLine($"---'{awardName}' joined to '{userName}'---");
+            }
+            else
+            {
+                Console.WriteLine($"---'{awardName}' NOT joined to '{userName}'---");
+            }
 
             return InputComplete();
+        }
+
+        private string GetAwardNameByGuid(Guid awardGuid)
+        {
+            var awardName = awardBll.GetAwardByGuid(awardGuid)?.Title;
+
+            if (awardName == string.Empty)
+            {
+                throw new Exception($"Award '{awardGuid.ToString()}' not found!");
+            }
+
+            return awardName;
+        }
+
+        private string GetUserNameByGuid(Guid userGuid)
+        {
+            var userName = userBll.GetUserByGuid(userGuid)?.Name;
+
+            if (userName == string.Empty)
+            {
+                throw new Exception($"User '{userGuid.ToString()}' not found!");
+            }
+
+            return userName;
+        }
+
+        private Guid GetChosenUserGuid()
+        {
+            var users = userBll.GetAll();
+            var userNum = 1;
+            var userNumList = new Dictionary<int, Guid>();
+
+            foreach (var user in users)
+            {
+                userNumList.Add(userNum, user.UserGuid);
+                PrintUser(user, userNum);
+                userNum++;
+            }
+
+            var chosenNum = GetKeyFromConsole(GetKeyArray(userNum));
+
+            return userNumList[chosenNum];
+        }
+
+        private Guid GetChosenAwardGuid()
+        {
+            var awards = awardBll.GetAll();
+            var awardNum = 1;
+            var awardNumList = new Dictionary<int, Guid>();
+
+            foreach (var award in awards)
+            {
+                awardNumList.Add(awardNum, award.AwardGuid);
+                PrintAward(award, awardNum);
+                awardNum++;
+            }
+
+            var chosenNum = GetKeyFromConsole(GetKeyArray(awardNum));
+
+            return awardNumList[chosenNum];
         }
 
         private User CreateUser(string dateFormat) => userBll.CreateUser(GetUserString("name"), GetUserDate(dateFormat));
@@ -296,7 +385,19 @@ namespace Pl
             return userBirthDate;
         }
 
-        private int GetKeyFromConsole()
+        private char[] GetKeyArray(int lastKey)
+        {
+            var keyArray = new char[lastKey + 1];
+
+            for (var i = 0; i <= lastKey; i++)
+            {
+                keyArray[i] = (char)i;
+            }
+
+            return keyArray;
+        }
+
+        private int GetKeyFromConsole(char[] keyArray)
         {
             bool inputComplete = false;
 
@@ -304,7 +405,7 @@ namespace Pl
 
             while (!inputComplete)
             {
-                inputComplete = KeyTaken(inputComplete, userKeySB);
+                inputComplete = KeyTaken(inputComplete, userKeySB, keyArray);
             }
 
             int result;
@@ -321,11 +422,9 @@ namespace Pl
             return result;
         }
 
-        private bool KeyTaken(bool inputComplete, StringBuilder userKeySB)
+        private bool KeyTaken(bool inputComplete, StringBuilder userKeySB, char[] keyArray)
         {
             ConsoleKeyInfo key = Console.ReadKey(true);
-
-            char[] keyArray = { '1', '2', '3', '4', '5', '6', '7', '8' };
 
             if (key.Key == ConsoleKey.Backspace)
             {

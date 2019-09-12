@@ -9,5 +9,11 @@ namespace InterfacesDAL
         bool JoinedAwardToUser(Guid userGuid, Guid awardGuid);
 
         IEnumerable<UserAward> GetAll();
+
+        IEnumerable<Award> GetAwardsByUser(User user);
+
+        bool UserRemoved(Guid userGuid);
+
+        bool AwardRemoved(Guid awardGuid);
     }
 }
