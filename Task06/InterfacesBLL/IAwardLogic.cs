@@ -1,5 +1,6 @@
 ﻿using Entities;
 using System;
+using System.Collections.Generic;
 
 namespace InterfacesBLL
 {
@@ -10,5 +11,7 @@ namespace InterfacesBLL
         bool AwardAdded(Award award);
 
         bool AwardRemoved(Guid awardGuid);
+
+        IEnumerable<Award> GetAll();
     }
 }

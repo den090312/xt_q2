@@ -10,6 +10,6 @@ namespace InterfacesDAL
 
         bool AwardRemoved(Guid awardGuid);
 
-        List<Award> GetAwards();
+        IEnumerable<Award> GetAll();
     }
 }

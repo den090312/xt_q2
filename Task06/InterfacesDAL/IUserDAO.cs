@@ -10,6 +10,6 @@ namespace InterfacesDAL
 
         bool UserRemoved(Guid userGuid);
 
-        List<User> GetUsers();
+        IEnumerable<User> GetAll();
     }
 }
