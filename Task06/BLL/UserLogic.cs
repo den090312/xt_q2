@@ -47,10 +47,7 @@ namespace BLL
             return _userDao.UserAdded(user);
         }
 
-        public bool UserRemoved(Guid userGuid)
-        {
-            throw new NotImplementedException();
-        }
+        public bool UserRemoved(Guid userGuid) => _userDao.UserRemoved(userGuid);
 
         private static void NullCheck<T>(T classObject) where T : class
         {

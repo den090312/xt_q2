@@ -385,19 +385,19 @@ namespace Pl
             return userBirthDate;
         }
 
-        private char[] GetKeyArray(int lastKey)
+        private int[] GetKeyArray(int lastKey)
         {
-            var keyArray = new char[lastKey + 1];
+            var keyArray = new int[lastKey + 1];
 
-            for (var i = 0; i <= lastKey; i++)
+            for (var i = 1; i <= lastKey; i++)
             {
-                keyArray[i] = (char)i;
+                keyArray[i] = i;
             }
 
             return keyArray;
         }
 
-        private int GetKeyFromConsole(char[] keyArray)
+        private int GetKeyFromConsole(int[] keyArray)
         {
             bool inputComplete = false;
 
@@ -422,7 +422,7 @@ namespace Pl
             return result;
         }
 
-        private bool KeyTaken(bool inputComplete, StringBuilder userKeySB, char[] keyArray)
+        private bool KeyTaken(bool inputComplete, StringBuilder userKeySB, int[] keyArray)
         {
             ConsoleKeyInfo key = Console.ReadKey(true);
 
@@ -437,7 +437,7 @@ namespace Pl
                     inputComplete = true;
                 }
             }
-            else if ((Array.Exists(keyArray, x => x == key.KeyChar)))
+            else if ((Array.Exists(keyArray, x => x.ToString() == key.KeyChar.ToString())))
             {
                 if (userKeySB.Length < 1)
                 {

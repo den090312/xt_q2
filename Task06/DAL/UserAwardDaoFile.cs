@@ -23,18 +23,29 @@ namespace DAL
             Separator = '|';
         }
 
-        public bool JoinedAwardToUser(Guid userGuid, Guid awardGuid)
+        public bool JoinedAwardToUser(User user, Award award)
         {
-            PrepareUserAwardFile();
+            PrepareFile();
 
+            try
+            {
+                Join(user, award);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void Join(User user, Award award)
+        {
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(FilePath, true);
 
-            //ToDo
-
+            streamWriter.WriteLine(user.UserGuid.ToString() + Separator + award.AwardGuid.ToString());
             streamWriter.Close();
-
-            return true;
         }
 
         public IEnumerable<UserAward> GetAll()
@@ -57,7 +68,7 @@ namespace DAL
             throw new NotImplementedException();
         }
 
-        private void PrepareUserAwardFile()
+        private void PrepareFile()
         {
             if (File.Exists(FilePath))
             {

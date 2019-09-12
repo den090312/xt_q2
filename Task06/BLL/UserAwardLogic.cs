@@ -25,7 +25,13 @@ namespace BLL
 
         public bool JoinedAwardToUser(Guid userGuid, Guid awardGuid)
         {
-            throw new NotImplementedException();
+            var user = _userDao.GetUserByGuid(userGuid);
+            NullCheck(user);
+
+            var award = _awardDao.GetAwardByGuid(awardGuid);
+            NullCheck(award);
+
+            return _userAwardDao.JoinedAwardToUser(user, award);
         }
 
         public IEnumerable<UserAward> GetAll()

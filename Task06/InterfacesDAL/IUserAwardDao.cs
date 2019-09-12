@@ -6,7 +6,7 @@ namespace InterfacesDAL
 {
     public interface IUserAwardDao
     {
-        bool JoinedAwardToUser(Guid userGuid, Guid awardGuid);
+        bool JoinedAwardToUser(User user, Award award);
 
         IEnumerable<UserAward> GetAll();
 

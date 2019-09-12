@@ -31,10 +31,7 @@ namespace BLL
             return _awardDao.AwardAdded(award);
         }
 
-        public bool AwardRemoved(Guid awardGuid)
-        {
-            throw new NotImplementedException();
-        }
+        public bool AwardRemoved(Guid awardGuid) => _awardDao.AwardRemoved(awardGuid);
 
         public IEnumerable<Award> GetAll()
         {

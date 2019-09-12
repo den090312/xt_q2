@@ -24,7 +24,7 @@ namespace DAL
 
         public bool UserAdded(User user)
         {
-            PrepareUserFile();
+            PrepareFile();
 
             try
             {
@@ -40,19 +40,58 @@ namespace DAL
 
         public bool UserRemoved(Guid userGuid)
         {
-            throw new NotImplementedException();
+            if (!File.Exists(FilePath))
+            {
+                return false;
+            }
+
+            try
+            {
+                RemoveUser(userGuid);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        private static void AddUser(User user)
+        private void RemoveUser(Guid userGuid)
         {
+            var users = GetAll();
+
+            File.Delete(FilePath);
+
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(FilePath, true);
 
+            foreach (var user in users)
+            {
+                if (user.UserGuid != userGuid)
+                {
+                    PrintLine(streamWriter, user);
+                }
+            }
+
+            streamWriter.Close();
+        }
+
+        private void PrintLine(StreamWriter streamWriter, User user)
+        {
             streamWriter.Write(user.UserGuid.ToString() + Separator);
             streamWriter.Write(user.Name + Separator);
             streamWriter.Write(user.DateOfBirth.ToString("dd.MM.yyyy") + Separator);
             streamWriter.Write(user.Age);
             streamWriter.WriteLine();
+        }
+
+        private void AddUser(User user)
+        {
+            Thread.Sleep(10);
+            var streamWriter = new StreamWriter(FilePath, true);
+
+            PrintLine(streamWriter, user);
 
             streamWriter.Close();
         }
@@ -67,7 +106,7 @@ namespace DAL
             throw new NotImplementedException();
         }
 
-        private void PrepareUserFile()
+        private void PrepareFile()
         {
             if (File.Exists(FilePath))
             {

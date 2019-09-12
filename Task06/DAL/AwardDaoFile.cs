@@ -38,14 +38,12 @@ namespace DAL
             }
         }
 
-        private static void AddAward(Award award)
+        private void AddAward(Award award)
         {
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(FilePath, true);
 
-            streamWriter.Write(award.AwardGuid.ToString() + Separator);
-            streamWriter.Write(award.Title);
-            streamWriter.WriteLine();
+            PrintLine(streamWriter, award);
 
             streamWriter.Close();
         }
@@ -57,11 +55,9 @@ namespace DAL
                 return false;
             }
 
-            SetNormalAttributes();
-
             try
             {
-                AddAward(awardGuid);
+                RemoveAward(awardGuid);
 
                 return true;
             }
@@ -71,27 +67,31 @@ namespace DAL
             }
         }
 
-        private static void AddAward(Guid awardGuid)
+        private void RemoveAward(Guid awardGuid)
         {
-            Thread.Sleep(10);
-            var awardLines = File.ReadAllLines(FilePath);
+            var users = GetAll();
 
             File.Delete(FilePath);
 
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(FilePath, true);
 
-            foreach (var line in awardLines)
+            foreach (var award in users)
             {
-                var title = line.Split(Separator)[1];
-
-                if (title != awardGuid.ToString())
+                if (award.AwardGuid != awardGuid)
                 {
-                    streamWriter.WriteLine(line);
+                    PrintLine(streamWriter, award);
                 }
             }
 
             streamWriter.Close();
+        }
+
+        private void PrintLine(StreamWriter streamWriter, Award award)
+        {
+            streamWriter.Write(award.AwardGuid.ToString() + Separator);
+            streamWriter.Write(award.Title);
+            streamWriter.WriteLine();
         }
 
         public IEnumerable<Award> GetAll()
