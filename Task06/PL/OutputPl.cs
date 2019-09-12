@@ -76,9 +76,7 @@ namespace Pl
         {
             PrintUsers(out int userNum, out Dictionary<int, Guid> userNumList);
 
-            var inputPl = new InputPl();
-
-            var chosenNum = inputPl.GetKeyFromConsole(userNum);
+            var chosenNum = new InputPl().GetKeyFromConsole(userNum);
 
             return userNumList[chosenNum];
         }
@@ -110,9 +108,7 @@ namespace Pl
                 awardNum++;
             }
 
-            var inputPl = new InputPl();
-
-            var chosenNum = inputPl.GetKeyFromConsole(awardNum);
+            var chosenNum = new InputPl().GetKeyFromConsole(awardNum);
 
             return awardNumList[chosenNum];
         }
@@ -121,7 +117,7 @@ namespace Pl
         {
             var inputPl = new InputPl();
 
-            return new DependencyResolver()?.UserBll?.CreateUser(inputPl.GetUserString("name"), inputPl.GetUserDate(dateFormat));
+            return new DependencyResolver()?.UserBll?.CreateUser(inputPl?.GetUserString("name"), inputPl.GetUserDate(dateFormat));
         }
 
         internal void RemoveUser()
@@ -154,12 +150,7 @@ namespace Pl
             throw new NotImplementedException();
         }
 
-        internal Award CreateAward()
-        {
-            var inputPl = new InputPl();
-
-            return new DependencyResolver()?.AwardBll?.CreateAward(inputPl.GetUserString("title"));
-        }
+        internal Award CreateAward() => new DependencyResolver()?.AwardBll?.CreateAward(new InputPl()?.GetUserString("title"));
 
         internal bool UserAdded(User user) => new DependencyResolver().UserBll.UserAdded(user);
 

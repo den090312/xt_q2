@@ -37,7 +37,7 @@ namespace PL
         {
             WriteMenu();
 
-            var userKey = GetKeyFromConsole(GetKeyArray(8));
+            var userKey = GetKeyFromConsole(8);
 
             var inputComplete = false;
 
@@ -128,10 +128,8 @@ namespace PL
             consoleSegment = ConsoleSegment.User;
             Console.Clear();
 
-            var outputPl = new OutputPl();
-
             var users = new DependencyResolver()?.UserBll?.GetAll();
-            outputPl.PrintUserAwards(users);
+            new OutputPl().PrintUserAwards(users);
 
             Console.WriteLine();
 
@@ -150,6 +148,7 @@ namespace PL
         {
             consoleSegment = ConsoleSegment.Award;
             Console.Clear();
+
             new OutputPl().PrintAwards();
             Console.WriteLine();
 
@@ -280,9 +279,9 @@ namespace PL
             return keyArray;
         }
 
-        public int GetKeyFromConsole(int lastNum)
+        public int GetKeyFromConsole(int lastKey)
         {
-            var keyArray = GetKeyArray(lastNum);
+            var keyArray = GetKeyArray(lastKey);
 
             bool inputComplete = false;
 
