@@ -38,6 +38,11 @@ namespace DAL
             }
         }
 
+        public bool UserRemoved(Guid userGuid)
+        {
+            throw new NotImplementedException();
+        }
+
         private static void AddUser(User user)
         {
             Thread.Sleep(10);
@@ -50,6 +55,11 @@ namespace DAL
             streamWriter.WriteLine();
 
             streamWriter.Close();
+        }
+
+        public IEnumerable<User> GetAll()
+        {
+            throw new NotImplementedException();
         }
 
         private void PrepareUserFile()
@@ -91,16 +101,6 @@ namespace DAL
             {
                 throw new FileNotFoundException($"{nameof(FilePath)} is not exists!");
             }
-        }
-
-        public bool UserRemoved(Guid userGuid)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<User> GetUsers()
-        {
-            throw new NotImplementedException();
         }
     }
 }

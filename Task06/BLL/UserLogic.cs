@@ -2,6 +2,7 @@
 using InterfacesDAL;
 using Entities;
 using System;
+using System.Collections.Generic;
 
 namespace BLL
 {
@@ -41,7 +42,9 @@ namespace BLL
 
         public bool UserAdded(User user)
         {
-            throw new NotImplementedException();
+            NullCheck(user);
+
+            return _userDao.UserAdded(user);
         }
 
         public bool UserRemoved(Guid userGuid)
@@ -55,6 +58,11 @@ namespace BLL
             {
                 throw new ArgumentNullException($"{nameof(classObject)} is null!");
             }
+        }
+
+        public IEnumerable<User> GetAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }

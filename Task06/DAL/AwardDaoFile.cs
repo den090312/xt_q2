@@ -94,6 +94,11 @@ namespace DAL
             streamWriter.Close();
         }
 
+        public IEnumerable<Award> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
         private void PrepareAwardFile()
         {
             if (File.Exists(FilePath))
@@ -133,11 +138,6 @@ namespace DAL
             {
                 throw new FileNotFoundException($"{nameof(FilePath)} is not exists!");
             }
-        }
-
-        public List<Award> GetAwards()
-        {
-            throw new NotImplementedException();
         }
     }
 }

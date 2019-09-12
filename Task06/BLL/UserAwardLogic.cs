@@ -1,6 +1,8 @@
-﻿using InterfacesBLL;
+﻿using Entities;
+using InterfacesBLL;
 using InterfacesDAL;
 using System;
+using System.Collections.Generic;
 
 namespace BLL
 {
@@ -22,6 +24,11 @@ namespace BLL
         }
 
         public bool JoinedAwardToUser(Guid userGuid, Guid awardGuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<UserAward> GetAll()
         {
             throw new NotImplementedException();
         }

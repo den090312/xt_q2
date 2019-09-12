@@ -1,4 +1,5 @@
 ﻿using Common;
+using Entities;
 using InterfacesBLL;
 using System;
 using System.Globalization;
@@ -100,7 +101,17 @@ namespace Pl
         private bool UserCreation()
         {
             consoleSegment = ConsoleSegment.User;
-            CreateUser(dateFormat);
+
+            var user = CreateUser(dateFormat);
+
+            if (UserAdded(user))
+            {
+                Console.WriteLine($"---{user.Name} added---");
+            }
+            else
+            {
+                Console.WriteLine($"---{user.Name} NOT added---");
+            }
 
             return InputComplete();
         }
@@ -156,12 +167,9 @@ namespace Pl
             return InputComplete();
         }
 
-        private void CreateUser(string dateFormat)
-        {
-            var user = userBll.CreateUser(GetUserString("name"), GetUserDate(dateFormat));
+        private User CreateUser(string dateFormat) => userBll.CreateUser(GetUserString("name"), GetUserDate(dateFormat));
 
-            userBll.UserAdded(user);
-        }
+        private bool UserAdded(User user) => userBll.UserAdded(user);
 
         private void CreateAward()
         {

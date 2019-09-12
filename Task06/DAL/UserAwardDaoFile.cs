@@ -1,4 +1,5 @@
-﻿using InterfacesDAL;
+﻿using Entities;
+using InterfacesDAL;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -34,6 +35,11 @@ namespace DAL
             streamWriter.Close();
 
             return true;
+        }
+
+        public IEnumerable<UserAward> GetAll()
+        {
+            throw new NotImplementedException();
         }
 
         private void PrepareUserAwardFile()

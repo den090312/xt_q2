@@ -2,6 +2,7 @@
 using InterfacesDAL;
 using Entities;
 using System;
+using System.Collections.Generic;
 
 namespace BLL
 {
@@ -29,6 +30,11 @@ namespace BLL
         }
 
         public bool AwardRemoved(Guid awardGuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Award> GetAll()
         {
             throw new NotImplementedException();
         }
