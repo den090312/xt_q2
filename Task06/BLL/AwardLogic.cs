@@ -26,7 +26,9 @@ namespace BLL
 
         public bool AwardAdded(Award award)
         {
-            throw new NotImplementedException();
+            NullCheck(award);
+
+            return _awardDao.AwardAdded(award);
         }
 
         public bool AwardRemoved(Guid awardGuid)

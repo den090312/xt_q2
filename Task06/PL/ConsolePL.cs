@@ -106,11 +106,11 @@ namespace Pl
 
             if (UserAdded(user))
             {
-                Console.WriteLine($"---{user.Name} added---");
+                Console.WriteLine($"---'{user.Name}' added---");
             }
             else
             {
-                Console.WriteLine($"---{user.Name} NOT added---");
+                Console.WriteLine($"---'{user.Name}' NOT added---");
             }
 
             return InputComplete();
@@ -136,8 +136,18 @@ namespace Pl
 
         private bool AwardCreation()
         {
-            consoleSegment = ConsoleSegment.Award;
-            CreateAward();
+            consoleSegment = ConsoleSegment.User;
+
+            var award = CreateAward();
+
+            if (AwardAdded(award))
+            {
+                Console.WriteLine($"---'{award.Title}' added---");
+            }
+            else
+            {
+                Console.WriteLine($"---'{award.Title}' NOT added---");
+            }
 
             return InputComplete();
         }
@@ -169,14 +179,11 @@ namespace Pl
 
         private User CreateUser(string dateFormat) => userBll.CreateUser(GetUserString("name"), GetUserDate(dateFormat));
 
+        private Award CreateAward() => awardBll.CreateAward(GetUserString("title"));
+
         private bool UserAdded(User user) => userBll.UserAdded(user);
 
-        private void CreateAward()
-        {
-            var award = awardBll.CreateAward(GetUserString("title"));
-
-            awardBll.AwardAdded(award);
-        }
+        private bool AwardAdded(Award award) => awardBll.AwardAdded(award);
 
         private void WriteMenu()
         {
