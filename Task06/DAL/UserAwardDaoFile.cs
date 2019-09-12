@@ -22,130 +22,18 @@ namespace DAL
             Separator = '|';
         }
 
-        public void JoinAwardsToUsers(string[] userIdArray, string[] awardIdArray)
+        public bool JoinedAwardToUser(Guid userGuid, Guid awardGuid)
         {
             PrepareUserAwardFile();
 
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(FilePath, true);
 
-            foreach (var userId in userIdArray)
-            {
-                WriteUserAwardLine(awardIdArray, streamWriter, userId);
-            }
+            //ToDo
 
             streamWriter.Close();
-        }
 
-        private void WriteUserAwardLine(string[] awardIdArray, StreamWriter streamWriter, string userId)
-        {
-            foreach (var awardId in awardIdArray)
-            {
-                streamWriter.WriteLine(userId + Separator + awardId);
-            }
-        }
-
-        public void PrintUsersAwards(string[] userLines, string[] awardLines)
-        {
-            var userAwardsDict = GetUserAwardsDict();
-
-            foreach (var userLine in userLines)
-            {
-                var userId = userLine.Split(Separator)[0];
-
-                PrintUserLine(userLine);
-                PrintAwardLines(awardLines, userAwardsDict, userId);
-            }
-        }
-
-        private Dictionary<string, string[]> GetUserAwardsDict()
-        {
-            var userAwardsDict = new Dictionary<string, string[]>();
-
-            if (!File.Exists(FilePath))
-            {
-                return userAwardsDict;
-            }
-
-            SetNormalAttributes();
-
-            Thread.Sleep(10);
-            var userAwardLines = File.ReadAllLines(FilePath);
-
-            foreach (var userAwardLine in userAwardLines)
-            {
-                var userId = userAwardLine.Split(Separator)[0];
-                var awardIdArray = GetAwardIdArray(userAwardLines, userId);
-
-                if (!userAwardsDict.ContainsKey(userId))
-                {
-                    userAwardsDict.Add(userId, awardIdArray);
-                }
-            }
-
-            return userAwardsDict;
-        }
-
-        private void PrintUserLine(string userLine)
-        {
-            var userLineArray = userLine.Split(Separator);
-
-            for (int i = 1; i < userLineArray.Length; i++)
-            {
-                Console.Write(userLineArray[i]);
-
-                if (i != userLineArray.Length - 1)
-                {
-                    Console.Write("---");
-                }
-            }
-
-            Console.WriteLine();
-        }
-
-        private void PrintAwardLines(string[] awardLines, Dictionary<string, string[]> userAwardsDict, string userId)
-        {
-            foreach (var kvPair in userAwardsDict)
-            {
-                if (userId == kvPair.Key)
-                {
-                    PrintAwards(awardLines, kvPair);
-                }
-            }
-        }
-
-        private void PrintAwards(string[] awardLines, KeyValuePair<string, string[]> kvPair)
-        {
-            foreach (var awardLine in awardLines)
-            {
-                var awardIdArray = kvPair.Value;
-                var awardId = awardLine.Split(Separator)[0];
-                var awardName = awardLine.Split(Separator)[1];
-
-                if (awardIdArray.Contains(awardId))
-                {
-                    Console.Write("---" + awardName);
-                }
-
-                Console.WriteLine();
-            }
-        }
-
-        private string[] GetAwardIdArray(string[] userAwardLines, string userId)
-        {
-            var awardIdList = new List<string>();
-
-            foreach (var userAwardLine in userAwardLines)
-            {
-                var charArray = userAwardLine.Split(Separator);
-
-                if (charArray[0] == userId)
-                {
-                    awardIdList.Add(charArray[1]);
-                }
-            }
-
-            return awardIdList.ToArray();
+            return true;
         }
 
         private void PrepareUserAwardFile()

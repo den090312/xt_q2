@@ -1,17 +1,15 @@
 ﻿using Entities;
+using System;
+using System.Collections.Generic;
 
 namespace InterfacesDAL
 {
     public interface IAwardDao
     {
-        void AddAward(Award award);
+        bool AwardAdded(Award award);
 
-        void RemoveAwards(string title);
+        bool AwardRemoved(Guid awardGuid);
 
-        void PrintAwards();
-
-        string[] GetAwardIdArray(string awardName);
-
-        string[] GetAllAwards();
+        List<Award> GetAwards();
     }
 }

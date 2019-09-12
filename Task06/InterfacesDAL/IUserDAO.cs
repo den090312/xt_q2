@@ -1,17 +1,15 @@
 ﻿using Entities;
+using System;
+using System.Collections.Generic;
 
 namespace InterfacesDAL
 {
     public interface IUserDao
     {
-        void AddUser(User user);
+        bool UserAdded(User user);
 
-        void RemoveUsers(string userName);
+        bool UserRemoved(Guid userGuid);
 
-        void PrintUsers();
-
-        string[] GetUserIdArray(string userName);
-
-        string[] GetAllUsers();
+        List<User> GetUsers();
     }
 }

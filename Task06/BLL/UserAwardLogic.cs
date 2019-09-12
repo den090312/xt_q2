@@ -21,29 +21,9 @@ namespace BLL
             _awardDao = awardDao;
         }
 
-        public void JoinAwardToUser(string userName, string awardName)
+        public bool JoinedAwardToUser(Guid userGuid, Guid awardGuid)
         {
-            NullCheck(userName);
-            NullCheck(awardName);
-
-            var userIdArray = _userDao.GetUserIdArray(userName);
-            var awardIdArray = _awardDao.GetAwardIdArray(awardName);
-
-            NullCheck(userIdArray);
-            NullCheck(awardIdArray);
-
-            _userAwardDao.JoinAwardsToUsers(userIdArray, awardIdArray);
-        }
-
-        public void PrintUsersAwards()
-        {
-            var userLines = _userDao.GetAllUsers();
-            var awardLines = _awardDao.GetAllAwards();
-
-            NullCheck(userLines);
-            NullCheck(awardLines);
-
-            _userAwardDao.PrintUsersAwards(userLines, awardLines);
+            throw new NotImplementedException();
         }
 
         private static void NullCheck<T>(T classObject) where T : class

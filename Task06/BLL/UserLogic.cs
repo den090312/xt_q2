@@ -24,22 +24,6 @@ namespace BLL
             return new User(name, dateBirth);
         }
 
-        public void AddUser(User user)
-        {
-            NullCheck(user);
-
-            _userDao.AddUser(user);
-        }
-
-        public void RemoveUsers(string userName)
-        {
-            NullCheck(userName);
-
-            _userDao.RemoveUsers(userName);
-        }
-
-        public void PrintUsers() => _userDao.PrintUsers();
-
         private static void CheckDateOfBirth(DateTime birthDate)
         {
             DateTime currentDateTime = DateTime.Now.Date;
@@ -55,24 +39,22 @@ namespace BLL
             }
         }
 
+        public bool UserAdded(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UserRemoved(Guid userGuid)
+        {
+            throw new NotImplementedException();
+        }
+
         private static void NullCheck<T>(T classObject) where T : class
         {
             if (classObject is null)
             {
                 throw new ArgumentNullException($"{nameof(classObject)} is null!");
             }
-        }
-
-        public string[] GetUserIdArray(string userName)
-        {
-            NullCheck(userName);
-
-            return _userDao.GetUserIdArray(userName);
-        }
-
-        public string[] GetAllUsers()
-        {
-            throw new NotImplementedException();
         }
     }
 }

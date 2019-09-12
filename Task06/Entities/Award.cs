@@ -4,27 +4,14 @@ namespace Entities
 {
     public class Award
     {
-        public string AwardId { get; } = string.Empty;
+        public Guid AwardGuid { get; }
 
         public string Title { get; } = string.Empty;
 
         public Award(string title)
         {
-            AwardId = Guid.NewGuid().ToString();
+            AwardGuid = Guid.NewGuid();
             Title = title;
-        }
-
-        public static int GetFieldIndex(string fieldName)
-        {
-            switch (fieldName)
-            {
-                case "AwardID":
-                    return 0;
-                case "Title":
-                    return 1;
-                default:
-                    return -1;
-            }
         }
     }
 }

@@ -7,14 +7,8 @@ namespace InterfacesBLL
     {
         User CreateUser(string name, DateTime dateBirth);
 
-        void AddUser(User user);
+        bool UserAdded(User user);
 
-        void RemoveUsers(string userName);
-
-        void PrintUsers();
-
-        string[] GetUserIdArray(string userName);
-
-        string[] GetAllUsers();
+        bool UserRemoved(Guid userGuid);
     }
 }

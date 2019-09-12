@@ -101,7 +101,6 @@ namespace Pl
         {
             consoleSegment = ConsoleSegment.User;
             CreateUser(dateFormat);
-            Console.WriteLine("---Done---");
 
             return InputComplete();
         }
@@ -109,8 +108,7 @@ namespace Pl
         private bool UserRemoving()
         {
             consoleSegment = ConsoleSegment.User;
-            RemoveUsers();
-            Console.WriteLine("---Done---");
+            //RemoveUsers();
 
             return InputComplete();
         }
@@ -119,7 +117,7 @@ namespace Pl
         {
             consoleSegment = ConsoleSegment.User;
             Console.Clear();
-            PrintUsersAwards();
+            //PrintUsersAwards();
             Console.WriteLine();
 
             return InputComplete();
@@ -129,7 +127,6 @@ namespace Pl
         {
             consoleSegment = ConsoleSegment.Award;
             CreateAward();
-            Console.WriteLine("---Done---");
 
             return InputComplete();
         }
@@ -137,8 +134,7 @@ namespace Pl
         private bool AwardRemoving()
         {
             consoleSegment = ConsoleSegment.Award;
-            RemoveAwards();
-            Console.WriteLine("---Done---");
+            //RemoveAwards();
 
             return InputComplete();
         }
@@ -147,7 +143,7 @@ namespace Pl
         {
             consoleSegment = ConsoleSegment.Award;
             Console.Clear();
-            PrintAwards();
+            //PrintAwards();
             Console.WriteLine();
 
             return InputComplete();
@@ -155,44 +151,24 @@ namespace Pl
 
         private bool JoinAwardToUser()
         {
-            Join();
-            Console.WriteLine("---Done---");
+            //Join();
 
             return InputComplete();
-        }
-
-        private void Join()
-        {
-            consoleSegment = ConsoleSegment.User;
-            var userName = GetUserString("name");
-
-            consoleSegment = ConsoleSegment.Award;
-            var awardName = GetUserString("title");
-
-            userAwardBll.JoinAwardToUser(userName, awardName);
         }
 
         private void CreateUser(string dateFormat)
         {
             var user = userBll.CreateUser(GetUserString("name"), GetUserDate(dateFormat));
 
-            userBll.AddUser(user);
+            userBll.UserAdded(user);
         }
-
-        private void RemoveUsers() => userBll.RemoveUsers(GetUserString("name"));
-
-        private void PrintUsersAwards() => userAwardBll.PrintUsersAwards();
 
         private void CreateAward()
         {
             var award = awardBll.CreateAward(GetUserString("title"));
 
-            awardBll.AddAward(award);
+            awardBll.AwardAdded(award);
         }
-
-        private void RemoveAwards() => awardBll.RemoveAwards(GetUserString("award"));
-
-        private void PrintAwards() => awardBll.PrintAwards();
 
         private void WriteMenu()
         {

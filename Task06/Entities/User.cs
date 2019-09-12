@@ -4,7 +4,7 @@ namespace Entities
 {
     public class User
     {
-        public string UserId { get; } = string.Empty;
+        public Guid UserGuid { get; }
 
         public string Name { get; } = string.Empty;
 
@@ -28,26 +28,9 @@ namespace Entities
 
         public User(string name, DateTime dateOfBirth)
         {
-            UserId = Guid.NewGuid().ToString();
+            UserGuid = Guid.NewGuid();
             Name = name;
             DateOfBirth = dateOfBirth;
-        }
-
-        public static int GetFieldIndex(string fieldName)
-        {
-            switch (fieldName)
-            {
-                case "UserID":
-                    return 0;
-                case "Name":
-                    return 1;
-                case "DateOfBirth":
-                    return 2;
-                case "Age":
-                    return 3;
-                default:
-                    return -1;
-            }
         }
     }
 }

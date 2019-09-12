@@ -1,9 +1,9 @@
-﻿namespace InterfacesBLL
+﻿using System;
+
+namespace InterfacesBLL
 {
     public interface IUserAwardLogic
     {
-        void JoinAwardToUser(string userName, string awardName);
-
-        void PrintUsersAwards();
+        bool JoinedAwardToUser(Guid userGuid, Guid awardGuid);
     }
 }
