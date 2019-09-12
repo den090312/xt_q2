@@ -9,5 +9,7 @@ namespace InterfacesBLL
         bool JoinedAwardToUser(Guid userGuid, Guid awardGuid);
 
         IEnumerable<UserAward> GetAll();
+
+        IEnumerable<Award> GetAwardsByUser(User user);
     }
 }

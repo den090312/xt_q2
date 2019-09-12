@@ -2,6 +2,7 @@
 using Entities;
 using InterfacesBLL;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
@@ -128,10 +129,41 @@ namespace Pl
         {
             consoleSegment = ConsoleSegment.User;
             Console.Clear();
-            //PrintUsersAwards();
+
+            var users = userBll.GetAll();
+            PrintUserAwards(users);
+
             Console.WriteLine();
 
             return InputComplete();
+        }
+
+        private void PrintUserAwards(IEnumerable<User> users)
+        {
+            foreach (var user in users)
+            {
+                PrintUser(user);
+                PrintAwardsByUser(user);
+            }
+        }
+
+        private void PrintAwardsByUser(User user)
+        {
+            var awards = userAwardBll.GetAwardsByUser(user);
+
+            foreach (var award in awards)
+            {
+                PrintAward(award);
+            }
+        }
+
+        private void PrintUser(User user)
+        {
+            throw new NotImplementedException();
+        }
+        private void PrintAward(Award award)
+        {
+            throw new NotImplementedException();
         }
 
         private bool AwardCreation()
