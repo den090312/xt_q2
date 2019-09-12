@@ -100,7 +100,7 @@ namespace PL
         {
             var outputPl = new OutputPl();
 
-            var user = outputPl.CreateUser(dateFormat);
+            var user = outputPl?.CreateUser(dateFormat);
 
             if (outputPl.UserAdded(user))
             {
@@ -118,7 +118,7 @@ namespace PL
         {
             Console.Clear();
 
-            new OutputPl().RemoveUser();
+            new OutputPl()?.RemoveUser();
 
             return InputComplete();
         }
@@ -129,7 +129,7 @@ namespace PL
             Console.Clear();
 
             var users = new DependencyResolver()?.UserBll?.GetAll();
-            new OutputPl().PrintUserAwards(users);
+            new OutputPl()?.PrintUserAwards(users);
 
             Console.WriteLine();
 
@@ -139,7 +139,7 @@ namespace PL
         private bool AwardRemoving()
         {
             consoleSegment = ConsoleSegment.Award;
-            new OutputPl().RemoveAward();
+            new OutputPl()?.RemoveAward();
 
             return InputComplete();
         }
@@ -149,7 +149,7 @@ namespace PL
             consoleSegment = ConsoleSegment.Award;
             Console.Clear();
 
-            new OutputPl().PrintAwards();
+            new OutputPl()?.PrintAwards();
             Console.WriteLine();
 
             return InputComplete();
@@ -161,7 +161,7 @@ namespace PL
 
             var outputPl = new OutputPl();
 
-            var award = outputPl.CreateAward();
+            var award = outputPl?.CreateAward();
 
             if (outputPl.AwardAdded(award))
             {
@@ -191,8 +191,8 @@ namespace PL
             var awardGuid = outputPl.GetChosenAwardGuid();
             Console.WriteLine();
 
-            var userName = outputPl.GetUserNameByGuid(userGuid);
-            var awardName = outputPl.GetAwardNameByGuid(awardGuid);
+            var userName = outputPl?.GetUserNameByGuid(userGuid);
+            var awardName = outputPl?.GetAwardNameByGuid(awardGuid);
 
             if (new DependencyResolver().UserAwardBll.JoinedAwardToUser(userGuid, awardGuid))
             {
@@ -308,7 +308,7 @@ namespace PL
 
         public bool KeyTaken(bool inputComplete, StringBuilder userKeySB, int[] keyArray)
         {
-            ConsoleKeyInfo key = Console.ReadKey(true);
+            var key = Console.ReadKey(true);
 
             if (key.Key == ConsoleKey.Backspace)
             {
