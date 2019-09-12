@@ -60,7 +60,47 @@ namespace DAL
 
         public bool UserRemoved(Guid userGuid)
         {
-            throw new NotImplementedException();
+            if (!File.Exists(FilePath))
+            {
+                return false;
+            }
+
+            try
+            {
+                RemoveUser(userGuid);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void RemoveUser(Guid userGuid)
+        {
+            var usersAwards = GetAll();
+
+            File.Delete(FilePath);
+
+            Thread.Sleep(10);
+            var streamWriter = new StreamWriter(FilePath, true);
+
+            foreach (var userAward in usersAwards)
+            {
+                if (userAward.UserRef.UserGuid != userGuid)
+                {
+                    PrintLine(streamWriter, userAward);
+                }
+            }
+
+            streamWriter.Close();
+        }
+
+        private void PrintLine(StreamWriter streamWriter, UserAward userAward)
+        {
+            streamWriter.WriteLine(userAward.UserRef.UserGuid.ToString() + Separator + userAward.AwardRef.AwardGuid.ToString());
+            streamWriter.WriteLine();
         }
 
         public bool AwardRemoved(Guid awardGuid)

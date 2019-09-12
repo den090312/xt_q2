@@ -1,6 +1,5 @@
 ﻿using Common;
 using Entities;
-using InterfacesBLL;
 using PL;
 using System;
 using System.Collections.Generic;
@@ -9,23 +8,9 @@ namespace Pl
 {
     internal class OutputPl
     {
-        internal IUserLogic userBll;
-        internal IAwardLogic awardBll;
-        internal IUserAwardLogic userAwardBll;
-
         public void Run()
         {
-            SetBll();
             new InputPl().Run();
-        }
-
-        private void SetBll()
-        {
-            var dr = new DependencyResolver();
-
-            userBll = dr.UserBll;
-            awardBll = dr.AwardBll;
-            userAwardBll = dr.UserAwardBll;
         }
 
         internal void PrintUserAwards(IEnumerable<User> users)
@@ -48,7 +33,7 @@ namespace Pl
 
         private void PrintAwardsByUser(User user)
         {
-            var awards = userAwardBll.GetAwardsByUser(user);
+            var awards = new DependencyResolver()?.UserAwardBll?.GetAwardsByUser(user);
             var awardNum = 1;
 
             foreach (var award in awards)
@@ -65,7 +50,7 @@ namespace Pl
 
         internal string GetAwardNameByGuid(Guid awardGuid)
         {
-            var awardName = awardBll.GetAwardByGuid(awardGuid)?.Title;
+            var awardName = new DependencyResolver()?.AwardBll?.GetAwardByGuid(awardGuid)?.Title;
 
             if (awardName == string.Empty)
             {
@@ -77,7 +62,7 @@ namespace Pl
 
         internal string GetUserNameByGuid(Guid userGuid)
         {
-            var userName = userBll.GetUserByGuid(userGuid)?.Name;
+            var userName = new DependencyResolver()?.UserBll?.GetUserByGuid(userGuid)?.Name;
 
             if (userName == string.Empty)
             {
@@ -93,14 +78,14 @@ namespace Pl
 
             var inputPl = new InputPl();
 
-            var chosenNum = inputPl.GetKeyFromConsole(inputPl.GetKeyArray(userNum));
+            var chosenNum = inputPl.GetKeyFromConsole(userNum);
 
             return userNumList[chosenNum];
         }
 
         private void PrintUsers(out int userNum, out Dictionary<int, Guid> userNumList)
         {
-            var users = userBll.GetAll();
+            var users = new DependencyResolver()?.UserBll?.GetAll();
             userNum = 1;
             userNumList = new Dictionary<int, Guid>();
 
@@ -114,7 +99,7 @@ namespace Pl
 
         internal Guid GetChosenAwardGuid()
         {
-            var awards = awardBll.GetAll();
+            var awards = new DependencyResolver()?.AwardBll?.GetAll();
             var awardNum = 1;
             var awardNumList = new Dictionary<int, Guid>();
 
@@ -127,7 +112,7 @@ namespace Pl
 
             var inputPl = new InputPl();
 
-            var chosenNum = inputPl.GetKeyFromConsole(inputPl.GetKeyArray(awardNum));
+            var chosenNum = inputPl.GetKeyFromConsole(awardNum);
 
             return awardNumList[chosenNum];
         }
@@ -136,23 +121,48 @@ namespace Pl
         {
             var inputPl = new InputPl();
 
-            return userBll.CreateUser(inputPl.GetUserString("name"), inputPl.GetUserDate(dateFormat));
+            return new DependencyResolver()?.UserBll?.CreateUser(inputPl.GetUserString("name"), inputPl.GetUserDate(dateFormat));
         }
 
         internal void RemoveUser()
         {
+            var dr = new DependencyResolver();
 
+            Console.WriteLine("Choose user by number:");
+            Console.WriteLine("----------------------");
+
+            var userGuid = GetChosenUserGuid();
+            Console.WriteLine();
+
+            if (dr.UserBll.UserRemoved(userGuid) && dr.UserAwardBll.UserRemoved(userGuid))
+            {
+                Console.WriteLine($"---user '{userGuid}' deleted---");
+            }
+            else
+            {
+                Console.WriteLine($"---user '{userGuid}' NOT deleted---");
+            }
+        }
+
+        internal void RemoveAward()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void PrintAwards()
+        {
+            throw new NotImplementedException();
         }
 
         internal Award CreateAward()
         {
             var inputPl = new InputPl();
 
-            return awardBll.CreateAward(inputPl.GetUserString("title"));
+            return new DependencyResolver()?.AwardBll?.CreateAward(inputPl.GetUserString("title"));
         }
 
-        internal bool UserAdded(User user) => userBll.UserAdded(user);
+        internal bool UserAdded(User user) => new DependencyResolver().UserBll.UserAdded(user);
 
-        internal bool AwardAdded(Award award) => awardBll.AwardAdded(award);
+        internal bool AwardAdded(Award award) => new DependencyResolver().AwardBll.AwardAdded(award);
     }
 }

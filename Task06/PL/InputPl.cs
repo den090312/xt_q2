@@ -1,4 +1,5 @@
-﻿using Pl;
+﻿using Common;
+using Pl;
 using System;
 using System.Globalization;
 using System.Text;
@@ -129,7 +130,7 @@ namespace PL
 
             var outputPl = new OutputPl();
 
-            var users = outputPl.userBll.GetAll();
+            var users = new DependencyResolver()?.UserBll?.GetAll();
             outputPl.PrintUserAwards(users);
 
             Console.WriteLine();
@@ -140,7 +141,7 @@ namespace PL
         private bool AwardRemoving()
         {
             consoleSegment = ConsoleSegment.Award;
-            //RemoveAwards();
+            new OutputPl().RemoveAward();
 
             return InputComplete();
         }
@@ -149,7 +150,7 @@ namespace PL
         {
             consoleSegment = ConsoleSegment.Award;
             Console.Clear();
-            //PrintAwards();
+            new OutputPl().PrintAwards();
             Console.WriteLine();
 
             return InputComplete();
@@ -194,7 +195,7 @@ namespace PL
             var userName = outputPl.GetUserNameByGuid(userGuid);
             var awardName = outputPl.GetAwardNameByGuid(awardGuid);
 
-            if (outputPl.userAwardBll.JoinedAwardToUser(userGuid, awardGuid))
+            if (new DependencyResolver().UserAwardBll.JoinedAwardToUser(userGuid, awardGuid))
             {
                 Console.WriteLine($"---'{awardName}' joined to '{userName}'---");
             }
@@ -279,8 +280,10 @@ namespace PL
             return keyArray;
         }
 
-        public int GetKeyFromConsole(int[] keyArray)
+        public int GetKeyFromConsole(int lastNum)
         {
+            var keyArray = GetKeyArray(lastNum);
+
             bool inputComplete = false;
 
             StringBuilder userKeySB = new StringBuilder();
