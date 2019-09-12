@@ -1,4 +1,5 @@
 ﻿using Common;
+using Entities;
 using Pl;
 using System;
 using System.Globalization;
@@ -17,8 +18,6 @@ namespace PL
         }
 
         private ConsoleSegment consoleSegment = ConsoleSegment.None;
-
-        private static readonly string dateFormat = "dd.MM.yyyy";
 
         internal void Run()
         {
@@ -100,7 +99,7 @@ namespace PL
         {
             var outputPl = new OutputPl();
 
-            var user = outputPl?.CreateUser(dateFormat);
+            var user = outputPl?.CreateUser(User.DateFormat);
 
             if (outputPl.UserAdded(user))
             {

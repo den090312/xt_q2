@@ -10,6 +10,8 @@ namespace Entities
 
         public DateTime DateOfBirth { get; }
 
+        public static string DateFormat { get; } = "dd.MM.yyyy";
+
         public int Age
         {
             get

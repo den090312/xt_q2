@@ -49,22 +49,16 @@ namespace BLL
 
         public bool UserRemoved(Guid userGuid) => _userDao.UserRemoved(userGuid);
 
+        public IEnumerable<User> GetAll() => _userDao.GetAll();
+
+        public User GetUserByGuid(Guid userGuid) => _userDao.GetUserByGuid(userGuid);
+
         private static void NullCheck<T>(T classObject) where T : class
         {
             if (classObject is null)
             {
                 throw new ArgumentNullException($"{nameof(classObject)} is null!");
             }
-        }
-
-        public IEnumerable<User> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public User GetUserByGuid(Guid userGuid)
-        {
-            throw new NotImplementedException();
         }
     }
 }

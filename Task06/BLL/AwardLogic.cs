@@ -33,15 +33,9 @@ namespace BLL
 
         public bool AwardRemoved(Guid awardGuid) => _awardDao.AwardRemoved(awardGuid);
 
-        public IEnumerable<Award> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<Award> GetAll() => _awardDao.GetAll();
 
-        public Award GetAwardByGuid(Guid awardGuid)
-        {
-            throw new NotImplementedException();
-        }
+        public Award GetAwardByGuid(Guid awardGuid) => _awardDao.GetAwardByGuid(awardGuid);
 
         private static void NullCheck<T>(T classObject) where T : class
         {

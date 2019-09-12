@@ -28,7 +28,7 @@ namespace Pl
 
         private void PrintSingleUser(User user, int userNum)
         {
-            Console.WriteLine($"{userNum}.{user.Name}---{user.DateOfBirth}---{user.Age}");
+            Console.WriteLine($"{userNum}.{user.Name}---{user.DateOfBirth.ToString("dd.MM.yyyy")}---{user.Age}");
         }
 
         private void PrintAwardsByUser(User user)

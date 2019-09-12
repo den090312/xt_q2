@@ -2,6 +2,7 @@
 using InterfacesDAL;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Threading;
 
@@ -98,7 +99,26 @@ namespace DAL
 
         public IEnumerable<User> GetAll()
         {
-            throw new NotImplementedException();
+            var users = new List<User>();
+
+            if (!File.Exists(FilePath))
+            {
+                return users;
+            }
+
+            var userLines = File.ReadAllLines(FilePath);
+
+            foreach (var userLine in userLines)
+            {
+                var userLineArray = userLine.Split(Separator);
+
+                var date = DateTime.ParseExact(userLineArray[2], User.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                var user = new User(userLineArray[1], date);
+
+                users.Add(user);
+            }
+
+            return users;
         }
 
         public User GetUserByGuid(Guid userGuid)
