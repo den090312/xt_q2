@@ -52,10 +52,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BLL\BLL.csproj">
-      <Project>{50fb4d5e-e94b-42be-806a-f343efc4c225}</Project>
-      <Name>BLL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{5275cae9-2388-4e4e-961b-ceac0946d040}</Project>
       <Name>Common</Name>
@@ -65,7 +61,7 @@
       <Name>Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\InterfacesBLL\InterfacesBll.csproj">
-      <Project>{53911CD3-40C3-4177-BBF5-4B2C65E21106}</Project>
+      <Project>{53911cd3-40c3-4177-bbf5-4b2c65e21106}</Project>
       <Name>InterfacesBll</Name>
     </ProjectReference>
   </ItemGroup>
