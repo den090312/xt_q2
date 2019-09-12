@@ -1,23 +1,12 @@
-﻿using Common;
-using Entities;
-using InterfacesBLL;
+﻿using Pl;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace Pl
+namespace PL
 {
-    public class ConsolePl
+    internal class InputPl
     {
-        private IUserLogic userBll;
-        private IAwardLogic awardBll;
-        private IUserAwardLogic userAwardBll;
-
-        private ConsoleSegment consoleSegment = ConsoleSegment.None;
-
-        public static readonly string dateFormat = "dd.MM.yyyy";
-
         private enum ConsoleSegment
         {
             None = 0,
@@ -26,22 +15,11 @@ namespace Pl
             Award = 3
         }
 
-        public void Run()
-        {
-            SetBll();
-            RunInput();
-        }
+        private ConsoleSegment consoleSegment = ConsoleSegment.None;
 
-        private void SetBll()
-        {
-            var dr = new DependencyResolver();
+        private static readonly string dateFormat = "dd.MM.yyyy";
 
-            userBll = dr.UserBll;
-            awardBll = dr.AwardBll;
-            userAwardBll = dr.UserAwardBll;
-        }
-
-        private void RunInput()
+        internal void Run()
         {
             consoleSegment = ConsoleSegment.Main;
 
@@ -84,7 +62,7 @@ namespace Pl
                             inputComplete = AwardRemoving();
                             break;
                         case 6:
-                            inputComplete = AwardPrint();
+                            inputComplete = AwardsPrint();
                             break;
                         case 7:
                             inputComplete = JoinAwardToUser();
@@ -98,213 +76,6 @@ namespace Pl
 
             return inputComplete;
         }
-
-        private bool UserCreation()
-        {
-            consoleSegment = ConsoleSegment.User;
-
-            var user = CreateUser(dateFormat);
-
-            if (UserAdded(user))
-            {
-                Console.WriteLine($"---'{user.Name}' added---");
-            }
-            else
-            {
-                Console.WriteLine($"---'{user.Name}' NOT added---");
-            }
-
-            return InputComplete();
-        }
-
-        private bool UserRemoving()
-        {
-            consoleSegment = ConsoleSegment.User;
-            //RemoveUsers();
-
-            return InputComplete();
-        }
-
-        private bool UsersAwardsPrint()
-        {
-            consoleSegment = ConsoleSegment.User;
-            Console.Clear();
-
-            var users = userBll.GetAll();
-            PrintUserAwards(users);
-
-            Console.WriteLine();
-
-            return InputComplete();
-        }
-
-        private void PrintUserAwards(IEnumerable<User> users)
-        {
-            var userNum = 1;
-
-            foreach (var user in users)
-            {
-                PrintUser(user, userNum);
-                userNum++;
-
-                PrintAwardsByUser(user);
-            }
-        }
-
-        private void PrintUser(User user, int userNum)
-        {
-            Console.WriteLine($"{userNum}.{user.Name}---{user.DateOfBirth}---{user.Age}");
-        }
-
-        private void PrintAwardsByUser(User user)
-        {
-            var awards = userAwardBll.GetAwardsByUser(user);
-            var awardNum = 1;
-
-            foreach (var award in awards)
-            {
-                PrintAward(award, awardNum);
-                awardNum++;
-            }
-        }
-
-        private void PrintAward(Award award, int awardNum)
-        {
-            Console.WriteLine($"---{awardNum}.{award.Title}");
-        }
-
-        private bool AwardCreation()
-        {
-            consoleSegment = ConsoleSegment.User;
-
-            var award = CreateAward();
-
-            if (AwardAdded(award))
-            {
-                Console.WriteLine($"---'{award.Title}' added---");
-            }
-            else
-            {
-                Console.WriteLine($"---'{award.Title}' NOT added---");
-            }
-
-            return InputComplete();
-        }
-
-        private bool AwardRemoving()
-        {
-            consoleSegment = ConsoleSegment.Award;
-            //RemoveAwards();
-
-            return InputComplete();
-        }
-
-        private bool AwardPrint()
-        {
-            consoleSegment = ConsoleSegment.Award;
-            Console.Clear();
-            //PrintAwards();
-            Console.WriteLine();
-
-            return InputComplete();
-        }
-
-        private bool JoinAwardToUser()
-        {
-            Console.WriteLine("Choose user by number:");
-            Console.WriteLine("----------------------");
-
-            var userGuid = GetChosenUserGuid();
-            Console.WriteLine();
-
-            Console.WriteLine("Choose award by number:");
-            Console.WriteLine("----------------------");
-
-            var awardGuid = GetChosenAwardGuid();
-            Console.WriteLine();
-
-            var userName = GetUserNameByGuid(userGuid);
-            var awardName = GetAwardNameByGuid(awardGuid);
-
-            if (userAwardBll.JoinedAwardToUser(userGuid, awardGuid))
-            {
-                Console.WriteLine($"---'{awardName}' joined to '{userName}'---");
-            }
-            else
-            {
-                Console.WriteLine($"---'{awardName}' NOT joined to '{userName}'---");
-            }
-
-            return InputComplete();
-        }
-
-        private string GetAwardNameByGuid(Guid awardGuid)
-        {
-            var awardName = awardBll.GetAwardByGuid(awardGuid)?.Title;
-
-            if (awardName == string.Empty)
-            {
-                throw new Exception($"Award '{awardGuid.ToString()}' not found!");
-            }
-
-            return awardName;
-        }
-
-        private string GetUserNameByGuid(Guid userGuid)
-        {
-            var userName = userBll.GetUserByGuid(userGuid)?.Name;
-
-            if (userName == string.Empty)
-            {
-                throw new Exception($"User '{userGuid.ToString()}' not found!");
-            }
-
-            return userName;
-        }
-
-        private Guid GetChosenUserGuid()
-        {
-            var users = userBll.GetAll();
-            var userNum = 1;
-            var userNumList = new Dictionary<int, Guid>();
-
-            foreach (var user in users)
-            {
-                userNumList.Add(userNum, user.UserGuid);
-                PrintUser(user, userNum);
-                userNum++;
-            }
-
-            var chosenNum = GetKeyFromConsole(GetKeyArray(userNum));
-
-            return userNumList[chosenNum];
-        }
-
-        private Guid GetChosenAwardGuid()
-        {
-            var awards = awardBll.GetAll();
-            var awardNum = 1;
-            var awardNumList = new Dictionary<int, Guid>();
-
-            foreach (var award in awards)
-            {
-                awardNumList.Add(awardNum, award.AwardGuid);
-                PrintAward(award, awardNum);
-                awardNum++;
-            }
-
-            var chosenNum = GetKeyFromConsole(GetKeyArray(awardNum));
-
-            return awardNumList[chosenNum];
-        }
-
-        private User CreateUser(string dateFormat) => userBll.CreateUser(GetUserString("name"), GetUserDate(dateFormat));
-
-        private Award CreateAward() => awardBll.CreateAward(GetUserString("title"));
-
-        private bool UserAdded(User user) => userBll.UserAdded(user);
-
-        private bool AwardAdded(Award award) => awardBll.AwardAdded(award);
 
         private void WriteMenu()
         {
@@ -324,7 +95,118 @@ namespace Pl
             Console.WriteLine("\t8: exit");
         }
 
-        private string GetUserString(string parameterName)
+        private bool UserCreation()
+        {
+            var outputPl = new OutputPl();
+
+            var user = outputPl.CreateUser(dateFormat);
+
+            if (outputPl.UserAdded(user))
+            {
+                Console.WriteLine($"---'{user.Name}' added---");
+            }
+            else
+            {
+                Console.WriteLine($"---'{user.Name}' NOT added---");
+            }
+
+            return InputComplete();
+        }
+
+        private bool UserRemoving()
+        {
+            Console.Clear();
+
+            new OutputPl().RemoveUser();
+
+            return InputComplete();
+        }
+
+        private bool UsersAwardsPrint()
+        {
+            consoleSegment = ConsoleSegment.User;
+            Console.Clear();
+
+            var outputPl = new OutputPl();
+
+            var users = outputPl.userBll.GetAll();
+            outputPl.PrintUserAwards(users);
+
+            Console.WriteLine();
+
+            return InputComplete();
+        }
+
+        private bool AwardRemoving()
+        {
+            consoleSegment = ConsoleSegment.Award;
+            //RemoveAwards();
+
+            return InputComplete();
+        }
+
+        private bool AwardsPrint()
+        {
+            consoleSegment = ConsoleSegment.Award;
+            Console.Clear();
+            //PrintAwards();
+            Console.WriteLine();
+
+            return InputComplete();
+        }
+
+        private bool AwardCreation()
+        {
+            consoleSegment = ConsoleSegment.User;
+
+            var outputPl = new OutputPl();
+
+            var award = outputPl.CreateAward();
+
+            if (outputPl.AwardAdded(award))
+            {
+                Console.WriteLine($"---'{award.Title}' added---");
+            }
+            else
+            {
+                Console.WriteLine($"---'{award.Title}' NOT added---");
+            }
+
+            return InputComplete();
+        }
+
+        private bool JoinAwardToUser()
+        {
+            var outputPl = new OutputPl();
+
+            Console.WriteLine("Choose user by number:");
+            Console.WriteLine("----------------------");
+
+            var userGuid = outputPl.GetChosenUserGuid();
+            Console.WriteLine();
+
+            Console.WriteLine("Choose award by number:");
+            Console.WriteLine("----------------------");
+
+            var awardGuid = outputPl.GetChosenAwardGuid();
+            Console.WriteLine();
+
+            var userName = outputPl.GetUserNameByGuid(userGuid);
+            var awardName = outputPl.GetAwardNameByGuid(awardGuid);
+
+            if (outputPl.userAwardBll.JoinedAwardToUser(userGuid, awardGuid))
+            {
+                Console.WriteLine($"---'{awardName}' joined to '{userName}'---");
+            }
+            else
+            {
+                Console.WriteLine($"---'{awardName}' NOT joined to '{userName}'---");
+            }
+
+            return InputComplete();
+        }
+
+        public string GetUserString(string parameterName)
         {
             Console.Clear();
             Console.WriteLine($"Enter {parameterName}:");
@@ -359,7 +241,7 @@ namespace Pl
             return userSB.ToString();
         }
 
-        private static DateTime GetUserDate(string dateFormat)
+        public DateTime GetUserDate(string dateFormat)
         {
             Console.Clear();
             Console.WriteLine($"Enter date in format: {dateFormat}");
@@ -385,7 +267,7 @@ namespace Pl
             return userBirthDate;
         }
 
-        private int[] GetKeyArray(int lastKey)
+        public int[] GetKeyArray(int lastKey)
         {
             var keyArray = new int[lastKey + 1];
 
@@ -397,7 +279,7 @@ namespace Pl
             return keyArray;
         }
 
-        private int GetKeyFromConsole(int[] keyArray)
+        public int GetKeyFromConsole(int[] keyArray)
         {
             bool inputComplete = false;
 
@@ -422,7 +304,7 @@ namespace Pl
             return result;
         }
 
-        private bool KeyTaken(bool inputComplete, StringBuilder userKeySB, int[] keyArray)
+        public bool KeyTaken(bool inputComplete, StringBuilder userKeySB, int[] keyArray)
         {
             ConsoleKeyInfo key = Console.ReadKey(true);
 
@@ -449,7 +331,7 @@ namespace Pl
             return inputComplete;
         }
 
-        private void EmulateBackspace(StringBuilder userKeySB)
+        public void EmulateBackspace(StringBuilder userKeySB)
         {
             if (userKeySB.Length > 0)
             {
@@ -461,7 +343,7 @@ namespace Pl
             Console.Write(userKeySB);
         }
 
-        private void ConsoleRestore()
+        public void ConsoleRestore()
         {
             switch (consoleSegment)
             {

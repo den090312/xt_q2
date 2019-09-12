@@ -4,7 +4,7 @@
     {
         private static void Main(string[] args)
         {
-            new ConsolePl().Run();
+            new OutputPl().Run();
         }
     }
 }
