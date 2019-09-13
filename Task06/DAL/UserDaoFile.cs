@@ -160,13 +160,5 @@ namespace DAL
                 File.SetAttributes(FilePath, FileAttributes.Normal);
             }
         }
-
-        private void CheckFileExistance()
-        {
-            if (!File.Exists(FilePath))
-            {
-                throw new FileNotFoundException($"{nameof(FilePath)} is not exists!");
-            }
-        }
     }
 }

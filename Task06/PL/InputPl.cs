@@ -109,6 +109,9 @@ namespace PL
 
         private bool UserCreation()
         {
+            consoleSegment = ConsoleSegment.User;
+            Console.Clear();
+
             var outputPl = new OutputPl();
 
             var user = outputPl?.CreateUser(User.DateFormat);
@@ -127,7 +130,10 @@ namespace PL
 
         private bool UserRemoving()
         {
+            consoleSegment = ConsoleSegment.User;
             Console.Clear();
+            Console.WriteLine("Choose user by number:");
+            Console.WriteLine("----------------------");
 
             new OutputPl()?.RemoveUser();
 
@@ -151,6 +157,8 @@ namespace PL
         {
             consoleSegment = ConsoleSegment.Award;
             Console.Clear();
+            Console.WriteLine("Choose award by number:");
+            Console.WriteLine("----------------------");
 
             new OutputPl()?.RemoveAward();
 
@@ -196,13 +204,11 @@ namespace PL
             var outputPl = new OutputPl();
 
             Console.WriteLine("Choose user by number:");
-            Console.WriteLine("----------------------");
 
             var userGuid = outputPl.GetChosenUserGuid();
             Console.WriteLine();
 
             Console.WriteLine("Choose award by number:");
-            Console.WriteLine("----------------------");
 
             var awardGuid = outputPl.GetChosenAwardGuid();
             Console.WriteLine();

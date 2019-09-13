@@ -42,6 +42,11 @@ namespace DAL
         {
             var awardsByUser = new List<Award>();
 
+            if (!File.Exists(FilePath))
+            {
+                return awardsByUser;
+            }
+
             var userAwardLines = File.ReadAllLines(FilePath);
 
             foreach (var line in userAwardLines)
@@ -143,6 +148,11 @@ namespace DAL
         {
             var usersAwards = GetAll(users, awards);
 
+            if (!File.Exists(FilePath))
+            {
+                return;
+            }
+
             File.Delete(FilePath);
 
             Thread.Sleep(10);
@@ -188,6 +198,11 @@ namespace DAL
         {
             var usersAwards = GetAll(users, awards);
 
+            if (!File.Exists(FilePath))
+            {
+                return;
+            }
+
             File.Delete(FilePath);
 
             Thread.Sleep(10);
@@ -228,12 +243,26 @@ namespace DAL
         private void SetNormalAttributes()
         {
             Thread.Sleep(10);
+
+            if (!File.Exists(FilePath))
+            {
+                return;
+            }
+
             var attributes = File.GetAttributes(FilePath);
 
             if ((attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
             {
                 Thread.Sleep(10);
                 File.SetAttributes(FilePath, FileAttributes.Normal);
+            }
+        }
+
+        private void CheckFileExistance()
+        {
+            if (!File.Exists(FilePath))
+            {
+                throw new FileNotFoundException($"{nameof(FilePath)} is not exists!");
             }
         }
     }

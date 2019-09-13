@@ -26,10 +26,8 @@ namespace Pl
             }
         }
 
-        private void PrintSingleUser(User user, int userNum)
-        {
+        private void PrintSingleUser(User user, int userNum) => 
             Console.WriteLine($"{userNum}.{user.Name}---{user.DateOfBirth.ToString("dd.MM.yyyy")}---{user.Age}");
-        }
 
         private void PrintAwardsByUser(User user)
         {
@@ -43,10 +41,7 @@ namespace Pl
             }
         }
 
-        private void PrintSingleAward(Award award, int awardNum)
-        {
-            Console.WriteLine($"---{awardNum}.{award.Title}");
-        }
+        private void PrintSingleAward(Award award, int awardNum) => Console.WriteLine($"---{awardNum}.{award.Title}");
 
         internal string GetAwardNameByGuid(Guid awardGuid)
         {
@@ -109,6 +104,7 @@ namespace Pl
             var awards = new DependencyResolver()?.AwardBll?.GetAll();
             awardNum = 1;
             awardNumList = new Dictionary<int, Guid>();
+
             foreach (var award in awards)
             {
                 awardNumList.Add(awardNum, award.AwardGuid);
@@ -138,22 +134,12 @@ namespace Pl
             return new DependencyResolver()?.UserBll?.CreateUser(name, dateBirth);
         }
 
-        internal void RemoveUser()
-        {
-            var dr = new DependencyResolver();
-
-            Console.WriteLine();
-            Console.WriteLine("Choose user by number:");
-            Console.WriteLine("----------------------");
-
-            var userGuid = GetChosenUserGuid();
-            Console.WriteLine();
-
-            RunUserRemove(dr, userGuid);
-        }
+        internal void RemoveUser() => RunUserRemove(new DependencyResolver(), GetChosenUserGuid());
 
         private void RunUserRemove(DependencyResolver dr, Guid userGuid)
         {
+            Console.WriteLine();
+
             if (dr.UserBll.UserRemoved(userGuid))
             {
                 Console.WriteLine($"---user '{userGuid}' deleted from UserBll---");
@@ -173,22 +159,12 @@ namespace Pl
             }
         }
 
-        internal void RemoveAward()
-        {
-            var dr = new DependencyResolver();
-
-            Console.WriteLine();
-            Console.WriteLine("Choose award by number:");
-            Console.WriteLine("----------------------");
-
-            var awardGuid = GetChosenAwardGuid();
-            Console.WriteLine();
-
-            RunAwardRemove(dr, awardGuid);
-        }
+        internal void RemoveAward() => RunAwardRemove(new DependencyResolver(), GetChosenAwardGuid());
 
         private void RunAwardRemove(DependencyResolver dr, Guid awardGuid)
         {
+            Console.WriteLine();
+
             if (dr.AwardBll.AwardRemoved(awardGuid))
             {
                 Console.WriteLine($"---user '{awardGuid}' deleted from UserBll---");
