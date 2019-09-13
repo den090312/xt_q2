@@ -142,6 +142,7 @@ namespace Pl
         {
             var dr = new DependencyResolver();
 
+            Console.WriteLine();
             Console.WriteLine("Choose user by number:");
             Console.WriteLine("----------------------");
 
@@ -176,7 +177,8 @@ namespace Pl
         {
             var dr = new DependencyResolver();
 
-            Console.WriteLine("Choose user by number:");
+            Console.WriteLine();
+            Console.WriteLine("Choose award by number:");
             Console.WriteLine("----------------------");
 
             var awardGuid = GetChosenAwardGuid();

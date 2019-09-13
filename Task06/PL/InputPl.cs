@@ -150,6 +150,8 @@ namespace PL
         private bool AwardRemoving()
         {
             consoleSegment = ConsoleSegment.Award;
+            Console.Clear();
+
             new OutputPl()?.RemoveAward();
 
             return InputComplete();
@@ -171,6 +173,7 @@ namespace PL
         private bool AwardCreation()
         {
             consoleSegment = ConsoleSegment.User;
+            Console.Clear();
 
             var outputPl = new OutputPl();
 
