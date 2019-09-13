@@ -97,23 +97,27 @@ namespace DAL
 
         public IEnumerable<Award> GetAll()
         {
-            var awards = new List<Award>();
-
             if (!File.Exists(FilePath))
             {
-                return awards;
+                return new List<Award>();
             }
 
             var awardLines = File.ReadAllLines(FilePath);
+            var awards = new List<Award>();
 
             foreach (var awardLine in awardLines)
             {
-                var awardLineArray = awardLine.Split(Separator);
-
-                awards.Add(new Award(Guid.Parse(awardLineArray[0]), awardLineArray[1]));
+                AddToAwards(ref awards, awardLine);
             }
 
             return awards;
+        }
+
+        private void AddToAwards(ref List<Award> awards, string awardLine)
+        {
+            var awardLineArray = awardLine.Split(Separator);
+
+            awards.Add(new Award(Guid.Parse(awardLineArray[0]), awardLineArray[1]));
         }
 
         public Award GetAwardByGuid(Guid awardGuid)

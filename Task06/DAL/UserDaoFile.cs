@@ -99,26 +99,30 @@ namespace DAL
 
         public IEnumerable<User> GetAll()
         {
-            var users = new List<User>();
-
             if (!File.Exists(FilePath))
             {
-                return users;
+                new List<User>();
             }
 
             var userLines = File.ReadAllLines(FilePath);
+            var users = new List<User>();
 
             foreach (var userLine in userLines)
             {
-                var userLineArray = userLine.Split(Separator);
-
-                var date = DateTime.ParseExact(userLineArray[2], User.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None);
-                var user = new User(Guid.Parse(userLineArray[0]), userLineArray[1], date);
-
-                users.Add(user);
+                AddToUsers(ref users, userLine);
             }
 
             return users;
+        }
+
+        private void AddToUsers(ref List<User> users, string userLine)
+        {
+            var userLineArray = userLine.Split(Separator);
+
+            var date = DateTime.ParseExact(userLineArray[2], User.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None);
+            var user = new User(Guid.Parse(userLineArray[0]), userLineArray[1], date);
+
+            users.Add(user);
         }
 
         public User GetUserByGuid(Guid userGuid)
