@@ -72,7 +72,7 @@ namespace Pl
             return userName;
         }
 
-        private Guid GetChosenUserGuid()
+        internal Guid GetChosenUserGuid()
         {
             PrintUsers(out int userNum, out Dictionary<int, Guid> userNumList);
 
@@ -95,7 +95,7 @@ namespace Pl
             }
         }
 
-        private Guid GetChosenAwardGuid()
+        internal Guid GetChosenAwardGuid()
         {
             PrintAwards(out int awardNum, out Dictionary<int, Guid> awardNumList);
 
@@ -104,7 +104,7 @@ namespace Pl
             return awardNumList[chosenNum];
         }
 
-        private void PrintAwards(out int awardNum, out Dictionary<int, Guid> awardNumList)
+        internal void PrintAwards(out int awardNum, out Dictionary<int, Guid> awardNumList)
         {
             var awards = new DependencyResolver()?.AwardBll?.GetAll();
             awardNum = 1;
@@ -112,6 +112,17 @@ namespace Pl
             foreach (var award in awards)
             {
                 awardNumList.Add(awardNum, award.AwardGuid);
+                PrintSingleAward(award, awardNum);
+                awardNum++;
+            }
+        }
+
+        internal void PrintAwards(IEnumerable<Award> awards)
+        {
+            var awardNum = 1;
+
+            foreach (var award in awards)
+            {
                 PrintSingleAward(award, awardNum);
                 awardNum++;
             }
@@ -193,11 +204,6 @@ namespace Pl
             {
                 Console.WriteLine($"---user '{awardGuid}' NOT deleted from UserAwardBll---");
             }
-        }
-
-        internal void PrintAwards()
-        {
-            throw new NotImplementedException();
         }
 
         internal Award CreateAward() => new DependencyResolver()?.AwardBll?.CreateAward(new InputPl()?.GetUserString("title"));

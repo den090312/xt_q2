@@ -160,7 +160,9 @@ namespace PL
             consoleSegment = ConsoleSegment.Award;
             Console.Clear();
 
-            new OutputPl()?.PrintAwards();
+            var awards = new DependencyResolver()?.AwardBll?.GetAll();
+            new OutputPl()?.PrintAwards(awards);
+
             Console.WriteLine();
 
             return InputComplete();
