@@ -2,6 +2,7 @@
 using InterfacesDAL;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Threading;
 
@@ -17,7 +18,7 @@ namespace DAL
 
         static AwardDaoFile()
         {
-            FilePath = @"D:\Task06\Awards.txt";
+            FilePath = @"C:\Task06\Awards.txt";
             FileName = "Awards.txt";
             Separator = '|';
         }
@@ -96,7 +97,25 @@ namespace DAL
 
         public IEnumerable<Award> GetAll()
         {
-            throw new NotImplementedException();
+            var awards = new List<Award>();
+
+            if (!File.Exists(FilePath))
+            {
+                return awards;
+            }
+
+            var awardLines = File.ReadAllLines(FilePath);
+
+            foreach (var awardLine in awardLines)
+            {
+                var awardLineArray = awardLine.Split(Separator);
+
+                var award = new Award(Guid.Parse(awardLineArray[0]), awardLineArray[1]);
+
+                awards.Add(award);
+            }
+
+            return awards;
         }
 
         public Award GetAwardByGuid(Guid awardGuid)

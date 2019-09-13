@@ -46,7 +46,10 @@ namespace BLL
 
         public bool UserRemoved(Guid userGuid)
         {
-            throw new NotImplementedException();
+            var users = userDao.GetAll();
+            var awards = awardDao.GetAll();
+
+            return userAwardDao.UserRemoved(userGuid, users, awards);
         }
 
         public bool AwardRemoved(Guid awardGuid)

@@ -2,6 +2,7 @@
 using InterfacesDAL;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Threading;
 
@@ -17,7 +18,7 @@ namespace DAL
 
         static UserAwardDaoFile()
         {
-            FilePath = @"D:\Task06\UsersAwards.txt";
+            FilePath = @"C:\Task06\UsersAwards.txt";
             FileName = "UsersAwards.txt";
             Separator = '|';
         }
@@ -47,9 +48,28 @@ namespace DAL
             streamWriter.Close();
         }
 
-        public IEnumerable<UserAward> GetAll()
+        public IEnumerable<UserAward> GetAll(IEnumerable<User> users, IEnumerable<Award> awards)
         {
-            throw new NotImplementedException();
+            var usersAwards = new List<UserAward>();
+
+            /*if (!File.Exists(FilePath))
+            {
+                return usersAwards;
+            }
+
+            var lines = File.ReadAllLines(FilePath);
+
+            foreach (var line in lines)
+            {
+                var lineArray = line.Split(Separator);
+
+                var date = DateTime.ParseExact(lineArray[2], User.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                var user = new User(Guid.Parse(lineArray[0]), lineArray[1], date);
+
+                usersAwards.Add(user);
+            }*/
+
+            return usersAwards;
         }
 
         public IEnumerable<Award> GetAwardsByUser(User user)
@@ -57,7 +77,7 @@ namespace DAL
             throw new NotImplementedException();
         }
 
-        public bool UserRemoved(Guid userGuid)
+        public bool UserRemoved(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
         {
             if (!File.Exists(FilePath))
             {
@@ -66,7 +86,7 @@ namespace DAL
 
             try
             {
-                RemoveUser(userGuid);
+                RemoveUser(userGuid, users, awards);
 
                 return true;
             }
@@ -77,9 +97,9 @@ namespace DAL
         }
         public void PrintInfo() => Console.WriteLine(FilePath);
 
-        private void RemoveUser(Guid userGuid)
+        private void RemoveUser(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
         {
-            var usersAwards = GetAll();
+            var usersAwards = GetAll(users, awards);
 
             File.Delete(FilePath);
 

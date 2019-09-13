@@ -8,11 +8,11 @@ namespace InterfacesDAL
     {
         bool JoinedAwardToUser(User user, Award award);
 
-        IEnumerable<UserAward> GetAll();
+        IEnumerable<UserAward> GetAll(IEnumerable<User> users, IEnumerable<Award> awards);
 
         IEnumerable<Award> GetAwardsByUser(User user);
 
-        bool UserRemoved(Guid userGuid);
+        bool UserRemoved(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards);
 
         bool AwardRemoved(Guid awardGuid);
 

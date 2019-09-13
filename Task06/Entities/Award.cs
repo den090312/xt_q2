@@ -16,6 +16,14 @@ namespace Entities
             Title = title;
         }
 
+        public Award(Guid guid, string title)
+        {
+            NullCheck(title);
+
+            AwardGuid = guid;
+            Title = title;
+        }
+
         private static void NullCheck<T>(T classObject) where T : class
         {
             if (classObject is null)

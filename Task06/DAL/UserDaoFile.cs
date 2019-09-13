@@ -18,7 +18,7 @@ namespace DAL
 
         static UserDaoFile()
         {
-            FilePath = @"D:\Task06\Users.txt";
+            FilePath = @"C:\Task06\Users.txt";
             FileName = "Users.txt";
             Separator = '|';
         }
@@ -113,7 +113,7 @@ namespace DAL
                 var userLineArray = userLine.Split(Separator);
 
                 var date = DateTime.ParseExact(userLineArray[2], User.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None);
-                var user = new User(userLineArray[1], date);
+                var user = new User(Guid.Parse(userLineArray[0]), userLineArray[1], date);
 
                 users.Add(user);
             }
