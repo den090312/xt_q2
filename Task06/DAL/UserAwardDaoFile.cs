@@ -58,20 +58,23 @@ namespace DAL
                 var userId = line.Split(Separator)[0];
                 var awardId = line.Split(Separator)[1];
 
-                if (user.UserGuid.ToString() == userId)
+                if (user.UserGuid.ToString() != userId)
                 {
-                    var title = GetAwardTitle(awards, awardId);
+                    continue;
+                }
 
-                    if (title != string.Empty)
-                    {
-                        var guid = Guid.Parse(awardId);
+                var title = GetAwardTitle(awards, awardId);
 
-                        awardsByUser.Add(new Award(guid, title));
-                    }
-                    else
-                    {
-                        continue;
-                    }
+                if (title == string.Empty)
+                {
+                    continue;
+                }
+
+                else
+                {
+                    var guid = Guid.Parse(awardId);
+
+                    awardsByUser.Add(new Award(guid, title));
                 }
             }
 
