@@ -36,18 +36,30 @@ namespace BLL
 
         public IEnumerable<UserAward> GetAll()
         {
-            throw new NotImplementedException();
+            var users = userDao.GetAll();
+            NullCheck(users);
+
+            var awards = awardDao.GetAll();
+            NullCheck(awards);
+
+            return userAwardDao.GetAll(users, awards);
         }
 
         public IEnumerable<Award> GetAwardsByUser(User user)
         {
-            throw new NotImplementedException();
+            var awards = awardDao.GetAll();
+            NullCheck(awards);
+
+            return userAwardDao.GetAwardsByUser(user, awards);
         }
 
         public bool UserRemoved(Guid userGuid)
         {
             var users = userDao.GetAll();
+            NullCheck(users);
+
             var awards = awardDao.GetAll();
+            NullCheck(awards);
 
             return userAwardDao.UserRemoved(userGuid, users, awards);
         }

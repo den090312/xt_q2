@@ -10,7 +10,7 @@ namespace InterfacesDAL
 
         IEnumerable<UserAward> GetAll(IEnumerable<User> users, IEnumerable<Award> awards);
 
-        IEnumerable<Award> GetAwardsByUser(User user);
+        IEnumerable<Award> GetAwardsByUser(User user, IEnumerable<Award> awards);
 
         bool UserRemoved(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards);
 

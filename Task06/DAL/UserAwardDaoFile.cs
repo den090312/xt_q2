@@ -52,29 +52,72 @@ namespace DAL
         {
             var usersAwards = new List<UserAward>();
 
-            /*if (!File.Exists(FilePath))
+            if (!File.Exists(FilePath))
             {
                 return usersAwards;
             }
 
-            var lines = File.ReadAllLines(FilePath);
-
-            foreach (var line in lines)
+            foreach (var user in users)
             {
-                var lineArray = line.Split(Separator);
-
-                var date = DateTime.ParseExact(lineArray[2], User.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None);
-                var user = new User(Guid.Parse(lineArray[0]), lineArray[1], date);
-
-                usersAwards.Add(user);
-            }*/
+                usersAwards = GetUserAwards(user, awards, usersAwards);
+            }
 
             return usersAwards;
         }
 
-        public IEnumerable<Award> GetAwardsByUser(User user)
+        private List<UserAward> GetUserAwards(User user, IEnumerable<Award> awards, List<UserAward> usersAwards)
         {
-            throw new NotImplementedException();
+            var awardsByUser = GetAwardsByUser(user, awards);
+
+            foreach (var award in awardsByUser)
+            {
+                usersAwards.Add(new UserAward(user, award));
+            }
+
+            return usersAwards;
+        }
+
+        public IEnumerable<Award> GetAwardsByUser(User user, IEnumerable<Award> awards)
+        {
+            var awardsByUser = new List<Award>();
+
+            var userAwardLines = File.ReadAllLines(FilePath);
+
+            foreach (var line in userAwardLines)
+            {
+                var userId = line.Split(Separator)[0];
+                var awardId = line.Split(Separator)[1];
+
+                if (user.UserGuid.ToString() == userId)
+                {
+                    var title = GetAwardTitle(awards, awardId);
+                    var guid = Guid.Parse(awardId);
+
+                    if (title != string.Empty)
+                    {
+                        awardsByUser.Add(new Award(guid, title));
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+            }
+
+            return awardsByUser;
+        }
+
+        private string GetAwardTitle(IEnumerable<Award> awards, string awardId)
+        {
+            foreach (var award in awards)
+            {
+                if (award.AwardGuid.ToString() == awardId)
+                {
+                    return award.Title;
+                }
+            }
+
+            return string.Empty;
         }
 
         public bool UserRemoved(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
