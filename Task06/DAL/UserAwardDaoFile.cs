@@ -2,7 +2,6 @@
 using InterfacesDAL;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Threading;
 
@@ -39,44 +38,6 @@ namespace DAL
             }
         }
 
-        private void Join(User user, Award award)
-        {
-            Thread.Sleep(10);
-            var streamWriter = new StreamWriter(FilePath, true);
-
-            streamWriter.WriteLine(user.UserGuid.ToString() + Separator + award.AwardGuid.ToString());
-            streamWriter.Close();
-        }
-
-        public IEnumerable<UserAward> GetAll(IEnumerable<User> users, IEnumerable<Award> awards)
-        {
-            var usersAwards = new List<UserAward>();
-
-            if (!File.Exists(FilePath))
-            {
-                return usersAwards;
-            }
-
-            foreach (var user in users)
-            {
-                usersAwards = GetUserAwards(user, awards, usersAwards);
-            }
-
-            return usersAwards;
-        }
-
-        private List<UserAward> GetUserAwards(User user, IEnumerable<Award> awards, List<UserAward> usersAwards)
-        {
-            var awardsByUser = GetAwardsByUser(user, awards);
-
-            foreach (var award in awardsByUser)
-            {
-                usersAwards.Add(new UserAward(user, award));
-            }
-
-            return usersAwards;
-        }
-
         public IEnumerable<Award> GetAwardsByUser(User user, IEnumerable<Award> awards)
         {
             var awardsByUser = new List<Award>();
@@ -105,6 +66,44 @@ namespace DAL
             }
 
             return awardsByUser;
+        }
+
+        private void Join(User user, Award award)
+        {
+            Thread.Sleep(10);
+            var streamWriter = new StreamWriter(FilePath, true);
+
+            streamWriter.WriteLine(user.UserGuid.ToString() + Separator + award.AwardGuid.ToString());
+            streamWriter.Close();
+        }
+
+        private IEnumerable<UserAward> GetAll(IEnumerable<User> users, IEnumerable<Award> awards)
+        {
+            var usersAwards = new List<UserAward>();
+
+            if (!File.Exists(FilePath))
+            {
+                return usersAwards;
+            }
+
+            foreach (var user in users)
+            {
+                usersAwards = GetUserAwards(user, awards, usersAwards);
+            }
+
+            return usersAwards;
+        }
+
+        private List<UserAward> GetUserAwards(User user, IEnumerable<Award> awards, List<UserAward> usersAwards)
+        {
+            var awardsByUser = GetAwardsByUser(user, awards);
+
+            foreach (var award in awardsByUser)
+            {
+                usersAwards.Add(new UserAward(user, award));
+            }
+
+            return usersAwards;
         }
 
         private string GetAwardTitle(IEnumerable<Award> awards, string awardId)
@@ -166,9 +165,43 @@ namespace DAL
             streamWriter.WriteLine();
         }
 
-        public bool AwardRemoved(Guid awardGuid)
+        public bool AwardRemoved(Guid awardGuid, IEnumerable<User> users, IEnumerable<Award> awards)
         {
-            throw new NotImplementedException();
+            if (!File.Exists(FilePath))
+            {
+                return false;
+            }
+
+            try
+            {
+                RemoveAward(awardGuid, users, awards);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void RemoveAward(Guid awardGuid, IEnumerable<User> users, IEnumerable<Award> awards)
+        {
+            var usersAwards = GetAll(users, awards);
+
+            File.Delete(FilePath);
+
+            Thread.Sleep(10);
+            var streamWriter = new StreamWriter(FilePath, true);
+
+            foreach (var userAward in usersAwards)
+            {
+                if (userAward.AwardRef.AwardGuid != awardGuid)
+                {
+                    PrintLine(streamWriter, userAward);
+                }
+            }
+
+            streamWriter.Close();
         }
 
         private void PrepareFile()

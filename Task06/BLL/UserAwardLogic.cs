@@ -34,17 +34,6 @@ namespace BLL
             return userAwardDao.JoinedAwardToUser(user, award);
         }
 
-        public IEnumerable<UserAward> GetAll()
-        {
-            var users = userDao.GetAll();
-            NullCheck(users);
-
-            var awards = awardDao.GetAll();
-            NullCheck(awards);
-
-            return userAwardDao.GetAll(users, awards);
-        }
-
         public IEnumerable<Award> GetAwardsByUser(User user)
         {
             var awards = awardDao.GetAll();
@@ -55,6 +44,11 @@ namespace BLL
 
         public bool UserRemoved(Guid userGuid)
         {
+            if (!userDao.UserRemoved(userGuid))
+            {
+                return false;
+            }
+
             var users = userDao.GetAll();
             NullCheck(users);
 
@@ -66,7 +60,18 @@ namespace BLL
 
         public bool AwardRemoved(Guid awardGuid)
         {
-            throw new NotImplementedException();
+            if (!awardDao.AwardRemoved(awardGuid))
+            {
+                return false;
+            }
+
+            var users = userDao.GetAll();
+            NullCheck(users);
+
+            var awards = awardDao.GetAll();
+            NullCheck(awards);
+
+            return userAwardDao.AwardRemoved(awardGuid, users, awards);
         }
 
         public void PrintInfo() => userAwardDao.PrintInfo();

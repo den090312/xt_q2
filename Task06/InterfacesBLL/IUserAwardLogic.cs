@@ -12,8 +12,6 @@ namespace InterfacesBLL
 
         bool AwardRemoved(Guid awardGuid);
 
-        IEnumerable<UserAward> GetAll();
-
         IEnumerable<Award> GetAwardsByUser(User user);
 
         void PrintInfo();

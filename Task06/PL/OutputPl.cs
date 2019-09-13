@@ -117,7 +117,10 @@ namespace Pl
         {
             var inputPl = new InputPl();
 
-            return new DependencyResolver()?.UserBll?.CreateUser(inputPl?.GetUserString("name"), inputPl.GetUserDate(dateFormat));
+            var name = inputPl?.GetUserString("name");
+            var dateBirth = inputPl.GetUserDate(dateFormat);
+
+            return new DependencyResolver()?.UserBll?.CreateUser(name, dateBirth);
         }
 
         internal void RemoveUser()
