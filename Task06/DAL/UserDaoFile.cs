@@ -123,7 +123,26 @@ namespace DAL
 
         public User GetUserByGuid(Guid userGuid)
         {
-            throw new NotImplementedException();
+            if (!File.Exists(FilePath))
+            {
+                throw new FileNotFoundException($"{nameof(FilePath)} is not exists!");
+            }
+
+            var userLines = File.ReadAllLines(FilePath);
+
+            foreach (var userLine in userLines)
+            {
+                var userLineArray = userLine.Split(Separator);
+
+                if (userLineArray[0] == userGuid.ToString())
+                {
+                    var date = DateTime.ParseExact(userLineArray[2], User.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None);
+
+                    return new User(userGuid, userLineArray[1], date);
+                }
+            }
+
+            return null;
         }
 
         public void PrintInfo() => Console.WriteLine(FilePath);

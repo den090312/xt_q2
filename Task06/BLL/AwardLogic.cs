@@ -33,11 +33,23 @@ namespace BLL
 
         public bool AwardRemoved(Guid awardGuid) => awardDao.AwardRemoved(awardGuid);
 
-        public IEnumerable<Award> GetAll() => awardDao.GetAll();
+        public IEnumerable<Award> GetAll()
+        {
+            var awards = awardDao?.GetAll();
+            NullCheck(awards);
 
-        public Award GetAwardByGuid(Guid awardGuid) => awardDao.GetAwardByGuid(awardGuid);
+            return awards;
+        }
 
-        public void PrintInfo() => awardDao.PrintInfo();
+        public Award GetAwardByGuid(Guid awardGuid)
+        {
+            var award = awardDao?.GetAwardByGuid(awardGuid);
+            NullCheck(award);
+
+            return award;
+        }
+
+        public void PrintInfo() => awardDao?.PrintInfo();
 
         private static void NullCheck<T>(T classObject) where T : class
         {

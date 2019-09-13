@@ -49,11 +49,23 @@ namespace BLL
 
         public bool UserRemoved(Guid userGuid) => userDao.UserRemoved(userGuid);
 
-        public IEnumerable<User> GetAll() => userDao.GetAll();
+        public IEnumerable<User> GetAll()
+        {
+            var users = userDao?.GetAll();
+            NullCheck(users);
 
-        public User GetUserByGuid(Guid userGuid) => userDao.GetUserByGuid(userGuid);
+            return users;
+        }
 
-        public void PrintInfo() => userDao.PrintInfo();
+        public User GetUserByGuid(Guid userGuid)
+        {
+            var user = userDao?.GetUserByGuid(userGuid);
+            NullCheck(user);
+
+            return user;
+        }
+
+        public void PrintInfo() => userDao?.PrintInfo();
 
         private static void NullCheck<T>(T classObject) where T : class
         {

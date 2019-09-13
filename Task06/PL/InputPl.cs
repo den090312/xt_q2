@@ -203,15 +203,7 @@ namespace PL
         {
             var outputPl = new OutputPl();
 
-            Console.WriteLine("Choose user by number:");
-
-            var userGuid = outputPl.GetChosenUserGuid();
-            Console.WriteLine();
-
-            Console.WriteLine("Choose award by number:");
-
-            var awardGuid = outputPl.GetChosenAwardGuid();
-            Console.WriteLine();
+            GetGuid(outputPl, out Guid userGuid, out Guid awardGuid);
 
             var userName = outputPl?.GetUserNameByGuid(userGuid);
             var awardName = outputPl?.GetAwardNameByGuid(awardGuid);
@@ -228,6 +220,21 @@ namespace PL
             return InputComplete();
         }
 
+        private void GetGuid(OutputPl outputPl, out Guid userGuid, out Guid awardGuid)
+        {
+            Console.Clear();
+            Console.WriteLine("Choose user by number:");
+            Console.WriteLine("---------------------");
+            userGuid = outputPl.GetChosenUserGuid();
+            Console.WriteLine();
+
+            Console.Clear();
+            Console.WriteLine("Choose award by number:");
+            Console.WriteLine("---------------------");
+            awardGuid = outputPl.GetChosenAwardGuid();
+            Console.WriteLine();
+        }
+
         public string GetUserString(string parameterName)
         {
             Console.Clear();
@@ -235,32 +242,39 @@ namespace PL
 
             bool inputComplete = false;
 
-            StringBuilder userSB = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
             while (!inputComplete)
             {
-                ConsoleKeyInfo key = Console.ReadKey(true);
-
-                if (key.Key == ConsoleKey.Backspace)
-                {
-                    EmulateBackspace(userSB);
-                }
-                else if (key.Key == ConsoleKey.Enter)
-                {
-                    if (userSB.Length > 0)
-                    {
-                        inputComplete = true;
-                        Console.WriteLine();
-                    }
-                }
-                else
-                {
-                    userSB.Append(key.KeyChar);
-                    Console.Write(key.KeyChar);
-                }
+                inputComplete = UserStringTaken(inputComplete, sb);
             }
 
-            return userSB.ToString();
+            return sb.ToString();
+        }
+
+        private bool UserStringTaken(bool inputComplete, StringBuilder userSB)
+        {
+            var key = Console.ReadKey(true);
+
+            if (key.Key == ConsoleKey.Backspace)
+            {
+                EmulateBackspace(userSB);
+            }
+            else if (key.Key == ConsoleKey.Enter)
+            {
+                if (userSB.Length > 0)
+                {
+                    inputComplete = true;
+                    Console.WriteLine();
+                }
+            }
+            else
+            {
+                userSB.Append(key.KeyChar);
+                Console.Write(key.KeyChar);
+            }
+
+            return inputComplete;
         }
 
         public DateTime GetUserDate(string dateFormat)

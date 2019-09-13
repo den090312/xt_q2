@@ -120,7 +120,24 @@ namespace DAL
 
         public Award GetAwardByGuid(Guid awardGuid)
         {
-            throw new NotImplementedException();
+            if (!File.Exists(FilePath))
+            {
+                throw new FileNotFoundException($"{nameof(FilePath)} is not exists!");
+            }
+
+            var awardLines = File.ReadAllLines(FilePath);
+
+            foreach (var awardLine in awardLines)
+            {
+                var awardLineArray = awardLine.Split(Separator);
+
+                if (awardLineArray[0] == awardGuid.ToString())
+                {
+                    return new Award(awardGuid, awardLineArray[1]);
+                }
+            }
+
+            return null;
         }
 
         public void PrintInfo() => Console.WriteLine(FilePath);
