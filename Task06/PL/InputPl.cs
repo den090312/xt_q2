@@ -203,7 +203,7 @@ namespace PL
         {
             var outputPl = new OutputPl();
 
-            GetGuid(outputPl, out Guid userGuid, out Guid awardGuid);
+            Guid(outputPl, out Guid userGuid, out Guid awardGuid);
 
             var userName = outputPl?.GetUserNameByGuid(userGuid);
             var awardName = outputPl?.GetAwardNameByGuid(awardGuid);
@@ -220,7 +220,7 @@ namespace PL
             return InputComplete();
         }
 
-        private void GetGuid(OutputPl outputPl, out Guid userGuid, out Guid awardGuid)
+        private void Guid(OutputPl outputPl, out Guid userGuid, out Guid awardGuid)
         {
             Console.Clear();
             Console.WriteLine("Choose user by number:");
@@ -235,7 +235,7 @@ namespace PL
             Console.WriteLine();
         }
 
-        public string GetUserString(string parameterName)
+        internal string GetUserString(string parameterName)
         {
             Console.Clear();
             Console.WriteLine($"Enter {parameterName}:");
@@ -277,7 +277,7 @@ namespace PL
             return inputComplete;
         }
 
-        public DateTime GetUserDate(string dateFormat)
+        internal DateTime GetUserDate(string dateFormat)
         {
             Console.Clear();
             Console.WriteLine($"Enter date in format: {dateFormat}");
@@ -303,7 +303,7 @@ namespace PL
             return userBirthDate;
         }
 
-        public int[] GetKeyArray(int lastKey)
+        private int[] GetKeyArray(int lastKey)
         {
             var keyArray = new int[lastKey + 1];
 
@@ -315,7 +315,7 @@ namespace PL
             return keyArray;
         }
 
-        public int GetKeyFromConsole(int lastKey)
+        internal int GetKeyFromConsole(int lastKey)
         {
             var keyArray = GetKeyArray(lastKey);
 
@@ -342,7 +342,7 @@ namespace PL
             return result;
         }
 
-        public bool KeyTaken(bool inputComplete, StringBuilder userKeySB, int[] keyArray)
+        private bool KeyTaken(bool inputComplete, StringBuilder userKeySB, int[] keyArray)
         {
             var key = Console.ReadKey(true);
 
@@ -369,7 +369,7 @@ namespace PL
             return inputComplete;
         }
 
-        public void EmulateBackspace(StringBuilder userKeySB)
+        private void EmulateBackspace(StringBuilder userKeySB)
         {
             if (userKeySB.Length > 0)
             {
@@ -381,7 +381,7 @@ namespace PL
             Console.Write(userKeySB);
         }
 
-        public void ConsoleRestore()
+        private void ConsoleRestore()
         {
             switch (consoleSegment)
             {
