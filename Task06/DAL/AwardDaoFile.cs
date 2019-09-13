@@ -110,9 +110,7 @@ namespace DAL
             {
                 var awardLineArray = awardLine.Split(Separator);
 
-                var award = new Award(Guid.Parse(awardLineArray[0]), awardLineArray[1]);
-
-                awards.Add(award);
+                awards.Add(new Award(Guid.Parse(awardLineArray[0]), awardLineArray[1]));
             }
 
             return awards;

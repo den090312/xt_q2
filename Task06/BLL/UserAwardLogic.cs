@@ -25,10 +25,10 @@ namespace BLL
 
         public bool JoinedAwardToUser(Guid userGuid, Guid awardGuid)
         {
-            var user = userDao.GetUserByGuid(userGuid);
+            var user = userDao?.GetUserByGuid(userGuid);
             NullCheck(user);
 
-            var award = awardDao.GetAwardByGuid(awardGuid);
+            var award = awardDao?.GetAwardByGuid(awardGuid);
             NullCheck(award);
 
             return userAwardDao.JoinedAwardToUser(user, award);
@@ -36,10 +36,10 @@ namespace BLL
 
         public IEnumerable<Award> GetAwardsByUser(User user)
         {
-            var awards = awardDao.GetAll();
+            var awards = awardDao?.GetAll();
             NullCheck(awards);
 
-            return userAwardDao.GetAwardsByUser(user, awards);
+            return userAwardDao?.GetAwardsByUser(user, awards);
         }
 
         public bool UserRemoved(Guid userGuid)
@@ -49,10 +49,10 @@ namespace BLL
                 return false;
             }
 
-            var users = userDao.GetAll();
+            var users = userDao?.GetAll();
             NullCheck(users);
 
-            var awards = awardDao.GetAll();
+            var awards = awardDao?.GetAll();
             NullCheck(awards);
 
             return userAwardDao.UserRemoved(userGuid, users, awards);
@@ -65,16 +65,16 @@ namespace BLL
                 return false;
             }
 
-            var users = userDao.GetAll();
+            var users = userDao?.GetAll();
             NullCheck(users);
 
-            var awards = awardDao.GetAll();
+            var awards = awardDao?.GetAll();
             NullCheck(awards);
 
             return userAwardDao.AwardRemoved(awardGuid, users, awards);
         }
 
-        public void PrintInfo() => userAwardDao.PrintInfo();
+        public void PrintInfo() => userAwardDao?.PrintInfo();
 
         private static void NullCheck<T>(T classObject) where T : class
         {
