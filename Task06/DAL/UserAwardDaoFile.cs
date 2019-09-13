@@ -40,13 +40,17 @@ namespace DAL
 
         public IEnumerable<Award> GetAwardsByUser(User user, IEnumerable<Award> awards)
         {
-            var awardsByUser = new List<Award>();
-
             if (!File.Exists(FilePath))
             {
-                return awardsByUser;
+                return new List<Award>();
             }
 
+            return GetAwards(user, awards);
+        }
+
+        private IEnumerable<Award> GetAwards(User user, IEnumerable<Award> awards)
+        {
+            var awardsByUser = new List<Award>();
             var userAwardLines = File.ReadAllLines(FilePath);
 
             foreach (var line in userAwardLines)
@@ -57,10 +61,11 @@ namespace DAL
                 if (user.UserGuid.ToString() == userId)
                 {
                     var title = GetAwardTitle(awards, awardId);
-                    var guid = Guid.Parse(awardId);
 
                     if (title != string.Empty)
                     {
+                        var guid = Guid.Parse(awardId);
+
                         awardsByUser.Add(new Award(guid, title));
                     }
                     else
