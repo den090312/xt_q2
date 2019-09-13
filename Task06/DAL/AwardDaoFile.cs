@@ -122,10 +122,7 @@ namespace DAL
 
         public Award GetAwardByGuid(Guid awardGuid)
         {
-            if (!File.Exists(FilePath))
-            {
-                throw new FileNotFoundException($"{nameof(FilePath)} is not exists!");
-            }
+            CheckFileExistence();
 
             var awardLines = File.ReadAllLines(FilePath);
 
@@ -140,6 +137,14 @@ namespace DAL
             }
 
             return null;
+        }
+
+        private void CheckFileExistence()
+        {
+            if (!File.Exists(FilePath))
+            {
+                throw new FileNotFoundException($"{nameof(FilePath)} is not exists!");
+            }
         }
 
         public void PrintInfo() => Console.WriteLine(FilePath);

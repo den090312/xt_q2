@@ -127,10 +127,7 @@ namespace DAL
 
         public User GetUserByGuid(Guid userGuid)
         {
-            if (!File.Exists(FilePath))
-            {
-                throw new FileNotFoundException($"{nameof(FilePath)} is not exists!");
-            }
+            CheckFileExistence();
 
             var userLines = File.ReadAllLines(FilePath);
 
@@ -147,6 +144,14 @@ namespace DAL
             }
 
             return null;
+        }
+
+        private void CheckFileExistence()
+        {
+            if (!File.Exists(FilePath))
+            {
+                throw new FileNotFoundException($"{nameof(FilePath)} is not exists!");
+            }
         }
 
         public void PrintInfo() => Console.WriteLine(FilePath);
