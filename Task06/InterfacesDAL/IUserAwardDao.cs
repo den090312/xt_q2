@@ -15,5 +15,7 @@ namespace InterfacesDAL
         bool UserRemoved(Guid userGuid);
 
         bool AwardRemoved(Guid awardGuid);
+
+        void PrintInfo();
     }
 }

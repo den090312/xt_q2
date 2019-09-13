@@ -126,6 +126,8 @@ namespace DAL
             throw new NotImplementedException();
         }
 
+        public void PrintInfo() => Console.WriteLine(FilePath);
+
         private void PrepareFile()
         {
             if (File.Exists(FilePath))

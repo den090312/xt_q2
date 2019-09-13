@@ -79,6 +79,9 @@ namespace PL
 
         private void WriteMenu()
         {
+            PrintInfo();
+            Console.WriteLine("-----------------");
+
             Console.WriteLine("Users operations:");
             Console.WriteLine("\t1: create");
             Console.WriteLine("\t2: delete");
@@ -93,6 +96,15 @@ namespace PL
             Console.WriteLine("\t7: join award to user");
             Console.WriteLine();
             Console.WriteLine("\t8: exit");
+        }
+
+        private void PrintInfo()
+        {
+            var dr = new DependencyResolver();
+
+            dr.UserBll.PrintInfo();
+            dr.AwardBll.PrintInfo();
+            dr.UserAwardBll.PrintInfo();
         }
 
         private bool UserCreation()

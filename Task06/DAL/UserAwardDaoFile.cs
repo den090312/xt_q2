@@ -75,6 +75,7 @@ namespace DAL
                 return false;
             }
         }
+        public void PrintInfo() => Console.WriteLine(FilePath);
 
         private void RemoveUser(Guid userGuid)
         {

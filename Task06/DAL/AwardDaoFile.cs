@@ -104,6 +104,8 @@ namespace DAL
             throw new NotImplementedException();
         }
 
+        public void PrintInfo() => Console.WriteLine(FilePath);
+
         private void PrepareAwardFile()
         {
             if (File.Exists(FilePath))

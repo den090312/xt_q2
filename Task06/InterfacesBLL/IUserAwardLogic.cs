@@ -15,5 +15,7 @@ namespace InterfacesBLL
         IEnumerable<UserAward> GetAll();
 
         IEnumerable<Award> GetAwardsByUser(User user);
+
+        void PrintInfo();
     }
 }

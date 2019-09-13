@@ -15,5 +15,7 @@ namespace InterfacesBLL
         IEnumerable<Award> GetAll();
 
         Award GetAwardByGuid(Guid awardGuid);
+
+        void PrintInfo();
     }
 }

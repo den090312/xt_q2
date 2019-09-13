@@ -8,9 +8,9 @@ namespace BLL
 {
     public class UserAwardLogic : IUserAwardLogic
     {
-        private readonly IUserAwardDao _userAwardDao;
-        private readonly IUserDao _userDao;
-        private readonly IAwardDao _awardDao;
+        private readonly IUserAwardDao userAwardDao;
+        private readonly IUserDao userDao;
+        private readonly IAwardDao awardDao;
 
         public UserAwardLogic(IUserAwardDao userAwardDao, IUserDao userDao, IAwardDao awardDao)
         {
@@ -18,20 +18,20 @@ namespace BLL
             NullCheck(userDao);
             NullCheck(awardDao);
 
-            _userAwardDao = userAwardDao;
-            _userDao = userDao;
-            _awardDao = awardDao;
+            this.userAwardDao = userAwardDao;
+            this.userDao = userDao;
+            this.awardDao = awardDao;
         }
 
         public bool JoinedAwardToUser(Guid userGuid, Guid awardGuid)
         {
-            var user = _userDao.GetUserByGuid(userGuid);
+            var user = userDao.GetUserByGuid(userGuid);
             NullCheck(user);
 
-            var award = _awardDao.GetAwardByGuid(awardGuid);
+            var award = awardDao.GetAwardByGuid(awardGuid);
             NullCheck(award);
 
-            return _userAwardDao.JoinedAwardToUser(user, award);
+            return userAwardDao.JoinedAwardToUser(user, award);
         }
 
         public IEnumerable<UserAward> GetAll()
@@ -53,6 +53,8 @@ namespace BLL
         {
             throw new NotImplementedException();
         }
+
+        public void PrintInfo() => userAwardDao.PrintInfo();
 
         private static void NullCheck<T>(T classObject) where T : class
         {
