@@ -89,6 +89,8 @@ namespace DAL
 
         private void AddUser(User user)
         {
+            PrepareFile();
+
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(FilePath, true);
 
@@ -99,10 +101,7 @@ namespace DAL
 
         public IEnumerable<User> GetAll()
         {
-            if (!File.Exists(FilePath))
-            {
-                new List<User>();
-            }
+            PrepareFile();
 
             var userLines = File.ReadAllLines(FilePath);
             var users = new List<User>();

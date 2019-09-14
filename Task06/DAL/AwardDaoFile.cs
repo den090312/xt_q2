@@ -25,7 +25,7 @@ namespace DAL
 
         public bool AwardAdded(Award award)
         {
-            PrepareAwardFile();
+            PrepareFile();
 
             try
             {
@@ -41,6 +41,8 @@ namespace DAL
 
         private void AddAward(Award award)
         {
+            PrepareFile();
+
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(FilePath, true);
 
@@ -97,10 +99,7 @@ namespace DAL
 
         public IEnumerable<Award> GetAll()
         {
-            if (!File.Exists(FilePath))
-            {
-                return new List<Award>();
-            }
+            PrepareFile();
 
             var awardLines = File.ReadAllLines(FilePath);
             var awards = new List<Award>();
@@ -149,7 +148,7 @@ namespace DAL
 
         public void PrintInfo() => Console.WriteLine(FilePath);
 
-        private void PrepareAwardFile()
+        private void PrepareFile()
         {
             if (File.Exists(FilePath))
             {
