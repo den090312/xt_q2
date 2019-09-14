@@ -17,7 +17,7 @@ namespace DAL
 
         static UserAwardDaoFile()
         {
-            FilePath = @"D:\Task06\UsersAwards.txt";
+            FilePath = @"C:\Task06\UsersAwards.txt";
             FileName = "UsersAwards.txt";
             Separator = '|';
         }
@@ -38,6 +38,49 @@ namespace DAL
             }
         }
 
+        public IEnumerable<Award> GetAwardsByUser(User user, IEnumerable<Award> awards)
+        {
+            if (!File.Exists(FilePath))
+            {
+                return new List<Award>();
+            }
+
+            return GetAwards(user, awards);
+        }
+
+        private IEnumerable<Award> GetAwards(User user, IEnumerable<Award> awards)
+        {
+            var awardsByUser = new List<Award>();
+            var userAwardLines = File.ReadAllLines(FilePath);
+
+            foreach (var line in userAwardLines)
+            {
+                var userId = line.Split(Separator)[0];
+                var awardId = line.Split(Separator)[1];
+
+                if (user.UserGuid.ToString() != userId)
+                {
+                    continue;
+                }
+
+                var title = GetAwardTitle(awards, awardId);
+
+                if (title == string.Empty)
+                {
+                    continue;
+                }
+
+                else
+                {
+                    var guid = Guid.Parse(awardId);
+
+                    awardsByUser.Add(new Award(guid, title));
+                }
+            }
+
+            return awardsByUser;
+        }
+
         private void Join(User user, Award award)
         {
             Thread.Sleep(10);
@@ -47,17 +90,49 @@ namespace DAL
             streamWriter.Close();
         }
 
-        public IEnumerable<UserAward> GetAll()
+        private IEnumerable<UserAward> GetAll(IEnumerable<User> users, IEnumerable<Award> awards)
         {
-            throw new NotImplementedException();
+            var usersAwards = new List<UserAward>();
+
+            if (!File.Exists(FilePath))
+            {
+                return usersAwards;
+            }
+
+            foreach (var user in users)
+            {
+                usersAwards = GetUserAwards(user, awards, usersAwards);
+            }
+
+            return usersAwards;
         }
 
-        public IEnumerable<Award> GetAwardsByUser(User user)
+        private List<UserAward> GetUserAwards(User user, IEnumerable<Award> awards, List<UserAward> usersAwards)
         {
-            throw new NotImplementedException();
+            var awardsByUser = GetAwardsByUser(user, awards);
+
+            foreach (var award in awardsByUser)
+            {
+                usersAwards.Add(new UserAward(user, award));
+            }
+
+            return usersAwards;
         }
 
-        public bool UserRemoved(Guid userGuid)
+        private string GetAwardTitle(IEnumerable<Award> awards, string awardId)
+        {
+            foreach (var award in awards)
+            {
+                if (award.AwardGuid.ToString() == awardId)
+                {
+                    return award.Title;
+                }
+            }
+
+            return string.Empty;
+        }
+
+        public bool UserRemoved(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
         {
             if (!File.Exists(FilePath))
             {
@@ -66,7 +141,7 @@ namespace DAL
 
             try
             {
-                RemoveUser(userGuid);
+                RemoveUser(userGuid, users, awards);
 
                 return true;
             }
@@ -76,9 +151,16 @@ namespace DAL
             }
         }
 
-        private void RemoveUser(Guid userGuid)
+        public void PrintInfo() => Console.WriteLine(FilePath);
+
+        private void RemoveUser(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
         {
-            var usersAwards = GetAll();
+            var usersAwards = GetAll(users, awards);
+
+            if (!File.Exists(FilePath))
+            {
+                return;
+            }
 
             File.Delete(FilePath);
 
@@ -102,9 +184,48 @@ namespace DAL
             streamWriter.WriteLine();
         }
 
-        public bool AwardRemoved(Guid awardGuid)
+        public bool AwardRemoved(Guid awardGuid, IEnumerable<User> users, IEnumerable<Award> awards)
         {
-            throw new NotImplementedException();
+            if (!File.Exists(FilePath))
+            {
+                return false;
+            }
+
+            try
+            {
+                RemoveAward(awardGuid, users, awards);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void RemoveAward(Guid awardGuid, IEnumerable<User> users, IEnumerable<Award> awards)
+        {
+            var usersAwards = GetAll(users, awards);
+
+            if (!File.Exists(FilePath))
+            {
+                return;
+            }
+
+            File.Delete(FilePath);
+
+            Thread.Sleep(10);
+            var streamWriter = new StreamWriter(FilePath, true);
+
+            foreach (var userAward in usersAwards)
+            {
+                if (userAward.AwardRef.AwardGuid != awardGuid)
+                {
+                    PrintLine(streamWriter, userAward);
+                }
+            }
+
+            streamWriter.Close();
         }
 
         private void PrepareFile()
@@ -131,6 +252,12 @@ namespace DAL
         private void SetNormalAttributes()
         {
             Thread.Sleep(10);
+
+            if (!File.Exists(FilePath))
+            {
+                return;
+            }
+
             var attributes = File.GetAttributes(FilePath);
 
             if ((attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)

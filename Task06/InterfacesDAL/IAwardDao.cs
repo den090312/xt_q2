@@ -13,5 +13,7 @@ namespace InterfacesDAL
         IEnumerable<Award> GetAll();
 
         Award GetAwardByGuid(Guid awardGuid);
+
+        void PrintInfo();
     }
 }

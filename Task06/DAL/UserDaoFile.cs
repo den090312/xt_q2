@@ -18,7 +18,7 @@ namespace DAL
 
         static UserDaoFile()
         {
-            FilePath = @"D:\Task06\Users.txt";
+            FilePath = @"C:\Task06\Users.txt";
             FileName = "Users.txt";
             Separator = '|';
         }
@@ -99,12 +99,35 @@ namespace DAL
 
         public IEnumerable<User> GetAll()
         {
-            var users = new List<User>();
-
             if (!File.Exists(FilePath))
             {
-                return users;
+                new List<User>();
             }
+
+            var userLines = File.ReadAllLines(FilePath);
+            var users = new List<User>();
+
+            foreach (var userLine in userLines)
+            {
+                AddToUsers(ref users, userLine);
+            }
+
+            return users;
+        }
+
+        private void AddToUsers(ref List<User> users, string userLine)
+        {
+            var userLineArray = userLine.Split(Separator);
+
+            var date = DateTime.ParseExact(userLineArray[2], User.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None);
+            var user = new User(Guid.Parse(userLineArray[0]), userLineArray[1], date);
+
+            users.Add(user);
+        }
+
+        public User GetUserByGuid(Guid userGuid)
+        {
+            CheckFileExistence();
 
             var userLines = File.ReadAllLines(FilePath);
 
@@ -112,19 +135,26 @@ namespace DAL
             {
                 var userLineArray = userLine.Split(Separator);
 
-                var date = DateTime.ParseExact(userLineArray[2], User.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None);
-                var user = new User(userLineArray[1], date);
+                if (userLineArray[0] == userGuid.ToString())
+                {
+                    var date = DateTime.ParseExact(userLineArray[2], User.DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None);
 
-                users.Add(user);
+                    return new User(userGuid, userLineArray[1], date);
+                }
             }
 
-            return users;
+            return null;
         }
 
-        public User GetUserByGuid(Guid userGuid)
+        private void CheckFileExistence()
         {
-            throw new NotImplementedException();
+            if (!File.Exists(FilePath))
+            {
+                throw new FileNotFoundException($"{nameof(FilePath)} is not exists!");
+            }
         }
+
+        public void PrintInfo() => Console.WriteLine(FilePath);
 
         private void PrepareFile()
         {
@@ -156,14 +186,6 @@ namespace DAL
             {
                 Thread.Sleep(10);
                 File.SetAttributes(FilePath, FileAttributes.Normal);
-            }
-        }
-
-        private void CheckFileExistance()
-        {
-            if (!File.Exists(FilePath))
-            {
-                throw new FileNotFoundException($"{nameof(FilePath)} is not exists!");
             }
         }
     }

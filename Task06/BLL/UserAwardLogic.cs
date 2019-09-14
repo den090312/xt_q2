@@ -8,9 +8,9 @@ namespace BLL
 {
     public class UserAwardLogic : IUserAwardLogic
     {
-        private readonly IUserAwardDao _userAwardDao;
-        private readonly IUserDao _userDao;
-        private readonly IAwardDao _awardDao;
+        private readonly IUserAwardDao userAwardDao;
+        private readonly IUserDao userDao;
+        private readonly IAwardDao awardDao;
 
         public UserAwardLogic(IUserAwardDao userAwardDao, IUserDao userDao, IAwardDao awardDao)
         {
@@ -18,41 +18,63 @@ namespace BLL
             NullCheck(userDao);
             NullCheck(awardDao);
 
-            _userAwardDao = userAwardDao;
-            _userDao = userDao;
-            _awardDao = awardDao;
+            this.userAwardDao = userAwardDao;
+            this.userDao = userDao;
+            this.awardDao = awardDao;
         }
 
         public bool JoinedAwardToUser(Guid userGuid, Guid awardGuid)
         {
-            var user = _userDao.GetUserByGuid(userGuid);
+            var user = userDao?.GetUserByGuid(userGuid);
             NullCheck(user);
 
-            var award = _awardDao.GetAwardByGuid(awardGuid);
+            var award = awardDao?.GetAwardByGuid(awardGuid);
             NullCheck(award);
 
-            return _userAwardDao.JoinedAwardToUser(user, award);
-        }
-
-        public IEnumerable<UserAward> GetAll()
-        {
-            throw new NotImplementedException();
+            return userAwardDao.JoinedAwardToUser(user, award);
         }
 
         public IEnumerable<Award> GetAwardsByUser(User user)
         {
-            throw new NotImplementedException();
+            var awards = awardDao?.GetAll();
+            NullCheck(awards);
+
+            return userAwardDao?.GetAwardsByUser(user, awards);
         }
 
         public bool UserRemoved(Guid userGuid)
         {
-            throw new NotImplementedException();
+            if (!userDao.UserRemoved(userGuid))
+            {
+                return false;
+            }
+
+            var users = userDao?.GetAll();
+            NullCheck(users);
+
+            var awards = awardDao?.GetAll();
+            NullCheck(awards);
+
+            return userAwardDao.UserRemoved(userGuid, users, awards);
         }
 
         public bool AwardRemoved(Guid awardGuid)
         {
-            throw new NotImplementedException();
+            if (!awardDao.AwardRemoved(awardGuid))
+            {
+                return false;
+            }
+
+            var users = userDao?.GetAll();
+            NullCheck(users);
+
+            var awards = awardDao?.GetAll();
+            NullCheck(awards);
+
+            return userAwardDao.AwardRemoved(awardGuid, users, awards);
         }
+
+        public void PrintInfo() => userAwardDao?.PrintInfo();
 
         private static void NullCheck<T>(T classObject) where T : class
         {

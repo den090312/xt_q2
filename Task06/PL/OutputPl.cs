@@ -26,10 +26,8 @@ namespace Pl
             }
         }
 
-        private void PrintSingleUser(User user, int userNum)
-        {
+        private void PrintSingleUser(User user, int userNum) => 
             Console.WriteLine($"{userNum}.{user.Name}---{user.DateOfBirth.ToString("dd.MM.yyyy")}---{user.Age}");
-        }
 
         private void PrintAwardsByUser(User user)
         {
@@ -38,15 +36,12 @@ namespace Pl
 
             foreach (var award in awards)
             {
-                PrintAward(award, awardNum);
+                PrintSingleAward(award, awardNum);
                 awardNum++;
             }
         }
 
-        private void PrintAward(Award award, int awardNum)
-        {
-            Console.WriteLine($"---{awardNum}.{award.Title}");
-        }
+        private void PrintSingleAward(Award award, int awardNum) => Console.WriteLine($"---{awardNum}.{award.Title}");
 
         internal string GetAwardNameByGuid(Guid awardGuid)
         {
@@ -97,57 +92,96 @@ namespace Pl
 
         internal Guid GetChosenAwardGuid()
         {
-            var awards = new DependencyResolver()?.AwardBll?.GetAll();
-            var awardNum = 1;
-            var awardNumList = new Dictionary<int, Guid>();
-
-            foreach (var award in awards)
-            {
-                awardNumList.Add(awardNum, award.AwardGuid);
-                PrintAward(award, awardNum);
-                awardNum++;
-            }
+            PrintAwards(out int awardNum, out Dictionary<int, Guid> awardNumList);
 
             var chosenNum = new InputPl().GetKeyFromConsole(awardNum);
 
             return awardNumList[chosenNum];
         }
 
+        internal void PrintAwards(out int awardNum, out Dictionary<int, Guid> awardNumList)
+        {
+            var awards = new DependencyResolver()?.AwardBll?.GetAll();
+            awardNum = 1;
+            awardNumList = new Dictionary<int, Guid>();
+
+            foreach (var award in awards)
+            {
+                awardNumList.Add(awardNum, award.AwardGuid);
+                PrintSingleAward(award, awardNum);
+                awardNum++;
+            }
+        }
+
+        internal void PrintAwards(IEnumerable<Award> awards)
+        {
+            var awardNum = 1;
+
+            foreach (var award in awards)
+            {
+                PrintSingleAward(award, awardNum);
+                awardNum++;
+            }
+        }
+
         internal User CreateUser(string dateFormat)
         {
             var inputPl = new InputPl();
 
-            return new DependencyResolver()?.UserBll?.CreateUser(inputPl?.GetUserString("name"), inputPl.GetUserDate(dateFormat));
+            var name = inputPl?.GetUserString("name");
+            var dateBirth = inputPl.GetUserDate(dateFormat);
+
+            return new DependencyResolver()?.UserBll?.CreateUser(name, dateBirth);
         }
 
-        internal void RemoveUser()
+        internal void RemoveUser() => RunUserRemove(new DependencyResolver(), GetChosenUserGuid());
+
+        private void RunUserRemove(DependencyResolver dr, Guid userGuid)
         {
-            var dr = new DependencyResolver();
-
-            Console.WriteLine("Choose user by number:");
-            Console.WriteLine("----------------------");
-
-            var userGuid = GetChosenUserGuid();
             Console.WriteLine();
 
-            if (dr.UserBll.UserRemoved(userGuid) && dr.UserAwardBll.UserRemoved(userGuid))
+            if (dr.UserBll.UserRemoved(userGuid))
             {
-                Console.WriteLine($"---user '{userGuid}' deleted---");
+                Console.WriteLine($"---user '{userGuid}' deleted from UserBll---");
             }
             else
             {
-                Console.WriteLine($"---user '{userGuid}' NOT deleted---");
+                Console.WriteLine($"---user '{userGuid}' NOT deleted from UserBll---");
+            }
+
+            if (dr.UserAwardBll.UserRemoved(userGuid))
+            {
+                Console.WriteLine($"---user '{userGuid}' deleted from UserAwardBll---");
+            }
+            else
+            {
+                Console.WriteLine($"---user '{userGuid}' NOT deleted from UserAwardBll---");
             }
         }
 
-        internal void RemoveAward()
-        {
-            throw new NotImplementedException();
-        }
+        internal void RemoveAward() => RunAwardRemove(new DependencyResolver(), GetChosenAwardGuid());
 
-        internal void PrintAwards()
+        private void RunAwardRemove(DependencyResolver dr, Guid awardGuid)
         {
-            throw new NotImplementedException();
+            Console.WriteLine();
+
+            if (dr.AwardBll.AwardRemoved(awardGuid))
+            {
+                Console.WriteLine($"---user '{awardGuid}' deleted from UserBll---");
+            }
+            else
+            {
+                Console.WriteLine($"---user '{awardGuid}' NOT deleted from UserBll---");
+            }
+
+            if (dr.UserAwardBll.AwardRemoved(awardGuid))
+            {
+                Console.WriteLine($"---user '{awardGuid}' deleted from UserAwardBll---");
+            }
+            else
+            {
+                Console.WriteLine($"---user '{awardGuid}' NOT deleted from UserAwardBll---");
+            }
         }
 
         internal Award CreateAward() => new DependencyResolver()?.AwardBll?.CreateAward(new InputPl()?.GetUserString("title"));

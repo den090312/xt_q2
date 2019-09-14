@@ -2,6 +2,7 @@
 using InterfacesDAL;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Threading;
 
@@ -17,7 +18,7 @@ namespace DAL
 
         static AwardDaoFile()
         {
-            FilePath = @"D:\Task06\Awards.txt";
+            FilePath = @"C:\Task06\Awards.txt";
             FileName = "Awards.txt";
             Separator = '|';
         }
@@ -96,13 +97,57 @@ namespace DAL
 
         public IEnumerable<Award> GetAll()
         {
-            throw new NotImplementedException();
+            if (!File.Exists(FilePath))
+            {
+                return new List<Award>();
+            }
+
+            var awardLines = File.ReadAllLines(FilePath);
+            var awards = new List<Award>();
+
+            foreach (var awardLine in awardLines)
+            {
+                AddToAwards(ref awards, awardLine);
+            }
+
+            return awards;
+        }
+
+        private void AddToAwards(ref List<Award> awards, string awardLine)
+        {
+            var awardLineArray = awardLine.Split(Separator);
+
+            awards.Add(new Award(Guid.Parse(awardLineArray[0]), awardLineArray[1]));
         }
 
         public Award GetAwardByGuid(Guid awardGuid)
         {
-            throw new NotImplementedException();
+            CheckFileExistence();
+
+            var awardLines = File.ReadAllLines(FilePath);
+
+            foreach (var awardLine in awardLines)
+            {
+                var awardLineArray = awardLine.Split(Separator);
+
+                if (awardLineArray[0] == awardGuid.ToString())
+                {
+                    return new Award(awardGuid, awardLineArray[1]);
+                }
+            }
+
+            return null;
         }
+
+        private void CheckFileExistence()
+        {
+            if (!File.Exists(FilePath))
+            {
+                throw new FileNotFoundException($"{nameof(FilePath)} is not exists!");
+            }
+        }
+
+        public void PrintInfo() => Console.WriteLine(FilePath);
 
         private void PrepareAwardFile()
         {
@@ -134,14 +179,6 @@ namespace DAL
             {
                 Thread.Sleep(10);
                 File.SetAttributes(FilePath, FileAttributes.Normal);
-            }
-        }
-
-        private void CheckFileExistance()
-        {
-            if (!File.Exists(FilePath))
-            {
-                throw new FileNotFoundException($"{nameof(FilePath)} is not exists!");
             }
         }
     }

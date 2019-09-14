@@ -15,5 +15,7 @@ namespace InterfacesBLL
         IEnumerable<User> GetAll();
 
         User GetUserByGuid(Guid userGuid);
+
+        void PrintInfo();
     }
 }

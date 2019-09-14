@@ -37,6 +37,15 @@ namespace Entities
             DateOfBirth = dateOfBirth;
         }
 
+        public User(Guid guid, string name, DateTime dateOfBirth)
+        {
+            NullCheck(name);
+
+            UserGuid = guid;
+            Name = name;
+            DateOfBirth = dateOfBirth;
+        }
+
         private static void NullCheck<T>(T classObject) where T : class
         {
             if (classObject is null)
