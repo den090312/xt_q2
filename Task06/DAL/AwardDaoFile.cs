@@ -18,7 +18,7 @@ namespace DAL
 
         static AwardDaoFile()
         {
-            FilePath = @"C:\Task06\Awards.txt";
+            FilePath = @"D:\Task06\Awards.txt";
             FileName = "Awards.txt";
             Separator = '|';
         }
@@ -156,17 +156,8 @@ namespace DAL
             }
             else
             {
-                CreateUserFile();
+                File.Create(FilePath).Close();
             }
-        }
-
-        private void CreateUserFile()
-        {
-            Thread.Sleep(10);
-            var streamWriter = new StreamWriter(FilePath, true);
-
-            streamWriter.Write(string.Empty);
-            streamWriter.Close();
         }
 
         private void SetNormalAttributes()

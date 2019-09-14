@@ -15,14 +15,18 @@ namespace Pl
 
         internal void PrintUserAwards(IEnumerable<User> users)
         {
-            var userNum = 1;
+            var userAwardNum = 0;
 
             foreach (var user in users)
             {
-                PrintSingleUser(user, userNum);
-                userNum++;
-
+                userAwardNum++;
+                PrintSingleUser(user, userAwardNum);
                 PrintAwardsByUser(user);
+            }
+
+            if (userAwardNum == 0)
+            {
+                Console.WriteLine("---No user-awards to print---");
             }
         }
 
@@ -69,47 +73,57 @@ namespace Pl
 
         internal Guid GetChosenUserGuid()
         {
-            PrintUsers(out int userNum, out Dictionary<int, Guid> userNumList);
+            PrintUsersToChoose(out int userNum, out Dictionary<int, Guid> userNumList);
 
             var chosenNum = new InputPl().GetKeyFromConsole(userNum);
 
             return userNumList[chosenNum];
         }
 
-        private void PrintUsers(out int userNum, out Dictionary<int, Guid> userNumList)
+        private void PrintUsersToChoose(out int userNum, out Dictionary<int, Guid> userNumList)
         {
             var users = new DependencyResolver()?.UserBll?.GetAll();
-            userNum = 1;
+            userNum = 0;
             userNumList = new Dictionary<int, Guid>();
 
             foreach (var user in users)
             {
+                userNum++;
                 userNumList.Add(userNum, user.UserGuid);
                 PrintSingleUser(user, userNum);
-                userNum++;
+            }
+
+            if (userNum == 0)
+            {
+                Console.WriteLine("---No users to choose---");
             }
         }
 
         internal Guid GetChosenAwardGuid()
         {
-            PrintAwards(out int awardNum, out Dictionary<int, Guid> awardNumList);
+            PrintAwardsToChoose(out int awardNum, out Dictionary<int, Guid> awardNumList);
 
             var chosenNum = new InputPl().GetKeyFromConsole(awardNum);
 
             return awardNumList[chosenNum];
         }
 
-        internal void PrintAwards(out int awardNum, out Dictionary<int, Guid> awardNumList)
+        internal void PrintAwardsToChoose(out int awardNum, out Dictionary<int, Guid> awardNumList)
         {
             var awards = new DependencyResolver()?.AwardBll?.GetAll();
-            awardNum = 1;
+            awardNum = 0;
             awardNumList = new Dictionary<int, Guid>();
 
             foreach (var award in awards)
             {
+                awardNum++;
                 awardNumList.Add(awardNum, award.AwardGuid);
                 PrintSingleAward(award, awardNum);
-                awardNum++;
+            }
+
+            if (awardNum == 0)
+            {
+                Console.WriteLine("---No awards to choose---");
             }
         }
 

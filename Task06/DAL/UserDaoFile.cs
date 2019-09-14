@@ -18,7 +18,7 @@ namespace DAL
 
         static UserDaoFile()
         {
-            FilePath = @"C:\Task06\Users.txt";
+            FilePath = @"D:\Task06\Users.txt";
             FileName = "Users.txt";
             Separator = '|';
         }
@@ -163,17 +163,8 @@ namespace DAL
             }
             else
             {
-                CreateUserFile();
+                File.Create(FilePath).Close();
             }
-        }
-
-        private void CreateUserFile()
-        {
-            Thread.Sleep(10);
-            var streamWriter = new StreamWriter(FilePath, true);
-
-            streamWriter.Write(string.Empty);
-            streamWriter.Close();
         }
 
         private void SetNormalAttributes()
