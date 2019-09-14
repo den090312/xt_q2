@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEB UI", "WEB UI\WEB UI.csproj", "{DA4BA8AC-0298-4435-8187-306E632983FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WEB UI", "WEB UI\WEB UI.csproj", "{210F261E-3EDA-4692-828C-19535028CE2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DA4BA8AC-0298-4435-8187-306E632983FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA4BA8AC-0298-4435-8187-306E632983FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA4BA8AC-0298-4435-8187-306E632983FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA4BA8AC-0298-4435-8187-306E632983FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{210F261E-3EDA-4692-828C-19535028CE2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{210F261E-3EDA-4692-828C-19535028CE2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{210F261E-3EDA-4692-828C-19535028CE2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{210F261E-3EDA-4692-828C-19535028CE2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {026ABB60-347A-4901-B668-CB50F2592D54}
+		SolutionGuid = {C235371B-1277-4BE7-97CC-3E1C97B97D2A}
 	EndGlobalSection
 EndGlobal
