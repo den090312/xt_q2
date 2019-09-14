@@ -7,3 +7,15 @@
 .button {
     padding: 10px;
 }
+
+.message_done, .message_failure {
+    font-weight: bold;
+}
+
+.message_done {
+    color: green;
+}
+
+.message_failure {
+    color: red;
+}
