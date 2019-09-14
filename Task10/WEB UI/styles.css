@@ -1,3 +1,13 @@
 ﻿body
 {
 }
+
+.block {
+    float: left;
+    padding: 25px;
+    text-align: center;
+}
+
+.button {
+    padding: 10px;
+}
