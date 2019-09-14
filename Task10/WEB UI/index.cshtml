@@ -7,55 +7,58 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <script src="script.js"></script>
     <link rel="stylesheet" href="styles.css" type="text/css" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>UserAwards</title>
 </head>
 <body>
-    <div class="block">
-        <div class="caption">
-            Users operations
-        </div>
-        <div class="options">
-            <div class="button">
-                <input type="button" value="create" />
+    <div id="main "class="main">
+        <div class="block">
+            <div class="caption">
+                Users operations
             </div>
-            <div class="button">
-                <input type="button" value="delete" />
-            </div>
-            <div class="button">
-                <input type="button" value="print" />
-            </div>
-        </div>
-    </div>
-    <div class="block">
-        <div class="caption">
-            Awards operations
-        </div>
-        <div class="options">
-            <div class="button">
-                <input type="button" value="create" />
-            </div>
-            <div class="button">
-                <input type="button" value="delete" />
-            </div>
-            <div class="button">
-                <input type="button" value="print" />
+            <div class="options">
+                <div class="button">
+                    <input type="button" class="user_create" value="create" />
+                </div>
+                <div class="button">
+                    <input type="button" class="user_delete" value="delete" />
+                </div>
+                <div class="button">
+                    <input type="button" class="user_print" value="print" />
+                </div>
             </div>
         </div>
-    </div>
-    <div class="block">
-        <div class="caption">
-            Join operations
-        </div>
-        <div class="options">
-            <div class="button">
-                <input type="button" value="join award to user" />
+        <div class="block">
+            <div class="caption">
+                Awards operations
             </div>
-            <div class="button">
-                <input type="button" value="exit" />
+            <div class="options">
+                <div class="button">
+                    <input type="button" class="award_create" value="create" />
+                </div>
+                <div class="button">
+                    <input type="button" class="award_delete" value="delete" />
+                </div>
+                <div class="button">
+                    <input type="button" class="award_print" value="print" />
+                </div>
             </div>
         </div>
-    </div>
+        <div class="block">
+            <div class="caption">
+                Join operations
+            </div>
+            <div class="options">
+                <div class="button">
+                    <input type="button" class="join" value="join award to user" />
+                </div>
+                <div class="button">
+                    <input type="button" class="exit" value="exit" />
+                </div>
+            </div>
+        </div>
+    </div>  
 </body>
 </html>
