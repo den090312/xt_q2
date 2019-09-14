@@ -29,7 +29,6 @@
         }
     }
 
-
     function proceedToOperations(operations) {
         for (let operation of operations) {
             if (operation) {
