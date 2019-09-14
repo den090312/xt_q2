@@ -16,6 +16,6 @@
     color: green;
 }
 
-.message_failure {
+.message_failure, .alertbox {
     color: red;
 }

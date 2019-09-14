@@ -46,16 +46,48 @@
             if (target) {
                 switch (target.className) {
                     case "cancel":
-                        operation.style.display = "none";
-                        main.style.display = "block";
+                        cancelOperation(main);
                         break;
                     case "user_create":
-                        operation.style.display = "none";
-                        message_done.style.display = "block";
-                        main.style.display = "block";
+                        userCreation(main);
                         break;
                 }
             }
+        }
+
+        function userCreation(main) {
+            var user_creation = document.getElementsByClassName("user_creation")[0];
+            var alertbox = user_creation.getElementsByClassName("alertbox")[0];
+            alertbox.style.display = "none";
+            var inputname = user_creation.getElementsByClassName("name")[0];
+            if (!inputname.value) {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "Name is missing!";
+                return;
+            }
+            var dateOfBirth = user_creation.getElementsByClassName("dateOfBirth")[0];
+            if (!dateOfBirth.value) {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "Date of birth is missing!";
+                return;
+            }
+            else if (new Date(dateOfBirth.value) >= new Date()) {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "Date of birth is not correct!";
+                return;
+            }
+            goToMain(main);
+        }
+
+        function goToMain(main) {
+            operation.style.display = "none";
+            message_done.style.display = "block";
+            main.style.display = "block";
+        }
+
+        function cancelOperation(main) {
+            operation.style.display = "none";
+            main.style.display = "block";
         }
     }
 
@@ -67,7 +99,7 @@
             if (target) {
                 switch (target.className) {
                     case "user_create":
-                        userCreation(main);
+                        proceedTouserCreation(main);
                         break;
                     case "user_delete":
                         alert("user_delete");
@@ -94,11 +126,15 @@
             }
         };
 
-        function userCreation(main) {
+        function proceedTouserCreation(main) {
             main.style.display = "none";
             operations[0].style.display = "block";
             var user_creation = document.getElementsByClassName("user_creation")[0];
             user_creation.style.display = "block";
+            var inputname = user_creation.getElementsByClassName("name")[0];
+            inputname.value = "";
+            var dateOfBirth = user_creation.getElementsByClassName("dateOfBirth")[0]; 
+            dateOfBirth.value = "";
         }
     }
 }
