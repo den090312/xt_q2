@@ -7,6 +7,18 @@
     if (operations) {
         proceedToOperations(operations);
     }
+    setSelectedUserGuid();
+
+    function setSelectedUserGuid() {
+        var user_chosen = document.getElementsByClassName("user_chosen")[0];
+        var user_chosen_guid = document.getElementsByClassName("user_chosen_guid")[0];
+        var user_guid = document.getElementsByClassName("user_guid")[0];
+        user_guid.value = user_chosen_guid[user_chosen_guid.selectedIndex].value;
+        user_chosen.onchange = function () {
+            user_chosen_guid.selectedIndex = user_chosen.selectedIndex;
+            user_guid.value = user_chosen_guid[user_chosen_guid.selectedIndex].value;
+        };
+    }
 
     function proceedToOptions(options, operations) {
         for (let option of options) {
@@ -44,6 +56,9 @@
                         break;
                     case "user_create":
                         userCreation(main);
+                        break;
+                    case "user_delete":
+                        goToMain(main);
                         break;
                     case "award_create":
                         awardCreation(main);
@@ -102,16 +117,16 @@
             if (target) {
                 switch (target.className) {
                     case "user_create":
-                        proceedTouserCreation(main);
+                        userCreate(main);
                         break;
                     case "user_delete":
-                        alert("user_delete");
+                        userDelete(main);
                         break;
                     case "user_print":
                         printUsers();
                         break;
                     case "award_create":
-                        proceedToAwardCreation(main);
+                        awardCreate(main);
                         break;
                     case "award_delete":
                         alert("award_delete");
@@ -129,9 +144,11 @@
             }
         };
 
-        function printAwards(main) {
+        function userDelete(main) {
             main.style.display = "none";
             operations[0].style.display = "block";
+            var user_del = document.getElementsByClassName("user_del")[0];
+            user_del.style.display = "block";
             var user_creation = document.getElementsByClassName("user_creation")[0];
             user_creation.style.display = "none";
             var award_creation = document.getElementsByClassName("award_creation")[0];
@@ -139,27 +156,46 @@
             var listusers = document.getElementsByClassName("listusers")[0];
             listusers.style.display = "none";
             var listawards = document.getElementsByClassName("listawards")[0];
+            listawards.style.display = "none";
+        }
+
+        function printAwards(main) {
+            main.style.display = "none";
+            operations[0].style.display = "block";
+            var listawards = document.getElementsByClassName("listawards")[0];
             listawards.style.display = "block";
+            var user_creation = document.getElementsByClassName("user_creation")[0];
+            user_creation.style.display = "none";
+            var user_del = document.getElementsByClassName("user_del")[0];
+            user_del.style.display = "none";
+            var award_creation = document.getElementsByClassName("award_creation")[0];
+            award_creation.style.display = "none";
+            var listusers = document.getElementsByClassName("listusers")[0];
+            listusers.style.display = "none";
         }
 
         function printUsers() {
             main.style.display = "none";
             operations[0].style.display = "block";
+            var listusers = document.getElementsByClassName("listusers")[0];
+            listusers.style.display = "block";
             var user_creation = document.getElementsByClassName("user_creation")[0];
             user_creation.style.display = "none";
+            var user_del = document.getElementsByClassName("user_del")[0];
+            user_del.style.display = "none";
             var award_creation = document.getElementsByClassName("award_creation")[0];
             award_creation.style.display = "none";
             var listawards = document.getElementsByClassName("listawards")[0];
             listawards.style.display = "none";
-            var listusers = document.getElementsByClassName("listusers")[0];
-            listusers.style.display = "block";
         }
 
-        function proceedTouserCreation(main) {
+        function userCreate(main) {
             main.style.display = "none";
             operations[0].style.display = "block";
             var user_creation = document.getElementsByClassName("user_creation")[0];
             user_creation.style.display = "block";
+            var user_del = document.getElementsByClassName("user_del")[0];
+            user_del.style.display = "none";
             var award_creation = document.getElementsByClassName("award_creation")[0];
             award_creation.style.display = "none";
             var listusers = document.getElementsByClassName("listusers")[0];
@@ -172,13 +208,15 @@
             dateOfBirth.value = "";
         }
 
-        function proceedToAwardCreation(main) {
+        function awardCreate(main) {
             main.style.display = "none";
             operations[0].style.display = "block";
             var award_creation = document.getElementsByClassName("award_creation")[0];
             award_creation.style.display = "block";
             var user_creation = document.getElementsByClassName("user_creation")[0];
             user_creation.style.display = "none";
+            var user_del = document.getElementsByClassName("user_del")[0];
+            user_del.style.display = "none";
             var listusers = document.getElementsByClassName("listusers")[0];
             listusers.style.display = "none";
             var listawards = document.getElementsByClassName("listawards")[0];
