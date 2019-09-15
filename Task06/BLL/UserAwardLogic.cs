@@ -31,7 +31,23 @@ namespace BLL
             var award = awardDao?.GetAwardByGuid(awardGuid);
             NullCheck(award);
 
-            return userAwardDao.JoinedAwardToUser(user, award);
+            return Joined(user, award);
+        }
+
+        private bool Joined(User user, Award award)
+        {
+            var singleAwardList = new List<Award>();
+            singleAwardList.Add(award);
+
+            var awardsByUser = userAwardDao.GetAwardsByUser(user, singleAwardList);
+            var counter = 0;
+
+            foreach (var singleAward in awardsByUser)
+            {
+                counter++;
+            }
+
+            return counter > 0 ? false : userAwardDao.JoinedAwardToUser(user, award);
         }
 
         public IEnumerable<Award> GetAwardsByUser(User user)
