@@ -7,6 +7,9 @@
     var awardGuid = string.Empty;
     var awardTitle = string.Empty;
 
+    var userGuidJoin = string.Empty;
+    var awardGuidJoin = string.Empty;
+
     if (IsPost)
     {
         UserCreation();
@@ -179,9 +182,6 @@
                 <div class="button">
                     <input type="button" class="join" value="join award to user" />
                 </div>
-                <div class="button">
-                    <input type="button" class="exit" value="exit" />
-                </div>
             </div>
         </div>
     </div>
@@ -221,7 +221,7 @@
             </p>
             <input type="text" class="user_guid" style="display: none;" name="userGuid" value=@userGuid>
             <input type="submit" class="user_delete" value="Delete" />
-            <input type="button" class="cancel" value="Back" />
+            <input type="button" class="cancel" value="Cancel" />
         </form>
         <form method="post" action="" class="award_del" style="display: none;">
             <h4>Choose award to delete:</h4>
@@ -241,9 +241,9 @@
                     }
                 </select>
             </p>
-            <input type="text" class="award_guid" name="awardGuid" style="display: none;" value=@awardGuid>
+            <input type="text" class="award_guid" style="display: none;" name="awardGuid" value=@awardGuid>
             <input type="submit" class="award_delete" value="Delete" />
-            <input type="button" class="cancel" value="Back" />
+            <input type="button" class="cancel" value="Cancel" />
         </form>
         <div class="listusers" style="display: none;">
             @{
@@ -263,6 +263,50 @@
             }
             <input type="button" class="cancel" value="Back" />
         </div>
+        <form method="post" action="" class="join" style="display: none;">
+            <h3>Choose user-award to join:</h3>
+            <div>
+                <h4>Choose user to join:</h4>
+                <p>
+                    <select class="user_chosen_join">
+                        @{
+                            users = new DependencyResolver()?.UserBll?.GetAll();
+
+                            foreach (var user in users)
+                                {<option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>}
+                        }
+                    </select>
+                    <select class="user_chosen_guid_join" style="display: none;">
+                        @{
+                            foreach (var user in users)
+                                {<option selected>@user.UserGuid.ToString()</option>}
+                        }
+                    </select>
+                </p>
+                <input type="text" class="user_guid_join" style="display: none;" name="userGuidJoin" value=@userGuidJoin>
+            </div>
+            <div>
+                <h4>Choose award to join:</h4>
+                <p>
+                    <select class="award_chosen_join">
+                        @{
+                            awards = new DependencyResolver()?.AwardBll?.GetAll();
+
+                            foreach (var award in awards)
+                                {<option selected>@award.Title</option>}
+                        }
+                    </select>
+                    <select class="award_chosen_guid_join" style="display: none;">
+                        @{
+                            foreach (var award in awards)
+                                {<option selected>@award.AwardGuid.ToString()</option>}
+                        }
+                    </select>
+                </p>
+                <input type="text" class="award_guid_join" style="display: none;" name="awardGuidJoin" value=@awardGuidJoin>
+            </div>
+            <input type="button" class="cancel" value="Cancel" />
+        </form>
     </div>
 </body>
 </html>

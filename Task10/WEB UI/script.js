@@ -132,133 +132,99 @@
             if (target) {
                 switch (target.className) {
                     case "user_create":
-                        userCreate(main);
+                        DisplayUserCreation(main);
                         break;
                     case "user_delete":
-                        userDelete(main);
+                        DisplayUserDel(main);
                         break;
                     case "user_print":
-                        printUsers();
+                        DisplayListUsers();
                         break;
                     case "award_create":
-                        awardCreate(main);
+                        DisplayAwardCreation(main);
                         break;
                     case "award_delete":
-                        awardDelete(main);
+                        DisplayAwardDel(main);
                         break;
                     case "award_print":
-                        printAwards(main);
+                        DisplayListAwards(main);
                         break;
                     case "join":
-                        alert("join");
-                        break;
-                    case "exit":
-                        alert("exit");
                         break;
                 }
             }
         };
 
-        function userDelete(main) {
+        function DisplayUserDel(main) {
             main.style.display = "none";
             operations[0].style.display = "block";
-            var user_del = document.getElementsByClassName("user_del")[0];
-            user_del.style.display = "block";
-            var award_del = document.getElementsByClassName("award_del")[0];
-            award_del.style.display = "none";
-            var user_creation = document.getElementsByClassName("user_creation")[0];
-            user_creation.style.display = "none";
-            var award_creation = document.getElementsByClassName("award_creation")[0];
-            award_creation.style.display = "none";
-            var listusers = document.getElementsByClassName("listusers")[0];
-            listusers.style.display = "none";
-            var listawards = document.getElementsByClassName("listawards")[0];
-            listawards.style.display = "none";
+            document.getElementsByClassName("user_del")[0].style.display = "block";
+            document.getElementsByClassName("award_del")[0].style.display = "none";
+            document.getElementsByClassName("user_creation")[0].style.display = "none";
+            document.getElementsByClassName("award_creation")[0].style.display = "none";
+            document.getElementsByClassName("listusers")[0].style.display = "none";
+            document.getElementsByClassName("listawards")[0].style.display = "none";
+            document.getElementsByClassName("join")[0].style.display = "none";
         }
 
-        function awardDelete(main) {
+        function DisplayAwardDel(main) {
             main.style.display = "none";
             operations[0].style.display = "block";
-            var user_del = document.getElementsByClassName("user_del")[0];
-            user_del.style.display = "none";
-            var award_del = document.getElementsByClassName("award_del")[0];
-            award_del.style.display = "block";
-            var user_creation = document.getElementsByClassName("user_creation")[0];
-            user_creation.style.display = "none";
-            var award_creation = document.getElementsByClassName("award_creation")[0];
-            award_creation.style.display = "none";
-            var listusers = document.getElementsByClassName("listusers")[0];
-            listusers.style.display = "none";
-            var listawards = document.getElementsByClassName("listawards")[0];
-            listawards.style.display = "none";
+            document.getElementsByClassName("user_del")[0].style.display = "none";
+            document.getElementsByClassName("award_del")[0].style.display = "block";
+            document.getElementsByClassName("user_creation")[0].style.display = "none";
+            document.getElementsByClassName("award_creation")[0].style.display = "none";
+            document.getElementsByClassName("listusers")[0].style.display = "none";
+            document.getElementsByClassName("listawards")[0].style.display = "none";
+            document.getElementsByClassName("join")[0].style.display = "none";
         }
 
-        function printAwards(main) {
+        function DisplayListAwards(main) {
             main.style.display = "none";
             operations[0].style.display = "block";
-            var user_del = document.getElementsByClassName("user_del")[0];
-            user_del.style.display = "none";
-            var award_del = document.getElementsByClassName("award_del")[0];
-            award_del.style.display = "none";
-            var user_creation = document.getElementsByClassName("user_creation")[0];
-            user_creation.style.display = "none";
-            var award_creation = document.getElementsByClassName("award_creation")[0];
-            award_creation.style.display = "none";
-            var listusers = document.getElementsByClassName("listusers")[0];
-            listusers.style.display = "none";
-            var listawards = document.getElementsByClassName("listawards")[0];
-            listawards.style.display = "block";
+            document.getElementsByClassName("user_del")[0].style.display = "none";
+            document.getElementsByClassName("award_del")[0].style.display = "none";
+            document.getElementsByClassName("user_creation")[0].style.display = "none";
+            document.getElementsByClassName("award_creation")[0].style.display = "none";
+            document.getElementsByClassName("listusers")[0].style.display = "none";
+            document.getElementsByClassName("listawards")[0].style.display = "block";
+            document.getElementsByClassName("join")[0].style.display = "none";
         }
 
-        function printUsers() {
+        function DisplayListUsers() {
             main.style.display = "none";
             operations[0].style.display = "block";
-            var user_del = document.getElementsByClassName("user_del")[0];
-            user_del.style.display = "none";
-            var award_del = document.getElementsByClassName("award_del")[0];
-            award_del.style.display = "none";
-            var user_creation = document.getElementsByClassName("user_creation")[0];
-            user_creation.style.display = "none";
-            var award_creation = document.getElementsByClassName("award_creation")[0];
-            award_creation.style.display = "none";
-            var listusers = document.getElementsByClassName("listusers")[0];
-            listusers.style.display = "block";
-            var listawards = document.getElementsByClassName("listawards")[0];
-            listawards.style.display = "none";
+            document.getElementsByClassName("user_del")[0].style.display = "none";
+            document.getElementsByClassName("award_del")[0].style.display = "none";
+            document.getElementsByClassName("user_creation")[0].style.display = "none";
+            document.getElementsByClassName("award_creation")[0].style.display = "none";
+            document.getElementsByClassName("listusers")[0].style.display = "block";
+            document.getElementsByClassName("listawards")[0].style.display = "none";
+            document.getElementsByClassName("join")[0].style.display = "none";
         }
 
-        function userCreate(main) {
+        function DisplayUserCreation(main) {
             main.style.display = "none";
             operations[0].style.display = "block";
-            var user_del = document.getElementsByClassName("user_del")[0];
-            user_del.style.display = "none";
-            var award_del = document.getElementsByClassName("award_del")[0];
-            award_del.style.display = "none";
-            var user_creation = document.getElementsByClassName("user_creation")[0];
-            user_creation.style.display = "block";
-            var award_creation = document.getElementsByClassName("award_creation")[0];
-            award_creation.style.display = "none";
-            var listusers = document.getElementsByClassName("listusers")[0];
-            listusers.style.display = "none";
-            var listawards = document.getElementsByClassName("listawards")[0];
-            listawards.style.display = "none";
+            document.getElementsByClassName("user_del")[0].style.display = "none";
+            document.getElementsByClassName("award_del")[0].style.display = "none";
+            document.getElementsByClassName("user_creation")[0].style.display = "block";
+            document.getElementsByClassName("award_creation")[0].style.display = "none";
+            document.getElementsByClassName("listusers")[0].style.display = "none";
+            document.getElementsByClassName("listawards")[0].style.display = "none";
+            document.getElementsByClassName("join")[0].style.display = "none";
         }
 
-        function awardCreate(main) {
+        function DisplayAwardCreation(main) {
             main.style.display = "none";
             operations[0].style.display = "block";
-            var user_del = document.getElementsByClassName("user_del")[0];
-            user_del.style.display = "none";
-            var award_del = document.getElementsByClassName("award_del")[0];
-            award_del.style.display = "none";
-            var user_creation = document.getElementsByClassName("user_creation")[0];
-            user_creation.style.display = "none";
-            var award_creation = document.getElementsByClassName("award_creation")[0];
-            award_creation.style.display = "block";
-            var listusers = document.getElementsByClassName("listusers")[0];
-            listusers.style.display = "none";
-            var listawards = document.getElementsByClassName("listawards")[0];
-            listawards.style.display = "none";
+            document.getElementsByClassName("user_del")[0].style.display = "none";
+            document.getElementsByClassName("award_del")[0].style.display = "none";
+            document.getElementsByClassName("user_creation")[0].style.display = "none";
+            document.getElementsByClassName("award_creation")[0].style.display = "block";
+            document.getElementsByClassName("listusers")[0].style.display = "none";
+            document.getElementsByClassName("listawards")[0].style.display = "none";
+            document.getElementsByClassName("join")[0].style.display = "none";
         }
     }
 }
