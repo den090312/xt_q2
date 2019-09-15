@@ -8,6 +8,7 @@
         proceedToOperations(operations);
     }
     setSelectedUserGuid();
+    setSelectedAwardGuid();
 
     function setSelectedUserGuid() {
         var user_chosen = document.getElementsByClassName("user_chosen")[0];
@@ -17,6 +18,17 @@
         user_chosen.onchange = function () {
             user_chosen_guid.selectedIndex = user_chosen.selectedIndex;
             user_guid.value = user_chosen_guid[user_chosen_guid.selectedIndex].value;
+        };
+    }
+
+    function setSelectedAwardGuid() {
+        var award_chosen = document.getElementsByClassName("award_chosen")[0];
+        var award_chosen_guid = document.getElementsByClassName("award_chosen_guid")[0];
+        var award_guid = document.getElementsByClassName("award_guid")[0];
+        award_guid.value = award_chosen_guid[award_chosen_guid.selectedIndex].value;
+        award_chosen.onchange = function () {
+            award_chosen_guid.selectedIndex = award_chosen.selectedIndex;
+            award_guid.value = award_chosen_guid[award_chosen_guid.selectedIndex].value;
         };
     }
 
@@ -62,6 +74,9 @@
                         break;
                     case "award_create":
                         awardCreation(main);
+                        break;
+                    case "award_delete":
+                        goToMain(main);
                         break;
                 }
             }
@@ -129,7 +144,7 @@
                         awardCreate(main);
                         break;
                     case "award_delete":
-                        alert("award_delete");
+                        awardDelete(main);
                         break;
                     case "award_print":
                         printAwards(main);
@@ -149,6 +164,25 @@
             operations[0].style.display = "block";
             var user_del = document.getElementsByClassName("user_del")[0];
             user_del.style.display = "block";
+            var award_del = document.getElementsByClassName("award_del")[0];
+            award_del.style.display = "none";
+            var user_creation = document.getElementsByClassName("user_creation")[0];
+            user_creation.style.display = "none";
+            var award_creation = document.getElementsByClassName("award_creation")[0];
+            award_creation.style.display = "none";
+            var listusers = document.getElementsByClassName("listusers")[0];
+            listusers.style.display = "none";
+            var listawards = document.getElementsByClassName("listawards")[0];
+            listawards.style.display = "none";
+        }
+
+        function awardDelete(main) {
+            main.style.display = "none";
+            operations[0].style.display = "block";
+            var user_del = document.getElementsByClassName("user_del")[0];
+            user_del.style.display = "none";
+            var award_del = document.getElementsByClassName("award_del")[0];
+            award_del.style.display = "block";
             var user_creation = document.getElementsByClassName("user_creation")[0];
             user_creation.style.display = "none";
             var award_creation = document.getElementsByClassName("award_creation")[0];
@@ -162,29 +196,33 @@
         function printAwards(main) {
             main.style.display = "none";
             operations[0].style.display = "block";
-            var listawards = document.getElementsByClassName("listawards")[0];
-            listawards.style.display = "block";
-            var user_creation = document.getElementsByClassName("user_creation")[0];
-            user_creation.style.display = "none";
             var user_del = document.getElementsByClassName("user_del")[0];
             user_del.style.display = "none";
+            var award_del = document.getElementsByClassName("award_del")[0];
+            award_del.style.display = "none";
+            var user_creation = document.getElementsByClassName("user_creation")[0];
+            user_creation.style.display = "none";
             var award_creation = document.getElementsByClassName("award_creation")[0];
             award_creation.style.display = "none";
             var listusers = document.getElementsByClassName("listusers")[0];
             listusers.style.display = "none";
+            var listawards = document.getElementsByClassName("listawards")[0];
+            listawards.style.display = "block";
         }
 
         function printUsers() {
             main.style.display = "none";
             operations[0].style.display = "block";
-            var listusers = document.getElementsByClassName("listusers")[0];
-            listusers.style.display = "block";
-            var user_creation = document.getElementsByClassName("user_creation")[0];
-            user_creation.style.display = "none";
             var user_del = document.getElementsByClassName("user_del")[0];
             user_del.style.display = "none";
+            var award_del = document.getElementsByClassName("award_del")[0];
+            award_del.style.display = "none";
+            var user_creation = document.getElementsByClassName("user_creation")[0];
+            user_creation.style.display = "none";
             var award_creation = document.getElementsByClassName("award_creation")[0];
             award_creation.style.display = "none";
+            var listusers = document.getElementsByClassName("listusers")[0];
+            listusers.style.display = "block";
             var listawards = document.getElementsByClassName("listawards")[0];
             listawards.style.display = "none";
         }
@@ -192,37 +230,35 @@
         function userCreate(main) {
             main.style.display = "none";
             operations[0].style.display = "block";
-            var user_creation = document.getElementsByClassName("user_creation")[0];
-            user_creation.style.display = "block";
             var user_del = document.getElementsByClassName("user_del")[0];
             user_del.style.display = "none";
+            var award_del = document.getElementsByClassName("award_del")[0];
+            award_del.style.display = "none";
+            var user_creation = document.getElementsByClassName("user_creation")[0];
+            user_creation.style.display = "block";
             var award_creation = document.getElementsByClassName("award_creation")[0];
             award_creation.style.display = "none";
             var listusers = document.getElementsByClassName("listusers")[0];
             listusers.style.display = "none";
             var listawards = document.getElementsByClassName("listawards")[0];
             listawards.style.display = "none";
-            var inputname = user_creation.getElementsByClassName("name")[0];
-            inputname.value = "";
-            var dateOfBirth = user_creation.getElementsByClassName("dateOfBirth")[0];
-            dateOfBirth.value = "";
         }
 
         function awardCreate(main) {
             main.style.display = "none";
             operations[0].style.display = "block";
-            var award_creation = document.getElementsByClassName("award_creation")[0];
-            award_creation.style.display = "block";
-            var user_creation = document.getElementsByClassName("user_creation")[0];
-            user_creation.style.display = "none";
             var user_del = document.getElementsByClassName("user_del")[0];
             user_del.style.display = "none";
+            var award_del = document.getElementsByClassName("award_del")[0];
+            award_del.style.display = "none";
+            var user_creation = document.getElementsByClassName("user_creation")[0];
+            user_creation.style.display = "none";
+            var award_creation = document.getElementsByClassName("award_creation")[0];
+            award_creation.style.display = "block";
             var listusers = document.getElementsByClassName("listusers")[0];
             listusers.style.display = "none";
             var listawards = document.getElementsByClassName("listawards")[0];
             listawards.style.display = "none";
-            var inputtitle = award_creation.getElementsByClassName("title")[0];
-            inputtitle.value = "";
         }
     }
 }

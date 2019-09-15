@@ -4,6 +4,7 @@
     var userName = string.Empty;
     var dateOfBirth = string.Empty;
     var userGuid = string.Empty;
+    var awardGuid = string.Empty;
     var awardTitle = string.Empty;
 
     if (IsPost)
@@ -11,6 +12,7 @@
         UserCreation();
         UserDelete();
         AwardCreation();
+        AwardDelete();
 
         //POST-reload page fix
         @Html.Raw("<script>document.location='https://localhost:44337/index.cshtml'</script>");
@@ -44,6 +46,16 @@
         if (awardTitle != null)
         {
             CreateAward();
+        }
+    }
+
+    void AwardDelete()
+    {
+        awardGuid = Request["awardGuid"];
+
+        if (awardGuid != null)
+        {
+            DeleteAward();
         }
     }
 
@@ -85,6 +97,21 @@
         var awardAdded = awardBll.AwardAdded(award);
 
         if (awardAdded)
+        {
+            message = "Done";
+        }
+        else
+        {
+            message = "Failure";
+        }
+    }
+
+    void DeleteAward()
+    {
+        var awardBll = new DependencyResolver()?.AwardBll;
+        var awardRemoved = awardBll.AwardRemoved(Guid.Parse(awardGuid));
+
+        if (awardRemoved)
         {
             message = "Done";
         }
@@ -182,25 +209,13 @@
                         var users = new DependencyResolver()?.UserBll?.GetAll();
 
                         foreach (var user in users)
-                        {
-                            {
-                                <option selected>
-                                    @(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))
-                                </option>
-                            }
-                        }
+                            {<option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>}
                     }
                 </select>
                 <select class="user_chosen_guid" style="display: none;">
                     @{
                         foreach (var user in users)
-                        {
-                            {
-                                <option selected>
-                                    @user.UserGuid.ToString()
-                                </option>
-                            }
-                        }
+                            {<option selected>@user.UserGuid.ToString()</option>}
                     }
                 </select>
             </p>
@@ -208,25 +223,43 @@
             <input type="submit" class="user_delete" value="Delete" />
             <input type="button" class="cancel" value="Back" />
         </form>
+        <form method="post" action="" class="award_del" style="display: none;">
+            <h4>Choose award to delete:</h4>
+            <p>
+                <select class="award_chosen">
+                    @{
+                        var awards = new DependencyResolver()?.AwardBll?.GetAll();
+
+                        foreach (var award in awards)
+                            {<option selected>@award.Title</option>}
+                    }
+                </select>
+                <select class="award_chosen_guid" style="display: none;">
+                    @{
+                        foreach (var award in awards)
+                            {<option selected>@award.AwardGuid.ToString()</option>}
+                    }
+                </select>
+            </p>
+            <input type="text" class="award_guid" name="awardGuid" style="display: none;" value=@awardGuid>
+            <input type="submit" class="award_delete" value="Delete" />
+            <input type="button" class="cancel" value="Back" />
+        </form>
         <div class="listusers" style="display: none;">
             @{
                 users = new DependencyResolver()?.UserBll?.GetAll();
 
                 foreach (var user in users)
-                {
                     {<p>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</p>}
-                }
             }
             <input type="button" class="cancel" value="Back" />
         </div>
         <div class="listawards" style="display: none;">
             @{
-                var awards = new DependencyResolver()?.AwardBll?.GetAll();
+                awards = new DependencyResolver()?.AwardBll?.GetAll();
 
                 foreach (var award in awards)
-                {
                     {<p>@award.Title</p>}
-            }
             }
             <input type="button" class="cancel" value="Back" />
         </div>
