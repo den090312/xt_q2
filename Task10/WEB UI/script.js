@@ -1,12 +1,4 @@
 ﻿window.onload = function () {
-    var message_done = document.getElementById("message_done");
-    var message_failure = document.getElementById("message_failure");
-
-    function disableMessages() {
-        message_done.style.display = "none";
-        message_failure.style.display = "none";
-    }
-
     var options = document.getElementsByClassName("options");
     var operations = document.getElementsByClassName("operations");
     if (options) {
@@ -39,7 +31,6 @@
 
     function operationOnClick(operation) {
         operation.onclick = function (event) {
-            disableMessages();
             var main = document.getElementById("main");
             var target = event.target;
             if (target) {
@@ -72,17 +63,14 @@
             }
             else if (new Date(dateOfBirth.value) >= new Date()) {
                 alertbox.style.display = "block";
-                alertbox.innerHTML = "Date of birth is not correct!";
+                alertbox.innerHTML = "Date of birth can't be more than current date!";
                 return;
             }
-            //var dateOfBirth = new Date(dateOfBirth.value);
-            //var inputname = inputname.value;
             goToMain(main);
         }
 
         function goToMain(main) {
             operation.style.display = "none";
-            message_done.style.display = "block";
             main.style.display = "block";
         }
 
@@ -94,7 +82,6 @@
 
     function buttonOnclick(button, operations) {
         button.onclick = function (event) {
-            disableMessages();
             var main = document.getElementById("main");
             var target = event.target;
             if (target) {

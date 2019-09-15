@@ -1,18 +1,29 @@
 ﻿@{
+    var message = string.Empty;
+    var userName = string.Empty;
+    var dateOfBirth = string.Empty;
+
     if (IsPost)
     {
-        var inputname = Request["userName"];
-        var dateOfBirth = Request["dateOfBirth"];
-        var dateOfBirthDate = DateTime.ParseExact(dateOfBirth, Entities.User.DateFormat, CultureInfo.InvariantCulture);
+        userName = Request["userName"]; 
+        dateOfBirth = Request["dateOfBirth"];
 
         var userBll = new DependencyResolver()?.UserBll;
-        var userAdded = userBll.UserAdded(userBll?.CreateUser(inputname, dateOfBirthDate));
+        var userAdded = userBll.UserAdded(userBll?.CreateUser(userName, DateTime.Parse(dateOfBirth)));
+
+        if (userAdded)
+        {
+            message = "Done";
+        }
+        else
+        {
+            message = "Failure";
+        }
     }
 }
 
 @using Common;
 @using System;
-@using System.Globalization;
 @using System.Collections.Generic;
 
 <!DOCTYPE html>
@@ -26,12 +37,7 @@
     <title>UserAwards</title>
 </head>
 <body>
-    <div id="message_done" class="message_done" style="display: none">
-        Done
-    </div>
-    <div id="message_failure" class="message_failure" style="display: none">
-        Failure
-    </div>
+    @message
     <div id="main" class="main">
         <div class="block">
             <div class="caption">
@@ -79,13 +85,13 @@
             </div>
         </div>
     </div>
-    <form method="post" class="operations" style="display: none">
+    <form method="post" action="/index" class="operations" style="display: none">
         <div class="user_creation">
             <h4>User creation</h4>
             <p class="alertbox"></p>
-            <p>Name: <input type="text" id="userName" class="name" placeholder=""></p>
-            <p>Date of birth: <input type="date" id="dateOfBirth" class="dateOfBirth" placeholder="Date of Birth"></p>
-            <input type="button" class="user_create" value="Create" />
+            <p>Name: <input type="text" id="userName" class="name" name="userName" value=@userName></p>
+            <p>Date of birth: <input type="date" id="dateOfBirth" class="dateOfBirth" name="dateOfBirth" value=@dateOfBirth></p>
+            <input type="submit" class="user_create" value="Create" />
             <input type="button" class="cancel" value="Cancel" />
         </div>
     </form>
