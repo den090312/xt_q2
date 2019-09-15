@@ -17,7 +17,7 @@ namespace DAL
 
         static UserAwardDaoFile()
         {
-            FilePath = @"C:\Task06\UsersAwards.txt";
+            FilePath = @"D:\Task06\UsersAwards.txt";
             FileName = "UsersAwards.txt";
             Separator = '|';
         }

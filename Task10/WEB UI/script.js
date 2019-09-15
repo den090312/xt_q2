@@ -9,6 +9,8 @@
     }
     setSelectedUserGuid();
     setSelectedAwardGuid();
+    setJoinGuidUser();
+    setJoinGuidAward();
 
     function setSelectedUserGuid() {
         var user_chosen = document.getElementsByClassName("user_chosen")[0];
@@ -30,6 +32,28 @@
             award_chosen_guid.selectedIndex = award_chosen.selectedIndex;
             award_guid.value = award_chosen_guid[award_chosen_guid.selectedIndex].value;
         };
+    }
+
+    function setJoinGuidUser() {
+        var user_chosen_join = document.getElementsByClassName("user_chosen_join")[0];
+        var user_chosen_join_guid = document.getElementsByClassName("user_chosen_join_guid")[0];
+        var user_guid_join = document.getElementsByClassName("user_guid_join")[0];
+        user_guid_join.value = user_chosen_join_guid[user_chosen_join_guid.selectedIndex].value;
+        user_chosen_join.onchange = function () {
+            user_chosen_join_guid.selectedIndex = user_chosen_join.selectedIndex;
+            user_guid_join.value = user_chosen_join_guid[user_chosen_join_guid.selectedIndex].value;
+        }
+    }
+
+    function setJoinGuidAward() {
+        var award_chosen_join = document.getElementsByClassName("award_chosen_join")[0];
+        var award_chosen_join_guid = document.getElementsByClassName("award_chosen_join_guid")[0];
+        var award_guid_join = document.getElementsByClassName("award_guid_join")[0];
+        award_guid_join.value = award_chosen_join_guid[award_chosen_join_guid.selectedIndex].value;
+        award_chosen_join.onchange = function () {
+            award_chosen_join_guid.selectedIndex = award_chosen_join.selectedIndex;
+            award_guid_join.value = award_chosen_join_guid[award_chosen_join_guid.selectedIndex].value;
+        }
     }
 
     function proceedToOptions(options, operations) {
