@@ -5,9 +5,25 @@
 
     if (IsPost)
     {
-        userName = Request["userName"]; 
+        UserCreation();
+
+        //reload page fix
+        @Html.Raw("<script>document.location='https://localhost:44337/index.cshtml'</script>");
+    }
+
+    void UserCreation()
+    {
+        userName = Request["userName"];
         dateOfBirth = Request["dateOfBirth"];
 
+        if (userName != null & dateOfBirth != null)
+        {
+            CreateUser();
+        }
+    }
+
+    void CreateUser()
+    {
         var userBll = new DependencyResolver()?.UserBll;
         var userAdded = userBll.UserAdded(userBll?.CreateUser(userName, DateTime.Parse(dateOfBirth)));
 
@@ -85,7 +101,7 @@
             </div>
         </div>
     </div>
-    <form method="post" action="/index" class="operations" style="display: none">
+    <form method="post" action="" class="operations" style="display: none">
         <div class="user_creation">
             <h4>User creation</h4>
             <p class="alertbox"></p>

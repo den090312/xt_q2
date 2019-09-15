@@ -12,10 +12,14 @@
         for (let option of options) {
             var buttons = option.getElementsByClassName("button");
             if (buttons) {
-                for (let button of buttons) {
-                    if (button) {
-                        buttonOnclick(button, operations);
-                    }
+                proceedToButtonOnclick();
+            }
+        }
+
+        function proceedToButtonOnclick() {
+            for (let button of buttons) {
+                if (button) {
+                    buttonOnclick(button, operations);
                 }
             }
         }
