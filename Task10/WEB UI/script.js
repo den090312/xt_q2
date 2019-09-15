@@ -7,7 +7,7 @@
         message_failure.style.display = "none";
     }
 
-    var options = document.getElementsByClassName("options"); 
+    var options = document.getElementsByClassName("options");
     var operations = document.getElementsByClassName("operations");
     if (options) {
         proceedToOptions(options, operations);
@@ -75,6 +75,8 @@
                 alertbox.innerHTML = "Date of birth is not correct!";
                 return;
             }
+            //var dateOfBirth = new Date(dateOfBirth.value);
+            //var inputname = inputname.value;
             goToMain(main);
         }
 
@@ -132,7 +134,7 @@
             user_creation.style.display = "block";
             var inputname = user_creation.getElementsByClassName("name")[0];
             inputname.value = "";
-            var dateOfBirth = user_creation.getElementsByClassName("dateOfBirth")[0]; 
+            var dateOfBirth = user_creation.getElementsByClassName("dateOfBirth")[0];
             dateOfBirth.value = "";
         }
     }

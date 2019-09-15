@@ -1,6 +1,19 @@
 ﻿@{
-    Layout = null;
+    if (IsPost)
+    {
+        var inputname = Request["userName"];
+        var dateOfBirth = Request["dateOfBirth"];
+        var dateOfBirthDate = DateTime.ParseExact(dateOfBirth, Entities.User.DateFormat, CultureInfo.InvariantCulture);
+
+        var userBll = new DependencyResolver()?.UserBll;
+        var userAdded = userBll.UserAdded(userBll?.CreateUser(inputname, dateOfBirthDate));
+    }
 }
+
+@using Common;
+@using System;
+@using System.Globalization;
+@using System.Collections.Generic;
 
 <!DOCTYPE html>
 
@@ -66,15 +79,15 @@
             </div>
         </div>
     </div>
-    <div class="operations" style="display: none">
+    <form method="post" class="operations" style="display: none">
         <div class="user_creation">
             <h4>User creation</h4>
             <p class="alertbox"></p>
-            <p>Name: <input type="text" class="name" placeholder=""></p>
-            <p>Date of birth: <input type="date" class="dateOfBirth" placeholder="Date of Birth"></p>
+            <p>Name: <input type="text" id="userName" class="name" placeholder=""></p>
+            <p>Date of birth: <input type="date" id="dateOfBirth" class="dateOfBirth" placeholder="Date of Birth"></p>
             <input type="button" class="user_create" value="Create" />
             <input type="button" class="cancel" value="Cancel" />
         </div>
-    </div>
+    </form>
 </body>
 </html>
