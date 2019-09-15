@@ -40,10 +40,13 @@
             if (target) {
                 switch (target.className) {
                     case "cancel":
-                        cancelOperation(main);
+                        cancelOperation(main, operation);
                         break;
                     case "user_create":
                         userCreation(main);
+                        break;
+                    case "award_create":
+                        awardCreation(main);
                         break;
                 }
             }
@@ -73,12 +76,25 @@
             goToMain(main);
         }
 
+        function awardCreation(main) {
+            var award_creation = document.getElementsByClassName("award_creation")[0];
+            var alertbox = user_creation.getElementsByClassName("alertbox")[0];
+            alertbox.style.display = "none";
+            var inputtitle = award_creation.getElementsByClassName("title")[0];
+            if (!inputtitle.value) {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "Title is missing!";
+                return;
+            }
+            goToMain(main);
+        }
+
         function goToMain(main) {
             operation.style.display = "none";
             main.style.display = "block";
         }
 
-        function cancelOperation(main) {
+        function cancelOperation(main, operation) {
             operation.style.display = "none";
             main.style.display = "block";
         }
@@ -100,7 +116,7 @@
                         alert("user_print");
                         break;
                     case "award_create":
-                        alert("award_create");
+                        proceedToAwardCreation(main);
                         break;
                     case "award_delete":
                         alert("award_delete");
@@ -123,10 +139,23 @@
             operations[0].style.display = "block";
             var user_creation = document.getElementsByClassName("user_creation")[0];
             user_creation.style.display = "block";
+            var award_creation = document.getElementsByClassName("award_creation")[0];
+            award_creation.style.display = "none";
             var inputname = user_creation.getElementsByClassName("name")[0];
             inputname.value = "";
             var dateOfBirth = user_creation.getElementsByClassName("dateOfBirth")[0];
             dateOfBirth.value = "";
+        }
+
+        function proceedToAwardCreation(main) {
+            main.style.display = "none";
+            operations[0].style.display = "block";
+            var user_creation = document.getElementsByClassName("user_creation")[0];
+            user_creation.style.display = "none";
+            var award_creation = document.getElementsByClassName("award_creation")[0];
+            award_creation.style.display = "block";
+            var inputtitle = award_creation.getElementsByClassName("title")[0];
+            inputtitle.value = "";
         }
     }
 }

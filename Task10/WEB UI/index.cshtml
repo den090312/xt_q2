@@ -1,11 +1,15 @@
 ﻿@{
     var message = string.Empty;
+
     var userName = string.Empty;
     var dateOfBirth = string.Empty;
+
+    var awardTitle = string.Empty;
 
     if (IsPost)
     {
         UserCreation();
+        AwardCreation();
 
         //reload page fix
         @Html.Raw("<script>document.location='https://localhost:44337/index.cshtml'</script>");
@@ -22,12 +26,39 @@
         }
     }
 
+    void AwardCreation()
+    {
+        awardTitle = Request["awardTitle"];
+
+        if (awardTitle != null)
+        {
+            CreateAward();
+        }
+    }
+
     void CreateUser()
     {
         var userBll = new DependencyResolver()?.UserBll;
-        var userAdded = userBll.UserAdded(userBll?.CreateUser(userName, DateTime.Parse(dateOfBirth)));
+        var user = userBll?.CreateUser(userName, DateTime.Parse(dateOfBirth));
+        var userAdded = userBll.UserAdded(user);
 
         if (userAdded)
+        {
+            message = "Done";
+        }
+        else
+        {
+            message = "Failure";
+        }
+    }
+
+    void CreateAward()
+    {
+        var awardBll = new DependencyResolver()?.AwardBll;
+        var award = awardBll?.CreateAward(awardTitle);
+        var awardAdded = awardBll.AwardAdded(award);
+
+        if (awardAdded)
         {
             message = "Done";
         }
@@ -101,15 +132,22 @@
             </div>
         </div>
     </div>
-    <form method="post" action="" class="operations" style="display: none">
-        <div class="user_creation">
+    <div class="operations">
+        <form method="post" action="" class="user_creation" style="display: none">
             <h4>User creation</h4>
             <p class="alertbox"></p>
             <p>Name: <input type="text" id="userName" class="name" name="userName" value=@userName></p>
             <p>Date of birth: <input type="date" id="dateOfBirth" class="dateOfBirth" name="dateOfBirth" value=@dateOfBirth></p>
             <input type="submit" class="user_create" value="Create" />
             <input type="button" class="cancel" value="Cancel" />
-        </div>
-    </form>
+        </form>
+        <form method="post" action="" class="award_creation" style="display: none">
+            <h4>Award creation</h4>
+            <p class="alertbox"></p>
+            <p>Title: <input type="text" id="awardTitle" class="title" name="awardTitle" value=@awardTitle></p>
+            <input type="submit" class="award_create" value="Create" />
+            <input type="button" class="cancel" value="Cancel" />
+        </form>
+    </div>
 </body>
 </html>
