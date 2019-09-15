@@ -271,13 +271,17 @@
                             users = new DependencyResolver()?.UserBll?.GetAll();
 
                             foreach (var user in users)
-                                {<option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>}
+                            {
+                                <option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>
+}
                         }
                     </select>
                     <select class="user_chosen_guid_join" style="display: none;">
                         @{
                             foreach (var user in users)
-                                {<option selected>@user.UserGuid.ToString()</option>}
+                            {
+                                <option selected>@user.UserGuid.ToString()</option>
+}
                         }
                     </select>
                 </p>
@@ -291,18 +295,23 @@
                             awards = new DependencyResolver()?.AwardBll?.GetAll();
 
                             foreach (var award in awards)
-                                {<option selected>@award.Title</option>}
+                            {
+                                <option selected>@award.Title</option>
+}
                         }
                     </select>
                     <select class="award_chosen_guid_join" style="display: none;">
                         @{
                             foreach (var award in awards)
-                                {<option selected>@award.AwardGuid.ToString()</option>}
+                            {
+                                <option selected>@award.AwardGuid.ToString()</option>
+}
                         }
                     </select>
                 </p>
                 <input type="text" class="award_guid_join" style="display: none;" name="awardGuidJoin" value=@awardGuidJoin>
             </div>
+            <input type="submit" class="join_user_award" value="Join" />
             <input type="button" class="cancel" value="Cancel" />
         </form>
     </div>

@@ -78,6 +78,9 @@
                     case "award_delete":
                         goToMain(main);
                         break;
+                    case "join_user_award":
+                        goToMain(main);
+                        break;
                 }
             }
         }
@@ -149,7 +152,8 @@
                     case "award_print":
                         DisplayListAwards(main);
                         break;
-                    case "join":
+                    case "join_button":
+                        DisplayJoin(main);
                         break;
                 }
             }
@@ -225,6 +229,18 @@
             document.getElementsByClassName("listusers")[0].style.display = "none";
             document.getElementsByClassName("listawards")[0].style.display = "none";
             document.getElementsByClassName("join")[0].style.display = "none";
+        }
+
+        function DisplayJoin(main) {
+            main.style.display = "none";
+            operations[0].style.display = "block";
+            document.getElementsByClassName("user_del")[0].style.display = "none";
+            document.getElementsByClassName("award_del")[0].style.display = "none";
+            document.getElementsByClassName("user_creation")[0].style.display = "none";
+            document.getElementsByClassName("award_creation")[0].style.display = "none";
+            document.getElementsByClassName("listusers")[0].style.display = "none";
+            document.getElementsByClassName("listawards")[0].style.display = "none";
+            document.getElementsByClassName("join")[0].style.display = "block";
         }
     }
 }
