@@ -261,10 +261,10 @@
             }
             <input type="button" class="cancel" value="Back" />
         </div>
-        <form method="post" action="" class="join" style="display: none;">
-            <h3>Choose user-award to join:</h3>
+        <form method="post" action="" class="join" style="display: none; padding-left: 25px;">
+            <h3>Join</h3>
             <div>
-                <h4>Choose user to join:</h4>
+                <h4>Choose user:</h4>
                 <p>
                     <select class="user_chosen_join">
                         @{
@@ -273,7 +273,7 @@
                             foreach (var user in users)
                             {
                                 <option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>
-}
+                            }
                         }
                     </select>
                     <select class="user_chosen_guid_join" style="display: none;">
@@ -281,14 +281,14 @@
                             foreach (var user in users)
                             {
                                 <option selected>@user.UserGuid.ToString()</option>
-}
+                            }
                         }
                     </select>
                 </p>
                 <input type="text" class="user_guid_join" style="display: none;" name="userGuidJoin" value=@userGuidJoin>
             </div>
             <div>
-                <h4>Choose award to join:</h4>
+                <h4>Choose award:</h4>
                 <p>
                     <select class="award_chosen_join">
                         @{
@@ -297,7 +297,7 @@
                             foreach (var award in awards)
                             {
                                 <option selected>@award.Title</option>
-}
+                            }
                         }
                     </select>
                     <select class="award_chosen_guid_join" style="display: none;">
@@ -305,14 +305,16 @@
                             foreach (var award in awards)
                             {
                                 <option selected>@award.AwardGuid.ToString()</option>
-}
+                            }
                         }
                     </select>
                 </p>
                 <input type="text" class="award_guid_join" style="display: none;" name="awardGuidJoin" value=@awardGuidJoin>
             </div>
-            <input type="submit" class="join_user_award" value="Join" />
-            <input type="button" class="cancel" value="Cancel" />
+            <div>
+                <input type="submit" class="join_user_award" value="Join" />
+                <input type="button" class="cancel" value="Cancel" />
+            </div>
         </form>
     </div>
 </body>
