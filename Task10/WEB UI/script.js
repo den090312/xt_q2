@@ -40,7 +40,7 @@
             if (target) {
                 switch (target.className) {
                     case "cancel":
-                        cancelOperation(main, operation);
+                        goToMain(main);
                         break;
                     case "user_create":
                         userCreation(main);
@@ -93,11 +93,6 @@
             operation.style.display = "none";
             main.style.display = "block";
         }
-
-        function cancelOperation(main, operation) {
-            operation.style.display = "none";
-            main.style.display = "block";
-        }
     }
 
     function buttonOnclick(button, operations) {
@@ -113,7 +108,7 @@
                         alert("user_delete");
                         break;
                     case "user_print":
-                        alert("user_print");
+                        printUsers();
                         break;
                     case "award_create":
                         proceedToAwardCreation(main);
@@ -122,7 +117,7 @@
                         alert("award_delete");
                         break;
                     case "award_print":
-                        alert("award_print");
+                        printAwards(main);
                         break;
                     case "join":
                         alert("join");
@@ -134,6 +129,32 @@
             }
         };
 
+        function printAwards(main) {
+            main.style.display = "none";
+            operations[0].style.display = "block";
+            var user_creation = document.getElementsByClassName("user_creation")[0];
+            user_creation.style.display = "none";
+            var award_creation = document.getElementsByClassName("award_creation")[0];
+            award_creation.style.display = "none";
+            var listusers = document.getElementsByClassName("listusers")[0];
+            listusers.style.display = "none";
+            var listawards = document.getElementsByClassName("listawards")[0];
+            listawards.style.display = "block";
+        }
+
+        function printUsers() {
+            main.style.display = "none";
+            operations[0].style.display = "block";
+            var user_creation = document.getElementsByClassName("user_creation")[0];
+            user_creation.style.display = "none";
+            var award_creation = document.getElementsByClassName("award_creation")[0];
+            award_creation.style.display = "none";
+            var listawards = document.getElementsByClassName("listawards")[0];
+            listawards.style.display = "none";
+            var listusers = document.getElementsByClassName("listusers")[0];
+            listusers.style.display = "block";
+        }
+
         function proceedTouserCreation(main) {
             main.style.display = "none";
             operations[0].style.display = "block";
@@ -141,6 +162,10 @@
             user_creation.style.display = "block";
             var award_creation = document.getElementsByClassName("award_creation")[0];
             award_creation.style.display = "none";
+            var listusers = document.getElementsByClassName("listusers")[0];
+            listusers.style.display = "none";
+            var listawards = document.getElementsByClassName("listawards")[0];
+            listawards.style.display = "none";
             var inputname = user_creation.getElementsByClassName("name")[0];
             inputname.value = "";
             var dateOfBirth = user_creation.getElementsByClassName("dateOfBirth")[0];
@@ -150,10 +175,14 @@
         function proceedToAwardCreation(main) {
             main.style.display = "none";
             operations[0].style.display = "block";
-            var user_creation = document.getElementsByClassName("user_creation")[0];
-            user_creation.style.display = "none";
             var award_creation = document.getElementsByClassName("award_creation")[0];
             award_creation.style.display = "block";
+            var user_creation = document.getElementsByClassName("user_creation")[0];
+            user_creation.style.display = "none";
+            var listusers = document.getElementsByClassName("listusers")[0];
+            listusers.style.display = "none";
+            var listawards = document.getElementsByClassName("listawards")[0];
+            listawards.style.display = "none";
             var inputtitle = award_creation.getElementsByClassName("title")[0];
             inputtitle.value = "";
         }

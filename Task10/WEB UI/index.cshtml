@@ -148,6 +148,28 @@
             <input type="submit" class="award_create" value="Create" />
             <input type="button" class="cancel" value="Cancel" />
         </form>
+        <div class="listusers" style="display: none;">
+            @{
+                var users = new DependencyResolver()?.UserBll?.GetAll();
+
+                foreach (var user in users)
+                {
+                    {<p>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</p>}
+            }
+            }
+            <input type="button" class="cancel" value="Back" />
+        </div>
+        <div class="listawards" style="display: none;">
+            @{
+                var awards = new DependencyResolver()?.AwardBll?.GetAll();
+
+                foreach (var award in awards)
+                {
+                    {<p>@award.Title</p>}
+            }
+            }
+            <input type="button" class="cancel" value="Back" />
+        </div>
     </div>
 </body>
 </html>
