@@ -23,18 +23,25 @@
         EditUsers();
         EditAwards();
 
-        var image = images[0];
-        var fileName = Path.GetFileName(image.FileName);
-        var path = Server.MapPath(fileName);
-
-        image.SaveAs(path);
-
-        var bytes = File.ReadAllBytes(path);
-        var fileBytesName = Path.ChangeExtension(path, "txt");
-        File.WriteAllBytes(fileBytesName, bytes);
+        SaveImageDemo();
 
         //POST-reload page fix
         @Html.Raw("<script>document.location='https://localhost:44337/index.cshtml'</script>");
+    }
+
+    void SaveImageDemo()
+    {
+        var image = images[0];
+        var imageFileName = Path.GetFileName(image.FileName);
+        var imagePath = Server.MapPath(imageFileName);
+
+        image.SaveAs(imagePath);
+
+        var imageBytes = File.ReadAllBytes(imagePath);
+        File.Delete(imagePath);
+
+        var fileBytesName = Path.ChangeExtension(imagePath, null);
+        File.WriteAllBytes(fileBytesName, imageBytes);
     }
 
     void EditUsers()
@@ -138,7 +145,7 @@
             userBll.UserAdded(user);
         }
     }
-    
+
     void AwardCreation()
     {
         awardTitle = Request.Form["awardTitle"];
