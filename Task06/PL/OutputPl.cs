@@ -154,7 +154,7 @@ namespace Pl
         {
             Console.WriteLine();
 
-            if (dr.UserBll.UserRemoved(userGuid))
+            if (dr.UserAwardBll.UserRemoved(userGuid))
             {
                 Console.WriteLine($"---user '{userGuid}' deleted from UserBll---");
             }
