@@ -91,13 +91,13 @@
                         goToMain(main);
                         break;
                     case "user_create":
-                        userCreation(main);
+                        userCreation(main, event);
                         break;
                     case "user_delete":
                         goToMain(main);
                         break;
                     case "award_create":
-                        awardCreation(main);
+                        awardCreation(main, event);
                         break;
                     case "award_delete":
                         if (!confirm("Награда будет удалена у всех пользователей. Вы уверены?")) {
@@ -112,7 +112,7 @@
             }
         }
 
-        function userCreation(main) {
+        function userCreation(main, e) {
             var user_creation = document.getElementsByClassName("user_creation")[0];
             var alertbox = user_creation.getElementsByClassName("alertbox")[0];
             alertbox.style.display = "none";
@@ -120,23 +120,26 @@
             if (!inputname.value) {
                 alertbox.style.display = "block";
                 alertbox.innerHTML = "Name is missing!";
+                e.preventDefault();
                 return;
             }
             var dateOfBirth = user_creation.getElementsByClassName("dateOfBirth")[0];
             if (!dateOfBirth.value) {
                 alertbox.style.display = "block";
                 alertbox.innerHTML = "Date of birth is missing!";
+                e.preventDefault();
                 return;
             }
             else if (new Date(dateOfBirth.value) >= new Date()) {
                 alertbox.style.display = "block";
                 alertbox.innerHTML = "Date of birth can't be more than current date!";
+                e.preventDefault();
                 return;
             }
             goToMain(main);
         }
 
-        function awardCreation(main) {
+        function awardCreation(main, e) {
             var award_creation = document.getElementsByClassName("award_creation")[0];
             var alertbox = user_creation.getElementsByClassName("alertbox")[0];
             alertbox.style.display = "none";
@@ -144,6 +147,7 @@
             if (!inputtitle.value) {
                 alertbox.style.display = "block";
                 alertbox.innerHTML = "Title is missing!";
+                e.preventDefault();
                 return;
             }
             goToMain(main);
