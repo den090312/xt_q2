@@ -9,15 +9,18 @@
     string[] names;
     string[] dates;
     string[] userGuids;
+    string[] titles;
+    string[] awardGuids;
 
     if (IsPost)
     {
         UserCreation();
-        UserDelete();
+        DeleteUsersWithAwards();
         AwardCreation();
-        AwardDelete();
+        DeleteAwardsWithUsers();
         JoinAwardToUser();
         EditUsers();
+        EditAwards();
 
         //POST-reload page fix
         @Html.Raw("<script>document.location='https://localhost:44337/index.cshtml'</script>");
@@ -50,11 +53,43 @@
         }
     }
 
+    void EditAwards()
+    {
+        titles = Request.Form.GetValues("awardTitles");
+        awardGuids = Request.Form.GetValues("awardGuids");
+
+        if (titles != null & awardGuids != null)
+        {
+            DeleteAllAwards();
+
+            var i = 0;
+
+            foreach (var title in titles)
+            {
+                var guid = awardGuids[i];
+
+                if (title != null)
+                {
+                    AddAward(title, guid);
+                }
+                
+                i++;
+            }
+        }
+    }
+
     void AddUser(string name, string date, string guid)
     {
         var userBll = new DependencyResolver()?.UserBll;
         var user = new Entities.User(Guid.Parse(guid), name, DateTime.Parse(date));
         userBll.UserAdded(user);
+    }
+
+    void AddAward(string title, string guid)
+    {
+        var awardBll = new DependencyResolver()?.AwardBll;
+        var award = new Entities.Award(Guid.Parse(guid), title);
+        awardBll.AwardAdded(award);
     }
 
     void DeleteAllUsers()
@@ -66,6 +101,18 @@
         foreach (var user in allUsers)
         {
             userBll.UserRemoved(user.UserGuid);
+        }
+    }
+
+    void DeleteAllAwards()
+    {
+        var dr = new DependencyResolver();
+        var awardBll = dr?.AwardBll;
+        var allAwards = awardBll?.GetAll();
+
+        foreach (var award in allAwards)
+        {
+            awardBll.AwardRemoved(award.AwardGuid);
         }
     }
 
@@ -90,7 +137,7 @@
         }
     }
 
-    void UserDelete()
+    void DeleteUsersWithAwards()
     {
         userGuid = Request.Form["userGuid"];
 
@@ -113,7 +160,7 @@
         }
     }
 
-    void AwardDelete()
+    void DeleteAwardsWithUsers()
     {
         awardGuid = Request.Form["awardGuid"];
 
