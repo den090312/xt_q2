@@ -78,9 +78,12 @@
 
     void CreateUser(string name, string date)
     {
-        var userBll = new DependencyResolver()?.UserBll;
-        var user = userBll?.CreateUser(name, DateTime.Parse(date));
-        userBll.UserAdded(user);
+        if (name != string.Empty & date != string.Empty)
+        {
+            var userBll = new DependencyResolver()?.UserBll;
+            var user = userBll?.CreateUser(name, DateTime.Parse(date));
+            userBll.UserAdded(user);
+        }
     }
 
     void UserDelete()
@@ -341,7 +344,7 @@
                     <div>
                         <input type="text" name="userNames" value=@user.Name />
                         <input type="date" name="userDates" value=@user.DateOfBirth.ToString("yyyy-MM-dd") />
-                        <input type="text" name="userGuids" value=@user.UserGuid.ToString() />
+                        <input type="text" name="userGuids" value=@user.UserGuid.ToString() style="display: none" />
                     </div>
                 }
             }

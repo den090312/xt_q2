@@ -127,7 +127,7 @@
             }
             else if (new Date(dateOfBirth.value) >= new Date()) {
                 alertbox.style.display = "block";
-                alertbox.innerHTML = "Date of birth can't be more then current date!";
+                alertbox.innerHTML = "Date of birth can't be more than current date!";
                 return;
             }
             goToMain(main);
