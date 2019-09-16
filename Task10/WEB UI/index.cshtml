@@ -72,7 +72,7 @@
                 {
                     AddAward(title, guid);
                 }
-                
+
                 i++;
             }
         }
@@ -136,6 +136,26 @@
             userBll.UserAdded(user);
         }
     }
+    
+    void AwardCreation()
+    {
+        awardTitle = Request.Form["awardTitle"];
+
+        if (awardTitle != null)
+        {
+            CreateAward();
+        }
+    }
+
+    void CreateAward()
+    {
+        if (awardTitle != string.Empty)
+        {
+            var awardBll = new DependencyResolver()?.AwardBll;
+            var award = awardBll?.CreateAward(awardTitle);
+            awardBll.AwardAdded(award);
+        }
+    }
 
     void DeleteUsersWithAwards()
     {
@@ -145,18 +165,6 @@
         {
             var userAwardBll = new DependencyResolver()?.UserAwardBll;
             userAwardBll.UserRemoved(Guid.Parse(userGuid));
-        }
-    }
-
-    void AwardCreation()
-    {
-        awardTitle = Request.Form["awardTitle"];
-
-        if (awardTitle != null)
-        {
-            var awardBll = new DependencyResolver()?.AwardBll;
-            var award = awardBll?.CreateAward(awardTitle);
-            awardBll.AwardAdded(award);
         }
     }
 
