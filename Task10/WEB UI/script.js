@@ -179,6 +179,12 @@
                     case "join_button":
                         DisplayJoin(main);
                         break;
+                    case "user_edit":
+                        DisplayUserEdition(main);
+                        break;
+                    case "award_edit":
+                        DisplayAwardEdition(main);
+                        break;
                 }
             }
         };
@@ -193,6 +199,8 @@
             document.getElementsByClassName("listusers")[0].style.display = "none";
             document.getElementsByClassName("listawards")[0].style.display = "none";
             document.getElementsByClassName("join")[0].style.display = "none";
+            document.getElementsByClassName("user_edition")[0].style.display = "none";
+            document.getElementsByClassName("award_edition")[0].style.display = "none";
         }
 
         function DisplayAwardDel(main) {
@@ -205,6 +213,8 @@
             document.getElementsByClassName("listusers")[0].style.display = "none";
             document.getElementsByClassName("listawards")[0].style.display = "none";
             document.getElementsByClassName("join")[0].style.display = "none";
+            document.getElementsByClassName("user_edition")[0].style.display = "none";
+            document.getElementsByClassName("award_edition")[0].style.display = "none";
         }
 
         function DisplayListAwards(main) {
@@ -217,6 +227,8 @@
             document.getElementsByClassName("listusers")[0].style.display = "none";
             document.getElementsByClassName("listawards")[0].style.display = "block";
             document.getElementsByClassName("join")[0].style.display = "none";
+            document.getElementsByClassName("user_edition")[0].style.display = "none";
+            document.getElementsByClassName("award_edition")[0].style.display = "none";
         }
 
         function DisplayListUsers() {
@@ -229,6 +241,8 @@
             document.getElementsByClassName("listusers")[0].style.display = "block";
             document.getElementsByClassName("listawards")[0].style.display = "none";
             document.getElementsByClassName("join")[0].style.display = "none";
+            document.getElementsByClassName("user_edition")[0].style.display = "none";
+            document.getElementsByClassName("award_edition")[0].style.display = "none";
         }
 
         function DisplayUserCreation(main) {
@@ -241,6 +255,8 @@
             document.getElementsByClassName("listusers")[0].style.display = "none";
             document.getElementsByClassName("listawards")[0].style.display = "none";
             document.getElementsByClassName("join")[0].style.display = "none";
+            document.getElementsByClassName("user_edition")[0].style.display = "none";
+            document.getElementsByClassName("award_edition")[0].style.display = "none";
         }
 
         function DisplayAwardCreation(main) {
@@ -253,6 +269,8 @@
             document.getElementsByClassName("listusers")[0].style.display = "none";
             document.getElementsByClassName("listawards")[0].style.display = "none";
             document.getElementsByClassName("join")[0].style.display = "none";
+            document.getElementsByClassName("user_edition")[0].style.display = "none";
+            document.getElementsByClassName("award_edition")[0].style.display = "none";
         }
 
         function DisplayJoin(main) {
@@ -265,6 +283,36 @@
             document.getElementsByClassName("listusers")[0].style.display = "none";
             document.getElementsByClassName("listawards")[0].style.display = "none";
             document.getElementsByClassName("join")[0].style.display = "block";
+            document.getElementsByClassName("user_edition")[0].style.display = "none";
+            document.getElementsByClassName("award_edition")[0].style.display = "none";
+        }
+
+        function DisplayUserEdition(main) {
+            main.style.display = "none";
+            operations[0].style.display = "block";
+            document.getElementsByClassName("user_del")[0].style.display = "none";
+            document.getElementsByClassName("award_del")[0].style.display = "none";
+            document.getElementsByClassName("user_creation")[0].style.display = "none";
+            document.getElementsByClassName("award_creation")[0].style.display = "none";
+            document.getElementsByClassName("listusers")[0].style.display = "none";
+            document.getElementsByClassName("listawards")[0].style.display = "none";
+            document.getElementsByClassName("join")[0].style.display = "none";
+            document.getElementsByClassName("user_edition")[0].style.display = "block";
+            document.getElementsByClassName("award_edition")[0].style.display = "none";
+        }
+
+        function DisplayAwardEdition(main) {
+            main.style.display = "none";
+            operations[0].style.display = "block";
+            document.getElementsByClassName("user_del")[0].style.display = "none";
+            document.getElementsByClassName("award_del")[0].style.display = "none";
+            document.getElementsByClassName("user_creation")[0].style.display = "none";
+            document.getElementsByClassName("award_creation")[0].style.display = "none";
+            document.getElementsByClassName("listusers")[0].style.display = "none";
+            document.getElementsByClassName("listawards")[0].style.display = "none";
+            document.getElementsByClassName("join")[0].style.display = "none";
+            document.getElementsByClassName("user_edition")[0].style.display = "none";
+            document.getElementsByClassName("award_edition")[0].style.display = "block";
         }
     }
 }
