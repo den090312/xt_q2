@@ -6,6 +6,9 @@
     var awardTitle = string.Empty;
     var userGuidJoin = string.Empty;
     var awardGuidJoin = string.Empty;
+    string[] names;
+    string[] dates;
+    string[] userGuids;
 
     if (IsPost)
     {
@@ -22,11 +25,11 @@
 
     void EditUsers()
     {
-        var names = Request.Form.GetValues("userNames");
-        var dates = Request.Form.GetValues("userDates");
-        var guids = Request.Form.GetValues("userGuids");
+        names = Request.Form.GetValues("userNames");
+        dates = Request.Form.GetValues("userDates");
+        userGuids = Request.Form.GetValues("userGuids");
 
-        if (names != null & dates != null & guids != null)
+        if (names != null & dates != null & userGuids != null)
         {
             DeleteAllUsers();
 
@@ -35,7 +38,7 @@
             foreach (var name in names)
             {
                 var date = dates[i];
-                var guid = guids[i];
+                var guid = userGuids[i];
 
                 if (name != null & date != null)
                 {
@@ -56,12 +59,14 @@
 
     void DeleteAllUsers()
     {
-        var userBll = new DependencyResolver()?.UserBll;
+        var dr = new DependencyResolver();
+        var userBll = dr?.UserBll;
+        var userAwardBll = dr?.UserAwardBll;
         var allUsers = userBll?.GetAll();
 
         foreach (var user in allUsers)
         {
-            userBll.UserRemoved(user.UserGuid);
+            userAwardBll.UserRemoved(user.UserGuid);
         }
     }
 
@@ -92,8 +97,8 @@
 
         if (userGuid != null)
         {
-            var userBll = new DependencyResolver()?.UserBll;
-            userBll.UserRemoved(Guid.Parse(userGuid));
+            var userAwardBll = new DependencyResolver()?.UserAwardBll;
+            userAwardBll.UserRemoved(Guid.Parse(userGuid));
         }
     }
 
@@ -115,8 +120,8 @@
 
         if (awardGuid != null)
         {
-            var awardBll = new DependencyResolver()?.AwardBll;
-            awardBll.AwardRemoved(Guid.Parse(awardGuid));
+            var userAwardBll = new DependencyResolver()?.UserAwardBll;
+            userAwardBll.AwardRemoved(Guid.Parse(awardGuid));
         }
     }
 
