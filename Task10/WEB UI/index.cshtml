@@ -40,12 +40,9 @@
 
             foreach (var name in names)
             {
-                var date = dates[i];
-                var guid = userGuids[i];
-
-                if (name != null & date != null)
+                if (name != null & dates[i] != null)
                 {
-                    AddUser(name, date, guid);
+                    AddUser(name, dates[i], userGuids[i]);
                 }
 
                 i++;
@@ -66,11 +63,9 @@
 
             foreach (var title in titles)
             {
-                var guid = awardGuids[i];
-
-                if (title != null)
+                if (title != null & awardGuids[i] != null)
                 {
-                    AddAward(title, guid);
+                    AddAward(title, awardGuids[i]);
                 }
 
                 i++;
@@ -80,39 +75,35 @@
 
     void AddUser(string name, string date, string guid)
     {
-        var userBll = new DependencyResolver()?.UserBll;
         var user = new Entities.User(Guid.Parse(guid), name, DateTime.Parse(date));
-        userBll.UserAdded(user);
+        new DependencyResolver()?.UserBll?.UserAdded(user);
     }
 
     void AddAward(string title, string guid)
     {
-        var awardBll = new DependencyResolver()?.AwardBll;
         var award = new Entities.Award(Guid.Parse(guid), title);
-        awardBll.AwardAdded(award);
+        new DependencyResolver()?.AwardBll?.AwardAdded(award);
     }
 
     void DeleteAllUsers()
     {
-        var dr = new DependencyResolver();
-        var userBll = dr?.UserBll;
+        var userBll = new DependencyResolver()?.UserBll;
         var allUsers = userBll?.GetAll();
 
         foreach (var user in allUsers)
         {
-            userBll.UserRemoved(user.UserGuid);
+            userBll?.UserRemoved(user.UserGuid);
         }
     }
 
     void DeleteAllAwards()
     {
-        var dr = new DependencyResolver();
-        var awardBll = dr?.AwardBll;
+        var awardBll = new DependencyResolver()?.AwardBll;
         var allAwards = awardBll?.GetAll();
 
         foreach (var award in allAwards)
         {
-            awardBll.AwardRemoved(award.AwardGuid);
+            awardBll?.AwardRemoved(award.AwardGuid);
         }
     }
 
@@ -163,8 +154,7 @@
 
         if (userGuid != null)
         {
-            var userAwardBll = new DependencyResolver()?.UserAwardBll;
-            userAwardBll.UserRemoved(Guid.Parse(userGuid));
+            new DependencyResolver()?.UserAwardBll?.UserRemoved(Guid.Parse(userGuid));
         }
     }
 
@@ -174,8 +164,7 @@
 
         if (awardGuid != null & awardGuid != "")
         {
-            var userAwardBll = new DependencyResolver()?.UserAwardBll;
-            userAwardBll.AwardRemoved(Guid.Parse(awardGuid));
+            new DependencyResolver()?.UserAwardBll?.AwardRemoved(Guid.Parse(awardGuid));
         }
     }
 
@@ -186,8 +175,10 @@
 
         if (userGuidJoin != null & awardGuidJoin != null)
         {
-            var userAwardBll = new DependencyResolver()?.UserAwardBll;
-            userAwardBll.JoinedAwardToUser(Guid.Parse(userGuidJoin), Guid.Parse(awardGuidJoin));
+            new DependencyResolver()?.UserAwardBll?.JoinedAwardToUser
+            (
+                Guid.Parse(userGuidJoin), Guid.Parse(awardGuidJoin)
+            );
         }
     }
 }
