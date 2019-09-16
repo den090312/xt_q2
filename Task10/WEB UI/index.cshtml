@@ -61,12 +61,11 @@
     {
         var dr = new DependencyResolver();
         var userBll = dr?.UserBll;
-        var userAwardBll = dr?.UserAwardBll;
         var allUsers = userBll?.GetAll();
 
         foreach (var user in allUsers)
         {
-            userAwardBll.UserRemoved(user.UserGuid);
+            userBll.UserRemoved(user.UserGuid);
         }
     }
 
@@ -358,7 +357,23 @@
                 <input type="button" class="cancel" value="Cancel" />
             </p>
         </form>
-        <form method="post" action="" class="award_edition" style="display: none;"></form>
+        <form method="post" action="" class="award_edition" style="display: none;">
+            @{
+                awards = new DependencyResolver()?.AwardBll?.GetAll();
+
+                foreach (var award in awards)
+                {
+                    <div>
+                        <input type="text" name="awardTitles" value=@award.Title />
+                        <input type="text" name="awardGuids" value=@award.AwardGuid.ToString() style="display: none" />
+                    </div>
+                }
+            }
+            <p>
+                <input type="submit" class="edit_award" value="Ok" />
+                <input type="button" class="cancel" value="Cancel" />
+            </p>
+        </form>
     </div>
 </body>
 </html>
