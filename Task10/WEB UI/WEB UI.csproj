@@ -43,23 +43,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BLL">
+    <Reference Include="BLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Task06\BLL\obj\Debug\BLL.dll</HintPath>
     </Reference>
-    <Reference Include="Common">
+    <Reference Include="Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Task06\Common\obj\Debug\Common.dll</HintPath>
     </Reference>
-    <Reference Include="DAL">
+    <Reference Include="DAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Task06\DAL\obj\Debug\DAL.dll</HintPath>
     </Reference>
     <Reference Include="Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Task06\Entities\obj\Debug\Entities.dll</HintPath>
     </Reference>
-    <Reference Include="InterfacesBLL">
+    <Reference Include="InterfacesBLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Task06\InterfacesBLL\obj\Debug\InterfacesBLL.dll</HintPath>
     </Reference>
-    <Reference Include="InterfacesDAL">
+    <Reference Include="InterfacesDAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Task06\InterfacesDAL\obj\Debug\InterfacesDAL.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">

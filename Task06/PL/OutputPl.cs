@@ -156,20 +156,11 @@ namespace Pl
 
             if (dr.UserAwardBll.UserRemoved(userGuid))
             {
-                Console.WriteLine($"---user '{userGuid}' deleted from UserBll---");
+                Console.WriteLine($"---user '{userGuid}' deleted---");
             }
             else
             {
-                Console.WriteLine($"---user '{userGuid}' NOT deleted from UserBll---");
-            }
-
-            if (dr.UserAwardBll.UserRemoved(userGuid))
-            {
-                Console.WriteLine($"---user '{userGuid}' deleted from UserAwardBll---");
-            }
-            else
-            {
-                Console.WriteLine($"---user '{userGuid}' NOT deleted from UserAwardBll---");
+                Console.WriteLine($"---user '{userGuid}' NOT deleted---");
             }
         }
 
@@ -179,22 +170,13 @@ namespace Pl
         {
             Console.WriteLine();
 
-            if (dr.AwardBll.AwardRemoved(awardGuid))
-            {
-                Console.WriteLine($"---user '{awardGuid}' deleted from UserBll---");
-            }
-            else
-            {
-                Console.WriteLine($"---user '{awardGuid}' NOT deleted from UserBll---");
-            }
-
             if (dr.UserAwardBll.AwardRemoved(awardGuid))
             {
-                Console.WriteLine($"---user '{awardGuid}' deleted from UserAwardBll---");
+                Console.WriteLine($"---user '{awardGuid}' deleted---");
             }
             else
             {
-                Console.WriteLine($"---user '{awardGuid}' NOT deleted from UserAwardBll---");
+                Console.WriteLine($"---user '{awardGuid}' NOT deleted---");
             }
         }
 
