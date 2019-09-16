@@ -345,7 +345,21 @@
             </div>
         </form>
         <form method="post" action="" class="user_edition" style="display: none;">
+            @{
+                users = new DependencyResolver()?.UserBll?.GetAll();
 
+                foreach (var user in users)
+                {
+                    <div>
+                        <input type="text" value=@user.Name />
+                        <input type="date" value=@user.DateOfBirth />
+                    </div>
+                }
+            }
+            <p>
+                <input type="submit" class="edit_user" value="Ok" />
+                <input type="button" class="cancel" value="Cancel" />
+            </p>
         </form>
         <form method="post" action="" class="award_edition" style="display: none;"></form>
     </div>
