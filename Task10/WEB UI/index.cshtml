@@ -11,6 +11,7 @@
     string[] userGuids;
     string[] titles;
     string[] awardGuids;
+    var images = HttpContext.Current.Request.Files;
 
     if (IsPost)
     {
@@ -21,6 +22,16 @@
         JoinAwardToUser();
         EditUsers();
         EditAwards();
+
+        var image = images[0];
+        var fileName = Path.GetFileName(image.FileName);
+        var path = Server.MapPath(fileName);
+
+        image.SaveAs(path);
+
+        var bytes = File.ReadAllBytes(path);
+        var fileBytesName = Path.ChangeExtension(path, "txt");
+        File.WriteAllBytes(fileBytesName, bytes);
 
         //POST-reload page fix
         @Html.Raw("<script>document.location='https://localhost:44337/index.cshtml'</script>");
@@ -244,6 +255,21 @@
                 <div class="button">
                     <input type="button" class="join_button" value="join award to user" />
                 </div>
+            </div>
+        </div>
+        <div class="block">
+            <div class="caption">
+                File operations
+            </div>
+            <div class="options">
+                <form enctype="multipart/form-data" method="post">
+                    <div class="button">
+                        <input type="file" name="fileImage" accept="image/*" value=@images>
+                    </div>
+                    <div class="button">
+                        <input type="submit" value="upload">
+                    </div>
+                </form>
             </div>
         </div>
     </div>
