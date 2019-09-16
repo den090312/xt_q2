@@ -1,5 +1,4 @@
 ﻿@{
-    var message = string.Empty;
     var userName = string.Empty;
     var dateOfBirth = string.Empty;
     var userGuid = string.Empty;
@@ -27,7 +26,9 @@
 
         if (userName != null & dateOfBirth != null)
         {
-            CreateUser();
+            var userBll = new DependencyResolver()?.UserBll;
+            var user = userBll?.CreateUser(userName, DateTime.Parse(dateOfBirth));
+            userBll.UserAdded(user);
         }
     }
 
@@ -37,7 +38,8 @@
 
         if (userGuid != null)
         {
-            DeleteUser();
+            var userBll = new DependencyResolver()?.UserBll;
+            userBll.UserRemoved(Guid.Parse(userGuid));
         }
     }
 
@@ -47,7 +49,9 @@
 
         if (awardTitle != null)
         {
-            CreateAward();
+            var awardBll = new DependencyResolver()?.AwardBll;
+            var award = awardBll?.CreateAward(awardTitle);
+            awardBll.AwardAdded(award);
         }
     }
 
@@ -57,69 +61,8 @@
 
         if (awardGuid != null)
         {
-            DeleteAward();
-        }
-    }
-
-    void CreateUser()
-    {
-        var userBll = new DependencyResolver()?.UserBll;
-        var user = userBll?.CreateUser(userName, DateTime.Parse(dateOfBirth));
-        var userAdded = userBll.UserAdded(user);
-
-        if (userAdded)
-        {
-            message = "Done";
-        }
-        else
-        {
-            message = "Failure";
-        }
-    }
-
-    void DeleteUser()
-    {
-        var userBll = new DependencyResolver()?.UserBll;
-        var userRemoved = userBll.UserRemoved(Guid.Parse(userGuid));
-
-        if (userRemoved)
-        {
-            message = "Done";
-        }
-        else
-        {
-            message = "Failure";
-        }
-    }
-
-    void CreateAward()
-    {
-        var awardBll = new DependencyResolver()?.AwardBll;
-        var award = awardBll?.CreateAward(awardTitle);
-        var awardAdded = awardBll.AwardAdded(award);
-
-        if (awardAdded)
-        {
-            message = "Done";
-        }
-        else
-        {
-            message = "Failure";
-        }
-    }
-
-    void DeleteAward()
-    {
-        var awardBll = new DependencyResolver()?.AwardBll;
-        var awardRemoved = awardBll.AwardRemoved(Guid.Parse(awardGuid));
-
-        if (awardRemoved)
-        {
-            message = "Done";
-        }
-        else
-        {
-            message = "Failure";
+            var awardBll = new DependencyResolver()?.AwardBll;
+            awardBll.AwardRemoved(Guid.Parse(awardGuid));
         }
     }
 
@@ -130,22 +73,8 @@
 
         if (userGuidJoin != null & awardGuidJoin != null)
         {
-            Join();
-        }
-    }
-
-    void Join()
-    {
-        var userAwardBll = new DependencyResolver()?.UserAwardBll;
-        var joined = userAwardBll.JoinedAwardToUser(Guid.Parse(userGuidJoin), Guid.Parse(awardGuidJoin));
-
-        if (joined)
-        {
-            message = "Done";
-        }
-        else
-        {
-            message = "Failure";
+            var userAwardBll = new DependencyResolver()?.UserAwardBll;
+            userAwardBll.JoinedAwardToUser(Guid.Parse(userGuidJoin), Guid.Parse(awardGuidJoin));
         }
     }
 }
@@ -164,7 +93,6 @@
     <title>UserAwards</title>
 </head>
 <body>
-    @message
     <div id="main" class="main">
         <div class="block">
             <div class="caption">
@@ -351,8 +279,8 @@
                 foreach (var user in users)
                 {
                     <div>
-                        <input type="text" value=@user.Name />
-                        <input type="date" value=@user.DateOfBirth.ToString("yyyy-MM-dd") />
+                        <input type="text" name="name[]" value=@user.Name />
+                        <input type="date" name="dateOfBirth[]" value=@user.DateOfBirth.ToString("yyyy-MM-dd") />
                     </div>
                 }
             }
