@@ -17,6 +17,12 @@ namespace Entities
             get
             {
                 var currentDateTime = DateTime.Now.Date;
+
+                if (currentDateTime.Year == DateOfBirth.Year)
+                {
+                    return 0;
+                }
+
                 var userAge = currentDateTime.AddYears(-DateOfBirth.Year).Year;
 
                 if (currentDateTime.Month < DateOfBirth.Month)

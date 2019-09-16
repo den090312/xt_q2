@@ -233,13 +233,13 @@
                         var users = new DependencyResolver()?.UserBll?.GetAll();
 
                         foreach (var user in users)
-                            {<option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>}
+                        {<option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>}
                     }
                 </select>
                 <select class="user_chosen_guid" style="display: none;">
                     @{
                         foreach (var user in users)
-                            {<option selected>@user.UserGuid.ToString()</option>}
+                        {<option selected>@user.UserGuid.ToString()</option>}
                     }
                 </select>
             </p>
@@ -255,13 +255,13 @@
                         var awards = new DependencyResolver()?.AwardBll?.GetAll();
 
                         foreach (var award in awards)
-                            {<option selected>@award.Title</option>}
+                        {<option selected>@award.Title</option>}
                     }
                 </select>
                 <select class="award_chosen_guid" style="display: none;">
                     @{
                         foreach (var award in awards)
-                            {<option selected>@award.AwardGuid.ToString()</option>}
+                        {<option selected>@award.AwardGuid.ToString()</option>}
                     }
                 </select>
             </p>
@@ -272,9 +272,15 @@
         <div class="listusers" style="display: none;">
             @{
                 users = new DependencyResolver()?.UserBll?.GetAll();
+                IEnumerable<Entities.Award> awardsByUser;
 
                 foreach (var user in users)
-                    {<p>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</p>}
+                {
+                    <p>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</p>
+                    awardsByUser = new DependencyResolver()?.UserAwardBll?.GetAwardsByUser(user);
+                    foreach (var awardByUser in awardsByUser)
+                        {<p>@("--- " + awardByUser.Title)</p>}    
+                }
             }
             <input type="button" class="cancel" value="Back" />
         </div>
