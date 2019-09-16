@@ -100,7 +100,10 @@
                         awardCreation(main);
                         break;
                     case "award_delete":
-                        goToMain(main);
+                        if (!confirm("Награда будет удалена у всех пользователей. Вы уверены?")) {
+                            document.getElementsByClassName("award_guid")[0].value = "";
+                            goToMain(main);
+                        }
                         break;
                     case "join_user_award":
                         goToMain(main);

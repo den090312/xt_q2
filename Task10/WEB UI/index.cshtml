@@ -118,7 +118,7 @@
     {
         awardGuid = Request.Form["awardGuid"];
 
-        if (awardGuid != null)
+        if (awardGuid != null & awardGuid != "")
         {
             var userAwardBll = new DependencyResolver()?.UserAwardBll;
             userAwardBll.AwardRemoved(Guid.Parse(awardGuid));
