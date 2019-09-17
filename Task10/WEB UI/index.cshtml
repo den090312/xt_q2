@@ -374,7 +374,6 @@
                     var root = Server.MapPath("~");
                     var guid = user.UserGuid.ToString();
                     var path = Path.Combine(root, guid);
-                    var altPath = Path.Combine(root, "alt");
 
                     var imgSrc = string.Empty;
                     var altImg = string.Empty;
@@ -386,15 +385,20 @@
                         imgSrc = String.Format("data:image/gif;base64,{0}", base64);
                     }
 
-                    var altBytes = File.ReadAllBytes(altPath);
-                    var altBase64 = Convert.ToBase64String(altBytes);
-                    altImg = String.Format("data:image/gif;base64,{0}", altBase64);
+                    var altPath = Path.Combine(root, "alt");
+
+                    if (File.Exists(altPath))
+                    {
+                        var altBytes = File.ReadAllBytes(altPath);
+                        var altBase64 = Convert.ToBase64String(altBytes);
+                        altImg = String.Format("data:image/gif;base64,{0}", altBase64);
+                    }
 
                     if (imgSrc == string.Empty)
                     {
                         imgSrc = altImg;
                     }
-                    
+
                     <img class="user_img" src="@imgSrc">
 
                     <p>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</p>
