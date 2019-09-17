@@ -12,6 +12,7 @@
     setJoinGuidUser();
     setJoinGuidAward();
     setImageGuidUser();
+    setImageGuidAward();
 
     function setSelectedUserGuid() {
         var user_chosen = document.getElementsByClassName("user_chosen")[0];
@@ -65,6 +66,17 @@
         user_chosen_image.onchange = function () {
             user_chosen_image_guid.selectedIndex = user_chosen_image.selectedIndex;
             user_image_guid.value = user_chosen_image_guid[user_chosen_image_guid.selectedIndex].value; 
+        }
+    }
+
+    function setImageGuidAward() {
+        var award_chosen_image = document.getElementsByClassName("award_chosen_image")[0];
+        var award_chosen_image_guid = document.getElementsByClassName("award_chosen_image_guid")[0];
+        var award_image_guid = document.getElementsByClassName("award_image_guid")[0];
+        award_image_guid.value = award_chosen_image_guid[award_chosen_image_guid.selectedIndex].value;
+        award_chosen_image.onchange = function () {
+            award_chosen_image_guid.selectedIndex = award_chosen_image.selectedIndex;
+            award_image_guid.value = award_chosen_image_guid[award_chosen_image_guid.selectedIndex].value;
         }
     }
 
@@ -122,6 +134,9 @@
                         break;
                     case "upload_user_image":
                         uploadUserImage(main, event);
+                        break;
+                    case "upload_award_image":
+                        uploadAwardImage(main, event);
                         break;
                 }
             }
@@ -182,6 +197,20 @@
             goToMain(main);
         }
 
+        function uploadAwardImage(main, e) {
+            var award_image_upload = document.getElementsByClassName("award_image_upload")[0];
+            var awardImage = award_image_upload.getElementsByClassName("awardImage")[0];
+            var alertbox = award_image_upload.getElementsByClassName("alertbox")[0];
+            alertbox.style.display = "none";
+            if (awardImage.value == "") {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "File is missing!";
+                e.preventDefault();
+                return;
+            }
+            goToMain(main);
+        }
+
         function goToMain(main) {
             operation.style.display = "none";
             main.style.display = "block";
@@ -224,6 +253,9 @@
                     case "user_upload_image":
                         DisplayUserImageUpload(main);
                         break;
+                    case "award_upload_image":
+                        DisplayAwardImageUpload(main);
+                        break;
                 }
             }
         };
@@ -241,6 +273,7 @@
             document.getElementsByClassName("user_edition")[0].style.display = "none";
             document.getElementsByClassName("award_edition")[0].style.display = "none";
             document.getElementsByClassName("user_image_upload")[0].style.display = "none";
+            document.getElementsByClassName("award_image_upload")[0].style.display = "none";
         }
 
         function DisplayAwardDel(main) {
@@ -256,6 +289,7 @@
             document.getElementsByClassName("user_edition")[0].style.display = "none";
             document.getElementsByClassName("award_edition")[0].style.display = "none";
             document.getElementsByClassName("user_image_upload")[0].style.display = "none";
+            document.getElementsByClassName("award_image_upload")[0].style.display = "none";
         }
 
         function DisplayListAwards(main) {
@@ -271,6 +305,7 @@
             document.getElementsByClassName("user_edition")[0].style.display = "none";
             document.getElementsByClassName("award_edition")[0].style.display = "none";
             document.getElementsByClassName("user_image_upload")[0].style.display = "none";
+            document.getElementsByClassName("award_image_upload")[0].style.display = "none";
         }
 
         function DisplayListUsers() {
@@ -286,6 +321,7 @@
             document.getElementsByClassName("user_edition")[0].style.display = "none";
             document.getElementsByClassName("award_edition")[0].style.display = "none";
             document.getElementsByClassName("user_image_upload")[0].style.display = "none";
+            document.getElementsByClassName("award_image_upload")[0].style.display = "none";
         }
 
         function DisplayUserCreation(main) {
@@ -301,6 +337,7 @@
             document.getElementsByClassName("user_edition")[0].style.display = "none";
             document.getElementsByClassName("award_edition")[0].style.display = "none";
             document.getElementsByClassName("user_image_upload")[0].style.display = "none";
+            document.getElementsByClassName("award_image_upload")[0].style.display = "none";
         }
 
         function DisplayAwardCreation(main) {
@@ -316,6 +353,7 @@
             document.getElementsByClassName("user_edition")[0].style.display = "none";
             document.getElementsByClassName("award_edition")[0].style.display = "none";
             document.getElementsByClassName("user_image_upload")[0].style.display = "none";
+            document.getElementsByClassName("award_image_upload")[0].style.display = "none";
         }
 
         function DisplayJoin(main) {
@@ -331,6 +369,7 @@
             document.getElementsByClassName("user_edition")[0].style.display = "none";
             document.getElementsByClassName("award_edition")[0].style.display = "none";
             document.getElementsByClassName("user_image_upload")[0].style.display = "none";
+            document.getElementsByClassName("award_image_upload")[0].style.display = "none";
         }
 
         function DisplayUserEdition(main) {
@@ -346,6 +385,7 @@
             document.getElementsByClassName("user_edition")[0].style.display = "block";
             document.getElementsByClassName("award_edition")[0].style.display = "none";
             document.getElementsByClassName("user_image_upload")[0].style.display = "none";
+            document.getElementsByClassName("award_image_upload")[0].style.display = "none";
         }
 
         function DisplayAwardEdition(main) {
@@ -361,6 +401,7 @@
             document.getElementsByClassName("user_edition")[0].style.display = "none";
             document.getElementsByClassName("award_edition")[0].style.display = "block";
             document.getElementsByClassName("user_image_upload")[0].style.display = "none";
+            document.getElementsByClassName("award_image_upload")[0].style.display = "none";
         }
 
         function DisplayUserImageUpload(main) {
@@ -376,6 +417,23 @@
             document.getElementsByClassName("user_edition")[0].style.display = "none";
             document.getElementsByClassName("award_edition")[0].style.display = "none";
             document.getElementsByClassName("user_image_upload")[0].style.display = "block";
+            document.getElementsByClassName("award_image_upload")[0].style.display = "none";
+        }
+
+        function DisplayAwardImageUpload(main) {
+            main.style.display = "none";
+            operations[0].style.display = "block";
+            document.getElementsByClassName("user_del")[0].style.display = "none";
+            document.getElementsByClassName("award_del")[0].style.display = "none";
+            document.getElementsByClassName("user_creation")[0].style.display = "none";
+            document.getElementsByClassName("award_creation")[0].style.display = "none";
+            document.getElementsByClassName("listusers")[0].style.display = "none";
+            document.getElementsByClassName("listawards")[0].style.display = "none";
+            document.getElementsByClassName("join")[0].style.display = "none";
+            document.getElementsByClassName("user_edition")[0].style.display = "none";
+            document.getElementsByClassName("award_edition")[0].style.display = "none";
+            document.getElementsByClassName("user_image_upload")[0].style.display = "none";
+            document.getElementsByClassName("award_image_upload")[0].style.display = "block";
         }
     }
 }

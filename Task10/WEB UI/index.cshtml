@@ -13,6 +13,8 @@
     string[] awardGuids;
     var userImages = HttpContext.Current.Request.Files;
     var userImageGuid = string.Empty;
+    var awardImageGuid = string.Empty;
+    var awardImages = HttpContext.Current.Request.Files;
 
     if (IsPost)
     {
@@ -23,14 +25,14 @@
         JoinAwardToUser();
         EditUsers();
         EditAwards();
-
-        SaveImageDemo();
+        SaveUserImage();
+        SaveAwardImage();
 
         //POST-reload page fix
         @Html.Raw("<script>document.location='https://localhost:44337/index.cshtml'</script>");
     }
 
-    void SaveImageDemo()
+    void SaveUserImage()
     {
         if (userImages == null)
         {
@@ -42,31 +44,76 @@
             return;
         }
 
-        var image = userImages[0];
+        var userImage = userImages[0];
 
-        if (image == null)
+        if (userImage == null)
         {
             return;
         }
 
-        var imageFileName = Path.GetFileName(image.FileName);
+        var userImageName = Path.GetFileName(userImage.FileName);
 
-        if (imageFileName == string.Empty)
+        if (userImageName == string.Empty)
         {
             return;
         }
 
         userImageGuid = Request.Form["userImageGuid"];
 
-        var imagePath = Server.MapPath(imageFileName);
-        image.SaveAs(imagePath);
+        if (userImageGuid != null)
+        {
+            var userImagePath = Server.MapPath(userImageName);
+            userImage.SaveAs(userImagePath);
 
-        var imageBytes = File.ReadAllBytes(imagePath);
-        File.Delete(imagePath);
+            var userImageBytes = File.ReadAllBytes(userImagePath);
+            File.Delete(userImagePath);
 
-        var root = Server.MapPath("~");
-        var finalPath = Path.Combine(root, userImageGuid);
-        File.WriteAllBytes(finalPath, imageBytes);
+            var root = Server.MapPath("~");
+            var finalPath = Path.Combine(root, userImageGuid);
+            File.WriteAllBytes(finalPath, userImageBytes);
+        }
+    }
+
+    void SaveAwardImage()
+    {
+        if (awardImages == null)
+        {
+            return;
+        }
+
+        if (awardImages.Count == 0)
+        {
+            return;
+        }
+
+        var awardImage = awardImages[0];
+
+        if (awardImage == null)
+        {
+            return;
+        }
+
+        var awardImageName = Path.GetFileName(awardImage.FileName);
+
+        if (awardImageName == string.Empty)
+        {
+            return;
+        }
+
+        awardImageGuid = Request.Form["awardImageGuid"];
+
+        if (awardImageGuid != null)
+        {
+            var awardImagePath = Server.MapPath(awardImageName);
+            awardImage.SaveAs(awardImagePath);
+
+            var awardImageBytes = File.ReadAllBytes(awardImagePath);
+            File.Delete(awardImagePath);
+
+            var root = Server.MapPath("~");
+            var finalPath = Path.Combine(root, awardImageGuid);
+            File.WriteAllBytes(finalPath, awardImageBytes);
+        }
     }
 
     void EditUsers()
@@ -281,7 +328,7 @@
                     <input type="button" class="award_edit" value="edit" />
                 </div>
                 <div class="button">
-                    <input type="button" class="award_image_upload" value="upload image" />
+                    <input type="button" class="award_upload_image" value="upload image" />
                 </div>
             </div>
         </div>
@@ -420,7 +467,7 @@
 
                         <div style="padding-left: 75px;">
                             <img class="award_img" src="@imgSrc">
-                            <p>@("--- " + awardByUser.Title)</p>
+                            <p>@(awardByUser.Title)</p>
                         </div>
                     }
                 }
@@ -561,6 +608,42 @@
             </p>
             <div style="padding-top: 20px;">
                 <input type="submit" class="upload_user_image" value="Ok" />
+                <input type="button" class="cancel" value="Cancel" />
+            </div>
+        </form>
+        <form enctype="multipart/form-data" method="post" action="" class="award_image_upload" style="display: none; padding-left: 25px;">
+            <h3>Upload image to award</h3>
+            <div>
+                <h4>Choose award:</h4>
+                <p>
+                    <select class="award_chosen_image">
+                        @{
+                            awards = new DependencyResolver()?.AwardBll?.GetAll();
+
+                            foreach (var award in awards)
+                            {
+                                <option selected>@(award.Title)</option>
+                            }
+                        }
+                    </select>
+                    <select class="award_chosen_image_guid" style="display: none;">
+                        @{
+                            foreach (var award in awards)
+                            {
+                                <option selected>@award.AwardGuid.ToString()</option>
+                            }
+                        }
+                    </select>
+                </p>
+                <input type="text" class="award_image_guid" style="display: none;" name="awardImageGuid" value=@awardImageGuid>
+            </div>
+            <h4>Choose image:</h4>
+            <p class="alertbox"></p>
+            <p>
+                <input type="file" class="awardImage" name="awardImage" accept="image/*" value=@awardImages>
+            </p>
+            <div style="padding-top: 20px;">
+                <input type="submit" class="upload_award_image" value="Ok" />
                 <input type="button" class="cancel" value="Cancel" />
             </div>
         </form>
