@@ -31,7 +31,23 @@
 
     void SaveImageDemo()
     {
+        if (images == null)
+        {
+            return;
+        }
+
+        if (images.Count == 0)
+        {
+            return;
+        }
+
         var image = images[0];
+
+        if (image == null)
+        {
+            return;
+        }
+
         var imageFileName = Path.GetFileName(image.FileName);
         var imagePath = Server.MapPath(imageFileName);
 
