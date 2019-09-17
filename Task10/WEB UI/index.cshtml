@@ -403,7 +403,25 @@
 
                     foreach (var awardByUser in awardsByUser)
                     {
-                        <p>@("--- " + awardByUser.Title)</p>
+                        path = Path.Combine(root, awardByUser.AwardGuid.ToString());
+
+                        imgSrc = string.Empty;
+
+                        if (File.Exists(path))
+                        {
+                            var base64 = Convert.ToBase64String(File.ReadAllBytes(path));
+                            imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                        }
+
+                        if (imgSrc == string.Empty)
+                        {
+                            imgSrc = altSrc;
+                        }
+
+                        <div style="padding-left: 75px;">
+                            <img class="award_img" src="@imgSrc">
+                            <p>@("--- " + awardByUser.Title)</p>
+                        </div>
                     }
                 }
             }
