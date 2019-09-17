@@ -11,7 +11,7 @@
     string[] userGuids;
     string[] titles;
     string[] awardGuids;
-    var images = HttpContext.Current.Request.Files;
+    var userImages = HttpContext.Current.Request.Files;
     var userImageGuid = string.Empty;
 
     if (IsPost)
@@ -32,17 +32,17 @@
 
     void SaveImageDemo()
     {
-        if (images == null)
+        if (userImages == null)
         {
             return;
         }
 
-        if (images.Count == 0)
+        if (userImages.Count == 0)
         {
             return;
         }
 
-        var image = images[0];
+        var image = userImages[0];
 
         if (image == null)
         {
@@ -56,14 +56,17 @@
             return;
         }
 
+        userImageGuid = Request.Form["userImageGuid"];
+
         var imagePath = Server.MapPath(imageFileName);
         image.SaveAs(imagePath);
 
         var imageBytes = File.ReadAllBytes(imagePath);
         File.Delete(imagePath);
 
-        var fileBytesName = Path.ChangeExtension(imagePath, null);
-        File.WriteAllBytes(fileBytesName, imageBytes);
+        var root = Server.MapPath("~");
+        var finalPath = Path.Combine(root, userImageGuid);
+        File.WriteAllBytes(finalPath, imageBytes);
     }
 
     void EditUsers()
@@ -486,7 +489,7 @@
             <div>
                 <h4>Choose user:</h4>
                 <p>
-                    <select class="user_chosen_join">
+                    <select class="user_chosen_image">
                         @{
                             users = new DependencyResolver()?.UserBll?.GetAll();
 
@@ -496,7 +499,7 @@
                             }
                         }
                     </select>
-                    <select class="user_chosen_join_guid" style="display: none;">
+                    <select class="user_chosen_image_guid" style="display: none;">
                         @{
                             foreach (var user in users)
                             {
@@ -505,12 +508,12 @@
                         }
                     </select>
                 </p>
-                <input type="text" class="user_guid_join" style="display: none;" name="userGuidJoin" value=@userImageGuid>
+                <input type="text" class="user_image_guid" name="userImageGuid" value=@userImageGuid>
             </div>
             <h4>Choose image:</h4>
             <p class="alertbox"></p>
             <p>
-                <input type="file" class="userImage" name="userImage" accept="image/*" value=@images>
+                <input type="file" class="userImage" name="userImage" accept="image/*" value=@userImages>
             </p>
             <div style="padding-top: 20px;">
                 <input type="submit" class="upload_user_image" value="Ok" />

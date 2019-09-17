@@ -11,6 +11,7 @@
     setSelectedAwardGuid();
     setJoinGuidUser();
     setJoinGuidAward();
+    setImageGuidUser();
 
     function setSelectedUserGuid() {
         var user_chosen = document.getElementsByClassName("user_chosen")[0];
@@ -53,6 +54,17 @@
         award_chosen_join.onchange = function () {
             award_chosen_join_guid.selectedIndex = award_chosen_join.selectedIndex;
             award_guid_join.value = award_chosen_join_guid[award_chosen_join_guid.selectedIndex].value;
+        }
+    }
+
+    function setImageGuidUser() {
+        var user_chosen_image = document.getElementsByClassName("user_chosen_image")[0];
+        var user_chosen_image_guid = document.getElementsByClassName("user_chosen_image_guid")[0]; 
+        var user_image_guid = document.getElementsByClassName("user_image_guid")[0];
+        user_image_guid.value = user_chosen_image_guid[user_chosen_image_guid.selectedIndex].value;
+        user_chosen_image.onchange = function () {
+            user_chosen_image_guid.selectedIndex = user_chosen_image.selectedIndex;
+            user_image_guid.value = user_chosen_image_guid[user_chosen_image_guid.selectedIndex].value; 
         }
     }
 
