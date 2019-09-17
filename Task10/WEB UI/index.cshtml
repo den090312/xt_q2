@@ -106,7 +106,7 @@
             }
         }
     }
-    
+
     void EditUsers()
     {
         var names = Request.Form.GetValues("userNames");
@@ -125,7 +125,7 @@
             }
         }
     }
-    
+
     void EditAwards()
     {
         var titles = Request.Form.GetValues("awardTitles");
@@ -176,21 +176,7 @@
 
     void SaveUserImage()
     {
-        if (userImages == null || userImages.Count == 0)
-        {
-            return;
-        }
-
-        var userImage = userImages[0];
-
-        if (userImage == null)
-        {
-            return;
-        }
-
-        var userImageName = Path.GetFileName(userImage.FileName);
-
-        if (userImageName == string.Empty)
+        if (!Images.ImageExists(userImages, out var userImageFile, out var userImageFileName))
         {
             return;
         }
@@ -199,27 +185,20 @@
 
         if (userImageGuid != null)
         {
-            SaveImage(userImage, userImageName, userImageGuid);
+            if (ImageSaved(userImageFile, userImageFileName, userImageGuid))
+            {
+                message = "User image saved";
+            }
+            else
+            {
+                message = "User image was NOT saved";
+            }
         }
     }
 
     void SaveAwardImage()
     {
-        if (awardImages == null || awardImages.Count == 0)
-        {
-            return;
-        }
-
-        var awardImage = awardImages[0];
-
-        if (awardImage == null)
-        {
-            return;
-        }
-
-        var awardImageName = Path.GetFileName(awardImage.FileName);
-
-        if (awardImageName == string.Empty)
+        if (!Images.ImageExists(awardImages, out var awardImageFile, out var awardImageFileName))
         {
             return;
         }
@@ -228,21 +207,37 @@
 
         if (awardImageGuid != null)
         {
-            SaveImage(awardImage, awardImageName, awardImageGuid);
+            if (ImageSaved(awardImageFile, awardImageFileName, awardImageGuid))
+            {
+                message = "Award image saved";
+            }
+            else
+            {
+                message = "Award image was NOT saved";
+            }
         }
     }
 
-    void SaveImage(HttpPostedFile image, string imageName, string guid)
+    bool ImageSaved(HttpPostedFile image, string imageName, string guid)
     {
-        var imagePath = Server.MapPath(imageName);
-        image.SaveAs(imagePath);
+        try
+        {
+            var imagePath = Server.MapPath(imageName);
+            image.SaveAs(imagePath);
 
-        var imageBytes = File.ReadAllBytes(imagePath);
-        File.Delete(imagePath);
+            var imageBytes = File.ReadAllBytes(imagePath);
+            File.Delete(imagePath);
 
-        var root = Server.MapPath("~");
-        var finalPath = Path.Combine(root, guid);
-        File.WriteAllBytes(finalPath, imageBytes);
+            var root = Server.MapPath("~");
+            var finalPath = Path.Combine(root, guid);
+            File.WriteAllBytes(finalPath, imageBytes);
+
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }
 
