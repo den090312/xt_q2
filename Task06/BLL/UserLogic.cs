@@ -8,13 +8,13 @@ namespace BLL
 {
     public class UserLogic : IUserLogic
     {
-        private readonly IUserDao userDao;
+        private readonly IUserDao _userDao;
 
         public UserLogic(IUserDao userDao)
         {
             NullCheck(userDao);
 
-            this.userDao = userDao;
+            this._userDao = userDao;
         }
 
         public User CreateUser(string name, DateTime dateBirth)
@@ -45,14 +45,14 @@ namespace BLL
         {
             NullCheck(user);
 
-            return userDao.UserAdded(user);
+            return _userDao.UserAdded(user);
         }
 
-        public bool UserRemoved(Guid userGuid) => userDao.UserRemoved(userGuid);
+        public bool UserRemoved(Guid userGuid) => _userDao.UserRemoved(userGuid);
 
         public IEnumerable<User> GetAll()
         {
-            var users = userDao?.GetAll();
+            var users = _userDao?.GetAll();
             NullCheck(users);
 
             return users;
@@ -60,13 +60,13 @@ namespace BLL
 
         public User GetUserByGuid(Guid userGuid)
         {
-            var user = userDao?.GetUserByGuid(userGuid);
+            var user = _userDao?.GetUserByGuid(userGuid);
             NullCheck(user);
 
             return user;
         }
 
-        public void PrintInfo() => userDao?.PrintInfo();
+        public void PrintInfo() => _userDao?.PrintInfo();
 
         private static void NullCheck<T>(T classObject) where T : class
         {
