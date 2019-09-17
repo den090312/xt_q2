@@ -176,12 +176,7 @@
 
     void SaveUserImage()
     {
-        if (userImages == null)
-        {
-            return;
-        }
-
-        if (userImages.Count == 0)
+        if (userImages == null || userImages.Count == 0)
         {
             return;
         }
@@ -210,12 +205,7 @@
 
     void SaveAwardImage()
     {
-        if (awardImages == null)
-        {
-            return;
-        }
-
-        if (awardImages.Count == 0)
+        if (awardImages == null || awardImages.Count == 0)
         {
             return;
         }
@@ -253,40 +243,6 @@
         var root = Server.MapPath("~");
         var finalPath = Path.Combine(root, guid);
         File.WriteAllBytes(finalPath, imageBytes);
-    }
-
-    void AddUser(string name, string date, string guid)
-    {
-        var user = new Entities.User(Guid.Parse(guid), name, DateTime.Parse(date));
-        DependencyResolver.UserLogic?.UserAdded(user);
-    }
-
-    void AddAward(string title, string guid)
-    {
-        var award = new Entities.Award(Guid.Parse(guid), title);
-        DependencyResolver.AwardLogic?.AwardAdded(award);
-    }
-
-    void DeleteAllUsers()
-    {
-        var userLogic = DependencyResolver.UserLogic;
-        var allUsers = userLogic?.GetAll();
-
-        foreach (var user in allUsers)
-        {
-            userLogic?.UserRemoved(user.UserGuid);
-        }
-    }
-
-    void DeleteAllAwards()
-    {
-        var awardBll = DependencyResolver.AwardLogic;
-        var allAwards = awardBll?.GetAll();
-
-        foreach (var award in allAwards)
-        {
-            awardBll?.AwardRemoved(award.AwardGuid);
-        }
     }
 }
 

@@ -177,6 +177,7 @@ namespace WEB_UI
 
             return true;
         }
+
         private static void NullCheck<T>(T classObject) where T : class
         {
             if (classObject == null)
