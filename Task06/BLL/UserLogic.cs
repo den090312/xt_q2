@@ -14,7 +14,7 @@ namespace BLL
         {
             NullCheck(userDao);
 
-            this._userDao = userDao;
+            _userDao = userDao;
         }
 
         public User CreateUser(string name, DateTime dateBirth)
