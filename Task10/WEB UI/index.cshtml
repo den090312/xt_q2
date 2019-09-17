@@ -372,16 +372,14 @@
                 foreach (var user in users)
                 {
                     var root = Server.MapPath("~");
-                    var guid = user.UserGuid.ToString();
-                    var path = Path.Combine(root, guid);
+                    var path = Path.Combine(root, user.UserGuid.ToString());
 
                     var imgSrc = string.Empty;
                     var altImg = string.Empty;
 
                     if (File.Exists(path))
                     {
-                        var bytes = File.ReadAllBytes(path);
-                        var base64 = Convert.ToBase64String(bytes);
+                        var base64 = Convert.ToBase64String(File.ReadAllBytes(path));
                         imgSrc = String.Format("data:image/gif;base64,{0}", base64);
                     }
 
@@ -389,8 +387,7 @@
 
                     if (File.Exists(altPath))
                     {
-                        var altBytes = File.ReadAllBytes(altPath);
-                        var altBase64 = Convert.ToBase64String(altBytes);
+                        var altBase64 = Convert.ToBase64String(File.ReadAllBytes(altPath));
                         altImg = String.Format("data:image/gif;base64,{0}", altBase64);
                     }
 
@@ -400,7 +397,6 @@
                     }
 
                     <img class="user_img" src="@imgSrc">
-
                     <p>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</p>
 
                     awardsByUser = new DependencyResolver()?.UserAwardBll?.GetAwardsByUser(user);
