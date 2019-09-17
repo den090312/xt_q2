@@ -467,6 +467,7 @@
 
                 foreach (var award in awards)
                 {
+                    <img class="award_img" src="@GetImgSrc(award.AwardGuid.ToString())">
                     <p>@award.Title</p>
                 }
             }
