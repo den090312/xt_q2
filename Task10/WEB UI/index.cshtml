@@ -371,6 +371,21 @@
 
                 foreach (var user in users)
                 {
+                    var root = Server.MapPath("~");
+                    var guid = user.UserGuid.ToString();
+                    var path = Path.Combine(root, guid);
+                    var altPath = Path.Combine(root, "alt.jpg"); 
+
+                    var imgSrc = string.Empty;
+
+                    if (File.Exists(path))
+                    {
+                        var bytes = File.ReadAllBytes(path);
+                        var base64 = Convert.ToBase64String(bytes);
+                        imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                    }
+
+                    <img class="user_img" src="@imgSrc" onerror="this.src = '@altPath';">
                     <p>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</p>
 
                     awardsByUser = new DependencyResolver()?.UserAwardBll?.GetAwardsByUser(user);
