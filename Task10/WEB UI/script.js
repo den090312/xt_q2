@@ -109,7 +109,7 @@
                         goToMain(main);
                         break;
                     case "upload_user_image":
-                        goToMain(main);
+                        uploadUserImage(main, event);
                         break;
                 }
             }
@@ -144,12 +144,26 @@
 
         function awardCreation(main, e) {
             var award_creation = document.getElementsByClassName("award_creation")[0];
-            var alertbox = user_creation.getElementsByClassName("alertbox")[0];
+            var alertbox = award_creation.getElementsByClassName("alertbox")[0];
             alertbox.style.display = "none";
             var inputtitle = award_creation.getElementsByClassName("title")[0];
             if (!inputtitle.value) {
                 alertbox.style.display = "block";
                 alertbox.innerHTML = "Title is missing!";
+                e.preventDefault();
+                return;
+            }
+            goToMain(main);
+        }
+
+        function uploadUserImage(main, e) {
+            var user_image_upload = document.getElementsByClassName("user_image_upload")[0];
+            var userImage = user_image_upload.getElementsByClassName("userImage")[0];
+            var alertbox = user_image_upload.getElementsByClassName("alertbox")[0];
+            alertbox.style.display = "none";
+            if (userImage.value == "") {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "File is missing!";
                 e.preventDefault();
                 return;
             }

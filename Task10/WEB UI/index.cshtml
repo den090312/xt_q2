@@ -12,6 +12,7 @@
     string[] titles;
     string[] awardGuids;
     var images = HttpContext.Current.Request.Files;
+    var userImageGuid = string.Empty;
 
     if (IsPost)
     {
@@ -481,7 +482,7 @@
             </p>
         </form>
         <form enctype="multipart/form-data" method="post" action="" class="user_image_upload" style="display: none; padding-left: 25px;">
-            <h3>Upload image</h3>
+            <h3>Upload image to user</h3>
             <div>
                 <h4>Choose user:</h4>
                 <p>
@@ -504,11 +505,12 @@
                         }
                     </select>
                 </p>
-                <input type="text" class="user_guid_join" style="display: none;" name="userGuidJoin" value=@userGuidJoin>
+                <input type="text" class="user_guid_join" style="display: none;" name="userGuidJoin" value=@userImageGuid>
             </div>
             <h4>Choose image:</h4>
+            <p class="alertbox"></p>
             <p>
-                <input type="file" name="fileImage" accept="image/*" value=@images>
+                <input type="file" class="userImage" name="userImage" accept="image/*" value=@images>
             </p>
             <div style="padding-top: 20px;">
                 <input type="submit" class="upload_user_image" value="Ok" />
