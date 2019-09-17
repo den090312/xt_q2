@@ -36,8 +36,10 @@ namespace BLL
 
         private bool Joined(User user, Award award)
         {
-            var singleAwardList = new List<Award>();
-            singleAwardList.Add(award);
+            var singleAwardList = new List<Award>
+            {
+                award
+            };
 
             var awardsByUser = _userAwardDao.GetAwardsByUser(user, singleAwardList);
             var counter = 0;

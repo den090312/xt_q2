@@ -20,6 +20,7 @@ namespace BLL
         public User CreateUser(string name, DateTime dateBirth)
         {
             NullCheck(name);
+            EmptyStringCheck(name);
             CheckDateOfBirth(dateBirth);
 
             return new User(name, dateBirth);
@@ -72,6 +73,14 @@ namespace BLL
             if (classObject is null)
             {
                 throw new ArgumentNullException($"{nameof(classObject)} is null!");
+            }
+        }
+
+        private static void EmptyStringCheck(string inputString)
+        {
+            if (inputString == string.Empty)
+            {
+                throw new Exception($"{nameof(inputString)} is empty!");
             }
         }
     }

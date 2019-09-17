@@ -9,6 +9,11 @@ namespace WEB_UI
         {
             NullCheck(userName);
 
+            if (userName == string.Empty)
+            {
+                return false;
+            }
+
             if (!DateTime.TryParse(dateOfBirth, out DateTime result))
             {
                 return false;
@@ -35,6 +40,11 @@ namespace WEB_UI
         public static bool AwardCreated(string awardTitle)
         {
             NullCheck(awardTitle);
+
+            if (awardTitle == string.Empty)
+            {
+                return false;
+            }
 
             var awardLogic = DependencyResolver.AwardLogic;
             var award = awardLogic?.CreateAward(awardTitle);
