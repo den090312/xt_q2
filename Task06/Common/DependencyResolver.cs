@@ -1,15 +1,33 @@
 ﻿using BLL;
 using InterfacesBLL;
+using InterfacesDAL;
 using DAL;
 
 namespace Common
 {
-    public class DependencyResolver
+    public static class DependencyResolver
     {
-        public readonly IUserLogic UserBll = new UserLogic(new UserDaoFile());
+        private static readonly IUserLogic _userLogic;
+        private static readonly IUserDao _userDao;
+        private static readonly IAwardLogic _awardLogic;
+        private static readonly IAwardDao _awardDao;
+        private static readonly IUserAwardLogic _userAwardLogic;
+        private static readonly IUserAwardDao _userAwardDao;
 
-        public readonly IAwardLogic AwardBll = new AwardLogic(new AwardDaoFile());
+        public static IUserLogic UserLogic => _userLogic;
 
-        public readonly IUserAwardLogic UserAwardBll = new UserAwardLogic(new UserAwardDaoFile(), new UserDaoFile(), new AwardDaoFile());
+        public static IAwardLogic AwardLogic => _awardLogic;
+
+        public static IUserAwardLogic UserAwardLogic => _userAwardLogic;
+
+        static DependencyResolver()
+        {
+            _userDao = new UserDaoFile();
+            _userLogic = new UserLogic(_userDao);
+            _awardDao = new AwardDaoFile();
+            _awardLogic = new AwardLogic(_awardDao);
+            _userAwardDao = new UserAwardDaoFile();
+            _userAwardLogic = new UserAwardLogic(_userAwardDao, _userDao, _awardDao);
+        }
     }
 }

@@ -35,7 +35,7 @@ namespace Pl
 
         private void PrintAwardsByUser(User user)
         {
-            var awards = new DependencyResolver()?.UserAwardBll?.GetAwardsByUser(user);
+            var awards = DependencyResolver.UserAwardLogic?.GetAwardsByUser(user);
             var awardNum = 1;
 
             foreach (var award in awards)
@@ -49,7 +49,7 @@ namespace Pl
 
         internal string GetAwardNameByGuid(Guid awardGuid)
         {
-            var awardName = new DependencyResolver()?.AwardBll?.GetAwardByGuid(awardGuid)?.Title;
+            var awardName = DependencyResolver.AwardLogic?.GetAwardByGuid(awardGuid)?.Title;
 
             if (awardName == string.Empty)
             {
@@ -61,7 +61,7 @@ namespace Pl
 
         internal string GetUserNameByGuid(Guid userGuid)
         {
-            var userName = new DependencyResolver()?.UserBll?.GetUserByGuid(userGuid)?.Name;
+            var userName = DependencyResolver.UserLogic?.GetUserByGuid(userGuid)?.Name;
 
             if (userName == string.Empty)
             {
@@ -82,7 +82,7 @@ namespace Pl
 
         private void PrintUsersToChoose(out int userNum, out Dictionary<int, Guid> userNumList)
         {
-            var users = new DependencyResolver()?.UserBll?.GetAll();
+            var users = DependencyResolver.UserLogic?.GetAll();
             userNum = 0;
             userNumList = new Dictionary<int, Guid>();
 
@@ -110,7 +110,7 @@ namespace Pl
 
         internal void PrintAwardsToChoose(out int awardNum, out Dictionary<int, Guid> awardNumList)
         {
-            var awards = new DependencyResolver()?.AwardBll?.GetAll();
+            var awards = DependencyResolver.AwardLogic?.GetAll();
             awardNum = 0;
             awardNumList = new Dictionary<int, Guid>();
 
@@ -145,16 +145,16 @@ namespace Pl
             var name = inputPl?.GetUserString("name");
             var dateBirth = inputPl.GetUserDate(dateFormat);
 
-            return new DependencyResolver()?.UserBll?.CreateUser(name, dateBirth);
+            return DependencyResolver.UserLogic?.CreateUser(name, dateBirth);
         }
 
-        internal void RemoveUser() => RunUserRemove(new DependencyResolver(), GetChosenUserGuid());
+        internal void RemoveUser() => RunUserRemove(GetChosenUserGuid());
 
-        private void RunUserRemove(DependencyResolver dr, Guid userGuid)
+        private void RunUserRemove(Guid userGuid)
         {
             Console.WriteLine();
 
-            if (dr.UserAwardBll.UserRemoved(userGuid))
+            if (DependencyResolver.UserAwardLogic.UserRemoved(userGuid))
             {
                 Console.WriteLine($"---user '{userGuid}' deleted---");
             }
@@ -164,13 +164,13 @@ namespace Pl
             }
         }
 
-        internal void RemoveAward() => RunAwardRemove(new DependencyResolver(), GetChosenAwardGuid());
+        internal void RemoveAward() => RunAwardRemove(GetChosenAwardGuid());
 
-        private void RunAwardRemove(DependencyResolver dr, Guid awardGuid)
+        private void RunAwardRemove(Guid awardGuid)
         {
             Console.WriteLine();
 
-            if (dr.UserAwardBll.AwardRemoved(awardGuid))
+            if (DependencyResolver.UserAwardLogic.AwardRemoved(awardGuid))
             {
                 Console.WriteLine($"---user '{awardGuid}' deleted---");
             }
@@ -180,10 +180,10 @@ namespace Pl
             }
         }
 
-        internal Award CreateAward() => new DependencyResolver()?.AwardBll?.CreateAward(new InputPl()?.GetUserString("title"));
+        internal Award CreateAward() => DependencyResolver.AwardLogic?.CreateAward(new InputPl()?.GetUserString("title"));
 
-        internal bool UserAdded(User user) => new DependencyResolver().UserBll.UserAdded(user);
+        internal bool UserAdded(User user) => DependencyResolver.UserLogic.UserAdded(user);
 
-        internal bool AwardAdded(Award award) => new DependencyResolver().AwardBll.AwardAdded(award);
+        internal bool AwardAdded(Award award) => DependencyResolver.AwardLogic.AwardAdded(award);
     }
 }

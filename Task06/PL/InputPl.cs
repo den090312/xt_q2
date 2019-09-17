@@ -100,11 +100,9 @@ namespace PL
 
         private void PrintInfo()
         {
-            var dr = new DependencyResolver();
-
-            dr.UserBll.PrintInfo();
-            dr.AwardBll.PrintInfo();
-            dr.UserAwardBll.PrintInfo();
+            DependencyResolver.UserLogic.PrintInfo();
+            DependencyResolver.AwardLogic.PrintInfo();
+            DependencyResolver.UserAwardLogic.PrintInfo();
         }
 
         private bool UserCreation()
@@ -145,7 +143,7 @@ namespace PL
             consoleSegment = ConsoleSegment.User;
             Console.Clear();
 
-            var users = new DependencyResolver()?.UserBll?.GetAll();
+            var users = DependencyResolver.UserLogic?.GetAll();
             new OutputPl()?.PrintUserAwards(users);
 
             Console.WriteLine();
@@ -170,7 +168,7 @@ namespace PL
             consoleSegment = ConsoleSegment.Award;
             Console.Clear();
 
-            var awards = new DependencyResolver()?.AwardBll?.GetAll();
+            var awards = DependencyResolver.AwardLogic?.GetAll();
             new OutputPl()?.PrintAwards(awards);
 
             Console.WriteLine();
@@ -208,7 +206,7 @@ namespace PL
             var userName = outputPl?.GetUserNameByGuid(userGuid);
             var awardName = outputPl?.GetAwardNameByGuid(awardGuid);
 
-            if (new DependencyResolver().UserAwardBll.JoinedAwardToUser(userGuid, awardGuid))
+            if (DependencyResolver.UserAwardLogic.JoinedAwardToUser(userGuid, awardGuid))
             {
                 Console.WriteLine($"---'{awardName}' joined to '{userName}'---");
             }
