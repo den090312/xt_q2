@@ -375,7 +375,7 @@
                     var path = Path.Combine(root, user.UserGuid.ToString());
 
                     var imgSrc = string.Empty;
-                    var altImg = string.Empty;
+                    var altSrc = string.Empty;
 
                     if (File.Exists(path))
                     {
@@ -387,13 +387,13 @@
 
                     if (File.Exists(altPath))
                     {
-                        var altBase64 = Convert.ToBase64String(File.ReadAllBytes(altPath));
-                        altImg = String.Format("data:image/gif;base64,{0}", altBase64);
+                        var alt64 = Convert.ToBase64String(File.ReadAllBytes(altPath));
+                        altSrc = String.Format("data:image/gif;base64,{0}", alt64);
                     }
 
                     if (imgSrc == string.Empty)
                     {
-                        imgSrc = altImg;
+                        imgSrc = altSrc;
                     }
 
                     <img class="user_img" src="@imgSrc">
