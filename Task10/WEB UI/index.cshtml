@@ -9,8 +9,8 @@
         UserAwardsDeleted();
         AwardCreation();
         AwardUsersDeleted();
-
         JoinAwardToUser();
+
         EditUsers();
         EditAwards();
         SaveUserImage();
@@ -91,15 +91,19 @@
     
     void JoinAwardToUser()
     {
-        var userGuidJoin = Request.Form["userGuidJoin"];
-        var awardGuidJoin = Request.Form["awardGuidJoin"];
+        var userGuid = Request.Form["userGuidJoin"];
+        var awardGuid = Request.Form["awardGuidJoin"];
 
-        if (userGuidJoin != null & awardGuidJoin != null)
+        if (userGuid != null & awardGuid != null)
         {
-            DependencyResolver.UserAwardLogic?.JoinedAwardToUser
-            (
-                Guid.Parse(userGuidJoin), Guid.Parse(awardGuidJoin)
-            );
+            if (WebPl.JoinedAwardToUser(userGuid, awardGuid))
+            {
+                message = "Award joined to user";
+            }
+            else
+            {
+                message = "Award was NOT joined to user";
+            }
         }
     }
 
