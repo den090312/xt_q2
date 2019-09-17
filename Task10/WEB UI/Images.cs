@@ -42,6 +42,11 @@ namespace WEB_UI
             NullCheck(root);
             NullCheck(guid);
 
+            if (root == string.Empty || guid == string.Empty)
+            {
+                return string.Empty;
+            }
+
             var imgSrc = string.Empty;
             var altSrc = string.Empty;
 
@@ -71,6 +76,15 @@ namespace WEB_UI
 
         public static bool ImageSaved(string imagePath, string root, HttpPostedFile image, string guid)
         {
+            NullCheck(imagePath);
+            NullCheck(root);
+            NullCheck(guid);
+
+            if (imagePath == string.Empty || root == string.Empty || guid == string.Empty)
+            {
+                return false;
+            }
+
             try
             {
                 image.SaveAs(imagePath);

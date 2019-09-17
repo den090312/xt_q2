@@ -9,7 +9,7 @@ namespace WEB_UI
         {
             NullCheck(userName);
 
-            if (userName == string.Empty)
+            if (userName == string.Empty || dateOfBirth == string.Empty)
             {
                 return false;
             }
@@ -28,6 +28,11 @@ namespace WEB_UI
         public static bool UserAwardsDeleted(string userGuid)
         {
             NullCheck(userGuid);
+
+            if (userGuid == string.Empty)
+            {
+                return false;
+            }
 
             if (!Guid.TryParse(userGuid, out Guid result))
             {
@@ -56,6 +61,11 @@ namespace WEB_UI
         {
             NullCheck(awardGuid);
 
+            if (awardGuid == string.Empty)
+            {
+                return false;
+            }
+
             if (!Guid.TryParse(awardGuid, out Guid result))
             {
                 return false;
@@ -69,6 +79,11 @@ namespace WEB_UI
             NullCheck(userGuid);
             NullCheck(awardGuid);
 
+            if (userGuid == string.Empty || awardGuid == string.Empty)
+            {
+                return false;
+            }
+
             if (!Guid.TryParse(userGuid, out Guid resultUserGuid) || !Guid.TryParse(awardGuid, out Guid resultAwardGuid))
             {
                 return false;
@@ -79,6 +94,10 @@ namespace WEB_UI
 
         public static bool UsersEdited(string[] guids, string[] names, string[] dates)
         {
+            NullCheck(guids);
+            NullCheck(names);
+            NullCheck(dates);
+
             if (!AllUsersDeleted())
             {
                 return false;
@@ -103,6 +122,9 @@ namespace WEB_UI
 
         public static bool AwardsEdited(string[] guids, string[] titles)
         {
+            NullCheck(guids);
+            NullCheck(titles);
+
             if (!AllAwardsDeleted())
             {
                 return false;
@@ -127,8 +149,8 @@ namespace WEB_UI
 
         private static bool UserAdded(string guid, string name, string date)
         {
-            NullCheck(name);
             NullCheck(guid);
+            NullCheck(name);
             NullCheck(date);
 
             if (name == string.Empty || !Guid.TryParse(guid, out Guid resultGuid) || !DateTime.TryParse(date, out DateTime resultDate))
@@ -143,8 +165,8 @@ namespace WEB_UI
 
         private static bool AwardAdded(string guid, string title)
         {
-            NullCheck(title);
             NullCheck(guid);
+            NullCheck(title);
 
             if (title == string.Empty || !Guid.TryParse(guid, out Guid resultGuid))
             {
