@@ -49,8 +49,13 @@
         }
 
         var imageFileName = Path.GetFileName(image.FileName);
-        var imagePath = Server.MapPath(imageFileName);
 
+        if (imageFileName == string.Empty)
+        {
+            return;
+        }
+
+        var imagePath = Server.MapPath(imageFileName);
         image.SaveAs(imagePath);
 
         var imageBytes = File.ReadAllBytes(imagePath);
