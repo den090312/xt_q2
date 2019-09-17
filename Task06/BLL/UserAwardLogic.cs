@@ -58,7 +58,7 @@ namespace BLL
             return userAwardDao?.GetAwardsByUser(user, awards);
         }
 
-        public bool UserRemoved(Guid userGuid)
+        public bool UserAwardsRemoved(Guid userGuid)
         {
             if (!userDao.UserRemoved(userGuid))
             {
@@ -71,7 +71,7 @@ namespace BLL
             var awards = awardDao?.GetAll();
             NullCheck(awards);
 
-            return userAwardDao.UserRemoved(userGuid, users, awards);
+            return userAwardDao.UserAwardsRemoved(userGuid, users, awards);
         }
 
         public bool AwardRemoved(Guid awardGuid)

@@ -132,7 +132,7 @@ namespace DAL
             return string.Empty;
         }
 
-        public bool UserRemoved(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
+        public bool UserAwardsRemoved(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
         {
             if (!File.Exists(FilePath))
             {

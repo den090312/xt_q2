@@ -1,6 +1,5 @@
 ﻿@{
-    var userName = string.Empty;
-    var dateOfBirth = string.Empty;
+    var message = string.Empty;
     var userGuid = string.Empty;
     var awardGuid = string.Empty;
     var awardTitle = string.Empty;
@@ -19,7 +18,8 @@
     if (IsPost)
     {
         UserCreation();
-        DeleteUsersWithAwards();
+        
+        UserAwardsDeleted();
         AwardCreation();
         DeleteAwardsWithUsers();
         JoinAwardToUser();
@@ -30,6 +30,41 @@
 
         //POST-reload page fix
         @Html.Raw("<script>document.location='https://localhost:44337/index.cshtml'</script>");
+    }
+
+    void UserCreation()
+    {
+        var userName = Request.Form["userName"];
+        var dateOfBirth = Request.Form["dateOfBirth"];
+
+        if (userName != null & dateOfBirth != null)
+        {
+            if (WebPl.UserCreated(userName, dateOfBirth))
+            {
+                message = "User created";
+            }
+            else
+            {
+                message = "User NOT created";
+            }
+        }
+    }
+
+    void UserAwardsDeleted()
+    {
+        userGuid = Request.Form["userGuid"];
+
+        if (userGuid != null)
+        {
+            if (WebPl.UserAwardsDeleted(userGuid))
+            {
+                message = "User with awards deleted";
+            }
+            else
+            {
+                message = "User with awards NOT deleted";
+            }
+        }
     }
 
     string GetImgSrc(string guid)
@@ -224,27 +259,6 @@
         }
     }
 
-    void UserCreation()
-    {
-        userName = Request.Form["userName"];
-        dateOfBirth = Request.Form["dateOfBirth"];
-
-        if (userName != null & dateOfBirth != null)
-        {
-            CreateUser(userName, dateOfBirth);
-        }
-    }
-
-    void CreateUser(string name, string date)
-    {
-        if (name != string.Empty & date != string.Empty)
-        {
-            var userLogic = DependencyResolver.UserLogic;
-            var user = userLogic?.CreateUser(name, DateTime.Parse(date));
-            userLogic.UserAdded(user);
-        }
-    }
-
     void AwardCreation()
     {
         awardTitle = Request.Form["awardTitle"];
@@ -262,16 +276,6 @@
             var awardLogic = DependencyResolver.AwardLogic;
             var award = awardLogic?.CreateAward(awardTitle);
             awardLogic.AwardAdded(award);
-        }
-    }
-
-    void DeleteUsersWithAwards()
-    {
-        userGuid = Request.Form["userGuid"];
-
-        if (userGuid != null)
-        {
-            DependencyResolver.UserAwardLogic?.UserRemoved(Guid.Parse(userGuid));
         }
     }
 
@@ -302,6 +306,7 @@
 
 @using Common;
 @using System;
+@using WEB_UI;
 
 <!DOCTYPE html>
 
@@ -314,6 +319,7 @@
     <title>UserAwards</title>
 </head>
 <body>
+    <b>@message</b>
     <div id="main" class="main">
         <div class="block">
             <div class="caption">
@@ -374,8 +380,8 @@
         <form method="post" action="" class="user_creation" style="display: none">
             <h4>User creation</h4>
             <p class="alertbox"></p>
-            <p>Name: <input type="text" id="userName" class="name" name="userName" value=@userName></p>
-            <p>Date of birth: <input type="date" id="dateOfBirth" class="dateOfBirth" name="dateOfBirth" value=@dateOfBirth></p>
+            <p>Name: <input type="text" id="userName" class="name" name="userName"></p>
+            <p>Date of birth: <input type="date" id="dateOfBirth" class="dateOfBirth" name="dateOfBirth"></p>
             <input type="submit" class="user_create" value="Create" />
             <input type="button" class="cancel" value="Cancel" />
         </form>

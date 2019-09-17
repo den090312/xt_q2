@@ -154,7 +154,7 @@ namespace Pl
         {
             Console.WriteLine();
 
-            if (DependencyResolver.UserAwardLogic.UserRemoved(userGuid))
+            if (DependencyResolver.UserAwardLogic.UserAwardsRemoved(userGuid))
             {
                 Console.WriteLine($"---user '{userGuid}' deleted---");
             }

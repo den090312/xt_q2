@@ -8,7 +8,7 @@ namespace InterfacesBLL
     {
         bool JoinedAwardToUser(Guid userGuid, Guid awardGuid);
 
-        bool UserRemoved(Guid userGuid);
+        bool UserAwardsRemoved(Guid userGuid);
 
         bool AwardRemoved(Guid awardGuid);
 
