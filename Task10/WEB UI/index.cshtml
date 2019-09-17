@@ -26,7 +26,7 @@
 
         if (userName != null & dateOfBirth != null)
         {
-            if (CrudLogic.UserCreated(userName, dateOfBirth))
+            if (Crud.UserCreated(userName, dateOfBirth))
             {
                 message = "User created";
             }
@@ -43,7 +43,7 @@
 
         if (userGuid != null)
         {
-            if (CrudLogic.UserAwardsDeleted(userGuid))
+            if (Crud.UserAwardsDeleted(userGuid))
             {
                 message = "User with awards deleted";
             }
@@ -60,7 +60,7 @@
 
         if (awardTitle != null)
         {
-            if (CrudLogic.AwardCreated(awardTitle))
+            if (Crud.AwardCreated(awardTitle))
             {
                 message = "Award created";
             }
@@ -77,7 +77,7 @@
 
         if (awardGuid != null & awardGuid != "")
         {
-            if (CrudLogic.AwardUsersDeleted(awardGuid))
+            if (Crud.AwardUsersDeleted(awardGuid))
             {
                 message = "Award with users deleted";
             }
@@ -95,7 +95,7 @@
 
         if (userGuid != null & awardGuid != null)
         {
-            if (CrudLogic.JoinedAwardToUser(userGuid, awardGuid))
+            if (Crud.JoinedAwardToUser(userGuid, awardGuid))
             {
                 message = "Award joined to user";
             }
@@ -114,7 +114,7 @@
 
         if (names != null & dates != null & guids != null)
         {
-            if (CrudLogic.UsersEdited(guids, names, dates))
+            if (Crud.UsersEdited(guids, names, dates))
             {
                 message = "Users edited";
             }
@@ -132,7 +132,7 @@
 
         if (titles != null & guids != null)
         {
-            if (CrudLogic.AwardsEdited(guids, titles))
+            if (Crud.AwardsEdited(guids, titles))
             {
                 message = "Awards edited";
             }
@@ -145,7 +145,7 @@
 
     void SaveUserImage()
     {
-        if (!ImageLogic.ImageExists(userImages, out var userImageFile, out var userImageFileName))
+        if (!Images.ImageExists(userImages, out var userImageFile, out var userImageFileName))
         {
             return;
         }
@@ -157,7 +157,7 @@
             var userImagePath = Server.MapPath(userImageFileName);
             var root = Server.MapPath("~");
 
-            if (ImageLogic.ImageSaved(userImagePath, root, userImageFile, userImageGuid))
+            if (Images.ImageSaved(userImagePath, root, userImageFile, userImageGuid))
             {
                 message = "User image saved";
             }
@@ -170,7 +170,7 @@
 
     void SaveAwardImage()
     {
-        if (!ImageLogic.ImageExists(awardImages, out var awardImageFile, out var awardImageFileName))
+        if (!Images.ImageExists(awardImages, out var awardImageFile, out var awardImageFileName))
         {
             return;
         }
@@ -182,7 +182,7 @@
             var awardImagePath = Server.MapPath(awardImageFileName);
             var root = Server.MapPath("~");
 
-            if (ImageLogic.ImageSaved(awardImagePath, root, awardImageFile, awardImageGuid))
+            if (Images.ImageSaved(awardImagePath, root, awardImageFile, awardImageGuid))
             {
                 message = "Award image saved";
             }
@@ -340,7 +340,7 @@
 
                 foreach (var user in users)
                 {
-                    <img class="user_img" src="@ImageLogic.GetImgSrc(Server.MapPath("~"), user.UserGuid.ToString())">
+                    <img class="user_img" src="@Images.GetImgSrc(Server.MapPath("~"), user.UserGuid.ToString())">
                     <p>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</p>
 
                     awardsByUser = DependencyResolver.UserAwardLogic?.GetAwardsByUser(user);
@@ -348,7 +348,7 @@
                     foreach (var awardByUser in awardsByUser)
                     {
                         <div style="padding-left: 75px;">
-                            <img class="award_img" src="@ImageLogic.GetImgSrc(Server.MapPath("~"), awardByUser.AwardGuid.ToString())">
+                            <img class="award_img" src="@Images.GetImgSrc(Server.MapPath("~"), awardByUser.AwardGuid.ToString())">
                             <p>@(awardByUser.Title)</p>
                         </div>
                     }
@@ -362,7 +362,7 @@
 
                 foreach (var award in awards)
                 {
-                    <img class="award_img" src="@ImageLogic.GetImgSrc(Server.MapPath("~"), award.AwardGuid.ToString())">
+                    <img class="award_img" src="@Images.GetImgSrc(Server.MapPath("~"), award.AwardGuid.ToString())">
                     <p>@award.Title</p>
                 }
             }

@@ -4,7 +4,7 @@ using System.Web;
 
 namespace WEB_UI
 {
-    public static class ImageLogic
+    public static class Images
     {
         private static readonly string altImageName = "alt";
 
