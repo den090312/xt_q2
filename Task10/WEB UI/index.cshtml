@@ -1,17 +1,6 @@
 ﻿@{
     var message = string.Empty;
-    var userGuid = string.Empty;
-    var awardGuid = string.Empty;
-    var userGuidJoin = string.Empty;
-    var awardGuidJoin = string.Empty;
-    string[] names;
-    string[] dates;
-    string[] userGuids;
-    string[] titles;
-    string[] awardGuids;
     var userImages = HttpContext.Current.Request.Files;
-    var userImageGuid = string.Empty;
-    var awardImageGuid = string.Empty;
     var awardImages = HttpContext.Current.Request.Files;
 
     if (IsPost)
@@ -19,8 +8,8 @@
         UserCreation();   
         UserAwardsDeleted();
         AwardCreation();
+        AwardUsersDeleted();
 
-        DeleteAwardsWithUsers();
         JoinAwardToUser();
         EditUsers();
         EditAwards();
@@ -51,7 +40,7 @@
 
     void UserAwardsDeleted()
     {
-        userGuid = Request.Form["userGuid"];
+        var userGuid = Request.Form["userGuid"];
 
         if (userGuid != null)
         {
@@ -65,7 +54,6 @@
             }
         }
     }
-
 
     void AwardCreation()
     {
@@ -81,6 +69,37 @@
             {
                 message = "Award NOT created";
             }
+        }
+    }
+
+    void AwardUsersDeleted()
+    {
+        var awardGuid = Request.Form["awardGuid"];
+
+        if (awardGuid != null & awardGuid != "")
+        {
+            if (WebPl.AwardUsersDeleted(awardGuid))
+            {
+                message = "Award with users deleted";
+            }
+            else
+            {
+                message = "Award with users NOT deleted";
+            }
+        }
+    }
+    
+    void JoinAwardToUser()
+    {
+        var userGuidJoin = Request.Form["userGuidJoin"];
+        var awardGuidJoin = Request.Form["awardGuidJoin"];
+
+        if (userGuidJoin != null & awardGuidJoin != null)
+        {
+            DependencyResolver.UserAwardLogic?.JoinedAwardToUser
+            (
+                Guid.Parse(userGuidJoin), Guid.Parse(awardGuidJoin)
+            );
         }
     }
 
@@ -140,7 +159,7 @@
             return;
         }
 
-        userImageGuid = Request.Form["userImageGuid"];
+        var userImageGuid = Request.Form["userImageGuid"];
 
         if (userImageGuid != null)
         {
@@ -174,7 +193,7 @@
             return;
         }
 
-        awardImageGuid = Request.Form["awardImageGuid"];
+        var awardImageGuid = Request.Form["awardImageGuid"];
 
         if (awardImageGuid != null)
         {
@@ -197,9 +216,9 @@
 
     void EditUsers()
     {
-        names = Request.Form.GetValues("userNames");
-        dates = Request.Form.GetValues("userDates");
-        userGuids = Request.Form.GetValues("userGuids");
+        var names = Request.Form.GetValues("userNames");
+        var dates = Request.Form.GetValues("userDates");
+        var userGuids = Request.Form.GetValues("userGuids");
 
         if (names != null & dates != null & userGuids != null)
         {
@@ -221,8 +240,8 @@
 
     void EditAwards()
     {
-        titles = Request.Form.GetValues("awardTitles");
-        awardGuids = Request.Form.GetValues("awardGuids");
+        var titles = Request.Form.GetValues("awardTitles");
+        var awardGuids = Request.Form.GetValues("awardGuids");
 
         if (titles != null & awardGuids != null)
         {
@@ -273,30 +292,6 @@
         foreach (var award in allAwards)
         {
             awardBll?.AwardRemoved(award.AwardGuid);
-        }
-    }
-
-    void DeleteAwardsWithUsers()
-    {
-        awardGuid = Request.Form["awardGuid"];
-
-        if (awardGuid != null & awardGuid != "")
-        {
-            DependencyResolver.UserAwardLogic?.AwardRemoved(Guid.Parse(awardGuid));
-        }
-    }
-
-    void JoinAwardToUser()
-    {
-        userGuidJoin = Request.Form["userGuidJoin"];
-        awardGuidJoin = Request.Form["awardGuidJoin"];
-
-        if (userGuidJoin != null & awardGuidJoin != null)
-        {
-            DependencyResolver.UserAwardLogic?.JoinedAwardToUser
-            (
-                Guid.Parse(userGuidJoin), Guid.Parse(awardGuidJoin)
-            );
         }
     }
 }
@@ -411,7 +406,7 @@
                     }
                 </select>
             </p>
-            <input type="text" class="user_guid" style="display: none;" name="userGuid" value=@userGuid>
+            <input type="text" class="user_guid" style="display: none;" name="userGuid">
             <input type="submit" class="user_delete" value="Delete" />
             <input type="button" class="cancel" value="Cancel" />
         </form>
@@ -437,7 +432,7 @@
                     }
                 </select>
             </p>
-            <input type="text" class="award_guid" style="display: none;" name="awardGuid" value=@awardGuid>
+            <input type="text" class="award_guid" style="display: none;" name="awardGuid">
             <input type="submit" class="award_delete" value="Delete" />
             <input type="button" class="cancel" value="Cancel" />
         </form>
@@ -500,7 +495,7 @@
                         }
                     </select>
                 </p>
-                <input type="text" class="user_guid_join" style="display: none;" name="userGuidJoin" value=@userGuidJoin>
+                <input type="text" class="user_guid_join" style="display: none;" name="userGuidJoin">
             </div>
             <div>
                 <h4>Choose award:</h4>
@@ -524,7 +519,7 @@
                         }
                     </select>
                 </p>
-                <input type="text" class="award_guid_join" style="display: none;" name="awardGuidJoin" value=@awardGuidJoin>
+                <input type="text" class="award_guid_join" style="display: none;" name="awardGuidJoin">
             </div>
             <div>
                 <input type="submit" class="join_user_award" value="Join" />
@@ -590,7 +585,7 @@
                         }
                     </select>
                 </p>
-                <input type="text" class="user_image_guid" style="display: none;" name="userImageGuid" value=@userImageGuid>
+                <input type="text" class="user_image_guid" style="display: none;" name="userImageGuid">
             </div>
             <h4>Choose image:</h4>
             <p class="alertbox"></p>
@@ -626,7 +621,7 @@
                         }
                     </select>
                 </p>
-                <input type="text" class="award_image_guid" style="display: none;" name="awardImageGuid" value=@awardImageGuid>
+                <input type="text" class="award_image_guid" style="display: none;" name="awardImageGuid">
             </div>
             <h4>Choose image:</h4>
             <p class="alertbox"></p>

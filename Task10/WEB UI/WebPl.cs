@@ -35,5 +35,15 @@ namespace WEB_UI
 
             return awardLogic.AwardAdded(award);
         }
+
+        public static bool AwardUsersDeleted(string awardGuid)
+        {
+            if (!Guid.TryParse(awardGuid, out Guid result))
+            {
+                return false;
+            }
+
+            return DependencyResolver.UserAwardLogic.AwardUsersRemoved(result);
+        }
     }
 }
