@@ -12,7 +12,6 @@
         JoinAwardToUser();
         EditUsers();
         EditAwards();
-
         SaveUserImage();
         SaveAwardImage();
 
@@ -27,7 +26,7 @@
 
         if (userName != null & dateOfBirth != null)
         {
-            if (Crud.UserCreated(userName, dateOfBirth))
+            if (CrudLogic.UserCreated(userName, dateOfBirth))
             {
                 message = "User created";
             }
@@ -44,7 +43,7 @@
 
         if (userGuid != null)
         {
-            if (Crud.UserAwardsDeleted(userGuid))
+            if (CrudLogic.UserAwardsDeleted(userGuid))
             {
                 message = "User with awards deleted";
             }
@@ -61,7 +60,7 @@
 
         if (awardTitle != null)
         {
-            if (Crud.AwardCreated(awardTitle))
+            if (CrudLogic.AwardCreated(awardTitle))
             {
                 message = "Award created";
             }
@@ -78,7 +77,7 @@
 
         if (awardGuid != null & awardGuid != "")
         {
-            if (Crud.AwardUsersDeleted(awardGuid))
+            if (CrudLogic.AwardUsersDeleted(awardGuid))
             {
                 message = "Award with users deleted";
             }
@@ -96,7 +95,7 @@
 
         if (userGuid != null & awardGuid != null)
         {
-            if (Crud.JoinedAwardToUser(userGuid, awardGuid))
+            if (CrudLogic.JoinedAwardToUser(userGuid, awardGuid))
             {
                 message = "Award joined to user";
             }
@@ -115,7 +114,7 @@
 
         if (names != null & dates != null & guids != null)
         {
-            if (Crud.UsersEdited(guids, names, dates))
+            if (CrudLogic.UsersEdited(guids, names, dates))
             {
                 message = "Users edited";
             }
@@ -133,7 +132,7 @@
 
         if (titles != null & guids != null)
         {
-            if (Crud.AwardsEdited(guids, titles))
+            if (CrudLogic.AwardsEdited(guids, titles))
             {
                 message = "Awards edited";
             }
@@ -144,39 +143,9 @@
         }
     }
 
-    string GetImgSrc(string guid)
-    {
-        var root = Server.MapPath("~");
-        var path = Path.Combine(root, guid);
-
-        var imgSrc = string.Empty;
-        var altSrc = string.Empty;
-
-        if (File.Exists(path))
-        {
-            var base64 = Convert.ToBase64String(File.ReadAllBytes(path));
-            imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-        }
-
-        var altPath = Path.Combine(root, "alt");
-
-        if (File.Exists(altPath))
-        {
-            var alt64 = Convert.ToBase64String(File.ReadAllBytes(altPath));
-            altSrc = String.Format("data:image/gif;base64,{0}", alt64);
-        }
-
-        if (imgSrc == string.Empty)
-        {
-            imgSrc = altSrc;
-        }
-
-        return imgSrc;
-    }
-
     void SaveUserImage()
     {
-        if (!Images.ImageExists(userImages, out var userImageFile, out var userImageFileName))
+        if (!ImageLogic.ImageExists(userImages, out var userImageFile, out var userImageFileName))
         {
             return;
         }
@@ -185,7 +154,10 @@
 
         if (userImageGuid != null)
         {
-            if (ImageSaved(userImageFile, userImageFileName, userImageGuid))
+            var userImagePath = Server.MapPath(userImageFileName);
+            var root = Server.MapPath("~");
+
+            if (ImageLogic.ImageSaved(userImagePath, root, userImageFile, userImageGuid))
             {
                 message = "User image saved";
             }
@@ -198,7 +170,7 @@
 
     void SaveAwardImage()
     {
-        if (!Images.ImageExists(awardImages, out var awardImageFile, out var awardImageFileName))
+        if (!ImageLogic.ImageExists(awardImages, out var awardImageFile, out var awardImageFileName))
         {
             return;
         }
@@ -207,7 +179,10 @@
 
         if (awardImageGuid != null)
         {
-            if (ImageSaved(awardImageFile, awardImageFileName, awardImageGuid))
+            var awardImagePath = Server.MapPath(awardImageFileName);
+            var root = Server.MapPath("~");
+
+            if (ImageLogic.ImageSaved(awardImagePath, root, awardImageFile, awardImageGuid))
             {
                 message = "Award image saved";
             }
@@ -217,32 +192,9 @@
             }
         }
     }
-
-    bool ImageSaved(HttpPostedFile image, string imageName, string guid)
-    {
-        try
-        {
-            var imagePath = Server.MapPath(imageName);
-            image.SaveAs(imagePath);
-
-            var imageBytes = File.ReadAllBytes(imagePath);
-            File.Delete(imagePath);
-
-            var root = Server.MapPath("~");
-            var finalPath = Path.Combine(root, guid);
-            File.WriteAllBytes(finalPath, imageBytes);
-
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
 }
 
 @using Common;
-@using System;
 @using WEB_UI;
 
 <!DOCTYPE html>
@@ -388,7 +340,7 @@
 
                 foreach (var user in users)
                 {
-                    <img class="user_img" src="@GetImgSrc(user.UserGuid.ToString())">
+                    <img class="user_img" src="@ImageLogic.GetImgSrc(Server.MapPath("~"), user.UserGuid.ToString())">
                     <p>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</p>
 
                     awardsByUser = DependencyResolver.UserAwardLogic?.GetAwardsByUser(user);
@@ -396,7 +348,7 @@
                     foreach (var awardByUser in awardsByUser)
                     {
                         <div style="padding-left: 75px;">
-                            <img class="award_img" src="@GetImgSrc(awardByUser.AwardGuid.ToString())">
+                            <img class="award_img" src="@ImageLogic.GetImgSrc(Server.MapPath("~"), awardByUser.AwardGuid.ToString())">
                             <p>@(awardByUser.Title)</p>
                         </div>
                     }
@@ -410,7 +362,7 @@
 
                 foreach (var award in awards)
                 {
-                    <img class="award_img" src="@GetImgSrc(award.AwardGuid.ToString())">
+                    <img class="award_img" src="@ImageLogic.GetImgSrc(Server.MapPath("~"), award.AwardGuid.ToString())">
                     <p>@award.Title</p>
                 }
             }

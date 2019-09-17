@@ -3,7 +3,7 @@ using System;
 
 namespace WEB_UI
 {
-    public static class Crud
+    public static class CrudLogic
     {
         public static bool UserCreated(string userName, string dateOfBirth)
         {
