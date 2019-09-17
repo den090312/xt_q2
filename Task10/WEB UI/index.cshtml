@@ -193,29 +193,29 @@
     void AddUser(string name, string date, string guid)
     {
         var user = new Entities.User(Guid.Parse(guid), name, DateTime.Parse(date));
-        new DependencyResolver()?.UserBll?.UserAdded(user);
+        DependencyResolver.UserLogic?.UserAdded(user);
     }
 
     void AddAward(string title, string guid)
     {
         var award = new Entities.Award(Guid.Parse(guid), title);
-        new DependencyResolver()?.AwardBll?.AwardAdded(award);
+        DependencyResolver.AwardLogic?.AwardAdded(award);
     }
 
     void DeleteAllUsers()
     {
-        var userBll = new DependencyResolver()?.UserBll;
-        var allUsers = userBll?.GetAll();
+        var userLogic = DependencyResolver.UserLogic;
+        var allUsers = userLogic?.GetAll();
 
         foreach (var user in allUsers)
         {
-            userBll?.UserRemoved(user.UserGuid);
+            userLogic?.UserRemoved(user.UserGuid);
         }
     }
 
     void DeleteAllAwards()
     {
-        var awardBll = new DependencyResolver()?.AwardBll;
+        var awardBll = DependencyResolver.AwardLogic;
         var allAwards = awardBll?.GetAll();
 
         foreach (var award in allAwards)
@@ -239,9 +239,9 @@
     {
         if (name != string.Empty & date != string.Empty)
         {
-            var userBll = new DependencyResolver()?.UserBll;
-            var user = userBll?.CreateUser(name, DateTime.Parse(date));
-            userBll.UserAdded(user);
+            var userLogic = DependencyResolver.UserLogic;
+            var user = userLogic?.CreateUser(name, DateTime.Parse(date));
+            userLogic.UserAdded(user);
         }
     }
 
@@ -259,9 +259,9 @@
     {
         if (awardTitle != string.Empty)
         {
-            var awardBll = new DependencyResolver()?.AwardBll;
-            var award = awardBll?.CreateAward(awardTitle);
-            awardBll.AwardAdded(award);
+            var awardLogic = DependencyResolver.AwardLogic;
+            var award = awardLogic?.CreateAward(awardTitle);
+            awardLogic.AwardAdded(award);
         }
     }
 
@@ -271,7 +271,7 @@
 
         if (userGuid != null)
         {
-            new DependencyResolver()?.UserAwardBll?.UserRemoved(Guid.Parse(userGuid));
+            DependencyResolver.UserAwardLogic?.UserRemoved(Guid.Parse(userGuid));
         }
     }
 
@@ -281,7 +281,7 @@
 
         if (awardGuid != null & awardGuid != "")
         {
-            new DependencyResolver()?.UserAwardBll?.AwardRemoved(Guid.Parse(awardGuid));
+            DependencyResolver.UserAwardLogic?.AwardRemoved(Guid.Parse(awardGuid));
         }
     }
 
@@ -292,7 +292,7 @@
 
         if (userGuidJoin != null & awardGuidJoin != null)
         {
-            new DependencyResolver()?.UserAwardBll?.JoinedAwardToUser
+            DependencyResolver.UserAwardLogic?.JoinedAwardToUser
             (
                 Guid.Parse(userGuidJoin), Guid.Parse(awardGuidJoin)
             );
@@ -391,7 +391,7 @@
             <p>
                 <select class="user_chosen">
                     @{
-                        var users = new DependencyResolver()?.UserBll?.GetAll();
+                        var users = DependencyResolver.UserLogic?.GetAll();
 
                         foreach (var user in users)
                         {
@@ -417,7 +417,7 @@
             <p>
                 <select class="award_chosen">
                     @{
-                        var awards = new DependencyResolver()?.AwardBll?.GetAll();
+                        var awards = DependencyResolver.AwardLogic?.GetAll();
 
                         foreach (var award in awards)
                         {
@@ -440,7 +440,7 @@
         </form>
         <div class="listusers" style="display: none;">
             @{
-                users = new DependencyResolver()?.UserBll?.GetAll();
+                users = DependencyResolver.UserLogic?.GetAll();
                 IEnumerable<Entities.Award> awardsByUser;
 
                 foreach (var user in users)
@@ -448,7 +448,7 @@
                     <img class="user_img" src="@GetImgSrc(user.UserGuid.ToString())">
                     <p>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</p>
 
-                    awardsByUser = new DependencyResolver()?.UserAwardBll?.GetAwardsByUser(user);
+                    awardsByUser = DependencyResolver.UserAwardLogic?.GetAwardsByUser(user);
 
                     foreach (var awardByUser in awardsByUser)
                     {
@@ -463,7 +463,7 @@
         </div>
         <div class="listawards" style="display: none;">
             @{
-                awards = new DependencyResolver()?.AwardBll?.GetAll();
+                awards = DependencyResolver.AwardLogic?.GetAll();
 
                 foreach (var award in awards)
                 {
@@ -479,7 +479,7 @@
                 <p>
                     <select class="user_chosen_join">
                         @{
-                            users = new DependencyResolver()?.UserBll?.GetAll();
+                            users = DependencyResolver.UserLogic?.GetAll();
 
                             foreach (var user in users)
                             {
@@ -503,7 +503,7 @@
                 <p>
                     <select class="award_chosen_join">
                         @{
-                            awards = new DependencyResolver()?.AwardBll?.GetAll();
+                            awards = DependencyResolver.AwardLogic?.GetAll();
 
                             foreach (var award in awards)
                             {
@@ -529,7 +529,7 @@
         </form>
         <form method="post" action="" class="user_edition" style="display: none;">
             @{
-                users = new DependencyResolver()?.UserBll?.GetAll();
+                users = DependencyResolver.UserLogic?.GetAll();
 
                 foreach (var user in users)
                 {
@@ -547,7 +547,7 @@
         </form>
         <form method="post" action="" class="award_edition" style="display: none;">
             @{
-                awards = new DependencyResolver()?.AwardBll?.GetAll();
+                awards = DependencyResolver.AwardLogic?.GetAll();
 
                 foreach (var award in awards)
                 {
@@ -569,7 +569,7 @@
                 <p>
                     <select class="user_chosen_image">
                         @{
-                            users = new DependencyResolver()?.UserBll?.GetAll();
+                            users = DependencyResolver.UserLogic?.GetAll();
 
                             foreach (var user in users)
                             {
@@ -605,7 +605,7 @@
                 <p>
                     <select class="award_chosen_image">
                         @{
-                            awards = new DependencyResolver()?.AwardBll?.GetAll();
+                            awards = DependencyResolver.AwardLogic?.GetAll();
 
                             foreach (var award in awards)
                             {
