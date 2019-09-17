@@ -108,11 +108,11 @@
 
     void EditUsers()
     {
+        var guids = Request.Form.GetValues("userGuids");
         var names = Request.Form.GetValues("userNames");
         var dates = Request.Form.GetValues("userDates");
-        var guids = Request.Form.GetValues("userGuids");
 
-        if (names != null & dates != null & guids != null)
+        if (guids != null & names != null & dates != null)
         {
             if (Crud.UsersEdited(guids, names, dates))
             {
@@ -127,10 +127,10 @@
 
     void EditAwards()
     {
-        var titles = Request.Form.GetValues("awardTitles");
         var guids = Request.Form.GetValues("awardGuids");
+        var titles = Request.Form.GetValues("awardTitles");
 
-        if (titles != null & guids != null)
+        if (guids != null & titles != null)
         {
             if (Crud.AwardsEdited(guids, titles))
             {
