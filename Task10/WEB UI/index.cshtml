@@ -5,14 +5,14 @@
 
     if (IsPost)
     {
-        UserCreation();   
+        UserCreation();
         UserAwardsDeleted();
         AwardCreation();
         AwardUsersDeleted();
         JoinAwardToUser();
-
         EditUsers();
         EditAwards();
+
         SaveUserImage();
         SaveAwardImage();
 
@@ -27,7 +27,7 @@
 
         if (userName != null & dateOfBirth != null)
         {
-            if (WebPl.UserCreated(userName, dateOfBirth))
+            if (Crud.UserCreated(userName, dateOfBirth))
             {
                 message = "User created";
             }
@@ -44,7 +44,7 @@
 
         if (userGuid != null)
         {
-            if (WebPl.UserAwardsDeleted(userGuid))
+            if (Crud.UserAwardsDeleted(userGuid))
             {
                 message = "User with awards deleted";
             }
@@ -61,7 +61,7 @@
 
         if (awardTitle != null)
         {
-            if (WebPl.AwardCreated(awardTitle))
+            if (Crud.AwardCreated(awardTitle))
             {
                 message = "Award created";
             }
@@ -78,7 +78,7 @@
 
         if (awardGuid != null & awardGuid != "")
         {
-            if (WebPl.AwardUsersDeleted(awardGuid))
+            if (Crud.AwardUsersDeleted(awardGuid))
             {
                 message = "Award with users deleted";
             }
@@ -88,7 +88,7 @@
             }
         }
     }
-    
+
     void JoinAwardToUser()
     {
         var userGuid = Request.Form["userGuidJoin"];
@@ -96,13 +96,50 @@
 
         if (userGuid != null & awardGuid != null)
         {
-            if (WebPl.JoinedAwardToUser(userGuid, awardGuid))
+            if (Crud.JoinedAwardToUser(userGuid, awardGuid))
             {
                 message = "Award joined to user";
             }
             else
             {
                 message = "Award was NOT joined to user";
+            }
+        }
+    }
+    
+    void EditUsers()
+    {
+        var names = Request.Form.GetValues("userNames");
+        var dates = Request.Form.GetValues("userDates");
+        var guids = Request.Form.GetValues("userGuids");
+
+        if (names != null & dates != null & guids != null)
+        {
+            if (Crud.UsersEdited(guids, names, dates))
+            {
+                message = "Users edited";
+            }
+            else
+            {
+                message = "Users was NOT edited";
+            }
+        }
+    }
+    
+    void EditAwards()
+    {
+        var titles = Request.Form.GetValues("awardTitles");
+        var guids = Request.Form.GetValues("awardGuids");
+
+        if (titles != null & guids != null)
+        {
+            if (Crud.AwardsEdited(guids, titles))
+            {
+                message = "Awards edited";
+            }
+            else
+            {
+                message = "Awards was NOT edited";
             }
         }
     }
@@ -216,53 +253,6 @@
         var root = Server.MapPath("~");
         var finalPath = Path.Combine(root, guid);
         File.WriteAllBytes(finalPath, imageBytes);
-    }
-
-    void EditUsers()
-    {
-        var names = Request.Form.GetValues("userNames");
-        var dates = Request.Form.GetValues("userDates");
-        var userGuids = Request.Form.GetValues("userGuids");
-
-        if (names != null & dates != null & userGuids != null)
-        {
-            DeleteAllUsers();
-
-            var i = 0;
-
-            foreach (var name in names)
-            {
-                if (name != null & dates[i] != null)
-                {
-                    AddUser(name, dates[i], userGuids[i]);
-                }
-
-                i++;
-            }
-        }
-    }
-
-    void EditAwards()
-    {
-        var titles = Request.Form.GetValues("awardTitles");
-        var awardGuids = Request.Form.GetValues("awardGuids");
-
-        if (titles != null & awardGuids != null)
-        {
-            DeleteAllAwards();
-
-            var i = 0;
-
-            foreach (var title in titles)
-            {
-                if (title != null & awardGuids[i] != null)
-                {
-                    AddAward(title, awardGuids[i]);
-                }
-
-                i++;
-            }
-        }
     }
 
     void AddUser(string name, string date, string guid)
