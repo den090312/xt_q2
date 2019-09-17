@@ -374,9 +374,10 @@
                     var root = Server.MapPath("~");
                     var guid = user.UserGuid.ToString();
                     var path = Path.Combine(root, guid);
-                    var altPath = Path.Combine(root, "alt.jpg"); 
+                    var altPath = Path.Combine(root, "alt");
 
                     var imgSrc = string.Empty;
+                    var altImg = string.Empty;
 
                     if (File.Exists(path))
                     {
@@ -385,7 +386,17 @@
                         imgSrc = String.Format("data:image/gif;base64,{0}", base64);
                     }
 
-                    <img class="user_img" src="@imgSrc" onerror="this.src = '@altPath';">
+                    var altBytes = File.ReadAllBytes(altPath);
+                    var altBase64 = Convert.ToBase64String(altBytes);
+                    altImg = String.Format("data:image/gif;base64,{0}", altBase64);
+
+                    if (imgSrc == string.Empty)
+                    {
+                        imgSrc = altImg;
+                    }
+                    
+                    <img class="user_img" src="@imgSrc">
+
                     <p>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</p>
 
                     awardsByUser = new DependencyResolver()?.UserAwardBll?.GetAwardsByUser(user);
