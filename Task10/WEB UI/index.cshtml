@@ -62,15 +62,7 @@
 
         if (userImageGuid != null)
         {
-            var userImagePath = Server.MapPath(userImageName);
-            userImage.SaveAs(userImagePath);
-
-            var userImageBytes = File.ReadAllBytes(userImagePath);
-            File.Delete(userImagePath);
-
-            var root = Server.MapPath("~");
-            var finalPath = Path.Combine(root, userImageGuid);
-            File.WriteAllBytes(finalPath, userImageBytes);
+            SaveImage(userImage, userImageName, userImageGuid);
         }
     }
 
@@ -104,16 +96,21 @@
 
         if (awardImageGuid != null)
         {
-            var awardImagePath = Server.MapPath(awardImageName);
-            awardImage.SaveAs(awardImagePath);
-
-            var awardImageBytes = File.ReadAllBytes(awardImagePath);
-            File.Delete(awardImagePath);
-
-            var root = Server.MapPath("~");
-            var finalPath = Path.Combine(root, awardImageGuid);
-            File.WriteAllBytes(finalPath, awardImageBytes);
+            SaveImage(awardImage, awardImageName, awardImageGuid);
         }
+    }
+
+    void SaveImage(HttpPostedFile image, string imageName, string guid)
+    {
+        var imagePath = Server.MapPath(imageName);
+        image.SaveAs(imagePath);
+
+        var imageBytes = File.ReadAllBytes(imagePath);
+        File.Delete(imagePath);
+
+        var root = Server.MapPath("~");
+        var finalPath = Path.Combine(root, guid);
+        File.WriteAllBytes(finalPath, imageBytes);
     }
 
     void EditUsers()
