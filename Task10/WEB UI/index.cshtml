@@ -254,6 +254,9 @@
                 <div class="button">
                     <input type="button" class="user_edit" value="edit" />
                 </div>
+                <div class="button">
+                    <input type="button" class="user_upload_image" value="upload image" />
+                </div>
             </div>
         </div>
         <div class="block">
@@ -273,6 +276,9 @@
                 <div class="button">
                     <input type="button" class="award_edit" value="edit" />
                 </div>
+                <div class="button">
+                    <input type="button" class="award_image_upload" value="upload image" />
+                </div>
             </div>
         </div>
         <div class="block">
@@ -283,21 +289,6 @@
                 <div class="button">
                     <input type="button" class="join_button" value="join award to user" />
                 </div>
-            </div>
-        </div>
-        <div class="block">
-            <div class="caption">
-                File operations
-            </div>
-            <div class="options">
-                <form enctype="multipart/form-data" method="post">
-                    <div class="button">
-                        <input type="file" name="fileImage" accept="image/*" value=@images>
-                    </div>
-                    <div class="button">
-                        <input type="submit" value="upload">
-                    </div>
-                </form>
             </div>
         </div>
     </div>
@@ -488,6 +479,41 @@
                 <input type="submit" class="edit_award" value="Ok" />
                 <input type="button" class="cancel" value="Cancel" />
             </p>
+        </form>
+        <form enctype="multipart/form-data" method="post" action="" class="user_image_upload" style="display: none; padding-left: 25px;">
+            <h3>Upload image</h3>
+            <div>
+                <h4>Choose user:</h4>
+                <p>
+                    <select class="user_chosen_join">
+                        @{
+                            users = new DependencyResolver()?.UserBll?.GetAll();
+
+                            foreach (var user in users)
+                            {
+                                <option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>
+                            }
+                        }
+                    </select>
+                    <select class="user_chosen_join_guid" style="display: none;">
+                        @{
+                            foreach (var user in users)
+                            {
+                                <option selected>@user.UserGuid.ToString()</option>
+                            }
+                        }
+                    </select>
+                </p>
+                <input type="text" class="user_guid_join" style="display: none;" name="userGuidJoin" value=@userGuidJoin>
+            </div>
+            <h4>Choose image:</h4>
+            <p>
+                <input type="file" name="fileImage" accept="image/*" value=@images>
+            </p>
+            <div style="padding-top: 20px;">
+                <input type="submit" class="upload_user_image" value="Ok" />
+                <input type="button" class="cancel" value="Cancel" />
+            </div>
         </form>
     </div>
 </body>

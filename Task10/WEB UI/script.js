@@ -108,6 +108,9 @@
                     case "join_user_award":
                         goToMain(main);
                         break;
+                    case "upload_user_image":
+                        goToMain(main);
+                        break;
                 }
             }
         }
@@ -192,6 +195,9 @@
                     case "award_edit":
                         DisplayAwardEdition(main);
                         break;
+                    case "user_upload_image":
+                        DisplayUserImageUpload(main);
+                        break;
                 }
             }
         };
@@ -208,6 +214,7 @@
             document.getElementsByClassName("join")[0].style.display = "none";
             document.getElementsByClassName("user_edition")[0].style.display = "none";
             document.getElementsByClassName("award_edition")[0].style.display = "none";
+            document.getElementsByClassName("user_image_upload")[0].style.display = "none";
         }
 
         function DisplayAwardDel(main) {
@@ -222,6 +229,7 @@
             document.getElementsByClassName("join")[0].style.display = "none";
             document.getElementsByClassName("user_edition")[0].style.display = "none";
             document.getElementsByClassName("award_edition")[0].style.display = "none";
+            document.getElementsByClassName("user_image_upload")[0].style.display = "none";
         }
 
         function DisplayListAwards(main) {
@@ -236,6 +244,7 @@
             document.getElementsByClassName("join")[0].style.display = "none";
             document.getElementsByClassName("user_edition")[0].style.display = "none";
             document.getElementsByClassName("award_edition")[0].style.display = "none";
+            document.getElementsByClassName("user_image_upload")[0].style.display = "none";
         }
 
         function DisplayListUsers() {
@@ -250,6 +259,7 @@
             document.getElementsByClassName("join")[0].style.display = "none";
             document.getElementsByClassName("user_edition")[0].style.display = "none";
             document.getElementsByClassName("award_edition")[0].style.display = "none";
+            document.getElementsByClassName("user_image_upload")[0].style.display = "none";
         }
 
         function DisplayUserCreation(main) {
@@ -264,6 +274,7 @@
             document.getElementsByClassName("join")[0].style.display = "none";
             document.getElementsByClassName("user_edition")[0].style.display = "none";
             document.getElementsByClassName("award_edition")[0].style.display = "none";
+            document.getElementsByClassName("user_image_upload")[0].style.display = "none";
         }
 
         function DisplayAwardCreation(main) {
@@ -278,6 +289,7 @@
             document.getElementsByClassName("join")[0].style.display = "none";
             document.getElementsByClassName("user_edition")[0].style.display = "none";
             document.getElementsByClassName("award_edition")[0].style.display = "none";
+            document.getElementsByClassName("user_image_upload")[0].style.display = "none";
         }
 
         function DisplayJoin(main) {
@@ -292,6 +304,7 @@
             document.getElementsByClassName("join")[0].style.display = "block";
             document.getElementsByClassName("user_edition")[0].style.display = "none";
             document.getElementsByClassName("award_edition")[0].style.display = "none";
+            document.getElementsByClassName("user_image_upload")[0].style.display = "none";
         }
 
         function DisplayUserEdition(main) {
@@ -306,6 +319,7 @@
             document.getElementsByClassName("join")[0].style.display = "none";
             document.getElementsByClassName("user_edition")[0].style.display = "block";
             document.getElementsByClassName("award_edition")[0].style.display = "none";
+            document.getElementsByClassName("user_image_upload")[0].style.display = "none";
         }
 
         function DisplayAwardEdition(main) {
@@ -320,6 +334,22 @@
             document.getElementsByClassName("join")[0].style.display = "none";
             document.getElementsByClassName("user_edition")[0].style.display = "none";
             document.getElementsByClassName("award_edition")[0].style.display = "block";
+            document.getElementsByClassName("user_image_upload")[0].style.display = "none";
+        }
+
+        function DisplayUserImageUpload(main) {
+            main.style.display = "none";
+            operations[0].style.display = "block";
+            document.getElementsByClassName("user_del")[0].style.display = "none";
+            document.getElementsByClassName("award_del")[0].style.display = "none";
+            document.getElementsByClassName("user_creation")[0].style.display = "none";
+            document.getElementsByClassName("award_creation")[0].style.display = "none";
+            document.getElementsByClassName("listusers")[0].style.display = "none";
+            document.getElementsByClassName("listawards")[0].style.display = "none";
+            document.getElementsByClassName("join")[0].style.display = "none";
+            document.getElementsByClassName("user_edition")[0].style.display = "none";
+            document.getElementsByClassName("award_edition")[0].style.display = "none";
+            document.getElementsByClassName("user_image_upload")[0].style.display = "block";
         }
     }
 }
