@@ -32,6 +32,36 @@
         @Html.Raw("<script>document.location='https://localhost:44337/index.cshtml'</script>");
     }
 
+    string GetImgSrc(string guid)
+    {
+        var root = Server.MapPath("~");
+        var path = Path.Combine(root, guid);
+
+        var imgSrc = string.Empty;
+        var altSrc = string.Empty;
+
+        if (File.Exists(path))
+        {
+            var base64 = Convert.ToBase64String(File.ReadAllBytes(path));
+            imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+        }
+
+        var altPath = Path.Combine(root, "alt");
+
+        if (File.Exists(altPath))
+        {
+            var alt64 = Convert.ToBase64String(File.ReadAllBytes(altPath));
+            altSrc = String.Format("data:image/gif;base64,{0}", alt64);
+        }
+
+        if (imgSrc == string.Empty)
+        {
+            imgSrc = altSrc;
+        }
+
+        return imgSrc;
+    }
+
     void SaveUserImage()
     {
         if (userImages == null)
@@ -415,55 +445,15 @@
 
                 foreach (var user in users)
                 {
-                    var root = Server.MapPath("~");
-                    var path = Path.Combine(root, user.UserGuid.ToString());
-
-                    var imgSrc = string.Empty;
-                    var altSrc = string.Empty;
-
-                    if (File.Exists(path))
-                    {
-                        var base64 = Convert.ToBase64String(File.ReadAllBytes(path));
-                        imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                    }
-
-                    var altPath = Path.Combine(root, "alt");
-
-                    if (File.Exists(altPath))
-                    {
-                        var alt64 = Convert.ToBase64String(File.ReadAllBytes(altPath));
-                        altSrc = String.Format("data:image/gif;base64,{0}", alt64);
-                    }
-
-                    if (imgSrc == string.Empty)
-                    {
-                        imgSrc = altSrc;
-                    }
-
-                    <img class="user_img" src="@imgSrc">
+                    <img class="user_img" src="@GetImgSrc(user.UserGuid.ToString())">
                     <p>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</p>
 
                     awardsByUser = new DependencyResolver()?.UserAwardBll?.GetAwardsByUser(user);
 
                     foreach (var awardByUser in awardsByUser)
                     {
-                        path = Path.Combine(root, awardByUser.AwardGuid.ToString());
-
-                        imgSrc = string.Empty;
-
-                        if (File.Exists(path))
-                        {
-                            var base64 = Convert.ToBase64String(File.ReadAllBytes(path));
-                            imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                        }
-
-                        if (imgSrc == string.Empty)
-                        {
-                            imgSrc = altSrc;
-                        }
-
                         <div style="padding-left: 75px;">
-                            <img class="award_img" src="@imgSrc">
+                            <img class="award_img" src="@GetImgSrc(awardByUser.AwardGuid.ToString())">
                             <p>@(awardByUser.Title)</p>
                         </div>
                     }
