@@ -153,7 +153,12 @@ namespace WEB_UI
             NullCheck(name);
             NullCheck(date);
 
-            if (name == string.Empty || !Guid.TryParse(guid, out Guid resultGuid) || !DateTime.TryParse(date, out DateTime resultDate))
+            if (guid == string.Empty || name == string.Empty || date == string.Empty)
+            {
+                return false;
+            }
+
+            if (!Guid.TryParse(guid, out Guid resultGuid) || !DateTime.TryParse(date, out DateTime resultDate))
             {
                 return false;
             }
@@ -168,7 +173,7 @@ namespace WEB_UI
             NullCheck(guid);
             NullCheck(title);
 
-            if (title == string.Empty || !Guid.TryParse(guid, out Guid resultGuid))
+            if (guid == string.Empty || title == string.Empty || !Guid.TryParse(guid, out Guid resultGuid))
             {
                 return false;
             }
