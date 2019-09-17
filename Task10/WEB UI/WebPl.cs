@@ -27,5 +27,13 @@ namespace WEB_UI
 
             return DependencyResolver.UserAwardLogic.UserAwardsRemoved(result);
         }
+
+        public static bool AwardCreated(string awardTitle)
+        {
+            var awardLogic = DependencyResolver.AwardLogic;
+            var award = awardLogic?.CreateAward(awardTitle);
+
+            return awardLogic.AwardAdded(award);
+        }
     }
 }

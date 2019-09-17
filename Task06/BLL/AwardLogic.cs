@@ -8,13 +8,13 @@ namespace BLL
 {
     public class AwardLogic : IAwardLogic
     {
-        private readonly IAwardDao awardDao;
+        private readonly IAwardDao _awardDao;
 
         public AwardLogic(IAwardDao awardDao)
         {
             NullCheck(awardDao);
 
-            this.awardDao = awardDao;
+            _awardDao = awardDao;
         }
 
         public Award CreateAward(string title)
@@ -28,14 +28,14 @@ namespace BLL
         {
             NullCheck(award);
 
-            return awardDao.AwardAdded(award);
+            return _awardDao.AwardAdded(award);
         }
 
-        public bool AwardRemoved(Guid awardGuid) => awardDao.AwardRemoved(awardGuid);
+        public bool AwardRemoved(Guid awardGuid) => _awardDao.AwardRemoved(awardGuid);
 
         public IEnumerable<Award> GetAll()
         {
-            var awards = awardDao?.GetAll();
+            var awards = _awardDao?.GetAll();
             NullCheck(awards);
 
             return awards;
@@ -43,13 +43,13 @@ namespace BLL
 
         public Award GetAwardByGuid(Guid awardGuid)
         {
-            var award = awardDao?.GetAwardByGuid(awardGuid);
+            var award = _awardDao?.GetAwardByGuid(awardGuid);
             NullCheck(award);
 
             return award;
         }
 
-        public void PrintInfo() => awardDao?.PrintInfo();
+        public void PrintInfo() => _awardDao?.PrintInfo();
 
         private static void NullCheck<T>(T classObject) where T : class
         {

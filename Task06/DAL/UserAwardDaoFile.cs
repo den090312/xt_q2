@@ -141,7 +141,7 @@ namespace DAL
 
             try
             {
-                RemoveUser(userGuid, users, awards);
+                RemoveUserAwards(userGuid, users, awards);
 
                 return true;
             }
@@ -153,7 +153,7 @@ namespace DAL
 
         public void PrintInfo() => Console.WriteLine(FilePath);
 
-        private void RemoveUser(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
+        private void RemoveUserAwards(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
         {
             var usersAwards = GetAll(users, awards);
 
@@ -184,7 +184,7 @@ namespace DAL
             streamWriter.WriteLine();
         }
 
-        public bool AwardRemoved(Guid awardGuid, IEnumerable<User> users, IEnumerable<Award> awards)
+        public bool AwardUsersRemoved(Guid awardGuid, IEnumerable<User> users, IEnumerable<Award> awards)
         {
             if (!File.Exists(FilePath))
             {
@@ -193,7 +193,7 @@ namespace DAL
 
             try
             {
-                RemoveAward(awardGuid, users, awards);
+                RemoveAwardUsers(awardGuid, users, awards);
 
                 return true;
             }
@@ -203,7 +203,7 @@ namespace DAL
             }
         }
 
-        private void RemoveAward(Guid awardGuid, IEnumerable<User> users, IEnumerable<Award> awards)
+        private void RemoveAwardUsers(Guid awardGuid, IEnumerable<User> users, IEnumerable<Award> awards)
         {
             var usersAwards = GetAll(users, awards);
 

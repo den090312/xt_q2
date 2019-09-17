@@ -170,7 +170,7 @@ namespace Pl
         {
             Console.WriteLine();
 
-            if (DependencyResolver.UserAwardLogic.AwardRemoved(awardGuid))
+            if (DependencyResolver.UserAwardLogic.AwardUsersRemoved(awardGuid))
             {
                 Console.WriteLine($"---user '{awardGuid}' deleted---");
             }

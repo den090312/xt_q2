@@ -8,9 +8,9 @@ namespace BLL
 {
     public class UserAwardLogic : IUserAwardLogic
     {
-        private readonly IUserAwardDao userAwardDao;
-        private readonly IUserDao userDao;
-        private readonly IAwardDao awardDao;
+        private readonly IUserAwardDao _userAwardDao;
+        private readonly IUserDao _userDao;
+        private readonly IAwardDao _awardDao;
 
         public UserAwardLogic(IUserAwardDao userAwardDao, IUserDao userDao, IAwardDao awardDao)
         {
@@ -18,17 +18,17 @@ namespace BLL
             NullCheck(userDao);
             NullCheck(awardDao);
 
-            this.userAwardDao = userAwardDao;
-            this.userDao = userDao;
-            this.awardDao = awardDao;
+            _userAwardDao = userAwardDao;
+            _userDao = userDao;
+            _awardDao = awardDao;
         }
 
         public bool JoinedAwardToUser(Guid userGuid, Guid awardGuid)
         {
-            var user = userDao?.GetUserByGuid(userGuid);
+            var user = _userDao?.GetUserByGuid(userGuid);
             NullCheck(user);
 
-            var award = awardDao?.GetAwardByGuid(awardGuid);
+            var award = _awardDao?.GetAwardByGuid(awardGuid);
             NullCheck(award);
 
             return Joined(user, award);
@@ -39,7 +39,7 @@ namespace BLL
             var singleAwardList = new List<Award>();
             singleAwardList.Add(award);
 
-            var awardsByUser = userAwardDao.GetAwardsByUser(user, singleAwardList);
+            var awardsByUser = _userAwardDao.GetAwardsByUser(user, singleAwardList);
             var counter = 0;
 
             foreach (var singleAward in awardsByUser)
@@ -47,50 +47,50 @@ namespace BLL
                 counter++;
             }
 
-            return counter > 0 ? false : userAwardDao.JoinedAwardToUser(user, award);
+            return counter > 0 ? false : _userAwardDao.JoinedAwardToUser(user, award);
         }
 
         public IEnumerable<Award> GetAwardsByUser(User user)
         {
-            var awards = awardDao?.GetAll();
+            var awards = _awardDao?.GetAll();
             NullCheck(awards);
 
-            return userAwardDao?.GetAwardsByUser(user, awards);
+            return _userAwardDao?.GetAwardsByUser(user, awards);
         }
 
         public bool UserAwardsRemoved(Guid userGuid)
         {
-            if (!userDao.UserRemoved(userGuid))
+            if (!_userDao.UserRemoved(userGuid))
             {
                 return false;
             }
 
-            var users = userDao?.GetAll();
+            var users = _userDao?.GetAll();
             NullCheck(users);
 
-            var awards = awardDao?.GetAll();
+            var awards = _awardDao?.GetAll();
             NullCheck(awards);
 
-            return userAwardDao.UserAwardsRemoved(userGuid, users, awards);
+            return _userAwardDao.UserAwardsRemoved(userGuid, users, awards);
         }
 
-        public bool AwardRemoved(Guid awardGuid)
+        public bool AwardUsersRemoved(Guid awardGuid)
         {
-            if (!awardDao.AwardRemoved(awardGuid))
+            if (!_awardDao.AwardRemoved(awardGuid))
             {
                 return false;
             }
 
-            var users = userDao?.GetAll();
+            var users = _userDao?.GetAll();
             NullCheck(users);
 
-            var awards = awardDao?.GetAll();
+            var awards = _awardDao?.GetAll();
             NullCheck(awards);
 
-            return userAwardDao.AwardRemoved(awardGuid, users, awards);
+            return _userAwardDao.AwardUsersRemoved(awardGuid, users, awards);
         }
 
-        public void PrintInfo() => userAwardDao?.PrintInfo();
+        public void PrintInfo() => _userAwardDao?.PrintInfo();
 
         private static void NullCheck<T>(T classObject) where T : class
         {

@@ -2,7 +2,6 @@
     var message = string.Empty;
     var userGuid = string.Empty;
     var awardGuid = string.Empty;
-    var awardTitle = string.Empty;
     var userGuidJoin = string.Empty;
     var awardGuidJoin = string.Empty;
     string[] names;
@@ -17,10 +16,10 @@
 
     if (IsPost)
     {
-        UserCreation();
-        
+        UserCreation();   
         UserAwardsDeleted();
         AwardCreation();
+
         DeleteAwardsWithUsers();
         JoinAwardToUser();
         EditUsers();
@@ -63,6 +62,24 @@
             else
             {
                 message = "User with awards NOT deleted";
+            }
+        }
+    }
+
+
+    void AwardCreation()
+    {
+        var awardTitle = Request.Form["awardTitle"];
+
+        if (awardTitle != null)
+        {
+            if (WebPl.AwardCreated(awardTitle))
+            {
+                message = "Award created";
+            }
+            else
+            {
+                message = "Award NOT created";
             }
         }
     }
@@ -259,26 +276,6 @@
         }
     }
 
-    void AwardCreation()
-    {
-        awardTitle = Request.Form["awardTitle"];
-
-        if (awardTitle != null)
-        {
-            CreateAward();
-        }
-    }
-
-    void CreateAward()
-    {
-        if (awardTitle != string.Empty)
-        {
-            var awardLogic = DependencyResolver.AwardLogic;
-            var award = awardLogic?.CreateAward(awardTitle);
-            awardLogic.AwardAdded(award);
-        }
-    }
-
     void DeleteAwardsWithUsers()
     {
         awardGuid = Request.Form["awardGuid"];
@@ -388,7 +385,7 @@
         <form method="post" action="" class="award_creation" style="display: none">
             <h4>Award creation</h4>
             <p class="alertbox"></p>
-            <p>Title: <input type="text" id="awardTitle" class="title" name="awardTitle" value=@awardTitle></p>
+            <p>Title: <input type="text" id="awardTitle" class="title" name="awardTitle"></p>
             <input type="submit" class="award_create" value="Create" />
             <input type="button" class="cancel" value="Cancel" />
         </form>

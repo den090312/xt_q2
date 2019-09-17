@@ -10,7 +10,7 @@ namespace InterfacesBLL
 
         bool UserAwardsRemoved(Guid userGuid);
 
-        bool AwardRemoved(Guid awardGuid);
+        bool AwardUsersRemoved(Guid awardGuid);
 
         IEnumerable<Award> GetAwardsByUser(User user);
 
