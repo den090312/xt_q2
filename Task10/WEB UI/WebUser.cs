@@ -49,7 +49,6 @@ namespace WEB_UI
 
         private static void EmptyStringCheck(string inputString)
         {
-
             if (inputString == string.Empty)
             {
                 throw new Exception($"{nameof(inputString)} is empty!");
