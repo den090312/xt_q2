@@ -217,9 +217,17 @@
     <div id="main" class="main">
         <div class="authentication">
             <p>Currrent user: @currentUser.Name</p>
-            <input type="button" class="log_in" value="Log in" />
-            <input type="button" class="log_out" value="Log out" style="display: none" />
-            <input type="button" class="register" value="Register" />
+            @{
+                if (currentUser.UserRole == WebUser.Role.Guest)
+                {
+                    <input type="button" class="log_in" value="Log in" />
+                    <input type="button" class="register" value="Register" />
+                }
+                else
+                {
+                    <input type="button" class="log_out" value="Log out" />
+                }
+            }
         </div>
 
         @{
