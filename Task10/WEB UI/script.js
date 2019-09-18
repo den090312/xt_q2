@@ -14,6 +14,17 @@
     setImageGuidUser();
     setImageGuidAward();
 
+    var user_log_in = document.getElementsByClassName("user_log_in")[0]; 
+    if (user_log_in) {
+        log_in = user_log_in.getElementsByClassName("log_in")[0]; 
+        if (log_in) {
+            log_in_post = user_log_in.getElementsByClassName("log_in_post")[0];  
+            if (log_in_post) {
+                log_in_post.value = "loggedIn";
+            }
+        }
+    }
+
     function setSelectedUserGuid() {
         var user_chosen = document.getElementsByClassName("user_chosen")[0];
         if (user_chosen) {

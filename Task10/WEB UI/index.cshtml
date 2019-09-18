@@ -1,5 +1,5 @@
 ﻿@{
-    var currentUser = WebUser.User;
+    var currentUser = WebUser.Current;
     var root = Server.MapPath("~");
     var AllUserOperationsHtml = @"\AllUserOperations.html";
     var AllAwardOperationsHtml = @"\AllAwardOperations.html";
@@ -9,6 +9,7 @@
     var userImages = HttpContext.Current.Request.Files;
     var awardImages = HttpContext.Current.Request.Files;
     var htmlRaw = string.Empty;
+    var logIn = string.Empty;
 
     if (IsPost)
     {
@@ -21,6 +22,16 @@
         EditAwards();
         SaveUserImage();
         SaveAwardImage();
+
+        logIn = Request.Form["logIn"];
+
+        if (logIn != null)
+        {
+            if (logIn == "loggedIn")
+            {
+                WebUser.Current = WebUser.User;
+            }
+        }
 
         //POST-reload page fix
         @Html.Raw("<script>document.location='https://localhost:44337/index.cshtml'</script>");
@@ -220,12 +231,19 @@
             @{
                 if (currentUser.UserRole == WebUser.Role.Guest)
                 {
-                    <input type="button" class="log_in" value="Log in" />
-                    <input type="button" class="register" value="Register" />
+                    <form method="post" action="" class="user_log_in">
+                        <input type="submit" class="log_in" value="Log in" />
+                        <input type="text" class="log_in_post" style="display: none;" name="logIn" value=@logIn>
+                    </form>
+                    <form method="post" action="" class="user_register" style="padding-top: 10px;">
+                        <input type="submit" class="register" value="Register" />
+                    </form>
                 }
                 else
                 {
-                    <input type="button" class="log_out" value="Log out" />
+                    <form method="post" action="" class="user_log_out">
+                        <input type="submit" class="log_out" value="Log out" />
+                    </form>
                 }
             }
         </div>
