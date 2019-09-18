@@ -22,7 +22,14 @@
         EditAwards();
         SaveUserImage();
         SaveAwardImage();
+        Authentication();
 
+        //POST-reload page fix
+        @Html.Raw("<script>document.location='https://localhost:44337/index.cshtml'</script>");
+    }
+
+    void Authentication()
+    {        
         logged = Request.Form["logged"];
 
         if (logged != null)
@@ -37,9 +44,6 @@
                 WebUser.Current = WebUser.Guest;
             }
         }
-
-        //POST-reload page fix
-        @Html.Raw("<script>document.location='https://localhost:44337/index.cshtml'</script>");
     }
 
     void UserCreation()
