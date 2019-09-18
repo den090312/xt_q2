@@ -38,6 +38,8 @@ namespace WEB_UI
             PasswordHash = GetPasswordHash(password);
         }
 
+        public WebUser Guest => new WebUser("Guest", Role.Guest, string.Empty);
+
         private string GetPasswordHash(string password)
         {
             NullCheck(password);
