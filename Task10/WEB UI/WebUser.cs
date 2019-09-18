@@ -36,8 +36,6 @@ namespace WEB_UI
             Name = name;
             UserRole = userRole;
             PasswordHash = GetPasswordHash(password);
-
-            ListWebUsers.Add(this);
         }
 
         private string GetPasswordHash(string password)
