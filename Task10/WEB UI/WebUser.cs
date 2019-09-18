@@ -5,9 +5,11 @@ using System.Web;
 
 namespace WEB_UI
 {
-    public class Webuser
+    public class WebUser
     {
-        public static Webuser CurrentUser { get; set; }
+        public static WebUser CurrentUser { get; set; }
+
+        public static List<WebUser> ListWebUsers { get; }
 
         public enum Role
         {
@@ -23,7 +25,7 @@ namespace WEB_UI
 
         public string PasswordHash { get; }
 
-        public Webuser(string name, Role userRole, string password)
+        public WebUser(string name, Role userRole, string password)
         {
             NullCheck(name);
             NullCheck(password);
@@ -33,7 +35,9 @@ namespace WEB_UI
 
             Name = name;
             UserRole = userRole;
-            PasswordHash = GetPasswordHash(password); 
+            PasswordHash = GetPasswordHash(password);
+
+            ListWebUsers.Add(this);
         }
 
         private string GetPasswordHash(string password)
