@@ -9,7 +9,7 @@
     var userImages = HttpContext.Current.Request.Files;
     var awardImages = HttpContext.Current.Request.Files;
     var htmlRaw = string.Empty;
-    var logIn = string.Empty;
+    var logged = string.Empty;
 
     if (IsPost)
     {
@@ -23,13 +23,18 @@
         SaveUserImage();
         SaveAwardImage();
 
-        logIn = Request.Form["logIn"];
+        logged = Request.Form["logged"];
 
-        if (logIn != null)
+        if (logged != null)
         {
-            if (logIn == "loggedIn")
+            if (logged == "loggedIn")
             {
                 WebUser.Current = WebUser.User;
+            }
+
+            if (logged == "loggedOut")
+            {
+                WebUser.Current = WebUser.Guest;
             }
         }
 
@@ -233,7 +238,7 @@
                 {
                     <form method="post" action="" class="user_log_in">
                         <input type="submit" class="log_in" value="Log in" />
-                        <input type="text" class="log_in_post" style="display: none;" name="logIn" value=@logIn>
+                        <input type="text" class="log_in_post" style="display: none;" name="logged" value=@logged>
                     </form>
                     <form method="post" action="" class="user_register" style="padding-top: 10px;">
                         <input type="submit" class="register" value="Register" />
@@ -243,6 +248,7 @@
                 {
                     <form method="post" action="" class="user_log_out">
                         <input type="submit" class="log_out" value="Log out" />
+                        <input type="text" class="log_out_post" style="display: none;" name="logged" value=@logged>
                     </form>
                 }
             }
