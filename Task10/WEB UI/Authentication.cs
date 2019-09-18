@@ -13,7 +13,7 @@ namespace WEB_UI
             {
                 NullCheck(webUser);
 
-                WebUser.CurrentUser = webUser;
+                WebUser.Current = webUser;
 
                 return true;
             }
@@ -27,7 +27,7 @@ namespace WEB_UI
         {
             try
             {
-                WebUser.CurrentUser = null;
+                WebUser.Current = null;
 
                 return true;
             }

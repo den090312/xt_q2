@@ -10,6 +10,14 @@ namespace WEB_UI
 
         public static bool ImageExists(HttpFileCollection images, out HttpPostedFile imageFile, out string imageFileName)
         {
+            if (images == null || images.Count == 0)
+            {
+                imageFileName = string.Empty;
+                imageFile = null;
+
+                return false;
+            }
+
             imageFile = images[0];
 
             if (imageFile == null)

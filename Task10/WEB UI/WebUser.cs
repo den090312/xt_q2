@@ -7,9 +7,17 @@ namespace WEB_UI
 {
     public class WebUser
     {
-        public static WebUser CurrentUser { get; set; }
+        public static WebUser Current { get; set; }
 
         public static List<WebUser> ListWebUsers { get; }
+
+        public string Name { get; }
+
+        public Role UserRole { get; } = Role.None;
+
+        public string PasswordHash { get; }
+
+        public WebUser Guest => new WebUser("Guest", Role.Guest, string.Empty);
 
         public enum Role
         {
@@ -18,12 +26,6 @@ namespace WEB_UI
             User = 2,
             Admin = 3
         }
-
-        public string Name { get; }
-
-        public Role UserRole { get; } = Role.None;
-
-        public string PasswordHash { get; }
 
         public WebUser(string name, Role userRole, string password)
         {
@@ -37,8 +39,6 @@ namespace WEB_UI
             UserRole = userRole;
             PasswordHash = GetPasswordHash(password);
         }
-
-        public WebUser Guest => new WebUser("Guest", Role.Guest, string.Empty);
 
         private string GetPasswordHash(string password)
         {
