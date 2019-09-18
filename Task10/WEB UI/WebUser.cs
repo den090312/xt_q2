@@ -17,7 +17,7 @@ namespace WEB_UI
 
         public string Name { get; }
 
-        public Role UserRole { get; }
+        public Role UserRole { get; } = Role.None;
 
         public string PasswordHash { get; }
 
