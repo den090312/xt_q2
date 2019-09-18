@@ -2,15 +2,7 @@
     var message = string.Empty;
     var userImages = HttpContext.Current.Request.Files;
     var awardImages = HttpContext.Current.Request.Files;
-
-    if (WebUser.Current == null)
-    {
-        var currentUser = WebUser.Guest;
-    }
-    else
-    {
-        var currentUser = WebUser.Current;
-    }
+    var currentUser = WebUser.Current;
 
     if (IsPost)
     {
@@ -220,7 +212,7 @@
     <b>@message</b>
     <div id="main" class="main">
         <div class="authentication">
-            Currrent user
+            <p>Currrent user: @currentUser.Name</p>
             <input type="button" class="log_in" value="Log in" />
             <input type="button" class="log_out" value="Log out" style="display: none" />
             <input type="button" class="register" value="Register" />

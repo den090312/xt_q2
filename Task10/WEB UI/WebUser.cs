@@ -7,7 +7,7 @@ namespace WEB_UI
 {
     public class WebUser
     {
-        public static WebUser Current { get; set; } = null;
+        public static WebUser Current { get; set; } = Guest;
 
         public static List<WebUser> ListWebUsers { get; }
 
