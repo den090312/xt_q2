@@ -1,11 +1,14 @@
 ﻿@{
+    var currentUser = WebUser.Admin;
     var root = Server.MapPath("~");
-    var userOperationsRes = @"\UserOperations.txt";
-
+    var AllUserOperationsHtml = @"\AllUserOperations.html";
+    var AllAwardOperationsHtml = @"\AllAwardOperations.html";
+    var UserPrintHtml = @"\UserPrint.html";
+    var JoinOperationsHtml = @"\JoinOperations.html";
     var message = string.Empty;
     var userImages = HttpContext.Current.Request.Files;
     var awardImages = HttpContext.Current.Request.Files;
-    var currentUser = WebUser.DefaultAdmin;
+    var htmlRaw = string.Empty;
 
     if (IsPost)
     {
@@ -194,6 +197,11 @@
             }
         }
     }
+
+    void RenderUserOperations()
+    {
+
+    }
 }
 
 @using Common;
@@ -220,71 +228,38 @@
         </div>
 
         @{
-            var htmlRaw = string.Empty;
+            //htmlRaw = string.Empty;
 
-            if (currentUser.UserRole != WebUser.Role.Admin && currentUser.UserRole != WebUser.Role.User)
+            if (currentUser.UserRole == WebUser.Role.Admin || currentUser.UserRole == WebUser.Role.User)
             {
-                return;
+                htmlRaw = File.ReadAllText(root + AllUserOperationsHtml);
             }
 
-            htmlRaw = File.ReadAllText(root + userOperationsRes); 
+            if (currentUser.UserRole == WebUser.Role.Guest)
+            {
+                htmlRaw = File.ReadAllText(root + UserPrintHtml);
+            }
+
+            @Html.Raw(htmlRaw);
+
+            htmlRaw = string.Empty;
+
+            if (currentUser.UserRole == WebUser.Role.Admin)
+            {
+                htmlRaw = File.ReadAllText(root + AllAwardOperationsHtml);
+            }
+
+            @Html.Raw(htmlRaw);
+
+            htmlRaw = string.Empty;
+
+            if (currentUser.UserRole == WebUser.Role.Admin)
+            {
+                htmlRaw = File.ReadAllText(root + JoinOperationsHtml);
+            }
 
             @Html.Raw(htmlRaw);
         }
-        <div class="menu">
-            <div class="caption">
-                Users operations
-            </div>
-            <div class="options">
-                <div class="button">
-                    <input type="button" class="user_create" value="create" />
-                </div>
-                <div class="button">
-                    <input type="button" class="user_delete" value="delete" />
-                </div>
-                <div class="button">
-                    <input type="button" class="user_print" value="print" />
-                </div>
-                <div class="button">
-                    <input type="button" class="user_edit" value="edit" />
-                </div>
-                <div class="button">
-                    <input type="button" class="user_upload_image" value="upload image" />
-                </div>
-            </div>
-        </div>
-        <div class="menu">
-            <div class="caption">
-                Awards operations
-            </div>
-            <div class="options">
-                <div class="button">
-                    <input type="button" class="award_create" value="create" />
-                </div>
-                <div class="button">
-                    <input type="button" class="award_delete" value="delete" />
-                </div>
-                <div class="button">
-                    <input type="button" class="award_print" value="print" />
-                </div>
-                <div class="button">
-                    <input type="button" class="award_edit" value="edit" />
-                </div>
-                <div class="button">
-                    <input type="button" class="award_upload_image" value="upload image" />
-                </div>
-            </div>
-        </div>
-        <div class="menu">
-            <div class="caption">
-                Join operations
-            </div>
-            <div class="options">
-                <div class="button">
-                    <input type="button" class="join_button" value="join award to user" />
-                </div>
-            </div>
-        </div>
     </div>
     <div class="operations">
         <form method="post" action="" class="user_creation" style="display: none">
@@ -302,62 +277,72 @@
             <input type="submit" class="award_create" value="Create" />
             <input type="button" class="cancel" value="Cancel" />
         </form>
-        <form method="post" action="" class="user_del" style="display: none;">
-            <h4>Choose user to delete:</h4>
-            <p>
-                <select class="user_chosen">
-                    @{
-                        var users = DependencyResolver.UserLogic?.GetAll();
+        @{
+            if (currentUser.UserRole == WebUser.Role.Admin)
+            {
+                <form method="post" action="" class="user_del" style="display: none;">
+                    <h4>Choose user to delete:</h4>
+                    <p>
+                        <select class="user_chosen">
+                            @{
+                                var allUsers = DependencyResolver.UserLogic?.GetAll();
 
-                        foreach (var user in users)
-                        {
-                            <option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>
-                        }
-                    }
-                </select>
-                <select class="user_chosen_guid" style="display: none;">
-                    @{
-                        foreach (var user in users)
-                        {
-                            <option selected>@user.UserGuid.ToString()</option>
-                        }
-                    }
-                </select>
-            </p>
-            <input type="text" class="user_guid" style="display: none;" name="userGuid">
-            <input type="submit" class="user_delete" value="Delete" />
-            <input type="button" class="cancel" value="Cancel" />
-        </form>
-        <form method="post" action="" class="award_del" style="display: none;">
-            <h4>Choose award to delete:</h4>
-            <p>
-                <select class="award_chosen">
-                    @{
-                        var awards = DependencyResolver.AwardLogic?.GetAll();
+                                foreach (var user in allUsers)
+                                {
+                                    <option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>
+                                }
+                            }
+                        </select>
+                        <select class="user_chosen_guid" style="display: none;">
+                            @{
+                                foreach (var user in allUsers)
+                                {
+                                    <option selected>@user.UserGuid.ToString()</option>
+                                }
+                            }
+                        </select>
+                    </p>
+                    <input type="text" class="user_guid" style="display: none;" name="userGuid">
+                    <input type="submit" class="user_delete" value="Delete" />
+                    <input type="button" class="cancel" value="Cancel" />
+                </form>
+            }
 
-                        foreach (var award in awards)
-                        {
-                            <option selected>@award.Title</option>
-                        }
-                    }
-                </select>
-                <select class="award_chosen_guid" style="display: none;">
-                    @{
-                        foreach (var award in awards)
-                        {
-                            <option selected>@award.AwardGuid.ToString()</option>
-                        }
-                    }
-                </select>
-            </p>
-            <input type="text" class="award_guid" style="display: none;" name="awardGuid">
-            <input type="submit" class="award_delete" value="Delete" />
-            <input type="button" class="cancel" value="Cancel" />
-        </form>
+            if (currentUser.UserRole == WebUser.Role.Admin)
+            {
+                <form method="post" action="" class="award_del" style="display: none;">
+                    <h4>Choose award to delete:</h4>
+                    <p>
+                        <select class="award_chosen">
+                            @{
+                                var allAwards = DependencyResolver.AwardLogic?.GetAll();
+
+                                foreach (var award in allAwards)
+                                {
+                                    <option selected>@award.Title</option>
+                                }
+                            }
+                        </select>
+                        <select class="award_chosen_guid" style="display: none;">
+                            @{
+                                foreach (var award in allAwards)
+                                {
+                                    <option selected>@award.AwardGuid.ToString()</option>
+                                }
+                            }
+                        </select>
+                    </p>
+                    <input type="text" class="award_guid" style="display: none;" name="awardGuid">
+                    <input type="submit" class="award_delete" value="Delete" />
+                    <input type="button" class="cancel" value="Cancel" />
+                </form>
+            }
+        }
+
         <div class="listusers" style="display: none;">
-            <input type="button" class="cancel" value="Back" style="display: block;"/>
+            <input type="button" class="cancel" value="Back" style="display: block;" />
             @{
-                users = DependencyResolver.UserLogic?.GetAll();
+                var users = DependencyResolver.UserLogic?.GetAll();
                 IEnumerable<Entities.Award> awardsByUser;
 
                 foreach (var user in users)
@@ -367,192 +352,208 @@
 
                     awardsByUser = DependencyResolver.UserAwardLogic?.GetAwardsByUser(user);
 
-                    foreach (var awardByUser in awardsByUser)
+                    if (currentUser.UserRole != WebUser.Role.Guest)
                     {
-                        <div style="padding-left: 75px;">
-                            <img class="award_img" src="@Images.GetImgSrc(root, awardByUser.AwardGuid.ToString())">
-                            <p>@(awardByUser.Title)</p>
-                        </div>
+                        foreach (var awardByUser in awardsByUser)
+                        {
+                            <div style="padding-left: 75px;">
+                                <img class="award_img" src="@Images.GetImgSrc(root, awardByUser.AwardGuid.ToString())">
+                                <p>@(awardByUser.Title)</p>
+                            </div>
+                        }
                     }
                 }
             }
             <input type="button" class="cancel" value="Back" />
         </div>
-        <div class="listawards" style="display: none;">
-            <input type="button" class="cancel" value="Back" style="display: block;" />
-            @{
-                awards = DependencyResolver.AwardLogic?.GetAll();
+        @{
+            if (currentUser.UserRole == WebUser.Role.Admin)
+            {
+                <div class="listawards" style="display: none;">
+                    <input type="button" class="cancel" value="Back" style="display: block;" />
+                    @{
+                        var allAwards = DependencyResolver.AwardLogic?.GetAll();
 
-                foreach (var award in awards)
-                {
-                    <img class="award_img" src="@Images.GetImgSrc(root, award.AwardGuid.ToString())">
-                    <p>@award.Title</p>
-                }
+                        foreach (var award in allAwards)
+                        {
+                            <img class="award_img" src="@Images.GetImgSrc(root, award.AwardGuid.ToString())">
+                            <p>@award.Title</p>
+                        }
+                    }
+                    <input type="button" class="cancel" value="Back" />
+                </div>
             }
-            <input type="button" class="cancel" value="Back" />
-        </div>
-        <form method="post" action="" class="join" style="display: none; padding-left: 25px;">
-            <h3>Join</h3>
-            <div>
-                <h4>Choose user:</h4>
-                <p>
-                    <select class="user_chosen_join">
-                        @{
-                            users = DependencyResolver.UserLogic?.GetAll();
 
-                            foreach (var user in users)
-                            {
-                                <option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>
-                            }
-                        }
-                    </select>
-                    <select class="user_chosen_join_guid" style="display: none;">
-                        @{
-                            foreach (var user in users)
-                            {
-                                <option selected>@user.UserGuid.ToString()</option>
-                            }
-                        }
-                    </select>
-                </p>
-                <input type="text" class="user_guid_join" style="display: none;" name="userGuidJoin">
-            </div>
-            <div>
-                <h4>Choose award:</h4>
-                <p>
-                    <select class="award_chosen_join">
-                        @{
-                            awards = DependencyResolver.AwardLogic?.GetAll();
-
-                            foreach (var award in awards)
-                            {
-                                <option selected>@award.Title</option>
-                            }
-                        }
-                    </select>
-                    <select class="award_chosen_join_guid" style="display: none;">
-                        @{
-                            foreach (var award in awards)
-                            {
-                                <option selected>@award.AwardGuid.ToString()</option>
-                            }
-                        }
-                    </select>
-                </p>
-                <input type="text" class="award_guid_join" style="display: none;" name="awardGuidJoin">
-            </div>
-            <div>
-                <input type="submit" class="join_user_award" value="Join" />
-                <input type="button" class="cancel" value="Cancel" />
-            </div>
-        </form>
-        <form method="post" action="" class="user_edition" style="display: none;">
-            @{
-                users = DependencyResolver.UserLogic?.GetAll();
-
-                foreach (var user in users)
-                {
+            if (currentUser.UserRole == WebUser.Role.Admin)
+            {
+                <form method="post" action="" class="join" style="display: none; padding-left: 25px;">
+                    <h3>Join</h3>
                     <div>
-                        <input type="text" name="userNames" value=@user.Name />
-                        <input type="date" name="userDates" value=@user.DateOfBirth.ToString("yyyy-MM-dd") />
-                        <input type="text" name="userGuids" value=@user.UserGuid.ToString() style="display: none" />
-                    </div>
-                }
-            }
-            <p>
-                <input type="submit" class="edit_user" value="Ok" />
-                <input type="button" class="cancel" value="Cancel" />
-            </p>
-        </form>
-        <form method="post" action="" class="award_edition" style="display: none;">
-            @{
-                awards = DependencyResolver.AwardLogic?.GetAll();
+                        <h4>Choose user:</h4>
+                        <p>
+                            <select class="user_chosen_join">
+                                @{
+                                    users = DependencyResolver.UserLogic?.GetAll();
 
-                foreach (var award in awards)
-                {
+                                    foreach (var user in users)
+                                    {
+                                        <option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>
+                                    }
+                                }
+                            </select>
+                            <select class="user_chosen_join_guid" style="display: none;">
+                                @{
+                                    foreach (var user in users)
+                                    {
+                                        <option selected>@user.UserGuid.ToString()</option>
+                                    }
+                                }
+                            </select>
+                        </p>
+                        <input type="text" class="user_guid_join" style="display: none;" name="userGuidJoin">
+                    </div>
                     <div>
-                        <input type="text" name="awardTitles" value=@award.Title />
-                        <input type="text" name="awardGuids" value=@award.AwardGuid.ToString() style="display: none" />
+                        <h4>Choose award:</h4>
+                        <p>
+                            <select class="award_chosen_join">
+                                @{
+                                    var allAwards = DependencyResolver.AwardLogic?.GetAll();
+
+                                    foreach (var award in allAwards)
+                                    {
+                                        <option selected>@award.Title</option>
+                                    }
+                                }
+                            </select>
+                            <select class="award_chosen_join_guid" style="display: none;">
+                                @{
+                                    foreach (var award in allAwards)
+                                    {
+                                        <option selected>@award.AwardGuid.ToString()</option>
+                                    }
+                                }
+                            </select>
+                        </p>
+                        <input type="text" class="award_guid_join" style="display: none;" name="awardGuidJoin">
                     </div>
-                }
+                    <div>
+                        <input type="submit" class="join_user_award" value="Join" />
+                        <input type="button" class="cancel" value="Cancel" />
+                    </div>
+                </form>
             }
-            <p>
-                <input type="submit" class="edit_award" value="Ok" />
-                <input type="button" class="cancel" value="Cancel" />
-            </p>
-        </form>
-        <form enctype="multipart/form-data" method="post" action="" class="user_image_upload" style="display: none; padding-left: 25px;">
-            <h3>Upload image to user</h3>
-            <div>
-                <h4>Choose user:</h4>
-                <p>
-                    <select class="user_chosen_image">
-                        @{
-                            users = DependencyResolver.UserLogic?.GetAll();
 
-                            foreach (var user in users)
-                            {
-                                <option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>
-                            }
-                        }
-                    </select>
-                    <select class="user_chosen_image_guid" style="display: none;">
-                        @{
-                            foreach (var user in users)
-                            {
-                                <option selected>@user.UserGuid.ToString()</option>
-                            }
-                        }
-                    </select>
-                </p>
-                <input type="text" class="user_image_guid" style="display: none;" name="userImageGuid">
-            </div>
-            <h4>Choose image:</h4>
-            <p class="alertbox"></p>
-            <p>
-                <input type="file" class="userImage" name="userImage" accept="image/*" value=@userImages>
-            </p>
-            <div style="padding-top: 20px;">
-                <input type="submit" class="upload_user_image" value="Ok" />
-                <input type="button" class="cancel" value="Cancel" />
-            </div>
-        </form>
-        <form enctype="multipart/form-data" method="post" action="" class="award_image_upload" style="display: none; padding-left: 25px;">
-            <h3>Upload image to award</h3>
-            <div>
-                <h4>Choose award:</h4>
-                <p>
-                    <select class="award_chosen_image">
-                        @{
-                            awards = DependencyResolver.AwardLogic?.GetAll();
+            if (currentUser.UserRole == WebUser.Role.Admin)
+            {
+                <form method="post" action="" class="user_edition" style="display: none;">
+                    @{
+                        users = DependencyResolver.UserLogic?.GetAll();
 
-                            foreach (var award in awards)
-                            {
-                                <option selected>@(award.Title)</option>
-                            }
+                        foreach (var user in users)
+                        {
+                            <div>
+                                <input type="text" name="userNames" value=@user.Name />
+                                <input type="date" name="userDates" value=@user.DateOfBirth.ToString("yyyy-MM-dd") />
+                                <input type="text" name="userGuids" value=@user.UserGuid.ToString() style="display: none" />
+                            </div>
                         }
-                    </select>
-                    <select class="award_chosen_image_guid" style="display: none;">
-                        @{
-                            foreach (var award in awards)
-                            {
-                                <option selected>@award.AwardGuid.ToString()</option>
-                            }
+                    }
+                    <p>
+                        <input type="submit" class="edit_user" value="Ok" />
+                        <input type="button" class="cancel" value="Cancel" />
+                    </p>
+                </form>
+                <form method="post" action="" class="award_edition" style="display: none;">
+                    @{
+                        var awards = DependencyResolver.AwardLogic?.GetAll();
+
+                        foreach (var award in awards)
+                        {
+                            <div>
+                                <input type="text" name="awardTitles" value=@award.Title />
+                                <input type="text" name="awardGuids" value=@award.AwardGuid.ToString() style="display: none" />
+                            </div>
                         }
-                    </select>
-                </p>
-                <input type="text" class="award_image_guid" style="display: none;" name="awardImageGuid">
-            </div>
-            <h4>Choose image:</h4>
-            <p class="alertbox"></p>
-            <p>
-                <input type="file" class="awardImage" name="awardImage" accept="image/*" value=@awardImages>
-            </p>
-            <div style="padding-top: 20px;">
-                <input type="submit" class="upload_award_image" value="Ok" />
-                <input type="button" class="cancel" value="Cancel" />
-            </div>
-        </form>
+                    }
+                    <p>
+                        <input type="submit" class="edit_award" value="Ok" />
+                        <input type="button" class="cancel" value="Cancel" />
+                    </p>
+                </form>
+                <form enctype="multipart/form-data" method="post" action="" class="user_image_upload" style="display: none; padding-left: 25px;">
+                    <h3>Upload image to user</h3>
+                    <div>
+                        <h4>Choose user:</h4>
+                        <p>
+                            <select class="user_chosen_image">
+                                @{
+                                    users = DependencyResolver.UserLogic?.GetAll();
+
+                                    foreach (var user in users)
+                                    {
+                                        <option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>
+                                    }
+                                }
+                            </select>
+                            <select class="user_chosen_image_guid" style="display: none;">
+                                @{
+                                    foreach (var user in users)
+                                    {
+                                        <option selected>@user.UserGuid.ToString()</option>
+                                    }
+                                }
+                            </select>
+                        </p>
+                        <input type="text" class="user_image_guid" style="display: none;" name="userImageGuid">
+                    </div>
+                    <h4>Choose image:</h4>
+                    <p class="alertbox"></p>
+                    <p>
+                        <input type="file" class="userImage" name="userImage" accept="image/*" value=@userImages>
+                    </p>
+                    <div style="padding-top: 20px;">
+                        <input type="submit" class="upload_user_image" value="Ok" />
+                        <input type="button" class="cancel" value="Cancel" />
+                    </div>
+                </form>
+                <form enctype="multipart/form-data" method="post" action="" class="award_image_upload" style="display: none; padding-left: 25px;">
+                    <h3>Upload image to award</h3>
+                    <div>
+                        <h4>Choose award:</h4>
+                        <p>
+                            <select class="award_chosen_image">
+                                @{
+                                    awards = DependencyResolver.AwardLogic?.GetAll();
+
+                                    foreach (var award in awards)
+                                    {
+                                        <option selected>@(award.Title)</option>
+                                    }
+                                }
+                            </select>
+                            <select class="award_chosen_image_guid" style="display: none;">
+                                @{
+                                    foreach (var award in awards)
+                                    {
+                                        <option selected>@award.AwardGuid.ToString()</option>
+                                    }
+                                }
+                            </select>
+                        </p>
+                        <input type="text" class="award_image_guid" style="display: none;" name="awardImageGuid">
+                    </div>
+                    <h4>Choose image:</h4>
+                    <p class="alertbox"></p>
+                    <p>
+                        <input type="file" class="awardImage" name="awardImage" accept="image/*" value=@awardImages>
+                    </p>
+                    <div style="padding-top: 20px;">
+                        <input type="submit" class="upload_award_image" value="Ok" />
+                        <input type="button" class="cancel" value="Cancel" />
+                    </div>
+                </form>
+            }
+        }
     </div>
 </body>
 </html>
