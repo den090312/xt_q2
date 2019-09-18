@@ -1,8 +1,11 @@
 ﻿@{
+    var root = Server.MapPath("~");
+    var userOperationsRes = @"\UserOperations.txt";
+
     var message = string.Empty;
     var userImages = HttpContext.Current.Request.Files;
     var awardImages = HttpContext.Current.Request.Files;
-    var currentUser = WebUser.Current;
+    var currentUser = WebUser.DefaultAdmin;
 
     if (IsPost)
     {
@@ -156,7 +159,6 @@
         if (userImageGuid != null)
         {
             var userImagePath = Server.MapPath(userImageFileName);
-            var root = Server.MapPath("~");
 
             if (Images.ImageSaved(userImagePath, root, userImageFile, userImageGuid))
             {
@@ -181,7 +183,6 @@
         if (awardImageGuid != null)
         {
             var awardImagePath = Server.MapPath(awardImageFileName);
-            var root = Server.MapPath("~");
 
             if (Images.ImageSaved(awardImagePath, root, awardImageFile, awardImageGuid))
             {
@@ -217,6 +218,19 @@
             <input type="button" class="log_out" value="Log out" style="display: none" />
             <input type="button" class="register" value="Register" />
         </div>
+
+        @{
+            var htmlRaw = string.Empty;
+
+            if (currentUser.UserRole != WebUser.Role.Admin && currentUser.UserRole != WebUser.Role.User)
+            {
+                return;
+            }
+
+            htmlRaw = File.ReadAllText(root + userOperationsRes); 
+
+            @Html.Raw(htmlRaw);
+        }
         <div class="menu">
             <div class="caption">
                 Users operations
@@ -341,13 +355,14 @@
             <input type="button" class="cancel" value="Cancel" />
         </form>
         <div class="listusers" style="display: none;">
+            <input type="button" class="cancel" value="Back" style="display: block;"/>
             @{
                 users = DependencyResolver.UserLogic?.GetAll();
                 IEnumerable<Entities.Award> awardsByUser;
 
                 foreach (var user in users)
                 {
-                    <img class="user_img" src="@Images.GetImgSrc(Server.MapPath("~"), user.UserGuid.ToString())">
+                    <img class="user_img" src="@Images.GetImgSrc(root, user.UserGuid.ToString())">
                     <p>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</p>
 
                     awardsByUser = DependencyResolver.UserAwardLogic?.GetAwardsByUser(user);
@@ -355,7 +370,7 @@
                     foreach (var awardByUser in awardsByUser)
                     {
                         <div style="padding-left: 75px;">
-                            <img class="award_img" src="@Images.GetImgSrc(Server.MapPath("~"), awardByUser.AwardGuid.ToString())">
+                            <img class="award_img" src="@Images.GetImgSrc(root, awardByUser.AwardGuid.ToString())">
                             <p>@(awardByUser.Title)</p>
                         </div>
                     }
@@ -364,12 +379,13 @@
             <input type="button" class="cancel" value="Back" />
         </div>
         <div class="listawards" style="display: none;">
+            <input type="button" class="cancel" value="Back" style="display: block;" />
             @{
                 awards = DependencyResolver.AwardLogic?.GetAll();
 
                 foreach (var award in awards)
                 {
-                    <img class="award_img" src="@Images.GetImgSrc(Server.MapPath("~"), award.AwardGuid.ToString())">
+                    <img class="award_img" src="@Images.GetImgSrc(root, award.AwardGuid.ToString())">
                     <p>@award.Title</p>
                 }
             }

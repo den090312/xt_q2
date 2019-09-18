@@ -19,6 +19,8 @@ namespace WEB_UI
 
         public static WebUser Guest => new WebUser("Guest", Role.Guest, "Guest");
 
+        public static WebUser DefaultAdmin => new WebUser("admin", Role.Admin, "admin");
+
         public enum Role
         {
             None = 0,
