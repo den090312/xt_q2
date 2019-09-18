@@ -3,6 +3,15 @@
     var userImages = HttpContext.Current.Request.Files;
     var awardImages = HttpContext.Current.Request.Files;
 
+    if (WebUser.Current == null)
+    {
+        var currentUser = WebUser.Guest;
+    }
+    else
+    {
+        var currentUser = WebUser.Current;
+    }
+
     if (IsPost)
     {
         UserCreation();
@@ -145,7 +154,7 @@
 
     void SaveUserImage()
     {
-        if (!Images.ImageExists(userImages, out var userImageFile, out var userImageFileName))
+        if (!Images.TryGetImage(userImages, out var userImageFile, out var userImageFileName))
         {
             return;
         }
@@ -170,7 +179,7 @@
 
     void SaveAwardImage()
     {
-        if (!Images.ImageExists(awardImages, out var awardImageFile, out var awardImageFileName))
+        if (!Images.TryGetImage(awardImages, out var awardImageFile, out var awardImageFileName))
         {
             return;
         }
@@ -210,7 +219,13 @@
 <body>
     <b>@message</b>
     <div id="main" class="main">
-        <div class="block">
+        <div class="authentication">
+            Currrent user
+            <input type="button" class="log_in" value="Log in" />
+            <input type="button" class="log_out" value="Log out" style="display: none" />
+            <input type="button" class="register" value="Register" />
+        </div>
+        <div class="menu">
             <div class="caption">
                 Users operations
             </div>
@@ -232,7 +247,7 @@
                 </div>
             </div>
         </div>
-        <div class="block">
+        <div class="menu">
             <div class="caption">
                 Awards operations
             </div>
@@ -254,7 +269,7 @@
                 </div>
             </div>
         </div>
-        <div class="block">
+        <div class="menu">
             <div class="caption">
                 Join operations
             </div>

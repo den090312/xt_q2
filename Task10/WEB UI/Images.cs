@@ -8,7 +8,7 @@ namespace WEB_UI
     {
         private static readonly string altImageName = "alt";
 
-        public static bool ImageExists(HttpFileCollection images, out HttpPostedFile imageFile, out string imageFileName)
+        public static bool TryGetImage(HttpFileCollection images, out HttpPostedFile imageFile, out string imageFileName)
         {
             if (images == null || images.Count == 0)
             {

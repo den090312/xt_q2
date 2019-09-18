@@ -71,14 +71,14 @@ namespace DAL
 
         private void RemoveAward(Guid awardGuid)
         {
-            var users = GetAll();
+            var awards = GetAll();
 
             File.Delete(FilePath);
 
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(FilePath, true);
 
-            foreach (var award in users)
+            foreach (var award in awards)
             {
                 if (award.AwardGuid != awardGuid)
                 {
@@ -105,6 +105,11 @@ namespace DAL
 
             foreach (var awardLine in awardLines)
             {
+                if (awardLine == string.Empty)
+                {
+                    continue;
+                }
+
                 AddToAwards(ref awards, awardLine);
             }
 
@@ -126,6 +131,11 @@ namespace DAL
 
             foreach (var awardLine in awardLines)
             {
+                if (awardLine == string.Empty)
+                {
+                    continue;
+                }
+
                 var awardLineArray = awardLine.Split(Separator);
 
                 if (awardLineArray[0] == awardGuid.ToString())

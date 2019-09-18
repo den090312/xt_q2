@@ -7,7 +7,7 @@ namespace WEB_UI
 {
     public class WebUser
     {
-        public static WebUser Current { get; set; }
+        public static WebUser Current { get; set; } = null;
 
         public static List<WebUser> ListWebUsers { get; }
 
@@ -17,7 +17,7 @@ namespace WEB_UI
 
         public string PasswordHash { get; }
 
-        public WebUser Guest => new WebUser("Guest", Role.Guest, string.Empty);
+        public static WebUser Guest => new WebUser("Guest", Role.Guest, "Guest");
 
         public enum Role
         {

@@ -108,6 +108,11 @@ namespace DAL
 
             foreach (var userLine in userLines)
             {
+                if (userLine == string.Empty)
+                {
+                    continue;
+                }
+
                 AddToUsers(ref users, userLine);
             }
 
@@ -132,6 +137,11 @@ namespace DAL
 
             foreach (var userLine in userLines)
             {
+                if (userLine == string.Empty)
+                {
+                    continue;
+                }
+
                 var userLineArray = userLine.Split(Separator);
 
                 if (userLineArray[0] == userGuid.ToString())

@@ -53,8 +53,18 @@ namespace DAL
             var awardsByUser = new List<Award>();
             var userAwardLines = File.ReadAllLines(FilePath);
 
+            if (userAwardLines.Length == 0)
+            {
+                return new List<Award>();
+            }
+
             foreach (var line in userAwardLines)
             {
+                if (line == string.Empty)
+                {
+                    continue;
+                }
+
                 var userId = line.Split(Separator)[0];
                 var awardId = line.Split(Separator)[1];
 
