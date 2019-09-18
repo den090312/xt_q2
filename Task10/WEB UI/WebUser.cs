@@ -24,6 +24,10 @@ namespace WEB_UI
         public WebUser(string name, Role userRole, string password)
         {
             NullCheck(name);
+            NullCheck(password);
+
+            EmptyStringCheck(name);
+            EmptyStringCheck(password);
 
             Name = name;
             UserRole = userRole;
@@ -32,7 +36,18 @@ namespace WEB_UI
 
         private string GetPasswordHash(string password)
         {
+            NullCheck(password);
+
             return password;
+        }
+
+        private static void EmptyStringCheck(string inputString)
+        {
+
+            if (inputString == string.Empty)
+            {
+                throw new Exception($"{nameof(inputString)} is empty!");
+            }
         }
 
         private static void NullCheck<T>(T classObject) where T : class
