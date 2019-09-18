@@ -5,8 +5,10 @@ using System.Web;
 
 namespace WEB_UI
 {
-    public class WebUser
+    public class Webuser
     {
+        public static Webuser CurrentUser { get; set; }
+
         public enum Role
         {
             None = 0,
@@ -21,7 +23,7 @@ namespace WEB_UI
 
         public string PasswordHash { get; }
 
-        public WebUser(string name, Role userRole, string password)
+        public Webuser(string name, Role userRole, string password)
         {
             NullCheck(name);
             NullCheck(password);
