@@ -1,5 +1,5 @@
 ﻿@{
-    var currentUser = WebUser.Admin;
+    var currentUser = WebUser.User;
     var root = Server.MapPath("~");
     var AllUserOperationsHtml = @"\AllUserOperations.html";
     var AllAwardOperationsHtml = @"\AllAwardOperations.html";
@@ -197,11 +197,6 @@
             }
         }
     }
-
-    void RenderUserOperations()
-    {
-
-    }
 }
 
 @using Common;
@@ -228,14 +223,12 @@
         </div>
 
         @{
-            //htmlRaw = string.Empty;
-
-            if (currentUser.UserRole == WebUser.Role.Admin || currentUser.UserRole == WebUser.Role.User)
+            if (currentUser.UserRole == WebUser.Role.Admin)
             {
                 htmlRaw = File.ReadAllText(root + AllUserOperationsHtml);
             }
 
-            if (currentUser.UserRole == WebUser.Role.Guest)
+            if (currentUser.UserRole == WebUser.Role.Guest || currentUser.UserRole == WebUser.Role.User)
             {
                 htmlRaw = File.ReadAllText(root + UserPrintHtml);
             }
