@@ -31,12 +31,31 @@
         goToRegistration.onclick = function () {
             user_register = document.getElementsByClassName("user_register")[0];
             if (user_register) {
+                user_register.style.display = "block";
+                var reg_name = user_register.getElementsByClassName("reg_name")[0];
+                var reg_pass = user_register.getElementsByClassName("reg_pass")[0]; 
+                var alertbox = user_register.getElementsByClassName("alertbox")[0];
+                alertbox.style.display = "none";
                 setStyleDisplayNone("user_log_in");
                 setStyleDisplayNone("authentication");
                 setStyleDisplayNone("menu");
                 setStyleDisplayNone("currentUserName");
                 setStyleDisplayNone("currentUserRole");
-                user_register.style.display = "block";
+                var register = user_register.getElementsByClassName("register")[0];
+                register.onclick = function (event) {
+                    if (!reg_name.value) {
+                        alertbox.style.display = "block";
+                        alertbox.innerHTML = "Name is missing!";
+                        event.preventDefault();
+                        return;
+                    }
+                    if (!reg_pass.value) {
+                        alertbox.style.display = "block";
+                        alertbox.innerHTML = "Password is missing!";
+                        event.preventDefault();
+                        return;
+                    }
+                }
             }
         }
     }
