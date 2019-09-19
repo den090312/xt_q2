@@ -13,13 +13,13 @@ namespace WEB_UI
 
         public string PasswordHash { get; } = string.Empty;
 
-        public static List<WebUser> WebUserList { get; }
-
         public readonly static WebUser Guest;
 
         public readonly static WebUser User;
 
         public readonly static WebUser Admin;
+
+        public static List<WebUser> WebUserList { get; }
 
         static WebUser()
         {
@@ -35,7 +35,11 @@ namespace WEB_UI
             };
         }
 
-        public WebUser(string name, Role role, string password)
+        public WebUser()
+        {
+        }
+
+        private WebUser(string name, Role role, string password)
         {
             NullCheck(name);
             NullCheck(role);
@@ -53,8 +57,15 @@ namespace WEB_UI
             EmptyStringCheck(passwordHash);
 
             PasswordHash = passwordHash;
+        }
 
-            WebUserList.Add(this);
+        public WebUser Create(string name, Role role, string password)
+        {
+            var webUser = new WebUser(name, role, password);
+
+            WebUserList.Add(webUser);
+
+            return webUser;
         }
 
         public static bool Registered(WebUser user)

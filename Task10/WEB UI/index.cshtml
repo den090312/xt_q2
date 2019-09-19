@@ -41,7 +41,7 @@
         {
             roleName = "Admin";
 
-            var user = new WebUser(logName, new Role(roleName), logPass);
+            var user = new WebUser().Create(logName, new Role(roleName), logPass);
 
             LogIn(user);
         }
@@ -96,7 +96,7 @@
             return false;
         }
 
-        user = new WebUser(regName, new Role(roleName), regPass);
+        user = new WebUser().Create(regName, new Role(roleName), regPass);
 
         return WebUser.Registered(user);
     }
@@ -291,7 +291,7 @@
     <div id="main" class="main">
         <b>@message</b>
         <p class="currentUserName">User name: @(currentUser.Name)</p>
-        <p class="currentUserRole">Role: @(currentUser.UserRole)</p>
+        <p class="currentUserRole">Role: @(currentUser.UserRole.Name)</p>
         @{
             if (currentUser.UserRole == WebUser.Guest.UserRole)
             {
