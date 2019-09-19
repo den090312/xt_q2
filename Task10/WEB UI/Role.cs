@@ -168,6 +168,25 @@ namespace WEB_UI
             }
         }
 
+        public override bool Equals(object obj)
+        {
+            NullCheck(obj);
+
+            return obj is Role role &&
+                   Name == role.Name &&
+                   EqualityComparer<List<WebUser>>.Default.Equals(userList, role.userList);
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -513442300;
+
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<WebUser>>.Default.GetHashCode(userList);
+
+            return hashCode;
+        }
+
         public static bool operator ==(Role role1, Role role2)
         {
             NullCheck(role1);
