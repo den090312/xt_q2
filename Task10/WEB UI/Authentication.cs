@@ -9,18 +9,11 @@ namespace WEB_UI
     {
         public static WebUser CurrentUser { get; set; } = WebUser.Guest;
 
-        public static void LogIn(WebUser user)
+        public static bool LoggedIn(WebUser user)
         {
             NullCheck(user);
 
-            if (DataBase.UserExists(user))
-            {
-                CurrentUser = user;
-            }
-            else
-            {
-                CurrentUser = WebUser.Guest;
-            }
+            return DataBase.UserExists(user);
         }
 
         public static void LogOut() => CurrentUser = WebUser.Guest;

@@ -16,5 +16,29 @@ namespace WEB_UI
         {
             return true;
         }
+
+        public static string GetPasswordHash(string password)
+        {
+            NullCheck(password);
+            EmptyStringCheck(password);
+
+            return password;
+        }
+
+        private static void EmptyStringCheck(string inputString)
+        {
+            if (inputString == string.Empty)
+            {
+                throw new Exception($"{nameof(inputString)} is empty!");
+            }
+        }
+
+        private static void NullCheck<T>(T classObject) where T : class
+        {
+            if (classObject == null)
+            {
+                throw new NullReferenceException($"{nameof(classObject)} is null!");
+            }
+        }
     }
 }

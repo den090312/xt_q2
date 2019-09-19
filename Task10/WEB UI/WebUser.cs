@@ -39,14 +39,7 @@ namespace WEB_UI
 
             Name = name;
             UserRole = userRole;
-            PasswordHash = GetPasswordHash(password);
-        }
-
-        private string GetPasswordHash(string password)
-        {
-            NullCheck(password);
-
-            return password;
+            PasswordHash = DataBase.GetPasswordHash(password);
         }
 
         public static bool Registered(WebUser user)

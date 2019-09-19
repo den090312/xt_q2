@@ -32,36 +32,48 @@
     {
         var loggedOut = Request.Form["loggedOut"];
         var logName = Request.Form["logName"];
+        var logPass = Request.Form["logPass"];
         var regName = Request.Form["regName"];
+        var regPass = Request.Form["regPass"];
         var roleName = Request.Form["roleName"];
 
-        if (logName != null)
+        if (logName != null & logPass != null)
         {
             roleName = "Admin";
-            Authentication.LogIn(new WebUser(logName, GetRegRole(roleName), "password"));
+
+            var user = new WebUser(logName, GetRegRole(roleName), DataBase.GetPasswordHash(logPass));
+
+            LogIn(user);
         }
 
         if (loggedOut != null & loggedOut == "loggedOut")
         {
-            SetCurrenUserGuest();
+            Authentication.LogOut();
         }
 
         if (regName != null)
         {
             if (TryUserRegister(regName, roleName, out WebUser user))
             {
-                Authentication.LogIn(user);
+                LogIn(user);
             }
             else
             {
-                SetCurrenUserGuest();
+                Authentication.LogOut();
             }
         }
     }
 
-    void SetCurrenUserGuest()
+    void LogIn(WebUser user)
     {
-        Authentication.CurrentUser = WebUser.Guest;
+        if (Authentication.LoggedIn(user))
+        {
+            currentUser = user;
+        }
+        else
+        {
+            Authentication.LogOut();
+        }
     }
 
     bool TryUserRegister(string regName, string roleName, out WebUser user)
