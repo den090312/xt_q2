@@ -4,6 +4,10 @@
     text-align: center;
 }
 
+.operations {
+    padding-left: 25px;
+}
+
 .button {
     padding: 10px;
 }
@@ -28,4 +32,8 @@
 .award_img {
     width: 75px;
     height: 75px;
+}
+
+.user_edition, .award_edition {
+    padding-top: 25px;
 }

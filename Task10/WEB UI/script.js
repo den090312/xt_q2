@@ -19,13 +19,36 @@
     logIn();
     logOut();
 
+    function setStyleDisplayNone(elementName) {
+        var element = document.getElementsByClassName(elementName)[0];
+        if (element) {
+            element.style.display = "none";
+        }
+    }
+
+    goToRegistration = document.getElementsByClassName("goToRegistration")[0]; 
+    if (goToRegistration) {
+        goToRegistration.onclick = function () {
+            user_register = document.getElementsByClassName("user_register")[0];
+            if (user_register) {
+                setStyleDisplayNone("user_log_in");
+                setStyleDisplayNone("authentication");
+                setStyleDisplayNone("menu");
+                setStyleDisplayNone("currentUserName");
+                setStyleDisplayNone("currentUserRole");
+                user_register.style.display = "block";
+            }
+        }
+    }
+
     function setSelectedUserGuid() {
         var user_chosen = document.getElementsByClassName("user_chosen")[0];
         if (user_chosen) {
+            user_chosen.addEventListener("onchange", userChosenOnChange); 
             var user_chosen_guid = document.getElementsByClassName("user_chosen_guid")[0];
             var user_guid = document.getElementsByClassName("user_guid")[0];
             user_guid.value = user_chosen_guid[user_chosen_guid.selectedIndex].value;
-            user_chosen.onchange = function () {
+            function userChosenOnChange() {
                 user_chosen_guid.selectedIndex = user_chosen.selectedIndex;
                 user_guid.value = user_chosen_guid[user_chosen_guid.selectedIndex].value;
             }
@@ -35,10 +58,11 @@
     function setSelectedAwardGuid() {
         var award_chosen = document.getElementsByClassName("award_chosen")[0];
         if (award_chosen) {
+            award_chosen.addEventListener("onchange", awardChosenOnChange);
             var award_chosen_guid = document.getElementsByClassName("award_chosen_guid")[0];
             var award_guid = document.getElementsByClassName("award_guid")[0];
             award_guid.value = award_chosen_guid[award_chosen_guid.selectedIndex].value;
-            award_chosen.onchange = function () {
+            function awardChosenOnChange() {
                 award_chosen_guid.selectedIndex = award_chosen.selectedIndex;
                 award_guid.value = award_chosen_guid[award_chosen_guid.selectedIndex].value;
             }
@@ -48,10 +72,11 @@
     function setJoinGuidUser() {
         var user_chosen_join = document.getElementsByClassName("user_chosen_join")[0];
         if (user_chosen_join) {
+            user_chosen_join.addEventListener("onchange", userChosenJoinOnChange);
             var user_chosen_join_guid = document.getElementsByClassName("user_chosen_join_guid")[0];
             var user_guid_join = document.getElementsByClassName("user_guid_join")[0];
             user_guid_join.value = user_chosen_join_guid[user_chosen_join_guid.selectedIndex].value;
-            user_chosen_join.onchange = function () {
+            function userChosenJoinOnChange() {
                 user_chosen_join_guid.selectedIndex = user_chosen_join.selectedIndex;
                 user_guid_join.value = user_chosen_join_guid[user_chosen_join_guid.selectedIndex].value;
             }
@@ -61,10 +86,11 @@
     function setJoinGuidAward() {
         var award_chosen_join = document.getElementsByClassName("award_chosen_join")[0];
         if (award_chosen_join) {
+            award_chosen_join.addEventListener("onchange", awardChosenJoinOnChange);
             var award_chosen_join_guid = document.getElementsByClassName("award_chosen_join_guid")[0];
             var award_guid_join = document.getElementsByClassName("award_guid_join")[0];
             award_guid_join.value = award_chosen_join_guid[award_chosen_join_guid.selectedIndex].value;
-            award_chosen_join.onchange = function () {
+            function awardChosenJoinOnChange() {
                 award_chosen_join_guid.selectedIndex = award_chosen_join.selectedIndex;
                 award_guid_join.value = award_chosen_join_guid[award_chosen_join_guid.selectedIndex].value;
             }
@@ -74,10 +100,11 @@
     function setImageGuidUser() {
         var user_chosen_image = document.getElementsByClassName("user_chosen_image")[0];
         if (user_chosen_image) {
+            user_chosen_image.addEventListener("onchange", userChosenImageJoinOnChange);
             var user_chosen_image_guid = document.getElementsByClassName("user_chosen_image_guid")[0];
             var user_image_guid = document.getElementsByClassName("user_image_guid")[0];
             user_image_guid.value = user_chosen_image_guid[user_chosen_image_guid.selectedIndex].value;
-            user_chosen_image.onchange = function () {
+            function userChosenImageJoinOnChange() {
                 user_chosen_image_guid.selectedIndex = user_chosen_image.selectedIndex;
                 user_image_guid.value = user_chosen_image_guid[user_chosen_image_guid.selectedIndex].value;
             }
@@ -87,10 +114,11 @@
     function setImageGuidAward() {
         var award_chosen_image = document.getElementsByClassName("award_chosen_image")[0];
         if (award_chosen_image) {
+            award_chosen_image.addEventListener("onchange", awardChosenImageJoinOnChange);
             var award_chosen_image_guid = document.getElementsByClassName("award_chosen_image_guid")[0];
             var award_image_guid = document.getElementsByClassName("award_image_guid")[0];
             award_image_guid.value = award_chosen_image_guid[award_chosen_image_guid.selectedIndex].value;
-            award_chosen_image.onchange = function () {
+            function awardChosenImageJoinOnChange() {
                 award_chosen_image_guid.selectedIndex = award_chosen_image.selectedIndex;
                 award_image_guid.value = award_chosen_image_guid[award_chosen_image_guid.selectedIndex].value;
             }
@@ -129,37 +157,37 @@
             if (target) {
                 switch (target.className) {
                     case "cancel":
-                        goToMain(main);
+                        goToMain(main, operation);
                         break;
                     case "user_create":
-                        userCreation(main, event);
+                        userCreation(main, event, operation);
                         break;
                     case "user_delete":
-                        goToMain(main);
+                        goToMain(main, operation);
                         break;
                     case "award_create":
-                        awardCreation(main, event);
+                        awardCreation(main, event, operation);
                         break;
                     case "award_delete":
                         if (!confirm("Награда будет удалена у всех пользователей. Вы уверены?")) {
                             document.getElementsByClassName("award_guid")[0].value = "";
-                            goToMain(main);
+                            goToMain(main, operation);
                         }
                         break;
                     case "join_user_award":
-                        goToMain(main);
+                        goToMain(main, operation);
                         break;
                     case "upload_user_image":
-                        uploadUserImage(main, event);
+                        uploadUserImage(main, event, operation);
                         break;
                     case "upload_award_image":
-                        uploadAwardImage(main, event);
+                        uploadAwardImage(main, event, operation);
                         break;
                 }
             }
         }
 
-        function userCreation(main, e) {
+        function userCreation(main, e, operation) {
             var user_creation = document.getElementsByClassName("user_creation")[0];
             var alertbox = user_creation.getElementsByClassName("alertbox")[0];
             alertbox.style.display = "none";
@@ -183,10 +211,10 @@
                 e.preventDefault();
                 return;
             }
-            goToMain(main);
+            goToMain(main, operation);
         }
 
-        function awardCreation(main, e) {
+        function awardCreation(main, e, operation) {
             var award_creation = document.getElementsByClassName("award_creation")[0];
             var alertbox = award_creation.getElementsByClassName("alertbox")[0];
             alertbox.style.display = "none";
@@ -197,10 +225,10 @@
                 e.preventDefault();
                 return;
             }
-            goToMain(main);
+            goToMain(main, operation);
         }
 
-        function uploadUserImage(main, e) {
+        function uploadUserImage(main, e, operation) {
             var user_image_upload = document.getElementsByClassName("user_image_upload")[0];
             var userImage = user_image_upload.getElementsByClassName("userImage")[0];
             var alertbox = user_image_upload.getElementsByClassName("alertbox")[0];
@@ -211,10 +239,10 @@
                 e.preventDefault();
                 return;
             }
-            goToMain(main);
+            goToMain(main, operation);
         }
 
-        function uploadAwardImage(main, e) {
+        function uploadAwardImage(main, e, operation) {
             var award_image_upload = document.getElementsByClassName("award_image_upload")[0];
             var awardImage = award_image_upload.getElementsByClassName("awardImage")[0];
             var alertbox = award_image_upload.getElementsByClassName("alertbox")[0];
@@ -225,12 +253,7 @@
                 e.preventDefault();
                 return;
             }
-            goToMain(main);
-        }
-
-        function goToMain(main) {
-            operation.style.display = "none";
-            main.style.display = "block";
+            goToMain(main, operation);
         }
     }
 
@@ -276,13 +299,6 @@
                 }
             }
         };
-
-        function setStyleDisplayNone(elementName) {
-            var element = document.getElementsByClassName(elementName)[0];
-            if (element) {
-                element.style.display = "none";
-            }
-        }
 
         function displayUserDel(main) {
             main.style.display = "none";
@@ -460,48 +476,56 @@
             document.getElementsByClassName("award_image_upload")[0].style.display = "block";
         }
     }
-}
 
-function logOut() {
-    var user_log_out = document.getElementsByClassName("user_log_out")[0];
-    if (user_log_out) {
-        log_out = user_log_out.getElementsByClassName("log_out")[0];
-        if (log_out) {
-            log_out_post = user_log_out.getElementsByClassName("log_out_post")[0];
-            if (log_out_post) {
-                log_out_post.value = "loggedOut";
+    function goToMain(main, operation) {
+        operation.style.display = "none";
+        main.style.display = "block";
+    }
+
+    function logOut() {
+        var user_log_out = document.getElementsByClassName("user_log_out")[0];
+        if (user_log_out) {
+            log_out = user_log_out.getElementsByClassName("log_out")[0];
+            if (log_out) {
+                log_out_post = user_log_out.getElementsByClassName("log_out_post")[0];
+                if (log_out_post) {
+                    log_out_post.value = "loggedOut";
+                }
             }
         }
     }
-}
 
-function logIn() {
-    var user_log_in = document.getElementsByClassName("user_log_in")[0];
-    if (user_log_in) {
-        var alertbox = user_log_in.getElementsByClassName("alertbox")[0];
-        alertbox.style.display = "none";
-        log_in = user_log_in.getElementsByClassName("log_in")[0];
-        if (log_in) {
-            log_in.onclick = function (event) {
-                log_name = user_log_in.getElementsByClassName("log_name")[0];
-                if (log_name.value == "") {
-                    alertbox.style.display = "block";
-                    alertbox.innerHTML = "Name is missing!";
-                    event.preventDefault();
-                    return;
+    function logIn() {
+        var user_log_in = document.getElementsByClassName("user_log_in")[0];
+        if (user_log_in) {
+            var alertbox = user_log_in.getElementsByClassName("alertbox")[0];
+            alertbox.style.display = "none";
+            log_in = user_log_in.getElementsByClassName("log_in")[0];
+            if (log_in) {
+                log_in.onclick = function (event) {
+                    log_name = user_log_in.getElementsByClassName("log_name")[0];
+                    if (log_name.value == "") {
+                        alertbox.style.display = "block";
+                        alertbox.innerHTML = "Name is missing!";
+                        event.preventDefault();
+                        return;
+                    }
+                    log_pass = user_log_in.getElementsByClassName("log_pass")[0];
+                    if (log_pass.value == "") {
+                        alertbox.style.display = "block";
+                        alertbox.innerHTML = "Password is missing!";
+                        event.preventDefault();
+                        return;
+                    }
                 }
-                log_pass = user_log_in.getElementsByClassName("log_pass")[0];
-                if (log_pass.value == "") {
-                    alertbox.style.display = "block";
-                    alertbox.innerHTML = "Password is missing!";
-                    event.preventDefault();
-                    return;
+                log_in_post = user_log_in.getElementsByClassName("log_in_post")[0];
+                if (log_in_post) {
+                    log_in_post.value = "loggedIn";
                 }
-            }
-
-            log_in_post = user_log_in.getElementsByClassName("log_in_post")[0];
-            if (log_in_post) {
-                log_in_post.value = "loggedIn";
+                log_out_post = user_log_in.getElementsByClassName("log_out_post")[0];
+                if (log_out_post) {
+                    log_out_post.value = "loggedOut";
+                }
             }
         }
     }

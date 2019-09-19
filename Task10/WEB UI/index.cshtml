@@ -33,7 +33,7 @@
         var logged = Request.Form["logged"];
         var logName = Request.Form["logName"];
 
-        if (logged != null & logName!= null)
+        if (logged != null & logName != null)
         {
             if (logged == "loggedIn")
             {
@@ -238,11 +238,12 @@
 <body>
     <b>@message</b>
     <div id="main" class="main">
-        <div class="authentication">
-            <p>Currrent user: @currentUser.Name</p>
-            @{
-                if (currentUser.UserRole == WebUser.Role.Guest)
-                {
+        <p class="currentUserName">User name: @(currentUser.Name)</p>
+        <p class="currentUserRole">Role: @(currentUser.UserRole)</p>
+        @{
+            if (currentUser.UserRole == WebUser.Role.Guest)
+            {
+                <div class="authentication">
                     <form method="post" action="" class="user_log_in">
                         <p class="alertbox"></p>
                         <input type="text" class="log_name" name="logName" placeholder="Name" />
@@ -250,21 +251,40 @@
                         <input type="submit" class="log_in" value="Log in">
                         <input type="text" class="log_in_post" style="display: none;" name="logged" />
                     </form>
-                    <form method="post" action="" class="user_register" style="padding-top: 10px;">
-                        <input type="submit" class="register" value="Register" />
-                   </form>
-                }
-                else
-                {
-                    <form method="post" action="" class="user_log_out">
-                        <input type="submit" class="log_out" value="Log out" />
+                    <p>
+                        <input type="button" class="goToRegistration" value="Register" />
+                    </p>
+                </div>
+                <form method="post" action="" class="user_register" style="display: none;">
+                    <h4>Registration</h4>
+                    <p>
+                        <input type="text" class="reg_name" name="regName" placeholder="Name" />
+                    </p>
+                    <p>
+                        <input type="text" class="reg_pass" name="regPass" placeholder="Password" />
+                    </p>
+                    Role:
+                    <label><input type="radio" class="role_user" name="role" value="User" checked />User</label>
+                    <label><input type="radio" class="role_admin" name="role" value="Admin" />Admin</label>
+                    <p>
+                        <input type="submit" class="register" value="Ок" />
+                        <input type="submit" class="cancel_register" value="Cancel" />
+                    </p>
+                </form>
+                <form>
+                    <p>
                         <input type="text" class="log_out_post" style="display: none;" name="logged" />
-                    </form>
-                }
+                    </p>
+                </form>
             }
-        </div>
+            else
+            {
+                <form method="post" action="" class="user_log_out">
+                    <input type="submit" class="log_out" value="Log out" />
+                    <input type="text" class="log_out_post" style="display: none;" name="logged" />
+                </form>
+            }
 
-        @{
             if (currentUser.UserRole == WebUser.Role.Admin)
             {
                 htmlRaw = File.ReadAllText(root + AllUserOperationsHtml);
@@ -369,7 +389,6 @@
                 </form>
             }
         }
-
         <div class="listusers" style="display: none;">
             <input type="button" class="cancel" value="Back" style="display: block;" />
             @{
@@ -413,7 +432,7 @@
                     }
                     <input type="button" class="cancel" value="Back" />
                 </div>
-                <form method="post" action="" class="join" style="display: none; padding-left: 25px;">
+                <form method="post" action="" class="join" style="display: none;">
                     <h3>Join</h3>
                     <div>
                         <h4>Choose user:</h4>
@@ -503,7 +522,7 @@
                         <input type="button" class="cancel" value="Cancel" />
                     </p>
                 </form>
-                <form enctype="multipart/form-data" method="post" action="" class="user_image_upload" style="display: none; padding-left: 25px;">
+                <form enctype="multipart/form-data" method="post" action="" class="user_image_upload" style="display: none;">
                     <h3>Upload image to user</h3>
                     <div>
                         <h4>Choose user:</h4>
@@ -539,7 +558,7 @@
                         <input type="button" class="cancel" value="Cancel" />
                     </div>
                 </form>
-                <form enctype="multipart/form-data" method="post" action="" class="award_image_upload" style="display: none; padding-left: 25px;">
+                <form enctype="multipart/form-data" method="post" action="" class="award_image_upload" style="display: none;">
                     <h3>Upload image to award</h3>
                     <div>
                         <h4>Choose award:</h4>
