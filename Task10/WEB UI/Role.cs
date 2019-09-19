@@ -167,5 +167,21 @@ namespace WEB_UI
                 throw new NullReferenceException($"{nameof(classObject)} is null!");
             }
         }
+
+        public static bool operator ==(Role role1, Role role2)
+        {
+            NullCheck(role1);
+            NullCheck(role2);
+
+            return role1.Name == role2.Name;
+        }
+
+        public static bool operator !=(Role role1, Role role2)
+        {
+            NullCheck(role1);
+            NullCheck(role2);
+
+            return role1.Name != role2.Name;
+        }
     }
 }
