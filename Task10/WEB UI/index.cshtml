@@ -30,21 +30,18 @@
 
     void Logging()
     {
-        var logged = Request.Form["logged"];
+        var loggedOut = Request.Form["loggedOut"];
         var logName = Request.Form["logName"];
         var regName = Request.Form["regName"];
 
-        if (logged != null & logName != null)
+        if (logName != null)
         {
-            if (logged == "loggedIn")
-            {
-                var user = new WebUser(logName, WebUser.Role.Admin, "admin");
+            var user = new WebUser(logName, WebUser.Role.Admin, "admin");
 
-                Authentication.LogIn(user);
-            }
+            Authentication.LogIn(user);
         }
 
-        if (logged != null & logged == "loggedOut")
+        if (loggedOut != null & loggedOut == "loggedOut")
         {
             Authentication.CurrentUser = WebUser.Guest;
         }
@@ -257,7 +254,6 @@
                         <input type="text" class="log_name" name="logName" placeholder="Name" />
                         <input type="text" class="log_pass" name="logPass" placeholder="Password" />
                         <input type="submit" class="log_in" value="Log in">
-                        <input type="text" class="log_in_post" style="display: none;" name="logged" />
                     </form>
                     <p>
                         <input type="button" class="goToRegistration" value="Register" />
@@ -280,17 +276,12 @@
                         <input type="submit" class="cancel_register" value="Cancel" />
                     </p>
                 </form>
-                <form>
-                    <p>
-                        <input type="text" class="log_out_post" style="display: none;" name="logged" />
-                    </p>
-                </form>
             }
             else
             {
                 <form method="post" action="" class="user_log_out">
                     <input type="submit" class="log_out" value="Log out" />
-                    <input type="text" class="log_out_post" style="display: none;" name="logged" />
+                    <input type="text" class="log_out_post" style="display: none;" name="loggedOut" />
                 </form>
             }
 

@@ -541,14 +541,6 @@
                         return;
                     }
                 }
-                log_in_post = user_log_in.getElementsByClassName("log_in_post")[0];
-                if (log_in_post) {
-                    log_in_post.value = "loggedIn";
-                }
-                log_out_post = user_log_in.getElementsByClassName("log_out_post")[0];
-                if (log_out_post) {
-                    log_out_post.value = "loggedOut";
-                }
             }
         }
     }
