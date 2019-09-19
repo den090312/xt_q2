@@ -32,6 +32,7 @@
     {
         var logged = Request.Form["logged"];
         var logName = Request.Form["logName"];
+        var regName = Request.Form["regName"];
 
         if (logged != null & logName != null)
         {
@@ -46,6 +47,13 @@
         if (logged != null & logged == "loggedOut")
         {
             Authentication.CurrentUser = WebUser.Guest;
+        }
+
+        if (regName != null)
+        {
+            var user = new WebUser(regName, WebUser.Role.Admin, "admin");
+
+            Authentication.LogIn(user);
         }
     }
 

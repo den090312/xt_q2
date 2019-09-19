@@ -41,23 +41,27 @@
                 setStyleDisplayNone("menu");
                 setStyleDisplayNone("currentUserName");
                 setStyleDisplayNone("currentUserRole");
-                var register = user_register.getElementsByClassName("register")[0];
-                register.onclick = function (event) {
-                    if (!reg_name.value) {
-                        alertbox.style.display = "block";
-                        alertbox.innerHTML = "Name is missing!";
-                        event.preventDefault();
-                        return;
-                    }
-                    if (!reg_pass.value) {
-                        alertbox.style.display = "block";
-                        alertbox.innerHTML = "Password is missing!";
-                        event.preventDefault();
-                        return;
-                    }
-                }
+                validateRegistration(reg_name, alertbox, reg_pass);
             }
         }
+    }
+
+    function validateRegistration(reg_name, alertbox, reg_pass) {
+        var register = user_register.getElementsByClassName("register")[0];
+        register.onclick = function (event) {
+            if (!reg_name.value) {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "Name is missing!";
+                event.preventDefault();
+                return;
+            }
+            if (!reg_pass.value) {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "Password is missing!";
+                event.preventDefault();
+                return;
+            }
+        };
     }
 
     function setSelectedUserGuid() {
