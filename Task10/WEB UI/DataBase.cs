@@ -22,7 +22,7 @@ namespace WEB_UI
             NullCheck(userName);
             EmptyStringCheck(userName);
 
-            return true;
+            return false;
         }
 
         public static bool PasswordIsOk(string userName, string password) => password == GetPassWordByName(userName);
@@ -32,14 +32,14 @@ namespace WEB_UI
             NullCheck(password);
             EmptyStringCheck(password);
 
-            var hash = string.Empty;
+            var hash = password;
 
             return hash;
         }
 
         private static string GetPasswordFromHash(string hash)
         {
-            var password = string.Empty;
+            var password = hash;
 
             return password;
         }
@@ -49,7 +49,7 @@ namespace WEB_UI
             NullCheck(userName);
             EmptyStringCheck(userName);
 
-            var password = string.Empty;
+            var password = userName;
 
             return password;
         }

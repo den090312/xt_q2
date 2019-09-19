@@ -22,13 +22,13 @@
         EditAwards();
         SaveUserImage();
         SaveAwardImage();
-        Logging();
+        Loggin();
 
         //POST-reload page fix
         @Html.Raw("<script>document.location='https://localhost:44337/index.cshtml'</script>");
     }
 
-    void Logging()
+    void Loggin()
     {
         var loggedOut = Request.Form["loggedOut"];
         var logName = Request.Form["logName"];
@@ -41,7 +41,7 @@
         {
             roleName = "Admin";
 
-            var user = new WebUser(logName, GetRegRole(roleName), Database.GetHashFromPassword(logPass));
+            var user = new WebUser(logName, GetRole(roleName), logPass);
 
             LogIn(user);
         }
@@ -51,7 +51,7 @@
             Authentication.LogOut();
         }
 
-        if (regName != null & regPass != null &  roleName != null)
+        if (regName != null & regPass != null & roleName != null)
         {
             if (TryUserRegister(regName, regPass, roleName, out WebUser user))
             {
@@ -89,15 +89,19 @@
         {
             user = WebUser.Guest;
 
+            message = "User name already exists";
+
+            Response.Write("<script>alert('User name already exists!');</script>");
+
             return false;
         }
 
-        user = new WebUser(regName, GetRegRole(roleName), Database.GetHashFromPassword(regPass));
+        user = new WebUser(regName, GetRole(roleName), regPass);
 
         return WebUser.Registered(user);
     }
 
-    WebUser.Role GetRegRole(string roleName)
+    WebUser.Role GetRole(string roleName)
     {
         if (roleName == null || roleName == string.Empty)
         {
@@ -304,8 +308,8 @@
     <title>UserAwards</title>
 </head>
 <body>
-    <b>@message</b>
     <div id="main" class="main">
+        <b>@message</b>
         <p class="currentUserName">User name: @(currentUser.Name)</p>
         <p class="currentUserRole">Role: @(currentUser.UserRole)</p>
         @{

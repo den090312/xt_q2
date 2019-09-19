@@ -46,7 +46,16 @@ namespace WEB_UI
         {
             NullCheck(user);
 
-            return Database.UserAdded(user);
+            if (Database.UserAdded(user))
+            {
+                Authentication.CurrentUser = user;
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private static void EmptyStringCheck(string inputString)
