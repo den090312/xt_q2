@@ -9,7 +9,7 @@ namespace WEB_UI
 
         public string Name { get; } = string.Empty;
 
-        public Role UserRole { get; } = new Role("Guest");
+        public Role UserRole { get; }
 
         public string PasswordHash { get; } = string.Empty;
 
