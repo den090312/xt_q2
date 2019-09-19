@@ -39,14 +39,14 @@ namespace WEB_UI
 
             Name = name;
             UserRole = userRole;
-            PasswordHash = DataBase.GetPasswordHash(password);
+            PasswordHash = Database.GetHashFromPassword(password);
         }
 
         public static bool Registered(WebUser user)
         {
             NullCheck(user);
 
-            return DataBase.UserAdded(user);
+            return Database.UserAdded(user);
         }
 
         private static void EmptyStringCheck(string inputString)

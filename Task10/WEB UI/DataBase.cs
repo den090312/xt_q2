@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WEB_UI
 {
-    public class DataBase
+    public class Database
     {
         public static bool UserExists(WebUser user)
         {
@@ -17,10 +17,39 @@ namespace WEB_UI
             return true;
         }
 
-        public static string GetPasswordHash(string password)
+        public static bool UserNameExists(string userName)
+        {
+            NullCheck(userName);
+            EmptyStringCheck(userName);
+
+            return true;
+        }
+
+        public static bool PasswordIsOk(string userName, string password) => password == GetPassWordByName(userName);
+
+        public static string GetHashFromPassword(string password)
         {
             NullCheck(password);
             EmptyStringCheck(password);
+
+            var hash = string.Empty;
+
+            return hash;
+        }
+
+        private static string GetPasswordFromHash(string hash)
+        {
+            var password = string.Empty;
+
+            return password;
+        }
+
+        private static string GetPassWordByName(string userName)
+        {
+            NullCheck(userName);
+            EmptyStringCheck(userName);
+
+            var password = string.Empty;
 
             return password;
         }

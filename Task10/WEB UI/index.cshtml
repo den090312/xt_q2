@@ -41,7 +41,7 @@
         {
             roleName = "Admin";
 
-            var user = new WebUser(logName, GetRegRole(roleName), DataBase.GetPasswordHash(logPass));
+            var user = new WebUser(logName, GetRegRole(roleName), Database.GetHashFromPassword(logPass));
 
             LogIn(user);
         }
@@ -51,9 +51,9 @@
             Authentication.LogOut();
         }
 
-        if (regName != null)
+        if (regName != null & regPass != null &  roleName != null)
         {
-            if (TryUserRegister(regName, roleName, out WebUser user))
+            if (TryUserRegister(regName, regPass, roleName, out WebUser user))
             {
                 LogIn(user);
             }
@@ -76,16 +76,23 @@
         }
     }
 
-    bool TryUserRegister(string regName, string roleName, out WebUser user)
+    bool TryUserRegister(string regName, string regPass, string roleName, out WebUser user)
     {
-        if (roleName == null)
+        if (regName == string.Empty || regPass == string.Empty || roleName == string.Empty)
         {
             user = WebUser.Guest;
 
             return false;
         }
 
-        user = new WebUser(regName, GetRegRole(roleName), "password");
+        if (Database.UserNameExists(regName))
+        {
+            user = WebUser.Guest;
+
+            return false;
+        }
+
+        user = new WebUser(regName, GetRegRole(roleName), Database.GetHashFromPassword(regPass));
 
         return WebUser.Registered(user);
     }

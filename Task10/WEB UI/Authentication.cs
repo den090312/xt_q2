@@ -13,7 +13,7 @@ namespace WEB_UI
         {
             NullCheck(user);
 
-            return DataBase.UserExists(user);
+            return Database.UserExists(user);
         }
 
         public static void LogOut() => CurrentUser = WebUser.Guest;
