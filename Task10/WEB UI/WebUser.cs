@@ -49,6 +49,13 @@ namespace WEB_UI
             return password;
         }
 
+        public static bool Registered(WebUser user)
+        {
+            NullCheck(user);
+
+            return DataBase.UserAdded(user);
+        }
+
         private static void EmptyStringCheck(string inputString)
         {
             if (inputString == string.Empty)

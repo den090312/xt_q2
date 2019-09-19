@@ -9,47 +9,21 @@ namespace WEB_UI
     {
         public static WebUser CurrentUser { get; set; } = WebUser.Guest;
 
-        public static void LogIn(WebUser loggedUser)
+        public static void LogIn(WebUser user)
         {
-            NullCheck(loggedUser);
+            NullCheck(user);
 
-            CurrentUser = loggedUser;
-        }
-
-        public static bool LoggedOut()
-        {
-            try
+            if (DataBase.UserExists(user))
             {
-                CurrentUser = null;
-
-                return true;
+                CurrentUser = user;
             }
-            catch
+            else
             {
-                return false;
+                CurrentUser = WebUser.Guest;
             }
         }
 
-        public static bool Registered(WebUser webUser)
-        {
-            try
-            {
-                NullCheck(webUser);
-
-                Register(webUser);
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        private static void Register(WebUser webUser)
-        {
-
-        }
+        public static void LogOut() => CurrentUser = WebUser.Guest;
 
         private static void NullCheck<T>(T classObject) where T : class
         {

@@ -33,35 +33,58 @@
         var loggedOut = Request.Form["loggedOut"];
         var logName = Request.Form["logName"];
         var regName = Request.Form["regName"];
+        var roleName = Request.Form["roleName"];
 
         if (logName != null)
         {
-            var user = new WebUser(logName, WebUser.Role.Admin, "admin");
-
-            Authentication.LogIn(user);
+            roleName = "Admin";
+            Authentication.LogIn(new WebUser(logName, GetRegRole(roleName), "password"));
         }
 
         if (loggedOut != null & loggedOut == "loggedOut")
         {
-            Authentication.CurrentUser = WebUser.Guest;
+            SetCurrenUserGuest();
         }
 
         if (regName != null)
         {
-            var roleName = Request.Form["roleName"];
-
-            if (roleName != null)
+            if (TryUserRegister(regName, roleName, out WebUser user))
             {
-                var user = new WebUser(regName, GetRegRole(roleName), roleName);
-
                 Authentication.LogIn(user);
             }
-
+            else
+            {
+                SetCurrenUserGuest();
+            }
         }
+    }
+
+    void SetCurrenUserGuest()
+    {
+        Authentication.CurrentUser = WebUser.Guest;
+    }
+
+    bool TryUserRegister(string regName, string roleName, out WebUser user)
+    {
+        if (roleName == null)
+        {
+            user = WebUser.Guest;
+
+            return false;
+        }
+
+        user = new WebUser(regName, GetRegRole(roleName), "password");
+
+        return WebUser.Registered(user);
     }
 
     WebUser.Role GetRegRole(string roleName)
     {
+        if (roleName == null || roleName == string.Empty)
+        {
+            return WebUser.Role.Guest;
+        }
+
         if (roleName == "Admin")
         {
             return WebUser.Role.Admin;
