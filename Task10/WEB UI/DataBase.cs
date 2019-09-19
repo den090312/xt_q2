@@ -78,6 +78,13 @@ namespace WEB_UI
             return hash;
         }
 
+        public static IEnumerable<WebUser> FindUsersInRole(Role role)
+        {
+            NullCheck(role);
+
+            return new List<WebUser>();
+        }
+
         private static void EmptyStringCheck(string inputString)
         {
             if (inputString == string.Empty)

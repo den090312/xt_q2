@@ -11,35 +11,28 @@ namespace WEB_UI
 
         public string Name { get; }
 
-        public Role UserRole { get; } = Role.None;
+        public Role Role { get; }
 
         public string PasswordHash { get; }
 
-        public static WebUser Guest => new WebUser("Guest", Role.Guest, "Guest");
+        public static List<WebUser> WebUserList { get; }
 
-        public static WebUser Admin => new WebUser("admin", Role.Admin, "admin");
+        static WebUser() => WebUserList = new List<WebUser>();
 
-        public static WebUser User => new WebUser("user", Role.User, "user");
-
-        public enum Role
-        {
-            None = 0,
-            Guest = 1,
-            User = 2,
-            Admin = 3
-        }
-
-        public WebUser(string name, Role userRole, string password)
+        public WebUser(string name, Role role, string password)
         {
             NullCheck(name);
+            NullCheck(role);
             NullCheck(password);
 
             EmptyStringCheck(name);
             EmptyStringCheck(password);
 
             Name = name;
-            UserRole = userRole;
+            Role = role;
             PasswordHash = Database.GetHashFromPassword(password);
+
+            WebUserList.Add(this);
         }
 
         public static bool Registered(WebUser user)

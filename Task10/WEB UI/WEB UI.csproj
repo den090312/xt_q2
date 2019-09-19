@@ -125,6 +125,7 @@
     <Compile Include="Images.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Crud.cs" />
+    <Compile Include="Role.cs" />
     <Compile Include="Webuser.cs" />
   </ItemGroup>
   <ItemGroup>
