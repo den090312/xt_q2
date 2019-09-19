@@ -41,7 +41,7 @@
         {
             roleName = "Admin";
 
-            var user = new WebUser(logName, GetRole(roleName), logPass);
+            var user = new WebUser(logName, new Role(roleName), logPass);
 
             LogIn(user);
         }
@@ -96,29 +96,9 @@
             return false;
         }
 
-        user = new WebUser(regName, GetRole(roleName), regPass);
+        user = new WebUser(regName, new Role(roleName), regPass);
 
         return WebUser.Registered(user);
-    }
-
-    WebUser.Role GetRole(string roleName)
-    {
-        if (roleName == null || roleName == string.Empty)
-        {
-            return WebUser.Role.Guest;
-        }
-
-        if (roleName == "Admin")
-        {
-            return WebUser.Role.Admin;
-        }
-
-        if (roleName == "User")
-        {
-            return WebUser.Role.User;
-        }
-
-        return WebUser.Role.Guest;
     }
 
     void UserCreation()
@@ -313,7 +293,7 @@
         <p class="currentUserName">User name: @(currentUser.Name)</p>
         <p class="currentUserRole">Role: @(currentUser.UserRole)</p>
         @{
-            if (currentUser.UserRole == WebUser.Role.Guest)
+            if (currentUser.UserRole == WebUser.Guest.UserRole)
             {
                 <div class="authentication">
                     <form method="post" action="" class="user_log_in">
@@ -352,12 +332,12 @@
                 </form>
             }
 
-            if (currentUser.UserRole == WebUser.Role.Admin)
+            if (currentUser.UserRole == WebUser.Admin.UserRole)
             {
                 htmlRaw = File.ReadAllText(root + AllUserOperationsHtml);
             }
 
-            if (currentUser.UserRole == WebUser.Role.Guest || currentUser.UserRole == WebUser.Role.User)
+            if (currentUser.UserRole == WebUser.Guest.UserRole || currentUser.UserRole == WebUser.User.UserRole)
             {
                 htmlRaw = File.ReadAllText(root + UserPrintHtml);
             }
@@ -366,7 +346,7 @@
 
             htmlRaw = string.Empty;
 
-            if (currentUser.UserRole == WebUser.Role.Admin)
+            if (currentUser.UserRole == WebUser.Admin.UserRole)
             {
                 htmlRaw = File.ReadAllText(root + AllAwardOperationsHtml);
             }
@@ -375,7 +355,7 @@
 
             htmlRaw = string.Empty;
 
-            if (currentUser.UserRole == WebUser.Role.Admin)
+            if (currentUser.UserRole == WebUser.Admin.UserRole)
             {
                 htmlRaw = File.ReadAllText(root + JoinOperationsHtml);
             }
@@ -400,7 +380,7 @@
             <input type="button" class="cancel" value="Cancel" />
         </form>
         @{
-            if (currentUser.UserRole == WebUser.Role.Admin)
+            if (currentUser.UserRole == WebUser.Admin.UserRole)
             {
                 <form method="post" action="" class="user_del" style="display: none;">
                     <h4>Choose user to delete:</h4>
@@ -467,12 +447,12 @@
                     <img class="user_img" src="@Images.GetImgSrc(root, user.UserGuid.ToString())">
                     <p>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</p>
 
-                    awardsByUser = DependencyResolver.UserAwardLogic?.GetAwardsByUser(user);
+                awardsByUser = DependencyResolver.UserAwardLogic?.GetAwardsByUser(user);
 
-                    if (currentUser.UserRole != WebUser.Role.Guest)
+                if (currentUser.UserRole != WebUser.Guest.UserRole)
+                {
+                    foreach (var awardByUser in awardsByUser)
                     {
-                        foreach (var awardByUser in awardsByUser)
-                        {
                             <div style="padding-left: 75px;">
                                 <img class="award_img" src="@Images.GetImgSrc(root, awardByUser.AwardGuid.ToString())">
                                 <p>@(awardByUser.Title)</p>
@@ -484,7 +464,7 @@
             <input type="button" class="cancel" value="Back" />
         </div>
         @{
-            if (currentUser.UserRole == WebUser.Role.Admin)
+            if (currentUser.UserRole == WebUser.Admin.UserRole)
             {
                 <div class="listawards" style="display: none;">
                     <input type="button" class="cancel" value="Back" style="display: block;" />

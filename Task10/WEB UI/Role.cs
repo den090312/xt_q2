@@ -9,18 +9,23 @@ namespace WEB_UI
     {
         public string Name { get; } = string.Empty;
 
-        private static readonly List<Role> roleList;
+        private List<WebUser> userList = new List<WebUser>();
+
+        private static List<Role> roleList;
 
         static Role() => roleList = new List<Role>();
 
-        public List<WebUser> listUsers;
-
-        private Role(string roleName)
+        public Role(string roleName)
         {
             NullCheck(roleName);
             EmptyStringCheck(roleName);
 
             Name = roleName;
+
+            if (!roleList.Exists(role => role.Name == roleName))
+            {
+                roleList.Add(this);
+            }
         }
 
         public static void AddUsersToRoles(IEnumerable<WebUser> users, IEnumerable<Role> roles)
@@ -47,7 +52,7 @@ namespace WEB_UI
             NullCheck(user);
             NullCheck(role);
 
-            role.listUsers.Add(user);
+            role.userList.Add(user);
         }
 
         public static void CreateRole(string roleName)
@@ -101,7 +106,7 @@ namespace WEB_UI
         {
             NullCheck(userRole);
 
-            return WebUser.WebUserList.FindAll(role => role.Role == userRole);
+            return WebUser.WebUserList.FindAll(role => role.UserRole == userRole);
         }
 
         public static bool IsUserInRole(WebUser user, Role role)
@@ -109,7 +114,7 @@ namespace WEB_UI
             NullCheck(user);
             NullCheck(role);
 
-            return user.Role == role;
+            return user.UserRole == role;
         }
 
         public static void RemoveUsersFromRoles(IEnumerable<WebUser> users, IEnumerable<Role> roles)
@@ -139,7 +144,7 @@ namespace WEB_UI
             NullCheck(role);
             NullCheck(user);
 
-            role.listUsers.Remove(user);
+            role.userList.Remove(user);
         }
 
         public static bool RoleExists(Role userRole)

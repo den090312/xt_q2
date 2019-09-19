@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace WEB_UI
 {
@@ -9,15 +7,33 @@ namespace WEB_UI
     {
         public int Id { get; }
 
-        public string Name { get; }
+        public string Name { get; } = string.Empty;
 
-        public Role Role { get; }
+        public Role UserRole { get; } = new Role("Guest");
 
-        public string PasswordHash { get; }
+        public string PasswordHash { get; } = string.Empty;
 
         public static List<WebUser> WebUserList { get; }
 
-        static WebUser() => WebUserList = new List<WebUser>();
+        public readonly static WebUser Guest;
+
+        public readonly static WebUser User;
+
+        public readonly static WebUser Admin;
+
+        static WebUser()
+        {
+            Guest = new WebUser("Guest", new Role("Guest"), "Guest");
+            User = new WebUser("User", new Role("User"), "User");
+            Admin = new WebUser("Admin", new Role("Admin"), "Admin");
+
+            WebUserList = new List<WebUser>
+            {
+                Guest,
+                User,
+                Admin
+            };
+        }
 
         public WebUser(string name, Role role, string password)
         {
@@ -29,8 +45,14 @@ namespace WEB_UI
             EmptyStringCheck(password);
 
             Name = name;
-            Role = role;
-            PasswordHash = Database.GetHashFromPassword(password);
+            UserRole = role;
+
+            var passwordHash = Database.GetHashFromPassword(password);
+
+            NullCheck(passwordHash);
+            EmptyStringCheck(passwordHash);
+
+            PasswordHash = passwordHash;
 
             WebUserList.Add(this);
         }
