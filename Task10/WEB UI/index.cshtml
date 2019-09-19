@@ -1,6 +1,6 @@
 ﻿@{
-    //var currentUser = Authentication.CurrentUsern;
-    var currentUser = WebUser.Admin;
+    var currentUser = Authentication.CurrentUser;
+    //var currentUser = WebUser.Admin;
     var root = Server.MapPath("~");
     var AllUserOperationsHtml = @"\AllUserOperations.html";
     var AllAwardOperationsHtml = @"\AllAwardOperations.html";
@@ -10,7 +10,6 @@
     var userImages = HttpContext.Current.Request.Files;
     var awardImages = HttpContext.Current.Request.Files;
     var htmlRaw = string.Empty;
-    var logged = string.Empty;
 
     if (IsPost)
     {
@@ -30,20 +29,23 @@
     }
 
     void Logging()
-    {        
-        logged = Request.Form["logged"];
+    {
+        var logged = Request.Form["logged"];
+        var logName = Request.Form["logName"];
 
-        if (logged != null)
+        if (logged != null & logName!= null)
         {
             if (logged == "loggedIn")
             {
-                Authentication.CurrentUser = WebUser.User;
-            }
+                var user = new WebUser(logName, WebUser.Role.Admin, "admin");
 
-            if (logged == "loggedOut")
-            {
-                Authentication.CurrentUser = WebUser.Guest;
+                Authentication.LogIn(user);
             }
+        }
+
+        if (logged != null & logged == "loggedOut")
+        {
+            Authentication.CurrentUser = WebUser.Guest;
         }
     }
 
@@ -242,18 +244,21 @@
                 if (currentUser.UserRole == WebUser.Role.Guest)
                 {
                     <form method="post" action="" class="user_log_in">
-                        <input type="submit" class="log_in" value="Log in" />
-                        <input type="text" class="log_in_post" style="display: none;" name="logged" value=@logged>
+                        <p class="alertbox"></p>
+                        <input type="text" class="log_name" name="logName" placeholder="Name" />
+                        <input type="text" class="log_pass" name="logPass" placeholder="Password" />
+                        <input type="submit" class="log_in" value="Log in">
+                        <input type="text" class="log_in_post" style="display: none;" name="logged" />
                     </form>
                     <form method="post" action="" class="user_register" style="padding-top: 10px;">
                         <input type="submit" class="register" value="Register" />
-                    </form>
+                   </form>
                 }
                 else
                 {
                     <form method="post" action="" class="user_log_out">
                         <input type="submit" class="log_out" value="Log out" />
-                        <input type="text" class="log_out_post" style="display: none;" name="logged" value=@logged>
+                        <input type="text" class="log_out_post" style="display: none;" name="logged" />
                     </form>
                 }
             }
@@ -332,7 +337,7 @@
                             }
                         </select>
                     </p>
-                    <input type="text" class="user_guid" style="display: none;" name="userGuid">
+                    <input type="text" class="user_guid" style="display: none;" name="userGuid" />
                     <input type="submit" class="user_delete" value="Delete" />
                     <input type="button" class="cancel" value="Cancel" />
                 </form>
@@ -358,7 +363,7 @@
                             }
                         </select>
                     </p>
-                    <input type="text" class="award_guid" style="display: none;" name="awardGuid">
+                    <input type="text" class="award_guid" style="display: none;" name="awardGuid" />
                     <input type="submit" class="award_delete" value="Delete" />
                     <input type="button" class="cancel" value="Cancel" />
                 </form>
@@ -432,7 +437,7 @@
                                 }
                             </select>
                         </p>
-                        <input type="text" class="user_guid_join" style="display: none;" name="userGuidJoin">
+                        <input type="text" class="user_guid_join" style="display: none;" name="userGuidJoin" />
                     </div>
                     <div>
                         <h4>Choose award:</h4>
@@ -456,7 +461,7 @@
                                 }
                             </select>
                         </p>
-                        <input type="text" class="award_guid_join" style="display: none;" name="awardGuidJoin">
+                        <input type="text" class="award_guid_join" style="display: none;" name="awardGuidJoin" />
                     </div>
                     <div>
                         <input type="submit" class="join_user_award" value="Join" />
@@ -488,8 +493,8 @@
                         foreach (var award in awards)
                         {
                             <div>
-                                <input type="text" name="awardTitles" value=@award.Title />
-                                <input type="text" name="awardGuids" value=@award.AwardGuid.ToString() style="display: none" />
+                                <input type="text" name="awardTitles" value=@award.Title>
+                                <input type="text" name="awardGuids" style="display: none" value=@award.AwardGuid.ToString()>
                             </div>
                         }
                     }
@@ -522,7 +527,7 @@
                                 }
                             </select>
                         </p>
-                        <input type="text" class="user_image_guid" style="display: none;" name="userImageGuid">
+                        <input type="text" class="user_image_guid" style="display: none;" name="userImageGuid" />
                     </div>
                     <h4>Choose image:</h4>
                     <p class="alertbox"></p>
@@ -558,7 +563,7 @@
                                 }
                             </select>
                         </p>
-                        <input type="text" class="award_image_guid" style="display: none;" name="awardImageGuid">
+                        <input type="text" class="award_image_guid" style="display: none;" name="awardImageGuid" />
                     </div>
                     <h4>Choose image:</h4>
                     <p class="alertbox"></p>

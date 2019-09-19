@@ -7,6 +7,8 @@ namespace WEB_UI
 {
     public class WebUser
     {
+        public int Id { get; }
+
         public string Name { get; }
 
         public Role UserRole { get; } = Role.None;

@@ -9,20 +9,11 @@ namespace WEB_UI
     {
         public static WebUser CurrentUser { get; set; } = WebUser.Guest;
 
-        public static bool LoggedIn(WebUser webUser)
+        public static void LogIn(WebUser loggedUser)
         {
-            try
-            {
-                NullCheck(webUser);
+            NullCheck(loggedUser);
 
-                CurrentUser = webUser;
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            CurrentUser = loggedUser;
         }
 
         public static bool LoggedOut()

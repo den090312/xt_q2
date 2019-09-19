@@ -478,8 +478,27 @@ function logOut() {
 function logIn() {
     var user_log_in = document.getElementsByClassName("user_log_in")[0];
     if (user_log_in) {
+        var alertbox = user_log_in.getElementsByClassName("alertbox")[0];
+        alertbox.style.display = "none";
         log_in = user_log_in.getElementsByClassName("log_in")[0];
         if (log_in) {
+            log_in.onclick = function (event) {
+                log_name = user_log_in.getElementsByClassName("log_name")[0];
+                if (log_name.value == "") {
+                    alertbox.style.display = "block";
+                    alertbox.innerHTML = "Name is missing!";
+                    event.preventDefault();
+                    return;
+                }
+                log_pass = user_log_in.getElementsByClassName("log_pass")[0];
+                if (log_pass.value == "") {
+                    alertbox.style.display = "block";
+                    alertbox.innerHTML = "Password is missing!";
+                    event.preventDefault();
+                    return;
+                }
+            }
+
             log_in_post = user_log_in.getElementsByClassName("log_in_post")[0];
             if (log_in_post) {
                 log_in_post.value = "loggedIn";
