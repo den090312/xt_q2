@@ -7,13 +7,15 @@ namespace WEB_UI
 {
     public static class Authentication
     {
+        public static WebUser CurrentUser { get; set; } = WebUser.Guest;
+
         public static bool LoggedIn(WebUser webUser)
         {
             try
             {
                 NullCheck(webUser);
 
-                WebUser.Current = webUser;
+                CurrentUser = webUser;
 
                 return true;
             }
@@ -27,7 +29,7 @@ namespace WEB_UI
         {
             try
             {
-                WebUser.Current = null;
+                CurrentUser = null;
 
                 return true;
             }
@@ -44,7 +46,6 @@ namespace WEB_UI
                 NullCheck(webUser);
 
                 Register(webUser);
-                WebUser.ListWebUsers.Add(webUser);
 
                 return true;
             }

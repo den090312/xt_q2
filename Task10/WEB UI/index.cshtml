@@ -1,5 +1,6 @@
 ﻿@{
-    var currentUser = WebUser.Current;
+    //var currentUser = Authentication.CurrentUsern;
+    var currentUser = WebUser.Admin;
     var root = Server.MapPath("~");
     var AllUserOperationsHtml = @"\AllUserOperations.html";
     var AllAwardOperationsHtml = @"\AllAwardOperations.html";
@@ -22,13 +23,13 @@
         EditAwards();
         SaveUserImage();
         SaveAwardImage();
-        Authentication();
+        Logging();
 
         //POST-reload page fix
         @Html.Raw("<script>document.location='https://localhost:44337/index.cshtml'</script>");
     }
 
-    void Authentication()
+    void Logging()
     {        
         logged = Request.Form["logged"];
 
@@ -36,12 +37,12 @@
         {
             if (logged == "loggedIn")
             {
-                WebUser.Current = WebUser.User;
+                Authentication.CurrentUser = WebUser.User;
             }
 
             if (logged == "loggedOut")
             {
-                WebUser.Current = WebUser.Guest;
+                Authentication.CurrentUser = WebUser.Guest;
             }
         }
     }
@@ -335,10 +336,6 @@
                     <input type="submit" class="user_delete" value="Delete" />
                     <input type="button" class="cancel" value="Cancel" />
                 </form>
-            }
-
-            if (currentUser.UserRole == WebUser.Role.Admin)
-            {
                 <form method="post" action="" class="award_del" style="display: none;">
                     <h4>Choose award to delete:</h4>
                     <p>
@@ -411,10 +408,6 @@
                     }
                     <input type="button" class="cancel" value="Back" />
                 </div>
-            }
-
-            if (currentUser.UserRole == WebUser.Role.Admin)
-            {
                 <form method="post" action="" class="join" style="display: none; padding-left: 25px;">
                     <h3>Join</h3>
                     <div>
@@ -446,7 +439,7 @@
                         <p>
                             <select class="award_chosen_join">
                                 @{
-                                    var allAwards = DependencyResolver.AwardLogic?.GetAll();
+                                    allAwards = DependencyResolver.AwardLogic?.GetAll();
 
                                     foreach (var award in allAwards)
                                     {
@@ -470,10 +463,6 @@
                         <input type="button" class="cancel" value="Cancel" />
                     </div>
                 </form>
-            }
-
-            if (currentUser.UserRole == WebUser.Role.Admin)
-            {
                 <form method="post" action="" class="user_edition" style="display: none;">
                     @{
                         users = DependencyResolver.UserLogic?.GetAll();

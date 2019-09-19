@@ -7,10 +7,6 @@ namespace WEB_UI
 {
     public class WebUser
     {
-        public static WebUser Current { get; set; } = Guest;
-
-        public static List<WebUser> ListWebUsers { get; }
-
         public string Name { get; }
 
         public Role UserRole { get; } = Role.None;
