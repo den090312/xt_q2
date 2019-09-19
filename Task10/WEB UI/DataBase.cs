@@ -33,7 +33,7 @@ namespace WEB_UI
             NullCheck(password);
             EmptyStringCheck(password);
 
-            return password == GetPassWordByName(userName);
+            return password == GetPasswordByName(userName);
         }
 
         public static string GetHashFromPassword(string password)
@@ -46,7 +46,7 @@ namespace WEB_UI
             return hash;
         }
 
-        private static string GetPassWordByName(string userName)
+        private static string GetPasswordByName(string userName)
         {
             NullCheck(userName);
             EmptyStringCheck(userName);
