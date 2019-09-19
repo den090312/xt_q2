@@ -25,7 +25,16 @@ namespace WEB_UI
             return false;
         }
 
-        public static bool PasswordIsOk(string userName, string password) => password == GetPassWordByName(userName);
+        public static bool PasswordIsOk(string userName, string password)
+        {
+            NullCheck(userName);
+            EmptyStringCheck(userName);
+
+            NullCheck(password);
+            EmptyStringCheck(password);
+
+            return password == GetPassWordByName(userName);
+        }
 
         public static string GetHashFromPassword(string password)
         {
@@ -37,6 +46,24 @@ namespace WEB_UI
             return hash;
         }
 
+        private static string GetPassWordByName(string userName)
+        {
+            NullCheck(userName);
+            EmptyStringCheck(userName);
+
+            var hash = GetHashFromDB(userName);
+
+            NullCheck(hash);
+            EmptyStringCheck(hash);
+
+            var password = GetPasswordFromHash(hash);
+
+            NullCheck(password);
+            EmptyStringCheck(password);
+
+            return password;
+        }
+
         private static string GetPasswordFromHash(string hash)
         {
             var password = hash;
@@ -44,14 +71,11 @@ namespace WEB_UI
             return password;
         }
 
-        private static string GetPassWordByName(string userName)
+        private static string GetHashFromDB(string userName)
         {
-            NullCheck(userName);
-            EmptyStringCheck(userName);
+            var hash = userName;
 
-            var password = userName;
-
-            return password;
+            return hash;
         }
 
         private static void EmptyStringCheck(string inputString)
