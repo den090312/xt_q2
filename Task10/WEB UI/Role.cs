@@ -9,9 +9,27 @@ namespace WEB_UI
 
         private List<WebUser> userList = new List<WebUser>();
 
+        public static Role Guest;
+
+        public static Role User;
+
+        public static Role Admin;
+
         private static List<Role> roleList;
 
-        static Role() => roleList = new List<Role>();
+        static Role()
+        {
+            Guest = new Role("Guest");
+            User  = new Role("User");
+            Admin = new Role("Admin");
+
+            roleList = new List<Role>
+            {
+                Guest,
+                User,
+                Admin
+            };
+        }
 
         public Role(string roleName)
         {
@@ -104,7 +122,7 @@ namespace WEB_UI
         {
             NullCheck(userRole);
 
-            return WebUser.WebUserList.FindAll(role => role.UserRole == userRole);
+            return WebUser.List.FindAll(role => role.Role == userRole);
         }
 
         public static bool IsUserInRole(WebUser user, Role role)
@@ -112,7 +130,7 @@ namespace WEB_UI
             NullCheck(user);
             NullCheck(role);
 
-            return user.UserRole == role;
+            return user.Role == role;
         }
 
         public static void RemoveUsersFromRoles(IEnumerable<WebUser> users, IEnumerable<Role> roles)
