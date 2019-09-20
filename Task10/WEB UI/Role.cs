@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace WEB_UI
 {
@@ -52,12 +53,20 @@ namespace WEB_UI
         {
             var newRole = new Role(roleName);
 
-            if (roleName.ToLower() != "guest")
+            bool matchName(Role role) => roleName.ToLower() == roleName.ToLower();
+
+            if (RoleList.Exists(matchName))
             {
-                if (!RoleList.Exists(role => role.Name == roleName))
-                {
-                    RoleList.Add(newRole);
-                }
+                return RoleList.Find(matchName);
+            }
+
+            if (Database.RoleAdded(newRole))
+            {
+                RoleList.Add(newRole);
+            }
+            else
+            {
+                throw new Exception("Error adding role to database!");
             }
 
             return newRole;
@@ -70,7 +79,9 @@ namespace WEB_UI
             NullCheck(roleName);
             EmptyStringCheck(roleName);
 
-            return RoleList.Find(role => role.Name == roleName);
+            bool matchRole(Role role) => role.Name == roleName;
+
+            return RoleList.Find(matchRole);
         }
 
         public static IEnumerable<Webuser> FindUsersInRole(Role role)
@@ -86,7 +97,9 @@ namespace WEB_UI
         {
             NullCheck(user);
 
-            if (!RoleList.Exists(role => role.Name == user.Name))
+            bool matchName(Role role) => role.Name.ToLower() == user.Name.ToLower();
+
+            if (!RoleList.Exists(matchName))
             {
                 userRole = null;
 
@@ -94,7 +107,7 @@ namespace WEB_UI
             }
             else
             {
-                userRole = RoleList.Find(role => role.Name == user.Name);
+                userRole = RoleList.Find(matchName);
 
                 return true;
             }
@@ -104,7 +117,9 @@ namespace WEB_UI
         {
             NullCheck(userRole);
 
-            return Webuser.list.FindAll(role => role.role == userRole);
+            bool matchRole(Webuser role) => role.role == userRole;
+
+            return Webuser.list.FindAll(matchRole);
         }
 
         public static bool IsUserInRole(Webuser user, Role role)
@@ -149,7 +164,9 @@ namespace WEB_UI
         {
             NullCheck(userRole);
 
-            return RoleList.Exists(role => role == userRole);
+            bool matchRole(Role role) => role == userRole;
+
+            return RoleList.Exists(matchRole);
         }
 
         private static void EmptyStringCheck(string inputString)

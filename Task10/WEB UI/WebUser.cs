@@ -24,7 +24,7 @@ namespace WEB_UI
             };
         }
 
-        public Webuser()
+        private Webuser()
         {
         }
 
@@ -40,7 +40,17 @@ namespace WEB_UI
             Name = name;
             this.role = role;
 
-            PasswordHash = Database.GetHashFromPassword(password);
+            PasswordHash = GetHashFromPassword(password);
+        }
+
+        private static int GetHashFromPassword(string password)
+        {
+            NullCheck(password);
+            EmptyStringCheck(password);
+
+            var hash = 0;
+
+            return hash;
         }
 
         public static Webuser Create(string name, Role role, string password)

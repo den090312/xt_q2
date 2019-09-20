@@ -7,6 +7,8 @@ namespace WEB_UI
 {
     public class Database
     {
+        private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=webusersdb;Integrated Security=True";
+
         public static bool UserExists(Webuser webuser)
         {
             return true;
@@ -18,7 +20,27 @@ namespace WEB_UI
 
             try
             {
-                AddWebuserToDatabase(webuser);
+                AddWebuser(webuser);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+            //AddWebuser(webuser);
+
+            //return true;
+        }
+
+        public static bool RoleAdded(Role role)
+        {
+            NullCheck(role);
+
+            try
+            {
+                AddRole(role);
 
                 return true;
             }
@@ -28,11 +50,43 @@ namespace WEB_UI
             }
         }
 
-        private static void AddWebuserToDatabase(Webuser webuser)
+        private static void AddRole(Role role)
         {
-            var IdRole = GetIdRoleByName(webuser?.role?.Name);
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
 
-            using (var sqlConnection = new SqlConnection())
+                sqlCommand.CommandText = "AddWebrole";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(new SqlParameter
+                {
+                    ParameterName = "@RoleName",
+                    Value = role.Name,
+                    SqlDbType = SqlDbType.NVarChar,
+                    Direction = ParameterDirection.Input
+                });
+ 
+                sqlConnection.Open();
+
+                sqlCommand.ExecuteNonQuery();
+            }
+        }
+
+        private static void AddWebuser(Webuser webuser)
+        {
+            var roleName = webuser?.role?.Name;
+
+            NullCheck(roleName);
+
+            var IdRole = GetIdRoleByName(roleName);
+
+            if (IdRole == -1)
+            {
+                throw new Exception($"Can't find id role by '{roleName}'!");
+            }
+
+            using (var sqlConnection = new SqlConnection(connectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
 
@@ -84,7 +138,39 @@ namespace WEB_UI
 
         private static int GetIdRoleByName(string roleName)
         {
-            var IdRole = 1;
+            int IdRole = -1;
+
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetIdRoleByName";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(new SqlParameter
+                {
+                    ParameterName = "@Name",
+                    Value = roleName,
+                    SqlDbType = SqlDbType.NVarChar,
+                    Direction = ParameterDirection.Input
+                });
+
+                sqlCommand.Parameters.Add(new SqlParameter
+                {
+                    ParameterName = "@IdRole",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                });
+
+                sqlConnection.Open();
+
+                var sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    return (int)sqlDataReader[0];
+                }
+            }
 
             return IdRole;
         }
@@ -106,16 +192,6 @@ namespace WEB_UI
             EmptyStringCheck(password);
 
             return password == GetPasswordByName(userName);
-        }
-
-        public static int GetHashFromPassword(string password)
-        {
-            NullCheck(password);
-            EmptyStringCheck(password);
-
-            var hash = 0;
-
-            return hash;
         }
 
         private static string GetPasswordByName(string userName)
