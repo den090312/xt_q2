@@ -1,18 +1,21 @@
 ﻿@{
     var currentUser = Authentication.CurrentUser;
     var root = Server.MapPath("~");
-    var AllUserOperationsHtml = @"\AllUserOperations.html";
+
+    var AllUserOperationsHtml  = @"\AllUserOperations.html";
     var AllAwardOperationsHtml = @"\AllAwardOperations.html";
-    var UserPrintHtml = @"\UserPrint.html";
-    var JoinOperationsHtml = @"\JoinOperations.html";
+    var UserPrintHtml          = @"\UserPrint.html";
+    var JoinOperationsHtml     = @"\JoinOperations.html";
+
     var message = string.Empty;
-    var userImages = HttpContext.Current.Request.Files;
-    var awardImages = HttpContext.Current.Request.Files;
     var htmlRaw = string.Empty;
 
-    var guest = new Role("Guest");
-    var roleUser  = new Role("User");
-    var admin = new Role("Admin");
+    var userImages  = HttpContext.Current.Request.Files;
+    var awardImages = HttpContext.Current.Request.Files;
+
+    var guest    = new Role("Guest");
+    var roleUser = new Role("User");
+    var admin    = new Role("Admin");
     
     if (IsPost)
     {
@@ -34,11 +37,11 @@
     void Loggin()
     {
         var loggedOut = Request.Form["loggedOut"];
-        var logName = Request.Form["logName"];
-        var logPass = Request.Form["logPass"];
-        var regName = Request.Form["regName"];
-        var regPass = Request.Form["regPass"];
-        var roleName = Request.Form["roleName"];
+        var logName   = Request.Form["logName"];
+        var logPass   = Request.Form["logPass"];
+        var regName   = Request.Form["regName"];
+        var regPass   = Request.Form["regPass"];
+        var roleName  = Request.Form["roleName"];
 
         if (logName != null & logPass != null)
         {
