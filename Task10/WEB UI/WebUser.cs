@@ -11,7 +11,7 @@ namespace WEB_UI
 
         public Role role { get; }
 
-        public string PasswordHash { get; } = string.Empty;
+        public int PasswordHash { get; }
 
         public readonly static Webuser Guest;
 
@@ -44,8 +44,8 @@ namespace WEB_UI
 
             var passwordHash = Database.GetHashFromPassword(password);
 
-            NullCheck(passwordHash);
-            EmptyStringCheck(passwordHash);
+            //NullCheck(passwordHash);
+            //EmptyStringCheck(passwordHash);
 
             PasswordHash = passwordHash;
         }

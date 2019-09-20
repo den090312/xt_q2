@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace WEB_UI
 {
@@ -36,12 +34,12 @@ namespace WEB_UI
             return password == GetPasswordByName(userName);
         }
 
-        public static string GetHashFromPassword(string password)
+        public static int GetHashFromPassword(string password)
         {
             NullCheck(password);
             EmptyStringCheck(password);
 
-            var hash = password;
+            var hash = 0;
 
             return hash;
         }
