@@ -7,7 +7,7 @@ namespace WEB_UI
     {
         public string Name { get; } = string.Empty;
 
-        private List<WebUser> userList = new List<WebUser>();
+        private List<Webuser> userList = new List<Webuser>();
 
         private static List<Role> roleList;
 
@@ -26,7 +26,7 @@ namespace WEB_UI
             }
         }
 
-        public static void AddUsersToRoles(IEnumerable<WebUser> users, IEnumerable<Role> roles)
+        public static void AddUsersToRoles(IEnumerable<Webuser> users, IEnumerable<Role> roles)
         {
             foreach (var role in roles)
             {
@@ -34,7 +34,7 @@ namespace WEB_UI
             }
         }
 
-        public static void AddUsersToRole(IEnumerable<WebUser> users, Role role)
+        public static void AddUsersToRole(IEnumerable<Webuser> users, Role role)
         {
             NullCheck(users);
             NullCheck(role);
@@ -45,7 +45,7 @@ namespace WEB_UI
             }
         }
 
-        public static void AddUserToRole(WebUser user, Role role)
+        public static void AddUserToRole(Webuser user, Role role)
         {
             NullCheck(user);
             NullCheck(role);
@@ -73,7 +73,7 @@ namespace WEB_UI
             return roleList.Find(role => role.Name == roleName);
         }
 
-        public static IEnumerable<WebUser> FindUsersInRole(Role role)
+        public static IEnumerable<Webuser> FindUsersInRole(Role role)
         {
             NullCheck(role);
 
@@ -82,7 +82,7 @@ namespace WEB_UI
 
         public static IEnumerable<Role> GetAllRoles() => roleList;
 
-        public static bool TryGetRoleForUser(WebUser user, out Role userRole)
+        public static bool TryGetRoleForUser(Webuser user, out Role userRole)
         {
             NullCheck(user);
 
@@ -100,14 +100,14 @@ namespace WEB_UI
             }
         }
 
-        public static IEnumerable<WebUser> GetUsersInRole(Role userRole)
+        public static IEnumerable<Webuser> GetUsersInRole(Role userRole)
         {
             NullCheck(userRole);
 
-            return WebUser.list.FindAll(role => role.role == userRole);
+            return Webuser.list.FindAll(role => role.role == userRole);
         }
 
-        public static bool IsUserInRole(WebUser user, Role role)
+        public static bool IsUserInRole(Webuser user, Role role)
         {
             NullCheck(user);
             NullCheck(role);
@@ -115,7 +115,7 @@ namespace WEB_UI
             return user.role == role;
         }
 
-        public static void RemoveUsersFromRoles(IEnumerable<WebUser> users, IEnumerable<Role> roles)
+        public static void RemoveUsersFromRoles(IEnumerable<Webuser> users, IEnumerable<Role> roles)
         {
             NullCheck(users);
             NullCheck(roles);
@@ -126,7 +126,7 @@ namespace WEB_UI
             }
         }
 
-        public static void RemoveUsersFromRole(IEnumerable<WebUser> users, Role role)
+        public static void RemoveUsersFromRole(IEnumerable<Webuser> users, Role role)
         {
             NullCheck(users);
             NullCheck(role);
@@ -137,7 +137,7 @@ namespace WEB_UI
             }
         }
 
-        public static void RemoveUserFromRole(Role role, WebUser user)
+        public static void RemoveUserFromRole(Role role, Webuser user)
         {
             NullCheck(role);
             NullCheck(user);
@@ -174,7 +174,7 @@ namespace WEB_UI
 
             return obj is Role role &&
                    Name == role.Name &&
-                   EqualityComparer<List<WebUser>>.Default.Equals(userList, role.userList);
+                   EqualityComparer<List<Webuser>>.Default.Equals(userList, role.userList);
         }
 
         public override int GetHashCode()
@@ -182,7 +182,7 @@ namespace WEB_UI
             var hashCode = -513442300;
 
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
-            hashCode = hashCode * -1521134295 + EqualityComparer<List<WebUser>>.Default.GetHashCode(userList);
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<Webuser>>.Default.GetHashCode(userList);
 
             return hashCode;
         }

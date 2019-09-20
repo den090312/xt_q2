@@ -44,7 +44,7 @@
         {
             roleName = "Admin";
 
-            var user = new WebUser().Create(logName, new Role(roleName), logPass);
+            var user = new Webuser().Create(logName, new Role(roleName), logPass);
 
             LogIn(user);
         }
@@ -56,7 +56,7 @@
 
         if (regName != null & regPass != null & roleName != null)
         {
-            if (TryUserRegister(regName, regPass, roleName, out WebUser user))
+            if (TryUserRegister(regName, regPass, roleName, out Webuser user))
             {
                 LogIn(user);
             }
@@ -67,7 +67,7 @@
         }
     }
 
-    void LogIn(WebUser user)
+    void LogIn(Webuser user)
     {
         if (Authentication.LoggedIn(user))
         {
@@ -79,18 +79,18 @@
         }
     }
 
-    bool TryUserRegister(string regName, string regPass, string roleName, out WebUser user)
+    bool TryUserRegister(string regName, string regPass, string roleName, out Webuser user)
     {
         if (regName == string.Empty || regPass == string.Empty || roleName == string.Empty)
         {
-            user = WebUser.Guest;
+            user = Webuser.Guest;
 
             return false;
         }
 
         if (Database.UserNameExists(regName))
         {
-            user = WebUser.Guest;
+            user = Webuser.Guest;
 
             message = "User name already exists";
 
@@ -99,9 +99,9 @@
             return false;
         }
 
-        user = new WebUser().Create(regName, new Role(roleName), regPass);
+        user = new Webuser().Create(regName, new Role(roleName), regPass);
 
-        return WebUser.Registered(user);
+        return Webuser.Registered(user);
     }
 
     void UserCreation()

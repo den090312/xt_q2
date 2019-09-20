@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WEB_UI
 {
-    public class WebUser
+    public class Webuser
     {
         public int Id { get; }
 
@@ -13,24 +13,24 @@ namespace WEB_UI
 
         public string PasswordHash { get; } = string.Empty;
 
-        public readonly static WebUser Guest;
+        public readonly static Webuser Guest;
 
-        public static List<WebUser> list { get; }
+        public static List<Webuser> list { get; }
 
-        static WebUser()
+        static Webuser()
         {
-            Guest = new WebUser("Guest", new Role("Guest"), "Guest");
-            list = new List<WebUser>
+            Guest = new Webuser("Guest", new Role("Guest"), "Guest");
+            list = new List<Webuser>
             {
                 Guest
             };
         }
 
-        public WebUser()
+        public Webuser()
         {
         }
 
-        private WebUser(string name, Role role, string password)
+        private Webuser(string name, Role role, string password)
         {
             NullCheck(name);
             NullCheck(role);
@@ -50,16 +50,16 @@ namespace WEB_UI
             PasswordHash = passwordHash;
         }
 
-        public WebUser Create(string name, Role role, string password)
+        public Webuser Create(string name, Role role, string password)
         {
-            var webUser = new WebUser(name, role, password);
+            var webUser = new Webuser(name, role, password);
 
             list.Add(webUser);
 
             return webUser;
         }
 
-        public static bool Registered(WebUser user)
+        public static bool Registered(Webuser user)
         {
             NullCheck(user);
 

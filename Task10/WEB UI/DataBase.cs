@@ -7,12 +7,12 @@ namespace WEB_UI
 {
     public class Database
     {
-        public static bool UserExists(WebUser user)
+        public static bool UserExists(Webuser user)
         {
             return true;
         }
 
-        public static bool UserAdded(WebUser user)
+        public static bool UserAdded(Webuser user)
         {
             return true;
         }
@@ -78,11 +78,11 @@ namespace WEB_UI
             return hash;
         }
 
-        public static IEnumerable<WebUser> FindUsersInRole(Role role)
+        public static IEnumerable<Webuser> FindUsersInRole(Role role)
         {
             NullCheck(role);
 
-            return new List<WebUser>();
+            return new List<Webuser>();
         }
 
         private static void EmptyStringCheck(string inputString)

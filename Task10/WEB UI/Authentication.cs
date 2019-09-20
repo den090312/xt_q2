@@ -4,11 +4,11 @@ namespace WEB_UI
 {
     public static class Authentication
     {
-        public static WebUser CurrentUser { get; set; }
+        public static Webuser CurrentUser { get; set; }
 
-        static Authentication() => CurrentUser = WebUser.Guest;
+        static Authentication() => CurrentUser = Webuser.Guest;
 
-        public static bool LoggedIn(WebUser user)
+        public static bool LoggedIn(Webuser user)
         {
             NullCheck(user);
 
@@ -24,7 +24,7 @@ namespace WEB_UI
             }
         }
 
-        public static void LogOut() => CurrentUser = WebUser.Guest;
+        public static void LogOut() => CurrentUser = Webuser.Guest;
 
         private static void NullCheck<T>(T classObject) where T : class
         {
