@@ -9,9 +9,9 @@ namespace WEB_UI
 
         private List<Webuser> userList = new List<Webuser>();
 
-        private static List<Role> roleList;
+        public static List<Role> RoleList { get; }
 
-        static Role() => roleList = new List<Role>();
+        static Role() => RoleList = new List<Role>();
 
         private Role(string roleName)
         {
@@ -54,23 +54,23 @@ namespace WEB_UI
 
             if (roleName.ToLower() != "guest")
             {
-                if (!roleList.Exists(role => role.Name == roleName))
+                if (!RoleList.Exists(role => role.Name == roleName))
                 {
-                    roleList.Add(newRole);
+                    RoleList.Add(newRole);
                 }
             }
 
             return newRole;
         }
 
-        public static void DeleteRole(Role role) => roleList.Remove(role);
+        public static void DeleteRole(Role role) => RoleList.Remove(role);
 
         public Role GetRole(string roleName)
         {
             NullCheck(roleName);
             EmptyStringCheck(roleName);
 
-            return roleList.Find(role => role.Name == roleName);
+            return RoleList.Find(role => role.Name == roleName);
         }
 
         public static IEnumerable<Webuser> FindUsersInRole(Role role)
@@ -80,13 +80,13 @@ namespace WEB_UI
             return Database.FindUsersInRole(role);
         }
 
-        public static IEnumerable<Role> GetAllRoles() => roleList;
+        public static IEnumerable<Role> GetAllRoles() => RoleList;
 
         public static bool TryGetRoleForUser(Webuser user, out Role userRole)
         {
             NullCheck(user);
 
-            if (!roleList.Exists(role => role.Name == user.Name))
+            if (!RoleList.Exists(role => role.Name == user.Name))
             {
                 userRole = null;
 
@@ -94,7 +94,7 @@ namespace WEB_UI
             }
             else
             {
-                userRole = roleList.Find(role => role.Name == user.Name);
+                userRole = RoleList.Find(role => role.Name == user.Name);
 
                 return true;
             }
@@ -149,7 +149,7 @@ namespace WEB_UI
         {
             NullCheck(userRole);
 
-            return roleList.Exists(role => role == userRole);
+            return RoleList.Exists(role => role == userRole);
         }
 
         private static void EmptyStringCheck(string inputString)

@@ -322,8 +322,16 @@
                         <input type="text" class="reg_pass" name="regPass" placeholder="Password" />
                     </p>
                     Role:
-                    <label><input type="radio" class="role_user" name="roleName" value="User" checked />User</label>
-                    <label><input type="radio" class="role_admin" name="roleName" value="Admin" />Admin</label>
+                    @{
+                        var roleList = Role.RoleList;
+
+                        foreach (var role in roleList)
+                        {
+                            <label><input type="radio" name="roleName" value="@(role.Name)" checked />@(role.Name)</label>
+                        }
+                    }
+                    <!--<label><input type="radio" name="roleName" value="User" checked />User</label>
+                    <label><input type="radio" name="roleName" value="Admin" />Admin</label>-->
                     <p>
                         <input type="submit" class="register" value="Ок" />
                         <input type="submit" class="cancel_register" value="Cancel" />
