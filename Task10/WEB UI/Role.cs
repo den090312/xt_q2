@@ -49,15 +49,33 @@ namespace WEB_UI
             role.userList.Add(user);
         }
 
-        public static Role Create(string roleName)
+        public static Role Get(string roleName)
         {
             var newRole = new Role(roleName);
 
             bool matchName(Role role) => roleName.ToLower() == roleName.ToLower();
 
-            if (RoleList.Exists(matchName))
+            if (Database.RoleNameReserved(roleName) & RoleList.Exists(matchName))
             {
                 return RoleList.Find(matchName);
+            }
+
+            if (!Database.RoleNameReserved(roleName) & RoleList.Exists(matchName))
+            {
+                if (Database.RoleAdded(newRole))
+                {
+                    RoleList.Add(newRole);
+                }
+            }
+
+            if (Database.RoleNameReserved(roleName) & !RoleList.Exists(matchName))
+            {
+                RoleList.Add(newRole);
+            }
+
+            if (!Database.RoleNameReserved(roleName) & !RoleList.Exists(matchName))
+            {
+                RoleList.Add(newRole);
             }
 
             if (Database.RoleAdded(newRole))
@@ -66,7 +84,7 @@ namespace WEB_UI
             }
             else
             {
-                throw new Exception("Error adding role to database!");
+                throw new Exception("Error adding new role to database!");
             }
 
             return newRole;

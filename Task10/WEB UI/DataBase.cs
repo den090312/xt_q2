@@ -14,6 +14,11 @@ namespace WEB_UI
             return true;
         }
 
+        public static bool RoleNameReserved(string roleName)
+        {
+            return true;
+        }
+
         public static bool UserAdded(Webuser webuser)
         {
             NullCheck(webuser);
