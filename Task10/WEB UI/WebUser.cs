@@ -9,21 +9,29 @@ namespace WEB_UI
 
         public string Name { get; } = string.Empty;
 
-        public Role Role { get; }
+        public Role UserRole { get; }
 
         public string PasswordHash { get; } = string.Empty;
 
         public readonly static WebUser Guest;
 
-        public static List<WebUser> List { get; }
+        public readonly static WebUser User;
+
+        public readonly static WebUser Admin;
+
+        public static List<WebUser> WebUserList { get; }
 
         static WebUser()
         {
             Guest = new WebUser("Guest", new Role("Guest"), "Guest");
+            User = new WebUser("User", new Role("User"), "User");
+            Admin = new WebUser("Admin", new Role("Admin"), "Admin");
 
-            List = new List<WebUser>
+            WebUserList = new List<WebUser>
             {
-                Guest
+                Guest,
+                User,
+                Admin
             };
         }
 
@@ -41,7 +49,7 @@ namespace WEB_UI
             EmptyStringCheck(password);
 
             Name = name;
-            this.Role = role;
+            UserRole = role;
 
             var passwordHash = Database.GetHashFromPassword(password);
 
@@ -55,7 +63,7 @@ namespace WEB_UI
         {
             var webUser = new WebUser(name, role, password);
 
-            List.Add(webUser);
+            WebUserList.Add(webUser);
 
             return webUser;
         }

@@ -290,9 +290,9 @@
     <div id="main" class="main">
         <b>@message</b>
         <p class="currentUserName">User name: @(currentUser.Name)</p>
-        <p class="currentUserRole">Role: @(currentUser.Role.Name)</p>
+        <p class="currentUserRole">Role: @(currentUser.UserRole.Name)</p>
         @{
-            if (currentUser.Role == Role.Guest)
+            if (currentUser.UserRole == WebUser.Guest.UserRole)
             {
                 <div class="authentication">
                     <form method="post" action="" class="user_log_in">
@@ -331,12 +331,12 @@
                 </form>
             }
 
-            if (currentUser.Role == Role.Admin)
+            if (currentUser.UserRole == WebUser.Admin.UserRole)
             {
                 htmlRaw = File.ReadAllText(root + AllUserOperationsHtml);
             }
 
-            if (currentUser.Role == Role.Guest || currentUser.Role == Role.User)
+            if (currentUser.UserRole == WebUser.Guest.UserRole || currentUser.UserRole == WebUser.User.UserRole)
             {
                 htmlRaw = File.ReadAllText(root + UserPrintHtml);
             }
@@ -345,7 +345,7 @@
 
             htmlRaw = string.Empty;
 
-            if (currentUser.Role == Role.Admin)
+            if (currentUser.UserRole == WebUser.Admin.UserRole)
             {
                 htmlRaw = File.ReadAllText(root + AllAwardOperationsHtml);
             }
@@ -354,7 +354,7 @@
 
             htmlRaw = string.Empty;
 
-            if (currentUser.Role == Role.Admin)
+            if (currentUser.UserRole == WebUser.Admin.UserRole)
             {
                 htmlRaw = File.ReadAllText(root + JoinOperationsHtml);
             }
@@ -379,7 +379,7 @@
             <input type="button" class="cancel" value="Cancel" />
         </form>
         @{
-            if (currentUser.Role == Role.Admin)
+            if (currentUser.UserRole == WebUser.Admin.UserRole)
             {
                 <form method="post" action="" class="user_del" style="display: none;">
                     <h4>Choose user to delete:</h4>
@@ -446,12 +446,12 @@
                     <img class="user_img" src="@Images.GetImgSrc(root, user.UserGuid.ToString())">
                     <p>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</p>
 
-                    awardsByUser = DependencyResolver.UserAwardLogic?.GetAwardsByUser(user);
+                awardsByUser = DependencyResolver.UserAwardLogic?.GetAwardsByUser(user);
 
-                    if (currentUser.Role != Role.Guest)
+                if (currentUser.UserRole != WebUser.Guest.UserRole)
+                {
+                    foreach (var awardByUser in awardsByUser)
                     {
-                        foreach (var awardByUser in awardsByUser)
-                        {
                             <div style="padding-left: 75px;">
                                 <img class="award_img" src="@Images.GetImgSrc(root, awardByUser.AwardGuid.ToString())">
                                 <p>@(awardByUser.Title)</p>
@@ -463,7 +463,7 @@
             <input type="button" class="cancel" value="Back" />
         </div>
         @{
-            if (currentUser.Role == Role.Admin)
+            if (currentUser.UserRole == WebUser.Admin.UserRole)
             {
                 <div class="listawards" style="display: none;">
                     <input type="button" class="cancel" value="Back" style="display: block;" />
