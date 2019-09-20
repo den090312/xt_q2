@@ -1,18 +1,92 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace WEB_UI
 {
     public class Database
     {
-        public static bool UserExists(Webuser user)
+        public static bool UserExists(Webuser webuser)
         {
             return true;
         }
 
-        public static bool UserAdded(Webuser user)
+        public static bool UserAdded(Webuser webuser)
         {
-            return true;
+            NullCheck(webuser);
+
+            try
+            {
+                AddWebuserToDatabase(webuser);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private static void AddWebuserToDatabase(Webuser webuser)
+        {
+            var IdRole = GetIdRoleByName(webuser?.role?.Name);
+
+            using (var sqlConnection = new SqlConnection())
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "AddWebuser";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(SqlParRoleId(IdRole));
+                sqlCommand.Parameters.Add(SqlParWebuserName(webuser));
+                sqlCommand.Parameters.Add(SqlParPasswordHash(webuser));
+
+                sqlConnection.Open();
+
+                sqlCommand.ExecuteNonQuery();
+            }
+        }
+
+        private static SqlParameter SqlParRoleId(int IdRole)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@RoleId",
+                Value = IdRole,
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParWebuserName(Webuser webuser)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@UserName",
+                Value = webuser.Name,
+                SqlDbType = SqlDbType.NVarChar,
+                Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParPasswordHash(Webuser webuser)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@PasswordHash",
+                Value = webuser.PasswordHash,
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Input
+            };
+        }
+
+        private static int GetIdRoleByName(string roleName)
+        {
+            var IdRole = 1;
+
+            return IdRole;
         }
 
         public static bool UserNameExists(string userName)

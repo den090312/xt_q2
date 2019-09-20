@@ -5,8 +5,6 @@ namespace WEB_UI
 {
     public class Webuser
     {
-        public int Id { get; }
-
         public string Name { get; } = string.Empty;
 
         public Role role { get; }
@@ -42,21 +40,18 @@ namespace WEB_UI
             Name = name;
             this.role = role;
 
-            var passwordHash = Database.GetHashFromPassword(password);
-
-            //NullCheck(passwordHash);
-            //EmptyStringCheck(passwordHash);
-
-            PasswordHash = passwordHash;
+            PasswordHash = Database.GetHashFromPassword(password);
         }
 
-        public Webuser Create(string name, Role role, string password)
+        public static Webuser Create(string name, Role role, string password)
         {
-            var webUser = new Webuser(name, role, password);
+            var webuser = new Webuser(name, role, password);
 
-            list.Add(webUser);
+            list.Add(webuser);
 
-            return webUser;
+            Role.AddUserToRole(webuser, role);
+
+            return webuser;
         }
 
         public static bool Registered(Webuser user)
