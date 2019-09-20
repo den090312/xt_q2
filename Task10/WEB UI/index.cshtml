@@ -13,9 +13,9 @@
     var userImages  = HttpContext.Current.Request.Files;
     var awardImages = HttpContext.Current.Request.Files;
 
-    var guest    = new Role("Guest");
-    var roleUser = new Role("User");
-    var admin    = new Role("Admin");
+    var guest    = Role.Create("Guest");
+    var roleUser = Role.Create("User");
+    var admin    = Role.Create("Admin");
     
     if (IsPost)
     {
@@ -47,7 +47,7 @@
         {
             roleName = "Admin";
 
-            var user = new Webuser().Create(logName, new Role(roleName), logPass);
+            var user = new Webuser().Create(logName, Role.Create(roleName), logPass);
 
             LogIn(user);
         }
@@ -102,7 +102,7 @@
             return false;
         }
 
-        user = new Webuser().Create(regName, new Role(roleName), regPass);
+        user = new Webuser().Create(regName, Role.Create(roleName), regPass);
 
         return Webuser.Registered(user);
     }

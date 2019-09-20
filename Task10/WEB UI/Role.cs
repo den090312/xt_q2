@@ -13,17 +13,12 @@ namespace WEB_UI
 
         static Role() => roleList = new List<Role>();
 
-        public Role(string roleName)
+        private Role(string roleName)
         {
             NullCheck(roleName);
             EmptyStringCheck(roleName);
 
             Name = roleName;
-
-            if (!roleList.Exists(role => role.Name == roleName))
-            {
-                roleList.Add(this);
-            }
         }
 
         public static void AddUsersToRoles(IEnumerable<Webuser> users, IEnumerable<Role> roles)
@@ -53,14 +48,19 @@ namespace WEB_UI
             role.userList.Add(user);
         }
 
-        public static void CreateRole(string roleName)
+        public static Role Create(string roleName)
         {
             var newRole = new Role(roleName);
 
-            if (!roleList.Exists(role => role.Name == roleName))
+            if (roleName.ToLower() != "guest")
             {
-                roleList.Add(newRole);
+                if (!roleList.Exists(role => role.Name == roleName))
+                {
+                    roleList.Add(newRole);
+                }
             }
+
+            return newRole;
         }
 
         public static void DeleteRole(Role role) => roleList.Remove(role);

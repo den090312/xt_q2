@@ -19,7 +19,7 @@ namespace WEB_UI
 
         static Webuser()
         {
-            Guest = new Webuser("Guest", new Role("Guest"), "Guest");
+            Guest = new Webuser("Guest", Role.Create("Guest"), "Guest");
             list = new List<Webuser>
             {
                 Guest
