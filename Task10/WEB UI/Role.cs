@@ -104,7 +104,7 @@ namespace WEB_UI
         {
             NullCheck(userRole);
 
-            return WebUser.WebUserList.FindAll(role => role.UserRole == userRole);
+            return WebUser.list.FindAll(role => role.role == userRole);
         }
 
         public static bool IsUserInRole(WebUser user, Role role)
@@ -112,7 +112,7 @@ namespace WEB_UI
             NullCheck(user);
             NullCheck(role);
 
-            return user.UserRole == role;
+            return user.role == role;
         }
 
         public static void RemoveUsersFromRoles(IEnumerable<WebUser> users, IEnumerable<Role> roles)
