@@ -5,9 +5,10 @@ namespace WEB_UI
 {
     public static class Crud
     {
-        public static bool UserCreated(string userName, string dateOfBirth)
+        public static bool UserCreate(string userName, string dateOfBirth)
         {
             NullCheck(userName);
+            NullCheck(dateOfBirth);
 
             if (userName == string.Empty || dateOfBirth == string.Empty)
             {
@@ -25,7 +26,7 @@ namespace WEB_UI
             return userLogic.UserAdded(user);
         }
 
-        public static bool UserAwardsDeleted(string userGuid)
+        public static bool UserAwardsDelete(string userGuid)
         {
             NullCheck(userGuid);
 
@@ -42,7 +43,7 @@ namespace WEB_UI
             return DependencyResolver.UserAwardLogic.UserAwardsRemoved(result);
         }
 
-        public static bool AwardCreated(string awardTitle)
+        public static bool AwardCreate(string awardTitle)
         {
             NullCheck(awardTitle);
 
@@ -57,7 +58,7 @@ namespace WEB_UI
             return awardLogic.AwardAdded(award);
         }
 
-        public static bool AwardUsersDeleted(string awardGuid)
+        public static bool AwardUsersDelete(string awardGuid)
         {
             NullCheck(awardGuid);
 
@@ -74,7 +75,7 @@ namespace WEB_UI
             return DependencyResolver.UserAwardLogic.AwardUsersRemoved(result);
         }
 
-        public static bool JoinedAwardToUser(string userGuid, string awardGuid)
+        public static bool JoinAwardToUser(string userGuid, string awardGuid)
         {
             NullCheck(userGuid);
             NullCheck(awardGuid);
@@ -92,7 +93,7 @@ namespace WEB_UI
             return DependencyResolver.UserAwardLogic.JoinedAwardToUser(resultUserGuid, resultAwardGuid);
         }
 
-        public static bool UsersEdited(string[] guids, string[] names, string[] dates)
+        public static bool UsersEdit(string[] guids, string[] names, string[] dates)
         {
             NullCheck(guids);
             NullCheck(names);
@@ -120,7 +121,7 @@ namespace WEB_UI
             return true;
         }
 
-        public static bool AwardsEdited(string[] guids, string[] titles)
+        public static bool AwardsEdit(string[] guids, string[] titles)
         {
             NullCheck(guids);
             NullCheck(titles);

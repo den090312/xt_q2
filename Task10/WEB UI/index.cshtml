@@ -123,7 +123,7 @@
 
         if (userName != null & dateOfBirth != null)
         {
-            if (Crud.UserCreated(userName, dateOfBirth))
+            if (Crud.UserCreate(userName, dateOfBirth))
             {
                 message = "User created";
             }
@@ -140,7 +140,7 @@
 
         if (userGuid != null)
         {
-            if (Crud.UserAwardsDeleted(userGuid))
+            if (Crud.UserAwardsDelete(userGuid))
             {
                 message = "User with awards deleted";
             }
@@ -157,7 +157,7 @@
 
         if (awardTitle != null)
         {
-            if (Crud.AwardCreated(awardTitle))
+            if (Crud.AwardCreate(awardTitle))
             {
                 message = "Award created";
             }
@@ -174,7 +174,7 @@
 
         if (awardGuid != null & awardGuid != "")
         {
-            if (Crud.AwardUsersDeleted(awardGuid))
+            if (Crud.AwardUsersDelete(awardGuid))
             {
                 message = "Award with users deleted";
             }
@@ -192,7 +192,7 @@
 
         if (userGuid != null & awardGuid != null)
         {
-            if (Crud.JoinedAwardToUser(userGuid, awardGuid))
+            if (Crud.JoinAwardToUser(userGuid, awardGuid))
             {
                 message = "Award joined to user";
             }
@@ -211,7 +211,7 @@
 
         if (guids != null & names != null & dates != null)
         {
-            if (Crud.UsersEdited(guids, names, dates))
+            if (Crud.UsersEdit(guids, names, dates))
             {
                 message = "Users edited";
             }
@@ -229,7 +229,7 @@
 
         if (guids != null & titles != null)
         {
-            if (Crud.AwardsEdited(guids, titles))
+            if (Crud.AwardsEdit(guids, titles))
             {
                 message = "Awards edited";
             }
