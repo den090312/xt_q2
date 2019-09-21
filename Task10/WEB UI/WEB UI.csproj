@@ -121,12 +121,12 @@
     <Content Include="sql script\webusersdb.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database.cs" />
-    <Compile Include="Images.cs" />
+    <Compile Include="classes\Database.cs" />
+    <Compile Include="classes\Images.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Crud.cs" />
-    <Compile Include="Role.cs" />
-    <Compile Include="Webuser.cs" />
+    <Compile Include="classes\Crud.cs" />
+    <Compile Include="classes\Role.cs" />
+    <Compile Include="classes\Webuser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.cshtml" />
