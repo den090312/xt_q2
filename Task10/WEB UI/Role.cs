@@ -50,7 +50,7 @@ namespace WEB_UI
             role.userList.Add(user);
         }
 
-        public static Role Get(string roleName)
+        public static Role Create(string roleName)
         {
             var newRole = new Role(roleName);
 
@@ -61,7 +61,7 @@ namespace WEB_UI
                 return RoleList.Find(matchName);
             }
 
-            if (WebroleExistsInDB(newRole))
+            if (ExistsInDB(newRole))
             {
                 if (newRole.Name.ToLower() != "guest")
                 {
@@ -70,7 +70,7 @@ namespace WEB_UI
             }
             else
             {
-                if (WebroleAddedIntoDB(newRole))
+                if (AddedInDB(newRole))
                 {
                     AddNewRoleToList(newRole);
                 }
@@ -91,7 +91,7 @@ namespace WEB_UI
             }
         }
 
-        private static bool WebroleExistsInDB(Role role)
+        private static bool ExistsInDB(Role role)
         {
             int roleCount = 0;
 
@@ -132,7 +132,7 @@ namespace WEB_UI
 
         public static void Delete(Role role)
         {
-            if (WebroleDeletedFromDB(role))
+            if (DeletedFromDB(role))
             {
                 RoleList.Remove(role);
             }
@@ -142,7 +142,7 @@ namespace WEB_UI
             }
         }
 
-        public Role GetRole(string roleName)
+        public Role GetRoleFromList(string roleName)
         {
             NullCheck(roleName);
             EmptyStringCheck(roleName);
@@ -233,12 +233,7 @@ namespace WEB_UI
             return role1.Name != role2.Name;
         }
 
-        public static bool WebroleNameReserved(string roleName)
-        {
-            return true;
-        }
-
-        public static bool WebroleAddedIntoDB(Role role)
+        public static bool AddedInDB(Role role)
         {
             NullCheck(role);
 
@@ -254,7 +249,7 @@ namespace WEB_UI
             }
         }
 
-        public static bool WebroleDeletedFromDB(Role role)
+        public static bool DeletedFromDB(Role role)
         {
             NullCheck(role);
 
@@ -331,88 +326,52 @@ namespace WEB_UI
                 sqlCommand.CommandText = "GetIdRoleByName";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                sqlCommand.Parameters.Add(new SqlParameter
-                {
-                    ParameterName = "@RoleName",
-                    Value = roleName,
-                    SqlDbType = SqlDbType.NVarChar,
-                    Direction = ParameterDirection.Input
-                });
-
-                sqlCommand.Parameters.Add(new SqlParameter
-                {
-                    ParameterName = "@IdRole",
-                    SqlDbType = SqlDbType.Int,
-                    Direction = ParameterDirection.Output
-                });
+                sqlCommand.Parameters.Add(SqlParRoleName(roleName));
+                sqlCommand.Parameters.Add(SqlParIdRole());
 
                 sqlConnection.Open();
-
-                var sqlDataReader = sqlCommand.ExecuteReader();
-
-                while (sqlDataReader.Read())
-                {
-                    IdRole = (int)sqlDataReader[0];
-                }
-
-                if (IdRole == -1)
-                {
-                    throw new Exception($"Can't find id role by '{roleName}'!");
-                }
+                IdRole = GetIdRole(roleName, IdRole, sqlCommand);
             }
 
             return IdRole;
         }
 
-        public static bool UserNameExists(string userName)
+        private static int GetIdRole(string roleName, int IdRole, SqlCommand sqlCommand)
         {
-            NullCheck(userName);
-            EmptyStringCheck(userName);
+            var sqlDataReader = sqlCommand.ExecuteReader();
 
-            return false;
+            while (sqlDataReader.Read())
+            {
+                IdRole = (int)sqlDataReader[0];
+            }
+
+            if (IdRole == -1)
+            {
+                throw new Exception($"Can't find id role by '{roleName}'!");
+            }
+
+            return IdRole;
         }
 
-        public static bool PasswordIsOk(string userName, string password)
+        private static SqlParameter SqlParIdRole()
         {
-            NullCheck(userName);
-            EmptyStringCheck(userName);
-
-            NullCheck(password);
-            EmptyStringCheck(password);
-
-            return password == GetPasswordByName(userName);
+            return new SqlParameter
+            {
+                ParameterName = "@IdRole",
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Output
+            };
         }
 
-        private static string GetPasswordByName(string userName)
+        private static SqlParameter SqlParRoleName(string roleName)
         {
-            NullCheck(userName);
-            EmptyStringCheck(userName);
-
-            var hash = GetPasswordHashFromDB(userName);
-
-            NullCheck(hash);
-            EmptyStringCheck(hash);
-
-            var password = GetPasswordFromHash(hash);
-
-            NullCheck(password);
-            EmptyStringCheck(password);
-
-            return password;
-        }
-
-        private static string GetPasswordFromHash(string hash)
-        {
-            var password = hash;
-
-            return password;
-        }
-
-        private static string GetPasswordHashFromDB(string userName)
-        {
-            var hash = userName;
-
-            return hash;
+            return new SqlParameter
+            {
+                ParameterName = "@RoleName",
+                Value = roleName,
+                SqlDbType = SqlDbType.NVarChar,
+                Direction = ParameterDirection.Input
+            };
         }
 
         public override bool Equals(object obj)

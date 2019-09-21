@@ -19,7 +19,7 @@ namespace WEB_UI
 
         static Webuser()
         {
-            Guest = new Webuser("Guest", Role.Get("Guest"), "Guest");
+            Guest = new Webuser("Guest", Role.Create("Guest"), "Guest");
             list = new List<Webuser>
             {
                 Guest
@@ -66,6 +66,49 @@ namespace WEB_UI
             return webuser;
         }
 
+        public static bool PasswordIsOk(string userName, string password)
+        {
+            NullCheck(userName);
+            EmptyStringCheck(userName);
+
+            NullCheck(password);
+            EmptyStringCheck(password);
+
+            return password == GetPasswordByName(userName);
+        }
+
+        private static string GetPasswordByName(string userName)
+        {
+            NullCheck(userName);
+            EmptyStringCheck(userName);
+
+            var hash = GetPasswordHashFromDB(userName);
+
+            NullCheck(hash);
+            EmptyStringCheck(hash);
+
+            var password = GetPasswordFromHash(hash);
+
+            NullCheck(password);
+            EmptyStringCheck(password);
+
+            return password;
+        }
+
+        private static string GetPasswordFromHash(string hash)
+        {
+            var password = hash;
+
+            return password;
+        }
+
+        private static string GetPasswordHashFromDB(string userName)
+        {
+            var hash = userName;
+
+            return hash;
+        }
+
         public static IEnumerable<Webuser> FindUsersInRole(Role role)
         {
             NullCheck(role);
@@ -79,7 +122,7 @@ namespace WEB_UI
         {
             NullCheck(user);
 
-            if (WebuserAddedToDB(user))
+            if (AddedToDB(user))
             {
                 Authentication.CurrentUser = user;
 
@@ -91,17 +134,62 @@ namespace WEB_UI
             }
         }
 
-        public static bool Exists(Webuser webuser)
+        public static bool ExistsInDB(Webuser webuser)
         {
-            return false;
+            int userCount = 0;
+
+            userCount = GetUserNameCount(webuser.Name, userCount);
+
+            return userCount == 1;
         }
 
-        public static bool UserNameExists(string name)
+        private static int GetUserNameCount(string userName, int userCount)
         {
-            return false;
+            using (var sqlConnection = new SqlConnection(Database.ConnectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "UserNameCount";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(new SqlParameter
+                {
+                    ParameterName = "@UserName",
+                    Value = userName,
+                    SqlDbType = SqlDbType.NVarChar,
+                    Direction = ParameterDirection.Input
+                });
+
+                sqlCommand.Parameters.Add(new SqlParameter
+                {
+                    ParameterName = "@Count",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                });
+
+                sqlConnection.Open();
+
+                var sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    userCount = (int)sqlDataReader[0];
+                }
+            }
+
+            return userCount;
         }
 
-        public static bool WebuserAddedToDB(Webuser webuser)
+        public static bool NameExistsInDB(string userName)
+        {
+            int userCount = 0;
+
+            userCount = GetUserNameCount(userName, userCount);
+
+            return userCount == 1;
+        }
+
+        public static bool AddedToDB(Webuser webuser)
         {
             NullCheck(webuser);
 

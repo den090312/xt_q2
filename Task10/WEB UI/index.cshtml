@@ -1,7 +1,7 @@
 ﻿@{
-    var guest    = Role.Get("Guest");
-    var roleUser = Role.Get("User");
-    var admin    = Role.Get("Admin");
+    var guest    = Role.Create("Guest");
+    var roleUser = Role.Create("User");
+    var admin    = Role.Create("Admin");
 
     var currentUser = Authentication.CurrentUser;
     var root = Server.MapPath("~");
@@ -47,7 +47,7 @@
         {
             roleName = "Admin";
 
-            var user = Webuser.Create(logName, Role.Get(roleName), logPass);
+            var user = Webuser.Create(logName, Role.Create(roleName), logPass);
 
             LogIn(user);
         }
@@ -91,7 +91,7 @@
             return false;
         }
 
-        if (Webuser.UserNameExists(regName))
+        if (Webuser.NameExistsInDB(regName))
         {
             user = Webuser.Guest;
 
@@ -102,7 +102,7 @@
             return false;
         }
 
-        user = Webuser.Create(regName, Role.Get(roleName), regPass);
+        user = Webuser.Create(regName, Role.Create(roleName), regPass);
 
         return Webuser.Registered(user);
     }
