@@ -63,13 +63,16 @@ namespace WEB_UI
 
             if (WebroleExistsInDB(newRole))
             {
-                RoleList.Add(newRole);
+                if (newRole.Name.ToLower() != "guest")
+                {
+                    AddNewRoleToList(newRole);
+                }
             }
             else
             {
                 if (WebroleAddedIntoDB(newRole))
                 {
-                    RoleList.Add(newRole);
+                    AddNewRoleToList(newRole);
                 }
                 else
                 {
@@ -78,6 +81,14 @@ namespace WEB_UI
             }
 
             return newRole;
+        }
+
+        private static void AddNewRoleToList(Role newRole)
+        {
+            if (newRole.Name.ToLower() != "guest")
+            {
+                RoleList.Add(newRole);
+            }
         }
 
         private static bool WebroleExistsInDB(Role role)
