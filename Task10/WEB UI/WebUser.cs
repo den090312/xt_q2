@@ -101,8 +101,7 @@ namespace WEB_UI
             NullCheck(userName);
             EmptyStringCheck(userName);
 
-            var hash = GetPasswordHashFromDB(userName);
-
+            var hash = GetHashFromDB(userName);
             var password = GetPasswordFromHash(hash);
 
             NullCheck(password);
@@ -111,9 +110,34 @@ namespace WEB_UI
             return password;
         }
 
-        private static int GetPasswordHashFromDB(string userName)
+        private static int GetHashFromDB(string userName)
         {
-            var hash = 0;
+            int hash = -1;
+
+            using (var sqlConnection = new SqlConnection(Database.ConnectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetHashFormUserName";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(SqlParUserName(userName));
+                sqlCommand.Parameters.Add(SqlParPasswordHash());
+
+                sqlConnection.Open();
+
+                var sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    hash = (int)sqlDataReader[0];
+                }
+
+                if (hash == -1)
+                {
+                    throw new Exception("Can't find password hash in database!");
+                }
+            }
 
             return hash;
         }
@@ -170,14 +194,7 @@ namespace WEB_UI
                 sqlCommand.CommandText = "UserNameCount";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                sqlCommand.Parameters.Add(new SqlParameter
-                {
-                    ParameterName = "@UserName",
-                    Value = userName,
-                    SqlDbType = SqlDbType.NVarChar,
-                    Direction = ParameterDirection.Input
-                });
-
+                sqlCommand.Parameters.Add(SqlParUserName(userName));
                 sqlCommand.Parameters.Add(new SqlParameter
                 {
                     ParameterName = "@Count",
@@ -230,8 +247,8 @@ namespace WEB_UI
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 sqlCommand.Parameters.Add(SqlParRoleId(roleId));
-                sqlCommand.Parameters.Add(SqlParWebuserName(webuser));
-                sqlCommand.Parameters.Add(SqlParPasswordHash(webuser));
+                sqlCommand.Parameters.Add(SqlParUserName(webuser.Name));
+                sqlCommand.Parameters.Add(SqlParPasswordHash(webuser.PasswordHash));
 
                 sqlConnection.Open();
 
@@ -250,25 +267,35 @@ namespace WEB_UI
             };
         }
 
-        private static SqlParameter SqlParWebuserName(Webuser webuser)
+        private static SqlParameter SqlParUserName(string userName)
         {
             return new SqlParameter
             {
                 ParameterName = "@UserName",
-                Value = webuser.Name,
+                Value = userName,
                 SqlDbType = SqlDbType.NVarChar,
                 Direction = ParameterDirection.Input
             };
         }
 
-        private static SqlParameter SqlParPasswordHash(Webuser webuser)
+        private static SqlParameter SqlParPasswordHash(int passwordHash)
         {
             return new SqlParameter
             {
                 ParameterName = "@PasswordHash",
-                Value = webuser.PasswordHash,
+                Value = passwordHash,
                 SqlDbType = SqlDbType.Int,
                 Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParPasswordHash()
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@PasswordHash",
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Output
             };
         }
 
