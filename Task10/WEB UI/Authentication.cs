@@ -8,13 +8,13 @@ namespace WEB_UI
 
         static Authentication() => CurrentUser = Webuser.Guest;
 
-        public static bool LoggedIn(Webuser user)
+        public static bool LoggedIn(Webuser webuser)
         {
-            NullCheck(user);
+            NullCheck(webuser);
 
-            if (Database.UserExists(user))
+            if (Webuser.Exists(webuser))
             {
-                CurrentUser = user;
+                CurrentUser = webuser;
 
                 return true;
             }

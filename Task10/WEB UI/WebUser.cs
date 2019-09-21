@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace WEB_UI
 {
@@ -64,11 +66,20 @@ namespace WEB_UI
             return webuser;
         }
 
+        public static IEnumerable<Webuser> FindUsersInRole(Role role)
+        {
+            NullCheck(role);
+
+            bool matchUsers(Webuser users) => users.role == role;
+
+            return list.FindAll(matchUsers);
+        }
+
         public static bool Registered(Webuser user)
         {
             NullCheck(user);
 
-            if (Database.UserAdded(user))
+            if (WebuserAddedToDB(user))
             {
                 Authentication.CurrentUser = user;
 
@@ -78,6 +89,90 @@ namespace WEB_UI
             {
                 return false;
             }
+        }
+
+        public static bool Exists(Webuser webuser)
+        {
+            return false;
+        }
+
+        public static bool UserNameExists(string name)
+        {
+            return false;
+        }
+
+        public static bool WebuserAddedToDB(Webuser webuser)
+        {
+            NullCheck(webuser);
+
+            try
+            {
+                AddWebuserToDB(webuser);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private static void AddWebuserToDB(Webuser webuser)
+        {
+            var role = webuser?.role;
+
+            NullCheck(role);
+
+            var roleId = Role.GetRoleId(role);
+
+            using (var sqlConnection = new SqlConnection(Database.ConnectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "AddWebuser";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(SqlParRoleId(roleId));
+                sqlCommand.Parameters.Add(SqlParWebuserName(webuser));
+                sqlCommand.Parameters.Add(SqlParPasswordHash(webuser));
+
+                sqlConnection.Open();
+
+                sqlCommand.ExecuteNonQuery();
+            }
+        }
+
+        private static SqlParameter SqlParRoleId(int IdRole)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@RoleId",
+                Value = IdRole,
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParWebuserName(Webuser webuser)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@UserName",
+                Value = webuser.Name,
+                SqlDbType = SqlDbType.NVarChar,
+                Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParPasswordHash(Webuser webuser)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@PasswordHash",
+                Value = webuser.PasswordHash,
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Input
+            };
         }
 
         private static void EmptyStringCheck(string inputString)
