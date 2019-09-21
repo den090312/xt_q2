@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text;
 
 namespace WEB_UI
 {
@@ -45,16 +46,6 @@ namespace WEB_UI
             PasswordHash = GetHashFromPassword(password);
         }
 
-        private static int GetHashFromPassword(string password)
-        {
-            NullCheck(password);
-            EmptyStringCheck(password);
-
-            var hash = 0;
-
-            return hash;
-        }
-
         public static Webuser Create(string name, Role role, string password)
         {
             var webuser = new Webuser(name, role, password);
@@ -73,6 +64,25 @@ namespace WEB_UI
             bool matchUser(Webuser user) => user.Name == userName & user.PasswordHash == userPassHash;
 
             return list.Find(matchUser);
+        }
+
+        private static int GetHashFromPassword(string password)
+        {
+            NullCheck(password);
+            EmptyStringCheck(password);
+
+            var bytes = Encoding.ASCII.GetBytes(password + "hackme");
+            var hash = BitConverter.ToInt32(bytes, 0);
+
+            return hash;
+        }
+
+        private static string GetPasswordFromHash(int hash)
+        {
+            var bytes = BitConverter.GetBytes(hash);
+            var password = Encoding.ASCII.GetString(bytes);
+
+            return password.Substring(0, password.Length - 6);
         }
 
         public static bool PasswordIsOk(string userName, string password)
@@ -97,13 +107,6 @@ namespace WEB_UI
 
             NullCheck(password);
             EmptyStringCheck(password);
-
-            return password;
-        }
-
-        private static string GetPasswordFromHash(int hash)
-        {
-            var password = hash.ToString();
 
             return password;
         }
