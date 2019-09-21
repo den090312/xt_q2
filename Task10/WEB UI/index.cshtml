@@ -20,9 +20,9 @@
     if (IsPost)
     {
         UserCreation();
-        UserAwardsDeleted();
+        UserAwardsDelete();
         AwardCreation();
-        AwardUsersDeleted();
+        AwardUsersDelete();
         JoinAwardToUser();
         EditUsers();
         EditAwards();
@@ -132,7 +132,7 @@
         }
     }
 
-    void UserAwardsDeleted()
+    void UserAwardsDelete()
     {
         var userGuid = Request.Form["userGuid"];
 
@@ -166,7 +166,7 @@
         }
     }
 
-    void AwardUsersDeleted()
+    void AwardUsersDelete()
     {
         var awardGuid = Request.Form["awardGuid"];
 
