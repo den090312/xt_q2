@@ -61,16 +61,62 @@ namespace WEB_UI
                 return RoleList.Find(matchName);
             }
 
-            if (WebroleAddedIntoDB(newRole))
+            if (WebroleExistsInDB(newRole))
             {
                 RoleList.Add(newRole);
             }
             else
             {
-                throw new Exception("Error adding new role to database!");
+                if (WebroleAddedIntoDB(newRole))
+                {
+                    RoleList.Add(newRole);
+                }
+                else
+                {
+                    throw new Exception("Error adding new role to database!");
+                }
             }
 
             return newRole;
+        }
+
+        private static bool WebroleExistsInDB(Role role)
+        {
+            int roleCount = 0;
+
+            using (var sqlConnection = new SqlConnection(Database.ConnectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "RoleNameCount";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(new SqlParameter
+                {
+                    ParameterName = "@RoleName",
+                    Value = role.Name,
+                    SqlDbType = SqlDbType.NVarChar,
+                    Direction = ParameterDirection.Input
+                });
+
+                sqlCommand.Parameters.Add(new SqlParameter
+                {
+                    ParameterName = "@Count",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                });
+
+                sqlConnection.Open();
+
+                var sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    roleCount = (int)sqlDataReader[0];
+                }
+            }
+
+            return roleCount == 1;
         }
 
         public static void Delete(Role role)
@@ -176,11 +222,6 @@ namespace WEB_UI
             return role1.Name != role2.Name;
         }
 
-        public static bool WebuserExists(Webuser webuser)
-        {
-            return true;
-        }
-
         public static bool WebroleNameReserved(string roleName)
         {
             return true;
@@ -245,8 +286,6 @@ namespace WEB_UI
 
         private static void AddWebroleToDB(Role role)
         {
-            var roleId = GetRoleId(role);
-
             using (var sqlConnection = new SqlConnection(Database.ConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
@@ -256,9 +295,9 @@ namespace WEB_UI
 
                 sqlCommand.Parameters.Add(new SqlParameter
                 {
-                    ParameterName = "@RoleId",
-                    Value = roleId,
-                    SqlDbType = SqlDbType.Int,
+                    ParameterName = "@RoleName",
+                    Value = role.Name,
+                    SqlDbType = SqlDbType.NVarChar,
                     Direction = ParameterDirection.Input
                 });
 
@@ -283,7 +322,7 @@ namespace WEB_UI
 
                 sqlCommand.Parameters.Add(new SqlParameter
                 {
-                    ParameterName = "@Name",
+                    ParameterName = "@RoleName",
                     Value = roleName,
                     SqlDbType = SqlDbType.NVarChar,
                     Direction = ParameterDirection.Input
