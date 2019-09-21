@@ -43,6 +43,36 @@
         var regPass   = Request.Form["regPass"];
         var roleName  = Request.Form["roleName"];
 
+        TryLogIn(logName, logPass);
+        TryLogOut(loggedOut);
+        TryRegister(regName, regPass, roleName);
+    }
+
+    void TryRegister(string regName, string regPass, string roleName)
+    {
+        if (regName != null & regPass != null & roleName != null)
+        {
+            if (TryUserRegister(regName, regPass, roleName))
+            {
+                LogIn(regName, regPass);
+            }
+            else
+            {
+                Webuser.LogOut();
+            }
+        }
+    }
+
+    void TryLogOut(string loggedOut)
+    {
+        if (loggedOut != null & loggedOut == "loggedOut")
+        {
+            Webuser.LogOut();
+        }
+    }
+
+    void TryLogIn(string logName, string logPass)
+    {
         if (logName != null & logPass != null)
         {
             if (!Webuser.NameExists(logName))
@@ -57,23 +87,6 @@
             else
             {
                 LogIn(logName, logPass);
-            }
-        }
-
-        if (loggedOut != null & loggedOut == "loggedOut")
-        {
-            Webuser.LogOut();
-        }
-
-        if (regName != null & regPass != null & roleName != null)
-        {
-            if (TryUserRegister(regName, regPass, roleName))
-            {
-                LogIn(regName, regPass);
-            }
-            else
-            {
-                Webuser.LogOut();
             }
         }
     }
