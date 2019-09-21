@@ -54,7 +54,7 @@ namespace WEB_UI
         {
             var newRole = new Role(roleName);
 
-            bool matchName(Role role) => roleName.ToLower() == roleName.ToLower();
+            bool matchName(Role role) => role.Name.ToLower() == roleName.ToLower();
 
             if (RoleList.Exists(matchName))
             {

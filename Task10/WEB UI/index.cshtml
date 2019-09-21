@@ -1,5 +1,7 @@
 ﻿@{
-    var guest = Role.Get("Guest");
+    var guest    = Role.Get("Guest");
+    var roleUser = Role.Get("User");
+    var admin    = Role.Get("Admin");
 
     var currentUser = Authentication.CurrentUser;
     var root = Server.MapPath("~");
@@ -14,9 +16,6 @@
 
     var userImages  = HttpContext.Current.Request.Files;
     var awardImages = HttpContext.Current.Request.Files;
-
-    var roleUser = Role.Get("User");
-    var admin    = Role.Get("Admin");
 
     if (IsPost)
     {
