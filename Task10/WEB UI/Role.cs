@@ -9,11 +9,11 @@ namespace WEB_UI
     {
         public string Name { get; } = string.Empty;
 
-        private List<Webuser> userList = new List<Webuser>();
+        public List<Webuser> UserList { get; } = new List<Webuser>();
 
-        public static List<Role> RoleList { get; }
+        public static List<Role> List { get; }
 
-        static Role() => RoleList = new List<Role>();
+        static Role() => List = new List<Role>();
 
         private Role(string roleName)
         {
@@ -27,14 +27,14 @@ namespace WEB_UI
         {
             var newRole = new Role(roleName);
 
-            if (NameExistsInDb(roleName))
+            if (NameExists(roleName))
             {
                 AddNewRoleToList(newRole);
 
                 return Get(roleName);
             }
 
-            if (AddedInDb(newRole))
+            if (Add(newRole))
             {
                 AddNewRoleToList(newRole);
             }
@@ -48,7 +48,7 @@ namespace WEB_UI
 
         public static Role Get(string roleName)
         {
-            if (!NameExistsInDb(roleName))
+            if (!NameExists(roleName))
             {
                 return Create(roleName);
             }
@@ -60,23 +60,23 @@ namespace WEB_UI
 
             bool matchName(Role role) => role.Name.ToLower() == roleName.ToLower();
 
-            return RoleList.Find(matchName);
+            return List.Find(matchName);
         }
 
         private static void AddNewRoleToList(Role newRole)
         {
             bool matchName(Role role) => role.Name.ToLower() == newRole.Name.ToLower();
 
-            if (!RoleList.Exists(matchName))
+            if (!List.Exists(matchName))
             {
                 if (newRole.Name.ToLower() != "guest")
                 {
-                    RoleList.Add(newRole);
+                    List.Add(newRole);
                 }
             }
         }
 
-        public static string GetRoleNameByRoleId(int idRole)
+        private static string GetRoleNameByRoleId(int idRole)
         {
             var roleName = string.Empty;
 
@@ -115,34 +115,15 @@ namespace WEB_UI
             return roleName;
         }
 
-        public static void AddUsersToRoles(IEnumerable<Webuser> users, IEnumerable<Role> roles)
-        {
-            foreach (var role in roles)
-            {
-                AddUsersToRole(users, role);
-            }
-        }
-
-        public static void AddUsersToRole(IEnumerable<Webuser> users, Role role)
-        {
-            NullCheck(users);
-            NullCheck(role);
-
-            foreach (var user in users)
-            {
-                AddUserToRole(user, role);
-            }
-        }
-
         public static void AddUserToRole(Webuser user, Role role)
         {
             NullCheck(user);
             NullCheck(role);
 
-            role.userList.Add(user);
+            role.UserList.Add(user);
         }
 
-        public static bool NameExistsInDb(string roleName)
+        public static bool NameExists(string roleName)
         {
             int roleCount = 0;
 
@@ -176,93 +157,6 @@ namespace WEB_UI
             return roleCount;
         }
 
-        public static void DeleteInList(Role role)
-        {
-            if (DeletedInDb(role))
-            {
-                RoleList.Remove(role);
-            }
-            else
-            {
-                throw new Exception("Error role delete!");
-            }
-        }
-
-        public Role GetRoleFromList(string roleName)
-        {
-            NullCheck(roleName);
-            EmptyStringCheck(roleName);
-
-            bool matchRole(Role role) => role.Name == roleName;
-
-            return RoleList.Find(matchRole);
-        }
-
-        public static IEnumerable<Webuser> FindUsersInRole(Role role)
-        {
-            NullCheck(role);
-
-            return Webuser.FindUsersInRole(role);
-        }
-
-        public static IEnumerable<Role> GetAll() => RoleList;
-
-        public static IEnumerable<Webuser> GetUsersInRole(Role userRole)
-        {
-            NullCheck(userRole);
-
-            bool matchRole(Webuser role) => role.role == userRole;
-
-            return Webuser.list.FindAll(matchRole);
-        }
-
-        public static bool IsUserInRole(Webuser user, Role role)
-        {
-            NullCheck(user);
-            NullCheck(role);
-
-            return user.role == role;
-        }
-
-        public static void RemoveUsersFromRoles(IEnumerable<Webuser> users, IEnumerable<Role> roles)
-        {
-            NullCheck(users);
-            NullCheck(roles);
-
-            foreach (var role in roles)
-            {
-                RemoveUsersFromRole(users, role);
-            }
-        }
-
-        public static void RemoveUsersFromRole(IEnumerable<Webuser> users, Role role)
-        {
-            NullCheck(users);
-            NullCheck(role);
-
-            foreach (var user in users)
-            {
-                RemoveUserFromRole(role, user);
-            }
-        }
-
-        public static void RemoveUserFromRole(Role role, Webuser user)
-        {
-            NullCheck(role);
-            NullCheck(user);
-
-            role.userList.Remove(user);
-        }
-
-        public static bool WebroleExists(Role userRole)
-        {
-            NullCheck(userRole);
-
-            bool matchRole(Role role) => role == userRole;
-
-            return RoleList.Exists(matchRole);
-        }
-
         public static bool operator ==(Role role1, Role role2)
         {
             NullCheck(role1);
@@ -279,13 +173,13 @@ namespace WEB_UI
             return role1.Name != role2.Name;
         }
 
-        public static bool AddedInDb(Role role)
+        public static bool Add(Role role)
         {
             NullCheck(role);
 
             try
             {
-                AddWebroleToDb(role);
+                AddWebrole(role);
 
                 return true;
             }
@@ -295,13 +189,13 @@ namespace WEB_UI
             }
         }
 
-        public static bool DeletedInDb(Role role)
+        public static bool Delete(Role role)
         {
             NullCheck(role);
 
             try
             {
-                DeleteWebroleInDb(role);
+                DeleteWebrole(role);
 
                 return true;
             }
@@ -311,7 +205,7 @@ namespace WEB_UI
             }
         }
 
-        private static void DeleteWebroleInDb(Role role)
+        private static void DeleteWebrole(Role role)
         {
             var roleId = GetRoleId(role);
 
@@ -330,7 +224,7 @@ namespace WEB_UI
             }
         }
 
-        private static void AddWebroleToDb(Role role)
+        private static void AddWebrole(Role role)
         {
             using (var sqlConnection = new SqlConnection(Database.ConnectionString))
             {
@@ -347,7 +241,7 @@ namespace WEB_UI
             }
         }
 
-        public static int GetRoleId(Role role) => GetIdRoleByName(role.Name);
+        private static int GetRoleId(Role role) => GetIdRoleByName(role.Name);
 
         private static int GetIdRoleByName(string roleName)
         {
@@ -457,7 +351,7 @@ namespace WEB_UI
 
             return obj is Role role &&
                    Name == role.Name &&
-                   EqualityComparer<List<Webuser>>.Default.Equals(userList, role.userList);
+                   EqualityComparer<List<Webuser>>.Default.Equals(UserList, role.UserList);
         }
 
         public override int GetHashCode()
@@ -465,7 +359,7 @@ namespace WEB_UI
             var hashCode = -513442300;
 
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
-            hashCode = hashCode * -1521134295 + EqualityComparer<List<Webuser>>.Default.GetHashCode(userList);
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<Webuser>>.Default.GetHashCode(UserList);
 
             return hashCode;
         }
