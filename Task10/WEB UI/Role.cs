@@ -23,33 +23,6 @@ namespace WEB_UI
             Name = roleName;
         }
 
-        public static void AddUsersToRoles(IEnumerable<Webuser> users, IEnumerable<Role> roles)
-        {
-            foreach (var role in roles)
-            {
-                AddUsersToRole(users, role);
-            }
-        }
-
-        public static void AddUsersToRole(IEnumerable<Webuser> users, Role role)
-        {
-            NullCheck(users);
-            NullCheck(role);
-
-            foreach (var user in users)
-            {
-                AddUserToRole(user, role);
-            }
-        }
-
-        public static void AddUserToRole(Webuser user, Role role)
-        {
-            NullCheck(user);
-            NullCheck(role);
-
-            role.userList.Add(user);
-        }
-
         public static Role Create(string roleName)
         {
             var newRole = new Role(roleName);
@@ -103,6 +76,33 @@ namespace WEB_UI
             }
         }
 
+        public static void AddUsersToRoles(IEnumerable<Webuser> users, IEnumerable<Role> roles)
+        {
+            foreach (var role in roles)
+            {
+                AddUsersToRole(users, role);
+            }
+        }
+
+        public static void AddUsersToRole(IEnumerable<Webuser> users, Role role)
+        {
+            NullCheck(users);
+            NullCheck(role);
+
+            foreach (var user in users)
+            {
+                AddUserToRole(user, role);
+            }
+        }
+
+        public static void AddUserToRole(Webuser user, Role role)
+        {
+            NullCheck(user);
+            NullCheck(role);
+
+            role.userList.Add(user);
+        }
+
         public static bool NameExistsInDB(string roleName)
         {
             int roleCount = 0;
@@ -121,20 +121,8 @@ namespace WEB_UI
                 sqlCommand.CommandText = "RoleNameCount";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                sqlCommand.Parameters.Add(new SqlParameter
-                {
-                    ParameterName = "@RoleName",
-                    Value = roleName,
-                    SqlDbType = SqlDbType.NVarChar,
-                    Direction = ParameterDirection.Input
-                });
-
-                sqlCommand.Parameters.Add(new SqlParameter
-                {
-                    ParameterName = "@Count",
-                    SqlDbType = SqlDbType.Int,
-                    Direction = ParameterDirection.Output
-                });
+                sqlCommand.Parameters.Add(SqlParRoleName(roleName));
+                sqlCommand.Parameters.Add(SqlParCountName());
 
                 sqlConnection.Open();
 
@@ -295,13 +283,7 @@ namespace WEB_UI
                 sqlCommand.CommandText = "DeleteWebrole";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                sqlCommand.Parameters.Add(new SqlParameter
-                {
-                    ParameterName = "@RoleId",
-                    Value = roleId,
-                    SqlDbType = SqlDbType.Int,
-                    Direction = ParameterDirection.Input
-                });
+                sqlCommand.Parameters.Add(SqlParRoleId(roleId));
 
                 sqlConnection.Open();
 
@@ -318,13 +300,7 @@ namespace WEB_UI
                 sqlCommand.CommandText = "AddWebrole";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                sqlCommand.Parameters.Add(new SqlParameter
-                {
-                    ParameterName = "@RoleName",
-                    Value = role.Name,
-                    SqlDbType = SqlDbType.NVarChar,
-                    Direction = ParameterDirection.Input
-                });
+                sqlCommand.Parameters.Add(SqlParRoleName(role.Name));
 
                 sqlConnection.Open();
 
@@ -370,6 +346,27 @@ namespace WEB_UI
             }
 
             return IdRole;
+        }
+
+        private static SqlParameter SqlParCountName()
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@Count",
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Output
+            };
+        }
+
+        private static SqlParameter SqlParRoleId(int roleId)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@RoleId",
+                Value = roleId,
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Input
+            };
         }
 
         private static SqlParameter SqlParIdRole()
