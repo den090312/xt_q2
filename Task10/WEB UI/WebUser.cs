@@ -12,7 +12,9 @@ namespace WEB_UI
 
         public Role role { get; }
 
-        private int PasswordHash { get; }
+        private string PasswordHash { get; }
+
+        private readonly static char hashSeparator = '|';
 
         public readonly static Webuser Guest;
 
@@ -57,32 +59,114 @@ namespace WEB_UI
             return webuser;
         }
 
-        public static Webuser Get(string userName, string userPass)
+        public static Webuser GetLoggedUser(string userName, string userPass)
         {
-            var userPassHash = GetHashFromPassword(userPass);
+            var roleId = GetRoleIdByUserName(userName);
 
-            bool matchUser(Webuser user) => user.Name == userName & user.PasswordHash == userPassHash;
+            var roleName = Role.GetRoleNameByRoleId(roleId);
+            var userRole = Role.Get(roleName);
 
-            return list.Find(matchUser);
+            var webuser = Create(userName, userRole, userPass);
+
+            return webuser;
         }
 
-        private static int GetHashFromPassword(string password)
+        private static int GetRoleIdByUserName(string userName)
+        {
+            var roleId = -1;
+
+            using (var sqlConnection = new SqlConnection(Database.ConnectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetRoleIdByUserName";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(SqlParUserName(userName));
+                sqlCommand.Parameters.Add(SqlParRoleId());
+
+                sqlConnection.Open();
+
+                var sqlDataReader = sqlCommand.ExecuteReader();
+
+                while (sqlDataReader.Read())
+                {
+                    roleId = (int)sqlDataReader[0];
+                }
+
+                if (roleId == -1)
+                {
+                    throw new Exception($"Can't find role id by '{userName}' in database!");
+                }
+            }
+
+            return roleId;
+        }
+
+        private static string GetHashFromPassword(string password)
         {
             NullCheck(password);
             EmptyStringCheck(password);
 
-            var bytes = Encoding.ASCII.GetBytes(password + "hackme");
-            var hash = BitConverter.ToInt32(bytes, 0);
+            var listPass = new List<string>();
+            var step = 4;
 
-            return hash;
+            for (var i = 0; i < password.Length; i += step)
+            {
+                listPass.Add(password.Substring(i, Math.Min(step, password.Length - i)));
+            }
+
+            var hashSb = new StringBuilder();
+
+            for (var i = 0; i < listPass.Count; i++)
+            {
+                var bytes = Encoding.ASCII.GetBytes(AppendSpacesToString(listPass[i], 4));
+
+                hashSb.Append(BitConverter.ToInt32(bytes, 0));
+
+                if (i == listPass.Count - 1)
+                {
+                    continue;
+                }
+
+                hashSb.Append(hashSeparator);
+            }
+
+            return hashSb.ToString();
         }
 
-        private static string GetPasswordFromHash(int hash)
+        private static string AppendSpacesToString(string subString, int spaceCount)
         {
-            var bytes = BitConverter.GetBytes(hash);
-            var password = Encoding.ASCII.GetString(bytes);
+            if (subString.Length < spaceCount)
+            {
+                var sb = new StringBuilder(subString);
 
-            return password.Substring(0, password.Length - 6);
+                while (sb.Length != spaceCount)
+                {
+                    sb.Append(" ");
+                }
+
+                subString = sb.ToString();
+            }
+
+            return subString;
+        }
+
+        private static string GetPasswordFromHash(string hash)
+        {
+            var hashArray = hash.Split(hashSeparator);
+            var passSB = new StringBuilder();
+
+            foreach (var subHash in hashArray)
+            {
+                var hashInt = int.Parse(subHash);
+                var bytes = BitConverter.GetBytes(hashInt);
+                var subPass = Encoding.ASCII.GetString(bytes);
+
+                passSB.Append(subPass);
+            }
+
+            return passSB.ToString().TrimEnd();
         }
 
         public static bool PasswordIsOk(string userName, string password)
@@ -101,7 +185,7 @@ namespace WEB_UI
             NullCheck(userName);
             EmptyStringCheck(userName);
 
-            var hash = GetHashFromDB(userName);
+            var hash = GetHashFromDb(userName);
             var password = GetPasswordFromHash(hash);
 
             NullCheck(password);
@@ -110,15 +194,15 @@ namespace WEB_UI
             return password;
         }
 
-        private static int GetHashFromDB(string userName)
+        private static string GetHashFromDb(string userName)
         {
-            int hash = -1;
+            var hash = string.Empty;
 
             using (var sqlConnection = new SqlConnection(Database.ConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
 
-                sqlCommand.CommandText = "GetHashFormUserName";
+                sqlCommand.CommandText = "GetPasswordHashFormUserName";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 sqlCommand.Parameters.Add(SqlParUserName(userName));
@@ -130,10 +214,10 @@ namespace WEB_UI
 
                 while (sqlDataReader.Read())
                 {
-                    hash = (int)sqlDataReader[0];
+                    hash = (string)sqlDataReader[0];
                 }
 
-                if (hash == -1)
+                if (hash == string.Empty)
                 {
                     throw new Exception("Can't find password hash in database!");
                 }
@@ -155,7 +239,7 @@ namespace WEB_UI
         {
             NullCheck(user);
 
-            if (AddedToDB(user))
+            if (AddedToDb(user))
             {
                 Authentication.CurrentUser = user;
 
@@ -167,7 +251,7 @@ namespace WEB_UI
             }
         }
 
-        public static bool ExistsInDB(Webuser webuser)
+        public static bool ExistsInDb(Webuser webuser)
         {
             int userCount = 0;
 
@@ -176,7 +260,7 @@ namespace WEB_UI
             return userCount == 1;
         }
 
-        public static bool NameExistsInDB(string userName)
+        public static bool NameExistsInDb(string userName)
         {
             int userCount = 0;
 
@@ -215,13 +299,13 @@ namespace WEB_UI
             return userCount;
         }
 
-        public static bool AddedToDB(Webuser webuser)
+        public static bool AddedToDb(Webuser webuser)
         {
             NullCheck(webuser);
 
             try
             {
-                AddWebuserToDB(webuser);
+                AddWebuserToDb(webuser);
 
                 return true;
             }
@@ -231,7 +315,7 @@ namespace WEB_UI
             }
         }
 
-        private static void AddWebuserToDB(Webuser webuser)
+        private static void AddWebuserToDb(Webuser webuser)
         {
             var role = webuser?.role;
 
@@ -267,6 +351,16 @@ namespace WEB_UI
             };
         }
 
+        private static SqlParameter SqlParRoleId()
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@RoleId",
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Output
+            };
+        }
+
         private static SqlParameter SqlParUserName(string userName)
         {
             return new SqlParameter
@@ -278,13 +372,13 @@ namespace WEB_UI
             };
         }
 
-        private static SqlParameter SqlParPasswordHash(int passwordHash)
+        private static SqlParameter SqlParPasswordHash(string passwordHash)
         {
             return new SqlParameter
             {
                 ParameterName = "@PasswordHash",
                 Value = passwordHash,
-                SqlDbType = SqlDbType.Int,
+                SqlDbType = SqlDbType.NVarChar,
                 Direction = ParameterDirection.Input
             };
         }
@@ -294,8 +388,9 @@ namespace WEB_UI
             return new SqlParameter
             {
                 ParameterName = "@PasswordHash",
-                SqlDbType = SqlDbType.Int,
-                Direction = ParameterDirection.Output
+                SqlDbType = SqlDbType.NVarChar,
+                Direction = ParameterDirection.Output,
+                Size = 500
             };
         }
 

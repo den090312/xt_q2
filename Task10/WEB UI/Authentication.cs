@@ -12,7 +12,7 @@ namespace WEB_UI
         {
             NullCheck(webuser);
 
-            if (Webuser.ExistsInDB(webuser))
+            if (Webuser.ExistsInDb(webuser))
             {
                 CurrentUser = webuser;
 

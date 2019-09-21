@@ -45,7 +45,7 @@
 
         if (logName != null & logPass != null)
         {
-            if (!Webuser.NameExistsInDB(logName))
+            if (!Webuser.NameExistsInDb(logName))
             {
                 Response.Write("<script>alert('User name is not exists!');</script>");
 
@@ -55,8 +55,8 @@
                 Response.Write("<script>alert('Wrong password!');</script>");
             }
             else
-            {   
-                LogIn(Webuser.Get(logName, logPass));
+            {
+                LogIn(Webuser.GetLoggedUser(logName, logPass));
             }
         }
 
@@ -99,7 +99,7 @@
             return false;
         }
 
-        if (Webuser.NameExistsInDB(regName))
+        if (Webuser.NameExistsInDb(regName))
         {
             user = Webuser.Guest;
 

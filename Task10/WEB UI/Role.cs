@@ -27,14 +27,14 @@ namespace WEB_UI
         {
             var newRole = new Role(roleName);
 
-            if (NameExistsInDB(roleName))
+            if (NameExistsInDb(roleName))
             {
                 AddNewRoleToList(newRole);
 
                 return Get(roleName);
             }
 
-            if (AddedInDB(newRole))
+            if (AddedInDb(newRole))
             {
                 AddNewRoleToList(newRole);
             }
@@ -48,7 +48,7 @@ namespace WEB_UI
 
         public static Role Get(string roleName)
         {
-            if (!NameExistsInDB(roleName))
+            if (!NameExistsInDb(roleName))
             {
                 return Create(roleName);
             }
@@ -74,6 +74,45 @@ namespace WEB_UI
                     RoleList.Add(newRole);
                 }
             }
+        }
+
+        public static string GetRoleNameByRoleId(int idRole)
+        {
+            var roleName = string.Empty;
+
+            using (var sqlConnection = new SqlConnection(Database.ConnectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetRoleNameByIdRole";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(SqlParIdRole(idRole));
+                sqlCommand.Parameters.Add(SqlParRoleName());
+
+                sqlConnection.Open();
+
+                roleName = GetRoleName(idRole, roleName, sqlCommand);
+            }
+
+            return roleName;
+        }
+
+        private static string GetRoleName(int idRole, string roleName, SqlCommand sqlCommand)
+        {
+            var sqlDataReader = sqlCommand.ExecuteReader();
+
+            while (sqlDataReader.Read())
+            {
+                roleName = (string)sqlDataReader[0];
+            }
+
+            if (roleName == string.Empty)
+            {
+                throw new Exception($"Can't find role name by '{idRole}'!");
+            }
+
+            return roleName;
         }
 
         public static void AddUsersToRoles(IEnumerable<Webuser> users, IEnumerable<Role> roles)
@@ -103,16 +142,16 @@ namespace WEB_UI
             role.userList.Add(user);
         }
 
-        public static bool NameExistsInDB(string roleName)
+        public static bool NameExistsInDb(string roleName)
         {
             int roleCount = 0;
 
-            roleCount = GetRoleNameCount(roleName, roleCount);
+            roleCount = GetRoleNameCountInDb(roleName, roleCount);
 
             return roleCount == 1;
         }
 
-        private static int GetRoleNameCount(string roleName, int roleCount)
+        private static int GetRoleNameCountInDb(string roleName, int roleCount)
         {
             using (var sqlConnection = new SqlConnection(Database.ConnectionString))
             {
@@ -137,9 +176,9 @@ namespace WEB_UI
             return roleCount;
         }
 
-        public static void Delete(Role role)
+        public static void DeleteInList(Role role)
         {
-            if (DeletedFromDB(role))
+            if (DeletedInDb(role))
             {
                 RoleList.Remove(role);
             }
@@ -240,13 +279,13 @@ namespace WEB_UI
             return role1.Name != role2.Name;
         }
 
-        public static bool AddedInDB(Role role)
+        public static bool AddedInDb(Role role)
         {
             NullCheck(role);
 
             try
             {
-                AddWebroleToDB(role);
+                AddWebroleToDb(role);
 
                 return true;
             }
@@ -256,13 +295,13 @@ namespace WEB_UI
             }
         }
 
-        public static bool DeletedFromDB(Role role)
+        public static bool DeletedInDb(Role role)
         {
             NullCheck(role);
 
             try
             {
-                DeleteWebrole(role);
+                DeleteWebroleInDb(role);
 
                 return true;
             }
@@ -272,7 +311,7 @@ namespace WEB_UI
             }
         }
 
-        private static void DeleteWebrole(Role role)
+        private static void DeleteWebroleInDb(Role role)
         {
             var roleId = GetRoleId(role);
 
@@ -291,7 +330,7 @@ namespace WEB_UI
             }
         }
 
-        private static void AddWebroleToDB(Role role)
+        private static void AddWebroleToDb(Role role)
         {
             using (var sqlConnection = new SqlConnection(Database.ConnectionString))
             {
@@ -379,6 +418,17 @@ namespace WEB_UI
             };
         }
 
+        private static SqlParameter SqlParIdRole(int idRole)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@IdRole",
+                SqlDbType = SqlDbType.Int,
+                Value = idRole,
+                Direction = ParameterDirection.Input
+            };
+        }
+
         private static SqlParameter SqlParRoleName(string roleName)
         {
             return new SqlParameter
@@ -387,6 +437,17 @@ namespace WEB_UI
                 Value = roleName,
                 SqlDbType = SqlDbType.NVarChar,
                 Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParRoleName()
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@RoleName",
+                SqlDbType = SqlDbType.NVarChar,
+                Direction = ParameterDirection.Output,
+                Size = 50
             };
         }
 
