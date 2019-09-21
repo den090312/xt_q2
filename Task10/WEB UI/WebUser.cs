@@ -84,7 +84,7 @@ namespace WEB_UI
         {
             var roleId = GetRoleIdByUserName(userName);
 
-            var roleName = Role.GetRoleNameByRoleId(roleId);
+            var roleName = GetRoleNameByRoleId(roleId);
             var userRole = Role.Get(roleName);
 
             var webuser = Create(userName, userRole, userPass);
@@ -301,6 +301,45 @@ namespace WEB_UI
             return userCount == 1;
         }
 
+        private static string GetRoleNameByRoleId(int idRole)
+        {
+            var roleName = string.Empty;
+
+            using (var sqlConnection = new SqlConnection(Database.ConnectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetRoleNameByIdRole";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(SqlParIdRole(idRole));
+                sqlCommand.Parameters.Add(SqlParRoleName());
+
+                sqlConnection.Open();
+
+                roleName = GetRoleName(idRole, roleName, sqlCommand);
+            }
+
+            return roleName;
+        }
+
+        private static string GetRoleName(int idRole, string roleName, SqlCommand sqlCommand)
+        {
+            var sqlDataReader = sqlCommand.ExecuteReader();
+
+            while (sqlDataReader.Read())
+            {
+                roleName = (string)sqlDataReader[0];
+            }
+
+            if (roleName == string.Empty)
+            {
+                throw new Exception($"Can't find role name by '{idRole}'!");
+            }
+
+            return roleName;
+        }
+
         private static int GetUserNameCount(string userName, int userCount)
         {
             using (var sqlConnection = new SqlConnection(Database.ConnectionString))
@@ -360,7 +399,7 @@ namespace WEB_UI
 
             NullCheck(role);
 
-            var roleId = Role.GetRoleId(role);
+            var roleId = GetRoleId(role);
 
             using (var sqlConnection = new SqlConnection(Database.ConnectionString))
             {
@@ -379,6 +418,46 @@ namespace WEB_UI
             }
         }
 
+        private static int GetRoleId(Role role) => GetIdRoleByName(role.Name);
+
+        private static int GetIdRoleByName(string roleName)
+        {
+            int IdRole = -1;
+
+            using (var sqlConnection = new SqlConnection(Database.ConnectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetIdRoleByName";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(SqlParRoleName(roleName));
+                sqlCommand.Parameters.Add(SqlParIdRole());
+
+                sqlConnection.Open();
+                IdRole = GetIdRole(roleName, IdRole, sqlCommand);
+            }
+
+            return IdRole;
+        }
+
+        private static int GetIdRole(string roleName, int IdRole, SqlCommand sqlCommand)
+        {
+            var sqlDataReader = sqlCommand.ExecuteReader();
+
+            while (sqlDataReader.Read())
+            {
+                IdRole = (int)sqlDataReader[0];
+            }
+
+            if (IdRole == -1)
+            {
+                throw new Exception($"Can't find id role by '{roleName}'!");
+            }
+
+            return IdRole;
+        }
+
         private static SqlParameter SqlParRoleId(int IdRole)
         {
             return new SqlParameter
@@ -386,6 +465,27 @@ namespace WEB_UI
                 ParameterName = "@RoleId",
                 Value = IdRole,
                 SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParIdRole()
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@IdRole",
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Output
+            };
+        }
+
+        private static SqlParameter SqlParIdRole(int idRole)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@IdRole",
+                SqlDbType = SqlDbType.Int,
+                Value = idRole,
                 Direction = ParameterDirection.Input
             };
         }
@@ -408,6 +508,28 @@ namespace WEB_UI
                 Value = userName,
                 SqlDbType = SqlDbType.NVarChar,
                 Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParRoleName(string roleName)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@RoleName",
+                Value = roleName,
+                SqlDbType = SqlDbType.NVarChar,
+                Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParRoleName()
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@RoleName",
+                SqlDbType = SqlDbType.NVarChar,
+                Direction = ParameterDirection.Output,
+                Size = 50
             };
         }
 

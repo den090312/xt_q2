@@ -76,45 +76,6 @@ namespace WEB_UI
             }
         }
 
-        private static string GetRoleNameByRoleId(int idRole)
-        {
-            var roleName = string.Empty;
-
-            using (var sqlConnection = new SqlConnection(Database.ConnectionString))
-            {
-                var sqlCommand = sqlConnection.CreateCommand();
-
-                sqlCommand.CommandText = "GetRoleNameByIdRole";
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-
-                sqlCommand.Parameters.Add(SqlParIdRole(idRole));
-                sqlCommand.Parameters.Add(SqlParRoleName());
-
-                sqlConnection.Open();
-
-                roleName = GetRoleName(idRole, roleName, sqlCommand);
-            }
-
-            return roleName;
-        }
-
-        private static string GetRoleName(int idRole, string roleName, SqlCommand sqlCommand)
-        {
-            var sqlDataReader = sqlCommand.ExecuteReader();
-
-            while (sqlDataReader.Read())
-            {
-                roleName = (string)sqlDataReader[0];
-            }
-
-            if (roleName == string.Empty)
-            {
-                throw new Exception($"Can't find role name by '{idRole}'!");
-            }
-
-            return roleName;
-        }
-
         public static void AddUserToRole(Webuser user, Role role)
         {
             NullCheck(user);
@@ -146,31 +107,22 @@ namespace WEB_UI
 
                 sqlConnection.Open();
 
-                var sqlDataReader = sqlCommand.ExecuteReader();
-
-                while (sqlDataReader.Read())
-                {
-                    roleCount = (int)sqlDataReader[0];
-                }
+                roleCount = GetRoleNameCount(roleCount, sqlCommand);
             }
 
             return roleCount;
         }
 
-        public static bool operator ==(Role role1, Role role2)
+        private static int GetRoleNameCount(int roleCount, SqlCommand sqlCommand)
         {
-            NullCheck(role1);
-            NullCheck(role2);
+            var sqlDataReader = sqlCommand.ExecuteReader();
 
-            return role1.Name == role2.Name;
-        }
+            while (sqlDataReader.Read())
+            {
+                roleCount = (int)sqlDataReader[0];
+            }
 
-        public static bool operator !=(Role role1, Role role2)
-        {
-            NullCheck(role1);
-            NullCheck(role2);
-
-            return role1.Name != role2.Name;
+            return roleCount;
         }
 
         public static bool Add(Role role)
@@ -312,17 +264,6 @@ namespace WEB_UI
             };
         }
 
-        private static SqlParameter SqlParIdRole(int idRole)
-        {
-            return new SqlParameter
-            {
-                ParameterName = "@IdRole",
-                SqlDbType = SqlDbType.Int,
-                Value = idRole,
-                Direction = ParameterDirection.Input
-            };
-        }
-
         private static SqlParameter SqlParRoleName(string roleName)
         {
             return new SqlParameter
@@ -334,15 +275,20 @@ namespace WEB_UI
             };
         }
 
-        private static SqlParameter SqlParRoleName()
+        public static bool operator ==(Role role1, Role role2)
         {
-            return new SqlParameter
-            {
-                ParameterName = "@RoleName",
-                SqlDbType = SqlDbType.NVarChar,
-                Direction = ParameterDirection.Output,
-                Size = 50
-            };
+            NullCheck(role1);
+            NullCheck(role2);
+
+            return role1.Name == role2.Name;
+        }
+
+        public static bool operator !=(Role role1, Role role2)
+        {
+            NullCheck(role1);
+            NullCheck(role2);
+
+            return role1.Name != role2.Name;
         }
 
         public override bool Equals(object obj)
