@@ -28,13 +28,13 @@
         EditAwards();
         SaveUserImage();
         SaveAwardImage();
-        Loggin();
+        Account();
 
         //POST-reload page fix
         @Html.Raw("<script>document.location='https://localhost:44337/index.cshtml'</script>");
     }
 
-    void Loggin()
+    void Account()
     {
         var loggedOut = Request.Form["loggedOut"];
         var logName   = Request.Form["logName"];
@@ -45,11 +45,19 @@
 
         if (logName != null & logPass != null)
         {
-            roleName = "Admin";
+            if (!Webuser.NameExistsInDB(logName))
+            {
+                Response.Write("<script>alert('User name is not exists!');</script>");
 
-            var user = Webuser.Create(logName, Role.Create(roleName), logPass);
-
-            LogIn(user);
+            }
+            else if (!Webuser.PasswordIsOk(logName, logPass))
+            {
+                Response.Write("<script>alert('Wrong password!');</script>");
+            }
+            else
+            {   
+                LogIn(Webuser.Get(logName, logPass));
+            }
         }
 
         if (loggedOut != null & loggedOut == "loggedOut")

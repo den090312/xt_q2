@@ -54,47 +54,66 @@ namespace WEB_UI
         {
             var newRole = new Role(roleName);
 
-            bool matchName(Role role) => role.Name.ToLower() == roleName.ToLower();
-
-            if (RoleList.Exists(matchName))
+            if (NameExistsInDB(roleName))
             {
-                return RoleList.Find(matchName);
+                AddNewRoleToList(newRole);
+
+                return Get(roleName);
             }
 
-            if (ExistsInDB(newRole))
+            if (AddedInDB(newRole))
             {
-                if (newRole.Name.ToLower() != "guest")
-                {
-                    AddNewRoleToList(newRole);
-                }
+                AddNewRoleToList(newRole);
             }
             else
             {
-                if (AddedInDB(newRole))
-                {
-                    AddNewRoleToList(newRole);
-                }
-                else
-                {
-                    throw new Exception("Error adding new role to database!");
-                }
+                throw new Exception("Error adding new role to database!");
             }
 
             return newRole;
         }
 
+        public static Role Get(string roleName)
+        {
+            if (!NameExistsInDB(roleName))
+            {
+                return Create(roleName);
+            }
+
+            if (roleName.ToLower() == "guest")
+            {
+                return new Role("Guest");
+            }
+
+            bool matchName(Role role) => role.Name.ToLower() == roleName.ToLower();
+
+            return RoleList.Find(matchName);
+        }
+
         private static void AddNewRoleToList(Role newRole)
         {
-            if (newRole.Name.ToLower() != "guest")
+            bool matchName(Role role) => role.Name.ToLower() == newRole.Name.ToLower();
+
+            if (!RoleList.Exists(matchName))
             {
-                RoleList.Add(newRole);
+                if (newRole.Name.ToLower() != "guest")
+                {
+                    RoleList.Add(newRole);
+                }
             }
         }
 
-        private static bool ExistsInDB(Role role)
+        public static bool NameExistsInDB(string roleName)
         {
             int roleCount = 0;
 
+            roleCount = GetRoleNameCount(roleName, roleCount);
+
+            return roleCount == 1;
+        }
+
+        private static int GetRoleNameCount(string roleName, int roleCount)
+        {
             using (var sqlConnection = new SqlConnection(Database.ConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
@@ -105,7 +124,7 @@ namespace WEB_UI
                 sqlCommand.Parameters.Add(new SqlParameter
                 {
                     ParameterName = "@RoleName",
-                    Value = role.Name,
+                    Value = roleName,
                     SqlDbType = SqlDbType.NVarChar,
                     Direction = ParameterDirection.Input
                 });
@@ -127,7 +146,7 @@ namespace WEB_UI
                 }
             }
 
-            return roleCount == 1;
+            return roleCount;
         }
 
         public static void Delete(Role role)

@@ -11,7 +11,7 @@ namespace WEB_UI
 
         public Role role { get; }
 
-        public int PasswordHash { get; }
+        private int PasswordHash { get; }
 
         public readonly static Webuser Guest;
 
@@ -19,7 +19,7 @@ namespace WEB_UI
 
         static Webuser()
         {
-            Guest = new Webuser("Guest", Role.Create("Guest"), "Guest");
+            Guest = new Webuser("Guest", Role.Get("Guest"), "Guest");
             list = new List<Webuser>
             {
                 Guest
@@ -66,6 +66,15 @@ namespace WEB_UI
             return webuser;
         }
 
+        public static Webuser Get(string userName, string userPass)
+        {
+            var userPassHash = GetHashFromPassword(userPass);
+
+            bool matchUser(Webuser user) => user.Name == userName & user.PasswordHash == userPassHash;
+
+            return list.Find(matchUser);
+        }
+
         public static bool PasswordIsOk(string userName, string password)
         {
             NullCheck(userName);
@@ -84,9 +93,6 @@ namespace WEB_UI
 
             var hash = GetPasswordHashFromDB(userName);
 
-            NullCheck(hash);
-            EmptyStringCheck(hash);
-
             var password = GetPasswordFromHash(hash);
 
             NullCheck(password);
@@ -95,16 +101,16 @@ namespace WEB_UI
             return password;
         }
 
-        private static string GetPasswordFromHash(string hash)
+        private static string GetPasswordFromHash(int hash)
         {
-            var password = hash;
+            var password = hash.ToString();
 
             return password;
         }
 
-        private static string GetPasswordHashFromDB(string userName)
+        private static int GetPasswordHashFromDB(string userName)
         {
-            var hash = userName;
+            var hash = 0;
 
             return hash;
         }
@@ -139,6 +145,15 @@ namespace WEB_UI
             int userCount = 0;
 
             userCount = GetUserNameCount(webuser.Name, userCount);
+
+            return userCount == 1;
+        }
+
+        public static bool NameExistsInDB(string userName)
+        {
+            int userCount = 0;
+
+            userCount = GetUserNameCount(userName, userCount);
 
             return userCount == 1;
         }
@@ -178,15 +193,6 @@ namespace WEB_UI
             }
 
             return userCount;
-        }
-
-        public static bool NameExistsInDB(string userName)
-        {
-            int userCount = 0;
-
-            userCount = GetUserNameCount(userName, userCount);
-
-            return userCount == 1;
         }
 
         public static bool AddedToDB(Webuser webuser)
