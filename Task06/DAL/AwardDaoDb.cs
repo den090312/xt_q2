@@ -86,8 +86,6 @@ namespace DAL
 
                 sqlConnection.Open();
 
-                sqlCommand.ExecuteNonQuery();
-
                 var sqlDr = sqlCommand.ExecuteReader();
 
                 while (sqlDr.Read())
@@ -150,14 +148,19 @@ namespace DAL
 
                 while (sqlDr.Read())
                 {
-                    for (var j = 0; j < 4; j++)
-                    {
-                        info += sqlDr.GetString(j) + " ";
-                        i++;
-                    }
+                    StringInfo(sqlDr, ref info, ref i);
                 }
 
                 return info.TrimEnd();
+            }
+        }
+
+        private static void StringInfo(SqlDataReader sqlDr, ref string info, ref int i)
+        {
+            for (var j = 0; j < 4; j++)
+            {
+                info += sqlDr.GetString(j) + " ";
+                i++;
             }
         }
 
