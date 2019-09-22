@@ -13,7 +13,33 @@ namespace DAL
 
         public bool JoinAwardToUser(User user, Award award)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Join(user, award);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void Join(User user, Award award)
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "JoinAwardToUser";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.Add(SqlParGuid(user.Guid));
+                sqlCommand.Parameters.Add(SqlParGuid(award.Guid));
+
+                sqlConnection.Open();
+
+                sqlCommand.ExecuteNonQuery();
+            }
         }
 
         public IEnumerable<Award> GetAwardsByUser(User user, IEnumerable<Award> awards)
@@ -59,9 +85,20 @@ namespace DAL
             throw new NotImplementedException();
         }
 
-        public bool RemoveAwardUsers(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
+        public bool RemoveAwardUsers(Guid awardGuid, IEnumerable<User> users, IEnumerable<Award> awards)
         {
             throw new NotImplementedException();
+        }
+
+        private static SqlParameter SqlParGuid(Guid guid)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@Guid",
+                Value = guid,
+                SqlDbType = SqlDbType.UniqueIdentifier,
+                Direction = ParameterDirection.Input
+            };
         }
     }
 }

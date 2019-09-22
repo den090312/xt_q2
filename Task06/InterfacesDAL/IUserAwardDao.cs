@@ -12,7 +12,7 @@ namespace InterfacesDAL
 
         bool RemoveUserAwards(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards);
 
-        bool RemoveAwardUsers(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards);
+        bool RemoveAwardUsers(Guid awardGuid, IEnumerable<User> users, IEnumerable<Award> awards);
 
         string GetInfo();
     }

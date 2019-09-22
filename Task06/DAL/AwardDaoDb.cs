@@ -181,7 +181,8 @@ namespace DAL
             {
                 ParameterName = "@Title",
                 SqlDbType = SqlDbType.NVarChar,
-                Direction = ParameterDirection.Output
+                Direction = ParameterDirection.Output,
+                Size = 30
             };
         }
 
