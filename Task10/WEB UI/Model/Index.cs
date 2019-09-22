@@ -1,16 +1,21 @@
 ﻿using System.Collections.Specialized;
+using System.Web;
 
 namespace WEB_UI
 {
     public static class Index
     {
-        public static NameValueCollection RequestForm { get; set; }
+        public static NameValueCollection Forms { private get; set; }
+
+        public static HttpFileCollection Files { private get; set; }
+
+        public static HttpServerUtilityBase MyServer { private get; set; }
 
         public static string Message { get; set; }
 
         static Index() => Message = string.Empty;
 
-        public static void Start(out string alert)
+        public static void Run(out string alert)
         {
             UserCreation();
             UserAwardsDelete();
@@ -20,6 +25,8 @@ namespace WEB_UI
             EditUsers();
             EditAwards();
             Account(out alert);
+            SaveUserImage();
+            SaveAwardImage();
         }
 
         private static void Account(out string alert)
@@ -32,9 +39,9 @@ namespace WEB_UI
         private static void TryRegister(out string alert)
         {
             var alertResponse = string.Empty;
-            var regName = RequestForm["regName"];
-            var regPass = RequestForm["regPass"];
-            var roleName = RequestForm["roleName"];
+            var regName = Forms["regName"];
+            var regPass = Forms["regPass"];
+            var roleName = Forms["roleName"];
 
             if (regName != null & regPass != null & roleName != null)
             {
@@ -53,7 +60,7 @@ namespace WEB_UI
 
         private static void TryLogOut()
         {
-            var loggedOut = RequestForm["loggedOut"];
+            var loggedOut = Forms["loggedOut"];
 
             if (loggedOut != null & loggedOut == "loggedOut")
             {
@@ -64,8 +71,8 @@ namespace WEB_UI
         private static string TryLogIn()
         {
             var errorResponse = string.Empty;
-            var logName = RequestForm["logName"];
-            var logPass = RequestForm["logPass"];
+            var logName = Forms["logName"];
+            var logPass = Forms["logPass"];
 
             if (logName != null & logPass != null)
             {
@@ -116,8 +123,8 @@ namespace WEB_UI
 
         private static void UserCreation()
         {
-            var userName = RequestForm["userName"];
-            var dateOfBirth = RequestForm["dateOfBirth"];
+            var userName = Forms["userName"];
+            var dateOfBirth = Forms["dateOfBirth"];
 
             if (userName != null & dateOfBirth != null)
             {
@@ -134,7 +141,7 @@ namespace WEB_UI
 
         private static void UserAwardsDelete()
         {
-            var userGuid = RequestForm["userGuid"];
+            var userGuid = Forms["userGuid"];
 
             if (userGuid != null)
             {
@@ -151,7 +158,7 @@ namespace WEB_UI
 
         private static void AwardCreation()
         {
-            var awardTitle = RequestForm["awardTitle"];
+            var awardTitle = Forms["awardTitle"];
 
             if (awardTitle != null)
             {
@@ -168,7 +175,7 @@ namespace WEB_UI
 
         private static void AwardUsersDelete()
         {
-            var awardGuid = RequestForm["awardGuid"];
+            var awardGuid = Forms["awardGuid"];
 
             if (awardGuid != null & awardGuid != "")
             {
@@ -185,8 +192,8 @@ namespace WEB_UI
 
         private static void JoinAwardToUser()
         {
-            var userGuid = RequestForm["userGuidJoin"];
-            var awardGuid = RequestForm["awardGuidJoin"];
+            var userGuid = Forms["userGuidJoin"];
+            var awardGuid = Forms["awardGuidJoin"];
 
             if (userGuid != null & awardGuid != null)
             {
@@ -203,9 +210,9 @@ namespace WEB_UI
 
         private static void EditUsers()
         {
-            var guids = RequestForm.GetValues("userGuids");
-            var names = RequestForm.GetValues("userNames");
-            var dates = RequestForm.GetValues("userDates");
+            var guids = Forms.GetValues("userGuids");
+            var names = Forms.GetValues("userNames");
+            var dates = Forms.GetValues("userDates");
 
             if (guids != null & names != null & dates != null)
             {
@@ -222,8 +229,8 @@ namespace WEB_UI
 
         private static void EditAwards()
         {
-            var guids = RequestForm.GetValues("awardGuids");
-            var titles = RequestForm.GetValues("awardTitles");
+            var guids = Forms.GetValues("awardGuids");
+            var titles = Forms.GetValues("awardTitles");
 
             if (guids != null & titles != null)
             {
@@ -234,6 +241,58 @@ namespace WEB_UI
                 else
                 {
                     Message = "Awards was NOT edited";
+                }
+            }
+        }
+
+        private static void SaveUserImage()
+        {
+            var root = MyServer.MapPath("~");
+
+            if (!Images.TryGetImage(Files, out var userImageFile, out var userImageFileName))
+            {
+                return;
+            }
+
+            var userImageGuid = Forms["userImageGuid"];
+
+            if (userImageGuid != null)
+            {
+                var userImagePath = MyServer.MapPath(userImageFileName);
+
+                if (Images.ImageSaved(userImagePath, root, userImageFile, userImageGuid))
+                {
+                    Message = "User image saved";
+                }
+                else
+                {
+                    Message = "User image was NOT saved";
+                }
+            }
+        }
+
+        private static void SaveAwardImage()
+        {
+            var root = MyServer.MapPath("~");
+
+            if (!Images.TryGetImage(Files, out var awardImageFile, out var awardImageFileName))
+            {
+                return;
+            }
+
+            var awardImageGuid = Forms["awardImageGuid"];
+
+            if (awardImageGuid != null)
+            {
+                var awardImagePath = MyServer.MapPath(awardImageFileName);
+
+                if (Images.ImageSaved(awardImagePath, root, awardImageFile, awardImageGuid))
+                {
+                    Message = "Award image saved";
+                }
+                else
+                {
+                    Message = "Award image was NOT saved";
                 }
             }
         }

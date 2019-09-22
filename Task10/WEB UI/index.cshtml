@@ -8,71 +8,18 @@
     var currentUser = Webuser.Current;
     var root = Server.MapPath("~");
 
-    var message = string.Empty;
-    var alertMessage = string.Empty;
+    var alert = string.Empty;
     var htmlRaw = string.Empty;
-
-    var userImages  = HttpContext.Current.Request.Files;
-    var awardImages = HttpContext.Current.Request.Files;
 
     if (IsPost)
     {
-        Index.RequestForm = Request.Form;
-        Index.Start(out alertMessage);
-
-        SaveUserImage();
-        SaveAwardImage();
+        Index.Forms    = Request.Form;
+        Index.Files    = HttpContext.Current.Request.Files;
+        Index.MyServer = Server;
+        Index.Run(out alert);
 
         //POST-reload page fix
         @Html.Raw("<script>document.location='https://localhost:44337/index.cshtml'</script>");
-    }
-
-    void SaveUserImage()
-    {
-        if (!Images.TryGetImage(userImages, out var userImageFile, out var userImageFileName))
-        {
-            return;
-        }
-
-        var userImageGuid = Request.Form["userImageGuid"];
-
-        if (userImageGuid != null)
-        {
-            var userImagePath = Server.MapPath(userImageFileName);
-
-            if (Images.ImageSaved(userImagePath, root, userImageFile, userImageGuid))
-            {
-                message = "User image saved";
-            }
-            else
-            {
-                message = "User image was NOT saved";
-            }
-        }
-    }
-
-    void SaveAwardImage()
-    {
-        if (!Images.TryGetImage(awardImages, out var awardImageFile, out var awardImageFileName))
-        {
-            return;
-        }
-
-        var awardImageGuid = Request.Form["awardImageGuid"];
-
-        if (awardImageGuid != null)
-        {
-            var awardImagePath = Server.MapPath(awardImageFileName);
-
-            if (Images.ImageSaved(awardImagePath, root, awardImageFile, awardImageGuid))
-            {
-                message = "Award image saved";
-            }
-            else
-            {
-                message = "Award image was NOT saved";
-            }
-        }
     }
 }
 <!DOCTYPE html>
@@ -86,9 +33,8 @@
 </head>
 <body>
     <div id="main" class="main">
-        <b>@message</b>
-        <b>@message = @alertMessage</b>
-        <b>@message = @Index.Message</b>
+        <b>@alert</b>
+        <b>@Index.Message</b>
         <p class="currentUserName">User name: @(currentUser.Name)</p>
         <p class="currentUserRole">Role: @(currentUser.Role.Name)</p>
         @{
