@@ -8,9 +8,9 @@ namespace InterfacesBLL
     {
         Award CreateAward(string title);
 
-        bool AwardAdded(Award award);
+        bool AddAward(Award award);
 
-        bool AwardRemoved(Guid awardGuid);
+        bool RemoveAward(Guid awardGuid);
 
         IEnumerable<Award> GetAll();
 

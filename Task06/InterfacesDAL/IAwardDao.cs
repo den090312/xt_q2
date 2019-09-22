@@ -6,9 +6,9 @@ namespace InterfacesDAL
 {
     public interface IAwardDao
     {
-        bool AwardAdded(Award award);
+        bool AddAward(Award award);
 
-        bool AwardRemoved(Guid awardGuid);
+        bool RemoveAward(Guid awardGuid);
 
         IEnumerable<Award> GetAll();
 

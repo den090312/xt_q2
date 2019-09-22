@@ -8,9 +8,9 @@ namespace InterfacesBLL
     {
         User CreateUser(string name, DateTime dateBirth);
 
-        bool UserAdded(User user);
+        bool AddUser(User user);
 
-        bool UserRemoved(Guid userGuid);
+        bool RemoveUser(Guid userGuid);
 
         IEnumerable<User> GetAll();
 

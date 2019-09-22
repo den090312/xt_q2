@@ -62,7 +62,7 @@ namespace BLL
 
         public bool UserAwardsRemoved(Guid userGuid)
         {
-            if (!_userDao.UserRemoved(userGuid))
+            if (!_userDao.RemoveUser(userGuid))
             {
                 return false;
             }
@@ -78,7 +78,7 @@ namespace BLL
 
         public bool AwardUsersRemoved(Guid awardGuid)
         {
-            if (!_awardDao.AwardRemoved(awardGuid))
+            if (!_awardDao.RemoveAward(awardGuid))
             {
                 return false;
             }

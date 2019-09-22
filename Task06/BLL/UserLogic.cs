@@ -41,14 +41,14 @@ namespace BLL
             }
         }
 
-        public bool UserAdded(User user)
+        public bool AddUser(User user)
         {
             NullCheck(user);
 
-            return _userDao.UserAdded(user);
+            return _userDao.AddUser(user);
         }
 
-        public bool UserRemoved(Guid userGuid) => _userDao.UserRemoved(userGuid);
+        public bool RemoveUser(Guid userGuid) => _userDao.RemoveUser(userGuid);
 
         public IEnumerable<User> GetAll()
         {

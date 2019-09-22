@@ -182,8 +182,8 @@ namespace Pl
 
         internal Award CreateAward() => DependencyResolver.AwardLogic?.CreateAward(new InputPl()?.GetUserString("title"));
 
-        internal bool UserAdded(User user) => DependencyResolver.UserLogic.UserAdded(user);
+        internal bool UserAdded(User user) => DependencyResolver.UserLogic.AddUser(user);
 
-        internal bool AwardAdded(Award award) => DependencyResolver.AwardLogic.AwardAdded(award);
+        internal bool AwardAdded(Award award) => DependencyResolver.AwardLogic.AddAward(award);
     }
 }

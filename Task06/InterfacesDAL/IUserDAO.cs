@@ -6,9 +6,9 @@ namespace InterfacesDAL
 {
     public interface IUserDao
     {
-        bool UserAdded(User user);
+        bool AddUser(User user);
 
-        bool UserRemoved(Guid userGuid);
+        bool RemoveUser(Guid userGuid);
 
         IEnumerable<User> GetAll();
 
