@@ -14,6 +14,8 @@ namespace DAL
     {
         private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=webusersdb;Integrated Security=True";
 
+        private static readonly string sqlDateFormat = "yyyy-MM-dd";
+
         public bool Add(User user)
         {
             try
@@ -28,6 +30,36 @@ namespace DAL
             }
         }
 
+        public bool RemoveByGuid(Guid userGuid)
+        {
+            try
+            {
+                RemoveUser(userGuid);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void RemoveUser(Guid guid)
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "RemoveUserByGuid";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.Add(SqlParGuid(guid));
+
+                sqlConnection.Open();
+
+                sqlCommand.ExecuteNonQuery();
+            }
+        }
+
         private static void AddUser(User user)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
@@ -37,59 +69,15 @@ namespace DAL
                 sqlCommand.CommandText = "AddUser";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                sqlCommand.Parameters.Add(SqlParGuid(user));
-                sqlCommand.Parameters.Add(SqlParName(user));
-                sqlCommand.Parameters.Add(SqlParDate(user));
-                sqlCommand.Parameters.Add(SqlParAge(user));
+                sqlCommand.Parameters.Add(SqlParGuid(user.Guid));
+                sqlCommand.Parameters.Add(SqlParName(user.Name));
+                sqlCommand.Parameters.Add(SqlParDate(user.DateOfBirth.ToString(sqlDateFormat)));
+                sqlCommand.Parameters.Add(SqlParAge(user.Age));
 
                 sqlConnection.Open();
 
                 sqlCommand.ExecuteNonQuery();
             }
-        }
-
-        private static SqlParameter SqlParAge(User user)
-        {
-            return new SqlParameter
-            {
-                ParameterName = "@Age",
-                Value = user.Age,
-                SqlDbType = SqlDbType.TinyInt,
-                Direction = ParameterDirection.Input
-            };
-        }
-
-        private static SqlParameter SqlParDate(User user)
-        {
-            return new SqlParameter
-            {
-                ParameterName = "@DateOfBirth",
-                Value = user.DateOfBirth.ToString("yyyy-MM-dd"),
-                SqlDbType = SqlDbType.Date,
-                Direction = ParameterDirection.Input
-            };
-        }
-
-        private static SqlParameter SqlParName(User user)
-        {
-            return new SqlParameter
-            {
-                ParameterName = "@Name",
-                Value = user.Name,
-                SqlDbType = SqlDbType.NVarChar,
-                Direction = ParameterDirection.Input
-            };
-        }
-
-        private static SqlParameter SqlParGuid(User user)
-        {
-            return new SqlParameter
-            {
-                ParameterName = "@Guid",
-                Value = user.Guid,
-                SqlDbType = SqlDbType.UniqueIdentifier,
-                Direction = ParameterDirection.Input
-            };
         }
 
         public IEnumerable<User> GetAll()
@@ -122,9 +110,33 @@ namespace DAL
             return users;
         }
 
-        public User GetByGuid(Guid userGuid)
+        public User GetByGuid(Guid guid)
         {
-            throw new NotImplementedException();
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetUserByGuid";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.Add(SqlParGuid(guid));
+                sqlConnection.Open();
+
+                var sqlDr = sqlCommand.ExecuteReader();
+
+                var name = string.Empty;
+
+                while (sqlDr.Read())
+                {
+                    return new User(guid, sqlDr.GetString(0), DateTime.Parse(sqlDr.GetString(1)));
+                }
+
+                if (name == string.Empty)
+                {
+                    return null;
+                }
+            }
+
+            return null;
         }
 
         public string GetInfo()
@@ -156,9 +168,48 @@ namespace DAL
             }
         }
 
-        public bool RemoveByGuid(Guid userGuid)
+        private static SqlParameter SqlParAge(int age)
         {
-            throw new NotImplementedException();
+            return new SqlParameter
+            {
+                ParameterName = "@Age",
+                Value = age,
+                SqlDbType = SqlDbType.TinyInt,
+                Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParDate(string dateString)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@DateOfBirth",
+                Value = dateString,
+                SqlDbType = SqlDbType.Date,
+                Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParName(string name)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@Name",
+                Value = name,
+                SqlDbType = SqlDbType.NVarChar,
+                Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParGuid(Guid guid)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@Guid",
+                Value = guid,
+                SqlDbType = SqlDbType.UniqueIdentifier,
+                Direction = ParameterDirection.Input
+            };
         }
     }
 }
