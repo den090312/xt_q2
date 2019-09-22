@@ -10,7 +10,7 @@ namespace WEB_UI
 
         static Index() => Message = string.Empty;
 
-        public static void Start(out string errorMessage)
+        public static void Start(out string alert)
         {
             UserCreation();
             UserAwardsDelete();
@@ -19,26 +19,26 @@ namespace WEB_UI
             JoinAwardToUser();
             EditUsers();
             EditAwards();
-            Account(out errorMessage);
+            Account(out alert);
         }
 
-        private static void Account(out string errorMessage)
+        private static void Account(out string alert)
         {
             TryLogIn();
             TryLogOut();
-            TryRegister(out errorMessage);
+            TryRegister(out alert);
         }
 
-        private static void TryRegister(out string errorMessage)
+        private static void TryRegister(out string alert)
         {
-            var errorResponse = string.Empty;
+            var alertResponse = string.Empty;
             var regName = RequestForm["regName"];
             var regPass = RequestForm["regPass"];
             var roleName = RequestForm["roleName"];
 
             if (regName != null & regPass != null & roleName != null)
             {
-                if (TryUserRegister(regName, regPass, roleName, out errorResponse))
+                if (TryUserRegister(regName, regPass, roleName, out alertResponse))
                 {
                     LogIn(regName, regPass);
                 }
@@ -48,7 +48,7 @@ namespace WEB_UI
                 }
             }
 
-            errorMessage = errorResponse;
+            alert = alertResponse;
         }
 
         private static void TryLogOut()

@@ -9,6 +9,7 @@
     var root = Server.MapPath("~");
 
     var message = string.Empty;
+    var alertMessage = string.Empty;
     var htmlRaw = string.Empty;
 
     var userImages  = HttpContext.Current.Request.Files;
@@ -17,7 +18,7 @@
     if (IsPost)
     {
         Index.RequestForm = Request.Form;
-        Index.Start(out message);
+        Index.Start(out alertMessage);
 
         SaveUserImage();
         SaveAwardImage();
@@ -86,6 +87,8 @@
 <body>
     <div id="main" class="main">
         <b>@message</b>
+        <b>@message = @alertMessage</b>
+        <b>@message = @Index.Message</b>
         <p class="currentUserName">User name: @(currentUser.Name)</p>
         <p class="currentUserRole">Role: @(currentUser.Role.Name)</p>
         @{
