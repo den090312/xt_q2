@@ -21,12 +21,12 @@ namespace WEB_UI
             }
 
             var userLogic = DependencyResolver.UserLogic;
-            var user = userLogic?.CreateUser(userName, result);
+            var user = userLogic?.Create(userName, result);
 
-            return userLogic.UserAdded(user);
+            return userLogic.Add(user);
         }
 
-        public static bool UserAwardsDelete(string userGuid)
+        public static bool DeleteUserAwards(string userGuid)
         {
             NullCheck(userGuid);
 
@@ -40,7 +40,7 @@ namespace WEB_UI
                 return false;
             }
 
-            return DependencyResolver.UserAwardLogic.UserAwardsRemoved(result);
+            return DependencyResolver.UserAwardLogic.RemoveUserAwards(result);
         }
 
         public static bool AwardCreate(string awardTitle)
@@ -53,12 +53,12 @@ namespace WEB_UI
             }
 
             var awardLogic = DependencyResolver.AwardLogic;
-            var award = awardLogic?.CreateAward(awardTitle);
+            var award = awardLogic?.Create(awardTitle);
 
-            return awardLogic.AwardAdded(award);
+            return awardLogic.Add(award);
         }
 
-        public static bool AwardUsersDelete(string awardGuid)
+        public static bool DeleteAwardUsers(string awardGuid)
         {
             NullCheck(awardGuid);
 
@@ -72,7 +72,7 @@ namespace WEB_UI
                 return false;
             }
 
-            return DependencyResolver.UserAwardLogic.AwardUsersRemoved(result);
+            return DependencyResolver.UserAwardLogic.RemoveAwardUsers(result);
         }
 
         public static bool JoinAwardToUser(string userGuid, string awardGuid)
@@ -90,7 +90,7 @@ namespace WEB_UI
                 return false;
             }
 
-            return DependencyResolver.UserAwardLogic.JoinedAwardToUser(resultUserGuid, resultAwardGuid);
+            return DependencyResolver.UserAwardLogic.JoinAwardToUser(resultUserGuid, resultAwardGuid);
         }
 
         public static bool UsersEdit(string[] guids, string[] names, string[] dates)
@@ -166,7 +166,7 @@ namespace WEB_UI
 
             var user = new Entities.User(resultGuid, name, resultDate);
 
-            return DependencyResolver.UserLogic.UserAdded(user);
+            return DependencyResolver.UserLogic.Add(user);
         }
 
         private static bool AwardAdded(string guid, string title)
@@ -181,7 +181,7 @@ namespace WEB_UI
 
             var award = new Entities.Award(resultGuid, title);
 
-            return DependencyResolver.AwardLogic.AwardAdded(award);
+            return DependencyResolver.AwardLogic.Add(award);
         }
 
         private static bool AllUsersDeleted()
@@ -191,7 +191,7 @@ namespace WEB_UI
 
             foreach (var user in allUsers)
             {
-                if (!userLogic.UserRemoved(user.UserGuid))
+                if (!userLogic.RemoveByGuid(user.UserGuid))
                 {
                     return false;
                 }
@@ -207,7 +207,7 @@ namespace WEB_UI
 
             foreach (var award in allAwards)
             {
-                if (!awardLogic.AwardRemoved(award.AwardGuid))
+                if (!awardLogic.RemoveByGuid(award.AwardGuid))
                 {
                     return false;
                 }

@@ -150,7 +150,7 @@ namespace WEB_UI
 
             if (userGuid != null)
             {
-                if (Crud.UserAwardsDelete(userGuid))
+                if (Crud.DeleteUserAwards(userGuid))
                 {
                     Message = "User with awards deleted";
                 }
@@ -184,7 +184,7 @@ namespace WEB_UI
 
             if (awardGuid != null & awardGuid != "")
             {
-                if (Crud.AwardUsersDelete(awardGuid))
+                if (Crud.DeleteAwardUsers(awardGuid))
                 {
                     Message = "Award with users deleted";
                 }
