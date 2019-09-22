@@ -136,6 +136,7 @@
   <ItemGroup>
     <Compile Include="Model\Database.cs" />
     <Compile Include="Model\Images.cs" />
+    <Compile Include="Model\Index.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Crud.cs" />
     <Compile Include="Model\Role.cs" />
