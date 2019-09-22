@@ -126,20 +126,20 @@
     <Content Include="Pages\RegistrationFinish.html" />
     <Content Include="Pages\UserCreation.html" />
     <Content Include="Pages\UserDelete.html" />
-    <Content Include="script.js" />
-    <Content Include="styles.css" />
+    <Content Include="Scripts\script.js" />
+    <Content Include="Content\styles.css" />
     <Content Include="Pages\AllUserOperations.html" />
     <Content Include="Pages\UserPrint.html" />
     <Content Include="Web.config" />
-    <Content Include="sql script\webusersdb.sql" />
+    <Content Include="Scripts\webusersdb.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database.cs" />
-    <Compile Include="Images.cs" />
+    <Compile Include="Model\Database.cs" />
+    <Compile Include="Model\Images.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Crud.cs" />
-    <Compile Include="Role.cs" />
-    <Compile Include="Webuser.cs" />
+    <Compile Include="Model\Crud.cs" />
+    <Compile Include="Model\Role.cs" />
+    <Compile Include="Model\Webuser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.cshtml" />

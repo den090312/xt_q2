@@ -1,15 +1,17 @@
-﻿@{
-    var guest    = Role.Create("Guest");
+﻿@using Common;
+@using WEB_UI;
+@{
+    var guest = Role.Create("Guest");
     var roleUser = Role.Create("User");
-    var admin    = Role.Create("Admin");
+    var admin = Role.Create("Admin");
 
     var currentUser = Webuser.Current;
-    var root        = Server.MapPath("~");
+    var root = Server.MapPath("~");
 
     var message = string.Empty;
     var htmlRaw = string.Empty;
 
-    var userImages  = HttpContext.Current.Request.Files;
+    var userImages = HttpContext.Current.Request.Files;
     var awardImages = HttpContext.Current.Request.Files;
 
     if (IsPost)
@@ -283,14 +285,12 @@
         }
     }
 }
-@using Common;
-@using WEB_UI;
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <script src="~/Scripts/script.js"></script>
+    <link rel="stylesheet" href="~/Content/styles.css" type="text/css" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>UserAwards</title>
 </head>
@@ -304,13 +304,13 @@
             {
                 @Html.Raw(File.ReadAllText(root + @"\Pages\Authentication.html"));
                 <form method="post" action="" class="user_register" style="display: none;">
-                    <p class="alertbox"></p>                  
+                    <p class="alertbox"></p>
                     @Html.Raw(File.ReadAllText(root + @"\Pages\RegistrationFields.html"))
                     Role:
                     @{
                         var roleList = Role.List;
                         foreach (var role in roleList)
-                            {<label><input type="radio" name="roleName" value="@(role.Name)" checked />@(role.Name)</label>}
+                        {<label><input type="radio" name="roleName" value="@(role.Name)" checked />@(role.Name)</label>}
                     }
                     @Html.Raw(File.ReadAllText(root + @"\Pages\RegistrationFinish.html"))
                 </form>
@@ -364,17 +364,21 @@
                             @{
                                 var allUsers = DependencyResolver.UserLogic?.GetAll();
                                 foreach (var user in allUsers)
-                                    {<option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>}
+                                {
+                                    <option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>
+}
                             }
                         </select>
                         <select class="user_chosen_guid" style="display: none;">
                             @{
                                 foreach (var user in allUsers)
-                                    {<option selected>@user.UserGuid.ToString()</option>}
+                                {
+                                    <option selected>@user.UserGuid.ToString()</option>
+}
                             }
                         </select>
                     </p>
-                    @Html.Raw(File.ReadAllText(root + @"\Pages\UserDelete.html"))              
+                    @Html.Raw(File.ReadAllText(root + @"\Pages\UserDelete.html"))
                 </form>
                 <form method="post" action="" class="award_del" style="display: none;">
                     <h4>Choose award to delete:</h4>
@@ -383,13 +387,17 @@
                             @{
                                 var allAwards = DependencyResolver.AwardLogic?.GetAll();
                                 foreach (var award in allAwards)
-                                    {<option selected>@award.Title</option>}
+                                {
+                                    <option selected>@award.Title</option>
+}
                             }
                         </select>
                         <select class="award_chosen_guid" style="display: none;">
                             @{
                                 foreach (var award in allAwards)
-                                    {<option selected>@award.AwardGuid.ToString()</option>}
+                                {
+                                    <option selected>@award.AwardGuid.ToString()</option>
+}
                             }
                         </select>
                     </p>
@@ -445,13 +453,17 @@
                                 @{
                                     users = DependencyResolver.UserLogic?.GetAll();
                                     foreach (var user in users)
-                                        {<option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>}
+                                    {
+                                        <option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>
+}
                                 }
                             </select>
                             <select class="user_chosen_join_guid" style="display: none;">
                                 @{
                                     foreach (var user in users)
-                                        {<option selected>@user.UserGuid.ToString()</option>}
+                                    {
+                                        <option selected>@user.UserGuid.ToString()</option>
+}
                                 }
                             </select>
                         </p>
@@ -464,13 +476,17 @@
                                 @{
                                     allAwards = DependencyResolver.AwardLogic?.GetAll();
                                     foreach (var award in allAwards)
-                                        {<option selected>@award.Title</option>}
+                                    {
+                                        <option selected>@award.Title</option>
+}
                                 }
                             </select>
                             <select class="award_chosen_join_guid" style="display: none;">
                                 @{
                                     foreach (var award in allAwards)
-                                        {<option selected>@award.AwardGuid.ToString()</option>}
+                                    {
+                                        <option selected>@award.AwardGuid.ToString()</option>
+}
                                 }
                             </select>
                         </p>
@@ -515,13 +531,17 @@
                                 @{
                                     users = DependencyResolver.UserLogic?.GetAll();
                                     foreach (var user in users)
-                                        {<option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>}
+                                    {
+                                        <option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>
+}
                                 }
                             </select>
                             <select class="user_chosen_image_guid" style="display: none;">
                                 @{
                                     foreach (var user in users)
-                                        {<option selected>@user.UserGuid.ToString()</option>}
+                                    {
+                                        <option selected>@user.UserGuid.ToString()</option>
+}
                                 }
                             </select>
                         </p>
@@ -538,13 +558,17 @@
                                 @{
                                     awards = DependencyResolver.AwardLogic?.GetAll();
                                     foreach (var award in awards)
-                                        {<option selected>@(award.Title)</option>}
+                                    {
+                                        <option selected>@(award.Title)</option>
+}
                                 }
                             </select>
                             <select class="award_chosen_image_guid" style="display: none;">
                                 @{
                                     foreach (var award in awards)
-                                        {<option selected>@award.AwardGuid.ToString()</option>}
+                                    {
+                                        <option selected>@award.AwardGuid.ToString()</option>
+}
                                 }
                             </select>
                         </p>
