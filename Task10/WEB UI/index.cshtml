@@ -1,9 +1,9 @@
 ﻿@using Common;
 @using WEB_UI;
 @{
-    var guest = Role.Create("Guest");
+    var guest    = Role.Create("Guest");
     var roleUser = Role.Create("User");
-    var admin = Role.Create("Admin");
+    var admin    = Role.Create("Admin");
 
     var currentUser = Webuser.Current;
     var root = Server.MapPath("~");
@@ -11,7 +11,7 @@
     var message = string.Empty;
     var htmlRaw = string.Empty;
 
-    var userImages = HttpContext.Current.Request.Files;
+    var userImages  = HttpContext.Current.Request.Files;
     var awardImages = HttpContext.Current.Request.Files;
 
     if (IsPost)
