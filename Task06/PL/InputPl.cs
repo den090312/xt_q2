@@ -206,7 +206,7 @@ namespace PL
             var userName = outputPl?.GetUserNameByGuid(userGuid);
             var awardName = outputPl?.GetAwardNameByGuid(awardGuid);
 
-            if (DependencyResolver.UserAwardLogic.JoinedAwardToUser(userGuid, awardGuid))
+            if (DependencyResolver.UserAwardLogic.JoinAwardToUser(userGuid, awardGuid))
             {
                 Console.WriteLine($"---'{awardName}' joined to '{userName}'---");
             }

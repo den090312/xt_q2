@@ -22,7 +22,7 @@ namespace DAL
             Separator = '|';
         }
 
-        public bool JoinedAwardToUser(User user, Award award)
+        public bool JoinAwardToUser(User user, Award award)
         {
             PrepareFile();
 
@@ -142,7 +142,7 @@ namespace DAL
             return string.Empty;
         }
 
-        public bool UserAwardsRemoved(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
+        public bool RemoveUserAwards(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
         {
             if (!File.Exists(FilePath))
             {
@@ -151,7 +151,7 @@ namespace DAL
 
             try
             {
-                RemoveUserAwards(userGuid, users, awards);
+                UserAwardsRemove(userGuid, users, awards);
 
                 return true;
             }
@@ -163,7 +163,7 @@ namespace DAL
 
         public void PrintInfo() => Console.WriteLine(FilePath);
 
-        private void RemoveUserAwards(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
+        private void UserAwardsRemove(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
         {
             var usersAwards = GetAll(users, awards);
 
@@ -194,7 +194,7 @@ namespace DAL
             streamWriter.WriteLine();
         }
 
-        public bool AwardUsersRemoved(Guid awardGuid, IEnumerable<User> users, IEnumerable<Award> awards)
+        public bool RemoveAwardUsers(Guid awardGuid, IEnumerable<User> users, IEnumerable<Award> awards)
         {
             if (!File.Exists(FilePath))
             {
@@ -203,7 +203,7 @@ namespace DAL
 
             try
             {
-                RemoveAwardUsers(awardGuid, users, awards);
+                AwardUsersRemove(awardGuid, users, awards);
 
                 return true;
             }
@@ -213,7 +213,7 @@ namespace DAL
             }
         }
 
-        private void RemoveAwardUsers(Guid awardGuid, IEnumerable<User> users, IEnumerable<Award> awards)
+        private void AwardUsersRemove(Guid awardGuid, IEnumerable<User> users, IEnumerable<Award> awards)
         {
             var usersAwards = GetAll(users, awards);
 

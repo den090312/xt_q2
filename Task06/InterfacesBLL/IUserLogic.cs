@@ -6,15 +6,15 @@ namespace InterfacesBLL
 {
     public interface IUserLogic
     {
-        User CreateUser(string name, DateTime dateBirth);
+        User Create(string name, DateTime dateBirth);
 
-        bool AddUser(User user);
+        bool Add(User user);
 
-        bool RemoveUser(Guid userGuid);
+        bool RemoveByGuid(Guid userGuid);
 
         IEnumerable<User> GetAll();
 
-        User GetUserByGuid(Guid userGuid);
+        User GetByGuid(Guid userGuid);
 
         void PrintInfo();
     }

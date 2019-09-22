@@ -17,7 +17,7 @@ namespace BLL
             _userDao = userDao;
         }
 
-        public User CreateUser(string name, DateTime dateBirth)
+        public User Create(string name, DateTime dateBirth)
         {
             NullCheck(name);
             EmptyStringCheck(name);
@@ -41,14 +41,14 @@ namespace BLL
             }
         }
 
-        public bool AddUser(User user)
+        public bool Add(User user)
         {
             NullCheck(user);
 
-            return _userDao.AddUser(user);
+            return _userDao.Add(user);
         }
 
-        public bool RemoveUser(Guid userGuid) => _userDao.RemoveUser(userGuid);
+        public bool RemoveByGuid(Guid userGuid) => _userDao.RemoveByGuid(userGuid);
 
         public IEnumerable<User> GetAll()
         {
@@ -58,9 +58,9 @@ namespace BLL
             return users;
         }
 
-        public User GetUserByGuid(Guid userGuid)
+        public User GetByGuid(Guid userGuid)
         {
-            var user = _userDao?.GetUserByGuid(userGuid);
+            var user = _userDao?.GetByGuid(userGuid);
             NullCheck(user);
 
             return user;

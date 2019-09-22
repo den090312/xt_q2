@@ -17,7 +17,7 @@ namespace BLL
             _awardDao = awardDao;
         }
 
-        public Award CreateAward(string title)
+        public Award Create(string title)
         {
             NullCheck(title);
             EmptyStringCheck(title);
@@ -25,14 +25,14 @@ namespace BLL
             return new Award(title);
         }
 
-        public bool AwardAdded(Award award)
+        public bool Add(Award award)
         {
             NullCheck(award);
 
-            return _awardDao.AwardAdded(award);
+            return _awardDao.Add(award);
         }
 
-        public bool AwardRemoved(Guid awardGuid) => _awardDao.AwardRemoved(awardGuid);
+        public bool RemoveByGuid(Guid awardGuid) => _awardDao.RemoveByGuid(awardGuid);
 
         public IEnumerable<Award> GetAll()
         {
@@ -42,9 +42,9 @@ namespace BLL
             return awards;
         }
 
-        public Award GetAwardByGuid(Guid awardGuid)
+        public Award GetByGuid(Guid awardGuid)
         {
-            var award = _awardDao?.GetAwardByGuid(awardGuid);
+            var award = _awardDao?.GetByGuid(awardGuid);
             NullCheck(award);
 
             return award;

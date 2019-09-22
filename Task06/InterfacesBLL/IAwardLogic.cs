@@ -6,15 +6,15 @@ namespace InterfacesBLL
 {
     public interface IAwardLogic
     {
-        Award CreateAward(string title);
+        Award Create(string title);
 
-        bool AddAward(Award award);
+        bool Add(Award award);
 
-        bool RemoveAward(Guid awardGuid);
+        bool RemoveByGuid(Guid awardGuid);
 
         IEnumerable<Award> GetAll();
 
-        Award GetAwardByGuid(Guid awardGuid);
+        Award GetByGuid(Guid awardGuid);
 
         void PrintInfo();
     }

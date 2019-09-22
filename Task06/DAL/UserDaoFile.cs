@@ -23,7 +23,7 @@ namespace DAL
             Separator = '|';
         }
 
-        public bool UserAdded(User user)
+        public bool Add(User user)
         {
             PrepareFile();
 
@@ -39,7 +39,7 @@ namespace DAL
             }
         }
 
-        public bool UserRemoved(Guid userGuid)
+        public bool RemoveByGuid(Guid userGuid)
         {
             if (!File.Exists(FilePath))
             {
@@ -129,7 +129,7 @@ namespace DAL
             users.Add(user);
         }
 
-        public User GetUserByGuid(Guid userGuid)
+        public User GetByGuid(Guid userGuid)
         {
             CheckFileExistence();
 

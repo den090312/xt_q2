@@ -23,12 +23,12 @@ namespace BLL
             _awardDao = awardDao;
         }
 
-        public bool JoinedAwardToUser(Guid userGuid, Guid awardGuid)
+        public bool JoinAwardToUser(Guid userGuid, Guid awardGuid)
         {
-            var user = _userDao?.GetUserByGuid(userGuid);
+            var user = _userDao?.GetByGuid(userGuid);
             NullCheck(user);
 
-            var award = _awardDao?.GetAwardByGuid(awardGuid);
+            var award = _awardDao?.GetByGuid(awardGuid);
             NullCheck(award);
 
             return Joined(user, award);
@@ -49,7 +49,7 @@ namespace BLL
                 counter++;
             }
 
-            return counter > 0 ? false : _userAwardDao.JoinedAwardToUser(user, award);
+            return counter > 0 ? false : _userAwardDao.JoinAwardToUser(user, award);
         }
 
         public IEnumerable<Award> GetAwardsByUser(User user)
@@ -60,9 +60,9 @@ namespace BLL
             return _userAwardDao?.GetAwardsByUser(user, awards);
         }
 
-        public bool UserAwardsRemoved(Guid userGuid)
+        public bool RemoveUserAwards(Guid userGuid)
         {
-            if (!_userDao.RemoveUser(userGuid))
+            if (!_userDao.RemoveByGuid(userGuid))
             {
                 return false;
             }
@@ -73,12 +73,12 @@ namespace BLL
             var awards = _awardDao?.GetAll();
             NullCheck(awards);
 
-            return _userAwardDao.UserAwardsRemoved(userGuid, users, awards);
+            return _userAwardDao.RemoveUserAwards(userGuid, users, awards);
         }
 
-        public bool AwardUsersRemoved(Guid awardGuid)
+        public bool RemoveAwardUsers(Guid awardGuid)
         {
-            if (!_awardDao.RemoveAward(awardGuid))
+            if (!_awardDao.RemoveByGuid(awardGuid))
             {
                 return false;
             }
@@ -89,7 +89,7 @@ namespace BLL
             var awards = _awardDao?.GetAll();
             NullCheck(awards);
 
-            return _userAwardDao.AwardUsersRemoved(awardGuid, users, awards);
+            return _userAwardDao.RemoveAwardUsers(awardGuid, users, awards);
         }
 
         public void PrintInfo() => _userAwardDao?.PrintInfo();

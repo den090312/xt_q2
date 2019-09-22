@@ -6,11 +6,11 @@ namespace InterfacesBLL
 {
     public interface IUserAwardLogic
     {
-        bool JoinedAwardToUser(Guid userGuid, Guid awardGuid);
+        bool JoinAwardToUser(Guid userGuid, Guid awardGuid);
 
-        bool UserAwardsRemoved(Guid userGuid);
+        bool RemoveUserAwards(Guid userGuid);
 
-        bool AwardUsersRemoved(Guid awardGuid);
+        bool RemoveAwardUsers(Guid awardGuid);
 
         IEnumerable<Award> GetAwardsByUser(User user);
 

@@ -22,7 +22,7 @@ namespace DAL
             Separator = '|';
         }
 
-        public bool AwardAdded(Award award)
+        public bool Add(Award award)
         {
             PrepareFile();
 
@@ -50,7 +50,7 @@ namespace DAL
             streamWriter.Close();
         }
 
-        public bool AwardRemoved(Guid awardGuid)
+        public bool RemoveByGuid(Guid awardGuid)
         {
             if (!File.Exists(FilePath))
             {
@@ -123,7 +123,7 @@ namespace DAL
             awards.Add(new Award(Guid.Parse(awardLineArray[0]), awardLineArray[1]));
         }
 
-        public Award GetAwardByGuid(Guid awardGuid)
+        public Award GetByGuid(Guid awardGuid)
         {
             CheckFileExistence();
 
