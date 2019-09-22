@@ -191,7 +191,7 @@ namespace WEB_UI
 
             foreach (var user in allUsers)
             {
-                if (!userLogic.RemoveByGuid(user.UserGuid))
+                if (!userLogic.RemoveByGuid(user.Guid))
                 {
                     return false;
                 }
@@ -207,7 +207,7 @@ namespace WEB_UI
 
             foreach (var award in allAwards)
             {
-                if (!awardLogic.RemoveByGuid(award.AwardGuid))
+                if (!awardLogic.RemoveByGuid(award.Guid))
                 {
                     return false;
                 }
