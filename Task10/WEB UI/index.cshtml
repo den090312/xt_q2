@@ -16,12 +16,12 @@
 
     if (IsPost)
     {
-        Index.Request = Request;
+        Index.RequestForm = Request.Form;
         Index.Start(out message);
 
         SaveUserImage();
         SaveAwardImage();
-        
+
         //POST-reload page fix
         @Html.Raw("<script>document.location='https://localhost:44337/index.cshtml'</script>");
     }

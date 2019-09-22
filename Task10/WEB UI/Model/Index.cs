@@ -1,10 +1,10 @@
-﻿using System.Web;
+﻿using System.Collections.Specialized;
 
 namespace WEB_UI
 {
     public static class Index
     {
-        public static HttpRequestBase Request { get; set; }
+        public static NameValueCollection RequestForm { get; set; }
 
         public static string Message { get; set; }
 
@@ -22,7 +22,7 @@ namespace WEB_UI
             Account(out errorMessage);
         }
 
-        public static void Account(out string errorMessage)
+        private static void Account(out string errorMessage)
         {
             TryLogIn();
             TryLogOut();
@@ -32,9 +32,9 @@ namespace WEB_UI
         private static void TryRegister(out string errorMessage)
         {
             var errorResponse = string.Empty;
-            var regName = Request.Form["regName"];
-            var regPass = Request.Form["regPass"];
-            var roleName = Request.Form["roleName"];
+            var regName = RequestForm["regName"];
+            var regPass = RequestForm["regPass"];
+            var roleName = RequestForm["roleName"];
 
             if (regName != null & regPass != null & roleName != null)
             {
@@ -53,7 +53,7 @@ namespace WEB_UI
 
         private static void TryLogOut()
         {
-            var loggedOut = Request.Form["loggedOut"];
+            var loggedOut = RequestForm["loggedOut"];
 
             if (loggedOut != null & loggedOut == "loggedOut")
             {
@@ -64,8 +64,8 @@ namespace WEB_UI
         private static string TryLogIn()
         {
             var errorResponse = string.Empty;
-            var logName = Request.Form["logName"];
-            var logPass = Request.Form["logPass"];
+            var logName = RequestForm["logName"];
+            var logPass = RequestForm["logPass"];
 
             if (logName != null & logPass != null)
             {
@@ -116,8 +116,8 @@ namespace WEB_UI
 
         private static void UserCreation()
         {
-            var userName = Request.Form["userName"];
-            var dateOfBirth = Request.Form["dateOfBirth"];
+            var userName = RequestForm["userName"];
+            var dateOfBirth = RequestForm["dateOfBirth"];
 
             if (userName != null & dateOfBirth != null)
             {
@@ -134,7 +134,7 @@ namespace WEB_UI
 
         private static void UserAwardsDelete()
         {
-            var userGuid = Request.Form["userGuid"];
+            var userGuid = RequestForm["userGuid"];
 
             if (userGuid != null)
             {
@@ -151,7 +151,7 @@ namespace WEB_UI
 
         private static void AwardCreation()
         {
-            var awardTitle = Request.Form["awardTitle"];
+            var awardTitle = RequestForm["awardTitle"];
 
             if (awardTitle != null)
             {
@@ -168,7 +168,7 @@ namespace WEB_UI
 
         private static void AwardUsersDelete()
         {
-            var awardGuid = Request.Form["awardGuid"];
+            var awardGuid = RequestForm["awardGuid"];
 
             if (awardGuid != null & awardGuid != "")
             {
@@ -185,8 +185,8 @@ namespace WEB_UI
 
         private static void JoinAwardToUser()
         {
-            var userGuid = Request.Form["userGuidJoin"];
-            var awardGuid = Request.Form["awardGuidJoin"];
+            var userGuid = RequestForm["userGuidJoin"];
+            var awardGuid = RequestForm["awardGuidJoin"];
 
             if (userGuid != null & awardGuid != null)
             {
@@ -203,9 +203,9 @@ namespace WEB_UI
 
         private static void EditUsers()
         {
-            var guids = Request.Form.GetValues("userGuids");
-            var names = Request.Form.GetValues("userNames");
-            var dates = Request.Form.GetValues("userDates");
+            var guids = RequestForm.GetValues("userGuids");
+            var names = RequestForm.GetValues("userNames");
+            var dates = RequestForm.GetValues("userDates");
 
             if (guids != null & names != null & dates != null)
             {
@@ -222,8 +222,8 @@ namespace WEB_UI
 
         private static void EditAwards()
         {
-            var guids = Request.Form.GetValues("awardGuids");
-            var titles = Request.Form.GetValues("awardTitles");
+            var guids = RequestForm.GetValues("awardGuids");
+            var titles = RequestForm.GetValues("awardTitles");
 
             if (guids != null & titles != null)
             {
