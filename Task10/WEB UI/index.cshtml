@@ -4,12 +4,7 @@
     var admin    = Role.Create("Admin");
 
     var currentUser = Webuser.Current;
-    var root = Server.MapPath("~");
-
-    var AllUserOperationsHtml  = @"\html\AllUserOperations.html";
-    var AllAwardOperationsHtml = @"\html\AllAwardOperations.html";
-    var UserPrintHtml          = @"\html\UserPrint.html";
-    var JoinOperationsHtml     = @"\html\JoinOperations.html";
+    var root        = Server.MapPath("~");
 
     var message = string.Empty;
     var htmlRaw = string.Empty;
@@ -43,9 +38,9 @@
 
     void TryRegister()
     {
-        var regName   = Request.Form["regName"];
-        var regPass   = Request.Form["regPass"];
-        var roleName  = Request.Form["roleName"];
+        var regName = Request.Form["regName"];
+        var regPass = Request.Form["regPass"];
+        var roleName = Request.Form["roleName"];
 
         if (regName != null & regPass != null & roleName != null)
         {
@@ -72,8 +67,8 @@
 
     void TryLogIn()
     {
-        var logName   = Request.Form["logName"];
-        var logPass   = Request.Form["logPass"];
+        var logName = Request.Form["logName"];
+        var logPass = Request.Form["logPass"];
 
         if (logName != null & logPass != null)
         {
@@ -288,12 +283,9 @@
         }
     }
 }
-
 @using Common;
 @using WEB_UI;
-
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -310,57 +302,32 @@
         @{
             if (currentUser.Role == guest)
             {
-                <div class="authentication">
-                    <form method="post" action="" class="user_log_in">
-                        <p class="alertbox"></p>
-                        <input type="text" class="log_name" name="logName" placeholder="Name" />
-                        <input type="text" class="log_pass" name="logPass" placeholder="Password" />
-                        <input type="submit" class="log_in" value="Log in">
-                    </form>
-                    <p>
-                        <input type="button" class="goToRegistration" value="Register" />
-                    </p>
-                </div>
+                @Html.Raw(File.ReadAllText(root + @"\Pages\Authentication.html"));
                 <form method="post" action="" class="user_register" style="display: none;">
-                    <p class="alertbox"></p>
-                    <h4>Registration</h4>
-                    <p>
-                        <input type="text" class="reg_name" name="regName" placeholder="Name" />
-                    </p>
-                    <p>
-                        <input type="text" class="reg_pass" name="regPass" placeholder="Password" />
-                    </p>
+                    <p class="alertbox"></p>                  
+                    @Html.Raw(File.ReadAllText(root + @"\Pages\RegistrationFields.html"))
                     Role:
                     @{
                         var roleList = Role.List;
-
                         foreach (var role in roleList)
-                        {
-                            <label><input type="radio" name="roleName" value="@(role.Name)" checked />@(role.Name)</label>
-                        }
+                            {<label><input type="radio" name="roleName" value="@(role.Name)" checked />@(role.Name)</label>}
                     }
-                    <p>
-                        <input type="submit" class="register" value="Ок" />
-                        <input type="submit" class="cancel_register" value="Cancel" />
-                    </p>
+                    @Html.Raw(File.ReadAllText(root + @"\Pages\RegistrationFinish.html"))
                 </form>
             }
             else
             {
-                <form method="post" action="" class="user_log_out">
-                    <input type="submit" class="log_out" value="Log out" />
-                    <input type="text" class="log_out_post" style="display: none;" name="loggedOut" />
-                </form>
+                @Html.Raw(File.ReadAllText(root + @"\Pages\LogOut.html"));
             }
 
             if (currentUser.Role == admin)
             {
-                htmlRaw = File.ReadAllText(root + AllUserOperationsHtml);
+                htmlRaw = File.ReadAllText(root + @"\Pages\AllUserOperations.html");
             }
 
             if (currentUser.Role == guest || currentUser.Role == roleUser)
             {
-                htmlRaw = File.ReadAllText(root + UserPrintHtml);
+                htmlRaw = File.ReadAllText(root + @"\Pages\UserPrint.html");
             }
 
             @Html.Raw(htmlRaw);
@@ -369,7 +336,7 @@
 
             if (currentUser.Role == admin)
             {
-                htmlRaw = File.ReadAllText(root + AllAwardOperationsHtml);
+                htmlRaw = File.ReadAllText(root + @"\Pages\AllAwardOperations.html");
             }
 
             @Html.Raw(htmlRaw);
@@ -378,28 +345,15 @@
 
             if (currentUser.Role == admin)
             {
-                htmlRaw = File.ReadAllText(root + JoinOperationsHtml);
+                htmlRaw = File.ReadAllText(root + @"\Pages\JoinOperations.html");
             }
 
             @Html.Raw(htmlRaw);
         }
     </div>
     <div class="operations">
-        <form method="post" action="" class="user_creation" style="display: none">
-            <h4>User creation</h4>
-            <p class="alertbox"></p>
-            <p>Name: <input type="text" id="userName" class="name" name="userName"></p>
-            <p>Date of birth: <input type="date" id="dateOfBirth" class="dateOfBirth" name="dateOfBirth"></p>
-            <input type="submit" class="user_create" value="Create" />
-            <input type="button" class="cancel" value="Cancel" />
-        </form>
-        <form method="post" action="" class="award_creation" style="display: none">
-            <h4>Award creation</h4>
-            <p class="alertbox"></p>
-            <p>Title: <input type="text" id="awardTitle" class="title" name="awardTitle"></p>
-            <input type="submit" class="award_create" value="Create" />
-            <input type="button" class="cancel" value="Cancel" />
-        </form>
+        @Html.Raw(File.ReadAllText(root + @"\Pages\UserCreation.html"))
+        @Html.Raw(File.ReadAllText(root + @"\Pages\AwardCreation.html"))
         @{
             if (currentUser.Role == admin)
             {
@@ -409,25 +363,18 @@
                         <select class="user_chosen">
                             @{
                                 var allUsers = DependencyResolver.UserLogic?.GetAll();
-
                                 foreach (var user in allUsers)
-                                {
-                                    <option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>
-                                }
+                                    {<option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>}
                             }
                         </select>
                         <select class="user_chosen_guid" style="display: none;">
                             @{
                                 foreach (var user in allUsers)
-                                {
-                                    <option selected>@user.UserGuid.ToString()</option>
-                                }
+                                    {<option selected>@user.UserGuid.ToString()</option>}
                             }
                         </select>
                     </p>
-                    <input type="text" class="user_guid" style="display: none;" name="userGuid" />
-                    <input type="submit" class="user_delete" value="Delete" />
-                    <input type="button" class="cancel" value="Cancel" />
+                    @Html.Raw(File.ReadAllText(root + @"\Pages\UserDelete.html"))              
                 </form>
                 <form method="post" action="" class="award_del" style="display: none;">
                     <h4>Choose award to delete:</h4>
@@ -435,25 +382,18 @@
                         <select class="award_chosen">
                             @{
                                 var allAwards = DependencyResolver.AwardLogic?.GetAll();
-
                                 foreach (var award in allAwards)
-                                {
-                                    <option selected>@award.Title</option>
-                                }
+                                    {<option selected>@award.Title</option>}
                             }
                         </select>
                         <select class="award_chosen_guid" style="display: none;">
                             @{
                                 foreach (var award in allAwards)
-                                {
-                                    <option selected>@award.AwardGuid.ToString()</option>
-                                }
+                                    {<option selected>@award.AwardGuid.ToString()</option>}
                             }
                         </select>
                     </p>
-                    <input type="text" class="award_guid" style="display: none;" name="awardGuid" />
-                    <input type="submit" class="award_delete" value="Delete" />
-                    <input type="button" class="cancel" value="Cancel" />
+                    @Html.Raw(File.ReadAllText(root + @"\Pages\AwardDelete.html"))
                 </form>
             }
         }
@@ -462,18 +402,15 @@
             @{
                 var users = DependencyResolver.UserLogic?.GetAll();
                 IEnumerable<Entities.Award> awardsByUser;
-
                 foreach (var user in users)
                 {
                     <img class="user_img" src="@Images.GetImgSrc(root, user.UserGuid.ToString())">
                     <p>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</p>
-
-                awardsByUser = DependencyResolver.UserAwardLogic?.GetAwardsByUser(user);
-
-                if (currentUser.Role != guest)
-                {
-                    foreach (var awardByUser in awardsByUser)
+                    awardsByUser = DependencyResolver.UserAwardLogic?.GetAwardsByUser(user);
+                    if (currentUser.Role != guest)
                     {
+                        foreach (var awardByUser in awardsByUser)
+                        {
                             <div style="padding-left: 75px;">
                                 <img class="award_img" src="@Images.GetImgSrc(root, awardByUser.AwardGuid.ToString())">
                                 <p>@(awardByUser.Title)</p>
@@ -491,7 +428,6 @@
                     <input type="button" class="cancel" value="Back" style="display: block;" />
                     @{
                         var allAwards = DependencyResolver.AwardLogic?.GetAll();
-
                         foreach (var award in allAwards)
                         {
                             <img class="award_img" src="@Images.GetImgSrc(root, award.AwardGuid.ToString())">
@@ -508,19 +444,14 @@
                             <select class="user_chosen_join">
                                 @{
                                     users = DependencyResolver.UserLogic?.GetAll();
-
                                     foreach (var user in users)
-                                    {
-                                        <option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>
-                                    }
+                                        {<option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>}
                                 }
                             </select>
                             <select class="user_chosen_join_guid" style="display: none;">
                                 @{
                                     foreach (var user in users)
-                                    {
-                                        <option selected>@user.UserGuid.ToString()</option>
-                                    }
+                                        {<option selected>@user.UserGuid.ToString()</option>}
                                 }
                             </select>
                         </p>
@@ -532,33 +463,24 @@
                             <select class="award_chosen_join">
                                 @{
                                     allAwards = DependencyResolver.AwardLogic?.GetAll();
-
                                     foreach (var award in allAwards)
-                                    {
-                                        <option selected>@award.Title</option>
-                                    }
+                                        {<option selected>@award.Title</option>}
                                 }
                             </select>
                             <select class="award_chosen_join_guid" style="display: none;">
                                 @{
                                     foreach (var award in allAwards)
-                                    {
-                                        <option selected>@award.AwardGuid.ToString()</option>
-                                    }
+                                        {<option selected>@award.AwardGuid.ToString()</option>}
                                 }
                             </select>
                         </p>
                         <input type="text" class="award_guid_join" style="display: none;" name="awardGuidJoin" />
                     </div>
-                    <div>
-                        <input type="submit" class="join_user_award" value="Join" />
-                        <input type="button" class="cancel" value="Cancel" />
-                    </div>
+                    @Html.Raw(File.ReadAllText(root + @"\Pages\JoinUserAward.html"))
                 </form>
                 <form method="post" action="" class="user_edition" style="display: none;">
                     @{
                         users = DependencyResolver.UserLogic?.GetAll();
-
                         foreach (var user in users)
                         {
                             <div>
@@ -568,10 +490,7 @@
                             </div>
                         }
                     }
-                    <p>
-                        <input type="submit" class="edit_user" value="Ok" />
-                        <input type="button" class="cancel" value="Cancel" />
-                    </p>
+                    @Html.Raw(File.ReadAllText(root + @"\Pages\EditUser.html"))
                 </form>
                 <form method="post" action="" class="award_edition" style="display: none;">
                     @{
@@ -585,10 +504,7 @@
                             </div>
                         }
                     }
-                    <p>
-                        <input type="submit" class="edit_award" value="Ok" />
-                        <input type="button" class="cancel" value="Cancel" />
-                    </p>
+                    @Html.Raw(File.ReadAllText(root + @"\Pages\EditAward.html"))
                 </form>
                 <form enctype="multipart/form-data" method="post" action="" class="user_image_upload" style="display: none;">
                     <h3>Upload image to user</h3>
@@ -598,33 +514,20 @@
                             <select class="user_chosen_image">
                                 @{
                                     users = DependencyResolver.UserLogic?.GetAll();
-
                                     foreach (var user in users)
-                                    {
-                                        <option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>
-                                    }
+                                        {<option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>}
                                 }
                             </select>
                             <select class="user_chosen_image_guid" style="display: none;">
                                 @{
                                     foreach (var user in users)
-                                    {
-                                        <option selected>@user.UserGuid.ToString()</option>
-                                    }
+                                        {<option selected>@user.UserGuid.ToString()</option>}
                                 }
                             </select>
                         </p>
                         <input type="text" class="user_image_guid" style="display: none;" name="userImageGuid" />
                     </div>
-                    <h4>Choose image:</h4>
-                    <p class="alertbox"></p>
-                    <p>
-                        <input type="file" class="userImage" name="userImage" accept="image/*" value=@userImages>
-                    </p>
-                    <div style="padding-top: 20px;">
-                        <input type="submit" class="upload_user_image" value="Ok" />
-                        <input type="button" class="cancel" value="Cancel" />
-                    </div>
+                    @Html.Raw(File.ReadAllText(root + @"\Pages\ChooseUserImage.html"))
                 </form>
                 <form enctype="multipart/form-data" method="post" action="" class="award_image_upload" style="display: none;">
                     <h3>Upload image to award</h3>
@@ -634,33 +537,20 @@
                             <select class="award_chosen_image">
                                 @{
                                     awards = DependencyResolver.AwardLogic?.GetAll();
-
                                     foreach (var award in awards)
-                                    {
-                                        <option selected>@(award.Title)</option>
-                                    }
+                                        {<option selected>@(award.Title)</option>}
                                 }
                             </select>
                             <select class="award_chosen_image_guid" style="display: none;">
                                 @{
                                     foreach (var award in awards)
-                                    {
-                                        <option selected>@award.AwardGuid.ToString()</option>
-                                    }
+                                        {<option selected>@award.AwardGuid.ToString()</option>}
                                 }
                             </select>
                         </p>
                         <input type="text" class="award_image_guid" style="display: none;" name="awardImageGuid" />
                     </div>
-                    <h4>Choose image:</h4>
-                    <p class="alertbox"></p>
-                    <p>
-                        <input type="file" class="awardImage" name="awardImage" accept="image/*" value=@awardImages>
-                    </p>
-                    <div style="padding-top: 20px;">
-                        <input type="submit" class="upload_award_image" value="Ok" />
-                        <input type="button" class="cancel" value="Cancel" />
-                    </div>
+                    @Html.Raw(File.ReadAllText(root + @"\Pages\ChooseAwardImage.html"))
                 </form>
             }
         }

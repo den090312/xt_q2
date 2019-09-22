@@ -110,23 +110,36 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="html\AllAwardOperations.html" />
+    <Content Include="Pages\AllAwardOperations.html" />
     <Content Include="favicon.ico" />
-    <Content Include="html\JoinOperations.html" />
+    <Content Include="Pages\Authentication.html" />
+    <Content Include="Pages\AwardCreation.html" />
+    <Content Include="Pages\AwardDelete.html" />
+    <Content Include="Pages\ChooseAwardImage.html" />
+    <Content Include="Pages\ChooseUserImage.html" />
+    <Content Include="Pages\EditAward.html" />
+    <Content Include="Pages\EditUser.html" />
+    <Content Include="Pages\JoinOperations.html" />
+    <Content Include="Pages\JoinUserAward.html" />
+    <Content Include="Pages\LogOut.html" />
+    <Content Include="Pages\RegistrationFields.html" />
+    <Content Include="Pages\RegistrationFinish.html" />
+    <Content Include="Pages\UserCreation.html" />
+    <Content Include="Pages\UserDelete.html" />
     <Content Include="script.js" />
     <Content Include="styles.css" />
-    <Content Include="html\AllUserOperations.html" />
-    <Content Include="html\UserPrint.html" />
+    <Content Include="Pages\AllUserOperations.html" />
+    <Content Include="Pages\UserPrint.html" />
     <Content Include="Web.config" />
     <Content Include="webusersdb.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="classes\Database.cs" />
-    <Compile Include="classes\Images.cs" />
+    <Compile Include="Database.cs" />
+    <Compile Include="Images.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="classes\Crud.cs" />
-    <Compile Include="classes\Role.cs" />
-    <Compile Include="classes\Webuser.cs" />
+    <Compile Include="Crud.cs" />
+    <Compile Include="Role.cs" />
+    <Compile Include="Webuser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.cshtml" />
