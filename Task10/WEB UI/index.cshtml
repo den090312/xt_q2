@@ -48,7 +48,7 @@
                     @{
                         var roleList = Role.List;
                         foreach (var role in roleList)
-                        {<label><input type="radio" name="roleName" value="@(role.Name)" checked />@(role.Name)</label>}
+                            {<label><input type="radio" name="roleName" value="@(role.Name)" checked />@(role.Name)</label>}
                     }
                     @Html.Raw(File.ReadAllText(root + @"\Pages\RegistrationFinish.html"))
                 </form>
