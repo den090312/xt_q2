@@ -118,7 +118,7 @@
     <Content Include="html\AllUserOperations.html" />
     <Content Include="html\UserPrint.html" />
     <Content Include="Web.config" />
-    <Content Include="sql script\webusersdb.sql" />
+    <Content Include="webusersdb.sql" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="classes\Database.cs" />
