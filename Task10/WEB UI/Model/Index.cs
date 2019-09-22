@@ -13,7 +13,12 @@ namespace WEB_UI
 
         public static string Message { get; set; }
 
-        static Index() => Message = string.Empty;
+        static Index()
+        {
+            Forms = new NameValueCollection();
+            Files = HttpContext.Current.Request.Files;
+            Message = string.Empty;
+        }
 
         public static void Run(out string alert)
         {
