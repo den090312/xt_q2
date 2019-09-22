@@ -41,9 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AwardDaoDb.cs" />
     <Compile Include="AwardDaoFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserAwardDaoDb.cs" />
     <Compile Include="UserAwardDaoFile.cs" />
+    <Compile Include="UserDaoDb.cs" />
     <Compile Include="UserDaoFile.cs" />
   </ItemGroup>
   <ItemGroup>
