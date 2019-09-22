@@ -2,34 +2,184 @@
 using InterfacesDAL;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace DAL
 {
     public class AwardDaoDb : IAwardDao
     {
+        private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=webusersdb;Integrated Security=True";
+
         public bool Add(Award award)
         {
-            throw new NotImplementedException();
+            try
+            {
+                AddAward(award);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private static void AddAward(Award award)
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "AddAward";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(SqlParGuid(award.Guid));
+                sqlCommand.Parameters.Add(SqlParTitle(award.Title));
+
+                sqlConnection.Open();
+
+                sqlCommand.ExecuteNonQuery();
+            }
+        }
+
+        public bool RemoveByGuid(Guid awardGuid)
+        {
+            try
+            {
+                RemoveAward(awardGuid);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void RemoveAward(Guid guid)
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "RemoveAwardByGuid";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.Add(SqlParGuid(guid));
+
+                sqlConnection.Open();
+
+                sqlCommand.ExecuteNonQuery();
+            }
         }
 
         public IEnumerable<Award> GetAll()
         {
-            throw new NotImplementedException();
+            var awards = new List<Award>();
+
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetAllAwards";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlConnection.Open();
+
+                sqlCommand.ExecuteNonQuery();
+
+                var sqlDr = sqlCommand.ExecuteReader();
+
+                while (sqlDr.Read())
+                {
+                    var guid = Guid.Parse(sqlDr["Guid"].ToString());
+                    var title = sqlDr["Title"].ToString();
+
+                    awards.Add(new Award(guid, title));
+                }
+            }
+
+            return awards;
         }
 
-        public Award GetByGuid(Guid awardGuid)
+        public Award GetByGuid(Guid guid)
         {
-            throw new NotImplementedException();
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetAwardByGuid";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.Add(SqlParGuid(guid));
+                sqlConnection.Open();
+
+                var sqlDr = sqlCommand.ExecuteReader();
+
+                var name = string.Empty;
+
+                while (sqlDr.Read())
+                {
+                    return new Award(guid, sqlDr.GetString(0));
+                }
+
+                if (name == string.Empty)
+                {
+                    return null;
+                }
+            }
+
+            return null;
         }
 
-        public string GetInfo() => "123";
-
-        public bool RemoveByGuid(Guid awardGuid)
+        public string GetInfo()
         {
-            throw new NotImplementedException();
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "PrintAwardsInfo";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlConnection.Open();
+                sqlCommand.ExecuteNonQuery();
+
+                var sqlDr = sqlCommand.ExecuteReader();
+
+                string info = string.Empty;
+                var i = 0;
+
+                while (sqlDr.Read())
+                {
+                    for (var j = 0; j < 4; j++)
+                    {
+                        info += sqlDr.GetString(j) + " ";
+                        i++;
+                    }
+                }
+
+                return info.TrimEnd();
+            }
+        }
+
+        private static SqlParameter SqlParTitle(string title)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@Title",
+                Value = title,
+                SqlDbType = SqlDbType.NVarChar,
+                Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParGuid(Guid guid)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@Guid",
+                Value = guid,
+                SqlDbType = SqlDbType.UniqueIdentifier,
+                Direction = ParameterDirection.Input
+            };
         }
     }
 }

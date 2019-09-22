@@ -25,7 +25,8 @@ namespace Common
             //userDao = new UserDaoFile();
             userDao = new UserDaoDb();
             _userLogic = new UserLogic(userDao);
-            awardDao = new AwardDaoFile();
+            //awardDao = new AwardDaoFile();
+            awardDao = new AwardDaoDb();
             _awardLogic = new AwardLogic(awardDao);
             userAwardDao = new UserAwardDaoFile();
             _userAwardLogic = new UserAwardLogic(userAwardDao, userDao, awardDao);

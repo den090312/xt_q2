@@ -44,22 +44,6 @@ namespace DAL
             }
         }
 
-        private void RemoveUser(Guid guid)
-        {
-            using (var sqlConnection = new SqlConnection(connectionString))
-            {
-                var sqlCommand = sqlConnection.CreateCommand();
-
-                sqlCommand.CommandText = "RemoveUserByGuid";
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.Add(SqlParGuid(guid));
-
-                sqlConnection.Open();
-
-                sqlCommand.ExecuteNonQuery();
-            }
-        }
-
         private static void AddUser(User user)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
@@ -73,6 +57,22 @@ namespace DAL
                 sqlCommand.Parameters.Add(SqlParName(user.Name));
                 sqlCommand.Parameters.Add(SqlParDate(user.DateOfBirth.ToString(sqlDateFormat)));
                 sqlCommand.Parameters.Add(SqlParAge(user.Age));
+
+                sqlConnection.Open();
+
+                sqlCommand.ExecuteNonQuery();
+            }
+        }
+
+        private void RemoveUser(Guid guid)
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "RemoveUserByGuid";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.Add(SqlParGuid(guid));
 
                 sqlConnection.Open();
 
