@@ -364,17 +364,13 @@
                             @{
                                 var allUsers = DependencyResolver.UserLogic?.GetAll();
                                 foreach (var user in allUsers)
-                                {
-                                    <option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>
-}
+                                    {<option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>}
                             }
                         </select>
                         <select class="user_chosen_guid" style="display: none;">
                             @{
                                 foreach (var user in allUsers)
-                                {
-                                    <option selected>@user.UserGuid.ToString()</option>
-}
+                                    {<option selected>@user.UserGuid.ToString()</option>}
                             }
                         </select>
                     </p>
@@ -387,17 +383,13 @@
                             @{
                                 var allAwards = DependencyResolver.AwardLogic?.GetAll();
                                 foreach (var award in allAwards)
-                                {
-                                    <option selected>@award.Title</option>
-}
+                                    {<option selected>@award.Title</option>}
                             }
                         </select>
                         <select class="award_chosen_guid" style="display: none;">
                             @{
                                 foreach (var award in allAwards)
-                                {
-                                    <option selected>@award.AwardGuid.ToString()</option>
-}
+                                    {<option selected>@award.AwardGuid.ToString()</option>}
                             }
                         </select>
                     </p>
@@ -453,17 +445,13 @@
                                 @{
                                     users = DependencyResolver.UserLogic?.GetAll();
                                     foreach (var user in users)
-                                    {
-                                        <option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>
-}
+                                        {<option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>}
                                 }
                             </select>
                             <select class="user_chosen_join_guid" style="display: none;">
                                 @{
                                     foreach (var user in users)
-                                    {
-                                        <option selected>@user.UserGuid.ToString()</option>
-}
+                                        {<option selected>@user.UserGuid.ToString()</option>}
                                 }
                             </select>
                         </p>
@@ -476,17 +464,13 @@
                                 @{
                                     allAwards = DependencyResolver.AwardLogic?.GetAll();
                                     foreach (var award in allAwards)
-                                    {
-                                        <option selected>@award.Title</option>
-}
+                                        {<option selected>@award.Title</option>}
                                 }
                             </select>
                             <select class="award_chosen_join_guid" style="display: none;">
                                 @{
                                     foreach (var award in allAwards)
-                                    {
-                                        <option selected>@award.AwardGuid.ToString()</option>
-}
+                                        {<option selected>@award.AwardGuid.ToString()</option>}
                                 }
                             </select>
                         </p>
@@ -531,17 +515,13 @@
                                 @{
                                     users = DependencyResolver.UserLogic?.GetAll();
                                     foreach (var user in users)
-                                    {
-                                        <option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>
-}
+                                        {<option selected>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</option>}
                                 }
                             </select>
                             <select class="user_chosen_image_guid" style="display: none;">
                                 @{
                                     foreach (var user in users)
-                                    {
-                                        <option selected>@user.UserGuid.ToString()</option>
-}
+                                        {<option selected>@user.UserGuid.ToString()</option>}
                                 }
                             </select>
                         </p>
@@ -558,17 +538,13 @@
                                 @{
                                     awards = DependencyResolver.AwardLogic?.GetAll();
                                     foreach (var award in awards)
-                                    {
-                                        <option selected>@(award.Title)</option>
-}
+                                        {<option selected>@(award.Title)</option>}
                                 }
                             </select>
                             <select class="award_chosen_image_guid" style="display: none;">
                                 @{
                                     foreach (var award in awards)
-                                    {
-                                        <option selected>@award.AwardGuid.ToString()</option>
-}
+                                        {<option selected>@award.AwardGuid.ToString()</option>}
                                 }
                             </select>
                         </p>
