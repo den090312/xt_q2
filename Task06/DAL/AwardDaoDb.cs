@@ -111,6 +111,7 @@ namespace DAL
                 sqlCommand.CommandText = "GetAwardByGuid";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.Add(SqlParGuid(guid));
+                sqlCommand.Parameters.Add(SqlParTitle());
                 sqlConnection.Open();
 
                 var sqlDr = sqlCommand.ExecuteReader();
@@ -168,6 +169,16 @@ namespace DAL
                 Value = title,
                 SqlDbType = SqlDbType.NVarChar,
                 Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParTitle()
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@Title",
+                SqlDbType = SqlDbType.NVarChar,
+                Direction = ParameterDirection.Output
             };
         }
 

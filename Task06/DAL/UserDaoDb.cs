@@ -119,6 +119,8 @@ namespace DAL
                 sqlCommand.CommandText = "GetUserByGuid";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.Add(SqlParGuid(guid));
+                sqlCommand.Parameters.Add(SqlParName());
+                sqlCommand.Parameters.Add(SqlParDate());
                 sqlConnection.Open();
 
                 var sqlDr = sqlCommand.ExecuteReader();
@@ -190,6 +192,16 @@ namespace DAL
             };
         }
 
+        private static SqlParameter SqlParDate()
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@DateOfBirth",
+                SqlDbType = SqlDbType.Date,
+                Direction = ParameterDirection.Output
+            };
+        }
+
         private static SqlParameter SqlParName(string name)
         {
             return new SqlParameter
@@ -198,6 +210,16 @@ namespace DAL
                 Value = name,
                 SqlDbType = SqlDbType.NVarChar,
                 Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParName()
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@Name",
+                SqlDbType = SqlDbType.NVarChar,
+                Direction = ParameterDirection.Output
             };
         }
 
