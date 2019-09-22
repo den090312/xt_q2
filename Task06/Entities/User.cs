@@ -4,7 +4,7 @@ namespace Entities
 {
     public class User
     {
-        public Guid UserGuid { get; }
+        public Guid Guid { get; }
 
         public string Name { get; } = string.Empty;
 
@@ -38,7 +38,7 @@ namespace Entities
         {
             NullCheck(name);
 
-            UserGuid = Guid.NewGuid();
+            Guid = Guid.NewGuid();
             Name = name;
             DateOfBirth = dateOfBirth;
         }
@@ -47,7 +47,7 @@ namespace Entities
         {
             NullCheck(name);
 
-            UserGuid = guid;
+            Guid = guid;
             Name = name;
             DateOfBirth = dateOfBirth;
         }

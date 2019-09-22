@@ -69,7 +69,7 @@ namespace DAL
 
             foreach (var user in users)
             {
-                if (user.UserGuid != userGuid)
+                if (user.Guid != userGuid)
                 {
                     PrintLine(streamWriter, user);
                 }
@@ -80,7 +80,7 @@ namespace DAL
 
         private void PrintLine(StreamWriter streamWriter, User user)
         {
-            streamWriter.Write(user.UserGuid.ToString() + Separator);
+            streamWriter.Write(user.Guid.ToString() + Separator);
             streamWriter.Write(user.Name + Separator);
             streamWriter.Write(user.DateOfBirth.ToString("dd.MM.yyyy") + Separator);
             streamWriter.Write(user.Age);

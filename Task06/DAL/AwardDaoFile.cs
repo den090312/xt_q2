@@ -80,7 +80,7 @@ namespace DAL
 
             foreach (var award in awards)
             {
-                if (award.AwardGuid != awardGuid)
+                if (award.Guid != awardGuid)
                 {
                     PrintLine(streamWriter, award);
                 }
@@ -91,7 +91,7 @@ namespace DAL
 
         private void PrintLine(StreamWriter streamWriter, Award award)
         {
-            streamWriter.Write(award.AwardGuid.ToString() + Separator);
+            streamWriter.Write(award.Guid.ToString() + Separator);
             streamWriter.Write(award.Title);
             streamWriter.WriteLine();
         }

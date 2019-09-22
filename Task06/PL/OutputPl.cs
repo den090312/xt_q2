@@ -89,7 +89,7 @@ namespace Pl
             foreach (var user in users)
             {
                 userNum++;
-                userNumList.Add(userNum, user.UserGuid);
+                userNumList.Add(userNum, user.Guid);
                 PrintSingleUser(user, userNum);
             }
 
@@ -117,7 +117,7 @@ namespace Pl
             foreach (var award in awards)
             {
                 awardNum++;
-                awardNumList.Add(awardNum, award.AwardGuid);
+                awardNumList.Add(awardNum, award.Guid);
                 PrintSingleAward(award, awardNum);
             }
 

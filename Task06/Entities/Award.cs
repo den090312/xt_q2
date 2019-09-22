@@ -4,7 +4,7 @@ namespace Entities
 {
     public class Award
     {
-        public Guid AwardGuid { get; }
+        public Guid Guid { get; }
 
         public string Title { get; } = string.Empty;
 
@@ -12,7 +12,7 @@ namespace Entities
         {
             NullCheck(title);
 
-            AwardGuid = Guid.NewGuid();
+            Guid = Guid.NewGuid();
             Title = title;
         }
 
@@ -20,7 +20,7 @@ namespace Entities
         {
             NullCheck(title);
 
-            AwardGuid = guid;
+            Guid = guid;
             Title = title;
         }
 

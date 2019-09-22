@@ -68,7 +68,7 @@ namespace DAL
                 var userId = line.Split(Separator)[0];
                 var awardId = line.Split(Separator)[1];
 
-                if (user.UserGuid.ToString() != userId)
+                if (user.Guid.ToString() != userId)
                 {
                     continue;
                 }
@@ -96,7 +96,7 @@ namespace DAL
             Thread.Sleep(10);
             var streamWriter = new StreamWriter(FilePath, true);
 
-            streamWriter.WriteLine(user.UserGuid.ToString() + Separator + award.AwardGuid.ToString());
+            streamWriter.WriteLine(user.Guid.ToString() + Separator + award.Guid.ToString());
             streamWriter.Close();
         }
 
@@ -133,7 +133,7 @@ namespace DAL
         {
             foreach (var award in awards)
             {
-                if (award.AwardGuid.ToString() == awardId)
+                if (award.Guid.ToString() == awardId)
                 {
                     return award.Title;
                 }
@@ -179,7 +179,7 @@ namespace DAL
 
             foreach (var userAward in usersAwards)
             {
-                if (userAward.UserRef.UserGuid != userGuid)
+                if (userAward.UserRef.Guid != userGuid)
                 {
                     PrintLine(streamWriter, userAward);
                 }
@@ -190,7 +190,7 @@ namespace DAL
 
         private void PrintLine(StreamWriter streamWriter, UserAward userAward)
         {
-            streamWriter.WriteLine(userAward.UserRef.UserGuid.ToString() + Separator + userAward.AwardRef.AwardGuid.ToString());
+            streamWriter.WriteLine(userAward.UserRef.Guid.ToString() + Separator + userAward.AwardRef.Guid.ToString());
             streamWriter.WriteLine();
         }
 
@@ -229,7 +229,7 @@ namespace DAL
 
             foreach (var userAward in usersAwards)
             {
-                if (userAward.AwardRef.AwardGuid != awardGuid)
+                if (userAward.AwardRef.Guid != awardGuid)
                 {
                     PrintLine(streamWriter, userAward);
                 }
