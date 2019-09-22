@@ -124,7 +124,7 @@ namespace DAL
 
                 while (sqlDr.Read())
                 {
-                    return new User(guid, sqlDr.GetString(0), DateTime.Parse(sqlDr.GetString(1)));
+                    return new User(guid, sqlDr.GetString(0), sqlDr.GetDateTime(1));
                 }
 
                 if (name == string.Empty)
