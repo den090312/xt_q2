@@ -44,7 +44,48 @@ namespace DAL
 
         public IEnumerable<Award> GetAwardsByUser(User user, IEnumerable<Award> awards)
         {
-            throw new NotImplementedException();
+            var awardsByUser = new List<Award>();
+
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetAwardsByUser";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.Add(SqlParUserGuid(user.Guid));
+                sqlCommand.Parameters.Add(SqlParAwardGuids(GetAwardGuids(awards)));
+
+                sqlConnection.Open();
+
+                var sqlDr = sqlCommand.ExecuteReader();
+
+                while (sqlDr.Read())
+                {
+                    var guid = sqlDr.GetGuid(0);
+
+                    foreach (var award in awards)
+                    {
+                        if (award.Guid == guid)
+                        {
+                            awardsByUser.Add(award);
+                        }
+                    }
+                }
+            }
+
+            return awardsByUser;
+        }
+
+        private static string[] GetAwardGuids(IEnumerable<Award> awards)
+        {
+            var guids = new List<string>();
+
+            foreach (var award in awards)
+            {
+                guids.Add(award.Guid.ToString());
+            }
+
+            return guids.ToArray();
         }
 
         public string GetInfo()
@@ -96,6 +137,39 @@ namespace DAL
             {
                 ParameterName = "@Guid",
                 Value = guid,
+                SqlDbType = SqlDbType.UniqueIdentifier,
+                Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParUserGuid(Guid userGuid)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@UserGuid",
+                Value = userGuid,
+                SqlDbType = SqlDbType.UniqueIdentifier,
+                Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParAwardGuid(Guid awardGuid)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@AwardGuid",
+                Value = awardGuid,
+                SqlDbType = SqlDbType.UniqueIdentifier,
+                Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParAwardGuids(string[] awardGuids)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@AwardGuid",
+                Value = awardGuids,
                 SqlDbType = SqlDbType.UniqueIdentifier,
                 Direction = ParameterDirection.Input
             };
