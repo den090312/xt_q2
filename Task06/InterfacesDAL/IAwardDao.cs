@@ -14,6 +14,6 @@ namespace InterfacesDAL
 
         Award GetByGuid(Guid awardGuid);
 
-        void PrintInfo();
+        string GetInfo();
     }
 }

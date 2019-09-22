@@ -16,6 +16,6 @@ namespace InterfacesBLL
 
         Award GetByGuid(Guid awardGuid);
 
-        void PrintInfo();
+        string GetInfo();
     }
 }

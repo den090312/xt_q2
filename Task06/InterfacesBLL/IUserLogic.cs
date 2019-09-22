@@ -16,6 +16,6 @@ namespace InterfacesBLL
 
         User GetByGuid(Guid userGuid);
 
-        void PrintInfo();
+        string GetInfo();
     }
 }

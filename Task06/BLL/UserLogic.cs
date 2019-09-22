@@ -66,7 +66,7 @@ namespace BLL
             return user;
         }
 
-        public void PrintInfo() => _userDao?.PrintInfo();
+        public string GetInfo() => _userDao?.GetInfo();
 
         private static void NullCheck<T>(T classObject) where T : class
         {

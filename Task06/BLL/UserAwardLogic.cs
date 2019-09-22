@@ -92,7 +92,7 @@ namespace BLL
             return _userAwardDao.RemoveAwardUsers(awardGuid, users, awards);
         }
 
-        public void PrintInfo() => _userAwardDao?.PrintInfo();
+        public string GetInfo() => _userAwardDao?.GetInfo();
 
         private static void NullCheck<T>(T classObject) where T : class
         {

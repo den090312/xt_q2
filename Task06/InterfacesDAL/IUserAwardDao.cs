@@ -14,6 +14,6 @@ namespace InterfacesDAL
 
         bool RemoveAwardUsers(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards);
 
-        void PrintInfo();
+        string GetInfo();
     }
 }

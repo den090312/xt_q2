@@ -79,7 +79,7 @@ namespace PL
 
         private void WriteMenu()
         {
-            PrintInfo();
+            PrintLogicInfo();
             Console.WriteLine("-----------------");
 
             Console.WriteLine("Users operations:");
@@ -98,11 +98,11 @@ namespace PL
             Console.WriteLine("\t8: exit");
         }
 
-        private void PrintInfo()
+        private void PrintLogicInfo()
         {
-            DependencyResolver.UserLogic.PrintInfo();
-            DependencyResolver.AwardLogic.PrintInfo();
-            DependencyResolver.UserAwardLogic.PrintInfo();
+            Console.WriteLine(DependencyResolver.UserLogic.GetInfo());
+            Console.WriteLine(DependencyResolver.AwardLogic.GetInfo());
+            Console.WriteLine(DependencyResolver.UserAwardLogic.GetInfo());
         }
 
         private bool UserCreation()

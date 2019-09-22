@@ -50,7 +50,7 @@ namespace BLL
             return award;
         }
 
-        public void PrintInfo() => _awardDao?.PrintInfo();
+        public string GetInfo() => _awardDao?.GetInfo();
 
         private static void NullCheck<T>(T classObject) where T : class
         {

@@ -22,7 +22,8 @@ namespace Common
 
         static DependencyResolver()
         {
-            userDao = new UserDaoFile();
+            //userDao = new UserDaoFile();
+            userDao = new UserDaoDb();
             _userLogic = new UserLogic(userDao);
             awardDao = new AwardDaoFile();
             _awardLogic = new AwardLogic(awardDao);

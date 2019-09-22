@@ -161,7 +161,7 @@ namespace DAL
             }
         }
 
-        public void PrintInfo() => Console.WriteLine(FilePath);
+        public string GetInfo() => FilePath;
 
         private void UserAwardsRemove(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
         {

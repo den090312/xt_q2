@@ -155,7 +155,7 @@ namespace DAL
             }
         }
 
-        public void PrintInfo() => Console.WriteLine(FilePath);
+        public string GetInfo() => FilePath;
 
         private void PrepareFile()
         {

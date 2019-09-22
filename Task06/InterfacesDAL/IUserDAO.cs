@@ -14,6 +14,6 @@ namespace InterfacesDAL
 
         User GetByGuid(Guid userGuid);
 
-        void PrintInfo();
+        string GetInfo();
     }
 }

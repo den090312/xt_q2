@@ -25,10 +25,7 @@ namespace DAL
             throw new NotImplementedException();
         }
 
-        public void PrintInfo()
-        {
-            throw new NotImplementedException();
-        }
+        public string GetInfo() => "123";
 
         public bool RemoveByGuid(Guid awardGuid)
         {
