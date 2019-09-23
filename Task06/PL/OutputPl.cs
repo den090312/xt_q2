@@ -10,6 +10,7 @@ namespace Pl
     {
         public void Run()
         {
+            //WEB_UI.Database.RunScript("~/Scripts/webusersdb.sql");
             new InputPl().Run();
         }
 

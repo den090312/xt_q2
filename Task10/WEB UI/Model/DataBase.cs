@@ -12,18 +12,18 @@ namespace WEB_UI
 
         public static readonly string ConnectionString;
 
-        public static string ScriptFileName { get; set; }
+        public static string WebUIscriptFileName { get; }
 
         static Database()
         {
             ConnectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=webusersdb;Integrated Security=True";
-            ScriptFileName = "~/Scripts/webusersdb.sql";
+            WebUIscriptFileName = "~/Scripts/webusersdb.sql";
         }
 
-        public static void RunScript()
+        public static void RunScript(string path)
         {
-            var sqriptPath = MyServer.MapPath(ScriptFileName);
-            var scriptText = File.ReadAllText(sqriptPath);
+            var scriptPath = MyServer.MapPath(path);
+            var scriptText = File.ReadAllText(scriptPath);
 
             var connectSql = new SqlConnection(ConnectionString);
             var connectSrv = new ServerConnection(connectSql);
