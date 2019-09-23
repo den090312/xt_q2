@@ -35,7 +35,7 @@ namespace Pl
 
         private void PrintAwardsByUser(User user)
         {
-            var awards = DependencyResolver.UserAwardLogic?.GetAwardsByUser(user);
+            var awards = DependencyResolver.UserAwardLogic?.GetAwardsByUserGuid(user.Guid);
             var awardNum = 1;
 
             foreach (var award in awards)

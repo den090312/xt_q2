@@ -41,7 +41,7 @@ namespace BLL
                 award
             };
 
-            var awardsByUser = userAwardDao.GetAwardsByUser(user, singleAwardList);
+            var awardsByUser = userAwardDao.GetAwardsByUserGuid(user.Guid, singleAwardList);
             var counter = 0;
 
             foreach (var singleAward in awardsByUser)
@@ -52,12 +52,12 @@ namespace BLL
             return counter > 0 ? false : userAwardDao.JoinAwardToUser(user, award);
         }
 
-        public IEnumerable<Award> GetAwardsByUser(User user)
+        public IEnumerable<Award> GetAwardsByUserGuid(Guid userGuid)
         {
             var awards = awardDao?.GetAll();
             NullCheck(awards);
 
-            return userAwardDao?.GetAwardsByUser(user, awards);
+            return userAwardDao?.GetAwardsByUserGuid(userGuid, awards);
         }
 
         public bool RemoveUserAwards(Guid userGuid)

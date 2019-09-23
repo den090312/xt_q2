@@ -38,17 +38,17 @@ namespace DAL
             }
         }
 
-        public IEnumerable<Award> GetAwardsByUser(User user, IEnumerable<Award> awards)
+        public IEnumerable<Award> GetAwardsByUserGuid(Guid userGuid, IEnumerable<Award> awards)
         {
             if (!File.Exists(FilePath))
             {
                 return new List<Award>();
             }
 
-            return GetAwards(user, awards);
+            return GetAwards(userGuid, awards);
         }
 
-        private IEnumerable<Award> GetAwards(User user, IEnumerable<Award> awards)
+        private IEnumerable<Award> GetAwards(Guid userGuid, IEnumerable<Award> awards)
         {
             var awardsByUser = new List<Award>();
             var userAwardLines = File.ReadAllLines(FilePath);
@@ -65,15 +65,15 @@ namespace DAL
                     continue;
                 }
 
-                var userId = line.Split(Separator)[0];
-                var awardId = line.Split(Separator)[1];
+                var guidUser = line.Split(Separator)[0];
+                var awardGuid = line.Split(Separator)[1];
 
-                if (user.Guid.ToString() != userId)
+                if (userGuid.ToString() != guidUser)
                 {
                     continue;
                 }
 
-                var title = GetAwardTitle(awards, awardId);
+                var title = GetAwardTitle(awards, awardGuid);
 
                 if (title == string.Empty)
                 {
@@ -82,7 +82,7 @@ namespace DAL
 
                 else
                 {
-                    var guid = Guid.Parse(awardId);
+                    var guid = Guid.Parse(awardGuid);
 
                     awardsByUser.Add(new Award(guid, title));
                 }
@@ -119,7 +119,7 @@ namespace DAL
 
         private List<UserAward> GetUserAwards(User user, IEnumerable<Award> awards, List<UserAward> usersAwards)
         {
-            var awardsByUser = GetAwardsByUser(user, awards);
+            var awardsByUser = GetAwardsByUserGuid(user.Guid, awards);
 
             foreach (var award in awardsByUser)
             {

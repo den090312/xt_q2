@@ -42,15 +42,46 @@ namespace DAL
             }
         }
 
-        public IEnumerable<Award> GetAwardsByUser(User user, IEnumerable<Award> awards)
+        public IEnumerable<Award> GetAwardsByUserGuid(Guid userGuid, IEnumerable<Award> awards)
         {
             var awardsByUser = new List<Award>();
 
-            using (var sqlConnection = new SqlConnection(connectionString))
+            /*using (var sqlConnection = new SqlConnection(connectionString))
             {
                 foreach (var award in awardsByUser)
                 {
                     AddAwardByUser(user, award, ref awardsByUser, sqlConnection);
+                }
+            }*/
+
+            var awardGuids = new List<Guid>();
+
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetAwardGuidsByUserGuid";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.Add(SqlParUserGuid(userGuid));
+
+                sqlConnection.Open();
+
+                var sqlDr = sqlCommand.ExecuteReader();
+
+                while (sqlDr.Read())
+                {
+                    awardGuids.Add(sqlDr.GetGuid(0));
+                }
+            }
+
+            foreach (var award in awards)
+            {
+                foreach (var guid in awardGuids)
+                {
+                    if (award.Guid == guid)
+                    {
+                        awardsByUser.Add(award);
+                    }
                 }
             }
 
@@ -118,7 +149,7 @@ namespace DAL
         {
             try
             {
-                UserAwardsRemove(userGuid, users, awards);
+                UserAwardsRemove(userGuid);
 
                 return true;
             }
@@ -128,7 +159,7 @@ namespace DAL
             }
         }
 
-        private void UserAwardsRemove(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
+        private void UserAwardsRemove(Guid userGuid)
         {
             //var usersAwards = GetAll(users, awards);
 
