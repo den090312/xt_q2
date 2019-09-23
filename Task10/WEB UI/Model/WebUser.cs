@@ -51,9 +51,9 @@ namespace WEB_UI
             PasswordHash = GetHashFromPassword(password);
         }
 
-        public static void LogOut() => Current = Guest;
+        internal static void LogOut() => Current = Guest;
 
-        public static bool LogIn(string name, string password)
+        internal static bool LogIn(string name, string password)
         {
             NullCheck(name);
             NullCheck(password);
@@ -80,7 +80,7 @@ namespace WEB_UI
             }
         }
 
-        public static Webuser Create(string name, Role role, string password)
+        internal static Webuser Create(string name, Role role, string password)
         {
             var webuser = new Webuser(name, role, password);
 
@@ -91,7 +91,7 @@ namespace WEB_UI
             return webuser;
         }
 
-        public static bool PasswordIsOk(string userName, string password)
+        internal static bool PasswordIsOk(string userName, string password)
         {
             NullCheck(userName);
             EmptyStringCheck(userName);
@@ -252,6 +252,15 @@ namespace WEB_UI
             return roleId;
         }
 
+        internal static bool PermissionsEdit(string[] panelRoleNames)
+        {
+            NullCheck(panelRoleNames);
+
+
+
+            return true;
+        }
+
         private static int GetRoleId(string userName, int roleId, SqlCommand sqlCommand)
         {
             var sqlDr = sqlCommand.ExecuteReader();
@@ -309,7 +318,7 @@ namespace WEB_UI
             return hash;
         }
 
-        public static bool Register(Webuser user)
+        internal static bool Register(Webuser user)
         {
             NullCheck(user);
 
@@ -325,7 +334,7 @@ namespace WEB_UI
             }
         }
 
-        public static bool NameExists(string userName)
+        internal static bool NameExists(string userName)
         {
             int userCount = 0;
 
