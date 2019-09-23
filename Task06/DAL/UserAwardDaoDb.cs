@@ -48,32 +48,37 @@ namespace DAL
 
             using (var sqlConnection = new SqlConnection(connectionString))
             {
-                var sqlCommand = sqlConnection.CreateCommand();
-
-                sqlCommand.CommandText = "GetAwardsByUser";
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.Add(SqlParUserGuid(user.Guid));
-                sqlCommand.Parameters.Add(SqlParAwardGuids(GetAwardGuids(awards)));
-
-                sqlConnection.Open();
-
-                var sqlDr = sqlCommand.ExecuteReader();
-
-                while (sqlDr.Read())
+                foreach (var award in awardsByUser)
                 {
-                    var guid = sqlDr.GetGuid(0);
-
-                    foreach (var award in awards)
-                    {
-                        if (award.Guid == guid)
-                        {
-                            awardsByUser.Add(award);
-                        }
-                    }
+                    AddAwardByUser(user, award, ref awardsByUser, sqlConnection);
                 }
             }
 
             return awardsByUser;
+        }
+
+        private static void AddAwardByUser(User user, Award award, ref List<Award> awardsByUser, SqlConnection sqlConnection)
+        {
+            var sqlCommand = sqlConnection.CreateCommand();
+
+            sqlCommand.CommandText = "GetAwardsByUser";
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.Add(SqlParUserGuid(user.Guid));
+            sqlCommand.Parameters.Add(SqlParAwardGuid(award.Guid));
+
+            sqlConnection.Open();
+
+            var sqlDr = sqlCommand.ExecuteReader();
+
+            while (sqlDr.Read())
+            {
+                var awardGuid = sqlDr.GetGuid(0);
+
+                if (award.Guid == awardGuid)
+                {
+                    awardsByUser.Add(award);
+                }
+            }
         }
 
         private static string[] GetAwardGuids(IEnumerable<Award> awards)
@@ -159,17 +164,6 @@ namespace DAL
             {
                 ParameterName = "@AwardGuid",
                 Value = awardGuid,
-                SqlDbType = SqlDbType.UniqueIdentifier,
-                Direction = ParameterDirection.Input
-            };
-        }
-
-        private static SqlParameter SqlParAwardGuids(string[] awardGuids)
-        {
-            return new SqlParameter
-            {
-                ParameterName = "@AwardGuid",
-                Value = awardGuids,
                 SqlDbType = SqlDbType.UniqueIdentifier,
                 Direction = ParameterDirection.Input
             };
