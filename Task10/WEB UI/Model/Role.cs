@@ -167,11 +167,8 @@ namespace WEB_UI
 
                 sqlCommand.CommandText = "DeleteWebrole";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-
                 sqlCommand.Parameters.Add(SqlParRoleId(roleId));
-
                 sqlConnection.Open();
-
                 sqlCommand.ExecuteNonQuery();
             }
         }
@@ -184,11 +181,8 @@ namespace WEB_UI
 
                 sqlCommand.CommandText = "AddWebrole";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-
                 sqlCommand.Parameters.Add(SqlParRoleName(role.Name));
-
                 sqlConnection.Open();
-
                 sqlCommand.ExecuteNonQuery();
             }
         }
@@ -218,11 +212,12 @@ namespace WEB_UI
 
         private static int GetIdRole(string roleName, int IdRole, SqlCommand sqlCommand)
         {
-            var sqlDataReader = sqlCommand.ExecuteReader();
+            var sqlDr = sqlCommand.ExecuteReader();
 
-            while (sqlDataReader.Read())
+            while (sqlDr.Read())
             {
-                IdRole = (int)sqlDataReader[0];
+                //IdRole = (int)sqlDr[0];
+                IdRole = sqlDr.GetInt32(0);
             }
 
             if (IdRole == -1)

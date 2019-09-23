@@ -325,11 +325,12 @@ namespace WEB_UI
 
         private static string GetRoleName(int idRole, string roleName, SqlCommand sqlCommand)
         {
-            var sqlDataReader = sqlCommand.ExecuteReader();
+            var sqlDr = sqlCommand.ExecuteReader();
 
-            while (sqlDataReader.Read())
+            while (sqlDr.Read())
             {
-                roleName = (string)sqlDataReader[0];
+                //roleName = (string)sqlDataReader[0];
+                roleName = sqlDr.GetString(0);
             }
 
             if (roleName == string.Empty)
@@ -367,11 +368,12 @@ namespace WEB_UI
 
         private static int GetCount(int userCount, SqlCommand sqlCommand)
         {
-            var sqlDataReader = sqlCommand.ExecuteReader();
+            var sqlDr = sqlCommand.ExecuteReader();
 
-            while (sqlDataReader.Read())
+            while (sqlDr.Read())
             {
-                userCount = (int)sqlDataReader[0];
+                //userCount = (int)sqlDataReader[0];
+                userCount = sqlDr.GetInt32(0);
             }
 
             return userCount;
@@ -443,11 +445,12 @@ namespace WEB_UI
 
         private static int GetIdRole(string roleName, int IdRole, SqlCommand sqlCommand)
         {
-            var sqlDataReader = sqlCommand.ExecuteReader();
+            var sqlDr = sqlCommand.ExecuteReader();
 
-            while (sqlDataReader.Read())
+            while (sqlDr.Read())
             {
-                IdRole = (int)sqlDataReader[0];
+                //IdRole = (int)sqlDr[0];
+                IdRole = sqlDr.GetInt32(0);
             }
 
             if (IdRole == -1)
