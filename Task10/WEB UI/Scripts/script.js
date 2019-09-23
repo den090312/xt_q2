@@ -319,6 +319,9 @@
                     case "award_upload_image":
                         displayAwardImageUpload(main);
                         break;
+                    case "administration":
+                        displayAdminpanel(main);
+                        break;
                 }
             }
         };
@@ -337,6 +340,7 @@
             setStyleDisplayNone("award_edition");
             setStyleDisplayNone("user_image_upload");
             setStyleDisplayNone("award_image_upload");
+            setStyleDisplayNone("adminpanel");
         }
 
         function displayAwardDel(main) {
@@ -353,6 +357,7 @@
             setStyleDisplayNone("award_edition");
             setStyleDisplayNone("user_image_upload");
             setStyleDisplayNone("award_image_upload");
+            setStyleDisplayNone("adminpanel");
         }
 
         function displayListAwards(main) {
@@ -369,6 +374,7 @@
             setStyleDisplayNone("award_edition");
             setStyleDisplayNone("user_image_upload");
             setStyleDisplayNone("award_image_upload");
+            setStyleDisplayNone("adminpanel");
         }
 
         function displayListUsers() {
@@ -385,6 +391,7 @@
             setStyleDisplayNone("award_edition");
             setStyleDisplayNone("user_image_upload");
             setStyleDisplayNone("award_image_upload");
+            setStyleDisplayNone("adminpanel");
         }
 
         function displayUserCreation(main) {
@@ -401,6 +408,7 @@
             setStyleDisplayNone("award_edition");
             setStyleDisplayNone("user_image_upload");
             setStyleDisplayNone("award_image_upload");
+            setStyleDisplayNone("adminpanel");
         }
 
         function displayAwardCreation(main) {
@@ -417,6 +425,7 @@
             setStyleDisplayNone("award_edition");
             setStyleDisplayNone("user_image_upload");
             setStyleDisplayNone("award_image_upload");
+            setStyleDisplayNone("adminpanel");
         }
 
         function displayJoin(main) {
@@ -433,6 +442,7 @@
             setStyleDisplayNone("award_edition");
             setStyleDisplayNone("user_image_upload");
             setStyleDisplayNone("award_image_upload");
+            setStyleDisplayNone("adminpanel");
         }
 
         function displayUserEdition(main) {
@@ -449,6 +459,7 @@
             setStyleDisplayNone("award_edition");
             setStyleDisplayNone("user_image_upload");
             setStyleDisplayNone("award_image_upload");
+            setStyleDisplayNone("adminpanel");
         }
 
         function displayAwardEdition(main) {
@@ -465,6 +476,7 @@
             document.getElementsByClassName("award_edition")[0].style.display = "block";
             setStyleDisplayNone("user_image_upload");
             setStyleDisplayNone("award_image_upload");
+            setStyleDisplayNone("adminpanel");
         }
 
         function displayUserImageUpload(main) {
@@ -481,6 +493,7 @@
             setStyleDisplayNone("award_edition");
             document.getElementsByClassName("user_image_upload")[0].style.display = "block";
             setStyleDisplayNone("award_image_upload");
+            setStyleDisplayNone("adminpanel");
         }
 
         function displayAwardImageUpload(main) {
@@ -497,6 +510,24 @@
             setStyleDisplayNone("award_edition");
             setStyleDisplayNone("user_image_upload");
             document.getElementsByClassName("award_image_upload")[0].style.display = "block";
+            setStyleDisplayNone("adminpanel");
+        }
+
+        function displayAdminpanel(main) {
+            main.style.display = "none";
+            operations[0].style.display = "block";
+            setStyleDisplayNone("user_del");
+            setStyleDisplayNone("award_del");
+            setStyleDisplayNone("user_creation");
+            setStyleDisplayNone("award_creation");
+            setStyleDisplayNone("listusers");
+            setStyleDisplayNone("listawards");
+            setStyleDisplayNone("join");
+            setStyleDisplayNone("user_edition");
+            setStyleDisplayNone("award_edition");
+            setStyleDisplayNone("user_image_upload");
+            setStyleDisplayNone("award_image_upload");
+            document.getElementsByClassName("adminpanel")[0].style.display = "block";
         }
     }
 
