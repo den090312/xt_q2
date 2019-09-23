@@ -256,8 +256,6 @@ namespace WEB_UI
         {
             NullCheck(panelRoleNames);
 
-
-
             return true;
         }
 

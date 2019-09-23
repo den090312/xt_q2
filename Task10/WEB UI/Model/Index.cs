@@ -37,21 +37,21 @@ namespace WEB_UI
 
         private static void Account(out string alert)
         {
-            TryLogIn();
+            alert = TryLogIn();
             TryLogOut();
-            TryRegister(out alert);
+            alert = TryRegister();
         }
 
-        private static void TryRegister(out string alert)
+        private static string TryRegister()
         {
-            var alertResponse = string.Empty;
+            var alert = string.Empty;
             var regName = Forms["regName"];
             var regPass = Forms["regPass"];
             var roleName = Forms["roleName"];
 
             if (regName != null & regPass != null & roleName != null)
             {
-                if (TryUserRegister(regName, regPass, roleName, out alertResponse))
+                if (TryUserRegister(regName, regPass, roleName, out alert))
                 {
                     LogIn(regName, regPass);
                 }
@@ -61,7 +61,7 @@ namespace WEB_UI
                 }
             }
 
-            alert = alertResponse;
+            return alert;
         }
 
         private static void TryLogOut()
@@ -84,12 +84,12 @@ namespace WEB_UI
             {
                 if (!Webuser.NameExists(logName))
                 {
-                    errorResponse = "@<script>alert('User name is not exists!');</script>";
+                    return "User name is not exists!";
 
                 }
                 else if (!Webuser.PasswordIsOk(logName, logPass))
                 {
-                    errorResponse = "@<script>alert('Wrong password!');</script>";
+                    return "Wrong password!";
                 }
                 else
                 {
@@ -108,7 +108,7 @@ namespace WEB_UI
 
             if (regName == string.Empty || regPass == string.Empty || roleName == string.Empty)
             {
-                errorResponse = "<script>alert('Finded empty strings!');</script>";
+                errorResponse = "Finded empty strings!";
 
                 return false;
             }
@@ -117,7 +117,7 @@ namespace WEB_UI
             {
                 Message = "User name already exists";
 
-                errorResponse = "<script>alert('User name already exists!');</script>";
+                errorResponse = "User name already exists!";
 
                 return false;
             }
@@ -239,6 +239,11 @@ namespace WEB_UI
 
             if (panelRoleNames != null)
             {
+                if (panelRoleNames.Length == 0)
+                {
+                    return;
+                }
+
                 if (Webuser.PermissionsEdit(panelRoleNames))
                 {
                     Message = "Users roles edited";

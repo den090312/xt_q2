@@ -3,9 +3,9 @@
 @{
     //Database.RunScript(Server, Database.WebUIscriptFileName);
 
-    var guest    = Role.Create("Guest");
+    var guest = Role.Create("Guest");
     var roleUser = Role.Create("User");
-    var admin    = Role.Create("Admin");
+    var admin = Role.Create("Admin");
 
     var currentUser = Webuser.Current;
     var root = Server.MapPath("~");
@@ -15,8 +15,8 @@
 
     if (IsPost)
     {
-        Index.Forms    = Request.Form;
-        Index.Files    = HttpContext.Current.Request.Files;
+        Index.Forms = Request.Form;
+        Index.Files = HttpContext.Current.Request.Files;
         Index.MyServer = Server;
         Index.Run(out alert);
 
@@ -35,7 +35,8 @@
 </head>
 <body>
     <div id="main" class="main">
-        <b>@alert</b>
+        @if (!string.IsNullOrEmpty(alert))
+            {<script>alert("@alert");</script>}
         <b>@Index.Message</b>
         <p class="currentUserName">User name: @(currentUser.Name)</p>
         <p class="currentUserRole">Role: @(currentUser.Role.Name)</p>
@@ -292,8 +293,8 @@
                     </div>
                     @Html.Raw(File.ReadAllText(root + @"\Pages\ChooseAwardImage.html"))
                 </form>
-                <form enctype="multipart/form-data" method="post" action="" class="administration" style="display: none;">
-                    <h3>Administration panel</h3>
+                <form enctype="multipart/form-data" method="post" action="" class="adminpanel" style="display: none;">
+                    <h3>Set user role:</h3>
                     <div>
                         @{
                             var webusers = Webuser.GetAll();
@@ -301,18 +302,25 @@
                             {
                                 <p>
                                     @webuser.Name
-                                    <input type="text" class="panel_role_guid" name="panelRoleGuid" style="display: none;" value=@webuser. />
+                                    <input type="text" class="panel_role_guid" name="panelRoleGuid" style="display: none;" value=@webuser . />
                                     <label>
-                                        <input type="radio" name="panelRoleName" value="@(webuser.Role.Name)" checked />@(webuser.Role.Name)
+                                        <input type="radio" name="roleName" value="@(webuser.Role.Name)" checked />@(webuser.Role.Name)
+                                        @{
+                                            var roleList = Role.List;
+                                            foreach (var role in roleList)
+                                            {
+                                                if (role.Name != webuser.Role.Name)
+                                                {
+                                                    {<input type="radio" name="roleName" value="@(role.Name)" />@(role.Name)}
+                                                }
+                                            }
+                                        }
                                     </label>
                                 </p>
                             }
                         }
                     </div>
-                <p>
-                    <input type="submit" class="saveWebusers" value="Ок" />
-                    <input type="button" class="cancel_save_webusers" value="Cancel" />
-                </p>                
+                    @Html.Raw(File.ReadAllText(root + @"\Pages\AdminpanelFinish.html"))
                 </form>
             }
         }

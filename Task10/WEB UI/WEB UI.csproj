@@ -203,6 +203,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Pages\AdminpanelFinish.html" />
     <Content Include="Pages\AllAwardOperations.html" />
     <Content Include="favicon.ico" />
     <Content Include="Pages\Authentication.html" />

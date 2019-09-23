@@ -319,7 +319,7 @@
                     case "award_upload_image":
                         displayAwardImageUpload(main);
                         break;
-                    case "administration":
+                    case "user_administration":
                         displayAdminpanel(main);
                         break;
                 }
