@@ -32,4 +32,4 @@ Task 11 done***
 
 Скрипт создания базы данных для всех заданий запускается процедурой:
 
-WebUI.Database.RunScript(connectionString, scriptPath)
+WEB_UI.Database.RunScript(connectionString, scriptPath);
