@@ -130,7 +130,20 @@ namespace DAL
 
         private void UserAwardsRemove(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
         {
-            var usersAwards = GetAll(users, awards);
+            //var usersAwards = GetAll(users, awards);
+
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "DeleteUserAwardByUserGuid";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.Add(SqlParUserGuid(userGuid));
+
+                sqlConnection.Open();
+
+                sqlCommand.ExecuteNonQuery();
+            }
         }
 
         private List<UserAward> GetAll(IEnumerable<User> users, IEnumerable<Award> awards)
@@ -159,7 +172,7 @@ namespace DAL
             {
                 var sqlCommand = sqlConnection.CreateCommand();
 
-                sqlCommand.CommandText = "GetUserAward";
+                sqlCommand.CommandText = "GetUserAwardCount";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.Add(SqlParUserGuid(user.Guid));
                 sqlCommand.Parameters.Add(SqlParAwardGuid(award.Guid));
