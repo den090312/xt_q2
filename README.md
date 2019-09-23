@@ -30,6 +30,6 @@ Task 11 done***
 
 ***Задание 11.2. SQL DAL включено в задание  6.1.USERS AND AWARDS
 
-Скрипт создания БД для 6-го и 10-го заданий запускается процедурой:
+Скрипт создания БД для 6,10,11 заданий запускается процедурой:
 
 WEB_UI.Database.RunScript(connectionString, scriptPath);
