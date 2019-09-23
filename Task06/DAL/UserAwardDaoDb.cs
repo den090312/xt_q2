@@ -74,14 +74,31 @@ namespace DAL
             return awardsByUser;
         }
 
-        private static void AddAwardByUser(ref List<Award> awardsByUser, List<Guid> awardGuids, Award award)
+        public bool RemoveUserAwards(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
         {
-            foreach (var guid in awardGuids)
+            try
             {
-                if (award.Guid == guid)
-                {
-                    awardsByUser.Add(award);
-                }
+                UserAwardsRemove(userGuid);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool RemoveAwardUsers(Guid awardGuid, IEnumerable<User> users, IEnumerable<Award> awards)
+        {
+            try
+            {
+                AwardUsersRemove(awardGuid);
+
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 
@@ -109,6 +126,17 @@ namespace DAL
             }
         }
 
+        private static void AddAwardByUser(ref List<Award> awardsByUser, List<Guid> awardGuids, Award award)
+        {
+            foreach (var guid in awardGuids)
+            {
+                if (award.Guid == guid)
+                {
+                    awardsByUser.Add(award);
+                }
+            }
+        }
+
         private static void StringInfo(SqlDataReader sqlDr, ref string info, ref int i)
         {
             for (var j = 0; j < 4; j++)
@@ -118,17 +146,19 @@ namespace DAL
             }
         }
 
-        public bool RemoveUserAwards(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
+        private void AwardUsersRemove(Guid awardGuid)
         {
-            try
+            using (var sqlConnection = new SqlConnection(connectionString))
             {
-                UserAwardsRemove(userGuid);
+                var sqlCommand = sqlConnection.CreateCommand();
 
-                return true;
-            }
-            catch
-            {
-                return false;
+                sqlCommand.CommandText = "DeleteUserAwardByAwardGuid";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.Add(SqlParAwardGuid(awardGuid));
+
+                sqlConnection.Open();
+
+                sqlCommand.ExecuteNonQuery();
             }
         }
 
@@ -146,40 +176,6 @@ namespace DAL
 
                 sqlCommand.ExecuteNonQuery();
             }
-        }
-
-        private static void AddUserAward(ref List<UserAward> userAwards, User user, Award award)
-        {
-            using (var sqlConnection = new SqlConnection(connectionString))
-            {
-                var sqlCommand = sqlConnection.CreateCommand();
-
-                sqlCommand.CommandText = "GetUserAwardCount";
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.Add(SqlParUserGuid(user.Guid));
-                sqlCommand.Parameters.Add(SqlParAwardGuid(award.Guid));
-
-                sqlConnection.Open();
-
-                var sqlDr = sqlCommand.ExecuteReader();
-
-                var counter = 0;
-
-                while (sqlDr.Read())
-                {
-                    counter++;
-                }
-
-                if (counter > 0)
-                {
-                    userAwards.Add(new UserAward(user, award));
-                }
-            }
-        }
-
-        public bool RemoveAwardUsers(Guid awardGuid, IEnumerable<User> users, IEnumerable<Award> awards)
-        {
-            throw new NotImplementedException();
         }
 
         private static SqlParameter SqlParGuid(Guid guid)
