@@ -33,8 +33,8 @@ namespace DAL
 
                 sqlCommand.CommandText = "JoinAwardToUser";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.Add(SqlParGuid(user.Guid));
-                sqlCommand.Parameters.Add(SqlParGuid(award.Guid));
+                sqlCommand.Parameters.Add(SqlParGuidUser(user.Guid));
+                sqlCommand.Parameters.Add(SqlParGuidAward(award.Guid));
 
                 sqlConnection.Open();
 
@@ -54,7 +54,6 @@ namespace DAL
                 sqlCommand.CommandText = "GetAwardGuidsByUserGuid";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.Add(SqlParUserGuid(userGuid));
-                sqlCommand.Parameters.Add(SqlParAwardGuid());
 
                 sqlConnection.Open();
 
@@ -178,12 +177,23 @@ namespace DAL
             }
         }
 
-        private static SqlParameter SqlParGuid(Guid guid)
+        private static SqlParameter SqlParGuidUser(Guid guidUser)
         {
             return new SqlParameter
             {
-                ParameterName = "@Guid",
-                Value = guid,
+                ParameterName = "@GuidUser",
+                Value = guidUser,
+                SqlDbType = SqlDbType.UniqueIdentifier,
+                Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParGuidAward(Guid guidAward)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@GuidAward",
+                Value = guidAward,
                 SqlDbType = SqlDbType.UniqueIdentifier,
                 Direction = ParameterDirection.Input
             };
@@ -208,16 +218,6 @@ namespace DAL
                 Value = awardGuid,
                 SqlDbType = SqlDbType.UniqueIdentifier,
                 Direction = ParameterDirection.Input
-            };
-        }
-
-        private static SqlParameter SqlParAwardGuid()
-        {
-            return new SqlParameter
-            {
-                ParameterName = "@AwardGuid",
-                SqlDbType = SqlDbType.UniqueIdentifier,
-                Direction = ParameterDirection.Output
             };
         }
     }
