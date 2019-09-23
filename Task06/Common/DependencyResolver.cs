@@ -22,14 +22,14 @@ namespace Common
 
         static DependencyResolver()
         {
-            //userDao = new UserDaoFile();
-            userDao = new UserDaoDb();
+            userDao = new UserDaoFile();
+            //userDao = new UserDaoDb();
             _userLogic = new UserLogic(userDao);
-            //awardDao = new AwardDaoFile();
-            awardDao = new AwardDaoDb();
+            awardDao = new AwardDaoFile();
+            //awardDao = new AwardDaoDb();
             _awardLogic = new AwardLogic(awardDao);
-            //userAwardDao = new UserAwardDaoFile();
-            userAwardDao = new UserAwardDaoDb();
+            userAwardDao = new UserAwardDaoFile();
+            //userAwardDao = new UserAwardDaoDb();
             _userAwardLogic = new UserAwardLogic(userAwardDao, userDao, awardDao);
         }
     }
