@@ -29,6 +29,3 @@ Task 11 done***
 ***Задание 11.1. DATABASE включено в задание 6.1.USERS AND AWARDS
 
 ***Задание 11.2. SQL DAL включено в задание  6.1.USERS AND AWARDS
-
-SQL Database скрипт для всех заданий: 
-https://github.com/den090312/xt_q2/blob/master/Task10/WEB%20UI/Scripts/webusersdb.sql
