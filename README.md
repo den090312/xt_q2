@@ -29,3 +29,7 @@ Task 11 done***
 ***Задание 11.1. DATABASE включено в задание 6.1.USERS AND AWARDS
 
 ***Задание 11.2. SQL DAL включено в задание  6.1.USERS AND AWARDS
+
+Скрипт создания базы данных для всех заданий запускается процедурой:
+
+WebUI.Database.RunScript(scriptPath)
