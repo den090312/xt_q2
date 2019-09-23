@@ -222,11 +222,12 @@ namespace WEB_UI
 
         private static int GetRoleId(string userName, int roleId, SqlCommand sqlCommand)
         {
-            var sqlDataReader = sqlCommand.ExecuteReader();
+            var sqlDr = sqlCommand.ExecuteReader();
 
-            while (sqlDataReader.Read())
+            while (sqlDr.Read())
             {
-                roleId = (int)sqlDataReader[0];
+                //roleId = (int)sqlDr[0];
+                roleId = sqlDr.GetInt32(0);
             }
 
             if (roleId == -1)
