@@ -136,10 +136,21 @@ namespace WEB_UI
 
         private static Webuser GetLoggedUser(string userName, string userPass)
         {
-            var roleId = GetRoleIdByUserName(userName);
+            NullCheck(userName);
+            EmptyStringCheck(userName);
 
+            NullCheck(userName);
+            EmptyStringCheck(userPass);
+
+            var roleId = GetRoleIdByUserName(userName);
             var roleName = GetRoleNameByRoleId(roleId);
+
+            NullCheck(roleName);
+            EmptyStringCheck(roleName);
+
             var userRole = Role.Get(roleName);
+
+            NullCheck(userRole);
 
             var webuser = Create(userName, userRole, userPass);
 
@@ -256,6 +267,8 @@ namespace WEB_UI
         {
             NullCheck(panelRoleNames);
 
+
+
             return true;
         }
 
@@ -265,7 +278,6 @@ namespace WEB_UI
 
             while (sqlDr.Read())
             {
-                //roleId = (int)sqlDr[0];
                 roleId = sqlDr.GetInt32(0);
             }
 
@@ -369,7 +381,6 @@ namespace WEB_UI
 
             while (sqlDr.Read())
             {
-                //roleName = (string)sqlDataReader[0];
                 roleName = sqlDr.GetString(0);
             }
 
@@ -412,7 +423,6 @@ namespace WEB_UI
 
             while (sqlDr.Read())
             {
-                //userCount = (int)sqlDataReader[0];
                 userCount = sqlDr.GetInt32(0);
             }
 
@@ -489,7 +499,6 @@ namespace WEB_UI
 
             while (sqlDr.Read())
             {
-                //IdRole = (int)sqlDr[0];
                 IdRole = sqlDr.GetInt32(0);
             }
 
