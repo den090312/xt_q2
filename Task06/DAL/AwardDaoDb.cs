@@ -47,7 +47,7 @@ namespace DAL
         {
             try
             {
-                RemoveUserAward(awardGuid);
+                RemoveUserAwards(awardGuid);
                 RemoveAward(awardGuid);
 
                 return true;
@@ -58,7 +58,7 @@ namespace DAL
             }
         }
 
-        private void RemoveUserAward(Guid awardGuid)
+        private void RemoveUserAwards(Guid awardGuid)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
             {

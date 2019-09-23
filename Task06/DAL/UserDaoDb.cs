@@ -31,6 +31,7 @@ namespace DAL
         {
             try
             {
+                RemoveUserAwards(userGuid);
                 RemoveUser(userGuid);
 
                 return true;
@@ -70,6 +71,22 @@ namespace DAL
                 sqlCommand.CommandText = "RemoveUserByGuid";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.Add(SqlParGuid(guid));
+
+                sqlConnection.Open();
+
+                sqlCommand.ExecuteNonQuery();
+            }
+        }
+
+        private void RemoveUserAwards(Guid userGuid)
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "RemoveUserAwardByUserGuid";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.Add(SqlParUserGuid(userGuid));
 
                 sqlConnection.Open();
 
@@ -230,6 +247,17 @@ namespace DAL
             {
                 ParameterName = "@Guid",
                 Value = guid,
+                SqlDbType = SqlDbType.UniqueIdentifier,
+                Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParUserGuid(Guid userGuid)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@UserGuid",
+                Value = userGuid,
                 SqlDbType = SqlDbType.UniqueIdentifier,
                 Direction = ParameterDirection.Input
             };
