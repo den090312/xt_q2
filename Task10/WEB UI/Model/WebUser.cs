@@ -80,6 +80,60 @@ namespace WEB_UI
             }
         }
 
+        public static Webuser Create(string name, Role role, string password)
+        {
+            var webuser = new Webuser(name, role, password);
+
+            List.Add(webuser);
+
+            Role.AddUserToRole(webuser, role);
+
+            return webuser;
+        }
+
+        public static bool PasswordIsOk(string userName, string password)
+        {
+            NullCheck(userName);
+            EmptyStringCheck(userName);
+
+            NullCheck(password);
+            EmptyStringCheck(password);
+
+            return password == GetPasswordByName(userName);
+        }
+
+        public static List<Webuser> GetAll()
+        {
+            var listWebusers = new List<Webuser>();
+
+            using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetAllWebusers";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlConnection.Open();
+
+                var sqlDr = sqlCommand.ExecuteReader();
+
+                while (sqlDr.Read())
+                {
+                    var roleId = sqlDr.GetInt32(1);
+                    var roleName = GetRoleNameByRoleId(roleId);
+                    var role = Role.Create(roleName);
+
+                    var name = sqlDr.GetString(2);
+                    var password = sqlDr.GetString(3);
+
+                    var hash = GetPasswordFromHash(password);
+
+                    listWebusers.Add(new Webuser(name, role, hash));
+                }
+            }
+
+            return listWebusers;
+        }
+
         private static Webuser GetLoggedUser(string userName, string userPass)
         {
             var roleId = GetRoleIdByUserName(userName);
@@ -88,17 +142,6 @@ namespace WEB_UI
             var userRole = Role.Get(roleName);
 
             var webuser = Create(userName, userRole, userPass);
-
-            return webuser;
-        }
-
-        public static Webuser Create(string name, Role role, string password)
-        {
-            var webuser = new Webuser(name, role, password);
-
-            List.Add(webuser);
-
-            Role.AddUserToRole(webuser, role);
 
             return webuser;
         }
@@ -171,17 +214,6 @@ namespace WEB_UI
             }
 
             return passSB.ToString().TrimEnd();
-        }
-
-        public static bool PasswordIsOk(string userName, string password)
-        {
-            NullCheck(userName);
-            EmptyStringCheck(userName);
-
-            NullCheck(password);
-            EmptyStringCheck(password);
-
-            return password == GetPasswordByName(userName);
         }
 
         private static string GetPasswordByName(string userName)
