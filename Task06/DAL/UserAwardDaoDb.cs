@@ -130,7 +130,56 @@ namespace DAL
 
         private void UserAwardsRemove(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
         {
+            var usersAwards = GetAll(users, awards);
+        }
 
+        private List<UserAward> GetAll(IEnumerable<User> users, IEnumerable<Award> awards)
+        {
+            var userAwards = new List<UserAward>();
+
+            foreach (var user in users)
+            {
+                AddAwardsToUser(awards, ref userAwards, user);
+            }
+
+            return userAwards;
+        }
+
+        private static void AddAwardsToUser(IEnumerable<Award> awards, ref List<UserAward> userAwards, User user)
+        {
+            foreach (var award in awards)
+            {
+                AddUserAward(ref userAwards, user, award);
+            }
+        }
+
+        private static void AddUserAward(ref List<UserAward> userAwards, User user, Award award)
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetUserAward";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.Add(SqlParUserGuid(user.Guid));
+                sqlCommand.Parameters.Add(SqlParAwardGuid(award.Guid));
+
+                sqlConnection.Open();
+
+                var sqlDr = sqlCommand.ExecuteReader();
+
+                var counter = 0;
+
+                while (sqlDr.Read())
+                {
+                    counter++;
+                }
+
+                if (counter > 0)
+                {
+                    userAwards.Add(new UserAward(user, award));
+                }
+            }
         }
 
         public bool RemoveAwardUsers(Guid awardGuid, IEnumerable<User> users, IEnumerable<Award> awards)
