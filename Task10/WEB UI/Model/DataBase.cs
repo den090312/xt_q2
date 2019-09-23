@@ -8,14 +8,14 @@ namespace WEB_UI
 {
     public static class Database
     {
-        public static readonly string ConnectionString;
+        public static string WebUiConnectionString { get; }
 
-        public static string WebUIscriptFileName { get; }
+        public static string WebUiScriptFileName { get; }
 
         static Database()
         {
-            ConnectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=webusersdb;Integrated Security=True";
-            WebUIscriptFileName = "~/Scripts/webusersdb.sql";
+            WebUiConnectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=webusersdb;Integrated Security=True";
+            WebUiScriptFileName = "~/Scripts/webusersdb.sql";
         }
 
         public static void RunScript(HttpServerUtilityBase server, string path)
@@ -23,17 +23,17 @@ namespace WEB_UI
             var scriptPath = server.MapPath(path);
             var scriptText = File.ReadAllText(scriptPath);
 
-            var connectSql = new SqlConnection(ConnectionString);
+            var connectSql = new SqlConnection(WebUiConnectionString);
             var connectSrv = new ServerConnection(connectSql);
 
             new Server(connectSrv).ConnectionContext.ExecuteNonQuery(scriptText);
         }
 
-        public static void RunScript(string path)
+        public static void RunScript(string connectionString, string scriptPath)
         {
-            var scriptText = File.ReadAllText(path);
+            var scriptText = File.ReadAllText(scriptPath);
 
-            var connectSql = new SqlConnection(ConnectionString);
+            var connectSql = new SqlConnection(connectionString);
             var connectSrv = new ServerConnection(connectSql);
 
             new Server(connectSrv).ConnectionContext.ExecuteNonQuery(scriptText);

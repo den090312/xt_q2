@@ -202,7 +202,7 @@ namespace WEB_UI
         {
             var roleId = -1;
 
-            using (var sqlConnection = new SqlConnection(Database.ConnectionString))
+            using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
 
@@ -241,7 +241,7 @@ namespace WEB_UI
         {
             var hash = string.Empty;
 
-            using (var sqlConnection = new SqlConnection(Database.ConnectionString))
+            using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
 
@@ -305,7 +305,7 @@ namespace WEB_UI
         {
             var roleName = string.Empty;
 
-            using (var sqlConnection = new SqlConnection(Database.ConnectionString))
+            using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
 
@@ -342,7 +342,7 @@ namespace WEB_UI
 
         private static int GetUserNameCount(string userName, int userCount)
         {
-            using (var sqlConnection = new SqlConnection(Database.ConnectionString))
+            using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
 
@@ -401,7 +401,7 @@ namespace WEB_UI
 
             var roleId = GetRoleId(role);
 
-            using (var sqlConnection = new SqlConnection(Database.ConnectionString))
+            using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
 
@@ -424,7 +424,7 @@ namespace WEB_UI
         {
             int IdRole = -1;
 
-            using (var sqlConnection = new SqlConnection(Database.ConnectionString))
+            using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
 

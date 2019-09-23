@@ -95,7 +95,7 @@ namespace WEB_UI
 
         private static int GetRoleNameCountInDb(string roleName, int roleCount)
         {
-            using (var sqlConnection = new SqlConnection(Database.ConnectionString))
+            using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
 
@@ -161,7 +161,7 @@ namespace WEB_UI
         {
             var roleId = GetRoleId(role);
 
-            using (var sqlConnection = new SqlConnection(Database.ConnectionString))
+            using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
 
@@ -178,7 +178,7 @@ namespace WEB_UI
 
         private static void AddWebrole(Role role)
         {
-            using (var sqlConnection = new SqlConnection(Database.ConnectionString))
+            using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
 
@@ -199,7 +199,7 @@ namespace WEB_UI
         {
             int IdRole = -1;
 
-            using (var sqlConnection = new SqlConnection(Database.ConnectionString))
+            using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
 
