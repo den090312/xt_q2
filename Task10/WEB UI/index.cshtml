@@ -144,7 +144,7 @@
                 {
                     <img class="user_img" src="@Images.GetImgSrc(root, user.Guid.ToString())">
                     <p>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</p>
-                    awardsByUser = DependencyResolver.UserAwardLogic?.GetAwardsByUser(user);
+                    awardsByUser = DependencyResolver.UserAwardLogic?.GetAwardsByUserGuid(user.Guid);
                     if (currentUser.Role != guest)
                     {
                         foreach (var awardByUser in awardsByUser)
