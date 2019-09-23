@@ -1,6 +1,7 @@
 ﻿using Common;
 using Entities;
 using PL;
+using WEB_UI;
 using System;
 using System.Collections.Generic;
 
@@ -10,7 +11,9 @@ namespace Pl
     {
         public void Run()
         {
-            //WEB_UI.Database.RunScript("~/Scripts/webusersdb.sql");
+            var scriptPath = @"C:\Users\Bolotin\source\repos\NewRepo2\Task06\Scripts\webusersdb.sql";
+            Database.RunScript(scriptPath);
+
             new InputPl().Run();
         }
 

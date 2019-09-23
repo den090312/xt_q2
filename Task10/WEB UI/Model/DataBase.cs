@@ -8,8 +8,6 @@ namespace WEB_UI
 {
     public static class Database
     {
-        public static HttpServerUtilityBase MyServer { private get; set; }
-
         public static readonly string ConnectionString;
 
         public static string WebUIscriptFileName { get; }
@@ -20,16 +18,25 @@ namespace WEB_UI
             WebUIscriptFileName = "~/Scripts/webusersdb.sql";
         }
 
-        public static void RunScript(string path)
+        public static void RunScript(HttpServerUtilityBase server, string path)
         {
-            var scriptPath = MyServer.MapPath(path);
+            var scriptPath = server.MapPath(path);
             var scriptText = File.ReadAllText(scriptPath);
 
             var connectSql = new SqlConnection(ConnectionString);
             var connectSrv = new ServerConnection(connectSql);
 
-            var server = new Server(connectSrv);
-            server.ConnectionContext.ExecuteNonQuery(scriptText);
+            new Server(connectSrv).ConnectionContext.ExecuteNonQuery(scriptText);
+        }
+
+        public static void RunScript(string path)
+        {
+            var scriptText = File.ReadAllText(path);
+
+            var connectSql = new SqlConnection(ConnectionString);
+            var connectSrv = new ServerConnection(connectSql);
+
+            new Server(connectSrv).ConnectionContext.ExecuteNonQuery(scriptText);
         }
     }
 }
