@@ -152,7 +152,7 @@ namespace DAL
             {
                 var sqlCommand = sqlConnection.CreateCommand();
 
-                sqlCommand.CommandText = "DeleteUserAwardByAwardGuid";
+                sqlCommand.CommandText = "RemoveUserAwardByAwardGuid";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.Add(SqlParAwardGuid(awardGuid));
 
@@ -168,7 +168,7 @@ namespace DAL
             {
                 var sqlCommand = sqlConnection.CreateCommand();
 
-                sqlCommand.CommandText = "DeleteUserAwardByUserGuid";
+                sqlCommand.CommandText = "RemoveUserAwardByUserGuid";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.Add(SqlParUserGuid(userGuid));
 
