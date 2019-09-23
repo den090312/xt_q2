@@ -31,4 +31,5 @@ Task 11 done***
 ***Задание 11.2. SQL DAL включено в задание  6.1.USERS AND AWARDS
 
 Cкрипт, создающий базу данных со всеми хранимками, запускается процедурой WebUI.DataBase.RunScript(string path)
+
 DataBase.dll лежит в 10-м таске
