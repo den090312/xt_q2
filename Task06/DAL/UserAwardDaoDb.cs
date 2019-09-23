@@ -81,18 +81,6 @@ namespace DAL
             }
         }
 
-        private static string[] GetAwardGuids(IEnumerable<Award> awards)
-        {
-            var guids = new List<string>();
-
-            foreach (var award in awards)
-            {
-                guids.Add(award.Guid.ToString());
-            }
-
-            return guids.ToArray();
-        }
-
         public string GetInfo()
         {
             using (var sqlConnection = new SqlConnection(connectionString))
@@ -128,7 +116,21 @@ namespace DAL
 
         public bool RemoveUserAwards(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
         {
-            throw new NotImplementedException();
+            try
+            {
+                UserAwardsRemove(userGuid, users, awards);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void UserAwardsRemove(Guid userGuid, IEnumerable<User> users, IEnumerable<Award> awards)
+        {
+
         }
 
         public bool RemoveAwardUsers(Guid awardGuid, IEnumerable<User> users, IEnumerable<Award> awards)
