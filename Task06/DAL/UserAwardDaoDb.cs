@@ -45,15 +45,6 @@ namespace DAL
         public IEnumerable<Award> GetAwardsByUserGuid(Guid userGuid, IEnumerable<Award> awards)
         {
             var awardsByUser = new List<Award>();
-
-            /*using (var sqlConnection = new SqlConnection(connectionString))
-            {
-                foreach (var award in awardsByUser)
-                {
-                    AddAwardByUser(user, award, ref awardsByUser, sqlConnection);
-                }
-            }*/
-
             var awardGuids = new List<Guid>();
 
             using (var sqlConnection = new SqlConnection(connectionString))
@@ -63,6 +54,7 @@ namespace DAL
                 sqlCommand.CommandText = "GetAwardGuidsByUserGuid";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.Add(SqlParUserGuid(userGuid));
+                sqlCommand.Parameters.Add(SqlParAwardGuid());
 
                 sqlConnection.Open();
 
@@ -76,36 +68,17 @@ namespace DAL
 
             foreach (var award in awards)
             {
-                foreach (var guid in awardGuids)
-                {
-                    if (award.Guid == guid)
-                    {
-                        awardsByUser.Add(award);
-                    }
-                }
+                AddAwardByUser(ref awardsByUser, awardGuids, award);
             }
 
             return awardsByUser;
         }
 
-        private static void AddAwardByUser(User user, Award award, ref List<Award> awardsByUser, SqlConnection sqlConnection)
+        private static void AddAwardByUser(ref List<Award> awardsByUser, List<Guid> awardGuids, Award award)
         {
-            var sqlCommand = sqlConnection.CreateCommand();
-
-            sqlCommand.CommandText = "GetAwardsByUser";
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.Add(SqlParUserGuid(user.Guid));
-            sqlCommand.Parameters.Add(SqlParAwardGuid(award.Guid));
-
-            sqlConnection.Open();
-
-            var sqlDr = sqlCommand.ExecuteReader();
-
-            while (sqlDr.Read())
+            foreach (var guid in awardGuids)
             {
-                var awardGuid = sqlDr.GetGuid(0);
-
-                if (award.Guid == awardGuid)
+                if (award.Guid == guid)
                 {
                     awardsByUser.Add(award);
                 }
@@ -161,8 +134,6 @@ namespace DAL
 
         private void UserAwardsRemove(Guid userGuid)
         {
-            //var usersAwards = GetAll(users, awards);
-
             using (var sqlConnection = new SqlConnection(connectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
@@ -174,26 +145,6 @@ namespace DAL
                 sqlConnection.Open();
 
                 sqlCommand.ExecuteNonQuery();
-            }
-        }
-
-        private List<UserAward> GetAll(IEnumerable<User> users, IEnumerable<Award> awards)
-        {
-            var userAwards = new List<UserAward>();
-
-            foreach (var user in users)
-            {
-                AddAwardsToUser(awards, ref userAwards, user);
-            }
-
-            return userAwards;
-        }
-
-        private static void AddAwardsToUser(IEnumerable<Award> awards, ref List<UserAward> userAwards, User user)
-        {
-            foreach (var award in awards)
-            {
-                AddUserAward(ref userAwards, user, award);
             }
         }
 
@@ -261,6 +212,16 @@ namespace DAL
                 Value = awardGuid,
                 SqlDbType = SqlDbType.UniqueIdentifier,
                 Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParAwardGuid()
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@AwardGuid",
+                SqlDbType = SqlDbType.UniqueIdentifier,
+                Direction = ParameterDirection.Output
             };
         }
     }
