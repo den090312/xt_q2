@@ -276,5 +276,10 @@ namespace DAL
                 File.SetAttributes(FilePath, FileAttributes.Normal);
             }
         }
+
+        public List<KeyValuePair<Guid, Guid>> GetGuidPairs()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

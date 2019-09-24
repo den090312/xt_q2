@@ -242,7 +242,7 @@ namespace WEB_UI
 
             if (guids != null & names != null & dates != null)
             {
-                if (Crud.UsersEdit(guids, names, dates))
+                if (Crud.EditUsers(guids, names, dates))
                 {
                     Message = "Users edited";
                 }

@@ -14,6 +14,8 @@ namespace InterfacesDAL
 
         bool RemoveAwardUsers(Guid awardGuid, IEnumerable<User> users, IEnumerable<Award> awards);
 
+        List<KeyValuePair<Guid, Guid>> GetGuidPairs();
+
         string GetInfo();
     }
 }

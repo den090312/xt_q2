@@ -93,7 +93,7 @@ namespace WEB_UI
             return DependencyResolver.UserAwardLogic.JoinAwardToUser(resultUserGuid, resultAwardGuid);
         }
 
-        public static bool UsersEdit(string[] guids, string[] names, string[] dates)
+        public static bool EditUsers(string[] guids, string[] names, string[] dates)
         {
             NullCheck(guids);
             NullCheck(names);

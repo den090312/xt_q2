@@ -101,6 +101,33 @@ namespace DAL
             }
         }
 
+
+        public List<KeyValuePair<Guid, Guid>> GetGuidPairs()
+        {
+            var guidPairs = new List<KeyValuePair<Guid, Guid>>();
+
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetAllUsersAwards";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlConnection.Open();
+
+                var sqlDr = sqlCommand.ExecuteReader();
+
+                while (sqlDr.Read())
+                {
+                    var userGuid = sqlDr.GetGuid(0);
+                    var awardGuid = sqlDr.GetGuid(1);
+
+                    guidPairs.Add(new KeyValuePair<Guid, Guid>(userGuid, awardGuid));
+                }
+
+                return guidPairs;
+            }
+        }
+
         public string GetInfo()
         {
             using (var sqlConnection = new SqlConnection(connectionString))

@@ -101,5 +101,28 @@ namespace BLL
                 throw new ArgumentNullException($"{nameof(classObject)} is null!");
             }
         }
+
+        public IEnumerable<UserAward> GetAll()
+        {
+            var guidPairs = userAwardDao.GetGuidPairs();
+
+            var usersAwards = new List<UserAward>();
+
+            foreach (var kvPair in guidPairs)
+            {
+                var user = userDao.GetByGuid(kvPair.Key);
+                NullCheck(user);
+
+                var award = awardDao.GetByGuid(kvPair.Value);
+                NullCheck(award);
+
+                var userAward = new UserAward(user, award);
+                NullCheck(userAward);
+
+                usersAwards.Add(userAward);
+            }
+
+            return usersAwards;
+        }
     }
 }
