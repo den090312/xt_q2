@@ -293,7 +293,6 @@
             }
             var alertbox = adminpanel.getElementsByClassName("alertbox")[0];
             alertbox.style.display = "none";
-            alert(adminCount);
             if (adminCount == 0) {
                 alertbox.style.display = "block";
                 alertbox.innerHTML = "Atleast one admin must be!";
