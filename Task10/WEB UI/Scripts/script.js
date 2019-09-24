@@ -283,14 +283,17 @@
         }
 
         function saveWebusers(main, e, operation) {
+            var adminpanel = document.getElementsByClassName("adminpanel")[0];
             var userRoleOutputs = document.getElementsByClassName("userRole");
             var adminCount = 0;
             for (let userRole of userRoleOutputs) {
-                if (userRole.value.toLowerCase() == "admin") {
+                if (userRole.checked & userRole.value.toLowerCase() == "admin") {
                     adminCount++;
                 }
             }
+            var alertbox = adminpanel.getElementsByClassName("alertbox")[0];
             alertbox.style.display = "none";
+            alert(adminCount);
             if (adminCount == 0) {
                 alertbox.style.display = "block";
                 alertbox.innerHTML = "Atleast one admin must be!";

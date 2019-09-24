@@ -295,27 +295,30 @@
                 </form>
                 <form enctype="multipart/form-data" method="post" action="" class="adminpanel" style="display: none;">
                     <h3>Set user role:</h3>
+                    <p class="alertbox"></p>
                     <div>
                         @{
                             var webusers = Webuser.GetAll();
+                            var counter = 0;
                             foreach (var webuser in webusers)
                             {
                                 <p>
                                     @webuser.Name
                                     <label>
-                                        <input type="radio" class="userRole" name="roleName" value="@(webuser.Role.Name)" checked />@(webuser.Role.Name)
+                                        <input type="radio" class="userRole" name="roleName@(counter)" value="@(webuser.Role.Name)" checked />@(webuser.Role.Name)
                                         @{
                                             var roleList = Role.List;
                                             foreach (var role in roleList)
                                             {
                                                 if (role.Name != webuser.Role.Name)
                                                 {
-                                                    {<input type="radio" class="userRole" name="roleName" value="@(role.Name)" />@(role.Name)}
-                                                }
+                                                    {<input type="radio" class="userRole" name="roleName@(counter)" value="@(role.Name)" />@(role.Name)}
                                             }
+                                        }
                                         }
                                     </label>
                                 </p>
+                                counter++;
                             }
                         }
                     </div>

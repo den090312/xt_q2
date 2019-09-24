@@ -133,7 +133,7 @@ namespace WEB_UI
 
             foreach (var webuser in webusers)
             {
-                SetNewRoles(roleNames, webuser);
+                UpdateRoles(roleNames, webuser);
             }
 
             return true;
@@ -307,28 +307,29 @@ namespace WEB_UI
             return roleId;
         }
 
-        private static void SetNewRoles(string[] panelRoleNames, Webuser webuser)
+        private static void UpdateRoles(string[] roleNames, Webuser webuser)
         {
-            foreach (var roleName in panelRoleNames)
+            foreach (var roleName in roleNames)
             {
                 if (webuser.Role.Name != roleName)
                 {
-                    var newRoleId = GetRoleIdByUserName(webuser.Name);
+                    var roleId = GetRoleIdByUserName(webuser.Name);
 
-                    SetRoleToWebuser(newRoleId);
+                    UpdateWebuserRole(webuser.Name, roleId);
                 }
             }
         }
 
-        private static void SetRoleToWebuser(int rolId)
+        private static void UpdateWebuserRole(string webuserName, int rolId)
         {
             using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
 
-                sqlCommand.CommandText = "SetRoleToWebuser";
+                sqlCommand.CommandText = "UpdateWebuserRole";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.Add(SqlParRoleId(rolId));
+                sqlCommand.Parameters.Add(SqlParWebuserName(webuserName));
                 sqlConnection.Open();
                 sqlCommand.ExecuteNonQuery();
             }
@@ -595,6 +596,17 @@ namespace WEB_UI
             {
                 ParameterName = "@UserName",
                 Value = userName,
+                SqlDbType = SqlDbType.NVarChar,
+                Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParWebuserName(string webuserName)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@Name",
+                Value = webuserName,
                 SqlDbType = SqlDbType.NVarChar,
                 Direction = ParameterDirection.Input
             };
