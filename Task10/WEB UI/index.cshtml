@@ -304,7 +304,7 @@
                                     @webuser.Name
                                     <input type="text" class="panel_role_guid" name="panelRoleGuid" style="display: none;" value=@webuser . />
                                     <label>
-                                        <input type="radio" class="roleName" name="roleName" value="@(webuser.Role.Name)" checked />@(webuser.Role.Name)
+                                        <input type="radio" class="userRole" name="roleName" value="@(webuser.Role.Name)" checked />@(webuser.Role.Name)
                                         @{
                                             var roleList = Role.List;
                                             foreach (var role in roleList)

@@ -283,9 +283,9 @@
         }
 
         function saveWebusers(main, e, operation) {
-            var roleNameOutputs = document.getElementsByClassName("roleName");
+            var userRoleOutputs = document.getElementsByClassName("userRole");
             var adminCount = 0;
-            for (let userRole of roleNameOutputs) {
+            for (let userRole of userRoleOutputs) {
                 if (userRole.value.toLowerCase() == "admin") {
                     adminCount++;
                 }
