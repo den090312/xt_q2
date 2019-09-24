@@ -306,17 +306,19 @@
                                     @webuser.Name
                                     <label>
                                         <input type="radio" class="userRole" name="roleName@(counter)" value="@(webuser.Role.Name)" checked />@(webuser.Role.Name)
-                                        @{
-                                            var roleList = Role.List;
-                                            foreach (var role in roleList)
+                                    </label>
+                                    @{
+                                        var roleList = Role.List;
+                                        foreach (var role in roleList)
+                                        {
+                                            if (role.Name != webuser.Role.Name)
                                             {
-                                                if (role.Name != webuser.Role.Name)
-                                                {
-                                                    {<input type="radio" class="userRole" name="roleName@(counter)" value="@(role.Name)" />@(role.Name)}
+                                                <label>
+                                                    <input type="radio" class="userRole" name="roleName@(counter)" value="@(role.Name)" />@(role.Name)
+                                                </label>
                                             }
                                         }
-                                        }
-                                    </label>
+                                    }
                                 </p>
                                 counter++;
                             }

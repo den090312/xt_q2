@@ -329,7 +329,7 @@ namespace WEB_UI
                 sqlCommand.CommandText = "UpdateWebuserRole";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.Add(SqlParRoleId(rolId));
-                sqlCommand.Parameters.Add(SqlParWebuserName(webuserName));
+                sqlCommand.Parameters.Add(SqlParUserName(webuserName));
                 sqlConnection.Open();
                 sqlCommand.ExecuteNonQuery();
             }
