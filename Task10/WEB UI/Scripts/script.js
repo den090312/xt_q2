@@ -64,6 +64,15 @@
         };
     }
 
+    /*var adminpanel = document.getElementsByClassName("adminpanel")[0];
+    if (adminpanel) {
+        userRoles = document.getElementsByClassName("userRole");
+        userRoles.addEventListener("change", userRolesChange);
+        function userRolesChange() {
+
+        }
+    }*/
+
     function setSelectedUserGuid() {
         var user_chosen = document.getElementsByClassName("user_chosen")[0];
         if (user_chosen) {
@@ -286,7 +295,11 @@
             var adminpanel = document.getElementsByClassName("adminpanel")[0];
             var userRoleOutputs = document.getElementsByClassName("userRole");
             var adminCount = 0;
+            var checkedRoles = [];
             for (let userRole of userRoleOutputs) {
+                if (userRole.checked) {
+                    checkedRoles.push(userRole.value);
+                }
                 if (userRole.checked & userRole.value.toLowerCase() == "admin") {
                     adminCount++;
                 }
@@ -298,6 +311,10 @@
                 alertbox.innerHTML = "Atleast one admin must be!";
                 e.preventDefault();
                 return;
+            }
+            inputsForRoles = document.getElementsByClassName("checkedRole");
+            for (var i = 0; i < inputsForRoles.length; i++) {
+                inputsForRoles[i].value = checkedRoles[i]; 
             }
             goToMain(main, operation);
         }

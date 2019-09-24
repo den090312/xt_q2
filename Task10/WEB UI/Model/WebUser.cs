@@ -125,18 +125,25 @@ namespace WEB_UI
             return password == GetPasswordByName(userName);
         }
 
-        public static bool RolesEdit(string[] roleNames)
+        public static void RolesEdit(string[] roleNames)
         {
             NullCheck(roleNames);
 
             var webusers = GetAll();
 
+            var i = 0;
+
             foreach (var webuser in webusers)
             {
-                UpdateRoles(roleNames, webuser);
-            }
+                if (webuser.Role.Name != roleNames[i])
+                {
+                    var roleId = GetIdRoleByName(roleNames[i]);
 
-            return true;
+                    UpdateWebuserRole(webuser.Name, roleId);
+                }
+
+                i++;
+            }
         }
 
         public static bool Register(Webuser user)
@@ -309,15 +316,7 @@ namespace WEB_UI
 
         private static void UpdateRoles(string[] roleNames, Webuser webuser)
         {
-            foreach (var roleName in roleNames)
-            {
-                if (webuser.Role.Name != roleName)
-                {
-                    var roleId = GetRoleIdByUserName(webuser.Name);
 
-                    UpdateWebuserRole(webuser.Name, roleId);
-                }
-            }
         }
 
         private static void UpdateWebuserRole(string webuserName, int rolId)
@@ -329,7 +328,7 @@ namespace WEB_UI
                 sqlCommand.CommandText = "UpdateWebuserRole";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.Add(SqlParRoleId(rolId));
-                sqlCommand.Parameters.Add(SqlParUserName(webuserName));
+                sqlCommand.Parameters.Add(SqlParName(webuserName));
                 sqlConnection.Open();
                 sqlCommand.ExecuteNonQuery();
             }
@@ -440,12 +439,7 @@ namespace WEB_UI
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 sqlCommand.Parameters.Add(SqlParUserName(userName));
-                sqlCommand.Parameters.Add(new SqlParameter
-                {
-                    ParameterName = "@Count",
-                    SqlDbType = SqlDbType.Int,
-                    Direction = ParameterDirection.Output
-                });
+                sqlCommand.Parameters.Add(SqlParCount());
 
                 sqlConnection.Open();
 
@@ -548,6 +542,16 @@ namespace WEB_UI
             return IdRole;
         }
 
+        private static SqlParameter SqlParCount()
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@Count",
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Output
+            };
+        }
+
         private static SqlParameter SqlParRoleId(int IdRole)
         {
             return new SqlParameter
@@ -601,12 +605,12 @@ namespace WEB_UI
             };
         }
 
-        private static SqlParameter SqlParWebuserName(string webuserName)
+        private static SqlParameter SqlParName(string name)
         {
             return new SqlParameter
             {
                 ParameterName = "@Name",
-                Value = webuserName,
+                Value = name,
                 SqlDbType = SqlDbType.NVarChar,
                 Direction = ParameterDirection.Input
             };

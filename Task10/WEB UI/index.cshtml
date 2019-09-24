@@ -306,6 +306,7 @@
                                     @webuser.Name
                                     <label>
                                         <input type="radio" class="userRole" name="roleName@(counter)" value="@(webuser.Role.Name)" checked />@(webuser.Role.Name)
+                                        <input type="text" class="checkedRole" name="checkedRole" style="display: none;">
                                     </label>
                                     @{
                                         var roleList = Role.List;

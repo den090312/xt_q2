@@ -225,7 +225,6 @@ namespace WEB_UI
 
             while (sqlDr.Read())
             {
-                //IdRole = (int)sqlDr[0];
                 IdRole = sqlDr.GetInt32(0);
             }
 

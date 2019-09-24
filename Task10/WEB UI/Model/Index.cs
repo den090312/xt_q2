@@ -249,7 +249,7 @@ namespace WEB_UI
 
         private static void EditUserRoles()
         {
-            var panelRoleNames = Forms.GetValues("panelRoleName");
+            var panelRoleNames = Forms.GetValues("checkedRole");
 
             if (panelRoleNames == null)
             {
@@ -261,14 +261,7 @@ namespace WEB_UI
                 return;
             }
 
-            if (Webuser.RolesEdit(panelRoleNames))
-            {
-                Message = "Users roles edited";
-            }
-            else
-            {
-                Message = "Users roles NOT edited";
-            }
+            Webuser.RolesEdit(panelRoleNames);
         }
 
         private static void EditAwards()
