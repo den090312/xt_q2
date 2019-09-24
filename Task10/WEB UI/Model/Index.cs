@@ -22,17 +22,23 @@ namespace WEB_UI
 
         public static void Run(out string alert)
         {
-            UserCreation();
-            UserAwardsDelete();
-            AwardCreation();
+            CreateUser();
+            CreateAward();
+
+            DeleteUserAwards();
             DeleteAwardUsers();
+
             JoinAwardToUser();
-            UsersEdit();
-            AwardsEdit();
+
+            EditUsers();
+            EditAwards();
+
             Account(out alert);
+
             SaveUserImage();
             SaveAwardImage();
-            UserRolesEdit();
+
+            EditUserRoles();
         }
 
         private static void Account(out string alert)
@@ -131,7 +137,7 @@ namespace WEB_UI
             return Webuser.Register(user);
         }
 
-        private static void UserCreation()
+        private static void CreateUser()
         {
             var userName = Forms["userName"];
             var dateOfBirth = Forms["dateOfBirth"];
@@ -151,7 +157,7 @@ namespace WEB_UI
             }
         }
 
-        private static void UserAwardsDelete()
+        private static void DeleteUserAwards()
         {
             var userGuid = Forms["userGuid"];
 
@@ -170,7 +176,7 @@ namespace WEB_UI
             }
         }
 
-        private static void AwardCreation()
+        private static void CreateAward()
         {
             var awardTitle = Forms["awardTitle"];
 
@@ -228,7 +234,7 @@ namespace WEB_UI
             }
         }
 
-        private static void UsersEdit()
+        private static void EditUsers()
         {
             var guids = Forms.GetValues("userGuids");
             var names = Forms.GetValues("userNames");
@@ -247,7 +253,7 @@ namespace WEB_UI
             }
         }
 
-        private static void UserRolesEdit()
+        private static void EditUserRoles()
         {
             var panelRoleNames = Forms.GetValues("checkedRole");
 
@@ -271,7 +277,7 @@ namespace WEB_UI
             }
         }
 
-        private static void AwardsEdit()
+        private static void EditAwards()
         {
             var guids = Forms.GetValues("awardGuids");
             var titles = Forms.GetValues("awardTitles");
