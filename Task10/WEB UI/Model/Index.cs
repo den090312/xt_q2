@@ -25,19 +25,19 @@ namespace WEB_UI
             UserCreation();
             UserAwardsDelete();
             AwardCreation();
-            AwardUsersDelete();
+            DeleteAwardUsers();
             JoinAwardToUser();
-            EditUsers();
-            EditAwards();
+            UsersEdit();
+            AwardsEdit();
             Account(out alert);
             SaveUserImage();
             SaveAwardImage();
-            EditUserRoles();
+            UserRolesEdit();
         }
 
         private static void Account(out string alert)
         {
-            alert = TryLogIn();
+            _ = TryLogIn();
             TryLogOut();
             alert = TryRegister();
         }
@@ -189,7 +189,7 @@ namespace WEB_UI
             }
         }
 
-        private static void AwardUsersDelete()
+        private static void DeleteAwardUsers()
         {
             var awardGuid = Forms["awardGuid"];
 
@@ -228,7 +228,7 @@ namespace WEB_UI
             }
         }
 
-        private static void EditUsers()
+        private static void UsersEdit()
         {
             var guids = Forms.GetValues("userGuids");
             var names = Forms.GetValues("userNames");
@@ -247,7 +247,7 @@ namespace WEB_UI
             }
         }
 
-        private static void EditUserRoles()
+        private static void UserRolesEdit()
         {
             var panelRoleNames = Forms.GetValues("checkedRole");
 
@@ -264,7 +264,7 @@ namespace WEB_UI
             Webuser.RolesEdit(panelRoleNames);
         }
 
-        private static void EditAwards()
+        private static void AwardsEdit()
         {
             var guids = Forms.GetValues("awardGuids");
             var titles = Forms.GetValues("awardTitles");

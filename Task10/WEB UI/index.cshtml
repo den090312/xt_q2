@@ -37,7 +37,7 @@
     <div id="main" class="main">
         @if (!string.IsNullOrEmpty(alert))
             {<script>alert("@alert");</script>}
-        <b>@Index.Message</b>
+        <b id="message">@Index.Message</b>
         <p class="currentUserName">User name: @(currentUser.Name)</p>
         <p class="currentUserRole">Role: @(currentUser.Role.Name)</p>
         @{

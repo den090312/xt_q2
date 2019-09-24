@@ -64,23 +64,14 @@
         };
     }
 
-    /*var adminpanel = document.getElementsByClassName("adminpanel")[0];
-    if (adminpanel) {
-        userRoles = document.getElementsByClassName("userRole");
-        userRoles.addEventListener("change", userRolesChange);
-        function userRolesChange() {
-
-        }
-    }*/
-
     function setSelectedUserGuid() {
         var user_chosen = document.getElementsByClassName("user_chosen")[0];
         if (user_chosen) {
-            user_chosen.addEventListener("onchange", userChosenOnChange); 
+            user_chosen.addEventListener("change", userChosenChange); 
             var user_chosen_guid = document.getElementsByClassName("user_chosen_guid")[0];
             var user_guid = document.getElementsByClassName("user_guid")[0];
             user_guid.value = user_chosen_guid[user_chosen_guid.selectedIndex].value;
-            function userChosenOnChange() {
+            function userChosenChange() {
                 user_chosen_guid.selectedIndex = user_chosen.selectedIndex;
                 user_guid.value = user_chosen_guid[user_chosen_guid.selectedIndex].value;
             }
@@ -90,11 +81,11 @@
     function setSelectedAwardGuid() {
         var award_chosen = document.getElementsByClassName("award_chosen")[0];
         if (award_chosen) {
-            award_chosen.addEventListener("onchange", awardChosenOnChange);
+            award_chosen.addEventListener("change", awardChosenChange);
             var award_chosen_guid = document.getElementsByClassName("award_chosen_guid")[0];
             var award_guid = document.getElementsByClassName("award_guid")[0];
             award_guid.value = award_chosen_guid[award_chosen_guid.selectedIndex].value;
-            function awardChosenOnChange() {
+            function awardChosenChange() {
                 award_chosen_guid.selectedIndex = award_chosen.selectedIndex;
                 award_guid.value = award_chosen_guid[award_chosen_guid.selectedIndex].value;
             }
@@ -104,11 +95,11 @@
     function setJoinGuidUser() {
         var user_chosen_join = document.getElementsByClassName("user_chosen_join")[0];
         if (user_chosen_join) {
-            user_chosen_join.addEventListener("onchange", userChosenJoinOnChange);
+            user_chosen_join.addEventListener("change", userChosenJoinChange);
             var user_chosen_join_guid = document.getElementsByClassName("user_chosen_join_guid")[0];
             var user_guid_join = document.getElementsByClassName("user_guid_join")[0];
             user_guid_join.value = user_chosen_join_guid[user_chosen_join_guid.selectedIndex].value;
-            function userChosenJoinOnChange() {
+            function userChosenJoinChange() {
                 user_chosen_join_guid.selectedIndex = user_chosen_join.selectedIndex;
                 user_guid_join.value = user_chosen_join_guid[user_chosen_join_guid.selectedIndex].value;
             }
@@ -118,11 +109,11 @@
     function setJoinGuidAward() {
         var award_chosen_join = document.getElementsByClassName("award_chosen_join")[0];
         if (award_chosen_join) {
-            award_chosen_join.addEventListener("onchange", awardChosenJoinOnChange);
+            award_chosen_join.addEventListener("change", awardChosenJoinChange);
             var award_chosen_join_guid = document.getElementsByClassName("award_chosen_join_guid")[0];
             var award_guid_join = document.getElementsByClassName("award_guid_join")[0];
             award_guid_join.value = award_chosen_join_guid[award_chosen_join_guid.selectedIndex].value;
-            function awardChosenJoinOnChange() {
+            function awardChosenJoinChange() {
                 award_chosen_join_guid.selectedIndex = award_chosen_join.selectedIndex;
                 award_guid_join.value = award_chosen_join_guid[award_chosen_join_guid.selectedIndex].value;
             }
@@ -132,11 +123,11 @@
     function setImageGuidUser() {
         var user_chosen_image = document.getElementsByClassName("user_chosen_image")[0];
         if (user_chosen_image) {
-            user_chosen_image.addEventListener("onchange", userChosenImageJoinOnChange);
+            user_chosen_image.addEventListener("change", userChosenImageJoinChange);
             var user_chosen_image_guid = document.getElementsByClassName("user_chosen_image_guid")[0];
             var user_image_guid = document.getElementsByClassName("user_image_guid")[0];
             user_image_guid.value = user_chosen_image_guid[user_chosen_image_guid.selectedIndex].value;
-            function userChosenImageJoinOnChange() {
+            function userChosenImageJoinChange() {
                 user_chosen_image_guid.selectedIndex = user_chosen_image.selectedIndex;
                 user_image_guid.value = user_chosen_image_guid[user_chosen_image_guid.selectedIndex].value;
             }
@@ -146,11 +137,11 @@
     function setImageGuidAward() {
         var award_chosen_image = document.getElementsByClassName("award_chosen_image")[0];
         if (award_chosen_image) {
-            award_chosen_image.addEventListener("onchange", awardChosenImageJoinOnChange);
+            award_chosen_image.addEventListener("change", awardChosenImageJoinChange);
             var award_chosen_image_guid = document.getElementsByClassName("award_chosen_image_guid")[0];
             var award_image_guid = document.getElementsByClassName("award_image_guid")[0];
             award_image_guid.value = award_chosen_image_guid[award_chosen_image_guid.selectedIndex].value;
-            function awardChosenImageJoinOnChange() {
+            function awardChosenImageJoinChange() {
                 award_chosen_image_guid.selectedIndex = award_chosen_image.selectedIndex;
                 award_image_guid.value = award_chosen_image_guid[award_chosen_image_guid.selectedIndex].value;
             }

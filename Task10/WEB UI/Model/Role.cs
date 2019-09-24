@@ -15,13 +15,7 @@ namespace WEB_UI
 
         static Role() => List = new List<Role>();
 
-        private Role(string roleName)
-        {
-            NullCheck(roleName);
-            EmptyStringCheck(roleName);
-
-            Name = roleName;
-        }
+        private Role(string roleName) => Name = roleName;
 
         public static Role Create(string roleName)
         {

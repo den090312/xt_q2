@@ -38,16 +38,8 @@ namespace WEB_UI
 
         private Webuser(string name, Role role, string password)
         {
-            NullCheck(name);
-            NullCheck(role);
-            NullCheck(password);
-
-            EmptyStringCheck(name);
-            EmptyStringCheck(password);
-
             Name = name;
             Role = role;
-
             PasswordHash = GetHashFromPassword(password);
         }
 
@@ -105,6 +97,13 @@ namespace WEB_UI
 
         public static Webuser Create(string name, Role role, string password)
         {
+            NullCheck(name);
+            NullCheck(role);
+            NullCheck(password);
+
+            EmptyStringCheck(name);
+            EmptyStringCheck(password);
+
             var webuser = new Webuser(name, role, password);
 
             List.Add(webuser);
@@ -129,6 +128,11 @@ namespace WEB_UI
         {
             NullCheck(roleNames);
 
+            if (roleNames.Length == 0)
+            {
+                return;
+            }
+
             var webusers = GetAll();
 
             var i = 0;
@@ -143,6 +147,22 @@ namespace WEB_UI
                 }
 
                 i++;
+            }
+        }
+
+        public static bool Add(Webuser webuser)
+        {
+            NullCheck(webuser);
+
+            try
+            {
+                AddWebuser(webuser);
+
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 
@@ -164,6 +184,9 @@ namespace WEB_UI
 
         public static bool NameExists(string userName)
         {
+            NullCheck(userName);
+            EmptyStringCheck(userName);
+
             int userCount = 0;
 
             userCount = GetUserNameCount(userName, userCount);
@@ -187,32 +210,16 @@ namespace WEB_UI
 
         private static Webuser GetLoggedUser(string userName, string userPass)
         {
-            NullCheck(userName);
-            EmptyStringCheck(userName);
-
-            NullCheck(userName);
-            EmptyStringCheck(userPass);
-
-            var roleId = GetRoleIdByUserName(userName);
+            var roleId   = GetRoleIdByUserName(userName);
             var roleName = GetRoleNameByRoleId(roleId);
-
-            NullCheck(roleName);
-            EmptyStringCheck(roleName);
-
             var userRole = Role.Get(roleName);
-
-            NullCheck(userRole);
-
-            var webuser = Create(userName, userRole, userPass);
+            var webuser  = Create(userName, userRole, userPass);
 
             return webuser;
         }
 
         private static string GetHashFromPassword(string password)
         {
-            NullCheck(password);
-            EmptyStringCheck(password);
-
             var listPass = new List<string>();
             var step = 4;
 
@@ -280,14 +287,8 @@ namespace WEB_UI
 
         private static string GetPasswordByName(string userName)
         {
-            NullCheck(userName);
-            EmptyStringCheck(userName);
-
             var hash = GetPasswordHash(userName);
             var password = GetPasswordFromHash(hash);
-
-            NullCheck(password);
-            EmptyStringCheck(password);
 
             return password;
         }
@@ -312,11 +313,6 @@ namespace WEB_UI
             }
 
             return roleId;
-        }
-
-        private static void UpdateRoles(string[] roleNames, Webuser webuser)
-        {
-
         }
 
         private static void UpdateWebuserRole(string webuserName, int rolId)
@@ -459,22 +455,6 @@ namespace WEB_UI
             }
 
             return userCount;
-        }
-
-        public static bool Add(Webuser webuser)
-        {
-            NullCheck(webuser);
-
-            try
-            {
-                AddWebuser(webuser);
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
         }
 
         private static void AddWebuser(Webuser webuser)
