@@ -26,7 +26,7 @@ Task 11 done***
 
 **Задание 10.1. WEB UI включает в себя все подзадания (10.2. CRUD APPLICATION, 10.3. IMAGES, 10.4. SECURITY)
 
-***Задание 11.1. DATABASE включено в задание 6.1.USERS AND AWARDS
+***Задание 11.1. DATABASE включено в задание 10.1. WEB UI
 
 ***Задание 11.2. SQL DAL включено в задание  6.1.USERS AND AWARDS
 
