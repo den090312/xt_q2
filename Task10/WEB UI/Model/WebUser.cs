@@ -124,13 +124,13 @@ namespace WEB_UI
             return password == GetPasswordByName(userName);
         }
 
-        public static void RolesEdit(string[] roleNames)
+        public static bool RolesEdit(string[] roleNames)
         {
             NullCheck(roleNames);
 
             if (roleNames.Length == 0)
             {
-                return;
+                return false;
             }
 
             var webusers = GetAll();
@@ -148,6 +148,8 @@ namespace WEB_UI
 
                 i++;
             }
+
+            return true;
         }
 
         public static bool Add(Webuser webuser)

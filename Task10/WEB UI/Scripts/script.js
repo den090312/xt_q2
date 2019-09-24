@@ -1,4 +1,5 @@
 ﻿window.onload = function () {
+    var messagebox = document.getElementById("messagebox"); 
     var options = document.getElementsByClassName("options");
     var operations = document.getElementsByClassName("operations");
     if (options) {
@@ -237,7 +238,6 @@
                 e.preventDefault();
                 return;
             }
-            goToMain(main, operation);
         }
 
         function awardCreation(main, e, operation) {
@@ -251,7 +251,6 @@
                 e.preventDefault();
                 return;
             }
-            goToMain(main, operation);
         }
 
         function uploadUserImage(main, e, operation) {
@@ -265,7 +264,6 @@
                 e.preventDefault();
                 return;
             }
-            goToMain(main, operation);
         }
 
         function uploadAwardImage(main, e, operation) {
@@ -279,7 +277,6 @@
                 e.preventDefault();
                 return;
             }
-            goToMain(main, operation);
         }
 
         function saveWebusers(main, e, operation) {
@@ -307,7 +304,6 @@
             for (var i = 0; i < inputsForRoles.length; i++) {
                 inputsForRoles[i].value = checkedRoles[i]; 
             }
-            goToMain(main, operation);
         }
     }
 
@@ -565,6 +561,7 @@
     function goToMain(main, operation) {
         operation.style.display = "none";
         main.style.display = "block";
+        messagebox.style.display = "none";
     }
 
     function logOut() {

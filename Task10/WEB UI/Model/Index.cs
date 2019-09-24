@@ -261,7 +261,14 @@ namespace WEB_UI
                 return;
             }
 
-            Webuser.RolesEdit(panelRoleNames);
+            if (Webuser.RolesEdit(panelRoleNames))
+            {
+                Message = "Roles edited";
+            }
+            else
+            {
+                Message = "Roles was NOT edited";
+            }
         }
 
         private static void AwardsEdit()
