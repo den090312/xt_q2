@@ -263,13 +263,45 @@ namespace WEB_UI
             return roleId;
         }
 
-        internal static bool PermissionsEdit(string[] panelRoleNames)
+        internal static bool RolesEdit(string[] roleNames)
         {
-            NullCheck(panelRoleNames);
+            NullCheck(roleNames);
 
+            var webusers = GetAll();
 
+            foreach (var webuser in webusers)
+            {
+                SetNewRoles(roleNames, webuser);
+            }
 
             return true;
+        }
+
+        private static void SetNewRoles(string[] panelRoleNames, Webuser webuser)
+        {
+            foreach (var roleName in panelRoleNames)
+            {
+                if (webuser.Role.Name != roleName)
+                {
+                    var newRoleId = GetRoleIdByUserName(webuser.Name);
+
+                    SetRoleToWebuser(newRoleId);
+                }
+            }
+        }
+
+        private static void SetRoleToWebuser(int rolId)
+        {
+            using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "SetRoleToWebuser";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.Add(SqlParRoleId(rolId));
+                sqlConnection.Open();
+                sqlCommand.ExecuteNonQuery();
+            }
         }
 
         private static int GetRoleId(string userName, int roleId, SqlCommand sqlCommand)

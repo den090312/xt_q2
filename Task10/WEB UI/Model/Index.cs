@@ -32,7 +32,7 @@ namespace WEB_UI
             Account(out alert);
             SaveUserImage();
             SaveAwardImage();
-            EditUserPermissions();
+            EditUserRoles();
         }
 
         private static void Account(out string alert)
@@ -233,7 +233,7 @@ namespace WEB_UI
             }
         }
 
-        private static void EditUserPermissions()
+        private static void EditUserRoles()
         {
             var panelRoleNames = Forms.GetValues("panelRoleName");
 
@@ -244,7 +244,7 @@ namespace WEB_UI
                     return;
                 }
 
-                if (Webuser.PermissionsEdit(panelRoleNames))
+                if (Webuser.RolesEdit(panelRoleNames))
                 {
                     Message = "Users roles edited";
                 }
