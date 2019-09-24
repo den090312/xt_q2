@@ -206,6 +206,9 @@
                     case "upload_award_image":
                         uploadAwardImage(main, event, operation);
                         break;
+                    case "saveWebusers":
+                        saveWebusers(main, event, operation);
+                        break;
                 }
             }
         }
@@ -273,6 +276,24 @@
             if (awardImage.value == "") {
                 alertbox.style.display = "block";
                 alertbox.innerHTML = "File is missing!";
+                e.preventDefault();
+                return;
+            }
+            goToMain(main, operation);
+        }
+
+        function saveWebusers(main, e, operation) {
+            var roleNameOutputs = document.getElementsByClassName("roleName");
+            var adminCount = 0;
+            for (let userRole of roleNameOutputs) {
+                if (userRole.value.toLowerCase() == "admin") {
+                    adminCount++;
+                }
+            }
+            alertbox.style.display = "none";
+            if (adminCount == 0) {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "Atleast one admin must be!";
                 e.preventDefault();
                 return;
             }
