@@ -51,9 +51,32 @@ namespace WEB_UI
             PasswordHash = GetHashFromPassword(password);
         }
 
-        internal static void LogOut() => Current = Guest;
+        public static List<Webuser> GetAll()
+        {
+            var listWebusers = new List<Webuser>();
 
-        internal static bool LogIn(string name, string password)
+            using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetAllWebusers";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlConnection.Open();
+
+                var sqlDr = sqlCommand.ExecuteReader();
+
+                while (sqlDr.Read())
+                {
+                    ListWebusersAdd(ref listWebusers, sqlDr);
+                }
+            }
+
+            return listWebusers;
+        }
+
+        public static void LogOut() => Current = Guest;
+
+        public static bool LogIn(string name, string password)
         {
             NullCheck(name);
             NullCheck(password);
@@ -80,7 +103,7 @@ namespace WEB_UI
             }
         }
 
-        internal static Webuser Create(string name, Role role, string password)
+        public static Webuser Create(string name, Role role, string password)
         {
             var webuser = new Webuser(name, role, password);
 
@@ -91,7 +114,7 @@ namespace WEB_UI
             return webuser;
         }
 
-        internal static bool PasswordIsOk(string userName, string password)
+        public static bool PasswordIsOk(string userName, string password)
         {
             NullCheck(userName);
             EmptyStringCheck(userName);
@@ -102,36 +125,57 @@ namespace WEB_UI
             return password == GetPasswordByName(userName);
         }
 
-        public static List<Webuser> GetAll()
+        public static bool RolesEdit(string[] roleNames)
         {
-            var listWebusers = new List<Webuser>();
+            NullCheck(roleNames);
 
-            using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
+            var webusers = GetAll();
+
+            foreach (var webuser in webusers)
             {
-                var sqlCommand = sqlConnection.CreateCommand();
-
-                sqlCommand.CommandText = "GetAllWebusers";
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlConnection.Open();
-
-                var sqlDr = sqlCommand.ExecuteReader();
-
-                while (sqlDr.Read())
-                {
-                    var roleId = sqlDr.GetInt32(1);
-                    var roleName = GetRoleNameByRoleId(roleId);
-                    var role = Role.Create(roleName);
-
-                    var name = sqlDr.GetString(2);
-                    var password = sqlDr.GetString(3);
-
-                    var hash = GetPasswordFromHash(password);
-
-                    listWebusers.Add(new Webuser(name, role, hash));
-                }
+                SetNewRoles(roleNames, webuser);
             }
 
-            return listWebusers;
+            return true;
+        }
+
+        public static bool Register(Webuser user)
+        {
+            NullCheck(user);
+
+            if (Add(user))
+            {
+                Current = user;
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool NameExists(string userName)
+        {
+            int userCount = 0;
+
+            userCount = GetUserNameCount(userName, userCount);
+
+            return userCount == 1;
+        }
+
+        private static void ListWebusersAdd(ref List<Webuser> listWebusers, SqlDataReader sqlDr)
+        {
+            var roleId = sqlDr.GetInt32(1);
+            var roleName = GetRoleNameByRoleId(roleId);
+            var role = Role.Create(roleName);
+
+            var name = sqlDr.GetString(2);
+            var password = sqlDr.GetString(3);
+
+            var hash = GetPasswordFromHash(password);
+
+            listWebusers.Add(new Webuser(name, role, hash));
         }
 
         private static Webuser GetLoggedUser(string userName, string userPass)
@@ -263,20 +307,6 @@ namespace WEB_UI
             return roleId;
         }
 
-        internal static bool RolesEdit(string[] roleNames)
-        {
-            NullCheck(roleNames);
-
-            var webusers = GetAll();
-
-            foreach (var webuser in webusers)
-            {
-                SetNewRoles(roleNames, webuser);
-            }
-
-            return true;
-        }
-
         private static void SetNewRoles(string[] panelRoleNames, Webuser webuser)
         {
             foreach (var roleName in panelRoleNames)
@@ -358,31 +388,6 @@ namespace WEB_UI
             }
 
             return hash;
-        }
-
-        internal static bool Register(Webuser user)
-        {
-            NullCheck(user);
-
-            if (Add(user))
-            {
-                Current = user;
-
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        internal static bool NameExists(string userName)
-        {
-            int userCount = 0;
-
-            userCount = GetUserNameCount(userName, userCount);
-
-            return userCount == 1;
         }
 
         private static string GetRoleNameByRoleId(int idRole)

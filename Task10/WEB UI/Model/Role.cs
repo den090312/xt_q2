@@ -237,6 +237,41 @@ namespace WEB_UI
             return IdRole;
         }
 
+        public static bool operator ==(Role role1, Role role2)
+        {
+            NullCheck(role1);
+            NullCheck(role2);
+
+            return role1.Name == role2.Name;
+        }
+
+        public static bool operator !=(Role role1, Role role2)
+        {
+            NullCheck(role1);
+            NullCheck(role2);
+
+            return role1.Name != role2.Name;
+        }
+
+        public override bool Equals(object obj)
+        {
+            NullCheck(obj);
+
+            return obj is Role role &&
+                   Name == role.Name &&
+                   EqualityComparer<List<Webuser>>.Default.Equals(UserList, role.UserList);
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -513442300;
+
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
+            hashCode = hashCode * -1521134295 + EqualityComparer<List<Webuser>>.Default.GetHashCode(UserList);
+
+            return hashCode;
+        }
+
         private static SqlParameter SqlParCountName()
         {
             return new SqlParameter
@@ -277,41 +312,6 @@ namespace WEB_UI
                 SqlDbType = SqlDbType.NVarChar,
                 Direction = ParameterDirection.Input
             };
-        }
-
-        public static bool operator ==(Role role1, Role role2)
-        {
-            NullCheck(role1);
-            NullCheck(role2);
-
-            return role1.Name == role2.Name;
-        }
-
-        public static bool operator !=(Role role1, Role role2)
-        {
-            NullCheck(role1);
-            NullCheck(role2);
-
-            return role1.Name != role2.Name;
-        }
-
-        public override bool Equals(object obj)
-        {
-            NullCheck(obj);
-
-            return obj is Role role &&
-                   Name == role.Name &&
-                   EqualityComparer<List<Webuser>>.Default.Equals(UserList, role.UserList);
-        }
-
-        public override int GetHashCode()
-        {
-            var hashCode = -513442300;
-
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
-            hashCode = hashCode * -1521134295 + EqualityComparer<List<Webuser>>.Default.GetHashCode(UserList);
-
-            return hashCode;
         }
 
         private static void EmptyStringCheck(string inputString)

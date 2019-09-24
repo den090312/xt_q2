@@ -3,9 +3,9 @@
 @{
     //Database.RunScript(Server, Database.WebUIscriptFileName);
 
-    var guest = Role.Create("Guest");
+    var guest    = Role.Create("Guest");
     var roleUser = Role.Create("User");
-    var admin = Role.Create("Admin");
+    var admin    = Role.Create("Admin");
 
     var currentUser = Webuser.Current;
     var root = Server.MapPath("~");

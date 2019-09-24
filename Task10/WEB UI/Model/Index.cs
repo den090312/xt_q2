@@ -49,16 +49,18 @@ namespace WEB_UI
             var regPass = Forms["regPass"];
             var roleName = Forms["roleName"];
 
-            if (regName != null & regPass != null & roleName != null)
+            if (regName == null | regPass == null | roleName == null)
             {
-                if (TryUserRegister(regName, regPass, roleName, out alert))
-                {
-                    LogIn(regName, regPass);
-                }
-                else
-                {
-                    Webuser.LogOut();
-                }
+                return alert;
+            }
+
+            if (TryUserRegister(regName, regPass, roleName, out alert))
+            {
+                LogIn(regName, regPass);
+            }
+            else
+            {
+                Webuser.LogOut();
             }
 
             return alert;
@@ -80,21 +82,23 @@ namespace WEB_UI
             var logName = Forms["logName"];
             var logPass = Forms["logPass"];
 
-            if (logName != null & logPass != null)
+            if (logName == null | logPass == null)
             {
-                if (!Webuser.NameExists(logName))
-                {
-                    return "User name is not exists!";
+                return errorResponse;
+            }
 
-                }
-                else if (!Webuser.PasswordIsOk(logName, logPass))
-                {
-                    return "Wrong password!";
-                }
-                else
-                {
-                    LogIn(logName, logPass);
-                }
+            if (!Webuser.NameExists(logName))
+            {
+                return "User name is not exists!";
+
+            }
+            else if (!Webuser.PasswordIsOk(logName, logPass))
+            {
+                return "Wrong password!";
+            }
+            else
+            {
+                LogIn(logName, logPass);
             }
 
             return errorResponse;
@@ -132,16 +136,18 @@ namespace WEB_UI
             var userName = Forms["userName"];
             var dateOfBirth = Forms["dateOfBirth"];
 
-            if (userName != null & dateOfBirth != null)
+            if (userName == null | dateOfBirth == null)
             {
-                if (Crud.UserCreate(userName, dateOfBirth))
-                {
-                    Message = "User created";
-                }
-                else
-                {
-                    Message = "User NOT created";
-                }
+                return;
+            }
+
+            if (Crud.UserCreate(userName, dateOfBirth))
+            {
+                Message = "User created";
+            }
+            else
+            {
+                Message = "User NOT created";
             }
         }
 
@@ -149,16 +155,18 @@ namespace WEB_UI
         {
             var userGuid = Forms["userGuid"];
 
-            if (userGuid != null)
+            if (userGuid == null)
             {
-                if (Crud.DeleteUserAwards(userGuid))
-                {
-                    Message = "User with awards deleted";
-                }
-                else
-                {
-                    Message = "User with awards NOT deleted";
-                }
+                return;
+            }
+
+            if (Crud.DeleteUserAwards(userGuid))
+            {
+                Message = "User with awards deleted";
+            }
+            else
+            {
+                Message = "User with awards NOT deleted";
             }
         }
 
@@ -166,16 +174,18 @@ namespace WEB_UI
         {
             var awardTitle = Forms["awardTitle"];
 
-            if (awardTitle != null)
+            if (awardTitle == null)
             {
-                if (Crud.AwardCreate(awardTitle))
-                {
-                    Message = "Award created";
-                }
-                else
-                {
-                    Message = "Award NOT created";
-                }
+                return;
+            }
+
+            if (Crud.AwardCreate(awardTitle))
+            {
+                Message = "Award created";
+            }
+            else
+            {
+                Message = "Award NOT created";
             }
         }
 
@@ -183,16 +193,18 @@ namespace WEB_UI
         {
             var awardGuid = Forms["awardGuid"];
 
-            if (awardGuid != null & awardGuid != "")
+            if (awardGuid == null | awardGuid == "")
             {
-                if (Crud.DeleteAwardUsers(awardGuid))
-                {
-                    Message = "Award with users deleted";
-                }
-                else
-                {
-                    Message = "Award with users NOT deleted";
-                }
+                return;
+            }
+
+            if (Crud.DeleteAwardUsers(awardGuid))
+            {
+                Message = "Award with users deleted";
+            }
+            else
+            {
+                Message = "Award with users NOT deleted";
             }
         }
 
@@ -201,16 +213,18 @@ namespace WEB_UI
             var userGuid = Forms["userGuidJoin"];
             var awardGuid = Forms["awardGuidJoin"];
 
-            if (userGuid != null & awardGuid != null)
+            if (userGuid == null | awardGuid == null)
             {
-                if (Crud.JoinAwardToUser(userGuid, awardGuid))
-                {
-                    Message = "Award joined to user";
-                }
-                else
-                {
-                    Message = "Award was NOT joined to user";
-                }
+                return;
+            }
+
+            if (Crud.JoinAwardToUser(userGuid, awardGuid))
+            {
+                Message = "Award joined to user";
+            }
+            else
+            {
+                Message = "Award was NOT joined to user";
             }
         }
 
@@ -237,21 +251,23 @@ namespace WEB_UI
         {
             var panelRoleNames = Forms.GetValues("panelRoleName");
 
-            if (panelRoleNames != null)
+            if (panelRoleNames == null)
             {
-                if (panelRoleNames.Length == 0)
-                {
-                    return;
-                }
+                return;
+            }
 
-                if (Webuser.RolesEdit(panelRoleNames))
-                {
-                    Message = "Users roles edited";
-                }
-                else
-                {
-                    Message = "Users roles NOT edited";
-                }
+            if (panelRoleNames.Length == 0)
+            {
+                return;
+            }
+
+            if (Webuser.RolesEdit(panelRoleNames))
+            {
+                Message = "Users roles edited";
+            }
+            else
+            {
+                Message = "Users roles NOT edited";
             }
         }
 
@@ -288,7 +304,7 @@ namespace WEB_UI
             {
                 var userImagePath = MyServer.MapPath(userImageFileName);
 
-                if (Images.ImageSaved(userImagePath, root, userImageFile, userImageGuid))
+                if (Images.SaveImage(userImagePath, root, userImageFile, userImageGuid))
                 {
                     Message = "User image saved";
                 }
@@ -314,7 +330,7 @@ namespace WEB_UI
             {
                 var awardImagePath = MyServer.MapPath(awardImageFileName);
 
-                if (Images.ImageSaved(awardImagePath, root, awardImageFile, awardImageGuid))
+                if (Images.SaveImage(awardImagePath, root, awardImageFile, awardImageGuid))
                 {
                     Message = "Award image saved";
                 }
