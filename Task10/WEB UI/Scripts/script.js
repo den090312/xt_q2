@@ -83,6 +83,7 @@
         var award_chosen = document.getElementsByClassName("award_chosen")[0];
         if (award_chosen) {
             award_chosen.addEventListener("change", awardChosenChange);
+
             var award_chosen_guid = document.getElementsByClassName("award_chosen_guid")[0];
             var award_guid = document.getElementsByClassName("award_guid")[0];
             award_guid.value = award_chosen_guid[award_chosen_guid.selectedIndex].value;
@@ -199,9 +200,9 @@
                         awardCreation(main, event, operation);
                         break;
                     case "award_delete":
-                        if (!confirm("Награда будет удалена у всех пользователей. Вы уверены?")) {
-                            document.getElementsByClassName("award_guid")[0].value = "";
-                            goToMain(main, operation);
+                        award_in_user = document.getElementsByClassName("award_in_user")[0];
+                        if (award_in_user.value == 1) {
+                            awardDeleteConfirmation(main);
                         }
                         break;
                     case "join_user_award":
@@ -217,6 +218,13 @@
                         saveWebusers(main, event, operation);
                         break;
                 }
+            }
+        }
+
+        function awardDeleteConfirmation(main) {
+            if (!confirm("Награда будет удалена у всех пользователей. Вы уверены?")) {
+                document.getElementsByClassName("award_guid")[0].value = "";
+                goToMain(main, operation);
             }
         }
 
