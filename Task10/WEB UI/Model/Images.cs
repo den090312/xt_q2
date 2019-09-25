@@ -45,12 +45,11 @@ namespace WEB_UI
             return true;
         }
 
-        public static string GetImgSrc(string root, string guid)
+        public static string GetImgSrc(string root, Guid guid)
         {
             NullCheck(root);
-            NullCheck(guid);
 
-            if (root == string.Empty || guid == string.Empty)
+            if (root == string.Empty || guid.ToString() == string.Empty)
             {
                 return string.Empty;
             }
@@ -58,14 +57,20 @@ namespace WEB_UI
             var imgSrc = string.Empty;
             var altSrc = string.Empty;
 
-            imgSrc = GetImgSrcFromFile(root, guid, imgSrc);
-            altSrc = GetAltSrcFromFile(root, altSrc);
+            //imgSrc = GetImgSrcFromFile(root, guid.ToString(), imgSrc);
+            imgSrc = GetImgSrcFromDB(guid, imgSrc);
+            altSrc = GetAltSrc(root, altSrc);
 
             if (imgSrc == string.Empty)
             {
                 imgSrc = altSrc;
             }
 
+            return imgSrc;
+        }
+
+        private static string GetImgSrcFromDB(Guid guid, string imgSrc)
+        {
             return imgSrc;
         }
 
@@ -92,7 +97,7 @@ namespace WEB_UI
             }
         }
 
-        private static string GetAltSrcFromFile(string root, string altSrc)
+        private static string GetAltSrc(string root, string altSrc)
         {
             var altPath = Path.Combine(root, altImageName);
 
