@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 using System.Web;
 
 namespace WEB_UI
@@ -307,59 +308,43 @@ namespace WEB_UI
 
         private static void SaveUserImage()
         {
-            var root = MyServer.MapPath("~");
-
-            if (!Images.TryGetImage(Files, out var userImageFile, out var userImageFileName))
+            if (!Images.TryGetImage(Files, out var userImageFile))
             {
                 return;
             }
 
-            var userImageGuid = Forms["userImageGuid"];
+            var userGuid = Forms["userImageGuid"];
 
-            if (userImageGuid != null & userImageGuid != string.Empty)
+             if (userGuid == string.Empty || userGuid == string.Empty)
             {
-                var userImagePath = MyServer.MapPath(userImageFileName);
+                return;
+            }
 
-                if (userImagePath == null || userImagePath == string.Empty)
-                {
-                    return;
-                }
-
-                if (Images.SaveImage(userImagePath, root, userImageFile, userImageGuid))
-                {
-                    Message = "User image saved";
-                }
-                else
-                {
-                    Message = "User image was NOT saved";
-                }
+            if (Images.SaveUserImage(userImageFile, userGuid))
+            {
+                Message = "User image saved";
+            }
+            else
+            {
+                Message = "User image was NOT saved";
             }
         }
 
         private static void SaveAwardImage()
         {
-            var root = MyServer.MapPath("~");
-
-            if (root == null || root == string.Empty)
+            if (!Images.TryGetImage(Files, out var awardImageFile))
             {
                 return;
             }
 
-            if (!Images.TryGetImage(Files, out var awardImageFile, out var awardImageFileName))
+            var awardGuid = Forms["awardImageGuid"];
+
+            if (awardGuid == null || awardGuid == string.Empty)
             {
                 return;
             }
 
-            var awardImageGuid = Forms["awardImageGuid"];
-
-            if (awardImageGuid == null || awardImageGuid == string.Empty)
-            {
-                return;
-            }
-
-            var awardImagePath = MyServer.MapPath(awardImageFileName);
-
-            if (Images.SaveImage(awardImagePath, root, awardImageFile, awardImageGuid))
+            if (Images.SaveAwardImage(awardImageFile, awardGuid))
             {
                 Message = "Award image saved";
             }
