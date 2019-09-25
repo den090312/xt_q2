@@ -161,7 +161,9 @@ namespace WEB_UI
                 var awardGuid = userAward.AwardRef.Guid;
                 var userGuid = userAward.UserRef.Guid;
 
-                if (!DependencyResolver.UserAwardLogic.JoinAwardToUser(awardGuid, userGuid))
+                var userAwardLogic = DependencyResolver.UserAwardLogic;
+
+                if (!userAwardLogic.JoinAwardToUser(userGuid, awardGuid))
                 {
                     return false;
                 }

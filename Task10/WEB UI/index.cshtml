@@ -122,15 +122,33 @@
                     <p>
                         <select class="award_chosen">
                             @{
-                                var allAwards = DependencyResolver.AwardLogic?.GetAll();
-                                foreach (var award in allAwards)
+                                var awards = DependencyResolver.AwardLogic?.GetAll();
+                                foreach (var award in awards)
                                     {<option selected>@award.Title</option>}
                             }
                         </select>
                         <select class="award_chosen_guid" style="display: none;">
                             @{
-                                foreach (var award in allAwards)
+                                foreach (var award in awards)
                                     {<option selected>@award.Guid.ToString()</option>}
+                            }
+                        </select>
+                        <select class="award_in_user">
+                            @{
+                                var userAwardLogic = DependencyResolver.UserAwardLogic;
+                                int awardInUser;
+                                foreach (var award in awards)
+                                {
+                                    if (userAwardLogic.AwardInUser(award))
+                                    {
+                                        awardInUser = 1;
+                                    }
+                                    else
+                                    {
+                                        awardInUser = 0;
+                                    }
+                                    <option selected>@awardInUser</option>
+                                }
                             }
                         </select>
                     </p>
@@ -286,24 +304,6 @@
                                 @{
                                     foreach (var award in awards)
                                         {<option selected>@award.Guid.ToString()</option>}
-                                }
-                            </select>
-                            <select class="award_in_user"">
-                                @{
-                                    var userAwardLogic = DependencyResolver.UserAwardLogic;
-                                    int awardInUser;
-                                    foreach (var award in awards)
-                                    {
-                                        if (userAwardLogic.AwardInUser(award))
-                                        {
-                                            awardInUser = 1;
-                                        }
-                                        else
-                                        {
-                                            awardInUser = 0;
-                                        }
-                                        <option selected>@awardInUser</option>
-                                    }
                                 }
                             </select>
                         </p>
