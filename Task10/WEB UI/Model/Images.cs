@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using System.Web;
 
@@ -71,6 +73,24 @@ namespace WEB_UI
 
         private static string GetImgSrcFromDB(Guid guid, string imgSrc)
         {
+            using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetGuidImageByAwardGuid";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.Add(SqlParGuid(guid));
+                sqlConnection.Open();
+
+                var sqlDr = sqlCommand.ExecuteReader();
+
+                while (sqlDr.Read())
+                {
+                    var imgBytes = (byte[])sqlDr.GetValue(0);
+                    imgSrc = BitConverter.ToString(imgBytes);
+                }
+            }
+
             return imgSrc;
         }
 
@@ -87,7 +107,8 @@ namespace WEB_UI
 
             try
             {
-                SaveImageToFile(imagePath, root, image, guid);
+                //SaveImageToFile(imagePath, root, image, guid);
+                SaveImageToDb(image, Guid.Parse(guid));
 
                 return true;
             }
@@ -95,6 +116,59 @@ namespace WEB_UI
             {
                 return false;
             }
+        }
+
+        private static void SaveImageToDb(HttpPostedFile image, Guid guid)
+        {
+            var bytes = GetBytes(image);
+
+            NullCheck(bytes);
+
+            using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetGuidImageByAwardGuid";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.Add(SqlParGuid(guid));
+                sqlCommand.Parameters.Add(SqlParBytes(bytes));
+                sqlConnection.Open();
+                sqlCommand.ExecuteNonQuery();
+            }
+        }
+
+        private static byte[] GetBytes(HttpPostedFile image)
+        {
+            byte[] imageBytes = null;
+
+            using (var binaryReader = new BinaryReader(image.InputStream))
+            {
+                imageBytes = binaryReader.ReadBytes(image.ContentLength);
+            }
+
+            return imageBytes;
+        }
+
+        private static SqlParameter SqlParBytes(byte[] imageBytes)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@Bytes",
+                Value = imageBytes,
+                SqlDbType = SqlDbType.Binary,
+                Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParGuid(Guid guid)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@Guid",
+                Value = guid,
+                SqlDbType = SqlDbType.UniqueIdentifier,
+                Direction = ParameterDirection.Input
+            };
         }
 
         private static string GetAltSrc(string root, string altSrc)

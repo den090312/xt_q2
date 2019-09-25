@@ -2,6 +2,8 @@
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace WEB_UI
 {
@@ -154,6 +156,76 @@ namespace WEB_UI
             return ReJoinAwardToUser(usersAwards);
         }
 
+        public static Guid GetGuidImageByAwardGuid(Guid awardGuid)
+        {
+            var guidImage = new Guid();
+
+            using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetGuidImageByAwardGuid";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.Add(SqlParAwardGuid(awardGuid));
+                sqlConnection.Open();
+
+                var sqlDr = sqlCommand.ExecuteReader();
+
+                while (sqlDr.Read())
+                {
+                    guidImage = sqlDr.GetGuid(0);
+                }
+            }
+
+            return guidImage;
+        }
+
+        public static Guid GetGuidImageByUserGuid(Guid userGuid)
+        {
+            var guidImage = new Guid();
+
+            using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetGuidImageByAwardGuid";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.Add(SqlParUserGuid(userGuid));
+                sqlConnection.Open();
+
+                var sqlDr = sqlCommand.ExecuteReader();
+
+                while (sqlDr.Read())
+                {
+                    guidImage = sqlDr.GetGuid(0);
+                }
+            }
+
+            return guidImage;
+        }
+
+        private static SqlParameter SqlParAwardGuid(Guid awardGuid)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@AwardGuid",
+                Value = awardGuid,
+                SqlDbType = SqlDbType.UniqueIdentifier,
+                Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParUserGuid(Guid userGuid)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@UserGuid",
+                Value = userGuid,
+                SqlDbType = SqlDbType.UniqueIdentifier,
+                Direction = ParameterDirection.Input
+            };
+        }
+
         private static bool ReJoinAwardToUser(IEnumerable<UserAward> usersAwards)
         {
             foreach (var userAward in usersAwards)
@@ -188,7 +260,7 @@ namespace WEB_UI
                 return false;
             }
 
-            var user = new Entities.User(resultGuid, name, resultDate);
+            var user = new User(resultGuid, name, resultDate);
 
             return DependencyResolver.UserLogic.Add(user);
         }
@@ -203,7 +275,7 @@ namespace WEB_UI
                 return false;
             }
 
-            var award = new Entities.Award(resultGuid, title);
+            var award = new Award(resultGuid, title);
 
             return DependencyResolver.AwardLogic.Add(award);
         }

@@ -163,16 +163,16 @@
                 IEnumerable<Entities.Award> awardsByUser;
                 foreach (var user in users)
                 {
-                    <img class="user_img" src="@Images.GetImgSrc(root, user.Guid)">
+                    <img class="user_img" src="@Images.GetImgSrc(root, Crud.GetGuidImageByUserGuid(user.Guid))">
                     <p>@(user.Name + " " + user.DateOfBirth.ToString(Entities.User.DateFormat))</p>
                     awardsByUser = DependencyResolver.UserAwardLogic?.GetAwardsByUserGuid(user.Guid);
                     if (currentUser.Role != guest)
                     {
-                        foreach (var awardByUser in awardsByUser)
+                        foreach (var award in awardsByUser)
                         {
                             <div style="padding-left: 75px;">
-                                <img class="award_img" src="@Images.GetImgSrc(root, awardByUser.Guid)">
-                                <p>@(awardByUser.Title)</p>
+                                <img class="award_img" src="@Images.GetImgSrc(root, Crud.GetGuidImageByAwardGuid(award.Guid))">
+                                <p>@(award.Title)</p>
                             </div>
                         }
                     }
