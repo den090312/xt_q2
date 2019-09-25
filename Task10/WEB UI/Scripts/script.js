@@ -86,9 +86,15 @@
             var award_chosen_guid = document.getElementsByClassName("award_chosen_guid")[0];
             var award_guid = document.getElementsByClassName("award_guid")[0];
             award_guid.value = award_chosen_guid[award_chosen_guid.selectedIndex].value;
+
+            var award_chosen_in_user = document.getElementsByClassName("award_chosen_in_user")[0];
+            var award_in_user = document.getElementsByClassName("award_in_user")[0];
+            award_in_user.value = award_chosen_in_user[award_chosen_guid.selectedIndex].value; 
+
             function awardChosenChange() {
                 award_chosen_guid.selectedIndex = award_chosen.selectedIndex;
                 award_guid.value = award_chosen_guid[award_chosen_guid.selectedIndex].value;
+                award_in_user.value = award_chosen_guid[award_chosen_guid.selectedIndex].value;
             }
         }
     }
