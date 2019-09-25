@@ -288,6 +288,24 @@
                                         {<option selected>@award.Guid.ToString()</option>}
                                 }
                             </select>
+                            <select class="award_in_user"">
+                                @{
+                                    var userAwardLogic = DependencyResolver.UserAwardLogic;
+                                    int awardInUser;
+                                    foreach (var award in awards)
+                                    {
+                                        if (userAwardLogic.AwardInUser(award))
+                                        {
+                                            awardInUser = 1;
+                                        }
+                                        else
+                                        {
+                                            awardInUser = 0;
+                                        }
+                                        <option selected>@awardInUser</option>
+                                    }
+                                }
+                            </select>
                         </p>
                         <input type="text" class="award_image_guid" style="display: none;" name="awardImageGuid" />
                     </div>

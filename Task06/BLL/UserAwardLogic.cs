@@ -124,5 +124,20 @@ namespace BLL
 
             return usersAwards;
         }
+
+        public bool AwardInUser(Award award)
+        {
+            var guidPairs = userAwardDao.GetGuidPairs();
+
+            foreach (var guidPair in guidPairs)
+            {
+                if (guidPair.Value == award.Guid)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
