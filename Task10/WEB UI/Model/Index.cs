@@ -284,7 +284,7 @@ namespace WEB_UI
 
             if (guids != null & titles != null)
             {
-                if (Crud.AwardsEdit(guids, titles))
+                if (Crud.EditAwards(guids, titles))
                 {
                     Message = "Awards edited";
                 }

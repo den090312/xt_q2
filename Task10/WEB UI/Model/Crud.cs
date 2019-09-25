@@ -1,5 +1,7 @@
 ﻿using Common;
+using Entities;
 using System;
+using System.Collections.Generic;
 
 namespace WEB_UI
 {
@@ -99,7 +101,9 @@ namespace WEB_UI
             NullCheck(names);
             NullCheck(dates);
 
-            if (!AllUsersDeleted())
+            var usersAwards = DependencyResolver.UserAwardLogic.GetAll();
+
+            if (!AllUsersDelete())
             {
                 return false;
             }
@@ -118,13 +122,15 @@ namespace WEB_UI
                 }
             }
 
-            return true;
+            return ReJoinAwardToUser(usersAwards);
         }
 
-        public static bool AwardsEdit(string[] guids, string[] titles)
+        public static bool EditAwards(string[] guids, string[] titles)
         {
             NullCheck(guids);
             NullCheck(titles);
+
+            var usersAwards = DependencyResolver.UserAwardLogic.GetAll();
 
             if (!AllAwardsDeleted())
             {
@@ -142,6 +148,22 @@ namespace WEB_UI
                 else
                 {
                     i++;
+                }
+            }
+
+            return ReJoinAwardToUser(usersAwards);
+        }
+
+        private static bool ReJoinAwardToUser(IEnumerable<UserAward> usersAwards)
+        {
+            foreach (var userAward in usersAwards)
+            {
+                var awardGuid = userAward.AwardRef.Guid;
+                var userGuid = userAward.UserRef.Guid;
+
+                if (!DependencyResolver.UserAwardLogic.JoinAwardToUser(awardGuid, userGuid))
+                {
+                    return false;
                 }
             }
 
@@ -184,7 +206,7 @@ namespace WEB_UI
             return DependencyResolver.AwardLogic.Add(award);
         }
 
-        private static bool AllUsersDeleted()
+        private static bool AllUsersDelete()
         {
             var userLogic = DependencyResolver.UserLogic;
             var allUsers = userLogic?.GetAll();
