@@ -73,14 +73,14 @@ namespace WEB_UI
                     //var bitmap = (Bitmap)typeConverter.ConvertFrom(bytes);
                     var bytes = (byte[])sqlDr["Bytes"];
                     var base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
-                    src = "data:image/png;base64," + base64String;
+                    src = "data:image;base64," + base64String;
                 }
             }
 
             return src;
         }
 
-        public static bool SaveUserImage(HttpPostedFile userImage, string userGuid)
+        public static bool SaveUserImage(WebImage userImage, string userGuid)
         {
             NullCheck(userImage);
             NullCheck(userGuid);
@@ -174,9 +174,9 @@ namespace WEB_UI
             return guidImage;
         }
 
-        private static void SaveImageToUser(HttpPostedFile userImage, Guid userGuid)
+        private static void SaveImageToUser(WebImage userImage, Guid userGuid)
         {
-            var userImageBytes = GetBytes(userImage);
+            var userImageBytes = userImage.GetBytes();
             var imageGuid = GetAddedImageGuid(userImageBytes);
 
             if (imageGuid != Guid.Empty)
@@ -187,13 +187,13 @@ namespace WEB_UI
 
         private static void SaveImageToAward(HttpPostedFile awardImage, Guid awardGuid)
         {
-            var awardImageBytes = GetBytes(awardImage);
-            var imageGuid = GetAddedImageGuid(awardImageBytes);
+            //var awardImageBytes = GetBytes(awardImage);
+            //var imageGuid = GetAddedImageGuid(awardImageBytes);
 
-            if (imageGuid != Guid.Empty)
-            {
-                AddImageToAward(awardGuid, imageGuid);
-            }
+            //if (imageGuid != Guid.Empty)
+            //{
+            //    AddImageToAward(awardGuid, imageGuid);
+            //}
         }
 
         private static void AddImageToUser(Guid userGuid, Guid imageGuid)

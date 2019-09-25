@@ -15,6 +15,13 @@
 
     if (IsPost)
     {
+        var inputImage = WebImage.GetImageFromRequest();
+
+        if (inputImage != null)
+        {
+            Index.Image = inputImage; 
+        }
+
         Index.Forms = Request.Form;
         Index.Files = HttpContext.Current.Request.Files;
         Index.MyServer = Server;

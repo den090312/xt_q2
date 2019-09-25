@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.IO;
 using System.Web;
+using System.Web.Helpers;
 
 namespace WEB_UI
 {
     public static class Index
     {
-        public static NameValueCollection Forms { private get; set; }
+        public static NameValueCollection Forms { private get; set; } 
+
+        public static WebImage Image { private get; set; }
 
         public static HttpFileCollection Files { private get; set; }
 
@@ -313,6 +317,8 @@ namespace WEB_UI
                 return;
             }
 
+            var userImage = Image;
+
             var userGuid = Forms["userImageGuid"];
 
              if (userGuid == string.Empty || userGuid == string.Empty)
@@ -320,7 +326,7 @@ namespace WEB_UI
                 return;
             }
 
-            if (Images.SaveUserImage(userImageFile, userGuid))
+            if (Images.SaveUserImage(userImage, userGuid))
             {
                 Message = "User image saved";
             }
