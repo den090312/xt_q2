@@ -71,9 +71,9 @@ namespace WEB_UI
         public static bool LogIn(string name, string password)
         {
             NullCheck(name);
-            NullCheck(password);
-
             EmptyStringCheck(name);
+
+            NullCheck(password);
             EmptyStringCheck(password);
 
             if (!PasswordIsOk(name, password))
@@ -98,10 +98,11 @@ namespace WEB_UI
         public static Webuser Create(string name, Role role, string password)
         {
             NullCheck(name);
-            NullCheck(role);
-            NullCheck(password);
-
             EmptyStringCheck(name);
+
+            NullCheck(role);
+
+            NullCheck(password);
             EmptyStringCheck(password);
 
             var webuser = new Webuser(name, role, password);
@@ -135,19 +136,9 @@ namespace WEB_UI
 
             var webusers = GetAll();
 
-            var i = 0;
+            NullCheck(webusers);
 
-            foreach (var webuser in webusers)
-            {
-                if (webuser.Role.Name != roleNames[i])
-                {
-                    var roleId = GetIdRoleByName(roleNames[i]);
-
-                    UpdateWebuserRole(webuser.Name, roleId);
-                }
-
-                i++;
-            }
+            UpdateRoles(roleNames, webusers);
 
             return true;
         }
@@ -194,6 +185,23 @@ namespace WEB_UI
             userCount = GetUserNameCount(userName, userCount);
 
             return userCount == 1;
+        }
+
+        private static void UpdateRoles(string[] roleNames, List<Webuser> webusers)
+        {
+            var i = 0;
+
+            foreach (var webuser in webusers)
+            {
+                if (webuser.Role.Name != roleNames[i])
+                {
+                    var roleId = GetIdRoleByName(roleNames[i]);
+
+                    UpdateWebuserRole(webuser.Name, roleId);
+                }
+
+                i++;
+            }
         }
 
         private static void ListWebusersAdd(ref List<Webuser> listWebusers, SqlDataReader sqlDr)
@@ -325,9 +333,12 @@ namespace WEB_UI
 
                 sqlCommand.CommandText = "UpdateWebuserRole";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
+
                 sqlCommand.Parameters.Add(SqlParRoleId(rolId));
                 sqlCommand.Parameters.Add(SqlParName(webuserName));
+
                 sqlConnection.Open();
+
                 sqlCommand.ExecuteNonQuery();
             }
         }

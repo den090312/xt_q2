@@ -1,5 +1,6 @@
 ﻿using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
+using System;
 using System.Data.SqlClient;
 using System.IO;
 using System.Web;
@@ -20,6 +21,11 @@ namespace WEB_UI
 
         public static void RunScript(HttpServerUtilityBase server, string path)
         {
+            NullCheck(server);
+            NullCheck(path);
+
+            EmptyStringCheck(path);
+
             var scriptPath = server.MapPath(path);
             var scriptText = File.ReadAllText(scriptPath);
 
@@ -31,12 +37,41 @@ namespace WEB_UI
 
         public static void RunScript(string connectionString, string scriptPath)
         {
+            NullCheck(connectionString);
+            EmptyStringCheck(connectionString);
+
+            NullCheck(scriptPath);
+            EmptyStringCheck(scriptPath);
+
             var scriptText = File.ReadAllText(scriptPath);
+            NullCheck(scriptText);
 
             var connectSql = new SqlConnection(connectionString);
-            var connectSrv = new ServerConnection(connectSql);
+            NullCheck(connectSql);
 
-            new Server(connectSrv).ConnectionContext.ExecuteNonQuery(scriptText);
+            var connectSrv = new ServerConnection(connectSql);
+            NullCheck(connectSrv);
+
+            var server = new Server(connectSrv);
+            NullCheck(server);
+
+            server.ConnectionContext.ExecuteNonQuery(scriptText);
+        }
+
+        private static void EmptyStringCheck(string inputString)
+        {
+            if (inputString == string.Empty)
+            {
+                throw new Exception($"{nameof(inputString)} is empty!");
+            }
+        }
+
+        private static void NullCheck<T>(T classObject) where T : class
+        {
+            if (classObject == null)
+            {
+                throw new NullReferenceException($"{nameof(classObject)} is null!");
+            }
         }
     }
 }

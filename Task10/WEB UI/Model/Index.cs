@@ -142,7 +142,12 @@ namespace WEB_UI
             var userName = Forms["userName"];
             var dateOfBirth = Forms["dateOfBirth"];
 
-            if (userName == null | dateOfBirth == null)
+            if (userName == null || dateOfBirth == null)
+            {
+                return;
+            }
+
+            if (userName == string.Empty || dateOfBirth == string.Empty)
             {
                 return;
             }
@@ -161,7 +166,7 @@ namespace WEB_UI
         {
             var userGuid = Forms["userGuid"];
 
-            if (userGuid == null)
+            if (userGuid == null || userGuid == string.Empty)
             {
                 return;
             }
@@ -180,7 +185,7 @@ namespace WEB_UI
         {
             var awardTitle = Forms["awardTitle"];
 
-            if (awardTitle == null)
+            if (awardTitle == null || awardTitle == string.Empty)
             {
                 return;
             }
@@ -199,7 +204,7 @@ namespace WEB_UI
         {
             var awardGuid = Forms["awardGuid"];
 
-            if (awardGuid == null | awardGuid == "")
+            if (awardGuid == null || awardGuid == string.Empty)
             {
                 return;
             }
@@ -219,7 +224,12 @@ namespace WEB_UI
             var userGuid = Forms["userGuidJoin"];
             var awardGuid = Forms["awardGuidJoin"];
 
-            if (userGuid == null | awardGuid == null)
+            if (userGuid == null || awardGuid == null)
+            {
+                return;
+            }
+
+            if (userGuid == string.Empty || awardGuid == string.Empty)
             {
                 return;
             }
@@ -255,19 +265,19 @@ namespace WEB_UI
 
         private static void EditUserRoles()
         {
-            var panelRoleNames = Forms.GetValues("checkedRole");
+            var checkedRoles = Forms.GetValues("checkedRole");
 
-            if (panelRoleNames == null)
+            if (checkedRoles == null)
             {
                 return;
             }
 
-            if (panelRoleNames.Length == 0)
+            if (checkedRoles.Length == 0)
             {
                 return;
             }
 
-            if (Webuser.RolesEdit(panelRoleNames))
+            if (Webuser.RolesEdit(checkedRoles))
             {
                 Message = "Roles edited";
             }
@@ -306,9 +316,14 @@ namespace WEB_UI
 
             var userImageGuid = Forms["userImageGuid"];
 
-            if (userImageGuid != null)
+            if (userImageGuid != null & userImageGuid != string.Empty)
             {
                 var userImagePath = MyServer.MapPath(userImageFileName);
+
+                if (userImagePath == null || userImagePath == string.Empty)
+                {
+                    return;
+                }
 
                 if (Images.SaveImage(userImagePath, root, userImageFile, userImageGuid))
                 {
@@ -325,6 +340,11 @@ namespace WEB_UI
         {
             var root = MyServer.MapPath("~");
 
+            if (root == null || root == string.Empty)
+            {
+                return;
+            }
+
             if (!Images.TryGetImage(Files, out var awardImageFile, out var awardImageFileName))
             {
                 return;
@@ -332,18 +352,20 @@ namespace WEB_UI
 
             var awardImageGuid = Forms["awardImageGuid"];
 
-            if (awardImageGuid != null)
+            if (awardImageGuid == null || awardImageGuid == string.Empty)
             {
-                var awardImagePath = MyServer.MapPath(awardImageFileName);
+                return;
+            }
 
-                if (Images.SaveImage(awardImagePath, root, awardImageFile, awardImageGuid))
-                {
-                    Message = "Award image saved";
-                }
-                else
-                {
-                    Message = "Award image was NOT saved";
-                }
+            var awardImagePath = MyServer.MapPath(awardImageFileName);
+
+            if (Images.SaveImage(awardImagePath, root, awardImageFile, awardImageGuid))
+            {
+                Message = "Award image saved";
+            }
+            else
+            {
+                Message = "Award image was NOT saved";
             }
         }
     }

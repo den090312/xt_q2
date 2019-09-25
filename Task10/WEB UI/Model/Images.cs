@@ -29,15 +29,9 @@ namespace WEB_UI
                 return false;
             }
 
-            if (images == null || images.Count == 0)
-            {
-                imageFileName = string.Empty;
-                imageFile = null;
-
-                return false;
-            }
-
             imageFileName = Path.GetFileName(imageFile.FileName);
+
+            NullCheck(imageFileName);
 
             if (imageFileName == string.Empty)
             {
@@ -97,6 +91,7 @@ namespace WEB_UI
         public static bool SaveImage(string imagePath, string root, HttpPostedFile image, string guid)
         {
             NullCheck(imagePath);
+            NullCheck(image);
             NullCheck(root);
             NullCheck(guid);
 
@@ -128,11 +123,14 @@ namespace WEB_UI
             {
                 var sqlCommand = sqlConnection.CreateCommand();
 
-                sqlCommand.CommandText = "GetGuidImageByAwardGuid";
+                sqlCommand.CommandText = "SaveImage";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
+
                 sqlCommand.Parameters.Add(SqlParGuid(guid));
                 sqlCommand.Parameters.Add(SqlParBytes(bytes));
+
                 sqlConnection.Open();
+
                 sqlCommand.ExecuteNonQuery();
             }
         }
@@ -206,6 +204,14 @@ namespace WEB_UI
 
             var finalPath = Path.Combine(root, guid);
             File.WriteAllBytes(finalPath, imageBytes);
+        }
+
+        private static void EmptyStringCheck(string inputString)
+        {
+            if (inputString == string.Empty)
+            {
+                throw new Exception($"{nameof(inputString)} is empty!");
+            }
         }
 
         private static void NullCheck<T>(T classObject) where T : class

@@ -12,12 +12,10 @@ namespace WEB_UI
         public static bool UserCreate(string userName, string dateOfBirth)
         {
             NullCheck(userName);
-            NullCheck(dateOfBirth);
+            EmptyStringCheck(userName);
 
-            if (userName == string.Empty || dateOfBirth == string.Empty)
-            {
-                return false;
-            }
+            NullCheck(dateOfBirth);
+            EmptyStringCheck(dateOfBirth);
 
             if (!DateTime.TryParse(dateOfBirth, out DateTime result))
             {
@@ -25,7 +23,10 @@ namespace WEB_UI
             }
 
             var userLogic = DependencyResolver.UserLogic;
+            NullCheck(userLogic);
+
             var user = userLogic?.Create(userName, result);
+            NullCheck(user);
 
             return userLogic.Add(user);
         }
@@ -33,11 +34,7 @@ namespace WEB_UI
         public static bool DeleteUserAwards(string userGuid)
         {
             NullCheck(userGuid);
-
-            if (userGuid == string.Empty)
-            {
-                return false;
-            }
+            EmptyStringCheck(userGuid);
 
             if (!Guid.TryParse(userGuid, out Guid result))
             {
@@ -50,11 +47,7 @@ namespace WEB_UI
         public static bool AwardCreate(string awardTitle)
         {
             NullCheck(awardTitle);
-
-            if (awardTitle == string.Empty)
-            {
-                return false;
-            }
+            EmptyStringCheck(awardTitle);
 
             var awardLogic = DependencyResolver.AwardLogic;
             var award = awardLogic?.Create(awardTitle);
@@ -65,11 +58,7 @@ namespace WEB_UI
         public static bool DeleteAwardUsers(string awardGuid)
         {
             NullCheck(awardGuid);
-
-            if (awardGuid == string.Empty)
-            {
-                return false;
-            }
+            EmptyStringCheck(awardGuid);
 
             if (!Guid.TryParse(awardGuid, out Guid result))
             {
@@ -82,7 +71,10 @@ namespace WEB_UI
         public static bool JoinAwardToUser(string userGuid, string awardGuid)
         {
             NullCheck(userGuid);
+            EmptyStringCheck(userGuid);
+
             NullCheck(awardGuid);
+            EmptyStringCheck(awardGuid);
 
             if (userGuid == string.Empty || awardGuid == string.Empty)
             {
@@ -104,6 +96,8 @@ namespace WEB_UI
             NullCheck(dates);
 
             var usersAwards = DependencyResolver.UserAwardLogic.GetAll();
+
+            NullCheck(usersAwards);
 
             if (!AllUsersDelete())
             {
@@ -133,6 +127,8 @@ namespace WEB_UI
             NullCheck(titles);
 
             var usersAwards = DependencyResolver.UserAwardLogic.GetAll();
+
+            NullCheck(usersAwards);
 
             if (!AllAwardsDeleted())
             {
@@ -246,10 +242,6 @@ namespace WEB_UI
 
         private static bool UserAdded(string guid, string name, string date)
         {
-            NullCheck(guid);
-            NullCheck(name);
-            NullCheck(date);
-
             if (guid == string.Empty || name == string.Empty || date == string.Empty)
             {
                 return false;
@@ -267,9 +259,6 @@ namespace WEB_UI
 
         private static bool AwardAdded(string guid, string title)
         {
-            NullCheck(guid);
-            NullCheck(title);
-
             if (guid == string.Empty || title == string.Empty || !Guid.TryParse(guid, out Guid resultGuid))
             {
                 return false;
@@ -310,6 +299,14 @@ namespace WEB_UI
             }
 
             return true;
+        }
+
+        private static void EmptyStringCheck(string inputString)
+        {
+            if (inputString == string.Empty)
+            {
+                throw new Exception($"{nameof(inputString)} is empty!");
+            }
         }
 
         private static void NullCheck<T>(T classObject) where T : class
