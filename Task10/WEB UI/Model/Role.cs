@@ -28,7 +28,7 @@ namespace WEB_UI
             {
                 AddNewRoleToList(newRole);
 
-                return Get(roleName);
+                return newRole;
             }
 
             if (Add(newRole))
