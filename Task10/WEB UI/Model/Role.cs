@@ -137,7 +137,11 @@ namespace WEB_UI
 
             sqlConnection.Open();
 
-            return GetRoleNameCount(sqlCommand.ExecuteReader());
+            var roleCount = GetRoleNameCount(sqlCommand.ExecuteReader());
+
+            sqlConnection.Close();
+
+            return roleCount;
         }
 
         private static int GetRoleNameCount(SqlDataReader sqlDr)
