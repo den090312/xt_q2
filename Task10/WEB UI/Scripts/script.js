@@ -95,6 +95,8 @@
             function awardChosenChange() {
                 award_chosen_guid.selectedIndex = award_chosen.selectedIndex;
                 award_guid.value = award_chosen_guid[award_chosen_guid.selectedIndex].value;
+
+                award_chosen_in_user.selectedIndex = award_chosen.selectedIndex;
                 award_in_user.value = award_chosen_guid[award_chosen_guid.selectedIndex].value;
             }
         }
