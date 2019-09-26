@@ -12,15 +12,11 @@ namespace Common
         private static readonly IUserDao userDao;
         private static readonly IAwardDao awardDao;
 
-        private static readonly IUserLogic _userLogic;
-        private static readonly IAwardLogic _awardLogic;
-        private static readonly IUserAwardLogic _userAwardLogic;
+        public static IUserLogic UserLogic { get; private set; }
 
-        public static IUserLogic UserLogic => _userLogic;
+        public static IAwardLogic AwardLogic { get; private set; }
 
-        public static IAwardLogic AwardLogic => _awardLogic;
-
-        public static IUserAwardLogic UserAwardLogic => _userAwardLogic; 
+        public static IUserAwardLogic UserAwardLogic { get; private set; }
 
         static DependencyResolver()
         {
@@ -60,9 +56,9 @@ namespace Common
                 awardDao = new AwardDaoDb();
             }
 
-            _userLogic = new UserLogic(userDao);
-            _awardLogic = new AwardLogic(awardDao);
-            _userAwardLogic = new UserAwardLogic(userAwardDao, userDao, awardDao);
+            UserLogic = new UserLogic(userDao);
+            AwardLogic = new AwardLogic(awardDao);
+            UserAwardLogic = new UserAwardLogic(userAwardDao, userDao, awardDao);
         }
     }
 }
