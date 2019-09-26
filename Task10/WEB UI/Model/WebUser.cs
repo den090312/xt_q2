@@ -295,8 +295,6 @@ namespace WEB_UI
 
         private static int GetRoleIdByUserName(string userName)
         {
-            var roleId = -1;
-
             using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
@@ -309,10 +307,8 @@ namespace WEB_UI
 
                 sqlConnection.Open();
 
-                roleId = GetRoleId(userName, sqlCommand.ExecuteReader());
+                return GetRoleId(userName, sqlCommand.ExecuteReader());
             }
-
-            return roleId;
         }
 
         private static void UpdateWebuserRole(string newWebuserName, int rolId)
@@ -428,8 +424,6 @@ namespace WEB_UI
 
         private static int GetUserNameCount(string userName)
         {
-            var userCount = 0;
-
             using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
@@ -442,10 +436,8 @@ namespace WEB_UI
 
                 sqlConnection.Open();
 
-                userCount = GetUserCount(sqlCommand.ExecuteReader());
+                return GetUserCount(sqlCommand.ExecuteReader());
             }
-
-            return userCount;
         }
 
         private static int GetUserCount(SqlDataReader sqlDr)
@@ -485,8 +477,6 @@ namespace WEB_UI
 
         private static int GetIdRoleByName(string roleName)
         {
-            var IdRole = -1;
-
             using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
@@ -499,10 +489,8 @@ namespace WEB_UI
 
                 sqlConnection.Open();
 
-                IdRole = GetIdRole(roleName, sqlCommand.ExecuteReader());
+                return GetIdRole(roleName, sqlCommand.ExecuteReader());
             }
-
-            return IdRole;
         }
 
         private static int GetIdRole(string roleName, SqlDataReader sqlDr)

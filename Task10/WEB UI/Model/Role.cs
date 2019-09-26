@@ -186,8 +186,6 @@ namespace WEB_UI
 
         private static int GetIdRoleByName(string roleName)
         {
-            var IdRole = -1;
-
             using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
@@ -200,10 +198,8 @@ namespace WEB_UI
 
                 sqlConnection.Open();
 
-                IdRole = GetIdRole(roleName, sqlCommand.ExecuteReader());
+                return GetIdRole(roleName, sqlCommand.ExecuteReader());
             }
-
-            return IdRole;
         }
 
         private static int GetIdRole(string roleName, SqlDataReader sqlDr)
@@ -212,7 +208,7 @@ namespace WEB_UI
 
             while (sqlDr.Read())
             {
-                IdRole = sqlDr.GetInt32(0);
+                return sqlDr.GetInt32(0);
             }
 
             if (IdRole == -1)

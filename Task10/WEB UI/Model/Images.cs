@@ -27,8 +27,6 @@ namespace WEB_UI
 
         private static string GetSrc(Guid guid)
         {
-            var src = string.Empty;
-
             using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
@@ -46,14 +44,14 @@ namespace WEB_UI
 
                     if (bytes == null)
                     {
-                        return src;
+                        return string.Empty;
                     }
 
-                    src = "data:image;base64," + Convert.ToBase64String(bytes);
+                    return "data:image;base64," + Convert.ToBase64String(bytes);
                 }
             }
 
-            return src;
+            return string.Empty;
         }
 
         public static bool SaveUserImage(WebImage userImage, Guid userGuid)
@@ -90,8 +88,6 @@ namespace WEB_UI
 
         public static Guid GetImageGuidByAwardGuid(Guid awardGuid)
         {
-            var guidImage = new Guid();
-
             using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
@@ -104,33 +100,27 @@ namespace WEB_UI
 
                 sqlConnection.Open();
 
-                guidImage = GetGuidImage(sqlCommand.ExecuteReader());
+                return GetGuidImage(sqlCommand.ExecuteReader());
             }
-
-            return guidImage;
         }
 
         private static Guid GetGuidImage(SqlDataReader sqlDr)
         {
-            var guidImage = new Guid();
-
             while (sqlDr.Read())
             {
                 var sqlGuid = sqlDr.GetSqlGuid(0);
 
                 if (!sqlGuid.IsNull)
                 {
-                    guidImage = (Guid)(sqlGuid);
+                    return (Guid)(sqlGuid);
                 }
             }
 
-            return guidImage;
+            return new Guid();
         }
 
         public static Guid GetImageGuidByUserGuid(Guid userGuid)
         {
-            var guidImage = new Guid();
-
             using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
@@ -143,10 +133,8 @@ namespace WEB_UI
 
                 sqlConnection.Open();
 
-                guidImage = GetGuidImage(sqlCommand.ExecuteReader());
+                return GetGuidImage(sqlCommand.ExecuteReader());
             }
-
-            return guidImage;
         }
 
         private static void SaveImageToUser(WebImage userImage, Guid userGuid)
@@ -291,8 +279,6 @@ namespace WEB_UI
                 Direction = ParameterDirection.Output
             };
         }
-
-        private static string GetAltSrc(string root) => Path.Combine(root, altImageName);
 
         private static void NullCheck<T>(T classObject) where T : class
         {
