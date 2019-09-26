@@ -257,14 +257,6 @@ namespace WEB_UI
 
         private static SqlParameter SqlParBytes(byte[] imageBytes)
         {
-            //return new SqlParameter
-            //{
-            //    ParameterName = "@Bytes",
-            //    Value = imageBytes,
-            //    SqlDbType = SqlDbType.VarBinary,
-            //    Direction = ParameterDirection.Input
-            //};
-
             return new SqlParameter("@Bytes", SqlDbType.VarBinary, -1)
             {
                 Value = imageBytes,
