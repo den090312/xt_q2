@@ -1,7 +1,7 @@
-﻿USE [master]
+USE [master]
 GO
 
-/****** Object:  Database [webusersdb]    Script Date: 23.09.2019 2:22:53 ******/
+/****** Object:  Database [webusersdb]    Script Date: 26.09.2019 20:34:55 ******/
 CREATE DATABASE [webusersdb]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -108,13 +108,28 @@ GO
 
 USE [webusersdb]
 GO
-/****** Object:  Table [dbo].[Awards]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  Table [dbo].[AltImages]    Script Date: 26.09.2019 20:35:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AltImages](
+	[Guid] [uniqueidentifier] NOT NULL,
+	[Bytes] [varbinary](max) NOT NULL,
+ CONSTRAINT [PK_AltImages] PRIMARY KEY CLUSTERED 
+(
+	[Guid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Awards]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Awards](
 	[Guid] [uniqueidentifier] NOT NULL,
+	[ImageGuid] [uniqueidentifier] NULL,
 	[Title] [nvarchar](30) NOT NULL,
  CONSTRAINT [PK_Awards] PRIMARY KEY CLUSTERED 
 (
@@ -122,13 +137,28 @@ CREATE TABLE [dbo].[Awards](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  Table [dbo].[Images]    Script Date: 26.09.2019 20:35:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Images](
+	[Guid] [uniqueidentifier] NOT NULL,
+	[Bytes] [varbinary](max) NOT NULL,
+ CONSTRAINT [PK_Images] PRIMARY KEY CLUSTERED 
+(
+	[Guid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Users](
 	[Guid] [uniqueidentifier] NOT NULL,
+	[ImageGuid] [uniqueidentifier] NULL,
 	[Name] [nvarchar](150) NOT NULL,
 	[DateOfBirth] [date] NOT NULL,
 	[Age] [tinyint] NOT NULL,
@@ -138,7 +168,7 @@ CREATE TABLE [dbo].[Users](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UsersAwards]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  Table [dbo].[UsersAwards]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -148,7 +178,7 @@ CREATE TABLE [dbo].[UsersAwards](
 	[GuidAward] [uniqueidentifier] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Webroles]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  Table [dbo].[Webroles]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -166,7 +196,7 @@ CREATE TABLE [dbo].[Webroles](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Webusers]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  Table [dbo].[Webusers]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -186,6 +216,16 @@ CREATE TABLE [dbo].[Webusers](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+ALTER TABLE [dbo].[Awards]  WITH CHECK ADD  CONSTRAINT [FK_Awards_Images] FOREIGN KEY([ImageGuid])
+REFERENCES [dbo].[Images] ([Guid])
+GO
+ALTER TABLE [dbo].[Awards] CHECK CONSTRAINT [FK_Awards_Images]
+GO
+ALTER TABLE [dbo].[Users]  WITH CHECK ADD  CONSTRAINT [FK_Users_Images] FOREIGN KEY([ImageGuid])
+REFERENCES [dbo].[Images] ([Guid])
+GO
+ALTER TABLE [dbo].[Users] CHECK CONSTRAINT [FK_Users_Images]
+GO
 ALTER TABLE [dbo].[UsersAwards]  WITH CHECK ADD  CONSTRAINT [FK_UsersAwards_Awards] FOREIGN KEY([GuidAward])
 REFERENCES [dbo].[Awards] ([Guid])
 GO
@@ -201,7 +241,7 @@ REFERENCES [dbo].[Webroles] ([IdRole])
 GO
 ALTER TABLE [dbo].[Webusers] CHECK CONSTRAINT [FK_Webusers_Webroles]
 GO
-/****** Object:  StoredProcedure [dbo].[AddAward]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[AddAward]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -216,7 +256,52 @@ BEGIN
 	VALUES(@Guid, @Title)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddUser]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[AddImage]    Script Date: 26.09.2019 20:35:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[AddImage]
+	@Guid UNIQUEIDENTIFIER,
+	@Bytes VARBINARY(MAX)
+AS
+BEGIN
+	INSERT INTO Images(Guid, Bytes)
+	VALUES (@Guid, @Bytes)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[AddImageToAward]    Script Date: 26.09.2019 20:35:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[AddImageToAward]
+	@Guid UNIQUEIDENTIFIER,
+	@ImageGuid UNIQUEIDENTIFIER
+AS
+BEGIN
+	UPDATE Awards SET ImageGuid = @ImageGuid
+	WHERE Guid = @Guid 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[AddImageToUser]    Script Date: 26.09.2019 20:35:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[AddImageToUser]
+	@Guid UNIQUEIDENTIFIER,
+	@ImageGuid UNIQUEIDENTIFIER
+AS
+BEGIN
+	UPDATE Users SET ImageGuid = @ImageGuid
+	WHERE Guid = @Guid 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[AddUser]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -233,7 +318,7 @@ BEGIN
 	VALUES(@Guid, @Name, @DateOfBirth, @Age)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddWebrole]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[AddWebrole]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -247,7 +332,7 @@ BEGIN
 	VALUES(@RoleName)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[AddWebuser]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[AddWebuser]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -263,7 +348,7 @@ BEGIN
 	VALUES(@RoleId, @UserName, @PasswordHash)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[DeleteWebrole]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[DeleteWebrole]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -277,7 +362,7 @@ BEGIN
 	WHERE IdRole = @RoleId 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetAllAwards]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[GetAllAwards]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -289,7 +374,7 @@ BEGIN
 	SELECT * FROM Awards
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetAllUsers]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[GetAllUsers]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -301,7 +386,31 @@ BEGIN
 	SELECT * FROM Users
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetAwardByGuid]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[GetAllUsersAwards]    Script Date: 26.09.2019 20:35:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[GetAllUsersAwards]
+AS
+BEGIN
+	SELECT * FROM UsersAwards
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetAllWebusers]    Script Date: 26.09.2019 20:35:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[GetAllWebusers]
+AS
+BEGIN
+	SELECT * FROM Webusers
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetAwardByGuid]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -315,22 +424,21 @@ BEGIN
 	SELECT Title FROM Awards
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetAwardsByUser]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[GetAwardGuidsByUserGuid]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [dbo].[GetAwardsByUser]
-	@GuidUser UNIQUEIDENTIFIER
+CREATE PROCEDURE [dbo].[GetAwardGuidsByUserGuid]
+	@UserGuid UNIQUEIDENTIFIER
 AS
 BEGIN
-DECLARE @GuidAward TABLE (GuidAward NVARCHAR(36))
-	SELECT GuidAward AS GuidAward FROM UsersAwards
-	WHERE GuidUser = @GuidUser AND GuidAward IN (SELECT GuidAward FROM @GuidAward)  
+	SELECT GuidAward FROM UsersAwards
+	WHERE GuidUser = @UserGuid 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetIdRoleByName]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[GetIdRoleByName]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -345,7 +453,51 @@ BEGIN
 	WHERE Name = @RoleName 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetPasswordHashFormUserName]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[GetImageByGuid]    Script Date: 26.09.2019 20:35:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[GetImageByGuid]
+	@Guid UNIQUEIDENTIFIER
+AS
+BEGIN
+	SELECT Bytes FROM Images
+	WHERE Guid = @Guid 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetImageGuidByAwardGuid]    Script Date: 26.09.2019 20:35:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[GetImageGuidByAwardGuid]
+	@AwardGuid UNIQUEIDENTIFIER,
+	@ImageGuid UNIQUEIDENTIFIER OUTPUT
+AS
+BEGIN
+	SELECT ImageGuid FROM Awards
+	WHERE Guid = @AwardGuid 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetImageGuidByUserGuid]    Script Date: 26.09.2019 20:35:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[GetImageGuidByUserGuid]
+	@UserGuid UNIQUEIDENTIFIER,
+	@ImageGuid UNIQUEIDENTIFIER OUTPUT
+AS
+BEGIN
+	SELECT ImageGuid FROM Users
+	WHERE Guid = @UserGuid 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetPasswordHashFormUserName]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -360,7 +512,7 @@ BEGIN
 	WHERE Name = @UserName 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetRoleIdByUserName]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[GetRoleIdByUserName]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -375,7 +527,7 @@ BEGIN
 	WHERE Name = @UserName 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetRoleNameByIdRole]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[GetRoleNameByIdRole]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -390,7 +542,7 @@ BEGIN
 	WHERE IdRole = @IdRole
 END
 GO
-/****** Object:  StoredProcedure [dbo].[GetUserByGuid]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[GetUserByGuid]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -405,7 +557,7 @@ BEGIN
 	SELECT Name, DateOfBirth FROM Users
 END
 GO
-/****** Object:  StoredProcedure [dbo].[JoinAwardToUser]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[JoinAwardToUser]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -420,7 +572,7 @@ BEGIN
 	VALUES(@GuidUser, @GuidAward)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[PrintAwardsInfo]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[PrintAwardsInfo]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -434,7 +586,7 @@ BEGIN
 	WHERE table_name = 'Awards'
 END
 GO
-/****** Object:  StoredProcedure [dbo].[PrintUsersAwardsInfo]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[PrintUsersAwardsInfo]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -448,7 +600,7 @@ BEGIN
 	WHERE table_name = 'UsersAwards'
 END
 GO
-/****** Object:  StoredProcedure [dbo].[PrintUsersInfo]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[PrintUsersInfo]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -462,7 +614,7 @@ BEGIN
 	WHERE table_name = 'Users'
 END
 GO
-/****** Object:  StoredProcedure [dbo].[RemoveAwardByGuid]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[RemoveAwardByGuid]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -476,7 +628,35 @@ BEGIN
 	WHERE Guid = @Guid 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[RemoveUserByGuid]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[RemoveUserAwardByAwardGuid]    Script Date: 26.09.2019 20:35:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[RemoveUserAwardByAwardGuid]
+	@AwardGuid UNIQUEIDENTIFIER
+AS
+BEGIN
+	DELETE FROM UsersAwards
+	WHERE GuidAward = @AwardGuid 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RemoveUserAwardByUserGuid]    Script Date: 26.09.2019 20:35:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[RemoveUserAwardByUserGuid]
+	@UserGuid UNIQUEIDENTIFIER
+AS
+BEGIN
+	DELETE FROM UsersAwards
+	WHERE GuidUser = @UserGuid 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RemoveUserByGuid]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -490,7 +670,7 @@ BEGIN
 	WHERE Guid = @Guid 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[RoleNameCount]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[RoleNameCount]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -505,7 +685,22 @@ BEGIN
 	WHERE Name = @RoleName 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[UserNameCount]    Script Date: 23.09.2019 2:23:31 ******/
+/****** Object:  StoredProcedure [dbo].[UpdateWebuserRole]    Script Date: 26.09.2019 20:35:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[UpdateWebuserRole]
+	@RoleId INT,
+	@Name NVARCHAR(50)
+AS
+BEGIN
+	UPDATE Webusers SET RoleId = @RoleId
+	WHERE Name = @Name
+END
+GO
+/****** Object:  StoredProcedure [dbo].[UserNameCount]    Script Date: 26.09.2019 20:35:55 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -520,5 +715,3 @@ BEGIN
 	WHERE Name = @UserName 
 END
 GO
-
-
