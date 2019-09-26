@@ -11,33 +11,24 @@ namespace WEB_UI
 {
     public static class Images
     {
-        private static readonly string altImageName = "alt";
+        private static readonly string altImageName = "alt.jpg";
 
-        public static string GetImgSrc(string root, Guid imageGuid)
+        public static string GetImgSrc(Guid imageGuid)
         {
-            NullCheck(root);
-
-            if (root == string.Empty || imageGuid == Guid.Empty)
-            {
-                return string.Empty;
-            }
-
-            var imgSrc = string.Empty;
-            var altSrc = string.Empty;
-
-            imgSrc = GetImgSrc(imageGuid, imgSrc);
-            altSrc = GetAltSrc(root, altSrc);
+            var imgSrc = GetSrc(imageGuid);
 
             if (imgSrc == string.Empty)
             {
-                imgSrc = altSrc;
+                imgSrc = altImageName;
             }
 
             return imgSrc;
         }
 
-        private static string GetImgSrc(Guid guid, string src)
+        private static string GetSrc(Guid guid)
         {
+            var src = string.Empty;
+
             using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
@@ -50,8 +41,13 @@ namespace WEB_UI
                 var sqlDr = sqlCommand.ExecuteReader();
 
                 while (sqlDr.Read())
-                {
+                {                  
                     var bytes = (byte[])sqlDr["Bytes"];
+
+                    if (bytes == null)
+                    {
+                        return src;
+                    }
 
                     src = "data:image;base64," + Convert.ToBase64String(bytes);
                 }
@@ -296,18 +292,7 @@ namespace WEB_UI
             };
         }
 
-        private static string GetAltSrc(string root, string altSrc)
-        {
-            var altPath = Path.Combine(root, altImageName);
-
-            if (File.Exists(altPath))
-            {
-                var alt64 = Convert.ToBase64String(File.ReadAllBytes(altPath));
-                altSrc = string.Format("data:image/gif;base64,{0}", alt64);
-            }
-
-            return altSrc;
-        }
+        private static string GetAltSrc(string root) => Path.Combine(root, altImageName);
 
         private static void NullCheck<T>(T classObject) where T : class
         {
