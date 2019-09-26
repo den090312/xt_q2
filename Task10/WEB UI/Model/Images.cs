@@ -25,7 +25,7 @@ namespace WEB_UI
             var imgSrc = string.Empty;
             var altSrc = string.Empty;
 
-            imgSrc = GetImgSrcFromDB(imageGuid, imgSrc);
+            imgSrc = GetImgSrc(imageGuid, imgSrc);
             altSrc = GetAltSrc(root, altSrc);
 
             if (imgSrc == string.Empty)
@@ -36,7 +36,7 @@ namespace WEB_UI
             return imgSrc;
         }
 
-        private static string GetImgSrcFromDB(Guid guid, string src)
+        private static string GetImgSrc(Guid guid, string src)
         {
             using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
@@ -52,8 +52,8 @@ namespace WEB_UI
                 while (sqlDr.Read())
                 {
                     var bytes = (byte[])sqlDr["Bytes"];
-                    var base64String = Convert.ToBase64String(bytes);
-                    src = "data:image;base64," + base64String;
+
+                    src = "data:image;base64," + Convert.ToBase64String(bytes);
                 }
             }
 
@@ -232,17 +232,6 @@ namespace WEB_UI
             return imageGuid;
         }
 
-        private static SqlParameter SqlParFile(HttpPostedFile imageFile)
-        {
-            return new SqlParameter
-            {
-                ParameterName = "@Bytes",
-                Value = imageFile,
-                SqlDbType = SqlDbType.Image,
-                Direction = ParameterDirection.Input
-            };
-        }
-
         private static SqlParameter SqlParUserGuid(Guid userGuid)
         {
             return new SqlParameter
@@ -287,16 +276,6 @@ namespace WEB_UI
             };
         }
 
-        private static SqlParameter SqlParGuid()
-        {
-            return new SqlParameter
-            {
-                ParameterName = "@Guid",
-                SqlDbType = SqlDbType.UniqueIdentifier,
-                Direction = ParameterDirection.Output
-            };
-        }
-
         private static SqlParameter SqlParImageGuid(Guid imageGuid)
         {
             return new SqlParameter
@@ -329,30 +308,6 @@ namespace WEB_UI
             }
 
             return altSrc;
-        }
-
-        private static string GetImgSrcFromFile(string root, string guid, string imgSrc)
-        {
-            var path = Path.Combine(root, guid);
-
-            if (File.Exists(path))
-            {
-                var base64 = Convert.ToBase64String(File.ReadAllBytes(path));
-                imgSrc = string.Format("data:image/gif;base64,{0}", base64);
-            }
-
-            return imgSrc;
-        }
-
-        private static void SaveImageToFile(string imagePath, string root, HttpPostedFile image, string guid)
-        {
-            image.SaveAs(imagePath);
-
-            var imageBytes = File.ReadAllBytes(imagePath);
-            File.Delete(imagePath);
-
-            var finalPath = Path.Combine(root, guid);
-            File.WriteAllBytes(finalPath, imageBytes);
         }
 
         private static void NullCheck<T>(T classObject) where T : class

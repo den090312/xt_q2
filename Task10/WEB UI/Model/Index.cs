@@ -10,7 +10,7 @@ namespace WEB_UI
     {
         public static NameValueCollection Forms { private get; set; } 
 
-        public static WebImage Image { private get; set; }
+        public static WebImage ImageFromRequest { private get; set; }
 
         public static HttpFileCollection Files { private get; set; }
 
@@ -312,7 +312,7 @@ namespace WEB_UI
 
         private static void SaveUserImage()
         {
-            var userImage = Image;
+            var userImage = ImageFromRequest;
 
             if (userImage == null)
             {
@@ -343,7 +343,7 @@ namespace WEB_UI
 
         private static void SaveAwardImage()
         {
-            var userImage = Image;
+            var userImage = ImageFromRequest;
 
             if (userImage == null)
             {
