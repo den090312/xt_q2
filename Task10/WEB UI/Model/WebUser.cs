@@ -180,11 +180,7 @@ namespace WEB_UI
             NullCheck(userName);
             EmptyStringCheck(userName);
 
-            int userCount = 0;
-
-            userCount = GetUserNameCount(userName, userCount);
-
-            return userCount == 1;
+            return GetUserNameCount(userName) == 1;
         }
 
         private static void UpdateRoles(string[] roleNames, List<Webuser> webusers)
@@ -295,13 +291,7 @@ namespace WEB_UI
             return passSB.ToString().TrimEnd();
         }
 
-        private static string GetPasswordByName(string userName)
-        {
-            var hash = GetPasswordHash(userName);
-            var password = GetPasswordFromHash(hash);
-
-            return password;
-        }
+        private static string GetPasswordByName(string userName) => GetPasswordFromHash(GetPasswordHash(userName));
 
         private static int GetRoleIdByUserName(string userName)
         {
@@ -319,13 +309,13 @@ namespace WEB_UI
 
                 sqlConnection.Open();
 
-                roleId = GetRoleId(userName, roleId, sqlCommand);
+                roleId = GetRoleId(userName, sqlCommand.ExecuteReader());
             }
 
             return roleId;
         }
 
-        private static void UpdateWebuserRole(string webuserName, int rolId)
+        private static void UpdateWebuserRole(string newWebuserName, int rolId)
         {
             using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
@@ -335,7 +325,7 @@ namespace WEB_UI
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 sqlCommand.Parameters.Add(SqlParRoleId(rolId));
-                sqlCommand.Parameters.Add(SqlParName(webuserName));
+                sqlCommand.Parameters.Add(SqlParName(newWebuserName));
 
                 sqlConnection.Open();
 
@@ -343,9 +333,9 @@ namespace WEB_UI
             }
         }
 
-        private static int GetRoleId(string userName, int roleId, SqlCommand sqlCommand)
+        private static int GetRoleId(string userName, SqlDataReader sqlDr)
         {
-            var sqlDr = sqlCommand.ExecuteReader();
+            var roleId = -1;
 
             while (sqlDr.Read())
             {
@@ -376,19 +366,17 @@ namespace WEB_UI
 
                 sqlConnection.Open();
 
-                hash = GetHash(hash, sqlCommand);
+                hash = GetHash(hash, sqlCommand.ExecuteReader());
             }
 
             return hash;
         }
 
-        private static string GetHash(string hash, SqlCommand sqlCommand)
+        private static string GetHash(string hash, SqlDataReader sqlDr)
         {
-            var sqlDataReader = sqlCommand.ExecuteReader();
-
-            while (sqlDataReader.Read())
+            while (sqlDr.Read())
             {
-                hash = (string)sqlDataReader[0];
+                hash = sqlDr.GetString(0);
             }
 
             if (hash == string.Empty)
@@ -415,15 +403,15 @@ namespace WEB_UI
 
                 sqlConnection.Open();
 
-                roleName = GetRoleName(idRole, roleName, sqlCommand);
+                roleName = GetRoleName(idRole, sqlCommand.ExecuteReader());
             }
 
             return roleName;
         }
 
-        private static string GetRoleName(int idRole, string roleName, SqlCommand sqlCommand)
+        private static string GetRoleName(int idRole, SqlDataReader sqlDr)
         {
-            var sqlDr = sqlCommand.ExecuteReader();
+            var roleName = string.Empty;
 
             while (sqlDr.Read())
             {
@@ -438,8 +426,10 @@ namespace WEB_UI
             return roleName;
         }
 
-        private static int GetUserNameCount(string userName, int userCount)
+        private static int GetUserNameCount(string userName)
         {
+            var userCount = 0;
+
             using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
@@ -452,15 +442,15 @@ namespace WEB_UI
 
                 sqlConnection.Open();
 
-                userCount = GetCount(userCount, sqlCommand);
+                userCount = GetUserCount(sqlCommand.ExecuteReader());
             }
 
             return userCount;
         }
 
-        private static int GetCount(int userCount, SqlCommand sqlCommand)
+        private static int GetUserCount(SqlDataReader sqlDr)
         {
-            var sqlDr = sqlCommand.ExecuteReader();
+            var userCount = 0;
 
             while (sqlDr.Read())
             {
@@ -472,11 +462,7 @@ namespace WEB_UI
 
         private static void AddWebuser(Webuser webuser)
         {
-            var role = webuser?.Role;
-
-            NullCheck(role);
-
-            var roleId = GetRoleId(role);
+            var roleId = GetRoleId(webuser.Role);
 
             using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
@@ -499,7 +485,7 @@ namespace WEB_UI
 
         private static int GetIdRoleByName(string roleName)
         {
-            int IdRole = -1;
+            var IdRole = -1;
 
             using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
@@ -512,15 +498,16 @@ namespace WEB_UI
                 sqlCommand.Parameters.Add(SqlParIdRole());
 
                 sqlConnection.Open();
-                IdRole = GetIdRole(roleName, IdRole, sqlCommand);
+
+                IdRole = GetIdRole(roleName, sqlCommand.ExecuteReader());
             }
 
             return IdRole;
         }
 
-        private static int GetIdRole(string roleName, int IdRole, SqlCommand sqlCommand)
+        private static int GetIdRole(string roleName, SqlDataReader sqlDr)
         {
-            var sqlDr = sqlCommand.ExecuteReader();
+            var IdRole = -1;
 
             while (sqlDr.Read())
             {

@@ -102,20 +102,29 @@ namespace WEB_UI
 
                 sqlCommand.CommandText = "GetImageGuidByAwardGuid";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
+
                 sqlCommand.Parameters.Add(SqlParAwardGuid(awardGuid));
                 sqlCommand.Parameters.Add(SqlParImageGuid());
+
                 sqlConnection.Open();
 
-                var sqlDr = sqlCommand.ExecuteReader();
+                guidImage = GetGuidImage(sqlCommand.ExecuteReader());
+            }
 
-                while (sqlDr.Read())
+            return guidImage;
+        }
+
+        private static Guid GetGuidImage(SqlDataReader sqlDr)
+        {
+            var guidImage = new Guid();
+
+            while (sqlDr.Read())
+            {
+                var sqlGuid = sqlDr.GetSqlGuid(0);
+
+                if (!sqlGuid.IsNull)
                 {
-                    var sqlGuid = sqlDr.GetSqlGuid(0);
-
-                    if (!sqlGuid.IsNull)
-                    {
-                        guidImage = (Guid)(sqlGuid);
-                    }
+                    guidImage = (Guid)(sqlGuid);
                 }
             }
 
@@ -132,21 +141,13 @@ namespace WEB_UI
 
                 sqlCommand.CommandText = "GetImageGuidByUserGuid";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
+
                 sqlCommand.Parameters.Add(SqlParUserGuid(userGuid));
                 sqlCommand.Parameters.Add(SqlParImageGuid());
+
                 sqlConnection.Open();
 
-                var sqlDr = sqlCommand.ExecuteReader();
-
-                while (sqlDr.Read())
-                {
-                    var sqlGuid = sqlDr.GetSqlGuid(0);
-
-                    if (!sqlGuid.IsNull)
-                    {
-                        guidImage = (Guid)(sqlGuid);
-                    }
-                }
+                guidImage = GetGuidImage(sqlCommand.ExecuteReader());
             }
 
             return guidImage;

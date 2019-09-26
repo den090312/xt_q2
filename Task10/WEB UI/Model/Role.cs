@@ -108,11 +108,7 @@ namespace WEB_UI
             NullCheck(roleName);
             EmptyStringCheck(roleName);
 
-            int roleCount = 0;
-
-            roleCount = GetRoleNameCountInDb(roleName, roleCount);
-
-            return roleCount == 1;
+            return GetRoleNameCount(roleName) == 1;
         }
 
         private static void AddNewRoleToList(Role newRole)
@@ -128,33 +124,29 @@ namespace WEB_UI
             }
         }
 
-        private static int GetRoleNameCountInDb(string roleName, int roleCount)
+        private static int GetRoleNameCount(string roleName)
         {
-            using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
-            {
-                var sqlCommand = sqlConnection.CreateCommand();
+            var sqlConnection = new SqlConnection(Database.WebUiConnectionString);
+            var sqlCommand = sqlConnection.CreateCommand();
 
-                sqlCommand.CommandText = "RoleNameCount";
-                sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.CommandText = "RoleNameCount";
+            sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                sqlCommand.Parameters.Add(SqlParRoleName(roleName));
-                sqlCommand.Parameters.Add(SqlParCountName());
+            sqlCommand.Parameters.Add(SqlParRoleName(roleName));
+            sqlCommand.Parameters.Add(SqlParCountName());
 
-                sqlConnection.Open();
+            sqlConnection.Open();
 
-                roleCount = GetRoleNameCount(roleCount, sqlCommand);
-            }
-
-            return roleCount;
+            return GetRoleNameCount(sqlCommand.ExecuteReader());
         }
 
-        private static int GetRoleNameCount(int roleCount, SqlCommand sqlCommand)
+        private static int GetRoleNameCount(SqlDataReader sqlDr)
         {
-            var sqlDataReader = sqlCommand.ExecuteReader();
+            var roleCount = 0;
 
-            while (sqlDataReader.Read())
+            while (sqlDr.Read())
             {
-                roleCount = (int)sqlDataReader[0];
+                roleCount = sqlDr.GetInt32(0);
             }
 
             return roleCount;
@@ -194,7 +186,7 @@ namespace WEB_UI
 
         private static int GetIdRoleByName(string roleName)
         {
-            int IdRole = -1;
+            var IdRole = -1;
 
             using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
             {
@@ -207,15 +199,16 @@ namespace WEB_UI
                 sqlCommand.Parameters.Add(SqlParIdRole());
 
                 sqlConnection.Open();
-                IdRole = GetIdRole(roleName, IdRole, sqlCommand);
+
+                IdRole = GetIdRole(roleName, sqlCommand.ExecuteReader());
             }
 
             return IdRole;
         }
 
-        private static int GetIdRole(string roleName, int IdRole, SqlCommand sqlCommand)
+        private static int GetIdRole(string roleName, SqlDataReader sqlDr)
         {
-            var sqlDr = sqlCommand.ExecuteReader();
+            var IdRole = -1;
 
             while (sqlDr.Read())
             {
