@@ -267,6 +267,7 @@ namespace WEB_UI
 
             return new SqlParameter("@Bytes", SqlDbType.VarBinary, -1)
             {
+                Value = imageBytes,
                 Direction = ParameterDirection.Input
             };
         }
