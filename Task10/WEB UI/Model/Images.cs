@@ -13,24 +13,6 @@ namespace WEB_UI
     {
         private static readonly string altImageName = "alt";
 
-        public static bool TryGetImage(HttpFileCollection images, out HttpPostedFile image)
-        {
-            NullCheck(images);
-
-            if (images.Count == 0)
-            {
-                image = null;
-
-                return false;
-            }
-
-            image = images[0];
-
-            NullCheck(image);
-
-            return true;
-        }
-
         public static string GetImgSrc(string root, Guid imageGuid)
         {
             NullCheck(root);
@@ -69,10 +51,8 @@ namespace WEB_UI
 
                 while (sqlDr.Read())
                 {
-                    //var typeConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
-                    //var bitmap = (Bitmap)typeConverter.ConvertFrom(bytes);
                     var bytes = (byte[])sqlDr["Bytes"];
-                    var base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+                    var base64String = Convert.ToBase64String(bytes);
                     src = "data:image;base64," + base64String;
                 }
             }
@@ -80,14 +60,13 @@ namespace WEB_UI
             return src;
         }
 
-        public static bool SaveUserImage(WebImage userImage, string userGuid)
+        public static bool SaveUserImage(WebImage userImage, Guid userGuid)
         {
             NullCheck(userImage);
-            NullCheck(userGuid);
 
             try
             {
-                SaveImageToUser(userImage, Guid.Parse(userGuid));
+                SaveImageToUser(userImage, userGuid);
 
                 return true;
             }
@@ -97,14 +76,13 @@ namespace WEB_UI
             }
         }
 
-        public static bool SaveAwardImage(HttpPostedFile awardImage, string awardGuid)
+        public static bool SaveAwardImage(WebImage awardImage, Guid awardGuid)
         {
             NullCheck(awardImage);
-            NullCheck(awardGuid);
 
             try
             {
-                SaveImageToAward(awardImage, Guid.Parse(awardGuid));
+                SaveImageToAward(awardImage, awardGuid);
 
                 return true;
             }
@@ -185,15 +163,15 @@ namespace WEB_UI
             }
         }
 
-        private static void SaveImageToAward(HttpPostedFile awardImage, Guid awardGuid)
+        private static void SaveImageToAward(WebImage awardImage, Guid awardGuid)
         {
-            //var awardImageBytes = GetBytes(awardImage);
-            //var imageGuid = GetAddedImageGuid(awardImageBytes);
+            var awardImageBytes = awardImage.GetBytes();
+            var imageGuid = GetAddedImageGuid(awardImageBytes);
 
-            //if (imageGuid != Guid.Empty)
-            //{
-            //    AddImageToAward(awardGuid, imageGuid);
-            //}
+            if (imageGuid != Guid.Empty)
+            {
+                AddImageToAward(awardGuid, imageGuid);
+            }
         }
 
         private static void AddImageToUser(Guid userGuid, Guid imageGuid)
@@ -254,28 +232,6 @@ namespace WEB_UI
             return imageGuid;
         }
 
-        private static Guid GetAddedImageGuid(HttpPostedFile imageFile)
-        {
-            var imageGuid = Guid.NewGuid();
-
-            using (var sqlConnection = new SqlConnection(Database.WebUiConnectionString))
-            {
-                var sqlCommand = sqlConnection.CreateCommand();
-
-                sqlCommand.CommandText = "AddImage";
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-
-                sqlCommand.Parameters.Add(SqlParGuid(imageGuid));
-                sqlCommand.Parameters.Add(SqlParFile(imageFile));
-
-                sqlConnection.Open();
-
-                sqlCommand.ExecuteNonQuery();
-            }
-
-            return imageGuid;
-        }
-
         private static SqlParameter SqlParFile(HttpPostedFile imageFile)
         {
             return new SqlParameter
@@ -285,18 +241,6 @@ namespace WEB_UI
                 SqlDbType = SqlDbType.Image,
                 Direction = ParameterDirection.Input
             };
-        }
-
-        private static byte[] GetBytes(HttpPostedFile image)
-        {
-            byte[] imageBytes = null;
-
-            using (var binaryReader = new BinaryReader(image.InputStream))
-            {
-                imageBytes = binaryReader.ReadBytes(image.ContentLength);
-            }
-
-            return imageBytes;
         }
 
         private static SqlParameter SqlParUserGuid(Guid userGuid)

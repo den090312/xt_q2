@@ -312,21 +312,26 @@ namespace WEB_UI
 
         private static void SaveUserImage()
         {
-            if (!Images.TryGetImage(Files, out var userImageFile))
-            {
-                return;
-            }
-
             var userImage = Image;
 
-            var userGuid = Forms["userImageGuid"];
-
-             if (userGuid == string.Empty || userGuid == string.Empty)
+            if (userImage == null)
             {
                 return;
             }
 
-            if (Images.SaveUserImage(userImage, userGuid))
+            var userGuidData = Forms["userImageGuid"];
+
+            if (userGuidData == string.Empty || userGuidData == string.Empty)
+            {
+                return;
+            }
+
+            if (!Guid.TryParse(userGuidData, out Guid awardGuid))
+            {
+                Message = "User guid error reading!";
+            }
+
+            if (Images.SaveUserImage(userImage, awardGuid))
             {
                 Message = "User image saved";
             }
@@ -338,19 +343,26 @@ namespace WEB_UI
 
         private static void SaveAwardImage()
         {
-            if (!Images.TryGetImage(Files, out var awardImageFile))
+            var userImage = Image;
+
+            if (userImage == null)
             {
                 return;
             }
 
-            var awardGuid = Forms["awardImageGuid"];
+            var awardGuidData = Forms["awardImageGuid"];
 
-            if (awardGuid == null || awardGuid == string.Empty)
+            if (awardGuidData == null || awardGuidData == string.Empty)
             {
                 return;
             }
 
-            if (Images.SaveAwardImage(awardImageFile, awardGuid))
+            if (!Guid.TryParse(awardGuidData, out Guid userGuid))
+            {
+                Message = "Award guid error reading!";
+            }
+
+            if (Images.SaveAwardImage(userImage, userGuid))
             {
                 Message = "Award image saved";
             }
