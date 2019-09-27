@@ -20,6 +20,10 @@ namespace DependencyResolver
             {
                 customerDao = new CustomerDaoDb();
             }
+            else
+            {
+                throw new ConfigurationErrorsException($"Can't find settings for {nameof(customDaoSet)}!");
+            }
 
             CustomerLogic = new CustomerLogic(customerDao);
         }

@@ -22,38 +22,44 @@ namespace Common
         {
             var userAwardDaoSet = ConfigurationManager.AppSettings["userAwardDao"];
 
-            if (userAwardDaoSet == "1")
+            switch (userAwardDaoSet)
             {
-                userAwardDao = new UserAwardDaoFile();
-            }
-
-            if (userAwardDaoSet == "2")
-            {
-                userAwardDao = new UserAwardDaoDb();
+                case "1":
+                    userAwardDao = new UserAwardDaoFile();
+                    break;
+                case "2":
+                    userAwardDao = new UserAwardDaoDb();
+                    break;
+                default:
+                    throw new ConfigurationErrorsException($"Can't find settings for {nameof(userAwardDaoSet)}!");
             }
 
             var userDaoSet = ConfigurationManager.AppSettings["userDao"];
 
-            if (userDaoSet == "1")
+            switch (userDaoSet)
             {
-                userDao = new UserDaoFile();
-            }
-
-            if (userDaoSet == "2")
-            {
-                userDao = new UserDaoDb();
+                case "1":
+                    userDao = new UserDaoFile();
+                    break;
+                case "2":
+                    userDao = new UserDaoDb();
+                    break;
+                default:
+                    throw new ConfigurationErrorsException($"Can't find settings for {nameof(userAwardDaoSet)}!");
             }
 
             var awardDaoSet = ConfigurationManager.AppSettings["awardDao"];
 
-            if (awardDaoSet == "1")
+            switch (awardDaoSet)
             {
-                awardDao = new AwardDaoFile();
-            }
-
-            if (awardDaoSet == "2")
-            {
-                awardDao = new AwardDaoDb();
+                case "1":
+                    awardDao = new AwardDaoFile();
+                    break;
+                case "2":
+                    awardDao = new AwardDaoDb();
+                    break;
+                default:
+                    throw new ConfigurationErrorsException($"Can't find settings for {nameof(userAwardDaoSet)}!");
             }
 
             UserLogic = new UserLogic(userDao);
