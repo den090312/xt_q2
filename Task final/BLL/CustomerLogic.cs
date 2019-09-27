@@ -1,0 +1,80 @@
+﻿using Entities;
+using InterfacesBLL;
+using InterfacesDAL;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BLL
+{
+    public class CustomerLogic : ICustomerLogic
+    {
+        private readonly ICustomerDao customerDao;
+
+        public CustomerLogic(ICustomerDao iCustomerDao)
+        {
+            NullCheck(iCustomerDao);
+
+            customerDao = iCustomerDao;
+        }
+
+        public bool Add(Customer customer)
+        {
+            NullCheck(customer); 
+
+            return customerDao.Add(customer);
+        }
+
+        public bool Remove(Customer customer)
+        {
+            NullCheck(customer);
+
+            return customerDao.Remove(customer);
+        }
+
+        public IEnumerable<Customer> GetAll() => customerDao.GetAll();
+
+        public bool AddOrder(Order order)
+        {
+            NullCheck(order);
+
+            return customerDao.AddOrder(order);
+        }
+
+        public void RemoveOrder(Order order)
+        {
+            NullCheck(order);
+
+            customerDao.RemoveOrder(order);
+        }
+
+        public IEnumerable<Order> GetOrders()
+        {
+            return customerDao.GetOrders();
+        }
+
+        public bool ChangeName(string newName)
+        {
+            NullCheck(newName);
+
+            return customerDao.ChangeName(newName);
+        }
+
+        public bool ConnectToUser(User user)
+        {
+            NullCheck(user);
+
+            return customerDao.ConnectToUser(user);
+        }
+
+        private static void NullCheck<T>(T classObject) where T : class
+        {
+            if (classObject is null)
+            {
+                throw new ArgumentNullException($"{nameof(classObject)} is null!");
+            }
+        }
+    }
+}
