@@ -102,7 +102,7 @@ namespace DAL
             {
                 var sqlCommand = sqlConnection.CreateCommand();
 
-                sqlCommand.CommandText = "AddAddReadonlyRole";
+                sqlCommand.CommandText = "AddReadonlyRole";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 sqlCommand.Parameters.Add(SqlParName(role.Name));
