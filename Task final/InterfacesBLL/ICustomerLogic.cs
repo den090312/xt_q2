@@ -9,7 +9,7 @@ namespace InterfacesBLL
 {
     public interface ICustomerLogic
     {
-        bool Add(string Name, int idUser);
+        bool Add(Customer customer);
 
         bool Remove(Customer customer);
 
@@ -20,8 +20,6 @@ namespace InterfacesBLL
         void RemoveOrder(Order order);
 
         IEnumerable<Order> GetOrders();
-
-        bool ConnectToUser(User user);
 
         bool ChangeName(string newName);
     }

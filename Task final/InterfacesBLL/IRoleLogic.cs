@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace InterfacesBLL
 {
-    interface IRoleLogic
+    public interface IRoleLogic
     {
+
     }
 }

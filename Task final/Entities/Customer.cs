@@ -5,7 +5,7 @@ namespace Entities
 {
     public class Customer
     {
-        public int CustomerId { get; set; }
+        public int Id { get; set; }
 
         public int IdUser { get; }
 
@@ -13,9 +13,9 @@ namespace Entities
 
         public List<int> ListOrderId { get; set; }
 
-        public Customer(string name, int idUser)
+        public Customer(string name, User user)
         {
-            IdUser = idUser;
+            IdUser = user.Id;
             Name = name;
         }
     }

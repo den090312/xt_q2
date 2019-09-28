@@ -2,9 +2,6 @@
 using InterfacesDAL;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -21,11 +18,6 @@ namespace DAL
         }
 
         public bool ChangeName(string newName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool ConnectToUser(User user)
         {
             throw new NotImplementedException();
         }

@@ -4,7 +4,7 @@ namespace Entities
 {
     public class Manager
     {
-        public int ManagerId { get; set; }
+        public int Id { get; set; }
 
         public int IdUser { get; }
 

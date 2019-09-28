@@ -17,13 +17,11 @@ namespace BLL
             customerDao = iCustomerDao;
         }
 
-        public bool Add(string name, int idUser)
+        public bool Add(Customer customer)
         {
-            NullCheck(name);
-            EmptyStringCheck(name);
-            IdCheck(idUser);
+            NullCheck(customer);
 
-            return customerDao.Add(new Customer(name, idUser));
+            return customerDao.Add(customer);
         }
 
         public bool Remove(Customer customer)
@@ -59,13 +57,6 @@ namespace BLL
             NullCheck(newName);
 
             return customerDao.ChangeName(newName);
-        }
-
-        public bool ConnectToUser(User user)
-        {
-            NullCheck(user);
-
-            return customerDao.ConnectToUser(user);
         }
 
         private void IdCheck(int id)
