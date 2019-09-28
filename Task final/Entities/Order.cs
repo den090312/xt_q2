@@ -18,7 +18,7 @@ namespace Entities
 
         public string Adress { get; }
 
-        public List<int> ListIdNomenclature { get; set; }
+        public List<int> ListIdProduct { get; set; }
 
         public Status CurrentStatus { get; set; }
 

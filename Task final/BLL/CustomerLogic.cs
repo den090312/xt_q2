@@ -17,11 +17,13 @@ namespace BLL
             customerDao = iCustomerDao;
         }
 
-        public bool Add(Customer customer)
+        public bool Add(string name, int idUser)
         {
-            NullCheck(customer); 
+            NullCheck(name);
+            EmptyStringCheck(name);
+            IdCheck(idUser);
 
-            return customerDao.Add(customer);
+            return customerDao.Add(new Customer(name, idUser));
         }
 
         public bool Remove(Customer customer)
@@ -66,6 +68,14 @@ namespace BLL
             return customerDao.ConnectToUser(user);
         }
 
+        private void IdCheck(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentException($"{nameof(id)} is incorrect!");
+            }
+        }
+
         private void EmptyStringCheck(string inputString)
         {
             if (inputString == string.Empty)
@@ -74,19 +84,19 @@ namespace BLL
             }
         }
 
-        private void NullCheck<T>(T classObject) where T : class
-        {
-            if (classObject is null)
-            {
-                throw new ArgumentNullException($"{nameof(classObject)} is null!");
-            }
-        }
-
         private void PriceCheck(double price)
         {
             if (price <= 0)
             {
                 throw new ArgumentException($"{nameof(price)} must be greater than zero!");
+            }
+        }
+
+        private void NullCheck<T>(T classObject) where T : class
+        {
+            if (classObject is null)
+            {
+                throw new ArgumentNullException($"{nameof(classObject)} is null!");
             }
         }
     }

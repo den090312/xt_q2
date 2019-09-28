@@ -7,15 +7,15 @@ namespace Entities
     {
         public int CustomerId { get; set; }
 
-        public int UserId { get; }
+        public int IdUser { get; }
 
         public string Name { get; }
 
         public List<int> ListOrderId { get; set; }
 
-        public Customer(string name, int userId)
+        public Customer(string name, int idUser)
         {
-            UserId = userId;
+            IdUser = idUser;
             Name = name;
         }
     }

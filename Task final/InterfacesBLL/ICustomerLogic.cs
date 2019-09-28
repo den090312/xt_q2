@@ -9,7 +9,7 @@ namespace InterfacesBLL
 {
     public interface ICustomerLogic
     {
-        bool Add(Customer customer);
+        bool Add(string Name, int idUser);
 
         bool Remove(Customer customer);
 

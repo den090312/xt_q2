@@ -6,9 +6,9 @@
 
         public string Name { get; }
 
-        public bool NomenclatureRead { get; set; }
+        public bool ProductRead { get; set; }
 
-        public bool NomenclatureWrite { get; set; }
+        public bool ProductWrite { get; set; }
 
         public bool OrderRead { get; set; }
 
