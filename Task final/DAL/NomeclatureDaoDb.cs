@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    class NomeclatureDaoDb
+    public class NomeclatureDaoDb
     {
+
     }
 }

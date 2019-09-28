@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    class ManagerLogic
+    public class ManagerLogic
     {
+
     }
 }

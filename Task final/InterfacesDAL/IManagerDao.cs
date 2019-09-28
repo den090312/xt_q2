@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace InterfacesDAL
 {
-    interface IManagerDao
+    public interface IManagerDao
     {
+
     }
 }

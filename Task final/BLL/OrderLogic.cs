@@ -8,6 +8,8 @@ namespace BLL
 {
     public class OrderLogic
     {
+
+
         private void DateCheck(DateTime date)
         {
             if (date == DateTime.MinValue)

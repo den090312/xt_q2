@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    class ManagerDaoDb
+    public class ManagerDaoDb
     {
+
     }
 }
