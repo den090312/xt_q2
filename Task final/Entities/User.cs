@@ -10,9 +10,7 @@ namespace Entities
     {
         private readonly string password;
 
-        public int UserId { get; }
-
-        public int IdRole { get; }
+        public Role Role { get; }
 
         public string Name { get; }
 

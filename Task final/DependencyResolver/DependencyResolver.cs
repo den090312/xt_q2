@@ -16,13 +16,13 @@ namespace DependencyResolver
         {
             var customDaoSet = ConfigurationManager.AppSettings["customDaoSet"];
 
-            if (customDaoSet == "1")
+            switch (customDaoSet)
             {
-                customerDao = new CustomerDaoDb();
-            }
-            else
-            {
-                throw new ConfigurationErrorsException($"Can't find settings for {nameof(customDaoSet)}!");
+                case "1":
+                    customerDao = new CustomerDaoDb();
+                    break;
+                default:
+                    throw new ConfigurationErrorsException($"Can't find settings for {nameof(customDaoSet)}!");
             }
 
             CustomerLogic = new CustomerLogic(customerDao);

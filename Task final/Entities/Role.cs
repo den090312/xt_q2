@@ -8,24 +8,46 @@ namespace Entities
 {
     public class Role
     {
-        public int RoleId { get; }
+        public string Name { get; set; }
 
-        public string Name { get; }
+        public bool NomenclatureRead { get; set; }
 
-        public bool NomenclatureRead { get; }
+        public bool NomenclatureWrite { get; set; }
 
-        public bool NomenclatureWrite { get; }
+        public bool OrderRead { get; set; }
 
-        public bool OrderRead { get; }
+        public bool OrderWrite { get; set; }
 
-        public bool OrderWrite { get; }
+        public bool RoleRead { get; set; }
 
-        public bool RoleRead { get; }
+        public bool RoleWrite { get; set; }
 
-        public bool RoleWrite { get; }
+        public bool UserRead { get; set; }
 
-        public bool UserRead { get; }
+        public bool UserWrite { get; set; }
 
-        public bool UserWrite { get; }
+        public Role(string name)
+        {
+            NullCheck(name);
+            EmptyStringCheck(name);
+
+            Name = name;
+        }
+
+        private void EmptyStringCheck(string inputString)
+        {
+            if (inputString == string.Empty)
+            {
+                throw new ArgumentException($"{nameof(inputString)} is empty!");
+            }
+        }
+
+        private void NullCheck<T>(T classObject) where T : class
+        {
+            if (classObject is null)
+            {
+                throw new ArgumentNullException($"{nameof(classObject)} is null!");
+            }
+        }
     }
 }

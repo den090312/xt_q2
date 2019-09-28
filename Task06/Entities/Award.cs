@@ -6,30 +6,18 @@ namespace Entities
     {
         public Guid Guid { get; }
 
-        public string Title { get; } = string.Empty;
+        public string Title { get; }
 
         public Award(string title)
         {
-            NullCheck(title);
-
             Guid = Guid.NewGuid();
             Title = title;
         }
 
         public Award(Guid guid, string title)
         {
-            NullCheck(title);
-
             Guid = guid;
             Title = title;
-        }
-
-        private static void NullCheck<T>(T classObject) where T : class
-        {
-            if (classObject is null)
-            {
-                throw new ArgumentNullException($"{nameof(classObject)} is null!");
-            }
         }
     }
 }

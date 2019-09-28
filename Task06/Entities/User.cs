@@ -6,7 +6,7 @@ namespace Entities
     {
         public Guid Guid { get; }
 
-        public string Name { get; } = string.Empty;
+        public string Name { get; }
 
         public DateTime DateOfBirth { get; }
 
@@ -36,8 +36,6 @@ namespace Entities
 
         public User(string name, DateTime dateOfBirth)
         {
-            NullCheck(name);
-
             Guid = Guid.NewGuid();
             Name = name;
             DateOfBirth = dateOfBirth;
@@ -45,19 +43,9 @@ namespace Entities
 
         public User(Guid guid, string name, DateTime dateOfBirth)
         {
-            NullCheck(name);
-
             Guid = guid;
             Name = name;
             DateOfBirth = dateOfBirth;
-        }
-
-        private static void NullCheck<T>(T classObject) where T : class
-        {
-            if (classObject is null)
-            {
-                throw new ArgumentNullException($"{nameof(classObject)} is null!");
-            }
         }
     }
 }

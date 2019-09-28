@@ -1,30 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities
 {
     public class Customer
     {
-        public int CustomerId { get; }
-
-        public int UserId { get; }
-
-        public List<int> IdOrders { get; }
-
         public string Name { get; }
 
-        public Customer(string name)
+        public User User { get; }
+
+        public List<Order> Orders { get; set; }
+
+        public Customer(User user, string name)
         {
+            NullCheck(user);
             NullCheck(name);
             EmptyStringCheck(name);
 
             Name = name;
+            User = user;
         }
 
-        private static void EmptyStringCheck(string inputString)
+        private void EmptyStringCheck(string inputString)
         {
             if (inputString == string.Empty)
             {
@@ -32,7 +29,7 @@ namespace Entities
             }
         }
 
-        private static void NullCheck<T>(T classObject) where T : class
+        private void NullCheck<T>(T classObject) where T : class
         {
             if (classObject is null)
             {
