@@ -33,44 +33,10 @@ namespace Entities
 
         public Order(Customer customer, DateTime date, string adress)
         {
-            NullCheck(customer);
-            DateCheck(date);
-            NullCheck(adress);
-            EmptyStringCheck(adress);
-
             Customer = customer;
             Date = date;
             Adress = adress;
             CurrentStatus = Status.Opened;
-        }
-
-        private void EmptyStringCheck(string inputString)
-        {
-            if (inputString == string.Empty)
-            {
-                throw new ArgumentException($"{nameof(inputString)} is empty!");
-            }
-        }
-
-        private void NullCheck<T>(T classObject) where T : class
-        {
-            if (classObject is null)
-            {
-                throw new ArgumentNullException($"{nameof(classObject)} is null!");
-            }
-        }
-
-        private void DateCheck(DateTime date)
-        {
-            if (date == DateTime.MinValue)
-            {
-                throw new ArgumentException($"{nameof(date)} is empty!");
-            }
-
-            if (date < DateTime.Now)
-            {
-                throw new ArgumentException($"{nameof(date)} must be grater than current date!");
-            }
         }
     }
 }

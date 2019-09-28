@@ -28,26 +28,7 @@ namespace Entities
 
         public Role(string name)
         {
-            NullCheck(name);
-            EmptyStringCheck(name);
-
             Name = name;
-        }
-
-        private void EmptyStringCheck(string inputString)
-        {
-            if (inputString == string.Empty)
-            {
-                throw new ArgumentException($"{nameof(inputString)} is empty!");
-            }
-        }
-
-        private void NullCheck<T>(T classObject) where T : class
-        {
-            if (classObject is null)
-            {
-                throw new ArgumentNullException($"{nameof(classObject)} is null!");
-            }
         }
     }
 }
