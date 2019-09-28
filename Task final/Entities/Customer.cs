@@ -5,16 +5,18 @@ namespace Entities
 {
     public class Customer
     {
+        public int CustomerId { get; set; }
+
+        public int UserId { get; }
+
         public string Name { get; }
 
-        public User User { get; }
+        public List<int> ListOrderId { get; set; }
 
-        public List<Order> Orders { get; set; }
-
-        public Customer(User user, string name)
+        public Customer(string name, int userId)
         {
+            UserId = userId;
             Name = name;
-            User = user;
         }
     }
 }

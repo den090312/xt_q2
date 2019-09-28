@@ -10,10 +10,19 @@ namespace Entities
     {
         private readonly string password;
 
-        public Role Role { get; }
+        public int UserId { get; set; }
+
+        public int IdRole { get; }
 
         public string Name { get; }
 
         public string PasswordHash { get; }
+
+        public User(string name, int idRole, string password)
+        {
+            Name = name;
+            IdRole = idRole;
+            this.password = password;
+        }
     }
 }

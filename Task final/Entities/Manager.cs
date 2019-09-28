@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Entities
 {
     public class Manager
     {
+        public int ManagerId { get; set; }
+
+        public int IdUser { get; }
+
         public string Name { get; }
 
-        public User User { get; }
+        public List<int> ListOrderId { get; set; }
 
-        public List<Order> Orders { get; set; }
+        public Rank CurrentRank { get; set; }
 
         public enum Rank
         {
@@ -23,10 +23,11 @@ namespace Entities
             General = 4
         }
 
-        public Manager(string name, User user)
+        public Manager(int idUser, string name, Rank rank)
         {
+            IdUser = idUser;
             Name = name;
-            User = user;
+            CurrentRank = rank;
         }
     }
 }

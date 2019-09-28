@@ -8,15 +8,17 @@ namespace Entities
 {
     public class Order
     {
-        public Customer Customer { get; }
+        public int OrderId { get; set; }
 
-        public Manager Manager { get; set; }
+        public int IdCustomer { get; }
+
+        public int IdManager { get; set; }
 
         public DateTime Date { get; }
 
         public string Adress { get; }
 
-        public List<Nomenclature> ListNomenclature { get; set; }
+        public List<int> ListIdNomenclature { get; set; }
 
         public Status CurrentStatus { get; set; }
 
@@ -31,9 +33,9 @@ namespace Entities
             Closed = 6
         }
 
-        public Order(Customer customer, DateTime date, string adress)
+        public Order(int idCustomer, DateTime date, string adress)
         {
-            Customer = customer;
+            IdCustomer = idCustomer;
             Date = date;
             Adress = adress;
             CurrentStatus = Status.Opened;
