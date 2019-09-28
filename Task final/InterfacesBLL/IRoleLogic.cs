@@ -15,7 +15,7 @@ namespace InterfacesBLL
 
         bool AddFullPermissons(string name);
 
-        bool Remove(int RoleId);
+        bool Remove(int roleId);
 
         IEnumerable<Role> GetAll();
 

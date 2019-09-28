@@ -7,7 +7,7 @@ namespace InterfacesDAL
     {
         bool Add(User user);
 
-        bool Remove(int UserId);
+        bool Remove(int userId);
 
         IEnumerable<User> GetAll();
 
