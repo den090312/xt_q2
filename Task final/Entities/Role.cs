@@ -26,5 +26,11 @@
         {
             Name = name;
         }
+
+        public Role(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
     }
 }

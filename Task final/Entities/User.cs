@@ -8,13 +8,21 @@
 
         public string Name { get; }
 
-        public string Password { get; }
+        public string PasswordHash { get; set; }
 
-        public User(string name, Role role, string password)
+        public User(int roleId, string name, string passwordHash)
         {
+            IdRole = roleId;
             Name = name;
-            IdRole = role.Id;
-            Password = password;
+            PasswordHash = passwordHash;
+        }
+
+        public User(int id, int roleId, string name, string passwordHash)
+        {
+            Id = id;
+            IdRole = roleId;
+            Name = name;
+            PasswordHash = passwordHash;
         }
     }
 }

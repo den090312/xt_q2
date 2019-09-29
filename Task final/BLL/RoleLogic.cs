@@ -64,6 +64,8 @@ namespace BLL
         public bool ChangeName(Role role, string newName)
         {
             NullCheck(role);
+            IdCheck(role.Id);
+
             NullCheck(newName);
             EmptyStringCheck(newName);
 

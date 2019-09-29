@@ -1,6 +1,5 @@
 ﻿using Entities;
 using InterfacesDAL;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -171,18 +170,19 @@ namespace DAL
 
             while (sqlDr.Read())
             {
-                var name = sqlDr.GetString(0);
+                var id = sqlDr.GetInt32(0);
+                var name = sqlDr.GetString(1);
 
-                var role = new Role(name)
+                var role = new Role(id, name)
                 {
-                    ProductRead  = sqlDr.GetBoolean(1),
-                    ProductWrite = sqlDr.GetBoolean(2),
-                    OrderRead    = sqlDr.GetBoolean(3),
-                    OrderWrite   = sqlDr.GetBoolean(4),
-                    RoleRead     = sqlDr.GetBoolean(5),
-                    RoleWrite    = sqlDr.GetBoolean(6),
-                    UserRead     = sqlDr.GetBoolean(7),
-                    UserWrite    = sqlDr.GetBoolean(8)
+                    ProductRead  = sqlDr.GetBoolean(2),
+                    ProductWrite = sqlDr.GetBoolean(3),
+                    OrderRead    = sqlDr.GetBoolean(4),
+                    OrderWrite   = sqlDr.GetBoolean(5),
+                    RoleRead     = sqlDr.GetBoolean(6),
+                    RoleWrite    = sqlDr.GetBoolean(7),
+                    UserRead     = sqlDr.GetBoolean(8),
+                    UserWrite    = sqlDr.GetBoolean(9)
                 };
 
                 roleList.Add(role);

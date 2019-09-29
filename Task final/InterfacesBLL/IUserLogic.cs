@@ -9,7 +9,7 @@ namespace InterfacesBLL
 {
     public interface IUserLogic
     {
-        bool Add(User user);
+        bool Add(int roleId, string name, string password);
 
         bool Remove(int userId);
 

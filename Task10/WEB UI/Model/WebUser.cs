@@ -234,16 +234,16 @@ namespace WEB_UI
                 listPass.Add(password.Substring(i, Math.Min(step, password.Length - i)));
             }
 
-            return GetHashFromListPass(listPass);
+            return GetHashFromListPass(listPass, step);
         }
 
-        private static string GetHashFromListPass(List<string> listPass)
+        private static string GetHashFromListPass(List<string> listPass, int step)
         {
             var hashSb = new StringBuilder();
 
             for (var i = 0; i < listPass.Count; i++)
             {
-                var bytes = Encoding.ASCII.GetBytes(AppendSpacesToString(listPass[i], 4));
+                var bytes = Encoding.ASCII.GetBytes(AppendSpacesToString(listPass[i], step));
 
                 hashSb.Append(BitConverter.ToInt32(bytes, 0));
 
