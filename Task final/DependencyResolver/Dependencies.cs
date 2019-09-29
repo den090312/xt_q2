@@ -4,9 +4,9 @@ using InterfacesDAL;
 using DAL;
 using System.Configuration;
 
-namespace Resolver
+namespace Dependencies
 {
-    public static class Resolver
+    public static class Dependencies
     {
         private static readonly IUserDao userDao;
         private static readonly ICustomerDao customerDao;
@@ -15,7 +15,7 @@ namespace Resolver
 
         public static ICustomerLogic CustomerLogic { get; private set; }
 
-        static Resolver()
+        static Dependencies()
         {
             var userDaoSet = ConfigurationManager.AppSettings["userDaoSet"];
 

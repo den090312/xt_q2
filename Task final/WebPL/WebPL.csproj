@@ -149,9 +149,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DependencyResolver\Resolver.csproj">
+    <ProjectReference Include="..\DependencyResolver\Dependencies.csproj">
       <Project>{fbf55eed-5165-4cff-b084-d19617a77ccb}</Project>
-      <Name>Resolver</Name>
+      <Name>Dependencies</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
       <Project>{76d90963-fd32-48ef-8297-421ae366156c}</Project>

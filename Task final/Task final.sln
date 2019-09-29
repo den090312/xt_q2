@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfacesBLL", "InterfacesBLL\InterfacesBLL.csproj", "{C9D7538A-22BE-412E-8237-DB6EE90D943A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resolver", "DependencyResolver\Resolver.csproj", "{FBF55EED-5165-4CFF-B084-D19617A77CCB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dependencies", "DependencyResolver\Dependencies.csproj", "{FBF55EED-5165-4CFF-B084-D19617A77CCB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{76D90963-FD32-48EF-8297-421AE366156C}"
 EndProject

@@ -8,7 +8,7 @@ namespace DAL
 {
     public class RoleDaoDb : IRoleDao
     {
-        private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=webusersdb;Integrated Security=True";
+        private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=orderservice;Integrated Security=True";
 
         public bool Add(Role role)
         {

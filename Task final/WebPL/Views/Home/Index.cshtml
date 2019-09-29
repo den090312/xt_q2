@@ -1,4 +1,4 @@
-﻿@using Resolver;
+﻿@using Dependencies;
 @using Entities;
 <!DOCTYPE html>
 <html>
@@ -12,7 +12,7 @@
 <body>
     <div>
         @{
-            //var customers = Resolver.CustomerLogic.GetAll();
+            var users = Dependencies.UserLogic.GetAll();
             //@Html.Partial("");
         }
     </div>
