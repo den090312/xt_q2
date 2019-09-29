@@ -1,5 +1,5 @@
-﻿@using Dependencies;
-@using Entities;
+﻿@using WebPL.Models;
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,10 +10,24 @@
     <title>Весёлые соседи - интернет-магазин</title>
 </head>
 <body>
-    <div>
+    <div id="main" class="main">
         @{
-            var users = Dependencies.UserLogic.GetAll();
-            @Html.Partial("~/Views/Guest.cshtml");
+            var currentUser = Index.CurrentUser;
+            var currentRoleId = Index.CurrentUser.IdRole;
+            var currentRoleName = string.Empty;
+
+            if (currentRoleId == 0)
+            {
+                currentRoleName = currentUser.Name; 
+            }
+        }
+        <p class="currentUserName">User name: @(currentUser.Name)</p>
+        <p class="currentUserRole">Role: @currentRoleName</p>
+        @{
+            if (Index.CurrentUser == Entities.User.Guest)
+            {
+                @Html.Partial("~/Views/Guest.cshtml");
+            }
         }
     </div>
 </body>

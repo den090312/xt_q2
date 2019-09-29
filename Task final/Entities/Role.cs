@@ -2,6 +2,8 @@
 {
     public class Role
     {
+        public static Role Guest { get; }
+
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -21,6 +23,8 @@
         public bool UserRead { get; set; }
 
         public bool UserWrite { get; set; }
+
+        static Role() => Guest = new Role("Guest");
 
         public Role(string name)
         {

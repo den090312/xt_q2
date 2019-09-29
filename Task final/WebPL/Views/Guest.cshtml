@@ -1,1 +1,26 @@
-﻿123
+﻿@using Dependencies;
+@using Entities;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/script.js"></script>
+    <link rel="stylesheet" href="~/Content/styles.css" type="text/css" />
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
+    <title>Весёлые соседи - интернет-магазин</title>
+</head>
+<body>
+    <div class="authentication">
+        <form method="post" action="" class="user_log_in">
+            <p class="alertbox"></p>
+            <input type="text" class="log_name" name="logName" placeholder="Name" />
+            <input type="text" class="log_pass" name="logPass" placeholder="Password" />
+            <input type="submit" class="log_in" value="Log in">
+        </form>
+        <p>
+            <input type="button" class="goToRegistration" value="Register" />
+        </p>
+    </div>
+</body>
+</html>

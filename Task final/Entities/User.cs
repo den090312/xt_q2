@@ -2,6 +2,8 @@
 {
     public class User
     {
+        public static User Guest { get; }
+
         public int Id { get; set; }
 
         public int IdRole { get; }
@@ -9,6 +11,10 @@
         public string Name { get; }
 
         public string PasswordHash { get; set; }
+
+        static User() => Guest = new User(Role.Guest);
+
+        public User(Role role) => Name = role.Name;
 
         public User(int roleId, string name, string passwordHash)
         {
