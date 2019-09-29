@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
-    public class ManagerDaoDb : IManagerDao
+    public class ProductDaoDb : IProductDao
     {
 
     }

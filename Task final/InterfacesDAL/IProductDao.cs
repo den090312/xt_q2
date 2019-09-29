@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InterfacesDAL
 {
-    public interface INomenclatureDao
+    public interface IProductDao
     {
 
     }

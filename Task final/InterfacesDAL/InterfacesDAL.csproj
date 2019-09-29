@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="ICustomerDao.cs" />
     <Compile Include="IManagerDao.cs" />
-    <Compile Include="INomenclatureDao.cs" />
+    <Compile Include="IProductDao.cs" />
     <Compile Include="IOrderDao.cs" />
     <Compile Include="IRoleDao.cs" />
     <Compile Include="IUserDao.cs" />
