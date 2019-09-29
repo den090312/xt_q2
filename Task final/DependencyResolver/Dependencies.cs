@@ -6,13 +6,13 @@ using System.Configuration;
 
 namespace DependencyResolver
 {
-    public static class DependencyResolver
+    public static class Dependencies
     {
         private static readonly ICustomerDao customerDao;
 
         public static ICustomerLogic CustomerLogic { get; private set; }
 
-        static DependencyResolver()
+        static Dependencies()
         {
             var customDaoSet = ConfigurationManager.AppSettings["customDaoSet"];
 
