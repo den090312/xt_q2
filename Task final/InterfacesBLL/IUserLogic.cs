@@ -11,6 +11,8 @@ namespace InterfacesBLL
     {
         bool Add(int roleId, string name, string password);
 
+        bool Add(ref User user, int roleId);
+
         bool Remove(int userId);
 
         IEnumerable<User> GetAll();

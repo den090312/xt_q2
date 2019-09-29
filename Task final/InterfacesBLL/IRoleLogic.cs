@@ -9,16 +9,12 @@ namespace InterfacesBLL
 {
     public interface IRoleLogic
     {
-        bool Add(string name);
-
-        bool AddReadonly(string name);
-
-        bool AddFullPermissons(string name);
+        bool Add(ref Role role);
 
         bool Remove(int roleId);
 
         IEnumerable<Role> GetAll();
 
-        bool ChangeName(Role role, string newName);
+        bool ChangeName(ref Role role, string newName);
     }
 }

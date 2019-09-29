@@ -9,16 +9,12 @@ namespace InterfacesDAL
 {
     public interface IRoleDao
     {
-        bool Add(Role role);
-
-        bool AddReadonly(Role role);
-
-        bool AddFullPermissons(Role role);
+        bool Add(ref Role role);
 
         bool Remove(int roleId);
 
         IEnumerable<Role> GetAll();
 
-        bool UpdateName(Role role);
+        bool UpdateName(ref Role role);
     }
 }

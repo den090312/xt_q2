@@ -1,5 +1,6 @@
 ﻿using Entities;
 using InterfacesDAL;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -10,39 +11,11 @@ namespace DAL
     {
         private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=orderservice;Integrated Security=True";
 
-        public bool Add(Role role)
+        public bool Add(ref Role role)
         {
             try
             {
-                AddRole(role);
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public bool AddFullPermissons(Role role)
-        {
-            try
-            {
-                AddFullPermissonRole(role);
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public bool AddReadonly(Role role)
-        {
-            try
-            {
-                AddAddReadonlyRole(role);
+                AddRole(ref role);
 
                 return true;
             }
@@ -81,11 +54,11 @@ namespace DAL
             }
         }
 
-        public bool UpdateName(Role role)
+        public bool UpdateName(ref Role role)
         {
             try
             {
-                UpdateRoleName(role);
+                UpdateRoleName(ref role);
 
                 return true;
             }
@@ -95,24 +68,7 @@ namespace DAL
             }
         }
 
-        private void AddAddReadonlyRole(Role role)
-        {
-            using (var sqlConnection = new SqlConnection(connectionString))
-            {
-                var sqlCommand = sqlConnection.CreateCommand();
-
-                sqlCommand.CommandText = "AddReadonlyRole";
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-
-                sqlCommand.Parameters.Add(SqlParName(role.Name));
-
-                sqlConnection.Open();
-
-                sqlCommand.ExecuteNonQuery();
-            }
-        }
-
-        private void AddRole(Role role)
+        private void AddRole(ref Role role)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
             {
@@ -120,31 +76,36 @@ namespace DAL
 
                 sqlCommand.CommandText = "AddRole";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
+
                 sqlCommand.Parameters.Add(SqlParName(role.Name));
+
+                sqlCommand.Parameters.Add(SqlParBit(role.ProductRead,  "@ProductRead"));
+                sqlCommand.Parameters.Add(SqlParBit(role.ProductWrite, "@ProductWrite"));
+                sqlCommand.Parameters.Add(SqlParBit(role.OrderRead,    "@OrderRead"));
+                sqlCommand.Parameters.Add(SqlParBit(role.OrderWrite,   "@OrderWrite"));
+                sqlCommand.Parameters.Add(SqlParBit(role.RoleRead,     "@RoleRead"));
+                sqlCommand.Parameters.Add(SqlParBit(role.RoleWrite,    "@RoleWrite"));
+                sqlCommand.Parameters.Add(SqlParBit(role.UserRead,     "@UserRead"));
+                sqlCommand.Parameters.Add(SqlParBit(role.UserWrite,    "@UserWrite"));
 
                 sqlConnection.Open();
 
-                sqlCommand.ExecuteNonQuery();
+                role.Id = sqlCommand.ExecuteReader().GetInt32(0);
             }
         }
 
-        private void AddFullPermissonRole(Role role)
+        private SqlParameter SqlParBit(bool value, string parameterName)
         {
-            using (var sqlConnection = new SqlConnection(connectionString))
+            return new SqlParameter
             {
-                var sqlCommand = sqlConnection.CreateCommand();
-
-                sqlCommand.CommandText = "AddFullPermissonRole";
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.Add(SqlParName(role.Name));
-
-                sqlConnection.Open();
-
-                sqlCommand.ExecuteNonQuery();
-            }
+                ParameterName = parameterName,
+                Value = value,
+                SqlDbType = SqlDbType.Bit,
+                Direction = ParameterDirection.Input
+            };
         }
 
-        private void UpdateRoleName(Role role)
+        private void UpdateRoleName(ref Role role)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
             {

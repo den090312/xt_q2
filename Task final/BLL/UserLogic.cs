@@ -32,7 +32,18 @@ namespace BLL
 
             var user = new User(roleId, name, GetHash(password));
 
-            return userDao.Add(user);
+            return userDao.Add(ref user);
+        }
+
+        public bool Add(User user, int roleId)
+        {
+            NullCheck(user);
+            EmptyStringCheck(user.Name);
+            IdCheck(roleId);
+
+            user.IdRole = roleId;
+
+            return userDao.Add(ref user);
         }
 
         public bool ChangeName(User user, string newName)

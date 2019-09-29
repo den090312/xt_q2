@@ -17,51 +17,15 @@ namespace BLL
             roleDao = iRoleDao;
         }
 
-        public bool Add(string name)
+        public bool Add(ref Role role)
         {
-            NullCheck(name);
-            EmptyStringCheck(name);
+            NullCheck(role);
+            EmptyStringCheck(role.Name);
 
-            return roleDao.Add(new Role(name));
+            return roleDao.Add(ref role);
         }
 
-        public bool AddReadonly(string name)
-        {
-            NullCheck(name);
-            EmptyStringCheck(name);
-
-            var role = new Role(name)
-            {
-                OrderRead = true,
-                ProductRead = true,
-                RoleRead = true,
-                UserRead = true
-            };
-
-            return roleDao.Add(role);
-        }
-
-        public bool AddFullPermissons(string name)
-        {
-            NullCheck(name);
-            EmptyStringCheck(name);
-
-            var role = new Role(name)
-            {
-                OrderRead = true,
-                OrderWrite = true,
-                ProductRead = true,
-                ProductWrite = true,
-                RoleRead = true,
-                RoleWrite = true,
-                UserRead = true,
-                UserWrite = true
-            };
-
-            return roleDao.Add(role);
-        }
-
-        public bool ChangeName(Role role, string newName)
+        public bool ChangeName(ref Role role, string newName)
         {
             NullCheck(role);
             IdCheck(role.Id);
@@ -71,7 +35,7 @@ namespace BLL
 
             role.Name = newName;
 
-            return roleDao.UpdateName(role);
+            return roleDao.UpdateName(ref role);
         }
 
         public IEnumerable<Role> GetAll() => roleDao.GetAll();

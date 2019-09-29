@@ -148,7 +148,7 @@
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Guest.cshtml" />
+    <Content Include="Views\Authentication.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DependencyResolver\Dependencies.csproj">

@@ -1,4 +1,11 @@
-﻿@using WebPL.Models;
+﻿@{ 
+    if (IsPost)
+    {
+
+    }
+}
+
+@using WebPL.Models;
 
 <!DOCTYPE html>
 <html>
@@ -26,7 +33,7 @@
         @{
             if (Index.CurrentUser == Entities.User.Guest)
             {
-                @Html.Partial("~/Views/Guest.cshtml");
+                @Html.Partial("~/Views/Authentication.cshtml");
             }
         }
     </div>

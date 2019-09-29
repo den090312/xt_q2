@@ -5,7 +5,7 @@ namespace InterfacesDAL
 {
     public interface IUserDao
     {
-        bool Add(User user);
+        bool Add(ref User user);
 
         bool Remove(int userId);
 
