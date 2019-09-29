@@ -40,25 +40,3 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>-->
-
-@using Resolver;
-@using Entities;
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <script src="~/Scripts/script.js"></script>
-    <link rel="stylesheet" href="~/Content/styles.css" type="text/css" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <title>Весёлые соседи - интернет-магазин</title>
-</head>
-<body>
-    <div>
-        @{
-            var customers = Resolver.RoleLogic.GetAll();
-            //@Html.Partial("");
-        }
-    </div>
-    <partial name="_PartialPage1" />
-</body>
-</html>

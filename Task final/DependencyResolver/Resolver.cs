@@ -28,7 +28,7 @@ namespace Resolver
                     throw new ConfigurationErrorsException($"Can't find settings for {nameof(userDaoSet)}!");
             }
 
-            var customerDaoSet = ConfigurationManager.AppSettings["customDaoSet"];
+            var customerDaoSet = ConfigurationManager.AppSettings["customerDaoSet"];
 
             switch (customerDaoSet)
             {

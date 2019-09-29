@@ -29,7 +29,6 @@
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>-->
-
 @using Resolver;
 @using Entities;
 <!DOCTYPE html>
@@ -44,7 +43,7 @@
 <body>
     <div>
         @{
-            //var customers = DependencyResolver.CustomerLogic.GetAll();
+            var customers = Resolver.CustomerLogic.GetAll();
             //@Html.Partial("");
         }
     </div>
