@@ -35,7 +35,7 @@ namespace BLL
             return userDao.Add(ref user);
         }
 
-        public bool Add(User user, int roleId)
+        public bool Add(ref User user, int roleId)
         {
             NullCheck(user);
             EmptyStringCheck(user.Name);

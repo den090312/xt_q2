@@ -11,12 +11,15 @@ namespace Common
         private static readonly IRoleDao roleDao;
         private static readonly IUserDao userDao;
         private static readonly ICustomerDao customerDao;
+        private static readonly IProductDao productDao;
 
         public static IRoleLogic RoleLogic { get; private set; }
 
         public static IUserLogic UserLogic { get; private set; }
 
         public static ICustomerLogic CustomerLogic { get; private set; }
+
+        public static IProductLogic ProductLogic { get; private set; }
 
         static Dependencies()
         {
@@ -47,15 +50,27 @@ namespace Common
             switch (customerDaoSet)
             {
                 case "1":
-                    customerDao = new CustomerDaoDb();
+                    productDao = new ProductDaoDb();
                     break;
                 default:
                     throw new ConfigurationErrorsException($"Can't find settings for {nameof(customerDaoSet)}!");
             }
 
-            RoleLogic = new RoleLogic(roleDao);
+            var productDaoSet = ConfigurationManager.AppSettings["productDaoSet"];
+
+            switch (productDaoSet)
+            {
+                case "1":
+                    customerDao = new CustomerDaoDb();
+                    break;
+                default:
+                    throw new ConfigurationErrorsException($"Can't find settings for {nameof(productDaoSet)}!");
+            }
+
+            RoleLogic     = new RoleLogic(roleDao);
+            UserLogic     = new UserLogic(userDao);
             CustomerLogic = new CustomerLogic(customerDao);
-            UserLogic = new UserLogic(userDao);
+            ProductLogic  = new ProductLogic(productDao);
         }
     }
 }

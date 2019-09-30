@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,10 @@ namespace InterfacesBLL
 {
     public interface IProductLogic
     {
+        bool Add(string name, decimal price);
+
+        bool Add(ref Product product);
+
         bool NoProducts();
     }
 }

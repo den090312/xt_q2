@@ -10,11 +10,11 @@ namespace DAL
     {
         private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=orderservice;Integrated Security=True";
 
-        public bool Add(User user)
+        public bool Add(ref User user)
         {
             try
             {
-                AddUser(user);
+                AddUser(ref user);
 
                 return true;
             }
@@ -122,7 +122,7 @@ namespace DAL
             return userList;
         }
 
-        private void AddUser(User user)
+        private void AddUser(ref User user)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
             {
@@ -137,7 +137,7 @@ namespace DAL
 
                 sqlConnection.Open();
 
-                sqlCommand.ExecuteNonQuery();
+                user.Id = sqlCommand.ExecuteReader().GetInt32(0);
             }
         }
 

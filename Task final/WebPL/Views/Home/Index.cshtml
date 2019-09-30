@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     if (IsPost)
     {
 
@@ -6,6 +6,7 @@
 }
 
 @using WebPL.Models;
+@using Entities;
 @using Common;
 
 <!DOCTYPE html>
@@ -31,7 +32,13 @@
 
             if (Dependencies.RoleLogic.NoRoles())
             {
-                Index.LoadDemoUsers();
+                Index.LoadDemoRoles(out Role roleGuest, out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin);
+                Index.LoadDemoUsers(roleGuest, roleCustomer, roleManager, roleAdmin, roleSuperAdmin);
+            }
+
+            if (Dependencies.ProductLogic.NoProducts())
+            {
+                Index.LoadDemoProducts();
             }
         }
         <p class="currentUserName">User name: @(currentUser.Name)</p>
