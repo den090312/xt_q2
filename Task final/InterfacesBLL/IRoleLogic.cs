@@ -16,5 +16,7 @@ namespace InterfacesBLL
         IEnumerable<Role> GetAll();
 
         bool ChangeName(ref Role role, string newName);
+
+        bool NoRoles();
     }
 }

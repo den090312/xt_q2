@@ -70,5 +70,10 @@ namespace BLL
                 throw new ArgumentNullException($"{nameof(classObject)} is null!");
             }
         }
+
+        public bool NoRoles()
+        {
+            return roleDao.NoRoles();
+        }
     }
 }

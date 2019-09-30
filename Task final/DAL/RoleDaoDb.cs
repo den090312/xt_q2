@@ -68,6 +68,23 @@ namespace DAL
             }
         }
 
+        public bool NoRoles() => GetRoleCount() == 0;
+
+        private static int GetRoleCount()
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetRoleCount";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlConnection.Open();
+
+                return sqlCommand.ExecuteReader().GetInt32(0);
+            }
+        }
+
         private void AddRole(ref Role role)
         {
             using (var sqlConnection = new SqlConnection(connectionString))

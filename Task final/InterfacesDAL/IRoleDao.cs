@@ -16,5 +16,7 @@ namespace InterfacesDAL
         IEnumerable<Role> GetAll();
 
         bool UpdateName(ref Role role);
+
+        bool NoRoles();
     }
 }
