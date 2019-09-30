@@ -6,6 +6,7 @@
 }
 
 @using WebPL.Models;
+@using Common;
 
 <!DOCTYPE html>
 <html>
@@ -25,7 +26,12 @@
 
             if (currentRoleId == 0)
             {
-                currentRoleName = currentUser.Name; 
+                currentRoleName = currentUser.Name;
+            }
+
+            if (Dependencies.RoleLogic.NoRoles())
+            {
+                Index.LoadDemoData();
             }
         }
         <p class="currentUserName">User name: @(currentUser.Name)</p>

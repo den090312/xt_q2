@@ -15,34 +15,29 @@ namespace WebPL.Models
 
         public static void LoadDemoData()
         {
-            LoadDefaultRoles(out Role roleGuest, out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin);
-
-            LoadDefaultUsers(roleGuest, roleCustomer, roleManager, roleAdmin, roleSuperAdmin, 
-                out User userGuest, out User userCustomer, out User userManager, out User userAdmin, out User userSuperAdmin);
-
-
+            LoadDemoRoles(out Role roleGuest, out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin);
+            LoadDemoUsers(roleGuest, roleCustomer, roleManager, roleAdmin, roleSuperAdmin);
         }
 
-        private static void LoadDefaultUsers(Role roleGuest, Role roleCustomer, Role roleManager, Role roleAdmin, Role roleSuperAdmin,
-            out User userGuest, out User userCustomer, out User userManager, out User userAdmin, out User userSuperAdmin)
+        private static void LoadDemoUsers(Role roleGuest, Role roleCustomer, Role roleManager, Role roleAdmin, Role roleSuperAdmin)
         {
-            userGuest = User.Guest;
+            var userGuest = User.Guest;
             Dependencies.UserLogic.Add(ref userGuest, roleGuest.Id);
 
-            userCustomer = User.Customer;
+            var userCustomer = User.Customer;
             Dependencies.UserLogic.Add(ref userCustomer, roleCustomer.Id);
 
-            userManager = User.Manager;
-            Dependencies.UserLogic.Add(ref userCustomer, roleManager.Id);
+            var userManager = User.Manager;
+            Dependencies.UserLogic.Add(ref userManager, roleManager.Id);
 
-            userAdmin = User.Manager;
+            var userAdmin = User.Manager;
             Dependencies.UserLogic.Add(ref userAdmin, roleAdmin.Id);
 
-            userSuperAdmin = User.Manager;
+            var userSuperAdmin = User.Manager;
             Dependencies.UserLogic.Add(ref userSuperAdmin, roleSuperAdmin.Id);
         }
 
-        private static void LoadDefaultRoles(out Role roleGuestId, out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin)
+        private static void LoadDemoRoles(out Role roleGuestId, out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin)
         {
             roleGuestId = Role.Guest;
             Dependencies.RoleLogic.Add(ref roleGuestId);
