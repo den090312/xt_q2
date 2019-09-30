@@ -8,6 +8,6 @@ namespace InterfacesDAL
 {
     public interface IProductDao
     {
-
+        bool NoProducts();
     }
 }

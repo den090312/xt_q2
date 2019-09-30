@@ -13,7 +13,7 @@ namespace WebPL.Models
 
         static Index() => CurrentUser = User.Guest;
 
-        public static void LoadDemoData()
+        public static void LoadDemoUsers()
         {
             LoadDemoRoles(out Role roleGuest, out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin);
             LoadDemoUsers(roleGuest, roleCustomer, roleManager, roleAdmin, roleSuperAdmin);

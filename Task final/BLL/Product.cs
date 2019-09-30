@@ -1,13 +1,24 @@
-﻿using System;
+﻿using Entities;
+using InterfacesBLL;
+using InterfacesDAL;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class NomenclatureLogic
+    public class Product : IProductLogic
     {
+        private readonly IProductDao productDao;
+
+        public Product(IProductDao iProductDao)
+        {
+            NullCheck(iProductDao);
+
+            productDao = iProductDao;
+        }
+
+        public bool NoProducts() => productDao.NoProducts();
+
         private void PriceCheck(double price)
         {
             if (price <= 0)

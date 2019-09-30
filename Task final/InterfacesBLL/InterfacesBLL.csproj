@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="ICustomerLogic.cs" />
     <Compile Include="IManagerLogic.cs" />
-    <Compile Include="INomenclatureLogic.cs" />
+    <Compile Include="IProductLogic.cs" />
     <Compile Include="IOrderLogic.cs" />
     <Compile Include="IRoleLogic.cs" />
     <Compile Include="IUserLogic.cs" />

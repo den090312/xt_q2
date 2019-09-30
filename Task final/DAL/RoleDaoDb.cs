@@ -68,15 +68,15 @@ namespace DAL
             }
         }
 
-        public bool NoRoles() => GetRoleCount() == 0;
+        public bool NoRoles() => GetRolesCount() == 0;
 
-        private static int GetRoleCount()
+        private static int GetRolesCount()
         {
             using (var sqlConnection = new SqlConnection(connectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
 
-                sqlCommand.CommandText = "GetRoleCount";
+                sqlCommand.CommandText = "GetRolesCount";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 sqlConnection.Open();
