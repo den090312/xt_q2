@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerDaoDb.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="ManagerDaoDb.cs" />
     <Compile Include="ProductDaoDb.cs" />
     <Compile Include="OrderDaoDb.cs" />
@@ -58,6 +62,9 @@
       <Project>{9D0B51BF-B2FF-4D58-957D-24A49FE906E9}</Project>
       <Name>InterfacesDAL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,5 +1,6 @@
 ﻿using Entities;
 using InterfacesDAL;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -18,8 +19,45 @@ namespace DAL
 
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                Logger.InitLogger();
+                Logger.Log.Error(ex.Message);
+
+                return false;
+            }
+        }
+
+        public bool Remove(int userId)
+        {
+            try
+            {
+                RemoveUser(userId);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Logger.InitLogger();
+                Logger.Log.Error(ex.Message);
+
+                return false;
+            }
+        }
+
+        public bool UpdateName(User user)
+        {
+            try
+            {
+                UpdateUserName(user);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Logger.InitLogger();
+                Logger.Log.Error(ex.Message);
+
                 return false;
             }
         }
@@ -36,34 +74,6 @@ namespace DAL
                 sqlConnection.Open();
 
                 return GetAllUsers(sqlCommand);
-            }
-        }
-
-        public bool Remove(int userId)
-        {
-            try
-            {
-                RemoveUser(userId);
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public bool UpdateName(User user)
-        {
-            try
-            {
-                UpdateUserName(user);
-
-                return true;
-            }
-            catch
-            {
-                return false;
             }
         }
 

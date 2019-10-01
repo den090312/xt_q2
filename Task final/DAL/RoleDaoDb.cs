@@ -19,8 +19,45 @@ namespace DAL
 
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                Logger.InitLogger();
+                Logger.Log.Error(ex.Message);
+
+                return false;
+            }
+        }
+
+        public bool Remove(int roleId)
+        {
+            try
+            {
+                RemoveRole(roleId);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Logger.InitLogger();
+                Logger.Log.Error(ex.Message);
+
+                return false;
+            }
+        }
+
+        public bool UpdateName(ref Role role)
+        {
+            try
+            {
+                UpdateRoleName(ref role);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Logger.InitLogger();
+                Logger.Log.Error(ex.Message);
+
                 return false;
             }
         }
@@ -37,34 +74,6 @@ namespace DAL
                 sqlConnection.Open();
 
                 return GetAllRoles(sqlCommand);
-            }
-        }
-
-        public bool Remove(int roleId)
-        {
-            try
-            {
-                RemoveRole(roleId);
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public bool UpdateName(ref Role role)
-        {
-            try
-            {
-                UpdateRoleName(ref role);
-
-                return true;
-            }
-            catch
-            {
-                return false;
             }
         }
 
@@ -227,16 +236,6 @@ namespace DAL
                 Value = id,
                 SqlDbType = SqlDbType.Int,
                 Direction = ParameterDirection.Input
-            };
-        }
-
-        private SqlParameter SqlParId()
-        {
-            return new SqlParameter
-            {
-                ParameterName = "@Id",
-                SqlDbType = SqlDbType.Int,
-                Direction = ParameterDirection.Output
             };
         }
     }

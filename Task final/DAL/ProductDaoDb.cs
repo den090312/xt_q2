@@ -19,8 +19,11 @@ namespace DAL
 
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
+                Logger.InitLogger();
+                Logger.Log.Error(ex.Message);
+
                 return false;
             }
         }
