@@ -1,13 +1,15 @@
-﻿@{
+﻿@using WebPL.Models;
+@using Entities;
+@using Common;
+
+@{
+    //Index.DemoData();
+
     if (IsPost)
     {
 
     }
 }
-
-@using WebPL.Models;
-@using Entities;
-@using Common;
 
 <!DOCTYPE html>
 <html>
@@ -29,24 +31,13 @@
             {
                 currentRoleName = currentUser.Name;
             }
-
-            if (Dependencies.RoleLogic.NoRoles())
-            {
-                Index.LoadDemoRoles(out Role roleGuest, out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin);
-                Index.LoadDemoUsers(roleGuest, roleCustomer, roleManager, roleAdmin, roleSuperAdmin);
-            }
-
-            if (Dependencies.ProductLogic.NoProducts())
-            {
-                Index.LoadDemoProducts();
-            }
         }
         <p class="currentUserName">User name: @(currentUser.Name)</p>
         <p class="currentUserRole">Role: @currentRoleName</p>
         @{
             if (Index.CurrentUser == Entities.User.Guest)
             {
-                @Html.Partial("~/Views/Authentication.cshtml");
+                @RenderPage("~/Pages/Authentication.cshtml");
             }
         }
     </div>

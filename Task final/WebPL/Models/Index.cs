@@ -13,7 +13,21 @@ namespace WebPL.Models
 
         static Index() => CurrentUser = User.Guest;
 
-        public static void LoadDemoRoles(out Role roleGuestId, out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin)
+        public static void DemoData()
+        {
+            if (Dependencies.RoleLogic.NoRoles())
+            {
+                LoadDemoRoles(out Role roleGuest, out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin);
+                LoadDemoUsers(roleGuest, roleCustomer, roleManager, roleAdmin, roleSuperAdmin);
+            }
+
+            if (Dependencies.ProductLogic.NoProducts())
+            {
+                LoadDemoProducts();
+            }
+        }
+
+        private static void LoadDemoRoles(out Role roleGuestId, out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin)
         {
             var roleLogic = Dependencies.RoleLogic;
 
@@ -33,7 +47,7 @@ namespace WebPL.Models
             roleLogic.Add(ref roleSuperAdmin);
         }
 
-        public static void LoadDemoUsers(Role roleGuest, Role roleCustomer, Role roleManager, Role roleAdmin, Role roleSuperAdmin)
+        private static void LoadDemoUsers(Role roleGuest, Role roleCustomer, Role roleManager, Role roleAdmin, Role roleSuperAdmin)
         {
             var userLogic = Dependencies.UserLogic;
 
@@ -53,7 +67,7 @@ namespace WebPL.Models
             userLogic.Add(ref userSuperAdmin, roleSuperAdmin.Id);
         }
 
-        public static void LoadDemoProducts()
+        private static void LoadDemoProducts()
         {
             var productLogic = Dependencies.ProductLogic;
 
