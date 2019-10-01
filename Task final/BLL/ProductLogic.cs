@@ -30,7 +30,11 @@ namespace BLL
 
         public bool Add(ref Product product)
         {
-            throw new NotImplementedException();
+            NullCheck(product);
+            EmptyStringCheck(product.Name);
+            PriceCheck(product.Price);
+
+            return productDao.Add(ref product);
         }
 
         public bool NoProducts() => productDao.NoProducts();

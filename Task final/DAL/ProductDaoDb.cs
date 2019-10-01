@@ -39,11 +39,50 @@ namespace DAL
 
                 sqlConnection.Open();
 
-                product.Id = sqlCommand.ExecuteReader().GetInt32(0);
+                SetProductId(ref product, sqlCommand);
             }
         }
 
         public bool NoProducts() => GetProductsCount() == 0;
+
+        private static void SetProductId(ref Product product, SqlCommand sqlCommand)
+        {
+            var sqlDr = sqlCommand.ExecuteReader();
+
+            while (sqlDr.Read())
+            {
+                product.Id = sqlDr.GetInt32(0);
+            }
+        }
+
+        private static int GetProductsCount()
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetProductsCount";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlConnection.Open();
+
+                return ProductsCount(sqlCommand);
+            }
+        }
+
+        private static int ProductsCount(SqlCommand sqlCommand)
+        {
+            var count = 0;
+
+            var sqlDr = sqlCommand.ExecuteReader();
+
+            while (sqlDr.Read())
+            {
+                count = sqlDr.GetInt32(0);
+            }
+
+            return count;
+        }
 
         private SqlParameter SqlParPrice(decimal price)
         {
@@ -65,21 +104,6 @@ namespace DAL
                 SqlDbType = SqlDbType.NVarChar,
                 Direction = ParameterDirection.Input
             };
-        }
-
-        private static int GetProductsCount()
-        {
-            using (var sqlConnection = new SqlConnection(connectionString))
-            {
-                var sqlCommand = sqlConnection.CreateCommand();
-
-                sqlCommand.CommandText = "GetProductsCount";
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-
-                sqlConnection.Open();
-
-                return sqlCommand.ExecuteReader().GetInt32(0);
-            }
         }
     }
 }

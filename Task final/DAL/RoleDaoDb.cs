@@ -70,7 +70,7 @@ namespace DAL
 
         public bool NoRoles() => GetRolesCount() == 0;
 
-        private static int GetRolesCount()
+        private int GetRolesCount()
         {
             using (var sqlConnection = new SqlConnection(connectionString))
             {
@@ -78,11 +78,24 @@ namespace DAL
 
                 sqlCommand.CommandText = "GetRolesCount";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-
                 sqlConnection.Open();
 
-                return sqlCommand.ExecuteReader().GetInt32(0);
+                return GetCount(sqlCommand);
             }
+        }
+
+        private static int GetCount(SqlCommand sqlCommand)
+        {
+            var count = 0;
+
+            var sqlDr = sqlCommand.ExecuteReader();
+
+            while (sqlDr.Read())
+            {
+                count = sqlDr.GetInt32(0);
+            }
+
+            return count;
         }
 
         private void AddRole(ref Role role)
@@ -107,19 +120,18 @@ namespace DAL
 
                 sqlConnection.Open();
 
-                role.Id = sqlCommand.ExecuteReader().GetInt32(0);
+                SetRoleId(ref role, sqlCommand);
             }
         }
 
-        private SqlParameter SqlParBit(bool value, string parameterName)
+        private static void SetRoleId(ref Role role, SqlCommand sqlCommand)
         {
-            return new SqlParameter
+            var sqlDr = sqlCommand.ExecuteReader();
+
+            while (sqlDr.Read())
             {
-                ParameterName = parameterName,
-                Value = value,
-                SqlDbType = SqlDbType.Bit,
-                Direction = ParameterDirection.Input
-            };
+                role.Id = sqlDr.GetInt32(0);
+            }
         }
 
         private void UpdateRoleName(ref Role role)
@@ -185,6 +197,17 @@ namespace DAL
             }
         }
 
+        private SqlParameter SqlParBit(bool value, string parameterName)
+        {
+            return new SqlParameter
+            {
+                ParameterName = parameterName,
+                Value = value,
+                SqlDbType = SqlDbType.Bit,
+                Direction = ParameterDirection.Input
+            };
+        }
+
         private static SqlParameter SqlParName(string name)
         {
             return new SqlParameter
@@ -204,6 +227,16 @@ namespace DAL
                 Value = id,
                 SqlDbType = SqlDbType.Int,
                 Direction = ParameterDirection.Input
+            };
+        }
+
+        private SqlParameter SqlParId()
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@Id",
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Output
             };
         }
     }

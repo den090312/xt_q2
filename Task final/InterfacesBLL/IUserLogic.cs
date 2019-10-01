@@ -11,7 +11,7 @@ namespace InterfacesBLL
     {
         bool Add(int roleId, string name, string password);
 
-        bool Add(ref User user, int roleId);
+        bool Add(ref User user, int roleId, string password);
 
         bool Remove(int userId);
 

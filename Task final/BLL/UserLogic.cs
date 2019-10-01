@@ -35,13 +35,17 @@ namespace BLL
             return userDao.Add(ref user);
         }
 
-        public bool Add(ref User user, int roleId)
+        public bool Add(ref User user, int roleId, string password)
         {
             NullCheck(user);
             EmptyStringCheck(user.Name);
             IdCheck(roleId);
 
+            NullCheck(password);
+            EmptyStringCheck(password);
+
             user.IdRole = roleId;
+            user.PasswordHash = GetHash(password);
 
             return userDao.Add(ref user);
         }

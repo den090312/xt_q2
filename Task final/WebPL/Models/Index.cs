@@ -27,12 +27,12 @@ namespace WebPL.Models
             }
         }
 
-        private static void LoadDemoRoles(out Role roleGuestId, out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin)
+        private static void LoadDemoRoles(out Role roleGuest, out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin)
         {
             var roleLogic = Dependencies.RoleLogic;
 
-            roleGuestId = Role.Guest;
-            roleLogic.Add(ref roleGuestId);
+            roleGuest = Role.Guest;
+            roleLogic.Add(ref roleGuest);
 
             roleCustomer = Role.Customer;
             roleLogic.Add(ref roleCustomer);
@@ -52,19 +52,19 @@ namespace WebPL.Models
             var userLogic = Dependencies.UserLogic;
 
             var userGuest = User.Guest;
-            userLogic.Add(ref userGuest, roleGuest.Id);
+            userLogic.Add(ref userGuest, roleGuest.Id, "Guest");
 
             var userCustomer = User.Customer;
-            userLogic.Add(ref userCustomer, roleCustomer.Id);
+            userLogic.Add(ref userCustomer, roleCustomer.Id, "Customer");
 
             var userManager = User.Manager;
-            userLogic.Add(ref userManager, roleManager.Id);
+            userLogic.Add(ref userManager, roleManager.Id, "Manager");
 
-            var userAdmin = User.Manager;
-            userLogic.Add(ref userAdmin, roleAdmin.Id);
+            var userAdmin = User.Admin;
+            userLogic.Add(ref userAdmin, roleAdmin.Id, "Admin");
 
-            var userSuperAdmin = User.Manager;
-            userLogic.Add(ref userSuperAdmin, roleSuperAdmin.Id);
+            var userSuperAdmin = User.SuperAdmin;
+            userLogic.Add(ref userSuperAdmin, roleSuperAdmin.Id, "SuperAdmin");
         }
 
         private static void LoadDemoProducts()

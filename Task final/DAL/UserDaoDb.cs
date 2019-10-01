@@ -137,7 +137,17 @@ namespace DAL
 
                 sqlConnection.Open();
 
-                user.Id = sqlCommand.ExecuteReader().GetInt32(0);
+                SetUserId(ref user, sqlCommand);
+            }
+        }
+
+        private static void SetUserId(ref User user, SqlCommand sqlCommand)
+        {
+            var sqlDr = sqlCommand.ExecuteReader();
+
+            while (sqlDr.Read())
+            {
+                user.Id = sqlDr.GetInt32(0);
             }
         }
 
