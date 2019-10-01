@@ -39,6 +39,8 @@ namespace BLL
 
         public bool NoProducts() => productDao.NoProducts();
 
+        public IEnumerable<Product> GetAll() => productDao.GetAll();
+
         private void PriceCheck(decimal price)
         {
             if (price <= 0)

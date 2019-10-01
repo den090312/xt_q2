@@ -12,5 +12,7 @@ namespace InterfacesDAL
         bool Add(ref Product product);
 
         bool NoProducts();
+
+        IEnumerable<Product> GetAll();
     }
 }

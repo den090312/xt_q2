@@ -1,0 +1,17 @@
+﻿@using WebPL.Models;
+@using Entities;
+@using Common;
+
+@{
+    Layout = null;
+}
+
+@{
+    var products = Dependencies.ProductLogic.GetAll();
+
+    foreach (var product in products)
+    {
+        {<div>@product.Name</div>}
+        {<div>@product.Price</div>}
+    }
+}

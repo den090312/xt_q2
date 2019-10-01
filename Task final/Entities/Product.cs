@@ -13,5 +13,12 @@
             Name = name;
             Price = price;
         }
+
+        public Product(int id, string name, decimal price)
+        {
+            Id = id;
+            Name = name;
+            Price = price;
+        }
     }
 }

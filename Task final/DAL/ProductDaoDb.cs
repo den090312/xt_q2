@@ -25,6 +25,43 @@ namespace DAL
             }
         }
 
+        public bool NoProducts() => GetProductsCount() == 0;
+
+        public IEnumerable<Product> GetAll()
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetAllProducts";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlConnection.Open();
+
+                return GetAllProducts(sqlCommand);
+            }
+        }
+
+        private IEnumerable<Product> GetAllProducts(SqlCommand sqlCommand)
+        {
+            var productList = new List<Product>();
+
+            var sqlDr = sqlCommand.ExecuteReader();
+
+            while (sqlDr.Read())
+            {
+                var id = sqlDr.GetInt32(0);
+                var name = sqlDr.GetString(1);
+                var price = sqlDr.GetDecimal(2);
+
+                var product = new Product(id, name, price);
+
+                productList.Add(product);
+            }
+
+            return productList;
+        }
+
         private void AddProduct(ref Product product)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
@@ -42,8 +79,6 @@ namespace DAL
                 SetProductId(ref product, sqlCommand);
             }
         }
-
-        public bool NoProducts() => GetProductsCount() == 0;
 
         private static void SetProductId(ref Product product, SqlCommand sqlCommand)
         {

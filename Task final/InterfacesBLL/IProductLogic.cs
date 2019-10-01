@@ -14,5 +14,7 @@ namespace InterfacesBLL
         bool Add(ref Product product);
 
         bool NoProducts();
+
+        IEnumerable<Product> GetAll();
     }
 }
