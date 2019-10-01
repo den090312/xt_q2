@@ -3,45 +3,26 @@
 @using Common;
 
 @{
+    Layout = "~/Pages/_Layout1.cshtml";
+
     Index.DemoData();
 
-    if (IsPost)
-    {
+    var currentUser = Index.CurrentUser;
+    var currentRoleId = Index.CurrentUser.IdRole;
+    var currentRoleName = string.Empty;
 
+    if (currentRoleId == 0)
+    {
+        currentRoleName = currentUser.Name;
     }
 }
+<p class="currentUserName">User name: @(currentUser.Name)</p>
+<p class="currentUserRole">Role: @currentRoleName</p>
+@{
+    if (Index.CurrentUser == Entities.User.Guest)
+    {
+        @RenderPage("~/Pages/Authentication.cshtml");
+    }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <script src="~/Scripts/script.js"></script>
-    <link rel="stylesheet" href="~/Content/styles.css" type="text/css" />
-    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon">
-    <title>Весёлые соседи - интернет-магазин</title>
-</head>
-<body>
-    <div id="main" class="main">
-        @{
-            var currentUser = Index.CurrentUser;
-            var currentRoleId = Index.CurrentUser.IdRole;
-            var currentRoleName = string.Empty;
-
-            if (currentRoleId == 0)
-            {
-                currentRoleName = currentUser.Name;
-            }
-        }
-        <p class="currentUserName">User name: @(currentUser.Name)</p>
-        <p class="currentUserRole">Role: @currentRoleName</p>
-        @{
-            if (Index.CurrentUser == Entities.User.Guest)
-            {
-                @RenderPage("~/Pages/Authentication.cshtml");
-            }
-
-            @RenderPage("~/Pages/Products.cshtml");
-        }
-    </div>
-</body>
-</html>
+    @RenderPage("~/Pages/Products.cshtml");
+}

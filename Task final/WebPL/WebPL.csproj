@@ -88,7 +88,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\styles.css" />
     <Content Include="favicon.ico" />
+    <Content Include="Scripts\script.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +102,9 @@
     <Content Include="Index.cshtml" />
     <Content Include="Pages\Authentication.cshtml" />
     <Content Include="Pages\Products.cshtml" />
+    <Content Include="Pages\_Layout1.cshtml" />
+    <Content Include="Pages\_Header.cshtml" />
+    <Content Include="Pages\_Footer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -107,10 +112,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\" />
-    <Folder Include="Scripts\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DependencyResolver\Dependencies.csproj">
       <Project>{fbf55eed-5165-4cff-b084-d19617a77ccb}</Project>

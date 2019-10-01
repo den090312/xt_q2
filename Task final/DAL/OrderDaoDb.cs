@@ -8,7 +8,7 @@ namespace DAL
 {
     public class OrderDaoDb : IOrderDao
     {
-        private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=orderservice;Integrated Security=True";
+        //private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=orderservice;Integrated Security=True";
 
 
     }
