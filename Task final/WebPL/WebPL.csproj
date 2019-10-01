@@ -105,6 +105,7 @@
     <Content Include="Pages\_Layout1.cshtml" />
     <Content Include="Pages\_Header.cshtml" />
     <Content Include="Pages\_Footer.cshtml" />
+    <Content Include="Pages\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

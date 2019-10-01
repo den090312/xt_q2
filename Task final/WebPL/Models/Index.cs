@@ -27,6 +27,11 @@ namespace WebPL.Models
             }
         }
 
+        public static string GetLastError()
+        {
+            return string.Empty;
+        }
+
         private static void LoadDemoRoles(out Role roleGuest, out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin)
         {
             var roleLogic = Dependencies.RoleLogic;

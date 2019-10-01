@@ -21,8 +21,7 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                Logger.InitLogger();
-                Logger.Log.Error(ex.Message);
+                LogProductError(product, ex);
 
                 return false;
             }
@@ -142,6 +141,14 @@ namespace DAL
                 SqlDbType = SqlDbType.NVarChar,
                 Direction = ParameterDirection.Input
             };
+        }
+
+        private static void LogProductError(Product product, Exception ex)
+        {
+            var productInfo = product.Id + " | " + product.Name + " | " + product.Price;
+
+            Logger.InitLogger();
+            Logger.Log.Error(ex.Message + " - " + productInfo);
         }
     }
 }

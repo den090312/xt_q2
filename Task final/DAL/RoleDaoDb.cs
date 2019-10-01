@@ -21,8 +21,7 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                Logger.InitLogger();
-                Logger.Log.Error(ex.Message);
+                LogRoleError(role, ex);
 
                 return false;
             }
@@ -39,7 +38,7 @@ namespace DAL
             catch (Exception ex)
             {
                 Logger.InitLogger();
-                Logger.Log.Error(ex.Message);
+                Logger.Log.Error(ex.Message + " - roleId: " + roleId);
 
                 return false;
             }
@@ -55,8 +54,7 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                Logger.InitLogger();
-                Logger.Log.Error(ex.Message);
+                LogRoleError(role, ex);
 
                 return false;
             }
@@ -237,6 +235,14 @@ namespace DAL
                 SqlDbType = SqlDbType.Int,
                 Direction = ParameterDirection.Input
             };
+        }
+
+        private static void LogRoleError(Role role, Exception ex)
+        {
+            var roleInfo = role.Id + " | " + role.Name;
+
+            Logger.InitLogger();
+            Logger.Log.Error(ex.Message + " - " + roleInfo);
         }
     }
 }

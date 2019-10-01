@@ -21,8 +21,7 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                Logger.InitLogger();
-                Logger.Log.Error(ex.Message);
+                LogUserError(user, ex);
 
                 return false;
             }
@@ -39,7 +38,7 @@ namespace DAL
             catch (Exception ex)
             {
                 Logger.InitLogger();
-                Logger.Log.Error(ex.Message);
+                Logger.Log.Error(ex.Message + " - userId: " + userId);
 
                 return false;
             }
@@ -55,8 +54,7 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                Logger.InitLogger();
-                Logger.Log.Error(ex.Message);
+                LogUserError(user, ex);
 
                 return false;
             }
@@ -203,6 +201,14 @@ namespace DAL
                 SqlDbType = SqlDbType.NVarChar,
                 Direction = ParameterDirection.Input
             };
+        }
+
+        private static void LogUserError(User user, Exception ex)
+        {
+            var userInfo = user.Id + " | " + user.Name;
+
+            Logger.InitLogger();
+            Logger.Log.Error(ex.Message + " - " + userInfo);
         }
     }
 }
