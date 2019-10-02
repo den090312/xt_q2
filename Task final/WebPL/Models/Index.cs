@@ -1,19 +1,124 @@
 ﻿using Entities;
 using Common;
+using System.Collections.Specialized;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace WebPL.Models
 {
     public class Index
     {
+        public static NameValueCollection Forms { private get; set; }
+
+        public static string Message { get; set; }
+
         public static User CurrentUser { get; set; }
 
         static Index() => CurrentUser = User.Guest;
 
-        public static void DemoData()
+        public static void Run()
+        {
+            Account();
+            LoadDemoData();
+        }
+
+        private static void Account()
+        {
+            TryLogIn();
+            LogOut();
+            Register();
+        }
+
+        public static void Register()
+        {
+            var regName  = Forms["regName"];
+            var regPass  = Forms["regPass"];
+            var regRole  = Forms["regRole"];
+
+            if (regName == null | regPass == null)
+            {
+                return;
+            }
+
+            if (CurrentUser == User.Guest)
+            {
+                RegisterUser(regName, regPass, Role.Customer);
+            }
+        }
+
+        private static void RegisterUser(string regName, string regPass, Role regRole)
+        {
+            var userLogic = Dependencies.UserLogic;
+
+            if (userLogic.GetByName(regName) != null)
+            {
+                Message = "User is already exists!";
+
+                return;
+            }
+
+            var roleId = Dependencies.RoleLogic.GetIdByName(regRole.Name);
+
+            if (userLogic.Add(roleId, regName, regPass))
+            {
+                CurrentUser = Dependencies.UserLogic.GetByName(regName);
+                Message = "User registered";
+
+                return;
+            }
+            else
+            {
+                Message = "User was NOT registered!";
+
+                return;
+            }
+        }
+
+        private static void LogOut()
+        {
+            var loggedOut = Forms["loggedOut"];
+
+            if (loggedOut != null & loggedOut == "loggedOut")
+            {
+                CurrentUser = User.Guest;
+                Message = string.Empty;
+            }
+        }
+
+        private static void TryLogIn()
+        {
+            var logName = Forms["logName"];
+            var logPass = Forms["logPass"];
+
+            if (logName == null | logPass == null)
+            {
+                return;
+            }
+
+            var userLogic = Dependencies.UserLogic;
+
+            var logUser = userLogic.GetByName(logName);
+
+            if (logUser == null)
+            {
+                Message = "User name is not exists!";
+
+                return;
+            }
+
+            if (!userLogic.PasswordIsOk(logPass, logUser.PasswordHash))
+            {
+                Message = "Wrong password!";
+
+                return;
+            }
+            else
+            {
+                CurrentUser = logUser;
+                Message = string.Empty;
+            }
+        }
+
+        private static void LoadDemoData()
         {
             if (Dependencies.RoleLogic.NoRoles())
             {

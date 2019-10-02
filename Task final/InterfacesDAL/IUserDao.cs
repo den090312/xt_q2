@@ -12,5 +12,7 @@ namespace InterfacesDAL
         IEnumerable<User> GetAll();
 
         bool UpdateName(User user);
+
+        User GetByName(string name);
     }
 }

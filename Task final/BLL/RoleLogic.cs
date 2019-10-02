@@ -59,6 +59,14 @@ namespace BLL
             return roleDao.GetNameById(id);
         }
 
+        public int GetIdByName(string name)
+        {
+            NullCheck(name);
+            EmptyStringCheck(name);
+
+            return roleDao.GetIdByName(name);
+        }
+
         private void IdCheck(int id)
         {
             if (id <= 0)

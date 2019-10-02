@@ -1,18 +1,21 @@
 ﻿@using WebPL.Models;
 @using Entities;
 @using Common;
+
 @{
     Layout = "~/Pages/_Layout.cshtml";
 
     if (IsPost)
     {
-        var logname = Request.Form["logname"];
+        Index.Forms = Request.Form;
+        Index.Run();
+
+        //var logname = Request.Form["logname"];
 
         //POST-reload page fix
         @Html.Raw("<script>document.location='Index.cshtml'</script>");
     }
 
-    Index.DemoData();
 
     var currentUser = Index.CurrentUser;
     var currentRoleId = Index.CurrentUser.IdRole;
@@ -27,12 +30,17 @@
         currentRoleName = Dependencies.RoleLogic.GetNameById(currentRoleId);
     }
 }
+<b id="messagebox">@Index.Message</b>
 <p class="currentUserName">Имя пользователя: @currentUser.Name</p>
 <p class="currentUserRole">Роль: @currentRoleName</p>
 @{
     if (Index.CurrentUser == Entities.User.Guest)
     {
         @RenderPage("~/Pages/Authentication.cshtml");
+    }
+    else
+    {
+        @RenderPage("~/Pages/CurrentUser.cshtml");
     }
 
     @RenderPage("~/Pages/Products.cshtml");

@@ -75,6 +75,54 @@ namespace DAL
             }
         }
 
+        public User GetByName(string name)
+        {
+            try
+            {
+                return GetUserByName(name);
+            }
+            catch (Exception ex)
+            {
+                Logger.InitLogger();
+                Logger.Log.Error(ex.Message + " - name: " + name);
+
+                return null;
+            }
+
+        }
+
+        private User GetUserByName(string name)
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetUserByName";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.Add(SqlParName(name));
+
+                sqlConnection.Open();
+
+                return GetUser(sqlCommand, name);
+            }
+        }
+
+        private User GetUser(SqlCommand sqlCommand, string name)
+        {
+            var sqlDr = sqlCommand.ExecuteReader();
+
+            while (sqlDr.Read())
+            {
+                var id = sqlDr.GetInt32(0);
+                var roleId = sqlDr.GetInt32(1);
+                var passwordHash = sqlDr.GetString(2);
+
+                return new User(id, roleId, name, passwordHash);
+            }
+
+            return null;
+        }
+
         private void UpdateUserName(User user)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
@@ -167,6 +215,16 @@ namespace DAL
                 Value = id,
                 SqlDbType = SqlDbType.Int,
                 Direction = ParameterDirection.Input
+            };
+        }
+
+        private SqlParameter SqlParId()
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@Id",
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Output
             };
         }
 

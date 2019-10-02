@@ -109,7 +109,39 @@ namespace DAL
             }
         }
 
-        private static string GetRoleName(SqlCommand sqlCommand)
+        public int GetIdByName(string name)
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetRoleIdByName";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(SqlParName(name));
+                sqlCommand.Parameters.Add(SqlParId());
+
+                sqlConnection.Open();
+
+                return GetRoleId(sqlCommand);
+            }
+        }
+
+        private int GetRoleId(SqlCommand sqlCommand)
+        {
+            var roleId = 0;
+
+            var sqlDr = sqlCommand.ExecuteReader();
+
+            while (sqlDr.Read())
+            {
+                roleId = sqlDr.GetInt32(0);
+            }
+
+            return roleId;
+        }
+
+        private string GetRoleName(SqlCommand sqlCommand)
         {
             var roleName = string.Empty;
 
@@ -123,7 +155,7 @@ namespace DAL
             return roleName;
         }
 
-        private static int GetCount(SqlCommand sqlCommand)
+        private int GetCount(SqlCommand sqlCommand)
         {
             var count = 0;
 
@@ -264,7 +296,8 @@ namespace DAL
             {
                 ParameterName = "@Name",
                 SqlDbType = SqlDbType.NVarChar,
-                Direction = ParameterDirection.Output
+                Direction = ParameterDirection.Output,
+                Size = 15
             };
         }
 
@@ -276,6 +309,16 @@ namespace DAL
                 Value = id,
                 SqlDbType = SqlDbType.Int,
                 Direction = ParameterDirection.Input
+            };
+        }
+
+        private SqlParameter SqlParId()
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@Id",
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Output
             };
         }
 

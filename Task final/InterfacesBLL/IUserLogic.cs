@@ -18,5 +18,9 @@ namespace InterfacesBLL
         IEnumerable<User> GetAll();
 
         bool ChangeName(User user, string newName);
+
+        User GetByName(string name);
+
+        bool PasswordIsOk(string password, string hashcode);
     }
 }

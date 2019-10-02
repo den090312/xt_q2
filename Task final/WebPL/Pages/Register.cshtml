@@ -1,0 +1,23 @@
+﻿@using WebPL.Models;
+@using Entities;
+@using Common;
+
+@{
+    Layout = "~/Pages/_Layout.cshtml";
+}
+<form method="post" action="~/Index.cshtml" class="user_register">
+    <p class="alertbox"></p>
+    <h4>Регистрация</h4>
+    <p>
+        <input type="text" class="reg_name" name="regName" placeholder="Name" />
+    </p>
+    <p>
+        <input type="text" class="reg_pass" name="regPass" placeholder="Password" />
+    </p>
+    <p>
+        <input type="submit" class="register" value="Ок" />
+        <a href="~/Index.cshtml">
+            <input type="submit" class="cancel_register" value="Cancel" />
+        </a>
+    </p>
+</form>

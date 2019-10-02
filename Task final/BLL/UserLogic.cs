@@ -70,6 +70,26 @@ namespace BLL
             return userDao.Remove(UserId);
         }
 
+        public User GetByName(string name)
+        {
+            NullCheck(name);
+            EmptyStringCheck(name);
+
+            return userDao.GetByName(name);
+        }
+
+
+        public bool PasswordIsOk(string password, string hashcode)
+        {
+            NullCheck(password);
+            EmptyStringCheck(password);
+
+            NullCheck(hashcode);
+            EmptyStringCheck(hashcode);
+
+            return GetHash(password) == hashcode;
+        }
+
         private string GetHash(string password)
         {
             var listPass = new List<string>();
