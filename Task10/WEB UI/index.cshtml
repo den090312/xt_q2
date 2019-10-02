@@ -25,7 +25,7 @@
         Index.Forms = Request.Form;
         Index.Files = HttpContext.Current.Request.Files;
         Index.MyServer = Server;
-        Index.Run(out alert);
+        Index.Run();
 
         //POST-reload page fix
         @Html.Raw("<script>document.location='https://localhost:44337/index.cshtml'</script>");
@@ -42,8 +42,6 @@
 </head>
 <body>
     <div id="main" class="main">
-        @if (!string.IsNullOrEmpty(alert))
-            {<script>alert("@alert");</script>}
         <b id="messagebox">@Index.Message</b>
         <p class="currentUserName">User name: @(currentUser.Name)</p>
         <p class="currentUserRole">Role: @(currentUser.Role.Name)</p>

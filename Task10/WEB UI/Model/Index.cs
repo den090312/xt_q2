@@ -25,7 +25,7 @@ namespace WEB_UI
             Message = string.Empty;
         }
 
-        public static void Run(out string alert)
+        public static void Run()
         {
             CreateUser();
             CreateAward();
@@ -38,7 +38,7 @@ namespace WEB_UI
             EditUsers();
             EditAwards();
 
-            Account(out alert);
+            Account();
 
             SaveUserImage();
             SaveAwardImage();
@@ -46,26 +46,25 @@ namespace WEB_UI
             EditUserRoles();
         }
 
-        private static void Account(out string alert)
+        private static void Account()
         {
-            _ = TryLogIn();
+            TryLogIn();
             TryLogOut();
-            alert = TryRegister();
+            TryRegister();
         }
 
-        private static string TryRegister()
+        private static void TryRegister()
         {
-            var alert = string.Empty;
             var regName = Forms["regName"];
             var regPass = Forms["regPass"];
             var roleName = Forms["roleName"];
 
             if (regName == null | regPass == null | roleName == null)
             {
-                return alert;
+                return;
             }
 
-            if (TryUserRegister(regName, regPass, roleName, out alert))
+            if (TryUserRegister(regName, regPass, roleName))
             {
                 LogIn(regName, regPass);
             }
@@ -73,8 +72,6 @@ namespace WEB_UI
             {
                 Webuser.LogOut();
             }
-
-            return alert;
         }
 
         private static void TryLogOut()
@@ -87,43 +84,38 @@ namespace WEB_UI
             }
         }
 
-        private static string TryLogIn()
+        private static void TryLogIn()
         {
-            var errorResponse = string.Empty;
             var logName = Forms["logName"];
             var logPass = Forms["logPass"];
 
             if (logName == null | logPass == null)
             {
-                return errorResponse;
+                return;
             }
 
             if (!Webuser.NameExists(logName))
             {
-                return "User name is not exists!";
+                Message = "User name is not exists!";
 
             }
             else if (!Webuser.PasswordIsOk(logName, logPass))
             {
-                return "Wrong password!";
+                Message = "Wrong password!";
             }
             else
             {
                 LogIn(logName, logPass);
             }
-
-            return errorResponse;
         }
 
         private static void LogIn(string logName, string logPass) => Webuser.LogIn(logName, logPass);
 
-        private static bool TryUserRegister(string regName, string regPass, string roleName, out string errorResponse)
+        private static bool TryUserRegister(string regName, string regPass, string roleName)
         {
-            errorResponse = string.Empty;
-
             if (regName == string.Empty || regPass == string.Empty || roleName == string.Empty)
             {
-                errorResponse = "Finded empty strings!";
+                Message = "Finded empty strings!";
 
                 return false;
             }
@@ -131,8 +123,6 @@ namespace WEB_UI
             if (Webuser.NameExists(regName))
             {
                 Message = "User name already exists";
-
-                errorResponse = "User name already exists!";
 
                 return false;
             }

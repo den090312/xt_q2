@@ -4,6 +4,14 @@
 @{
     Layout = "~/Pages/_Layout.cshtml";
 
+    if (IsPost)
+    {
+        var logname = Request.Form["logname"];
+
+        //POST-reload page fix
+        @Html.Raw("<script>document.location='Index.cshtml'</script>");
+    }
+
     Index.DemoData();
 
     var currentUser = Index.CurrentUser;
