@@ -47,6 +47,7 @@
     <Compile Include="CustomerDaoDb.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="ManagerDaoDb.cs" />
+    <Compile Include="OrderProductDaoDb.cs" />
     <Compile Include="ProductDaoDb.cs" />
     <Compile Include="OrderDaoDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

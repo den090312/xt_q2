@@ -108,6 +108,7 @@
     <Content Include="Pages\Error.cshtml" />
     <Content Include="Pages\Register.cshtml" />
     <Content Include="Pages\CurrentUser.cshtml" />
+    <Content Include="Pages\Orders.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
