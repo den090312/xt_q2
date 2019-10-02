@@ -59,7 +59,7 @@ namespace WEB_UI
             var regPass = Forms["regPass"];
             var roleName = Forms["roleName"];
 
-            if (regName == null | regPass == null | roleName == null)
+            if (regName == null || regPass == null || roleName == null)
             {
                 return;
             }
@@ -89,7 +89,7 @@ namespace WEB_UI
             var logName = Forms["logName"];
             var logPass = Forms["logPass"];
 
-            if (logName == null | logPass == null)
+            if (logName == null || logPass == null)
             {
                 return;
             }

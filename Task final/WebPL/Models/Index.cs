@@ -34,7 +34,7 @@ namespace WebPL.Models
             var regPass  = Forms["regPass"];
             var regRole  = Forms["regRole"];
 
-            if (regName == null | regPass == null)
+            if (regName == null || regPass == null || regName == string.Empty || regPass == string.Empty)
             {
                 return;
             }
@@ -89,7 +89,7 @@ namespace WebPL.Models
             var logName = Forms["logName"];
             var logPass = Forms["logPass"];
 
-            if (logName == null | logPass == null)
+            if (logName == null || logPass == null)
             {
                 return;
             }
