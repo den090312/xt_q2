@@ -13,4 +13,11 @@
             }
         }
     }
+
+    var product_block = document.getElementsByClassName("product_block")[0];
+    product_block.onclick = function (event) {
+        for (let product_order of product_block) {
+            
+        }
+    }
 }

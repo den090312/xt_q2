@@ -2,8 +2,17 @@
     text-align: center;
 }
 
+.product_block {
+    display: flex;
+    margin: auto;
+}
+
 .products {
     display: flex;
+}
+
+.product {
+    margin: auto;
 }
 
 .product_caption {

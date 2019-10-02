@@ -15,6 +15,11 @@ namespace BLL
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Order> GetByManagerId(int managerId)
+        {
+            throw new NotImplementedException();
+        }
+
         private void DateCheck(DateTime date)
         {
             if (date == DateTime.MinValue)
