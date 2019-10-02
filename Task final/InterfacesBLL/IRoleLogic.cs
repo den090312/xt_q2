@@ -19,7 +19,7 @@ namespace InterfacesBLL
 
         bool NoRoles();
 
-        string GetNameById(int id);
+        Role GetById(int id);
 
         int GetIdByName(string name);
     }

@@ -91,21 +91,20 @@ namespace DAL
             }
         }
 
-        public string GetNameById(int id)
+        public Role GetById(int id)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
             {
                 var sqlCommand = sqlConnection.CreateCommand();
 
-                sqlCommand.CommandText = "GetRoleNameById";
+                sqlCommand.CommandText = "GetRoleById";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
                 sqlCommand.Parameters.Add(SqlParId(id));
-                sqlCommand.Parameters.Add(SqlParName());
 
                 sqlConnection.Open();
 
-                return GetRoleName(sqlCommand);
+                return GetRoleById(sqlCommand, id);
             }
         }
 
@@ -141,18 +140,28 @@ namespace DAL
             return roleId;
         }
 
-        private string GetRoleName(SqlCommand sqlCommand)
+        private Role GetRoleById(SqlCommand sqlCommand, int id)
         {
-            var roleName = string.Empty;
-
             var sqlDr = sqlCommand.ExecuteReader();
 
             while (sqlDr.Read())
             {
-                roleName = sqlDr.GetString(0);
+                var role = new Role(id, sqlDr.GetString(1))
+                {
+                    ProductRead = sqlDr.GetBoolean(2),
+                    ProductWrite = sqlDr.GetBoolean(3),
+                    OrderRead = sqlDr.GetBoolean(4),
+                    OrderWrite = sqlDr.GetBoolean(5),
+                    RoleRead = sqlDr.GetBoolean(6),
+                    RoleWrite = sqlDr.GetBoolean(7),
+                    UserRead = sqlDr.GetBoolean(8),
+                    UserWrite = sqlDr.GetBoolean(9)
+                };
+
+                return role;
             }
 
-            return roleName;
+            return null;
         }
 
         private int GetCount(SqlCommand sqlCommand)

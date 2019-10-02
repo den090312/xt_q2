@@ -7,9 +7,18 @@
 }
 
 .product_caption {
-    margin: 35px 0 10px 0;
+    margin: 0 0 35px 0;
+    text-align: center;
 }  
 
 .product {
     padding: 0 25px 25px 0;
+}
+
+.product_name, .product_price, .product_quantity {
+    padding: 2px;
+}
+
+.submit_order {
+    margin: 2px;
 }

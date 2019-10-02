@@ -4,16 +4,52 @@
 
 @{
     Layout = null;
-    <h4 class="product_caption">Товары</h4>
+
+    <h2 class="product_caption">Товары</h2>
     <div class="products">
         @{
+            var roleLogic = Dependencies.RoleLogic;
             var products = Dependencies.ProductLogic.GetAll();
-            foreach (var product in products)
+            var currentUser = Index.CurrentUser;
+            var roleId = 0;
+
+            if (currentUser.IdRole == 0)
             {
-                <div class="product">
-                    <div class="product_name">@product.Name</div>
-                    <div class="product_price">@product.Price руб.</div>
-                </div>
+                roleId = roleLogic.GetIdByName(Index.CurrentUser.Name);
+            }
+            else
+            {
+                roleId = currentUser.IdRole;
+            }
+
+            var currentRole = roleLogic.GetById(roleId);
+
+            if (currentRole.OrderWrite)
+            {
+                foreach (var product in products)
+                {
+                    <form method="post" action="~/Index.cshtml" class="product_order" style="margin: auto;">
+                        <div class="product">
+                            <input type="text" class="product_id" name="product_id" value="@product.Id" style="display: none;" />
+                            <div class="product_name">@product.Name</div>
+                            <div class="product_price">@product.Price руб.</div>
+                            <div class="product_quantity">
+                                <input type="text" class="product_quantity_value" name="productQuantity" placeholder="Введите количество" />
+                            </div>
+                            <input type="submit" class="submit_order" value="Заказать" />
+                        </div>
+                    </form>
+                }
+            }
+            else
+            {
+                foreach (var product in products)
+                {
+                    <div class="product" style="margin: auto;">
+                        <div class="product_name">@product.Name</div>
+                        <div class="product_price">@product.Price руб.</div>
+                    </div>
+                }
             }
         }
     </div>

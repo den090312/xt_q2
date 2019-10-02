@@ -52,11 +52,11 @@ namespace BLL
             return roleDao.NoRoles();
         }
 
-        public string GetNameById(int id)
+        public Role GetById(int id)
         {
             IdCheck(id);
 
-            return roleDao.GetNameById(id);
+            return roleDao.GetById(id);
         }
 
         public int GetIdByName(string name)
