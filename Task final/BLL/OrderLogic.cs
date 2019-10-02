@@ -10,7 +10,7 @@ namespace BLL
 {
     public class OrderLogic : IOrderLogic
     {
-        public IEnumerable<Order> GetByCustomer(Customer customer)
+        public IEnumerable<Order> GetByCustomerId(int customerId)
         {
             throw new NotImplementedException();
         }
