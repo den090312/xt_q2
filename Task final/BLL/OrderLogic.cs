@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Entities;
+using InterfacesBLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +8,12 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class OrderLogic
+    public class OrderLogic : IOrderLogic
     {
-
+        public IEnumerable<Order> GetByCustomer(Customer customer)
+        {
+            throw new NotImplementedException();
+        }
 
         private void DateCheck(DateTime date)
         {

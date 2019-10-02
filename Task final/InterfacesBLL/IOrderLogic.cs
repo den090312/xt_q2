@@ -9,6 +9,6 @@ namespace InterfacesBLL
 {
     public interface IOrderLogic
     {
-        IEnumerable<Order> GetByCustomer();
+        IEnumerable<Order> GetByCustomer(Customer customer);
     }
 }
