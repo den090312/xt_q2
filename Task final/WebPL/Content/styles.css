@@ -1,3 +1,15 @@
-﻿.footer {
+﻿.header, .footer {
     text-align: center;
+}
+
+.products {
+    display: flex;
+}
+
+.product_caption {
+    margin: 35px 0 10px 0;
+}  
+
+.product {
+    padding: 0 25px 25px 0;
 }
