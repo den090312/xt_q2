@@ -106,6 +106,8 @@ namespace WEB_UI
             else
             {
                 LogIn(logName, logPass);
+
+                Message = string.Empty;
             }
         }
 
@@ -128,6 +130,8 @@ namespace WEB_UI
             }
 
             var user = Webuser.Create(regName, Role.Create(roleName), regPass);
+
+            Message = string.Empty;
 
             return Webuser.Register(user);
         }
