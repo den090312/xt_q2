@@ -28,7 +28,7 @@
             {
                 <div class="product_block">
                     @foreach (var product in products)
-                     {
+                    {
                         <form method="post" action="~/Index.cshtml" class="product_order" style="margin: auto;">
                             <div class="product">
                                 <input type="text" class="product_id" name="productId" value="@product.Id" style="display: none;" />
@@ -38,9 +38,11 @@
                                     <input type="text" class="product_quantity_value" name="productQuantity" placeholder="Введите количество" />
                                 </div>
                                 <input type="submit" class="submit_order" value="Заказать" />
+                                <input type="text" class="chosenProductId" name="chosenProductId" style="display: none;" />
+                                <input type="text" class="chosenProductQuantity" name="chosenProductQuantity" style="display: none;" />
                             </div>
                         </form>
-                     }
+                    }
                 </div>
             }
             else

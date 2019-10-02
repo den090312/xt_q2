@@ -19,6 +19,20 @@ namespace WebPL.Models
         {
             Account();
             LoadDemoData();
+            Order();
+        }
+
+        private static void Order()
+        {
+            var productId = Forms["chosenProductId"];
+            var quantity = Forms["chosenProductQuantity"];
+
+            if (productId == null || quantity == null || productId == string.Empty || quantity == string.Empty)
+            {
+                return;
+            }
+
+
         }
 
         private static void Account()
@@ -28,7 +42,7 @@ namespace WebPL.Models
             Register();
         }
 
-        public static void Register()
+        private static void Register()
         {
             var regName  = Forms["regName"];
             var regPass  = Forms["regPass"];

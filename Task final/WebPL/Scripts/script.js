@@ -16,8 +16,17 @@
 
     var product_block = document.getElementsByClassName("product_block")[0];
     product_block.onclick = function (event) {
-        for (let product_order of product_block) {
-            
-        }
+        var product = event.target.parentElement;
+
+        var product_id = product.getElementsByClassName("product_id")[0];
+
+        var product_quantity = product.getElementsByClassName("product_quantity")[0]; 
+        var product_quantity_value = product_quantity.getElementsByClassName("product_quantity_value")[0];
+
+        var chosenProductId = product.getElementsByClassName("chosenProductId")[0]; 
+        var chosenProductQuantity = product.getElementsByClassName("chosenProductQuantity")[0]; 
+
+        chosenProductId.value = product_id.value;
+        chosenProductQuantity.value = product_quantity_value.value;
     }
 }
