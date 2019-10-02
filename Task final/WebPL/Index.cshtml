@@ -15,8 +15,12 @@
     {
         currentRoleName = currentUser.Name;
     }
+    else
+    {
+        currentRoleName = Dependencies.RoleLogic.GetNameById(currentRoleId);
+    }
 }
-<p class="currentUserName">Имя пользователя: @(currentUser.Name)</p>
+<p class="currentUserName">Имя пользователя: @currentUser.Name</p>
 <p class="currentUserRole">Роль: @currentRoleName</p>
 @{
     if (Index.CurrentUser == Entities.User.Guest)

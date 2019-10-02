@@ -47,6 +47,18 @@ namespace BLL
             return roleDao.Remove(RoleId);
         }
 
+        public bool NoRoles()
+        {
+            return roleDao.NoRoles();
+        }
+
+        public string GetNameById(int id)
+        {
+            IdCheck(id);
+
+            return roleDao.GetNameById(id);
+        }
+
         private void IdCheck(int id)
         {
             if (id <= 0)
@@ -69,11 +81,6 @@ namespace BLL
             {
                 throw new ArgumentNullException($"{nameof(classObject)} is null!");
             }
-        }
-
-        public bool NoRoles()
-        {
-            return roleDao.NoRoles();
         }
     }
 }

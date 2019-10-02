@@ -18,5 +18,7 @@ namespace InterfacesDAL
         bool UpdateName(ref Role role);
 
         bool NoRoles();
+
+        string GetNameById(int id);
     }
 }

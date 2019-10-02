@@ -18,5 +18,7 @@ namespace InterfacesBLL
         bool ChangeName(ref Role role, string newName);
 
         bool NoRoles();
+
+        string GetNameById(int id);
     }
 }

@@ -4,19 +4,17 @@
 
 @{
     Layout = null;
-}
-
-@{
-    var products = Dependencies.ProductLogic.GetAll();
-
     <h4 class="product_caption">Товары</h4>
     <div class="products">
-        @foreach (var product in products)
-        {
-            <div class="product">
-                <div class="product_name">@product.Name</div>
-                <div class="product_price">@product.Price руб.</div>
-            </div>
+        @{
+            var products = Dependencies.ProductLogic.GetAll();
+            foreach (var product in products)
+            {
+                <div class="product">
+                    <div class="product_name">@product.Name</div>
+                    <div class="product_price">@product.Price руб.</div>
+                </div>
+            }
         }
     </div>
 }

@@ -91,6 +91,38 @@ namespace DAL
             }
         }
 
+        public string GetNameById(int id)
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetRoleNameById";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(SqlParId(id));
+                sqlCommand.Parameters.Add(SqlParName());
+
+                sqlConnection.Open();
+
+                return GetRoleName(sqlCommand);
+            }
+        }
+
+        private static string GetRoleName(SqlCommand sqlCommand)
+        {
+            var roleName = string.Empty;
+
+            var sqlDr = sqlCommand.ExecuteReader();
+
+            while (sqlDr.Read())
+            {
+                roleName = sqlDr.GetString(0);
+            }
+
+            return roleName;
+        }
+
         private static int GetCount(SqlCommand sqlCommand)
         {
             var count = 0;
@@ -223,6 +255,16 @@ namespace DAL
                 Value = name,
                 SqlDbType = SqlDbType.NVarChar,
                 Direction = ParameterDirection.Input
+            };
+        }
+
+        private static SqlParameter SqlParName()
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@Name",
+                SqlDbType = SqlDbType.NVarChar,
+                Direction = ParameterDirection.Output
             };
         }
 
