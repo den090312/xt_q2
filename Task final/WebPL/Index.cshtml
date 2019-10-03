@@ -14,7 +14,6 @@
         @Html.Raw("<script>document.location='Index.cshtml'</script>");
     }
 
-
     var currentUser = Index.CurrentUser;
     var currentRoleId = Index.CurrentUser.IdRole;
     var currentRoleName = string.Empty;
@@ -28,9 +27,9 @@
         currentRoleName = Dependencies.RoleLogic.GetById(currentRoleId).Name;
     }
 }
-<b id="messagebox">@Index.Message</b>
-<p class="currentUserName">Имя пользователя: @currentUser.Name</p>
-<p class="currentUserRole">Роль: @currentRoleName</p>
+    <b id="messagebox">@Index.Message</b>
+    <p class="currentUserName">Имя пользователя: @currentUser.Name</p>
+    <p class="currentUserRole">Роль: @currentRoleName</p>
 @{
     if (Index.CurrentUser == Entities.User.Guest)
     {

@@ -5,12 +5,22 @@
 @{
     Layout = "~/Pages/_Layout.cshtml";
 
+    var orderList = Enumerable.Empty<Order>();
+
     if (IsPost)
     {
         Index.Forms = Request.Form;
-        var orderList = Index.GetOrderList();
+        orderList = Index.GetOrderList();
+    }
 
-        //POST-reload page fix
-        @Html.Raw("<script>document.location='Orders.cshtml'</script>");
+    if (orderList.Count() > 0)
+    {
+        var counter = 1;
+
+        foreach (var order in orderList)
+        {
+            <div>@counter) @order.Date @order.Adress @order.Sum @order.CurrentStatus</div>
+            counter++;
+        }
     }
 }
