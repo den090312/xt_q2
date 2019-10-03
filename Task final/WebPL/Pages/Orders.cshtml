@@ -10,14 +10,45 @@
     if (IsPost)
     {
         Index.Forms = Request.Form;
+
         orderList = Index.GetOrderList();
+        Index.CancelOrder();
     }
 
     if (orderList.Count() > 0)
     {
-        foreach (var order in orderList)
-        {
-            <div>@order.Id @order.Date.ToString("dd.MM.yyyy") @order.Adress @order.Sum @order.CurrentStatus</div>
-        }
+        <b id="messagebox">@Index.Message</b>
+        <h2 class="product_caption">Заказы</h2>
+        <form method="post" action="~/Index.cshtml" class="customer_orders">
+            <div class="table">
+                <div class="tableRow">
+                    <div class="tableCellCaption">ID</div>
+                    <div class="tableCellCaption">Дата</div>
+                    <div class="tableCellCaption">Адрес</div>
+                    <div class="tableCellCaption">Сумма</div>
+                    <div class="tableCellCaption">Статус</div>
+                    <div class="tableCellCaption">Опция</div>
+                </div>
+
+                @foreach (var order in orderList)
+                {
+                    <div class="tableRow">
+                        <input type="text" class="tableCellOrderId" value="@order.Id" style="display: none;" />
+                        <div class="tableCell">@order.Id</div>
+                        <div class="tableCell">@order.Date.ToString("dd.MM.yyyy")</div>
+                        <div class="tableCell">@order.Adress</div>
+                        <div class="tableCell">@order.Sum</div>
+                        <div class="tableCell">@order.CurrentStatus</div>
+                        <div class="tableCell">
+                            <input type="submit" class="cancelOrder" name="cancelOrder" value="Отменить" />
+                        </div>
+                    </div>
+                }
+                <a href="~/Index.cshtml">
+                    <input type="button" value="На главную" style="margin-top: 25px;" />
+                </a>
+                <input type="text" class="chosenOrderId" name="chosenOrderId" style="display: none;" />
+            </div>
+        </form>
     }
 }

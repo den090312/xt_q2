@@ -33,6 +33,13 @@ namespace BLL
             return orderDao.Add(ref order);
         }
 
+        public bool CancelOrder(int id)
+        {
+            IdCheck(id);
+
+            return orderDao.CancelOrder(id);
+        }
+
         public IEnumerable<Order> GetByCustomerId(int id)
         {
             IdCheck(id);

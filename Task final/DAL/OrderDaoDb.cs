@@ -44,6 +44,40 @@ namespace DAL
             }
         }
 
+        public bool CancelOrder(int id)
+        {
+            try
+            {
+                OrderCancel(id);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Logger.InitLogger();
+                Logger.Log.Error(ex.Message + " - " + "id заказа - " + id);
+
+                return false;
+            }
+        }
+
+        private void OrderCancel(int id)
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "CancelOrderById";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(SqlParId(id));
+
+                sqlConnection.Open();
+
+                sqlCommand.ExecuteNonQuery();
+            }
+        }
+
         private IEnumerable<Order> GetOrdersById(SqlCommand sqlCommand, int idCustomer)
         {
             var sqlDr = sqlCommand.ExecuteReader();

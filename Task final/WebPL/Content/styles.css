@@ -31,3 +31,27 @@
 .submit_order {
     margin: 2px;
 }
+
+.table {
+    display: table;
+    width: 95%;
+    margin: 25px auto;
+}
+
+.tableRow {
+    display: table-row;
+}
+
+.tableCell, .tableCellCaption {
+    display: table-cell;
+    padding: 5px 5px;
+}
+
+.tableCellCaption {
+    border: 1px solid #0b043338;
+    font-weight: bold;
+}
+
+.tableCell {
+    border: 1px solid #99999954;
+}

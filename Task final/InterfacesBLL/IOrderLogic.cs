@@ -14,5 +14,7 @@ namespace InterfacesBLL
         IEnumerable<Order> GetByCustomerId(int id);
 
         IEnumerable<Order> GetByManagerId(int id);
+
+        bool CancelOrder(int id);
     }
 }

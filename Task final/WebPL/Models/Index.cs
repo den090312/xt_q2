@@ -3,6 +3,7 @@ using Common;
 using System.Collections.Specialized;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebPL.Models
 {
@@ -20,7 +21,7 @@ namespace WebPL.Models
         {
             Account();
             DemoData();
-            Order();
+            AddOrder();
         }
 
         public static IEnumerable<Order> GetOrderList()
@@ -30,18 +31,53 @@ namespace WebPL.Models
 
             if (userType == null || id == null || userType == string.Empty || id == string.Empty)
             {
-                return null;
+                return Enumerable.Empty<Order>();
+            }
+
+            if (!int.TryParse(id, out int idParsed))
+            {
+                Message = $"Некорректный id - '{id}'!";
+
+                return Enumerable.Empty<Order>();
             }
 
             if (userType == "customer")
             {
-                return Dependencies.OrderLogic.GetByCustomerId(int.Parse(id));
+                Message = string.Empty;
+
+                return Dependencies.OrderLogic.GetByCustomerId(idParsed);
             }
 
-            return null;
+            return Enumerable.Empty<Order>();
         }
 
-        private static void Order()
+        public static void CancelOrder()
+        {
+            var id = Forms["chosenOrderId"];
+
+            if (id == null || id == string.Empty)
+            {
+                return;
+            }
+
+            if (!int.TryParse(id, out int idParsed))
+            {
+                Message = $"Некорректный id - {id}!";
+
+                return;
+            }
+
+            if (Dependencies.OrderLogic.CancelOrder(idParsed))
+            {
+                Message = "Заказ отменен";
+            }
+            else
+            {
+                Message = "Ошибка отмены заказа!";
+            }
+        }
+
+        private static void AddOrder()
         {
             var idCustomer = Forms["customerId"];
             var idProduct  = Forms["chosenProductId"];
@@ -58,10 +94,10 @@ namespace WebPL.Models
                 return;
             }
 
-            AddOrder(int.Parse(idCustomer), int.Parse(idProduct), int.Parse(quantity), adress);
+            OrderAdd(int.Parse(idCustomer), int.Parse(idProduct), int.Parse(quantity), adress);
         }
 
-        private static void AddOrder(int idCustomer, int idProduct, int quantity, string adress)
+        private static void OrderAdd(int idCustomer, int idProduct, int quantity, string adress)
         {
             var listIdProduct = new List<int>
             {
@@ -105,18 +141,13 @@ namespace WebPL.Models
 
         private static void Account()
         {
-            TryLogIn();
+            LogIn();
             LogOut();
 
-            if (CurrentUser == null)
+            if (CurrentUser == User.Guest)
             {
-                Register();
+                RegisterCustomer(RegisterUser());
             }
-        }
-
-        public static void Register()
-        {
-            RegisterCustomer(RegisterUser());
         }
 
         private static void RegisterCustomer(User user)
@@ -141,11 +172,11 @@ namespace WebPL.Models
         {
             var regName = Forms["regName"];
             var regPass = Forms["regPass"];
-            var regRole = Forms["regRole"];
+            //var regRole = Forms["regRole"];
 
             if (regName == null || regPass == null || regName == string.Empty || regPass == string.Empty)
             {
-                return null;
+                return User.Guest;
             }
 
             if (CurrentUser == User.Guest)
@@ -153,7 +184,7 @@ namespace WebPL.Models
                 return RegisterNewUser(regName, regPass, Role.Customer);
             }
 
-            return null;
+            return User.Guest;
         }
 
         private static User RegisterNewUser(string regName, string regPass, Role regRole)
@@ -164,7 +195,7 @@ namespace WebPL.Models
             {
                 Message = "Пользователь с таким именем уже существует!";
 
-                return null;
+                return User.Guest;
             }
 
             var roleId = Dependencies.RoleLogic.GetIdByName(regRole.Name);
@@ -180,7 +211,7 @@ namespace WebPL.Models
             {
                 Message = "Ошибка регистрации пользователя!";
 
-                return null;
+                return User.Guest;
             }
         }
 
@@ -195,7 +226,7 @@ namespace WebPL.Models
             }
         }
 
-        private static void TryLogIn()
+        private static void LogIn()
         {
             var logName = Forms["logName"];
             var logPass = Forms["logPass"];

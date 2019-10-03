@@ -12,5 +12,7 @@ namespace InterfacesDAL
         bool Add(ref Order order);
 
         IEnumerable<Order> GetByIdCustomer(int id);
+
+        bool CancelOrder(int id);
     }
 }

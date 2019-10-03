@@ -15,21 +15,31 @@
     }
 
     var product_block = document.getElementsByClassName("product_block")[0];
-    product_block.onclick = function (event) {
-        var product = event.target.parentElement;
+    if (product_block) {
+        product_block.onclick = function (event) {
+            var product = event.target.parentElement;
 
-        var product_id = product.getElementsByClassName("product_id")[0];
+            var product_id = product.getElementsByClassName("product_id")[0];
 
-        var product_quantity = product.getElementsByClassName("product_quantity")[0]; 
-        var product_quantity_value = product_quantity.getElementsByClassName("product_quantity_value")[0];
-        var order_adress_value = product_quantity.getElementsByClassName("order_adress_value")[0];
+            var product_quantity = product.getElementsByClassName("product_quantity")[0];
+            var product_quantity_value = product_quantity.getElementsByClassName("product_quantity_value")[0];
 
-        var chosenProductId = product.getElementsByClassName("chosenProductId")[0]; 
-        var chosenProductQuantity = product.getElementsByClassName("chosenProductQuantity")[0]; 
-        //var chosenOrderAdress = product.getElementsByClassName("chosenOrderAdress")[0]; 
+            var chosenProductId = product.getElementsByClassName("chosenProductId")[0];
+            var chosenProductQuantity = product.getElementsByClassName("chosenProductQuantity")[0];
 
-        chosenProductId.value = product_id.value;
-        chosenProductQuantity.value = product_quantity_value.value;
-        //chosenOrderAdress.value = order_adress_value.value; 
+            chosenProductId.value = product_id.value;
+            chosenProductQuantity.value = product_quantity_value.value;
+        }
+    }
+
+    var customer_orders = document.getElementsByClassName("customer_orders")[0];
+    if (customer_orders) {
+        customer_orders.onclick = function (event) {
+            var tableRow = event.target.parentElement.parentElement;
+            var tableCellOrderId = tableRow.getElementsByClassName("tableCellOrderId")[0];
+            var chosenOrderId = customer_orders.getElementsByClassName("chosenOrderId")[0];
+
+            chosenOrderId.value = tableCellOrderId.value; 
+        }
     }
 }
