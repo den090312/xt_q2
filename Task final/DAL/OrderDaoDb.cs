@@ -27,7 +27,7 @@ namespace DAL
             }
         }
 
-        public IEnumerable<Order> GetByIdCustomer(int id)
+        public IEnumerable<Order> GetByIdCustomer(int idCustomer)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
             {
@@ -36,15 +36,15 @@ namespace DAL
                 sqlCommand.CommandText = "GetOrdersByIdCustomer";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                sqlCommand.Parameters.Add(SqlParId(id));
+                sqlCommand.Parameters.Add(SqlParId(idCustomer));
 
                 sqlConnection.Open();
 
-                return GetOrdersById(sqlCommand);
+                return GetOrdersById(sqlCommand, idCustomer);
             }
         }
 
-        private IEnumerable<Order> GetOrdersById(SqlCommand sqlCommand)
+        private IEnumerable<Order> GetOrdersById(SqlCommand sqlCommand, int idCustomer)
         {
             var sqlDr = sqlCommand.ExecuteReader();
 
@@ -52,15 +52,18 @@ namespace DAL
 
             while (sqlDr.Read())
             {
-                var id     = sqlDr.GetInt32(0);
-                var date   = sqlDr.GetDateTime(1);
-                var adress = sqlDr.GetString(2);
-                var sum    = sqlDr.GetDecimal(3);
-                var status = sqlDr.GetString(4);
+                var orderId = sqlDr.GetInt32(0);
+                var date    = sqlDr.GetDateTime(1);
+                var adress  = sqlDr.GetString(2);
+                var sum     = sqlDr.GetDecimal(3);
+                var status  = sqlDr.GetString(4);
 
                 var currentStatus = (Order.Status)Enum.Parse(typeof(Order.Status), status);
 
-                var order = new Order(id, date, adress, new List<int>(), sum, currentStatus);
+                var order = new Order(idCustomer, date, adress, new List<int>(), sum, currentStatus)
+                {
+                    Id = orderId
+                };
 
                 orders.Add(order);
             }

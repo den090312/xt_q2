@@ -15,12 +15,9 @@
 
     if (orderList.Count() > 0)
     {
-        var counter = 1;
-
         foreach (var order in orderList)
         {
-            <div>@counter) @order.Date @order.Adress @order.Sum @order.CurrentStatus</div>
-            counter++;
+            <div>@order.Id @order.Date.ToString("dd.MM.yyyy") @order.Adress @order.Sum @order.CurrentStatus</div>
         }
     }
 }
