@@ -18,5 +18,12 @@ namespace Entities
             IdUser = user.Id;
             Name = name;
         }
+
+        public Customer(int id, int idUser, string name)
+        {
+            Id = id;
+            IdUser = idUser;
+            Name = name;
+        }
     }
 }

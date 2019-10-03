@@ -41,6 +41,21 @@ namespace BLL
 
         public IEnumerable<Product> GetAll() => productDao.GetAll();
 
+        public Product GetById(int idProduct)
+        {
+            IdCheck(idProduct);
+
+            return productDao.GetById(idProduct);
+        }
+
+        private void IdCheck(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentException($"{nameof(id)} is incorrect!");
+            }
+        }
+
         private void PriceCheck(decimal price)
         {
             if (price <= 0)

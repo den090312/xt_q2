@@ -2,6 +2,7 @@
 using Common;
 using System.Collections.Specialized;
 using System;
+using System.Collections.Generic;
 
 namespace WebPL.Models
 {
@@ -18,56 +19,152 @@ namespace WebPL.Models
         public static void Run()
         {
             Account();
-            LoadDemoData();
+            DemoData();
             Order();
+        }
+
+        public static IEnumerable<Order> GetOrderList()
+        {
+            var userType = Forms["userType"];
+            var id = Forms["id"];
+
+            if (userType == null || id == null || userType == string.Empty || id == string.Empty)
+            {
+                return null;
+            }
+
+            if (userType == "customer")
+            {
+                return Dependencies.OrderLogic.GetByCustomerId(int.Parse(id));
+            }
+
+            return null;
         }
 
         private static void Order()
         {
-            var productId = Forms["chosenProductId"];
-            var quantity = Forms["chosenProductQuantity"];
+            var idCustomer = Forms["customerId"];
+            var idProduct  = Forms["chosenProductId"];
+            var quantity   = Forms["chosenProductQuantity"];
+            var adress     = Forms["orderAdress"];
 
-            if (productId == null || quantity == null || productId == string.Empty || quantity == string.Empty)
+            if (idProduct == null || quantity == null || adress == null || idCustomer == null)
             {
                 return;
             }
 
+            if (idProduct == string.Empty || quantity == string.Empty || adress == string.Empty || idCustomer == string.Empty)
+            {
+                return;
+            }
 
+            AddOrder(int.Parse(idCustomer), int.Parse(idProduct), int.Parse(quantity), adress);
+        }
+
+        private static void AddOrder(int idCustomer, int idProduct, int quantity, string adress)
+        {
+            var listIdProduct = new List<int>
+            {
+                idProduct
+            };
+
+            var product = Dependencies.ProductLogic.GetById(idProduct);
+
+            decimal sum = product.Price * quantity;
+
+            var order = new Order(idCustomer, DateTime.Now, adress, listIdProduct, sum);
+
+            if (Dependencies.OrderLogic.Add(ref order))
+            {
+                AddProductsToOrder(order);
+
+                Message = "Заказ создан";
+
+                return;
+            }
+            else
+            {
+                Message = "Ошибка создания заказа!";
+
+                return;
+            }
+        }
+
+        private static void AddProductsToOrder(Order order)
+        {
+            foreach (var productId in order.ListIdProduct)
+            {
+                if (!Dependencies.OrderProductLogic.Add(new OrderProduct(order.Id, productId)))
+                {
+                    Message = $"Товар id '{productId}' не был добавлен в заказ id '{order.Id}'";
+
+                    return;
+                }
+            }
         }
 
         private static void Account()
         {
             TryLogIn();
             LogOut();
-            Register();
+
+            if (CurrentUser == null)
+            {
+                Register();
+            }
         }
 
-        private static void Register()
+        public static void Register()
         {
-            var regName  = Forms["regName"];
-            var regPass  = Forms["regPass"];
-            var regRole  = Forms["regRole"];
+            RegisterCustomer(RegisterUser());
+        }
+
+        private static void RegisterCustomer(User user)
+        {
+            var customer = new Customer(user.Name, user);
+
+            if (Dependencies.CustomerLogic.Add(ref customer))
+            {
+                Message = "Покупатель зарегистрирован";
+
+                return;
+            }
+            else
+            {
+                Message = "Ошибка регистрации покупателя!";
+
+                return;
+            }
+        }
+
+        private static User RegisterUser()
+        {
+            var regName = Forms["regName"];
+            var regPass = Forms["regPass"];
+            var regRole = Forms["regRole"];
 
             if (regName == null || regPass == null || regName == string.Empty || regPass == string.Empty)
             {
-                return;
+                return null;
             }
 
             if (CurrentUser == User.Guest)
             {
-                RegisterUser(regName, regPass, Role.Customer);
+                return RegisterNewUser(regName, regPass, Role.Customer);
             }
+
+            return null;
         }
 
-        private static void RegisterUser(string regName, string regPass, Role regRole)
+        private static User RegisterNewUser(string regName, string regPass, Role regRole)
         {
             var userLogic = Dependencies.UserLogic;
 
             if (userLogic.GetByName(regName) != null)
             {
-                Message = "User is already exists!";
+                Message = "Пользователь с таким именем уже существует!";
 
-                return;
+                return null;
             }
 
             var roleId = Dependencies.RoleLogic.GetIdByName(regRole.Name);
@@ -75,15 +172,15 @@ namespace WebPL.Models
             if (userLogic.Add(roleId, regName, regPass))
             {
                 CurrentUser = Dependencies.UserLogic.GetByName(regName);
-                Message = "User registered";
+                Message = "Пользователь зарегистрирован";
 
-                return;
+                return CurrentUser;
             }
             else
             {
-                Message = "User was NOT registered!";
+                Message = "Ошибка регистрации пользователя!";
 
-                return;
+                return null;
             }
         }
 
@@ -114,14 +211,14 @@ namespace WebPL.Models
 
             if (logUser == null)
             {
-                Message = "User name is not exists!";
+                Message = "Пользователя с таким именем не существует!";
 
                 return;
             }
 
             if (!userLogic.PasswordIsOk(logPass, logUser.PasswordHash))
             {
-                Message = "Wrong password!";
+                Message = "Неправильный пароль!";
 
                 return;
             }
@@ -132,7 +229,7 @@ namespace WebPL.Models
             }
         }
 
-        private static void LoadDemoData()
+        private static void DemoData()
         {
             if (Dependencies.RoleLogic.NoRoles())
             {

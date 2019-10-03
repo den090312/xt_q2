@@ -14,5 +14,7 @@ namespace InterfacesDAL
         bool NoProducts();
 
         IEnumerable<Product> GetAll();
+
+        Product GetById(int id);
     }
 }

@@ -6,15 +6,24 @@
     Layout = null;
 }
     
-<form method="post" action="" class="user_log_out">
+<form method="post" action="~/Pages/Orders.cshtml" class="user_log_out">
     @{
         var currentRole = Dependencies.RoleLogic.GetById(Index.CurrentUser.IdRole);
 
         if (currentRole.OrderWrite)
         {
-            <a href="~/Pages/Orders.cshtml" style="text-decoration: none">
-                <input type="button" class="myOrders" value="Мои заказы" />
-            </a> 
+            var userType = string.Empty;
+
+            var customer = Dependencies.CustomerLogic.GetByUserId(Index.CurrentUser.Id);
+
+            if (customer != null)
+            {
+                userType = "customer";
+            }
+
+            <input type="text" name="id" value="@customer.Id" style="display: none;" />
+            <input type="text" name="userType" value="@userType" style="display: none;" />
+            <input type="submit" class="myOrders" value="Мои заказы" />
         }
     }
     <a href="~/Index.cshtml">

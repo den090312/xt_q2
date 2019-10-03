@@ -17,11 +17,18 @@ namespace BLL
             customerDao = iCustomerDao;
         }
 
-        public bool Add(Customer customer)
+        public bool Add(ref Customer customer)
         {
             NullCheck(customer);
 
-            return customerDao.Add(customer);
+            return customerDao.Add(ref customer);
+        }
+
+        public Customer GetByUserId(int userId)
+        {
+            IdCheck(userId);
+
+            return customerDao.GetByUserId(userId);
         }
 
         public bool Remove(Customer customer)

@@ -26,23 +26,29 @@
 
             if (currentRole.OrderWrite)
             {
+                var customer = Dependencies.CustomerLogic.GetByUserId(currentUser.Id);
+
                 <div class="product_block">
                     @foreach (var product in products)
-                    {
+                     {
                         <form method="post" action="~/Index.cshtml" class="product_order" style="margin: auto;">
                             <div class="product">
                                 <input type="text" class="product_id" name="productId" value="@product.Id" style="display: none;" />
                                 <div class="product_name">@product.Name</div>
                                 <div class="product_price">@product.Price руб.</div>
                                 <div class="product_quantity">
-                                    <input type="text" class="product_quantity_value" name="productQuantity" placeholder="Введите количество" />
+                                    <input type="text" class="product_quantity_value" name="productQuantity" placeholder="Количество" />
+                                </div>
+                                <div class="order_adress">
+                                    <input type="text" class="order_adress_value" name="orderAdress" placeholder="Адрес доставки" />
                                 </div>
                                 <input type="submit" class="submit_order" value="Заказать" />
                                 <input type="text" class="chosenProductId" name="chosenProductId" style="display: none;" />
                                 <input type="text" class="chosenProductQuantity" name="chosenProductQuantity" style="display: none;" />
+                                <input type="text" class="customerId" name="customerId" value="@customer.Id" style="display: none;" />
                             </div>
                         </form>
-                    }
+                     }
                 </div>
             }
             else

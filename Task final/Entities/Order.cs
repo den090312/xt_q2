@@ -20,6 +20,8 @@ namespace Entities
 
         public List<int> ListIdProduct { get; set; }
 
+        public decimal Sum { get; }
+
         public Status CurrentStatus { get; set; }
 
         public enum Status
@@ -33,12 +35,24 @@ namespace Entities
             Closed = 6
         }
 
-        public Order(int idCustomer, DateTime date, string adress)
+        public Order(int idCustomer, DateTime date, string adress, List<int> listIdProduct, decimal sum)
         {
             IdCustomer = idCustomer;
             Date = date;
             Adress = adress;
+            ListIdProduct = listIdProduct;
+            Sum = sum;
             CurrentStatus = Status.Opened;
+        }
+
+        public Order(int idCustomer, DateTime date, string adress, List<int> listIdProduct, decimal sum, Status status)
+        {
+            IdCustomer = idCustomer;
+            Date = date;
+            Adress = adress;
+            ListIdProduct = listIdProduct;
+            Sum = sum;
+            CurrentStatus = status;
         }
     }
 }

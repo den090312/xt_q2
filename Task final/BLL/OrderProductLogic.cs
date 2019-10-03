@@ -22,7 +22,12 @@ namespace BLL
 
         public bool Add(OrderProduct orderProduct)
         {
-            throw new NotImplementedException();
+            NullCheck(orderProduct);
+
+            IdCheck(orderProduct.IdOrder);
+            IdCheck(orderProduct.IdProduct);
+
+            return orderProductDao.Add(orderProduct);
         }
 
         public IEnumerable<OrderProduct> GetAll()

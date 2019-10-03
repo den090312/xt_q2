@@ -9,8 +9,10 @@ namespace InterfacesBLL
 {
     public interface IOrderLogic
     {
-        IEnumerable<Order> GetByCustomerId(int customerId);
+        bool Add(ref Order order);
 
-        IEnumerable<Order> GetByManagerId(int managerId);
+        IEnumerable<Order> GetByCustomerId(int id);
+
+        IEnumerable<Order> GetByManagerId(int id);
     }
 }

@@ -6,7 +6,9 @@ namespace InterfacesDAL
 {
     public interface ICustomerDao
     {
-        bool Add(Customer customer);
+        bool Add(ref Customer customer);
+
+        Customer GetByUserId(int userId);
 
         bool Remove(Customer customer);
 

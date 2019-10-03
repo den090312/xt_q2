@@ -1,5 +1,16 @@
-﻿@{
-    Layout = null;
-}
+﻿@using WebPL.Models;
+@using Entities;
+@using Common;
 
-Здесь будут заказы
+@{
+    Layout = "~/Pages/_Layout.cshtml";
+
+    if (IsPost)
+    {
+        Index.Forms = Request.Form;
+        var orderList = Index.GetOrderList();
+
+        //POST-reload page fix
+        @Html.Raw("<script>document.location='Orders.cshtml'</script>");
+    }
+}

@@ -24,7 +24,7 @@
     padding: 0 25px 25px 0;
 }
 
-.product_name, .product_price, .product_quantity {
+.product_name, .product_price, .product_quantity, .order_adress {
     padding: 2px;
 }
 

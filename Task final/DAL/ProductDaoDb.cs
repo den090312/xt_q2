@@ -44,6 +44,38 @@ namespace DAL
             }
         }
 
+        public Product GetById(int id)
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetProductById";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(SqlParId(id));
+
+                sqlConnection.Open();
+
+                return GetProductById(sqlCommand, id);
+            }
+        }
+
+        private Product GetProductById(SqlCommand sqlCommand, int id)
+        {
+            var sqlDr = sqlCommand.ExecuteReader();
+
+            while (sqlDr.Read())
+            {
+                var name = sqlDr.GetString(0);
+                var price = sqlDr.GetDecimal(1);
+
+                return new Product(id, name, price);
+            }
+
+            return null;
+        }
+
         private IEnumerable<Product> GetAllProducts(SqlCommand sqlCommand)
         {
             var productList = new List<Product>();
@@ -119,6 +151,17 @@ namespace DAL
             }
 
             return count;
+        }
+
+        private SqlParameter SqlParId(int id)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@Id",
+                Value = id,
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Input
+            };
         }
 
         private SqlParameter SqlParPrice(decimal price)
