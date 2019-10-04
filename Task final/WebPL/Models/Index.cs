@@ -28,13 +28,21 @@ namespace WebPL.Models
             if (Dependencies.RoleLogic.NoRoles())
             {
                 LoadDemoRoles(out Role roleGuest, out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin);
-                LoadDemoUsers(roleGuest, roleCustomer, roleManager, roleAdmin, roleSuperAdmin);
+                LoadDemoUsers(roleGuest, roleCustomer, roleManager, roleAdmin, roleSuperAdmin, out int userManagerId);
+                LoadGeneralManager(userManagerId);
             }
 
             if (Dependencies.ProductLogic.NoProducts())
             {
                 LoadDemoProducts();
             }
+        }
+
+        private static void LoadGeneralManager(int userManagerId)
+        {
+            var manager = new Manager(userManagerId, "Manager", Manager.Rank.General);
+
+            Dependencies.ManagerLogic.Add(ref manager);
         }
 
         public static string GetLastError()
@@ -75,7 +83,7 @@ namespace WebPL.Models
             roleLogic.Add(ref roleSuperAdmin);
         }
 
-        private static void LoadDemoUsers(Role roleGuest, Role roleCustomer, Role roleManager, Role roleAdmin, Role roleSuperAdmin)
+        private static void LoadDemoUsers(Role roleGuest, Role roleCustomer, Role roleManager, Role roleAdmin, Role roleSuperAdmin, out int userManagerId)
         {
             var userLogic = Dependencies.UserLogic;
 
@@ -87,6 +95,7 @@ namespace WebPL.Models
 
             var userManager = User.Manager;
             userLogic.Add(ref userManager, roleManager.Id, "Manager");
+            userManagerId = userManager.Id;
 
             var userAdmin = User.Admin;
             userLogic.Add(ref userAdmin, roleAdmin.Id, "Admin");

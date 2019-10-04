@@ -11,7 +11,7 @@ namespace InterfacesBLL
     {
         bool Add(ref Customer customer);
 
-        Customer GetByUserId(int userId);
+        Customer GetByIdUser(int userId);
 
         bool Remove(Customer customer);
 

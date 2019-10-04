@@ -8,7 +8,7 @@ namespace InterfacesDAL
     {
         bool Add(ref Customer customer);
 
-        Customer GetByUserId(int userId);
+        Customer GetByIdUser(int idUser);
 
         bool Remove(Customer customer);
 

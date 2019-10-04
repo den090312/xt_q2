@@ -55,6 +55,13 @@ namespace WebPL.Models
                 return Dependencies.OrderLogic.GetByCustomerId(idParsed);
             }
 
+            if (userType == "manager")
+            {
+                Message = string.Empty;
+
+                return Dependencies.OrderLogic.GetByManagerId(idParsed);
+            }
+
             return Enumerable.Empty<Entities.Order>();
         }
 

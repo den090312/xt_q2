@@ -50,7 +50,6 @@
             Manager = new Role("Manager")
             {
                 OrderRead = true,
-                OrderWrite = true,
                 ProductRead = true,
                 ProductWrite = true
             };

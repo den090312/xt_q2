@@ -2,6 +2,10 @@
     text-align: center;
 }
 
+.footer {
+    margin-top: 25px;
+}
+
 .product_block {
     display: flex;
     margin: auto;

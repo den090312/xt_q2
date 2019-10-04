@@ -27,7 +27,7 @@ namespace DAL
             }
         }
 
-        public Customer GetByUserId(int idUser)
+        public Customer GetByIdUser(int idUser)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
             {

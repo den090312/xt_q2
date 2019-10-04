@@ -24,11 +24,11 @@ namespace BLL
             return customerDao.Add(ref customer);
         }
 
-        public Customer GetByUserId(int userId)
+        public Customer GetByIdUser(int userId)
         {
             IdCheck(userId);
 
-            return customerDao.GetByUserId(userId);
+            return customerDao.GetByIdUser(userId);
         }
 
         public bool Remove(Customer customer)

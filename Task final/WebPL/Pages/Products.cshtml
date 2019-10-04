@@ -26,7 +26,7 @@
 
             if (currentRole.OrderWrite)
             {
-                var customer = Dependencies.CustomerLogic.GetByUserId(currentUser.Id);
+                var customer = Dependencies.CustomerLogic.GetByIdUser(currentUser.Id);
 
                 <div class="product_block">
                     @foreach (var product in products)
