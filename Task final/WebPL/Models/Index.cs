@@ -141,13 +141,12 @@ namespace WebPL.Models
 
         private static void Account()
         {
-            LogIn();
-            LogOut();
-
-            if (CurrentUser == User.Guest)
+            if (LogIn() | LogOut())
             {
-                RegisterCustomer(RegisterUser());
+                return;
             }
+
+            RegisterCustomer(RegisterUser());
         }
 
         private static void RegisterCustomer(User user)
@@ -215,25 +214,29 @@ namespace WebPL.Models
             }
         }
 
-        private static void LogOut()
+        private static bool LogOut()
         {
             var loggedOut = Forms["loggedOut"];
 
-            if (loggedOut != null & loggedOut == "loggedOut")
+            if (loggedOut == null || loggedOut != "loggedOut")
             {
-                CurrentUser = User.Guest;
-                Message = string.Empty;
+                return false;
             }
+
+            CurrentUser = User.Guest;
+            Message = string.Empty;
+
+            return true;
         }
 
-        private static void LogIn()
+        private static bool LogIn()
         {
             var logName = Forms["logName"];
             var logPass = Forms["logPass"];
 
             if (logName == null || logPass == null)
             {
-                return;
+                return false;
             }
 
             var userLogic = Dependencies.UserLogic;
@@ -244,19 +247,21 @@ namespace WebPL.Models
             {
                 Message = "Пользователя с таким именем не существует!";
 
-                return;
+                return true;
             }
 
             if (!userLogic.PasswordIsOk(logPass, logUser.PasswordHash))
             {
                 Message = "Неправильный пароль!";
 
-                return;
+                return true;
             }
             else
             {
                 CurrentUser = logUser;
                 Message = string.Empty;
+
+                return true;
             }
         }
 

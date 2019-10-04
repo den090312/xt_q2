@@ -12,9 +12,10 @@
         <input type="text" class="reg_pass" name="regPass" placeholder="Password" />
     </p>
     <p>
-        <input type="submit" class="register" value="Ок" />
-        <a href="~/Index.cshtml">
-            <input type="submit" class="cancel_register" value="Cancel" />
-        </a>
+        <input type="submit" class="register" value="Ок" style="float: left;"/>
     </p>
+</form>
+<form method="post" action="~/Index.cshtml" class="user_log_out" style="float: left;">
+    <input type="submit" class="log_out" value="Отмена" style="margin-left: 15px;" />
+    <input type="text" class="log_out_post" style="display: none;" name="loggedOut" />
 </form>

@@ -5,8 +5,8 @@
 @{
     Layout = null;
 }
-    
-<form method="post" action="~/Pages/Orders.cshtml" class="user_log_out">
+
+<form method="post" action="~/Pages/Orders.cshtml" style="float: left;">
     @{
         var currentRole = Dependencies.RoleLogic.GetById(Index.CurrentUser.IdRole);
 
@@ -26,8 +26,8 @@
             <input type="submit" class="myOrders" value="Мои заказы" />
         }
     }
-    <a href="~/Index.cshtml">
-        <input type="submit" class="log_out" value="Выйти" />
-    </a>
+</form>
+<form method="post" action="~/Index.cshtml" class="user_log_out" style="float: left;">
+    <input type="submit" class="log_out" value="Выйти" style="margin-left: 15px;"/>
     <input type="text" class="log_out_post" style="display: none;" name="loggedOut" />
 </form>
