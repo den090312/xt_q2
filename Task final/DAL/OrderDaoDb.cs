@@ -124,6 +124,22 @@ namespace DAL
             }
         }
 
+        public bool CompleteOrder(int id)
+        {
+            try
+            {
+                OrderComplete(id);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LogOrderError(id, ex);
+
+                return false;
+            }
+        }
+
         private IEnumerable<Order> NewOrders(SqlCommand sqlCommand)
         {
             var sqlDr = sqlCommand.ExecuteReader();
@@ -160,6 +176,23 @@ namespace DAL
 
                 sqlCommand.Parameters.Add(SqlParId(orderId));
                 sqlCommand.Parameters.Add(SqlParIdManager(idManager));
+
+                sqlConnection.Open();
+
+                sqlCommand.ExecuteNonQuery();
+            }
+        }
+
+        private void OrderComplete(int id)
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "CompleteOrderById";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(SqlParId(id));
 
                 sqlConnection.Open();
 

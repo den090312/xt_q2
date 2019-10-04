@@ -18,7 +18,7 @@ namespace WebPL.Models
         {
             Forms = forms;
 
-            if (AddOrder() || CancelOrder() || RestoreOrder() || InWorkOrder())
+            if (AddOrder() || CancelOrder() || RestoreOrder() || InWorkOrder() || CompleteOrder())
             {
                 return;
             }
@@ -146,6 +146,30 @@ namespace WebPL.Models
             else
             {
                 Message = "Ошибка взятия заказа в работу!";
+
+                return false;
+            }
+        }
+
+
+        private static bool CompleteOrder()
+        {
+            var id = GetFormsOrderId("orderCompleteId");
+
+            if (id <= 0)
+            {
+                return false;
+            }
+
+            if (Dependencies.OrderLogic.CompleteOrder(id))
+            {
+                Message = "Заказ доставлен";
+
+                return true;
+            }
+            else
+            {
+                Message = "Ошибка доставки заказа!";
 
                 return false;
             }

@@ -56,6 +56,10 @@
                             {
                                 <input type="submit" class="restoreOrder" name="restoreOrder" value="Восстановить" />
                             }
+                            @if (order.CurrentStatus == Entities.Order.Status.Processed)
+                            {
+                                <input type="submit" class="completeOrder" name="completeOrder" value="Завершить" />
+                            }
                         </div>
                     </div>
 
@@ -83,6 +87,7 @@
                 </a>
                 <input type="text" class="orderCancelId" name="orderCancelId" style="display: none;" />
                 <input type="text" class="orderRestoreId" name="orderRestoreId" style="display: none;" />
+                <input type="text" class="orderCompleteId" name="orderCompleteId" style="display: none;" />
             </div>
         </form>
     }

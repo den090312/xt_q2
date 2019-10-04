@@ -55,6 +55,13 @@ namespace BLL
             return orderDao.InWorkOrder(orderId, idManager);
         }
 
+        public bool CompleteOrder(int id)
+        {
+            IdCheck(id);
+
+            return orderDao.CompleteOrder(id);
+        }
+
         public IEnumerable<Order> GetNewOrders()
         {
             return orderDao.GetNewOrders();

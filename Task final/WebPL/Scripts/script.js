@@ -54,6 +54,11 @@
                 var inWorkOrderId = customer_orders.getElementsByClassName("inWorkOrderId")[0];
                 inWorkOrderId.value = tableCellOrderId.value;
             }
+
+            if (eventTarget.className == "completeOrder") {
+                var orderCompleteId = customer_orders.getElementsByClassName("orderCompleteId")[0];
+                orderCompleteId.value = tableCellOrderId.value;
+            }
         }
     }
 }

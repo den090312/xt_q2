@@ -22,5 +22,7 @@ namespace InterfacesDAL
         bool InWorkOrder(int orderId, int idManager);
 
         IEnumerable<Order> GetNewOrders();
+
+        bool CompleteOrder(int id);
     }
 }

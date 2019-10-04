@@ -19,6 +19,8 @@ namespace InterfacesBLL
 
         bool RestoreOrder(int id);
 
+        bool CompleteOrder(int id);
+
         IEnumerable<Order> GetNewOrders();
 
         bool InWorkOrder(int orderId, int idManager);
