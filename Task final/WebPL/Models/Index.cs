@@ -21,6 +21,7 @@ namespace WebPL.Models
         {
             Account();
             Order();
+            Product();
         }
 
         public static void DemoData()
@@ -61,6 +62,12 @@ namespace WebPL.Models
         {
             Models.Order.Run(Forms);
             Message = Models.Order.Message;
+        }
+
+        private static void Product()
+        {
+            Models.Product.Run(Forms);
+            Message = Models.Product.Message;
         }
 
         private static void LoadDemoRoles(out Role roleGuest, out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin)
@@ -108,13 +115,13 @@ namespace WebPL.Models
         {
             var productLogic = Dependencies.ProductLogic;
 
-            var drill = new Product("Дрель", 7500);
+            var drill = new Entities.Product("Дрель", 7500);
             productLogic.Add(ref drill);
 
-            var speakers = new Product("Колонки", 3500);
+            var speakers = new Entities.Product("Колонки", 3500);
             productLogic.Add(ref speakers);
 
-            var fireworks = new Product("Хлопушка", 1000);
+            var fireworks = new Entities.Product("Хлопушка", 1000);
             productLogic.Add(ref fireworks);
         }
     }

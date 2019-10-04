@@ -30,7 +30,7 @@
 
                 <div class="product_block">
                     @foreach (var product in products)
-                     {
+                    {
                         <form method="post" action="~/Index.cshtml" class="product_order">
                             <div class="product">
                                 <input type="text" class="product_id" name="productId" value="@product.Id" style="display: none;" />
@@ -48,12 +48,12 @@
                                 <input type="text" class="customerId" name="customerId" value="@customer.Id" style="display: none;" />
                             </div>
                         </form>
-                     }
+                    }
                 </div>
             }
             else
             {
-               <div class="product_block">
+                <div class="product_block">
                     @foreach (var product in products)
                     {
                         <div class="product_order">
@@ -63,8 +63,18 @@
                             </div>
                         </div>
                     }
-               </div>
+                </div>
             }
         }
     </div>
+
+    if (currentRole.ProductWrite)
+    {
+        <form method="post" action="~/Index.cshtml" class="product_add">
+            <h4>Добавить товар</h4>
+            <input type="text" class="product_new_name" name="newProductName" placeholder="Наименование" />
+            <input type="text" class="product_new_price" name="newProductPrice" placeholder="Цена" />
+            <input type="submit" class="submit_order" value="Ок" />
+        </form>
+    }
 }
