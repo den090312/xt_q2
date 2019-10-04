@@ -18,20 +18,13 @@ namespace WebPL.Models
         {
             Forms = forms;
 
-            if (AddOrder())
+            if (AddOrder() || CancelOrder() || RestoreOrder() || InWorkOrder())
             {
                 return;
             }
-
-            if (CancelOrder())
-            {
-                return;
-            }
-
-            RestoreOrder();
         }
 
-        public static IEnumerable<Entities.Order> GetOrderList()
+        public static IEnumerable<Entities.Order> GetOrders()
         {
             var userType = Forms["userType"];
             var id = Forms["id"];
@@ -52,18 +45,20 @@ namespace WebPL.Models
             {
                 Message = string.Empty;
 
-                return Dependencies.OrderLogic.GetByCustomerId(idParsed);
+                return Dependencies.OrderLogic.GetByIdCustomer(idParsed);
             }
 
             if (userType == "manager")
             {
                 Message = string.Empty;
 
-                return Dependencies.OrderLogic.GetByManagerId(idParsed);
+                return Dependencies.OrderLogic.GetByIdManager(idParsed);
             }
 
             return Enumerable.Empty<Entities.Order>();
         }
+
+        public static IEnumerable<Entities.Order> GetNewOrders() => Dependencies.OrderLogic.GetNewOrders();
 
         private static bool AddOrder()
         {
@@ -87,7 +82,7 @@ namespace WebPL.Models
 
         private static bool CancelOrder()
         {
-            var id = GetChosenOrderCancelId();
+            var id = GetFormsOrderId("orderCancelId");
 
             if (id <= 0)
             {
@@ -108,47 +103,57 @@ namespace WebPL.Models
             }
         }
 
-        private static void RestoreOrder()
+        private static bool RestoreOrder()
         {
-            var id = GetChosenOrderRestoreId();
+            var id = GetFormsOrderId("orderRestoreId");
 
             if (id <= 0)
             {
-                return;
+                return false;
             }
 
             if (Dependencies.OrderLogic.RestoreOrder(id))
             {
                 Message = "Заказ восстановлен";
+
+                return true;
             }
             else
             {
                 Message = "Ошибка восстановления заказа!";
+
+                return false;
             }
         }
 
-        private static int GetChosenOrderCancelId()
+        private static bool InWorkOrder()
         {
-            var id = Forms["chosenOrderCancelId"];
+            var orderId = GetFormsOrderId("inWorkOrderId");
 
-            if (id == null || id == string.Empty)
+            if (orderId <= 0)
             {
-                return 0;
+                return false;
             }
 
-            if (!int.TryParse(id, out int idParsed))
+            var idManager = Dependencies.ManagerLogic.GetByUserId(Index.CurrentUser.Id);
+
+            if (Dependencies.OrderLogic.InWorkOrder(orderId, idManager.Id))
             {
-                Message = $"Некорректный id - {id}!";
+                Message = "Заказ взят в работу";
 
-                return 0;
+                return true;
             }
+            else
+            {
+                Message = "Ошибка взятия заказа в работу!";
 
-            return idParsed;
+                return false;
+            }
         }
 
-        private static int GetChosenOrderRestoreId()
+        private static int GetFormsOrderId(string elementName)
         {
-            var id = Forms["chosenOrderRestoreId"];
+            var id = Forms[elementName];
 
             if (id == null || id == string.Empty)
             {

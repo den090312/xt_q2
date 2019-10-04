@@ -5,12 +5,14 @@
 @{
     Layout = "~/Pages/_Layout.cshtml";
 
+    Index.Message = string.Empty;
+
     var orderList = Enumerable.Empty<Entities.Order>();
 
     if (IsPost)
     {
         WebPL.Models.Order.Forms = Request.Form;
-        orderList = WebPL.Models.Order.GetOrderList();
+        orderList = WebPL.Models.Order.GetOrders();
     }
 
     if (orderList.Count() == 0)
@@ -79,8 +81,8 @@
                 <a href="~/Index.cshtml">
                     <input type="button" value="На главную" />
                 </a>
-                <input type="text" class="chosenOrderCancelId" name="chosenOrderCancelId" style="display: none;" />
-                <input type="text" class="chosenOrderRestoreId" name="chosenOrderRestoreId" style="display: none;" />
+                <input type="text" class="orderCancelId" name="orderCancelId" style="display: none;" />
+                <input type="text" class="orderRestoreId" name="orderRestoreId" style="display: none;" />
             </div>
         </form>
     }

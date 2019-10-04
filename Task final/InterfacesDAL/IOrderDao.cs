@@ -13,8 +13,14 @@ namespace InterfacesDAL
 
         IEnumerable<Order> GetByIdCustomer(int id);
 
+        IEnumerable<Order> GetByIdManager(int id);
+
         bool CancelOrder(int id);
 
         bool RestoreOrder(int id);
+
+        bool InWorkOrder(int orderId, int idManager);
+
+        IEnumerable<Order> GetNewOrders();
     }
 }

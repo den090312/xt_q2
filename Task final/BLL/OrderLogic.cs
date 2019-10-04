@@ -47,16 +47,31 @@ namespace BLL
             return orderDao.RestoreOrder(id);
         }
 
-        public IEnumerable<Order> GetByCustomerId(int id)
+        public bool InWorkOrder(int orderId, int idManager)
+        {
+            IdCheck(orderId);
+            IdCheck(idManager);
+
+            return orderDao.InWorkOrder(orderId, idManager);
+        }
+
+        public IEnumerable<Order> GetNewOrders()
+        {
+            return orderDao.GetNewOrders();
+        }
+
+        public IEnumerable<Order> GetByIdCustomer(int id)
         {
             IdCheck(id);
 
             return orderDao.GetByIdCustomer(id);
         }
 
-        public IEnumerable<Order> GetByManagerId(int id)
+        public IEnumerable<Order> GetByIdManager(int id)
         {
-            throw new NotImplementedException();
+            IdCheck(id);
+
+            return orderDao.GetByIdManager(id);
         }
 
         private void IdCheck(int id)

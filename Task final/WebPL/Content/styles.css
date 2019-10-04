@@ -15,7 +15,7 @@
     display: flex;
 }
 
-.product {
+.product_order, .product {
     margin: auto;
 }
 

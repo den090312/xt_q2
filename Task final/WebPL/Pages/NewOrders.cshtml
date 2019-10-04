@@ -5,27 +5,20 @@
 @{
     Layout = null;
 
-    var orderList = Enumerable.Empty<Entities.Order>();
+    var newOrders = WebPL.Models.Order.GetNewOrders();
 
-    if (IsPost)
-    {
-        WebPL.Models.Order.Forms = Request.Form;
-        orderList = WebPL.Models.Order.GetOrderList();
-    }
-
-    if (orderList.Count() == 0)
+    if (newOrders.Count() == 0)
     {
         <h2 class="product_caption">Новых заказов не найдено</h2>
     }
 
-    if (orderList.Count() > 0)
+    if (newOrders.Count() > 0)
     {
-        <b id="messagebox">@Index.Message</b>
-        <h2 class="product_caption">Заказы</h2>
+        <h2 class="product_caption">Новые заказы</h2>
         <form method="post" action="~/Index.cshtml" class="customer_orders">
             <div class="table">
 
-                @foreach (var order in orderList)
+                @foreach (var order in newOrders)
                 {
                     <div class="tableRow">
                         <div class="tableCellCaption">ID</div>
@@ -43,14 +36,7 @@
                         <div class="tableCell">@order.Sum</div>
                         <div class="tableCell">@order.CurrentStatus</div>
                         <div class="tableCell">
-                            @if (order.CurrentStatus == Entities.Order.Status.Opened)
-                            {
-                                <input type="submit" class="cancelOrder" name="cancelOrder" value="Отменить" />
-                            }
-                            @if (order.CurrentStatus == Entities.Order.Status.Canceled)
-                            {
-                                <input type="submit" class="restoreOrder" name="restoreOrder" value="Восстановить" />
-                            }
+                            <input type="submit" class="inWorkOrder" name="inWorkOrder" value="Взять в работу" />
                         </div>
                     </div>
 
@@ -73,8 +59,7 @@
                         }
                     </div>
                 }
-                <input type="text" class="chosenOrderCancelId" name="chosenOrderCancelId" style="display: none;" />
-                <input type="text" class="chosenOrderRestoreId" name="chosenOrderRestoreId" style="display: none;" />
+                <input type="text" class="inWorkOrderId" name="inWorkOrderId" style="display: none;" />
             </div>
         </form>
     }

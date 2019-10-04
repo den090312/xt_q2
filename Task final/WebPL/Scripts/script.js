@@ -41,13 +41,18 @@
             var tableCellOrderId = tableRow.getElementsByClassName("tableCellOrderId")[0];
 
             if (eventTarget.className == "cancelOrder") {
-                var chosenOrderCancelId = customer_orders.getElementsByClassName("chosenOrderCancelId")[0];
-                chosenOrderCancelId.value = tableCellOrderId.value;
+                var orderCancelId = customer_orders.getElementsByClassName("orderCancelId")[0];
+                orderCancelId.value = tableCellOrderId.value;
             }
 
             if (eventTarget.className == "restoreOrder") {
-                var chosenOrderRestoreId = customer_orders.getElementsByClassName("chosenOrderRestoreId")[0];
-                chosenOrderRestoreId.value = tableCellOrderId.value;
+                var orderRestoreId = customer_orders.getElementsByClassName("orderRestoreId")[0];
+                orderRestoreId.value = tableCellOrderId.value;
+            }
+
+            if (eventTarget.className == "inWorkOrder") {
+                var inWorkOrderId = customer_orders.getElementsByClassName("inWorkOrderId")[0];
+                inWorkOrderId.value = tableCellOrderId.value;
             }
         }
     }

@@ -40,7 +40,24 @@ namespace DAL
 
                 sqlConnection.Open();
 
-                return GetOrdersById(sqlCommand, idCustomer);
+                return GetOrdersByIdCustomer(sqlCommand, idCustomer);
+            }
+        }
+
+        public IEnumerable<Order> GetByIdManager(int idManager)
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetOrdersByIdManager";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(SqlParId(idManager));
+
+                sqlConnection.Open();
+
+                return GetOrdersByIdManager(sqlCommand, idManager);
             }
         }
 
@@ -54,8 +71,7 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                Logger.InitLogger();
-                Logger.Log.Error(ex.Message + " - " + "id заказа - " + id);
+                LogOrderError(id, ex);
 
                 return false;
             }
@@ -71,10 +87,83 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                Logger.InitLogger();
-                Logger.Log.Error(ex.Message + " - " + "id заказа - " + id);
+                LogOrderError(id, ex);
 
                 return false;
+            }
+        }
+
+        public bool InWorkOrder(int orderId, int idManager)
+        {
+            try
+            {
+                OrderInWork(orderId, idManager);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LogOrderError(orderId, ex);
+
+                return false;
+            }
+        }
+
+        public IEnumerable<Order> GetNewOrders()
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetNewOrders";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlConnection.Open();
+
+                return NewOrders(sqlCommand);
+            }
+        }
+
+        private IEnumerable<Order> NewOrders(SqlCommand sqlCommand)
+        {
+            var sqlDr = sqlCommand.ExecuteReader();
+
+            var orderList = new List<Order>();
+
+            while (sqlDr.Read())
+            {
+                var orderId = sqlDr.GetInt32(0);
+                var idCustomer = sqlDr.GetInt32(1);
+                var date = sqlDr.GetDateTime(2);
+                var adress = sqlDr.GetString(3);
+                var sum = sqlDr.GetDecimal(4);
+
+                var order = new Order(idCustomer, date, adress, new List<int>(), sum)
+                {
+                    Id = orderId
+                };
+
+                orderList.Add(order);
+            }
+
+            return orderList;
+        }
+
+        private void OrderInWork(int orderId, int idManager)
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "InWorkOrder";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(SqlParId(orderId));
+                sqlCommand.Parameters.Add(SqlParIdManager(idManager));
+
+                sqlConnection.Open();
+
+                sqlCommand.ExecuteNonQuery();
             }
         }
 
@@ -112,7 +201,7 @@ namespace DAL
             }
         }
 
-        private IEnumerable<Order> GetOrdersById(SqlCommand sqlCommand, int idCustomer)
+        private IEnumerable<Order> GetOrdersByIdCustomer(SqlCommand sqlCommand, int idCustomer)
         {
             var sqlDr = sqlCommand.ExecuteReader();
 
@@ -131,6 +220,35 @@ namespace DAL
                 var order = new Order(idCustomer, date, adress, new List<int>(), sum, currentStatus)
                 {
                     Id = orderId
+                };
+
+                orders.Add(order);
+            }
+
+            return orders;
+        }
+
+        private IEnumerable<Order> GetOrdersByIdManager(SqlCommand sqlCommand, int idManager)
+        {
+            var sqlDr = sqlCommand.ExecuteReader();
+
+            var orders = new List<Order>();
+
+            while (sqlDr.Read())
+            {
+                var orderId    = sqlDr.GetInt32(0);
+                var idCustomer = sqlDr.GetInt32(1);
+                var date       = sqlDr.GetDateTime(2);
+                var adress     = sqlDr.GetString(3);
+                var sum        = sqlDr.GetDecimal(4);
+                var status     = sqlDr.GetString(5);
+
+                var currentStatus = (Order.Status)Enum.Parse(typeof(Order.Status), status);
+
+                var order = new Order(idCustomer, date, adress, new List<int>(), sum, currentStatus)
+                {
+                    Id = orderId,
+                    IdManager = idManager
                 };
 
                 orders.Add(order);
@@ -200,6 +318,17 @@ namespace DAL
             };
         }
 
+        private SqlParameter SqlParIdManager(int idManager)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@IdManager",
+                Value = idManager,
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Input
+            };
+        }
+
         private SqlParameter SqlParId(int id)
         {
             return new SqlParameter
@@ -231,6 +360,12 @@ namespace DAL
                 SqlDbType = SqlDbType.NVarChar,
                 Direction = ParameterDirection.Input
             };
+        }
+
+        private static void LogOrderError(int id, Exception ex)
+        {
+            Logger.InitLogger();
+            Logger.Log.Error(ex.Message + " - " + "id заказа - " + id);
         }
     }
 }

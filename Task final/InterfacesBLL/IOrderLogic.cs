@@ -11,12 +11,16 @@ namespace InterfacesBLL
     {
         bool Add(ref Order order);
 
-        IEnumerable<Order> GetByCustomerId(int id);
+        IEnumerable<Order> GetByIdCustomer(int id);
 
-        IEnumerable<Order> GetByManagerId(int id);
+        IEnumerable<Order> GetByIdManager(int id);
 
         bool CancelOrder(int id);
 
         bool RestoreOrder(int id);
+
+        IEnumerable<Order> GetNewOrders();
+
+        bool InWorkOrder(int orderId, int idManager);
     }
 }
