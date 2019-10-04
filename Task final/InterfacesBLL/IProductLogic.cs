@@ -18,5 +18,7 @@ namespace InterfacesBLL
         IEnumerable<Product> GetAll();
 
         Product GetById(int id);
+
+        bool Remove(int id);
     }
 }

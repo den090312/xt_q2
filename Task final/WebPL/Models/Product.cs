@@ -18,26 +18,56 @@ namespace WebPL.Models
         {
             Forms = forms;
 
-            AddProduct();
+            if (AddProduct() || RemoveProduct())
+            {
+                return;
+            } 
         }
 
-        private static void AddProduct()
+        private static bool AddProduct()
         {
             var name = Forms["newProductName"];
             var price = Forms["newProductPrice"];
 
             if (!decimal.TryParse(price, out decimal priceParsed))
             {
-                return;
+                return false;
             }
 
             if (Dependencies.ProductLogic.Add(name, priceParsed))
             {
                 Message = "Товар добавлен!";
+
+                return true;
             }
             else
             {
                 Message = "Ошибка добавления товара!";
+
+                return false;
+            }
+        }
+
+        private static bool RemoveProduct()
+        {
+            var productId = Forms["chosenProductIdDelete"];
+
+            if (!int.TryParse(productId, out int productIdParsed))
+            {
+                return false;
+            }
+
+            if (Dependencies.ProductLogic.Remove(productIdParsed))
+            {
+                Message = "Товар удален!";
+
+                return true;
+            }
+            else
+            {
+                Message = "Ошибка удаления товара!";
+
+                return false;
             }
         }
     }

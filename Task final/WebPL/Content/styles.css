@@ -6,7 +6,7 @@
     margin-top: 25px;
 }
 
-.product_block {
+.product_block, .product_block_delete {
     display: flex;
     margin: auto;
 }

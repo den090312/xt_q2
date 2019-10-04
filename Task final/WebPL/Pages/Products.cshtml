@@ -53,15 +53,21 @@
             }
             else
             {
-                <div class="product_block">
+                <div class="product_block_delete">
                     @foreach (var product in products)
                     {
-                        <div class="product_order">
+                        <form method="post" action="~/Index.cshtml">
                             <div class="product">
+                                <input type="text" class="product_id_delete" name="productIdDelete" value="@product.Id" style="display: none;" />
                                 <div class="product_name">@product.Name</div>
                                 <div class="product_price">@product.Price руб.</div>
                             </div>
-                        </div>
+                            @if (currentRole.ProductWrite)
+                            {
+                                <input type="submit" class="deleteProduct" value="Удалить" />
+                                <input type="text" class="chosenProductIdDelete" name="chosenProductIdDelete" style="display: none;" />
+                            }
+                        </form>
                     }
                 </div>
             }

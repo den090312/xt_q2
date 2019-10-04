@@ -61,6 +61,40 @@ namespace DAL
             }
         }
 
+        public bool Remove(int id)
+        {
+            try
+            {
+                RemoveProduct(id);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Logger.InitLogger();
+                Logger.Log.Error(ex.Message + " - id: " + id);
+
+                return false;
+            }
+        }
+
+        public void RemoveProduct(int id)
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "RemoveProduct";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(SqlParId(id));
+
+                sqlConnection.Open();
+
+                sqlCommand.ExecuteNonQuery();
+            }
+        }
+
         private Product GetProductById(SqlCommand sqlCommand, int id)
         {
             var sqlDr = sqlCommand.ExecuteReader();

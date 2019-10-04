@@ -48,6 +48,13 @@ namespace BLL
             return productDao.GetById(idProduct);
         }
 
+        public bool Remove(int id)
+        {
+            IdCheck(id);
+
+            return productDao.Remove(id);
+        }
+
         private void IdCheck(int id)
         {
             if (id <= 0)

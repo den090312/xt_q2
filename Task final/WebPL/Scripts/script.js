@@ -32,6 +32,20 @@
         }
     }
 
+    var product_block_delete = document.getElementsByClassName("product_block_delete")[0];
+    if (product_block_delete) {
+        product_block_delete.onclick = function (event) {
+            var eventTarget = event.target;
+            var form = eventTarget.parentElement;
+            var divProduct = form.getElementsByClassName("product")[0];
+            var productIdDelete = divProduct.getElementsByClassName("product_id_delete")[0];
+
+            var chosenProductIdDelete = form.getElementsByClassName("chosenProductIdDelete")[0];
+
+            chosenProductIdDelete.value = productIdDelete.value;
+        }
+    }
+
     var customer_orders = document.getElementsByClassName("customer_orders")[0];
     if (customer_orders) {
         customer_orders.onclick = function (event) {
