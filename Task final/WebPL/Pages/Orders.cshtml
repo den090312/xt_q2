@@ -5,18 +5,20 @@
 @{
     Layout = "~/Pages/_Layout.cshtml";
 
-    var orderList = Enumerable.Empty<Order>();
+    var orderList = Enumerable.Empty<Entities.Order>();
 
     if (IsPost)
     {
-        Index.Forms = Request.Form;
-        
-        orderList = Index.GetOrderList();
+        WebPL.Models.Order.Forms = Request.Form;
+        orderList = WebPL.Models.Order.GetOrderList();
     }
 
     if (orderList.Count() == 0)
     {
         <h2 class="product_caption">Заказов не найдено</h2>
+        <a href="~/Index.cshtml">
+            <input type="button" value="На главную" style="margin-top: 25px;" />
+        </a>
     }
 
     if (orderList.Count() > 0)
@@ -44,11 +46,11 @@
                         <div class="tableCell">@order.Sum</div>
                         <div class="tableCell">@order.CurrentStatus</div>
                         <div class="tableCell">
-                            @if (order.CurrentStatus == Order.Status.Opened)
+                            @if (order.CurrentStatus == Entities.Order.Status.Opened)
                             {
                                 <input type="submit" class="cancelOrder" name="cancelOrder" value="Отменить" />
                             }
-                            @if (order.CurrentStatus == Order.Status.Canceled)
+                            @if (order.CurrentStatus == Entities.Order.Status.Canceled)
                             {
                                 <input type="submit" class="restoreOrder" name="restoreOrder" value="Восстановить" />
                             }
