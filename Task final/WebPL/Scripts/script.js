@@ -35,11 +35,20 @@
     var customer_orders = document.getElementsByClassName("customer_orders")[0];
     if (customer_orders) {
         customer_orders.onclick = function (event) {
-            var tableRow = event.target.parentElement.parentElement;
-            var tableCellOrderId = tableRow.getElementsByClassName("tableCellOrderId")[0];
-            var chosenOrderId = customer_orders.getElementsByClassName("chosenOrderId")[0];
+            var eventTarget = event.target;
 
-            chosenOrderId.value = tableCellOrderId.value; 
+            var tableRow = eventTarget.parentElement.parentElement;
+            var tableCellOrderId = tableRow.getElementsByClassName("tableCellOrderId")[0];
+
+            if (eventTarget.className == "cancelOrder") {
+                var chosenOrderCancelId = customer_orders.getElementsByClassName("chosenOrderCancelId")[0];
+                chosenOrderCancelId.value = tableCellOrderId.value;
+            }
+
+            if (eventTarget.className == "restoreOrder") {
+                var chosenOrderRestoreId = customer_orders.getElementsByClassName("chosenOrderRestoreId")[0];
+                chosenOrderRestoreId.value = tableCellOrderId.value;
+            }
         }
     }
 }

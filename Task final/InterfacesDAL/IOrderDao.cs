@@ -14,5 +14,7 @@ namespace InterfacesDAL
         IEnumerable<Order> GetByIdCustomer(int id);
 
         bool CancelOrder(int id);
+
+        bool RestoreOrder(int id);
     }
 }

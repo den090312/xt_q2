@@ -20,8 +20,49 @@ namespace WebPL.Models
         public static void Run()
         {
             Account();
-            DemoData();
-            AddOrder();
+            Order();
+        }
+
+        private static void Account()
+        {
+            if (LogIn())
+            {
+                return;
+            }
+
+            if (LogOut())
+            {
+                return;
+            }
+
+            if (CurrentUser != User.Guest)
+            {
+                return;
+            }
+
+            var registerUser = RegisterUser();
+
+            if (registerUser == User.Guest)
+            {
+                return;
+            }
+
+            RegisterCustomer(registerUser);
+        }
+
+        private static void Order()
+        {
+            if (AddOrder())
+            {
+                return;
+            }
+
+            if (CancelOrder())
+            {
+                return;
+            }
+
+            RestoreOrder();
         }
 
         public static IEnumerable<Order> GetOrderList()
@@ -51,53 +92,134 @@ namespace WebPL.Models
             return Enumerable.Empty<Order>();
         }
 
-        public static void CancelOrder()
+        private static bool CancelOrder()
         {
-            var id = Forms["chosenOrderId"];
+            var id = GetChosenOrderCancelId();
+
+            if (id <= 0)
+            {
+                return false;
+            }
+
+            if (Dependencies.OrderLogic.CancelOrder(id))
+            {
+                Message = "Заказ отменен";
+
+                return true;
+            }
+            else
+            {
+                Message = "Ошибка отмены заказа!";
+
+                return false;
+            }
+        }
+
+
+        private static void RestoreOrder()
+        {
+            var id = GetChosenOrderRestoreId();
+
+            if (id <= 0)
+            {
+                return;
+            }
+
+            if (Dependencies.OrderLogic.RestoreOrder(id))
+            {
+                Message = "Заказ восстановлен";
+            }
+            else
+            {
+                Message = "Ошибка восстановления заказа!";
+            }
+        }
+
+        private static int GetChosenOrderCancelId()
+        {
+            var id = Forms["chosenOrderCancelId"];
 
             if (id == null || id == string.Empty)
             {
-                return;
+                return 0;
             }
 
             if (!int.TryParse(id, out int idParsed))
             {
                 Message = $"Некорректный id - {id}!";
 
-                return;
+                return 0;
             }
 
-            if (Dependencies.OrderLogic.CancelOrder(idParsed))
-            {
-                Message = "Заказ отменен";
-            }
-            else
-            {
-                Message = "Ошибка отмены заказа!";
-            }
+            return idParsed;
         }
 
-        private static void AddOrder()
+        private static int GetChosenOrderRestoreId()
+        {
+            var id = Forms["chosenOrderRestoreId"];
+
+            if (id == null || id == string.Empty)
+            {
+                return 0;
+            }
+
+            if (!int.TryParse(id, out int idParsed))
+            {
+                Message = $"Некорректный id - {id}!";
+
+                return 0;
+            }
+
+            return idParsed;
+        }
+
+        private static bool AddOrder()
         {
             var idCustomer = Forms["customerId"];
-            var idProduct  = Forms["chosenProductId"];
-            var quantity   = Forms["chosenProductQuantity"];
-            var adress     = Forms["orderAdress"];
+            var idProduct = Forms["chosenProductId"];
+            var quantity = Forms["chosenProductQuantity"];
+            var adress = Forms["orderAdress"];
 
             if (idProduct == null || quantity == null || adress == null || idCustomer == null)
             {
-                return;
+                return false;
             }
 
             if (idProduct == string.Empty || quantity == string.Empty || adress == string.Empty || idCustomer == string.Empty)
             {
-                return;
+                return false;
             }
 
-            OrderAdd(int.Parse(idCustomer), int.Parse(idProduct), int.Parse(quantity), adress);
+            return OrderAdd(idCustomer, idProduct, quantity, adress);
         }
 
-        private static void OrderAdd(int idCustomer, int idProduct, int quantity, string adress)
+        private static bool OrderAdd(string idCustomer, string idProduct, string quantity, string adress)
+        {
+            if (!int.TryParse(idCustomer, out int idCustomerParsed))
+            {
+                Message = $"Некорректный idCustomer - '{idCustomer}'!";
+
+                return false;
+            }
+
+            if (!int.TryParse(idProduct, out int idProductParsed))
+            {
+                Message = $"Некорректный idProduct - '{idProduct}'!";
+
+                return false;
+            }
+
+            if (!int.TryParse(quantity, out int quantityParsed))
+            {
+                Message = $"Некорректный quantity - '{quantity}'!";
+
+                return false;
+            }
+
+            return OrderAddParsed(idCustomerParsed, idProductParsed, quantityParsed, adress);
+        }
+
+        private static bool OrderAddParsed(int idCustomer, int idProduct, int quantity, string adress)
         {
             var listIdProduct = new List<int>
             {
@@ -116,13 +238,13 @@ namespace WebPL.Models
 
                 Message = "Заказ создан";
 
-                return;
+                return true;
             }
             else
             {
                 Message = "Ошибка создания заказа!";
 
-                return;
+                return false;
             }
         }
 
@@ -136,34 +258,6 @@ namespace WebPL.Models
 
                     return;
                 }
-            }
-        }
-
-        private static void Account()
-        {
-            if (LogIn() | LogOut())
-            {
-                return;
-            }
-
-            RegisterCustomer(RegisterUser());
-        }
-
-        private static void RegisterCustomer(User user)
-        {
-            var customer = new Customer(user.Name, user);
-
-            if (Dependencies.CustomerLogic.Add(ref customer))
-            {
-                Message = "Покупатель зарегистрирован";
-
-                return;
-            }
-            else
-            {
-                Message = "Ошибка регистрации покупателя!";
-
-                return;
             }
         }
 
@@ -184,6 +278,24 @@ namespace WebPL.Models
             }
 
             return User.Guest;
+        }
+
+        private static void RegisterCustomer(User user)
+        {
+            var customer = new Customer(user.Name, user);
+
+            if (Dependencies.CustomerLogic.Add(ref customer))
+            {
+                Message = "Покупатель зарегистрирован";
+
+                return;
+            }
+            else
+            {
+                Message = "Ошибка регистрации покупателя!";
+
+                return;
+            }
         }
 
         private static User RegisterNewUser(string regName, string regPass, Role regRole)
@@ -265,7 +377,7 @@ namespace WebPL.Models
             }
         }
 
-        private static void DemoData()
+        public static void DemoData()
         {
             if (Dependencies.RoleLogic.NoRoles())
             {

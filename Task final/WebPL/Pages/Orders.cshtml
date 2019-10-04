@@ -10,9 +10,13 @@
     if (IsPost)
     {
         Index.Forms = Request.Form;
-
+        
         orderList = Index.GetOrderList();
-        Index.CancelOrder();
+    }
+
+    if (orderList.Count() == 0)
+    {
+        <h2 class="product_caption">Заказов не найдено</h2>
     }
 
     if (orderList.Count() > 0)
@@ -40,14 +44,22 @@
                         <div class="tableCell">@order.Sum</div>
                         <div class="tableCell">@order.CurrentStatus</div>
                         <div class="tableCell">
-                            <input type="submit" class="cancelOrder" name="cancelOrder" value="Отменить" />
+                            @if (order.CurrentStatus == Order.Status.Opened)
+                            {
+                                <input type="submit" class="cancelOrder" name="cancelOrder" value="Отменить" />
+                            }
+                            @if (order.CurrentStatus == Order.Status.Canceled)
+                            {
+                                <input type="submit" class="restoreOrder" name="restoreOrder" value="Восстановить" />
+                            }
                         </div>
                     </div>
                 }
                 <a href="~/Index.cshtml">
                     <input type="button" value="На главную" style="margin-top: 25px;" />
                 </a>
-                <input type="text" class="chosenOrderId" name="chosenOrderId" style="display: none;" />
+                <input type="text" class="chosenOrderCancelId" name="chosenOrderCancelId" style="display: none;" />
+                <input type="text" class="chosenOrderRestoreId" name="chosenOrderRestoreId" style="display: none;" />
             </div>
         </form>
     }

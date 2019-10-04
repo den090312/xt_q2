@@ -61,6 +61,40 @@ namespace DAL
             }
         }
 
+        public bool RestoreOrder(int id)
+        {
+            try
+            {
+                OrderRestore(id);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Logger.InitLogger();
+                Logger.Log.Error(ex.Message + " - " + "id заказа - " + id);
+
+                return false;
+            }
+        }
+
+        private void OrderRestore(int id)
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "RestoreOrderById";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(SqlParId(id));
+
+                sqlConnection.Open();
+
+                sqlCommand.ExecuteNonQuery();
+            }
+        }
+
         private void OrderCancel(int id)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
