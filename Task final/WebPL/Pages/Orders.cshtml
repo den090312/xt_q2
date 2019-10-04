@@ -27,17 +27,17 @@
         <h2 class="product_caption">Заказы</h2>
         <form method="post" action="~/Index.cshtml" class="customer_orders">
             <div class="table">
-                <div class="tableRow">
-                    <div class="tableCellCaption">ID</div>
-                    <div class="tableCellCaption">Дата</div>
-                    <div class="tableCellCaption">Адрес</div>
-                    <div class="tableCellCaption">Сумма</div>
-                    <div class="tableCellCaption">Статус</div>
-                    <div class="tableCellCaption">Опция</div>
-                </div>
 
                 @foreach (var order in orderList)
                 {
+                    <div class="tableRow">
+                        <div class="tableCellCaption">ID</div>
+                        <div class="tableCellCaption">Дата</div>
+                        <div class="tableCellCaption">Адрес</div>
+                        <div class="tableCellCaption">Сумма</div>
+                        <div class="tableCellCaption">Статус</div>
+                        <div class="tableCellCaption">Опция</div>
+                    </div>
                     <div class="tableRow">
                         <input type="text" class="tableCellOrderId" value="@order.Id" style="display: none;" />
                         <div class="tableCell">@order.Id</div>
@@ -56,9 +56,28 @@
                             }
                         </div>
                     </div>
+
+                    var productIds = Dependencies.OrderProductLogic.GetProductIds(order.Id);
+
+                    <div class="subTable">
+                        <div class="tableRow">
+                            <div class="tableCellCaption">Товар</div>
+                            <div class="tableCellCaption">Цена</div>
+                        </div>
+
+                        @foreach (var id in productIds)
+                        {
+                            var product = Dependencies.ProductLogic.GetById(id);
+
+                            <div class="tableRow">
+                                <div class="tableCell">@product.Name</div>
+                                <div class="tableCell">@product.Price</div>
+                            </div>
+                        }
+                    </div>
                 }
                 <a href="~/Index.cshtml">
-                    <input type="button" value="На главную" style="margin-top: 25px;" />
+                    <input type="button" value="На главную" />
                 </a>
                 <input type="text" class="chosenOrderCancelId" name="chosenOrderCancelId" style="display: none;" />
                 <input type="text" class="chosenOrderRestoreId" name="chosenOrderRestoreId" style="display: none;" />

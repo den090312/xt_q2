@@ -38,6 +38,12 @@
     margin: 25px auto;
 }
 
+.subTable {
+    display: table;
+    width: 95%;
+    margin: 10px 25px 50px 0;
+}
+
 .tableRow {
     display: table-row;
 }

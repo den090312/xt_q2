@@ -11,6 +11,8 @@ namespace InterfacesDAL
     {
         bool Add(OrderProduct orderProduct);
 
+        IEnumerable<int> GetProductIds(int orderId);
+
         bool RemoveByOrderId(int orderId);
 
         bool RemoveByProductId(int productId);

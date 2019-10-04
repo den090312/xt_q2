@@ -30,6 +30,37 @@ namespace DAL
             }
         }
 
+        public IEnumerable<int> GetProductIds(int orderId)
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetProductIdsByIdOrder";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(SqlParId(orderId));
+
+                sqlConnection.Open();
+
+                return ProductIds(sqlCommand);
+            }
+        }
+
+        private static List<int> ProductIds(SqlCommand sqlCommand)
+        {
+            var sqlDr = sqlCommand.ExecuteReader();
+
+            var productIds = new List<int>();
+
+            while (sqlDr.Read())
+            {
+                productIds.Add(sqlDr.GetInt32(0));
+            }
+
+            return productIds;
+        }
+
         private void AddOrderProduct(OrderProduct orderProduct)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
@@ -84,6 +115,17 @@ namespace DAL
         public bool RemoveByProductId(int productId)
         {
             throw new NotImplementedException();
+        }
+
+        private SqlParameter SqlParId(int id)
+        {
+            return new SqlParameter
+            {
+                ParameterName = "@Id",
+                Value = id,
+                SqlDbType = SqlDbType.Int,
+                Direction = ParameterDirection.Input
+            };
         }
 
         private SqlParameter SqlParIdOrder(int idOrder)

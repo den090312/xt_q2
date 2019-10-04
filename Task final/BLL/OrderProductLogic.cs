@@ -30,6 +30,13 @@ namespace BLL
             return orderProductDao.Add(orderProduct);
         }
 
+        public IEnumerable<int> GetProductIds(int orderId)
+        {
+            IdCheck(orderId);
+
+            return orderProductDao.GetProductIds(orderId);
+        }
+
         public IEnumerable<OrderProduct> GetAll()
         {
             throw new NotImplementedException();
