@@ -14,11 +14,13 @@ namespace BLL
 
         public ILog Log => loggerDao.Log;
 
-        public ManagerLogic(IManagerDao iManagerDao)
+        public ManagerLogic(IManagerDao iManagerDao, ILoggerDao iLoggerDao)
         {
             NullCheck(iManagerDao);
+            NullCheck(iLoggerDao);
 
             managerDao = iManagerDao;
+            loggerDao = iLoggerDao;
         }
 
         public void InitLogger() => loggerDao.InitLogger();

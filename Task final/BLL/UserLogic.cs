@@ -14,15 +14,17 @@ namespace BLL
 
         private readonly ILoggerDao loggerDao;
 
-        public ILog Log => loggerDao.Log;
-
         private readonly static char hashSeparator = '|';
 
-        public UserLogic(IUserDao iUserDao)
+        public ILog Log => loggerDao.Log;
+
+        public UserLogic(IUserDao iUserDao, ILoggerDao iLoggerDao)
         {
             NullCheck(iUserDao);
+            NullCheck(iLoggerDao);
 
             userDao = iUserDao;
+            loggerDao = iLoggerDao;
         }
 
         public void InitLogger() => loggerDao.InitLogger();

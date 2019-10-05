@@ -8,14 +8,14 @@ namespace Common
 {
     public static class Dependencies
     {
-        private static readonly IRoleDao roleDao;
-        private static readonly IUserDao userDao;
-        private static readonly ICustomerDao customerDao;
-        private static readonly IProductDao productDao;
-        private static readonly IOrderDao orderDao;
+        private static readonly IRoleDao         roleDao;
+        private static readonly IUserDao         userDao;
+        private static readonly ICustomerDao     customerDao;
+        private static readonly IProductDao      productDao;
+        private static readonly IOrderDao        orderDao;
         private static readonly IOrderProductDao orderProductDao;
-        private static readonly IManagerDao managerDao;
-        private static readonly ILoggerDao loggerDao;
+        private static readonly IManagerDao      managerDao;
+        private static readonly ILoggerDao       loggerDao;
 
         public static IRoleLogic RoleLogic { get; private set; }
 
@@ -123,13 +123,13 @@ namespace Common
                     throw new ConfigurationErrorsException($"Can't find settings for {nameof(loggerDaoSet)}!");
             }
 
-            RoleLogic         = new RoleLogic(roleDao);
-            UserLogic         = new UserLogic(userDao);
-            CustomerLogic     = new CustomerLogic(customerDao);
-            ProductLogic      = new ProductLogic(productDao);
-            OrderLogic        = new OrderLogic(orderDao);
-            OrderProductLogic = new OrderProductLogic(orderProductDao);
-            ManagerLogic      = new ManagerLogic(managerDao);
+            RoleLogic         = new RoleLogic(roleDao, loggerDao);
+            UserLogic         = new UserLogic(userDao, loggerDao);
+            CustomerLogic     = new CustomerLogic(customerDao, loggerDao);
+            ProductLogic      = new ProductLogic(productDao, loggerDao);
+            OrderLogic        = new OrderLogic(orderDao, loggerDao);
+            OrderProductLogic = new OrderProductLogic(orderProductDao, loggerDao);
+            ManagerLogic      = new ManagerLogic(managerDao, loggerDao);
             LoggerLogic       = new LoggerLogic(loggerDao); 
         }
     }

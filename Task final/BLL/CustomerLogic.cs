@@ -15,11 +15,13 @@ namespace BLL
 
         public ILog Log => loggerDao.Log;
 
-        public CustomerLogic(ICustomerDao iCustomerDao)
+        public CustomerLogic(ICustomerDao iCustomerDao, ILoggerDao iLoggerDao)
         {
             NullCheck(iCustomerDao);
+            NullCheck(iLoggerDao);
 
             customerDao = iCustomerDao;
+            loggerDao = iLoggerDao;
         }
 
         public void InitLogger() => loggerDao.InitLogger();

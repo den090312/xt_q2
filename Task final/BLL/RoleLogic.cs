@@ -15,11 +15,13 @@ namespace BLL
 
         public ILog Log => loggerDao.Log;
 
-        public RoleLogic(IRoleDao iRoleDao)
+        public RoleLogic(IRoleDao iRoleDao, ILoggerDao iLoggerDao)
         {
             NullCheck(iRoleDao);
+            NullCheck(iLoggerDao);
 
             roleDao = iRoleDao;
+            loggerDao = iLoggerDao;
         }
 
         public void InitLogger() => loggerDao.InitLogger();

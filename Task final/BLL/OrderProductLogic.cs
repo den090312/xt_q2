@@ -15,11 +15,13 @@ namespace BLL
 
         public ILog Log => loggerDao.Log;
 
-        public OrderProductLogic(IOrderProductDao iOrderProductDao)
+        public OrderProductLogic(IOrderProductDao iOrderProductDao, ILoggerDao iLoggerDao)
         {
             NullCheck(iOrderProductDao);
+            NullCheck(iLoggerDao);
 
             orderProductDao = iOrderProductDao;
+            loggerDao = iLoggerDao;
         }
 
         public void InitLogger() => loggerDao.InitLogger();
