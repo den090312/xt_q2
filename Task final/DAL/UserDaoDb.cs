@@ -60,21 +60,6 @@ namespace DAL
             }
         }
 
-        public IEnumerable<User> GetAll()
-        {
-            using (var sqlConnection = new SqlConnection(connectionString))
-            {
-                var sqlCommand = sqlConnection.CreateCommand();
-
-                sqlCommand.CommandText = "GetAllUsers";
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-
-                sqlConnection.Open();
-
-                return GetAllUsers(sqlCommand);
-            }
-        }
-
         public User GetByName(string name)
         {
             try
@@ -88,7 +73,31 @@ namespace DAL
 
                 return null;
             }
+        }
 
+        public IEnumerable<User> GetAll()
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetAllUsers";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                try
+                {
+                    sqlConnection.Open();
+
+                    return GetAllUsers(sqlCommand);
+                }
+                catch (Exception ex)
+                {
+                    Logger.InitLogger();
+                    Logger.Log.Error(ex.Message);
+
+                    return new List<User>();
+                }
+            }
         }
 
         private User GetUserByName(string name)
@@ -165,12 +174,12 @@ namespace DAL
 
             while (sqlDr.Read())
             {
-                var id = sqlDr.GetInt32(0);
-                var roleId = sqlDr.GetInt32(1);
-                var name = sqlDr.GetString(2);
-                var passwordHash = sqlDr.GetString(3);
+                var id       = sqlDr.GetInt32(0);
+                var roleId   = sqlDr.GetInt32(1);
+                var name     = sqlDr.GetString(2);
+                var passHash = sqlDr.GetString(3);
 
-                var user = new User(id, roleId, name, passwordHash);
+                var user = new User(id, roleId, name, passHash);
 
                 userList.Add(user);
             }
@@ -215,16 +224,6 @@ namespace DAL
                 Value = id,
                 SqlDbType = SqlDbType.Int,
                 Direction = ParameterDirection.Input
-            };
-        }
-
-        private SqlParameter SqlParId()
-        {
-            return new SqlParameter
-            {
-                ParameterName = "@Id",
-                SqlDbType = SqlDbType.Int,
-                Direction = ParameterDirection.Output
             };
         }
 

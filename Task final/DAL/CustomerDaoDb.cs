@@ -31,15 +31,27 @@ namespace DAL
         {
             using (var sqlConnection = new SqlConnection(connectionString))
             {
+                var connectionState = sqlConnection.State;
+
                 var sqlCommand = sqlConnection.CreateCommand();
 
                 sqlCommand.CommandText = "GetCustomerByIdUser";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.Add(SqlParId(idUser));
 
-                sqlConnection.Open();
+                try
+                {
+                    sqlConnection.Open();
 
-                return GetCustomer(sqlCommand, idUser);
+                    return GetCustomer(sqlCommand, idUser);
+                }
+                catch (Exception ex)
+                {
+                    Logger.InitLogger();
+                    Logger.Log.Error(ex.Message);
+
+                    return null;
+                }
             }
         }
 

@@ -71,7 +71,19 @@ namespace DAL
 
                 sqlConnection.Open();
 
-                return GetAllRoles(sqlCommand);
+                try
+                {
+                    sqlConnection.Open();
+
+                    return GetAllRoles(sqlCommand);
+                }
+                catch (Exception ex)
+                {
+                    Logger.InitLogger();
+                    Logger.Log.Error(ex.Message);
+
+                    return new List<Role>();
+                }
             }
         }
 
@@ -85,9 +97,20 @@ namespace DAL
 
                 sqlCommand.CommandText = "GetRolesCount";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlConnection.Open();
 
-                return GetCount(sqlCommand);
+                try
+                {
+                    sqlConnection.Open();
+
+                    return GetCount(sqlCommand);
+                }
+                catch (Exception ex)
+                {
+                    Logger.InitLogger();
+                    Logger.Log.Error(ex.Message);
+
+                    return 0;
+                }
             }
         }
 
@@ -102,9 +125,19 @@ namespace DAL
 
                 sqlCommand.Parameters.Add(SqlParId(id));
 
-                sqlConnection.Open();
+                try
+                {
+                    sqlConnection.Open();
 
-                return GetRoleById(sqlCommand, id);
+                    return GetRoleById(sqlCommand, id);
+                }
+                catch (Exception ex)
+                {
+                    Logger.InitLogger();
+                    Logger.Log.Error(ex.Message);
+
+                    return null;
+                }
             }
         }
 
@@ -120,9 +153,19 @@ namespace DAL
                 sqlCommand.Parameters.Add(SqlParName(name));
                 sqlCommand.Parameters.Add(SqlParId());
 
-                sqlConnection.Open();
+                try
+                {
+                    sqlConnection.Open();
 
-                return GetRoleId(sqlCommand);
+                    return GetRoleId(sqlCommand);
+                }
+                catch (Exception ex)
+                {
+                    Logger.InitLogger();
+                    Logger.Log.Error(ex.Message);
+
+                    return 0;
+                }
             }
         }
 

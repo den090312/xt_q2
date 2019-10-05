@@ -38,9 +38,19 @@ namespace DAL
 
                 sqlCommand.Parameters.Add(SqlParId(idCustomer));
 
-                sqlConnection.Open();
+                try
+                {
+                    sqlConnection.Open();
 
-                return GetOrdersByIdCustomer(sqlCommand, idCustomer);
+                    return GetOrdersByIdCustomer(sqlCommand, idCustomer);
+                }
+                catch (Exception ex)
+                {
+                    Logger.InitLogger();
+                    Logger.Log.Error(ex.Message);
+
+                    return new List<Order>();
+                }
             }
         }
 
@@ -55,9 +65,19 @@ namespace DAL
 
                 sqlCommand.Parameters.Add(SqlParId(idManager));
 
-                sqlConnection.Open();
+                try
+                {
+                    sqlConnection.Open();
 
-                return GetOrdersByIdManager(sqlCommand, idManager);
+                    return GetOrdersByIdManager(sqlCommand, idManager);
+                }
+                catch (Exception ex)
+                {
+                    Logger.InitLogger();
+                    Logger.Log.Error(ex.Message);
+
+                    return new List<Order>();
+                }
             }
         }
 
@@ -109,21 +129,6 @@ namespace DAL
             }
         }
 
-        public IEnumerable<Order> GetNewOrders()
-        {
-            using (var sqlConnection = new SqlConnection(connectionString))
-            {
-                var sqlCommand = sqlConnection.CreateCommand();
-
-                sqlCommand.CommandText = "GetNewOrders";
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-
-                sqlConnection.Open();
-
-                return NewOrders(sqlCommand);
-            }
-        }
-
         public bool CompleteOrder(int id)
         {
             try
@@ -137,6 +142,31 @@ namespace DAL
                 LogOrderError(id, ex);
 
                 return false;
+            }
+        }
+
+        public IEnumerable<Order> GetNewOrders()
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetNewOrders";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                try
+                {
+                    sqlConnection.Open();
+
+                    return NewOrders(sqlCommand);
+                }
+                catch (Exception ex)
+                {
+                    Logger.InitLogger();
+                    Logger.Log.Error(ex.Message);
+
+                    return new List<Order>();
+                }
             }
         }
 

@@ -38,9 +38,19 @@ namespace DAL
                 sqlCommand.CommandText = "GetAllProducts";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                sqlConnection.Open();
+                try
+                {
+                    sqlConnection.Open();
 
-                return GetAllProducts(sqlCommand);
+                    return GetAllProducts(sqlCommand);
+                }
+                catch (Exception ex)
+                {
+                    Logger.InitLogger();
+                    Logger.Log.Error(ex.Message);
+
+                    return new List<Product>();
+                }
             }
         }
 
@@ -55,9 +65,19 @@ namespace DAL
 
                 sqlCommand.Parameters.Add(SqlParId(id));
 
-                sqlConnection.Open();
+                try
+                {
+                    sqlConnection.Open();
 
-                return GetProductById(sqlCommand, id);
+                    return GetProductById(sqlCommand, id);
+                }
+                catch (Exception ex)
+                {
+                    Logger.InitLogger();
+                    Logger.Log.Error(ex.Message);
+
+                    return null;
+                }
             }
         }
 
@@ -78,7 +98,7 @@ namespace DAL
             }
         }
 
-        public void RemoveProduct(int id)
+        private void RemoveProduct(int id)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
             {

@@ -41,9 +41,19 @@ namespace DAL
 
                 sqlCommand.Parameters.Add(SqlParId(orderId));
 
-                sqlConnection.Open();
+                try
+                {
+                    sqlConnection.Open();
 
-                return ProductIds(sqlCommand);
+                    return ProductIds(sqlCommand);
+                }
+                catch (Exception ex)
+                {
+                    Logger.InitLogger();
+                    Logger.Log.Error(ex.Message);
+
+                    return new List<int>();
+                }
             }
         }
 

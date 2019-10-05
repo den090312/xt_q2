@@ -60,8 +60,6 @@ namespace WebPL.Models
             return Enumerable.Empty<Entities.Order>();
         }
 
-        public static IEnumerable<Entities.Order> GetNewOrders() => Dependencies.OrderLogic.GetNewOrders();
-
         private static bool AddOrder()
         {
             var idCustomer = Forms["customerId"];

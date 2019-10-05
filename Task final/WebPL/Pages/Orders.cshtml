@@ -12,7 +12,15 @@
     if (IsPost)
     {
         WebPL.Models.Order.Forms = Request.Form;
-        orderList = WebPL.Models.Order.GetOrders();
+
+        try
+        {
+            orderList = WebPL.Models.Order.GetOrders();
+        }
+        catch
+        {
+            Response.Redirect("~/Pages/Error.cshtml");
+        }
     }
 
     if (orderList.Count() == 0)
@@ -74,6 +82,11 @@
                         @foreach (var id in productIds)
                         {
                             var product = Dependencies.ProductLogic.GetById(id);
+
+                            if (product == null)
+                            {
+                                Response.Redirect("~/Pages/Error.cshtml");
+                            }
 
                             <div class="tableRow">
                                 <div class="tableCell">@product.Name</div>

@@ -8,6 +8,12 @@
     <form method="post" action="~/Pages/Orders.cshtml" style="float: left;">
         @{
             var currentRole = Dependencies.RoleLogic.GetById(Index.CurrentUser.IdRole);
+
+            if (currentRole == null)
+            {
+                Response.Redirect("~/Pages/Error.cshtml");
+            }
+
             var userType = string.Empty;
 
             if (currentRole.OrderWrite)
@@ -19,6 +25,10 @@
                     userType = "customer";
                     <input type="text" name="id" value="@customer.Id" style="display: none;" />
                 }
+                else
+                {
+                    Response.Redirect("~/Pages/Error.cshtml");
+                }
             }
 
             if (currentRole.ProductWrite)
@@ -29,6 +39,10 @@
                 {
                     userType = "manager";
                     <input type="text" name="id" value="@manager.Id" style="display: none;" />
+                }
+                else
+                {
+                    Response.Redirect("~/Pages/Error.cshtml");
                 }
             }
             <input type="text" name="userType" value="@userType" style="display: none;" />

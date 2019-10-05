@@ -69,3 +69,8 @@
 .alertbox {
     color: #ff0000;
 }
+
+.error {
+    color: #ff0000;
+    font-weight: bold;
+}

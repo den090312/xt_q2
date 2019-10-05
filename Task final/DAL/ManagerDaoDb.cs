@@ -37,9 +37,19 @@ namespace DAL
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.Add(SqlParId(idUser));
 
-                sqlConnection.Open();
+                try
+                {
+                    sqlConnection.Open();
 
-                return GetManager(sqlCommand, idUser);
+                    return GetManager(sqlCommand, idUser);
+                }
+                catch (Exception ex)
+                {
+                    Logger.InitLogger();
+                    Logger.Log.Error(ex.Message);
+
+                    return null;
+                }
             }
         }
 
@@ -54,9 +64,19 @@ namespace DAL
 
                 sqlCommand.Parameters.Add(SqlParId(idUser));
 
-                sqlConnection.Open();
+                try
+                {
+                    sqlConnection.Open();
 
-                return GetManagerCount(sqlCommand);
+                    return GetManagerCount(sqlCommand);
+                }
+                catch (Exception ex)
+                {
+                    Logger.InitLogger();
+                    Logger.Log.Error(ex.Message);
+
+                    return false;
+                }
             }
         }
 

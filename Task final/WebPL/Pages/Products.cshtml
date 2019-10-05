@@ -9,13 +9,30 @@
     <div class="products">
         @{
             var roleLogic = Dependencies.RoleLogic;
-            var products = Dependencies.ProductLogic.GetAll();
+            var products = Enumerable.Empty<Entities.Product>();
+
+            try
+            {
+                products = Dependencies.ProductLogic.GetAll();
+            }
+            catch
+            {
+                Response.Redirect("~/Pages/Error.cshtml");
+            }
+
             var currentUser = Index.CurrentUser;
             var roleId = 0;
 
             if (currentUser.IdRole == 0)
             {
-                roleId = roleLogic.GetIdByName(Index.CurrentUser.Name);
+                try
+                {
+                    roleId = roleLogic.GetIdByName(Index.CurrentUser.Name);
+                }
+                catch
+                {
+                    Response.Redirect("~/Pages/Error.cshtml");
+                }
             }
             else
             {
@@ -24,9 +41,19 @@
 
             var currentRole = roleLogic.GetById(roleId);
 
+            if (currentRole == null)
+            {
+                Response.Redirect("~/Pages/Error.cshtml");
+            }
+
             if (currentRole.OrderWrite)
             {
                 var customer = Dependencies.CustomerLogic.GetByIdUser(currentUser.Id);
+
+                if (customer == null)
+                {
+                    Response.Redirect("~/Pages/Error.cshtml");
+                }
 
                 <div class="product_block">
                     @foreach (var product in products)
