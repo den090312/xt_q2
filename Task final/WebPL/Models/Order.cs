@@ -14,6 +14,8 @@ namespace WebPL.Models
 
         public static string Message { get; private set; }
 
+        static Order() => Message = string.Empty;
+
         public static void Run(NameValueCollection forms)
         {
             Forms = forms;

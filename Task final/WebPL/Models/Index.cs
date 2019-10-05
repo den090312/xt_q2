@@ -15,7 +15,11 @@ namespace WebPL.Models
 
         public static User CurrentUser { get; set; }
 
-        static Index() => CurrentUser = Models.Account.CurrentUser;
+        static Index()
+        {
+            Message = string.Empty;
+            CurrentUser = Models.Account.CurrentUser;
+        }
 
         public static void Run()
         {
@@ -54,20 +58,47 @@ namespace WebPL.Models
         private static void Account()
         {
             Models.Account.Run(Forms);
-            Message = Models.Account.Message;
+
+            var message = Models.Account.Message;
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                switch (message)
+                {
+                    case "ok":
+                        Message = string.Empty;
+                        break;
+                    default:
+                        Message = message;
+                        break;
+                }
+            }
+
             CurrentUser = Models.Account.CurrentUser;
         }
 
         private static void Order()
         {
             Models.Order.Run(Forms);
-            Message = Models.Order.Message;
+
+            var message = Models.Order.Message;
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                Message = message;
+            }
         }
 
         private static void Product()
         {
             Models.Product.Run(Forms);
-            Message = Models.Product.Message;
+
+            var message = Models.Product.Message;
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                Message = message;
+            }
         }
 
         private static void LoadDemoRoles(out Role roleGuest, out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin)

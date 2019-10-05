@@ -16,7 +16,11 @@ namespace WebPL.Models
 
         public static User CurrentUser { get; private set; }
 
-        static Account() => CurrentUser = User.Guest;
+        static Account()
+        {
+            Message = string.Empty;
+            CurrentUser = User.Guest;
+        }
 
         public static void Run(NameValueCollection forms)
         {
@@ -77,7 +81,7 @@ namespace WebPL.Models
             else
             {
                 CurrentUser = logUser;
-                Message = string.Empty;
+                Message = "ok";
 
                 return true;
             }
