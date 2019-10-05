@@ -1,14 +1,19 @@
 ﻿using Entities;
 using InterfacesBLL;
 using InterfacesDAL;
+using log4net;
 using System;
 using System.Collections.Generic;
 
 namespace BLL
 {
-    public class ProductLogic : IProductLogic
+    public class ProductLogic : IProductLogic, ILoggerLogic
     {
         private readonly IProductDao productDao;
+
+        private readonly ILoggerDao loggerDao;
+
+        public ILog Log => loggerDao.Log;
 
         public ProductLogic(IProductDao iProductDao)
         {
@@ -16,6 +21,8 @@ namespace BLL
 
             productDao = iProductDao;
         }
+
+        public void InitLogger() => loggerDao.InitLogger();
 
         public bool Add(string name, decimal price)
         {

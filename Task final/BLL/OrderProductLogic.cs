@@ -1,17 +1,19 @@
 ﻿using Entities;
 using InterfacesBLL;
 using InterfacesDAL;
+using log4net;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class OrderProductLogic : IOrderProductLogic
+    public class OrderProductLogic : IOrderProductLogic, ILoggerLogic
     {
         private readonly IOrderProductDao orderProductDao;
+
+        private readonly ILoggerDao loggerDao;
+
+        public ILog Log => loggerDao.Log;
 
         public OrderProductLogic(IOrderProductDao iOrderProductDao)
         {
@@ -19,6 +21,8 @@ namespace BLL
 
             orderProductDao = iOrderProductDao;
         }
+
+        public void InitLogger() => loggerDao.InitLogger();
 
         public bool Add(OrderProduct orderProduct)
         {

@@ -1,14 +1,19 @@
 ﻿using Entities;
 using InterfacesBLL;
 using InterfacesDAL;
+using log4net;
 using System;
 using System.Collections.Generic;
 
 namespace BLL
 {
-    public class CustomerLogic : ICustomerLogic
+    public class CustomerLogic : ICustomerLogic, ILoggerLogic
     {
         private readonly ICustomerDao customerDao;
+
+        private readonly ILoggerDao loggerDao;
+
+        public ILog Log => loggerDao.Log;
 
         public CustomerLogic(ICustomerDao iCustomerDao)
         {
@@ -16,6 +21,8 @@ namespace BLL
 
             customerDao = iCustomerDao;
         }
+
+        public void InitLogger() => loggerDao.InitLogger();
 
         public bool Add(ref Customer customer)
         {
@@ -71,22 +78,6 @@ namespace BLL
             if (id <= 0)
             {
                 throw new ArgumentException($"{nameof(id)} is incorrect!");
-            }
-        }
-
-        private void EmptyStringCheck(string inputString)
-        {
-            if (inputString == string.Empty)
-            {
-                throw new ArgumentException($"{nameof(inputString)} is empty!");
-            }
-        }
-
-        private void PriceCheck(double price)
-        {
-            if (price <= 0)
-            {
-                throw new ArgumentException($"{nameof(price)} must be greater than zero!");
             }
         }
 

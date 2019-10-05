@@ -15,6 +15,7 @@ namespace Common
         private static readonly IOrderDao orderDao;
         private static readonly IOrderProductDao orderProductDao;
         private static readonly IManagerDao managerDao;
+        private static readonly ILoggerDao loggerDao;
 
         public static IRoleLogic RoleLogic { get; private set; }
 
@@ -29,6 +30,8 @@ namespace Common
         public static IOrderProductLogic OrderProductLogic { get; private set; }
 
         public static IManagerLogic ManagerLogic { get; private set; }
+
+        public static ILoggerLogic LoggerLogic { get; private set; }
 
         static Dependencies()
         {
@@ -109,6 +112,17 @@ namespace Common
                     throw new ConfigurationErrorsException($"Can't find settings for {nameof(managerDaoSet)}!");
             }
 
+            var loggerDaoSet = ConfigurationManager.AppSettings["loggerDaoSet"];
+
+            switch (loggerDaoSet)
+            {
+                case "2":
+                    loggerDao = new LoggerDaoFile();
+                    break;
+                default:
+                    throw new ConfigurationErrorsException($"Can't find settings for {nameof(loggerDaoSet)}!");
+            }
+
             RoleLogic         = new RoleLogic(roleDao);
             UserLogic         = new UserLogic(userDao);
             CustomerLogic     = new CustomerLogic(customerDao);
@@ -116,6 +130,7 @@ namespace Common
             OrderLogic        = new OrderLogic(orderDao);
             OrderProductLogic = new OrderProductLogic(orderProductDao);
             ManagerLogic      = new ManagerLogic(managerDao);
+            LoggerLogic       = new LoggerLogic(loggerDao); 
         }
     }
 }

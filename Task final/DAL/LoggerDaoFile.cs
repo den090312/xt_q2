@@ -1,15 +1,16 @@
-﻿using log4net;
+﻿using InterfacesDAL;
+using log4net;
 using log4net.Config;
 using System;
 using System.IO;
 
 namespace DAL
 {
-    public class Logger
+    public class LoggerDaoFile : ILoggerDao
     {
-        public static ILog Log { get; } = LogManager.GetLogger("LOGGER");
+        public ILog Log { get; } = LogManager.GetLogger("LOGGER");
 
-        public static void InitLogger()
+        public void InitLogger()
         {
             var configFile = new FileInfo(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
 

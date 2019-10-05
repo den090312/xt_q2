@@ -1,17 +1,18 @@
 ﻿using Entities;
 using InterfacesBLL;
 using InterfacesDAL;
+using log4net;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class ManagerLogic : IManagerLogic
+    public class ManagerLogic : IManagerLogic, ILoggerLogic
     {
         private readonly IManagerDao managerDao;
+
+        private readonly ILoggerDao loggerDao;
+
+        public ILog Log => loggerDao.Log;
 
         public ManagerLogic(IManagerDao iManagerDao)
         {
@@ -19,6 +20,8 @@ namespace BLL
 
             managerDao = iManagerDao;
         }
+
+        public void InitLogger() => loggerDao.InitLogger();
 
         public bool Add(ref Manager manager)
         {

@@ -45,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerDaoDb.cs" />
-    <Compile Include="Logger.cs" />
+    <Compile Include="LoggerDaoFile.cs" />
     <Compile Include="ManagerDaoDb.cs" />
     <Compile Include="OrderProductDaoDb.cs" />
     <Compile Include="ProductDaoDb.cs" />

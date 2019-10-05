@@ -1,15 +1,20 @@
 ﻿using Entities;
 using InterfacesDAL;
+using log4net;
+using log4net.Config;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace DAL
 {
-    public class OrderDaoDb : IOrderDao
+    public class OrderDaoDb : IOrderDao, ILoggerDao
     {
         private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=orderservice;Integrated Security=True";
+
+        public ILog Log { get; } = LogManager.GetLogger("LOGGER");
 
         public bool Add(ref Order order)
         {
@@ -46,8 +51,8 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    Logger.InitLogger();
-                    Logger.Log.Error(ex.Message);
+                    InitLogger();
+                    Log.Error(ex.Message);
 
                     return new List<Order>();
                 }
@@ -73,8 +78,8 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    Logger.InitLogger();
-                    Logger.Log.Error(ex.Message);
+                    InitLogger();
+                    Log.Error(ex.Message);
 
                     return new List<Order>();
                 }
@@ -162,8 +167,8 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    Logger.InitLogger();
-                    Logger.Log.Error(ex.Message);
+                    InitLogger();
+                    Log.Error(ex.Message);
 
                     return new List<Order>();
                 }
@@ -351,14 +356,6 @@ namespace DAL
             }
         }
 
-        private static void LogOrderError(Order order, Exception ex)
-        {
-            var productInfo = "id заказа - " + order.Id;
-
-            Logger.InitLogger();
-            Logger.Log.Error(ex.Message + " - " + productInfo);
-        }
-
         private SqlParameter SqlParSum(decimal sum)
         {
             return new SqlParameter
@@ -425,10 +422,25 @@ namespace DAL
             };
         }
 
-        private static void LogOrderError(int id, Exception ex)
+        private void LogOrderError(Order order, Exception ex)
         {
-            Logger.InitLogger();
-            Logger.Log.Error(ex.Message + " - " + "id заказа - " + id);
+            var productInfo = "id заказа - " + order.Id;
+
+            InitLogger();
+            Log.Error(ex.Message + " - " + productInfo);
+        }
+
+        private void LogOrderError(int id, Exception ex)
+        {
+            InitLogger();
+            Log.Error(ex.Message + " - " + "id заказа - " + id);
+        }
+
+        public void InitLogger()
+        {
+            var configFile = new FileInfo(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+
+            XmlConfigurator.Configure(configFile);
         }
     }
 }

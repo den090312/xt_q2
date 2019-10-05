@@ -1,15 +1,20 @@
 ﻿using Entities;
 using InterfacesDAL;
+using log4net;
+using log4net.Config;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace DAL
 {
-    public class UserDaoDb : IUserDao
+    public class UserDaoDb : IUserDao, ILoggerDao
     {
         private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=orderservice;Integrated Security=True";
+
+        public ILog Log { get; } = LogManager.GetLogger("LOGGER");
 
         public bool Add(ref User user)
         {
@@ -37,8 +42,8 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                Logger.InitLogger();
-                Logger.Log.Error(ex.Message + " - userId: " + userId);
+                InitLogger();
+                Log.Error(ex.Message + " - userId: " + userId);
 
                 return false;
             }
@@ -68,8 +73,8 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                Logger.InitLogger();
-                Logger.Log.Error(ex.Message + " - name: " + name);
+                InitLogger();
+                Log.Error(ex.Message + " - name: " + name);
 
                 return null;
             }
@@ -92,8 +97,8 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    Logger.InitLogger();
-                    Logger.Log.Error(ex.Message);
+                    InitLogger();
+                    Log.Error(ex.Message);
 
                     return new List<User>();
                 }
@@ -260,12 +265,19 @@ namespace DAL
             };
         }
 
-        private static void LogUserError(User user, Exception ex)
+        private void LogUserError(User user, Exception ex)
         {
             var userInfo = user.Id + " | " + user.Name;
 
-            Logger.InitLogger();
-            Logger.Log.Error(ex.Message + " - " + userInfo);
+            InitLogger();
+            Log.Error(ex.Message + " - " + userInfo);
+        }
+
+        public void InitLogger()
+        {
+            var configFile = new FileInfo(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+
+            XmlConfigurator.Configure(configFile);
         }
     }
 }

@@ -1,15 +1,20 @@
 ﻿using Entities;
 using InterfacesDAL;
+using log4net;
+using log4net.Config;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace DAL
 {
-    public class ProductDaoDb : IProductDao
+    public class ProductDaoDb : IProductDao, ILoggerDao
     {
         private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=orderservice;Integrated Security=True";
+
+        public ILog Log { get; } = LogManager.GetLogger("LOGGER");
 
         public bool Add(ref Product product)
         {
@@ -46,8 +51,8 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    Logger.InitLogger();
-                    Logger.Log.Error(ex.Message);
+                    InitLogger();
+                    Log.Error(ex.Message);
 
                     return new List<Product>();
                 }
@@ -73,8 +78,8 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    Logger.InitLogger();
-                    Logger.Log.Error(ex.Message);
+                    InitLogger();
+                    Log.Error(ex.Message);
 
                     return null;
                 }
@@ -91,8 +96,8 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                Logger.InitLogger();
-                Logger.Log.Error(ex.Message + " - id: " + id);
+                InitLogger();
+                Log.Error(ex.Message + " - id: " + id);
 
                 return false;
             }
@@ -240,12 +245,19 @@ namespace DAL
             };
         }
 
-        private static void LogProductError(Product product, Exception ex)
+        private void LogProductError(Product product, Exception ex)
         {
             var productInfo = product.Id + " | " + product.Name + " | " + product.Price;
 
-            Logger.InitLogger();
-            Logger.Log.Error(ex.Message + " - " + productInfo);
+            InitLogger();
+            Log.Error(ex.Message + " - " + productInfo);
+        }
+
+        public void InitLogger()
+        {
+            var configFile = new FileInfo(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+
+            XmlConfigurator.Configure(configFile);
         }
     }
 }

@@ -1,15 +1,20 @@
 ﻿using Entities;
 using InterfacesDAL;
+using log4net;
+using log4net.Config;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace DAL
 {
-    public class RoleDaoDb : IRoleDao
+    public class RoleDaoDb : IRoleDao, ILoggerDao
     {
         private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=orderservice;Integrated Security=True";
+
+        public ILog Log { get; } = LogManager.GetLogger("LOGGER");
 
         public bool Add(ref Role role)
         {
@@ -37,8 +42,8 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                Logger.InitLogger();
-                Logger.Log.Error(ex.Message + " - roleId: " + roleId);
+                InitLogger();
+                Log.Error(ex.Message + " - roleId: " + roleId);
 
                 return false;
             }
@@ -79,8 +84,8 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    Logger.InitLogger();
-                    Logger.Log.Error(ex.Message);
+                    InitLogger();
+                    Log.Error(ex.Message);
 
                     return new List<Role>();
                 }
@@ -106,8 +111,8 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    Logger.InitLogger();
-                    Logger.Log.Error(ex.Message);
+                    InitLogger();
+                    Log.Error(ex.Message);
 
                     return 0;
                 }
@@ -133,8 +138,8 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    Logger.InitLogger();
-                    Logger.Log.Error(ex.Message);
+                    InitLogger();
+                    Log.Error(ex.Message);
 
                     return null;
                 }
@@ -161,8 +166,8 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    Logger.InitLogger();
-                    Logger.Log.Error(ex.Message);
+                    InitLogger();
+                    Log.Error(ex.Message);
 
                     return 0;
                 }
@@ -374,12 +379,19 @@ namespace DAL
             };
         }
 
-        private static void LogRoleError(Role role, Exception ex)
+        private void LogRoleError(Role role, Exception ex)
         {
             var roleInfo = role.Id + " | " + role.Name;
 
-            Logger.InitLogger();
-            Logger.Log.Error(ex.Message + " - " + roleInfo);
+            InitLogger();
+            Log.Error(ex.Message + " - " + roleInfo);
+        }
+
+        public void InitLogger()
+        {
+            var configFile = new FileInfo(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+
+            XmlConfigurator.Configure(configFile);
         }
     }
 }

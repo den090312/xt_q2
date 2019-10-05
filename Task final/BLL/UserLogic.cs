@@ -1,15 +1,20 @@
 ﻿using Entities;
 using InterfacesBLL;
 using InterfacesDAL;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace BLL
 {
-    public class UserLogic : IUserLogic
+    public class UserLogic : IUserLogic, ILoggerLogic
     {
         private readonly IUserDao userDao;
+
+        private readonly ILoggerDao loggerDao;
+
+        public ILog Log => loggerDao.Log;
 
         private readonly static char hashSeparator = '|';
 
@@ -19,6 +24,8 @@ namespace BLL
 
             userDao = iUserDao;
         }
+
+        public void InitLogger() => loggerDao.InitLogger();
 
         public bool Add(int roleId, string name, string password)
         {

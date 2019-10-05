@@ -1,15 +1,20 @@
 ﻿using Entities;
 using InterfacesDAL;
+using log4net;
+using log4net.Config;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace DAL
 {
-    public class ManagerDaoDb : IManagerDao
+    public class ManagerDaoDb : IManagerDao, ILoggerDao
     {
         private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=orderservice;Integrated Security=True";
+
+        public ILog Log { get; } = LogManager.GetLogger("LOGGER");
 
         public bool Add(ref Manager manager)
         {
@@ -45,8 +50,8 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    Logger.InitLogger();
-                    Logger.Log.Error(ex.Message);
+                    InitLogger();
+                    Log.Error(ex.Message);
 
                     return null;
                 }
@@ -72,8 +77,8 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    Logger.InitLogger();
-                    Logger.Log.Error(ex.Message);
+                    InitLogger();
+                    Log.Error(ex.Message);
 
                     return false;
                 }
@@ -177,12 +182,19 @@ namespace DAL
             };
         }
 
-        private static void LogManagerError(Manager manager, Exception ex)
+        private void LogManagerError(Manager manager, Exception ex)
         {
             var managerInfo = manager.Id + " | " + manager.Name + " | ";
 
-            Logger.InitLogger();
-            Logger.Log.Error(ex.Message + " - " + managerInfo);
+            InitLogger();
+            Log.Error(ex.Message + " - " + managerInfo);
+        }
+
+        public void InitLogger()
+        {
+            var configFile = new FileInfo(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+
+            XmlConfigurator.Configure(configFile);
         }
     }
 }

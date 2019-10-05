@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Configuration;
 
 namespace WebPL.Models
 {
@@ -52,7 +53,7 @@ namespace WebPL.Models
 
         public static string GetLastError()
         {
-            return string.Empty;
+            return "Error";
         }
 
         private static void Account()

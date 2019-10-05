@@ -1,14 +1,19 @@
 ﻿using Entities;
 using InterfacesBLL;
 using InterfacesDAL;
+using log4net;
 using System;
 using System.Collections.Generic;
 
 namespace BLL
 {
-    public class RoleLogic : IRoleLogic
+    public class RoleLogic : IRoleLogic, ILoggerLogic
     {
         private readonly IRoleDao roleDao;
+
+        private readonly ILoggerDao loggerDao;
+
+        public ILog Log => loggerDao.Log;
 
         public RoleLogic(IRoleDao iRoleDao)
         {
@@ -16,6 +21,8 @@ namespace BLL
 
             roleDao = iRoleDao;
         }
+
+        public void InitLogger() => loggerDao.InitLogger();
 
         public bool Add(ref Role role)
         {

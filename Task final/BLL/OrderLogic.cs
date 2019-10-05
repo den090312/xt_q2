@@ -1,17 +1,19 @@
 ﻿using Entities;
 using InterfacesBLL;
 using InterfacesDAL;
+using log4net;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class OrderLogic : IOrderLogic
+    public class OrderLogic : IOrderLogic, ILoggerLogic
     {
         private readonly IOrderDao orderDao;
+
+        private readonly ILoggerDao loggerDao;
+
+        public ILog Log => loggerDao.Log;
 
         public OrderLogic(IOrderDao iOrderDao)
         {
@@ -19,6 +21,8 @@ namespace BLL
 
             orderDao = iOrderDao;
         }
+
+        public void InitLogger() => loggerDao.InitLogger();
 
         public bool Add(ref Order order)
         {
@@ -94,19 +98,6 @@ namespace BLL
             if (sum <= 0)
             {
                 throw new ArgumentException($"{nameof(sum)} is incorrect!");
-            }
-        }
-
-        private void DateCheck(DateTime date)
-        {
-            if (date == DateTime.MinValue)
-            {
-                throw new ArgumentException($"{nameof(date)} is empty!");
-            }
-
-            if (date < DateTime.Now)
-            {
-                throw new ArgumentException($"{nameof(date)} must be grater than current date!");
             }
         }
 

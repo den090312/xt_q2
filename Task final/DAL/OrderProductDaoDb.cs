@@ -1,18 +1,23 @@
 ﻿using Entities;
 using InterfacesDAL;
+using log4net;
+using log4net.Config;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class OrderProductDaoDb : IOrderProductDao
+    public class OrderProductDaoDb : IOrderProductDao, ILoggerDao
     {
         private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=orderservice;Integrated Security=True";
+
+        public ILog Log { get; } = LogManager.GetLogger("LOGGER");
 
         public bool Add(OrderProduct orderProduct)
         {
@@ -49,8 +54,8 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    Logger.InitLogger();
-                    Logger.Log.Error(ex.Message);
+                    InitLogger();
+                    Log.Error(ex.Message);
 
                     return new List<int>();
                 }
@@ -93,8 +98,8 @@ namespace DAL
         {
             var productInfo = "id заказа - " + orderProduct.IdOrder + ", id продукта - " + orderProduct.IdProduct;
 
-            Logger.InitLogger();
-            Logger.Log.Error(ex.Message + " - " + productInfo);
+            InitLogger();
+            Log.Error(ex.Message + " - " + productInfo);
         }
 
         public IEnumerable<OrderProduct> GetAll()
@@ -158,6 +163,13 @@ namespace DAL
                 SqlDbType = SqlDbType.Int,
                 Direction = ParameterDirection.Input
             };
+        }
+
+        public void InitLogger()
+        {
+            var configFile = new FileInfo(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+
+            XmlConfigurator.Configure(configFile);
         }
     }
 }
