@@ -29,6 +29,11 @@ namespace WebPL.Models
             var name = Forms["newProductName"];
             var price = Forms["newProductPrice"];
 
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(price))
+            {
+                return false;
+            }
+
             if (!decimal.TryParse(price, out decimal priceParsed))
             {
                 return false;
@@ -51,6 +56,11 @@ namespace WebPL.Models
         private static bool RemoveProduct()
         {
             var productId = Forms["chosenProductIdDelete"];
+
+            if (string.IsNullOrEmpty(productId))
+            {
+                return false;
+            }
 
             if (!int.TryParse(productId, out int productIdParsed))
             {

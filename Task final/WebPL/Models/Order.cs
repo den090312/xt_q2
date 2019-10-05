@@ -29,7 +29,7 @@ namespace WebPL.Models
             var userType = Forms["userType"];
             var id = Forms["id"];
 
-            if (userType == null || id == null || userType == string.Empty || id == string.Empty)
+            if (string.IsNullOrEmpty(userType) || string.IsNullOrEmpty(id))
             {
                 return Enumerable.Empty<Entities.Order>();
             }
@@ -67,12 +67,8 @@ namespace WebPL.Models
             var quantity = Forms["chosenProductQuantity"];
             var adress = Forms["orderAdress"];
 
-            if (idProduct == null || quantity == null || adress == null || idCustomer == null)
-            {
-                return false;
-            }
-
-            if (idProduct == string.Empty || quantity == string.Empty || adress == string.Empty || idCustomer == string.Empty)
+            if (string.IsNullOrEmpty(idCustomer) || string.IsNullOrEmpty(idProduct) || 
+                string.IsNullOrEmpty(quantity) || string.IsNullOrEmpty(adress))
             {
                 return false;
             }
@@ -179,7 +175,7 @@ namespace WebPL.Models
         {
             var id = Forms[elementName];
 
-            if (id == null || id == string.Empty)
+            if (string.IsNullOrEmpty(id))
             {
                 return 0;
             }

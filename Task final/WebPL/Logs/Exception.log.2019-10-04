@@ -1,0 +1,22 @@
+2019-10-04 04:08:16,860  ERROR Конфликт инструкции INSERT с ограничением FOREIGN KEY "FK_Customers_Users". Конфликт произошел в базе данных "orderservice", таблица "dbo.Users", column 'UserId'.
+Выполнение данной инструкции было прервано. - 0 | Guest
+2019-10-04 04:11:44,582  ERROR Конфликт инструкции INSERT с ограничением FOREIGN KEY "FK_Customers_Users". Конфликт произошел в базе данных "orderservice", таблица "dbo.Users", column 'UserId'.
+Выполнение данной инструкции было прервано. - 0 | Guest
+2019-10-04 04:14:06,280  ERROR Конфликт инструкции INSERT с ограничением FOREIGN KEY "FK_Customers_Users". Конфликт произошел в базе данных "orderservice", таблица "dbo.Users", column 'UserId'.
+Выполнение данной инструкции было прервано. - 0 | Guest
+2019-10-04 04:14:34,396  ERROR Конфликт инструкции INSERT с ограничением FOREIGN KEY "FK_Customers_Users". Конфликт произошел в базе данных "orderservice", таблица "dbo.Users", column 'UserId'.
+Выполнение данной инструкции было прервано. - 0 | Guest
+2019-10-04 04:14:39,796  ERROR Конфликт инструкции INSERT с ограничением FOREIGN KEY "FK_Customers_Users". Конфликт произошел в базе данных "orderservice", таблица "dbo.Users", column 'UserId'.
+Выполнение данной инструкции было прервано. - 0 | Guest
+2019-10-04 04:18:28,858  ERROR Конфликт инструкции INSERT с ограничением FOREIGN KEY "FK_Customers_Users". Конфликт произошел в базе данных "orderservice", таблица "dbo.Users", column 'UserId'.
+Выполнение данной инструкции было прервано. - 0 | Guest
+2019-10-04 12:59:47,468  ERROR Конфликт инструкции INSERT с ограничением FOREIGN KEY "FK_Customers_Users". Конфликт произошел в базе данных "orderservice", таблица "dbo.Users", column 'UserId'.
+Выполнение данной инструкции было прервано. - 0 | Guest
+2019-10-04 12:59:53,552  ERROR Конфликт инструкции INSERT с ограничением FOREIGN KEY "FK_Customers_Users". Конфликт произошел в базе данных "orderservice", таблица "dbo.Users", column 'UserId'.
+Выполнение данной инструкции было прервано. - 0 | Guest
+2019-10-04 13:00:01,478  ERROR Конфликт инструкции INSERT с ограничением FOREIGN KEY "FK_Customers_Users". Конфликт произошел в базе данных "orderservice", таблица "dbo.Users", column 'UserId'.
+Выполнение данной инструкции было прервано. - 0 | Guest
+2019-10-04 13:00:17,470  ERROR Конфликт инструкции INSERT с ограничением FOREIGN KEY "FK_Customers_Users". Конфликт произошел в базе данных "orderservice", таблица "dbo.Users", column 'UserId'.
+Выполнение данной инструкции было прервано. - 0 | Guest
+2019-10-04 13:00:45,120  ERROR Конфликт инструкции INSERT с ограничением FOREIGN KEY "FK_Customers_Users". Конфликт произошел в базе данных "orderservice", таблица "dbo.Users", column 'UserId'.
+Выполнение данной инструкции было прервано. - 0 | Guest
