@@ -97,7 +97,7 @@ namespace WebPL.Models
             }
 
             CurrentUser = User.Guest;
-            Message = string.Empty;
+            Message = "ok";
 
             return true;
         }

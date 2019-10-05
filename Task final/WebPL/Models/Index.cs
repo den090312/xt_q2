@@ -61,7 +61,7 @@ namespace WebPL.Models
 
             var message = Models.Account.Message;
 
-            if (!string.IsNullOrEmpty(message))
+            if (message != string.Empty)
             {
                 switch (message)
                 {
@@ -83,7 +83,7 @@ namespace WebPL.Models
 
             var message = Models.Order.Message;
 
-            if (!string.IsNullOrEmpty(message))
+            if (message != string.Empty)
             {
                 Message = message;
             }
@@ -95,7 +95,7 @@ namespace WebPL.Models
 
             var message = Models.Product.Message;
 
-            if (!string.IsNullOrEmpty(message))
+            if (message != string.Empty)
             {
                 Message = message;
             }

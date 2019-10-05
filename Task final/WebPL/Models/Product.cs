@@ -61,11 +61,15 @@ namespace WebPL.Models
 
             if (string.IsNullOrEmpty(productId))
             {
+                Message = string.Empty;
+
                 return false;
             }
 
             if (!int.TryParse(productId, out int productIdParsed))
             {
+                Message = "Некорректный id товара!";
+
                 return false;
             }
 
