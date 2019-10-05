@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.IO;
 
 namespace DAL
 {
@@ -14,7 +13,9 @@ namespace DAL
     {
         private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=orderservice;Integrated Security=True";
 
-        public ILog Log { get; } = LogManager.GetLogger("LOGGER");
+        public ILog Log { get; } = LogManager.GetLogger(Logger.Name);
+
+        public void StartLogger() => XmlConfigurator.Configure(Logger.ConfigFile);
 
         public bool Add(ref Order order)
         {
@@ -26,13 +27,17 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                LogOrderError(order, ex);
+                StartLogger();
+                var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                Log.Error(exMessage + " Ошибка добавления заказа, id: " + order.IdCustomer 
+                    + ", дата заказа: " + order.Date.ToString("dd.MM.yyyy") 
+                    + ", сумма: " + order.Sum);
 
                 return false;
             }
         }
 
-        public IEnumerable<Order> GetByIdCustomer(int idCustomer)
+        public IEnumerable<Order> GetByIdCustomer(int id)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
             {
@@ -41,25 +46,26 @@ namespace DAL
                 sqlCommand.CommandText = "GetOrdersByIdCustomer";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                sqlCommand.Parameters.Add(SqlParId(idCustomer));
+                sqlCommand.Parameters.Add(SqlParId(id));
 
                 try
                 {
                     sqlConnection.Open();
 
-                    return GetOrdersByIdCustomer(sqlCommand, idCustomer);
+                    return GetOrdersByIdCustomer(sqlCommand, id);
                 }
                 catch (Exception ex)
                 {
-                    InitLogger();
-                    Log.Error(ex.Message);
+                    StartLogger();
+                    var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                    Log.Error(exMessage + " Ошибка получения заказа по id покупателя, id: " + id);
 
                     return new List<Order>();
                 }
             }
         }
 
-        public IEnumerable<Order> GetByIdManager(int idManager)
+        public IEnumerable<Order> GetByIdManager(int id)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
             {
@@ -68,18 +74,19 @@ namespace DAL
                 sqlCommand.CommandText = "GetOrdersByIdManager";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                sqlCommand.Parameters.Add(SqlParId(idManager));
+                sqlCommand.Parameters.Add(SqlParId(id));
 
                 try
                 {
                     sqlConnection.Open();
 
-                    return GetOrdersByIdManager(sqlCommand, idManager);
+                    return GetOrdersByIdManager(sqlCommand, id);
                 }
                 catch (Exception ex)
                 {
-                    InitLogger();
-                    Log.Error(ex.Message);
+                    StartLogger();
+                    var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                    Log.Error(exMessage + " Ошибка получения заказа по id менеджера, id: " + id);
 
                     return new List<Order>();
                 }
@@ -96,7 +103,9 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                LogOrderError(id, ex);
+                StartLogger();
+                var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                Log.Error(exMessage + " Ошибка отмены заказа, id: " + id);
 
                 return false;
             }
@@ -112,23 +121,27 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                LogOrderError(id, ex);
+                StartLogger();
+                var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                Log.Error(exMessage + " Ошибка восстановления заказа, id: " + id);
 
                 return false;
             }
         }
 
-        public bool InWorkOrder(int orderId, int idManager)
+        public bool InWorkOrder(int idOrder, int idManager)
         {
             try
             {
-                OrderInWork(orderId, idManager);
+                OrderInWork(idOrder, idManager);
 
                 return true;
             }
             catch (Exception ex)
             {
-                LogOrderError(orderId, ex);
+                StartLogger();
+                var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                Log.Error(exMessage + " Ошибка взятия заказа в работу, id заказа: " + idOrder + ", id менеджера: " + idManager);
 
                 return false;
             }
@@ -144,7 +157,9 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                LogOrderError(id, ex);
+                StartLogger();
+                var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                Log.Error(exMessage + " Ошибка завершения заказа, id: " + id);
 
                 return false;
             }
@@ -167,8 +182,9 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    InitLogger();
-                    Log.Error(ex.Message);
+                    StartLogger();
+                    var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                    Log.Error(exMessage + " Ошибка получения новых заказов");
 
                     return new List<Order>();
                 }
@@ -420,27 +436,6 @@ namespace DAL
                 SqlDbType = SqlDbType.NVarChar,
                 Direction = ParameterDirection.Input
             };
-        }
-
-        private void LogOrderError(Order order, Exception ex)
-        {
-            var productInfo = "id заказа - " + order.Id;
-
-            InitLogger();
-            Log.Error(ex.Message + " - " + productInfo);
-        }
-
-        private void LogOrderError(int id, Exception ex)
-        {
-            InitLogger();
-            Log.Error(ex.Message + " - " + "id заказа - " + id);
-        }
-
-        public void InitLogger()
-        {
-            var configFile = new FileInfo(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
-
-            XmlConfigurator.Configure(configFile);
         }
     }
 }

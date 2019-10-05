@@ -19,7 +19,7 @@
     margin: auto;
 }
 
-.product_caption {
+.product_caption, .error_caption {
     margin: 0 0 35px 0;
     text-align: center;
 }  

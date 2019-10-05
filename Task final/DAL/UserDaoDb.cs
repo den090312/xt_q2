@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.IO;
 
 namespace DAL
 {
@@ -14,7 +13,9 @@ namespace DAL
     {
         private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=orderservice;Integrated Security=True";
 
-        public ILog Log { get; } = LogManager.GetLogger("LOGGER");
+        public ILog Log { get; } = LogManager.GetLogger(Logger.Name);
+
+        public void StartLogger() => XmlConfigurator.Configure(Logger.ConfigFile);
 
         public bool Add(ref User user)
         {
@@ -26,24 +27,27 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                LogUserError(user, ex);
+                StartLogger();
+                var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                Log.Error(exMessage + " Ошибка добавления пользователя, id: " + user.Id + ", имя: '" + user.Name + "'");
 
                 return false;
             }
         }
 
-        public bool Remove(int userId)
+        public bool Remove(int id)
         {
             try
             {
-                RemoveUser(userId);
+                RemoveUser(id);
 
                 return true;
             }
             catch (Exception ex)
             {
-                InitLogger();
-                Log.Error(ex.Message + " - userId: " + userId);
+                StartLogger();
+                var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                Log.Error(exMessage + " Ошибка удаления пользователя, id: " + id);
 
                 return false;
             }
@@ -59,7 +63,9 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                LogUserError(user, ex);
+                StartLogger();
+                var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                Log.Error(exMessage + " Ошибка смены имени пользователя, id: " + user.Id + ", имя: '" + user.Name + "'");
 
                 return false;
             }
@@ -73,8 +79,9 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                InitLogger();
-                Log.Error(ex.Message + " - name: " + name);
+                StartLogger();
+                var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                Log.Error(exMessage + " Ошибка получения пользователя по имени: '" + name + "'");
 
                 return null;
             }
@@ -97,8 +104,9 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    InitLogger();
-                    Log.Error(ex.Message);
+                    StartLogger();
+                    var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                    Log.Error(exMessage + " Ошибка получения всех пользователей");
 
                     return new List<User>();
                 }
@@ -263,21 +271,6 @@ namespace DAL
                 SqlDbType = SqlDbType.NVarChar,
                 Direction = ParameterDirection.Input
             };
-        }
-
-        private void LogUserError(User user, Exception ex)
-        {
-            var userInfo = user.Id + " | " + user.Name;
-
-            InitLogger();
-            Log.Error(ex.Message + " - " + userInfo);
-        }
-
-        public void InitLogger()
-        {
-            var configFile = new FileInfo(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
-
-            XmlConfigurator.Configure(configFile);
         }
     }
 }

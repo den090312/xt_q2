@@ -14,7 +14,9 @@ namespace DAL
     {
         private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=orderservice;Integrated Security=True";
 
-        public ILog Log { get; } = LogManager.GetLogger("LOGGER");
+        public ILog Log { get; } = LogManager.GetLogger(Logger.Name);
+
+        public void StartLogger() => XmlConfigurator.Configure(Logger.ConfigFile);
 
         public bool Add(ref Customer customer)
         {
@@ -26,13 +28,15 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                LogCustomerError(customer, ex);
+                StartLogger();
+                var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                Log.Error(exMessage + " Ошибка добавления покупателя, имя: '" + customer.Name + "'");
 
                 return false;
             }
         }
 
-        public Customer GetByIdUser(int idUser)
+        public Customer GetByIdUser(int id)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
             {
@@ -42,18 +46,19 @@ namespace DAL
 
                 sqlCommand.CommandText = "GetCustomerByIdUser";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.Add(SqlParId(idUser));
+                sqlCommand.Parameters.Add(SqlParId(id));
 
                 try
                 {
                     sqlConnection.Open();
 
-                    return GetCustomer(sqlCommand, idUser);
+                    return GetCustomer(sqlCommand, id);
                 }
                 catch (Exception ex)
                 {
-                    InitLogger();
-                    Log.Error(ex.Message);
+                    StartLogger();
+                    var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                    Log.Error(exMessage + " Ошибка получения покупателя по id пользователя: " + id);
 
                     return null;
                 }
@@ -153,21 +158,6 @@ namespace DAL
             {
                 customer.Id = sqlDr.GetInt32(0);
             }
-        }
-
-        private void LogCustomerError(Customer customer, Exception ex)
-        {
-            var productInfo = customer.Id + " | " + customer.Name;
-
-            InitLogger();
-            Log.Error(ex.Message + " - " + productInfo);
-        }
-
-        public void InitLogger()
-        {
-            var configFile = new FileInfo(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
-
-            XmlConfigurator.Configure(configFile);
         }
     }
 }

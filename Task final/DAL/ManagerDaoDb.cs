@@ -3,10 +3,8 @@ using InterfacesDAL;
 using log4net;
 using log4net.Config;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.IO;
 
 namespace DAL
 {
@@ -14,7 +12,9 @@ namespace DAL
     {
         private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=orderservice;Integrated Security=True";
 
-        public ILog Log { get; } = LogManager.GetLogger("LOGGER");
+        public ILog Log { get; } = LogManager.GetLogger(Logger.Name);
+
+        public void StartLogger() => XmlConfigurator.Configure(Logger.ConfigFile);
 
         public bool Add(ref Manager manager)
         {
@@ -26,13 +26,15 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                LogManagerError(manager, ex);
+                StartLogger();
+                var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                Log.Error(exMessage + " Ошибка добавления менеджера, имя: '" + manager.Name + "'");
 
                 return false;
             }
         }
 
-        public Manager GetByIdUser(int idUser)
+        public Manager GetByIdUser(int id)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
             {
@@ -40,18 +42,19 @@ namespace DAL
 
                 sqlCommand.CommandText = "GetManagerByIdUser";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
-                sqlCommand.Parameters.Add(SqlParId(idUser));
+                sqlCommand.Parameters.Add(SqlParId(id));
 
                 try
                 {
                     sqlConnection.Open();
 
-                    return GetManager(sqlCommand, idUser);
+                    return GetManager(sqlCommand, id);
                 }
                 catch (Exception ex)
                 {
-                    InitLogger();
-                    Log.Error(ex.Message);
+                    StartLogger();
+                    var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                    Log.Error(exMessage + " Ошибка получения менеджера по id пользователя: " + id);
 
                     return null;
                 }
@@ -77,8 +80,9 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    InitLogger();
-                    Log.Error(ex.Message);
+                    StartLogger();
+                    var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                    Log.Error(exMessage + " Ошибка подтверждения менеджера по id пользователя: " + idUser);
 
                     return false;
                 }
@@ -180,21 +184,6 @@ namespace DAL
                 SqlDbType = SqlDbType.NVarChar,
                 Direction = ParameterDirection.Input
             };
-        }
-
-        private void LogManagerError(Manager manager, Exception ex)
-        {
-            var managerInfo = manager.Id + " | " + manager.Name + " | ";
-
-            InitLogger();
-            Log.Error(ex.Message + " - " + managerInfo);
-        }
-
-        public void InitLogger()
-        {
-            var configFile = new FileInfo(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
-
-            XmlConfigurator.Configure(configFile);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace BLL
 
         public ILog Log => loggerDao.Log;
 
-        public void InitLogger() => loggerDao.InitLogger();
+        public void InitLogger() => loggerDao.StartLogger();
 
         private void NullCheck<T>(T classObject) where T : class
         {

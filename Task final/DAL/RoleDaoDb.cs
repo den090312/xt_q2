@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.IO;
 
 namespace DAL
 {
@@ -14,7 +13,9 @@ namespace DAL
     {
         private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=orderservice;Integrated Security=True";
 
-        public ILog Log { get; } = LogManager.GetLogger("LOGGER");
+        public ILog Log { get; } = LogManager.GetLogger(Logger.Name);
+
+        public void StartLogger() => XmlConfigurator.Configure(Logger.ConfigFile);
 
         public bool Add(ref Role role)
         {
@@ -26,24 +27,27 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                LogRoleError(role, ex);
+                StartLogger();
+                var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                Log.Error(exMessage + " Ошибка добавления роли, имя: '" + role.Name + "'");
 
                 return false;
             }
         }
 
-        public bool Remove(int roleId)
+        public bool Remove(int id)
         {
             try
             {
-                RemoveRole(roleId);
+                RemoveRole(id);
 
                 return true;
             }
             catch (Exception ex)
             {
-                InitLogger();
-                Log.Error(ex.Message + " - roleId: " + roleId);
+                StartLogger();
+                var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                Log.Error(exMessage + " Ошибка удаления роли, id: " + id);
 
                 return false;
             }
@@ -59,7 +63,9 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                LogRoleError(role, ex);
+                StartLogger();
+                var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                Log.Error(exMessage + " Ошибка смены имени роли, id: " + role.Id + ", имя: " + role.Name + "'");
 
                 return false;
             }
@@ -84,8 +90,9 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    InitLogger();
-                    Log.Error(ex.Message);
+                    StartLogger();
+                    var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                    Log.Error(exMessage + " Ошибка получения всех ролей");
 
                     return new List<Role>();
                 }
@@ -111,8 +118,9 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    InitLogger();
-                    Log.Error(ex.Message);
+                    StartLogger();
+                    var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                    Log.Error(exMessage + " Ошибка получения количества всех ролей");
 
                     return 0;
                 }
@@ -138,8 +146,9 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    InitLogger();
-                    Log.Error(ex.Message);
+                    StartLogger();
+                    var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                    Log.Error(exMessage + " Ошибка получения роли по id: " + id);
 
                     return null;
                 }
@@ -166,8 +175,9 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    InitLogger();
-                    Log.Error(ex.Message);
+                    StartLogger();
+                    var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                    Log.Error(exMessage + " Ошибка получения роли по имени: '" + name + "'");
 
                     return 0;
                 }
@@ -377,21 +387,6 @@ namespace DAL
                 SqlDbType = SqlDbType.Int,
                 Direction = ParameterDirection.Output
             };
-        }
-
-        private void LogRoleError(Role role, Exception ex)
-        {
-            var roleInfo = role.Id + " | " + role.Name;
-
-            InitLogger();
-            Log.Error(ex.Message + " - " + roleInfo);
-        }
-
-        public void InitLogger()
-        {
-            var configFile = new FileInfo(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
-
-            XmlConfigurator.Configure(configFile);
         }
     }
 }

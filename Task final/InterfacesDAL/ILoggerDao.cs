@@ -1,9 +1,4 @@
 ﻿using log4net;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InterfacesDAL
 {
@@ -11,6 +6,6 @@ namespace InterfacesDAL
     {
         ILog Log { get; }
 
-        void InitLogger();
+        void StartLogger();
     }
 }

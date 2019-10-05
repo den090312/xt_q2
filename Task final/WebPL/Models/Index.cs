@@ -5,6 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Configuration;
+using log4net.Repository.Hierarchy;
+using log4net.Appender;
+using System.IO;
+using System.Threading;
+using System.Text;
 
 namespace WebPL.Models
 {
@@ -51,9 +56,42 @@ namespace WebPL.Models
             Dependencies.ManagerLogic.Add(ref manager);
         }
 
-        public static string GetLastError()
+        public static string LastError()
         {
-            return "Error";
+            var logPath = GetLogPath();
+
+            NullCheck(logPath);
+            EmptyStringCheck(logPath);
+
+            var fs = new FileStream(logPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            var encoding = Encoding.GetEncoding(1251);
+
+            var lastError = string.Empty;
+            
+            using (var sr = new StreamReader(fs, encoding))
+            {
+                while (!sr.EndOfStream)
+                {
+                    lastError = sr.ReadLine();
+                }
+            }
+
+            return lastError;
+        }
+
+        private static string GetLogPath()
+        {
+            var repository = Dependencies.LoggerLogic.Log.Logger.Repository;
+            var appenders = ((Hierarchy)repository).Root.Appenders.OfType<RollingFileAppender>();
+
+            var logPath = string.Empty;
+
+            foreach (var appender in appenders)
+            {
+                logPath = appender.File;
+            }
+
+            return logPath;
         }
 
         private static void Account()
@@ -155,6 +193,22 @@ namespace WebPL.Models
 
             var fireworks = new Entities.Product("Хлопушка", 1000);
             productLogic.Add(ref fireworks);
+        }
+
+        private static void EmptyStringCheck(string inputString)
+        {
+            if (inputString == string.Empty)
+            {
+                throw new ArgumentException($"{nameof(inputString)} is empty!");
+            }
+        }
+
+        private static void NullCheck<T>(T classObject) where T : class
+        {
+            if (classObject is null)
+            {
+                throw new ArgumentNullException($"{nameof(classObject)} is null!");
+            }
         }
     }
 }

@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.IO;
 
 namespace DAL
 {
@@ -14,7 +13,9 @@ namespace DAL
     {
         private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=orderservice;Integrated Security=True";
 
-        public ILog Log { get; } = LogManager.GetLogger("LOGGER");
+        public ILog Log { get; } = LogManager.GetLogger(Logger.Name);
+
+        public void StartLogger() => XmlConfigurator.Configure(Logger.ConfigFile);
 
         public bool Add(ref Product product)
         {
@@ -26,7 +27,9 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                LogProductError(product, ex);
+                StartLogger();
+                var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                Log.Error(exMessage + " Ошибка добавления товара, название: '" + product.Name + "'");
 
                 return false;
             }
@@ -51,8 +54,9 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    InitLogger();
-                    Log.Error(ex.Message);
+                    StartLogger();
+                    var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                    Log.Error(exMessage + " Ошибка получения всех товаров");
 
                     return new List<Product>();
                 }
@@ -78,8 +82,9 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    InitLogger();
-                    Log.Error(ex.Message);
+                    StartLogger();
+                    var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                    Log.Error(exMessage + " Ошибка получения товара по id: " + id);
 
                     return null;
                 }
@@ -96,8 +101,9 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                InitLogger();
-                Log.Error(ex.Message + " - id: " + id);
+                StartLogger();
+                var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                Log.Error(exMessage + " Ошибка удаления товара по id: " + id);
 
                 return false;
             }
@@ -243,21 +249,6 @@ namespace DAL
                 SqlDbType = SqlDbType.NVarChar,
                 Direction = ParameterDirection.Input
             };
-        }
-
-        private void LogProductError(Product product, Exception ex)
-        {
-            var productInfo = product.Id + " | " + product.Name + " | " + product.Price;
-
-            InitLogger();
-            Log.Error(ex.Message + " - " + productInfo);
-        }
-
-        public void InitLogger()
-        {
-            var configFile = new FileInfo(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
-
-            XmlConfigurator.Configure(configFile);
         }
     }
 }

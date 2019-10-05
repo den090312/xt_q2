@@ -6,10 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -17,7 +13,9 @@ namespace DAL
     {
         private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=orderservice;Integrated Security=True";
 
-        public ILog Log { get; } = LogManager.GetLogger("LOGGER");
+        public ILog Log { get; } = LogManager.GetLogger(Logger.Name);
+
+        public void StartLogger() => XmlConfigurator.Configure(Logger.ConfigFile);
 
         public bool Add(OrderProduct orderProduct)
         {
@@ -29,7 +27,9 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                LogOrderProductError(orderProduct, ex);
+                StartLogger();
+                var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                Log.Error(exMessage + " Ошибка добавления товара в заказ, id товара: " + orderProduct.IdProduct + ", id заказа: " + orderProduct.IdOrder);
 
                 return false;
             }
@@ -54,8 +54,9 @@ namespace DAL
                 }
                 catch (Exception ex)
                 {
-                    InitLogger();
-                    Log.Error(ex.Message);
+                    StartLogger();
+                    var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                    Log.Error(exMessage + " Ошибка получения товаров по id заказа: " + orderId);
 
                     return new List<int>();
                 }
@@ -92,14 +93,6 @@ namespace DAL
 
                 sqlCommand.ExecuteNonQuery();
             }
-        }
-
-        private void LogOrderProductError(OrderProduct orderProduct, Exception ex)
-        {
-            var productInfo = "id заказа - " + orderProduct.IdOrder + ", id продукта - " + orderProduct.IdProduct;
-
-            InitLogger();
-            Log.Error(ex.Message + " - " + productInfo);
         }
 
         public IEnumerable<OrderProduct> GetAll()
@@ -163,13 +156,6 @@ namespace DAL
                 SqlDbType = SqlDbType.Int,
                 Direction = ParameterDirection.Input
             };
-        }
-
-        public void InitLogger()
-        {
-            var configFile = new FileInfo(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
-
-            XmlConfigurator.Configure(configFile);
         }
     }
 }
