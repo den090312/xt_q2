@@ -43,7 +43,7 @@ namespace WebPL.Models
 
             if (Dependencies.ProductLogic.Add(name, priceParsed))
             {
-                Message = "Товар добавлен!";
+                Message = "Товар добавлен";
 
                 return true;
             }
@@ -75,7 +75,7 @@ namespace WebPL.Models
 
             if (Dependencies.ProductLogic.Remove(productIdParsed))
             {
-                Message = "Товар удален!";
+                Message = "Товар удален";
 
                 return true;
             }

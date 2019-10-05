@@ -33,6 +33,7 @@
                     {
                         <form method="post" action="~/Index.cshtml" class="product_order">
                             <div class="product">
+                                <p class="alertbox"></p>
                                 <input type="text" class="product_id" name="productId" value="@product.Id" style="display: none;" />
                                 <div class="product_name">@product.Name</div>
                                 <div class="product_price">@product.Price руб.</div>
@@ -78,9 +79,10 @@
     {
         <form method="post" action="~/Index.cshtml" class="product_add">
             <h4>Добавить товар</h4>
+            <p class="alertbox"></p>
             <input type="text" class="product_new_name" name="newProductName" placeholder="Наименование" />
             <input type="text" class="product_new_price" name="newProductPrice" placeholder="Цена" />
-            <input type="submit" class="submit_order" value="Ок" />
+            <input type="submit" class="submit_product_add" value="Ок" />
         </form>
     }
 }

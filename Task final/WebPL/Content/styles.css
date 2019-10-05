@@ -65,3 +65,7 @@
 .tableCell {
     border: 1px solid #99999954;
 }
+
+.alertbox {
+    color: #ff0000;
+}

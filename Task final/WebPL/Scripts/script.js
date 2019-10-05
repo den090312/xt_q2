@@ -75,4 +75,108 @@
             }
         }
     }
+
+    var log_in = document.getElementsByClassName("log_in")[0];
+    if (log_in) {
+        log_in.onclick = function (event) {
+            var user_log_in = log_in.parentElement;
+            var alertbox = user_log_in.getElementsByClassName("alertbox")[0];
+            alertbox.style.display = "none";
+
+            var log_name = user_log_in.getElementsByClassName("log_name")[0];
+            var log_pass = user_log_in.getElementsByClassName("log_pass")[0];
+
+            if (!log_name.value) {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "Введите логин!";
+                event.preventDefault();
+                return;
+            }
+
+            if (!log_pass.value) {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "Введите пароль!";
+                event.preventDefault();
+                return;
+            }
+        } 
+    }
+
+    var register = document.getElementsByClassName("register")[0];
+    if (register) {
+        register.onclick = function (event) {
+            var user_register = register.parentElement.parentElement;
+            var alertbox = user_register.getElementsByClassName("alertbox")[0];
+            alertbox.style.display = "none";
+
+            var reg_name = user_register.getElementsByClassName("reg_name")[0];
+            var reg_pass = user_register.getElementsByClassName("reg_pass")[0];
+
+            if (!reg_name.value) {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "Введите логин!";
+                event.preventDefault();
+                return;
+            }
+
+            if (!reg_pass.value) {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "Введите пароль!";
+                event.preventDefault();
+                return;
+            }
+        }
+    }
+
+    var submit_product_add = document.getElementsByClassName("submit_product_add")[0];
+    if (submit_product_add) {
+        submit_product_add.onclick = function (event) {
+            var product_add = submit_product_add.parentElement;
+            var alertbox = product_add.getElementsByClassName("alertbox")[0];
+            alertbox.style.display = "none";
+
+            var product_new_name = product_add.getElementsByClassName("product_new_name")[0];
+            var product_new_price = product_add.getElementsByClassName("product_new_price")[0];
+
+            if (!product_new_name.value) {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "Введите наименование товара!";
+                event.preventDefault();
+                return;
+            }
+
+            if (!product_new_price.value) {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "Введите цену товара!";
+                event.preventDefault();
+                return;
+            }
+        }
+    }
+
+    var submit_order = document.getElementsByClassName("submit_order")[0];
+    if (submit_order) {
+        submit_order.onclick = function (event) {
+            var product = submit_order.parentElement;
+            var alertbox = product.getElementsByClassName("alertbox")[0];
+            alertbox.style.display = "none";
+
+            var product_quantity_value = product.getElementsByClassName("product_quantity_value")[0];
+            var order_adress_value = product.getElementsByClassName("order_adress_value")[0];
+
+            if (!product_quantity_value.value) {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "Введите количество товара!";
+                event.preventDefault();
+                return;
+            }
+
+            if (!order_adress_value.value) {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "Введите адрес доставки товара!";
+                event.preventDefault();
+                return;
+            }
+        }
+    }
 }

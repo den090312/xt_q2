@@ -148,14 +148,14 @@ namespace DAL
             {
                 var role = new Role(id, sqlDr.GetString(1))
                 {
-                    ProductRead = sqlDr.GetBoolean(2),
+                    ProductRead  = sqlDr.GetBoolean(2),
                     ProductWrite = sqlDr.GetBoolean(3),
-                    OrderRead = sqlDr.GetBoolean(4),
-                    OrderWrite = sqlDr.GetBoolean(5),
-                    RoleRead = sqlDr.GetBoolean(6),
-                    RoleWrite = sqlDr.GetBoolean(7),
-                    UserRead = sqlDr.GetBoolean(8),
-                    UserWrite = sqlDr.GetBoolean(9)
+                    OrderRead    = sqlDr.GetBoolean(4),
+                    OrderWrite   = sqlDr.GetBoolean(5),
+                    RoleRead     = sqlDr.GetBoolean(6),
+                    RoleWrite    = sqlDr.GetBoolean(7),
+                    UserRead     = sqlDr.GetBoolean(8),
+                    UserWrite    = sqlDr.GetBoolean(9)
                 };
 
                 return role;
