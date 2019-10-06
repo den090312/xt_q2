@@ -1,6 +1,4 @@
-﻿@using WebPL.Models;
-@using Entities;
-@using Common;
+﻿@using Common;
 
 @{
     Layout = null;
@@ -26,7 +24,6 @@
         <h2 class="product_caption">Новые заказы</h2>
         <form method="post" action="~/Index.cshtml" class="customer_orders">
             <div class="table">
-
                 @foreach (var order in newOrders)
                 {
                     <div class="tableRow">

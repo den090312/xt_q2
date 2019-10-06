@@ -2,20 +2,20 @@
     Layout = "~/Pages/_Layout.cshtml";
 }
 
-<form method="post" action="~/Index.cshtml" class="user_register">
-    <h4>Регистрация покупателя</h4>
-    <p class="alertbox"></p>
-    <p>
-        <input type="text" class="reg_name" name="regName" placeholder="Логин" />
-    </p>
-    <p>
-        <input type="password" class="reg_pass" name="regPass" placeholder="Пароль" />
-    </p>
-    <p>
-        <input type="submit" class="register" value="Ок" style="float: left;"/>
-    </p>
-</form>
-<form method="post" action="~/Index.cshtml" class="user_log_out" style="float: left;">
-    <input type="submit" class="log_out" value="Отмена" style="margin-left: 15px;" />
-    <input type="text" class="log_out_post" style="display: none;" name="loggedOut" />
-</form>
+    <form method="post" action="~/Index.cshtml" class="user_register">
+        <h4>Регистрация покупателя</h4>
+        <p class="alertbox"></p>
+        <p>
+            <input type="text" class="reg_name" name="regName" placeholder="Логин" />
+        </p>
+        <p>
+            <input type="password" class="reg_pass" name="regPass" placeholder="Пароль" />
+        </p>
+        <p>
+            <input type="submit" class="register" value="Ок" style="float: left;"/>
+        </p>
+    </form>
+    <form method="post" action="~/Index.cshtml" class="user_log_out" style="float: left;">
+        <input type="submit" class="log_out" value="Отмена" style="margin-left: 15px;" />
+        <input type="text" class="log_out_post" style="display: none;" name="loggedOut" />
+    </form>

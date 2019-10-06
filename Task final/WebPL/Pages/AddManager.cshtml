@@ -9,23 +9,23 @@
 
         Роль:
         <select class="selectRole" style="margin-left: 5px;">
-            @{
-                var roles = Dependencies.RoleLogic.GetAll();
+        @{
+            var roles = Dependencies.RoleLogic.GetAll();
 
-                foreach (var role in roles)
-                {
-                    <option>@role.Name</option>
-                }
+            foreach (var role in roles)
+            {
+                <option>@role.Name</option>
             }
+        }
         </select>
 
         <select class="selectRoleId" style="display: none;">
-            @{
-                foreach (var role in roles)
-                {
-                    <option>@role.Id</option>
-                }
+        @{
+            foreach (var role in roles)
+            {
+                <option>@role.Id</option>
             }
+        }
         </select>
         <input type="text" class="selectRoleIdChosen" name="selectRoleIdChosen" style="display: none;" />
         <p>
@@ -39,14 +39,14 @@
 
         Ранг:
         <select class="selectRank" style="margin-left: 5px;">
-            @{
-                var ranks = Entities.Manager.Ranks();
+        @{
+            var ranks = Entities.Manager.Ranks();
 
-                foreach (var rank in ranks)
-                {
-                    <option>@rank</option>
-                }
+            foreach (var rank in ranks)
+            {
+                <option>@rank</option>
             }
+        }
         </select>
         <input type="text" class="selectRankChosen" name="selectRankChosen" style="display: none;" />
         <p>
