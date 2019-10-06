@@ -97,6 +97,7 @@
   <ItemGroup>
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Index.cs" />
+    <Compile Include="Models\Manager.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -115,6 +116,10 @@
     <Content Include="Pages\Orders.cshtml" />
     <Content Include="Pages\NewOrders.cshtml" />
     <Content Include="Pages\ChangePassword.cshtml" />
+    <Content Include="Pages\Users.cshtml" />
+    <Content Include="Pages\Roles.cshtml" />
+    <Content Include="Pages\Managers.cshtml" />
+    <Content Include="Pages\AddManager.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

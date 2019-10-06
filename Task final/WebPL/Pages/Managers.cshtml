@@ -1,0 +1,29 @@
+﻿@using WebPL.Models;
+@using Common;
+
+@{
+    Layout = null;
+
+    var managers = Dependencies.ManagerLogic.GetAll();
+
+    <b id="messagebox">@Index.Message</b>
+    <h2 class="product_caption">Менеджеры</h2>
+    <div class="table">
+        <div class="tableRow">
+            <div class="tableCellCaption">UserId</div>
+            <div class="tableCellCaption">IdRole</div>
+            <div class="tableCellCaption">Name</div>
+            <div class="tableCellCaption">CurrentRank</div>
+        </div>
+
+        @foreach (var manager in managers)
+        {
+            <div class="tableRow">
+                <div class="tableCell">@manager.Id</div>
+                <div class="tableCell">@manager.IdUser</div>
+                <div class="tableCell">@manager.Name</div>
+                <div class="tableCell">@manager.CurrentRank</div>
+            </div>
+        }
+    </div>
+}

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Entities;
 
 namespace InterfacesDAL
@@ -14,5 +10,7 @@ namespace InterfacesDAL
         Manager GetByIdUser(int idUser);
 
         bool IsManager(int idUser);
+
+        IEnumerable<Manager> GetAll();
     }
 }

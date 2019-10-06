@@ -80,8 +80,6 @@ namespace DAL
                 sqlCommand.CommandText = "GetAllRoles";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
 
-                sqlConnection.Open();
-
                 try
                 {
                     sqlConnection.Open();
@@ -213,7 +211,9 @@ namespace DAL
                     RoleRead     = sqlDr.GetBoolean(6),
                     RoleWrite    = sqlDr.GetBoolean(7),
                     UserRead     = sqlDr.GetBoolean(8),
-                    UserWrite    = sqlDr.GetBoolean(9)
+                    UserWrite    = sqlDr.GetBoolean(9),
+                    ManagerRead  = sqlDr.GetBoolean(10),
+                    ManagerWrite = sqlDr.GetBoolean(11)
                 };
 
                 return role;
@@ -255,6 +255,8 @@ namespace DAL
                 sqlCommand.Parameters.Add(SqlParBit(role.RoleWrite,    "@RoleWrite"));
                 sqlCommand.Parameters.Add(SqlParBit(role.UserRead,     "@UserRead"));
                 sqlCommand.Parameters.Add(SqlParBit(role.UserWrite,    "@UserWrite"));
+                sqlCommand.Parameters.Add(SqlParBit(role.ManagerRead,  "@ManagerRead"));
+                sqlCommand.Parameters.Add(SqlParBit(role.ManagerWrite, "@ManagerWrite"));
 
                 sqlConnection.Open();
 
@@ -310,7 +312,9 @@ namespace DAL
                     RoleRead     = sqlDr.GetBoolean(6),
                     RoleWrite    = sqlDr.GetBoolean(7),
                     UserRead     = sqlDr.GetBoolean(8),
-                    UserWrite    = sqlDr.GetBoolean(9)
+                    UserWrite    = sqlDr.GetBoolean(9),
+                    ManagerRead  = sqlDr.GetBoolean(10),
+                    ManagerWrite = sqlDr.GetBoolean(11)
                 };
 
                 roleList.Add(role);

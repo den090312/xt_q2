@@ -3,6 +3,7 @@ using InterfacesDAL;
 using log4net;
 using log4net.Config;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -87,6 +88,58 @@ namespace DAL
                     return false;
                 }
             }
+        }
+
+        public IEnumerable<Manager> GetAll()
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetAllManagers";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                try
+                {
+                    sqlConnection.Open();
+
+                    return GetAllManagers(sqlCommand);
+                }
+                catch (Exception ex)
+                {
+                    StartLogger();
+                    var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                    Log.Error(exMessage + " Ошибка получения всех менеджеров");
+
+                    return new List<Manager>();
+                }
+            }
+        }
+
+        private IEnumerable<Manager> GetAllManagers(SqlCommand sqlCommand)
+        {
+            var managerList = new List<Manager>();
+
+            var sqlDr = sqlCommand.ExecuteReader();
+
+            while (sqlDr.Read())
+            {
+                var id     = sqlDr.GetInt32(0);
+                var idUser = sqlDr.GetInt32(1);
+                var name   = sqlDr.GetString(2);
+                var rank   = sqlDr.GetString(3);
+
+                var currentRank = (Manager.Rank)Enum.Parse(typeof(Manager.Rank), rank);
+
+                var manager = new Manager(idUser, name, currentRank)
+                {
+                    Id = id
+                };
+
+                managerList.Add(manager);
+            }
+
+            return managerList;
         }
 
         private static bool GetManagerCount(SqlCommand sqlCommand)

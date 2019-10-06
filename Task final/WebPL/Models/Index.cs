@@ -2,13 +2,10 @@
 using Common;
 using System.Collections.Specialized;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Configuration;
 using log4net.Repository.Hierarchy;
 using log4net.Appender;
 using System.IO;
-using System.Threading;
 using System.Text;
 
 namespace WebPL.Models
@@ -32,6 +29,7 @@ namespace WebPL.Models
             Account();
             Order();
             Product();
+            Manager();
         }
 
         public static void DemoData()
@@ -51,12 +49,12 @@ namespace WebPL.Models
 
         private static void LoadGeneralManager(int userManagerId)
         {
-            var manager = new Manager(userManagerId, "Manager", Manager.Rank.General);
+            var manager = new Entities.Manager(userManagerId, "Manager", Entities.Manager.Rank.General);
 
             Dependencies.ManagerLogic.Add(ref manager);
         }
 
-        public static string LastError()
+        public static string GetLastError()
         {
             var logPath = GetLogPath();
 
@@ -133,6 +131,18 @@ namespace WebPL.Models
             Models.Product.Run(Forms);
 
             var message = Models.Product.Message;
+
+            if (message != string.Empty)
+            {
+                Message = message;
+            }
+        }
+
+        private static void Manager()
+        {
+            Models.Manager.Run(Forms);
+
+            var message = Models.Manager.Message;
 
             if (message != string.Empty)
             {

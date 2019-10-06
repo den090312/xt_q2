@@ -23,6 +23,17 @@ namespace Entities
             General = 4
         }
 
+        public static IEnumerable<Rank> Ranks()
+        {
+            return new List<Rank>
+            {
+                Rank.Junior,
+                Rank.Middle,
+                Rank.Top,
+                Rank.General
+            };
+        }
+
         public Manager(int idUser, string name, Rank rank)
         {
             IdUser = idUser;

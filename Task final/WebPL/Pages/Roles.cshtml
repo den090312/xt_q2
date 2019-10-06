@@ -1,0 +1,46 @@
+﻿@using WebPL.Models;
+@using Entities;
+@using Common;
+
+@{
+    Layout = null;
+
+    var roles = Dependencies.RoleLogic.GetAll();
+
+    <b id="messagebox">@Index.Message</b>
+    <h2 class="product_caption">Роли</h2>
+    <div class="table">
+        <div class="tableRow">
+            <div class="tableCellCaption">ID</div>
+            <div class="tableCellCaption">Name</div>
+            <div class="tableCellCaption">ProductRead</div>
+            <div class="tableCellCaption">ProductWrite</div>
+            <div class="tableCellCaption">OrderRead</div>
+            <div class="tableCellCaption">OrderWrite</div>
+            <div class="tableCellCaption">RoleRead</div>
+            <div class="tableCellCaption">RoleWrite</div>
+            <div class="tableCellCaption">UserRead</div>
+            <div class="tableCellCaption">UserWrite</div>
+            <div class="tableCellCaption">ManagerRead</div>
+            <div class="tableCellCaption">ManagerWrite</div>
+        </div>
+
+        @foreach (var role in roles)
+        {
+            <div class="tableRow">
+                <div class="tableCell">@role.Id</div>
+                <div class="tableCell">@role.Name</div>
+                <div class="tableCell">@role.ProductRead</div>
+                <div class="tableCell">@role.ProductWrite</div>
+                <div class="tableCell">@role.OrderRead</div>
+                <div class="tableCell">@role.OrderWrite</div>
+                <div class="tableCell">@role.RoleRead</div>
+                <div class="tableCell">@role.RoleWrite</div>
+                <div class="tableCell">@role.UserRead</div>
+                <div class="tableCell">@role.UserWrite</div>
+                <div class="tableCell">@role.ManagerRead</div>
+                <div class="tableCell">@role.ManagerWrite</div>
+            </div>
+        }
+    </div>
+}

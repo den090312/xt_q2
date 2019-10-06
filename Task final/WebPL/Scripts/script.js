@@ -99,7 +99,7 @@
                 event.preventDefault();
                 return;
             }
-        } 
+        }
     }
 
     var register = document.getElementsByClassName("register")[0];
@@ -218,6 +218,25 @@
                 event.preventDefault();
                 return;
             }
+        }
+    }
+
+    var manager_add = document.getElementsByClassName("manager_add")[0];
+    if (manager_add) {
+        manager_add.addEventListener("change", managerAddChange);
+
+        function managerAddChange() {
+            var selectRole = manager_add.getElementsByClassName("selectRole")[0];
+            var selectRoleId = manager_add.getElementsByClassName("selectRoleId")[0];
+            var selectRoleIdChosen = manager_add.getElementsByClassName("selectRoleIdChosen")[0];
+
+            selectRoleId.selectedIndex = selectRole.selectedIndex;
+            selectRoleIdChosen.value = selectRoleId[selectRoleId.selectedIndex].value;
+
+            var selectRank = manager_add.getElementsByClassName("selectRank")[0]; 
+            var selectRankChosen = manager_add.getElementsByClassName("selectRankChosen")[0]; 
+
+            selectRankChosen.value = selectRank[selectRank.selectedIndex].value;
         }
     }
 }

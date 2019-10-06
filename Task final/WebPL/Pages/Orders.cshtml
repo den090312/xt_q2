@@ -7,7 +7,7 @@
 
     Index.Message = string.Empty;
 
-    var orderList = Enumerable.Empty<Entities.Order>();
+    var orders = Enumerable.Empty<Entities.Order>();
 
     if (IsPost)
     {
@@ -15,7 +15,7 @@
 
         try
         {
-            orderList = WebPL.Models.Order.GetOrders();
+            orders = WebPL.Models.Order.GetOrders();
         }
         catch
         {
@@ -23,7 +23,7 @@
         }
     }
 
-    if (orderList.Count() == 0)
+    if (orders.Count() == 0)
     {
         <h2 class="product_caption">Заказов не найдено</h2>
         <a href="~/Index.cshtml">
@@ -31,14 +31,14 @@
         </a>
     }
 
-    if (orderList.Count() > 0)
+    if (orders.Count() > 0)
     {
         <b id="messagebox">@Index.Message</b>
         <h2 class="product_caption">Заказы</h2>
         <form method="post" action="~/Index.cshtml" class="customer_orders">
             <div class="table">
 
-                @foreach (var order in orderList)
+                @foreach (var order in orders)
                 {
                     <div class="tableRow">
                         <div class="tableCellCaption">ID</div>

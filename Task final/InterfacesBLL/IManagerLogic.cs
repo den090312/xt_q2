@@ -1,9 +1,5 @@
 ﻿using Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InterfacesBLL
 {
@@ -12,6 +8,8 @@ namespace InterfacesBLL
         bool Add(ref Manager manager);
 
         Manager GetByUserId(int idUser);
+
+        IEnumerable<Manager> GetAll();
 
         bool IsManager(int idUser);
     }

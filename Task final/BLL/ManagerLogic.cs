@@ -3,6 +3,7 @@ using InterfacesBLL;
 using InterfacesDAL;
 using log4net;
 using System;
+using System.Collections.Generic;
 
 namespace BLL
 {
@@ -48,6 +49,11 @@ namespace BLL
             IdCheck(idUser);
 
             return managerDao.IsManager(idUser);
+        }
+
+        public IEnumerable<Manager> GetAll()
+        {
+            return managerDao.GetAll();
         }
 
         private void IdCheck(int id)

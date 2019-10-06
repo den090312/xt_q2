@@ -35,6 +35,12 @@
             Name = role.Name;
         }
 
+        public User(int roleId, string name)
+        {
+            IdRole = roleId;
+            Name = name;
+        }
+
         public User(int roleId, string name, string passwordHash)
         {
             IdRole = roleId;

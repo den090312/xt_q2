@@ -1,0 +1,55 @@
+﻿@using Common;
+
+@{
+    Layout = null;
+}
+    <form method="post" action="~/Index.cshtml" class="manager_add" style="margin: 35px 0 0 44%;">
+        <h4>Добавить менеджера</h4>
+        <p class="alertbox"></p>
+
+        Роль:
+        <select class="selectRole" style="margin-left: 5px;">
+            @{
+                var roles = Dependencies.RoleLogic.GetAll();
+
+                foreach (var role in roles)
+                {
+                    <option>@role.Name</option>
+                }
+            }
+        </select>
+
+        <select class="selectRoleId" style="display: none;">
+            @{
+                foreach (var role in roles)
+                {
+                    <option>@role.Id</option>
+                }
+            }
+        </select>
+        <input type="text" class="selectRoleIdChosen" name="selectRoleIdChosen" style="display: none;" />
+        <p>
+            <input type="text" class="manager_new_login" name="newManagerLogin" placeholder="Логин" />
+        </p>
+        <p>
+            <input type="text" class="manager_new_pass" name="newManagerPass" placeholder="Пароль" />
+        <p>
+            <input type="text" class="manager_new_name" name="newManagerName" placeholder="Имя" />
+        </p>
+
+        Ранг:
+        <select class="selectRank" style="margin-left: 5px;">
+            @{
+                var ranks = Entities.Manager.Ranks();
+
+                foreach (var rank in ranks)
+                {
+                    <option>@rank</option>
+                }
+            }
+        </select>
+        <input type="text" class="selectRankChosen" name="selectRankChosen" style="display: none;" />
+        <p>
+            <input type="submit" class="submit_manager_add" value="Ок" />
+        </p>
+    </form>

@@ -32,13 +32,16 @@
 
         public bool UserWrite { get; set; }
 
+        public bool ManagerRead { get; set; }
+
+        public bool ManagerWrite { get; set; }
+
         static Role()
         {
             Guest = new Role("Guest")
             {
                 ProductRead = true
             };
-
 
             Customer = new Role("Customer")
             {
@@ -59,7 +62,9 @@
                 RoleRead = true,
                 RoleWrite = true,
                 UserRead = true,
-                UserWrite = true
+                UserWrite = true,
+                ManagerRead = true,
+                ManagerWrite = true
             };
 
             SuperAdmin = new Role("SuperAdmin")
@@ -71,8 +76,14 @@
                 RoleRead = true,
                 RoleWrite = true,
                 UserRead = true,
-                UserWrite = true
+                UserWrite = true,
+                ManagerRead = true,
+                ManagerWrite = true
             };
+        }
+
+        public Role()
+        {
         }
 
         public Role(string name) => Name = name;

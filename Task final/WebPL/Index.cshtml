@@ -35,6 +35,7 @@
 
     var currentUser = Index.CurrentUser;
     var currentRoleId = Index.CurrentUser.IdRole;
+    var currentRole = new Role();
     var currentRoleName = string.Empty;
 
     if (currentRoleId == 0)
@@ -43,7 +44,8 @@
     }
     else
     {
-        currentRoleName = Dependencies.RoleLogic.GetById(currentRoleId).Name;
+        currentRole = Dependencies.RoleLogic.GetById(currentRoleId);
+        currentRoleName = currentRole.Name;
     }
 
     <b id="messagebox">@Index.Message</b>
@@ -58,11 +60,31 @@
     {
         @RenderPage("~/Pages/CurrentUser.cshtml");
 
-        if (Dependencies.ManagerLogic.IsManager(Index.CurrentUser.Id))
+        if (currentRole.OrderRead)
         {
             @RenderPage("~/Pages/NewOrders.cshtml");
         }
     }
 
     @RenderPage("~/Pages/Products.cshtml");
+
+    if (currentRole.UserRead)
+    {
+        @RenderPage("~/Pages/Users.cshtml");
+    }
+
+    if (currentRole.RoleRead)
+    {
+        @RenderPage("~/Pages/Roles.cshtml");
+    }
+
+    if (currentRole.ManagerRead)
+    {
+        @RenderPage("~/Pages/Managers.cshtml");
+    }
+
+    if (currentRole.ManagerWrite)
+    {
+        @RenderPage("~/Pages/AddManager.cshtml");
+    }
 }
