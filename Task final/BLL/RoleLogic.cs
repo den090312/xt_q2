@@ -56,10 +56,7 @@ namespace BLL
             return roleDao.Remove(RoleId);
         }
 
-        public bool NoRoles()
-        {
-            return roleDao.NoRoles();
-        }
+        public bool NoRoles() => roleDao.NoRoles();
 
         public Role GetById(int id)
         {

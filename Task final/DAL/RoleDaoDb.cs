@@ -99,32 +99,6 @@ namespace DAL
 
         public bool NoRoles() => GetRolesCount() == 0;
 
-        private int GetRolesCount()
-        {
-            using (var sqlConnection = new SqlConnection(connectionString))
-            {
-                var sqlCommand = sqlConnection.CreateCommand();
-
-                sqlCommand.CommandText = "GetRolesCount";
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-
-                try
-                {
-                    sqlConnection.Open();
-
-                    return GetCount(sqlCommand);
-                }
-                catch (Exception ex)
-                {
-                    StartLogger();
-                    var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                    Log.Error(exMessage + " Ошибка получения количества всех ролей");
-
-                    return 0;
-                }
-            }
-        }
-
         public Role GetById(int id)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
@@ -149,6 +123,32 @@ namespace DAL
                     Log.Error(exMessage + " Ошибка получения роли по id: " + id);
 
                     return null;
+                }
+            }
+        }
+
+        private int GetRolesCount()
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetRolesCount";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                try
+                {
+                    sqlConnection.Open();
+
+                    return GetCount(sqlCommand);
+                }
+                catch (Exception ex)
+                {
+                    StartLogger();
+                    var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                    Log.Error(exMessage + " Ошибка получения количества всех ролей");
+
+                    return 0;
                 }
             }
         }
@@ -331,6 +331,7 @@ namespace DAL
 
                 sqlCommand.CommandText = "RemoveRole";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
+
                 sqlCommand.Parameters.Add(SqlParId(roleId));
 
                 sqlConnection.Open();

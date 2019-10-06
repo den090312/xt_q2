@@ -10,7 +10,5 @@ namespace InterfacesBLL
         Manager GetByUserId(int idUser);
 
         IEnumerable<Manager> GetAll();
-
-        bool IsManager(int idUser);
     }
 }

@@ -44,17 +44,7 @@ namespace BLL
             return managerDao.GetByIdUser(userId);
         }
 
-        public bool IsManager(int idUser)
-        {
-            IdCheck(idUser);
-
-            return managerDao.IsManager(idUser);
-        }
-
-        public IEnumerable<Manager> GetAll()
-        {
-            return managerDao.GetAll();
-        }
+        public IEnumerable<Manager> GetAll() => managerDao.GetAll();
 
         private void IdCheck(int id)
         {

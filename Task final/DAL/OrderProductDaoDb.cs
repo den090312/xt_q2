@@ -95,36 +95,6 @@ namespace DAL
             }
         }
 
-        public IEnumerable<OrderProduct> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<OrderProduct> GetByOrderId(int orderId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<OrderProduct> GetByProductId(int productId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool NoOrderProducts()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool RemoveByOrderId(int orderId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool RemoveByProductId(int productId)
-        {
-            throw new NotImplementedException();
-        }
-
         private SqlParameter SqlParId(int id)
         {
             return new SqlParameter

@@ -132,7 +132,7 @@ namespace DAL
 
             while (sqlDr.Read())
             {
-                var name = sqlDr.GetString(0);
+                var name  = sqlDr.GetString(0);
                 var price = sqlDr.GetDecimal(1);
 
                 return new Product(id, name, price);
@@ -149,8 +149,8 @@ namespace DAL
 
             while (sqlDr.Read())
             {
-                var id = sqlDr.GetInt32(0);
-                var name = sqlDr.GetString(1);
+                var id    = sqlDr.GetInt32(0);
+                var name  = sqlDr.GetString(1);
                 var price = sqlDr.GetDecimal(2);
 
                 var product = new Product(id, name, price);

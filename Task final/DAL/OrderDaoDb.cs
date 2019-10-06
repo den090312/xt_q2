@@ -199,11 +199,11 @@ namespace DAL
 
             while (sqlDr.Read())
             {
-                var orderId = sqlDr.GetInt32(0);
+                var orderId    = sqlDr.GetInt32(0);
                 var idCustomer = sqlDr.GetInt32(1);
-                var date = sqlDr.GetDateTime(2);
-                var adress = sqlDr.GetString(3);
-                var sum = sqlDr.GetDecimal(4);
+                var date       = sqlDr.GetDateTime(2);
+                var adress     = sqlDr.GetString(3);
+                var sum        = sqlDr.GetDecimal(4);
 
                 var order = new Order(idCustomer, date, adress, new List<int>(), sum)
                 {

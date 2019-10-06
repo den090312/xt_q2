@@ -28,7 +28,7 @@ namespace WebPL.Models
 
         private static bool AddProduct()
         {
-            var name = Forms["newProductName"];
+            var name  = Forms["newProductName"];
             var price = Forms["newProductPrice"];
 
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(price))

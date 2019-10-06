@@ -3,7 +3,6 @@ using InterfacesBLL;
 using InterfacesDAL;
 using log4net;
 using System;
-using System.Collections.Generic;
 
 namespace BLL
 {
@@ -38,41 +37,6 @@ namespace BLL
             IdCheck(userId);
 
             return customerDao.GetByIdUser(userId);
-        }
-
-        public bool Remove(Customer customer)
-        {
-            NullCheck(customer);
-
-            return customerDao.Remove(customer);
-        }
-
-        public IEnumerable<Customer> GetAll() => customerDao.GetAll();
-
-        public bool AddOrder(Order order)
-        {
-            NullCheck(order);
-
-            return customerDao.AddOrder(order);
-        }
-
-        public void RemoveOrder(Order order)
-        {
-            NullCheck(order);
-
-            customerDao.RemoveOrder(order);
-        }
-
-        public IEnumerable<Order> GetOrders()
-        {
-            return customerDao.GetOrders();
-        }
-
-        public bool ChangeName(string newName)
-        {
-            NullCheck(newName);
-
-            return customerDao.ChangeName(newName);
         }
 
         private void IdCheck(int id)

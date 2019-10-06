@@ -68,10 +68,7 @@ namespace BLL
             return orderDao.CompleteOrder(id);
         }
 
-        public IEnumerable<Order> GetNewOrders()
-        {
-            return orderDao.GetNewOrders();
-        }
+        public IEnumerable<Order> GetNewOrders() => orderDao.GetNewOrders();
 
         public IEnumerable<Order> GetByIdCustomer(int id)
         {

@@ -1,10 +1,6 @@
 ﻿using Common;
 using Entities;
-using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Web;
 
 namespace WebPL.Models
 {
@@ -26,22 +22,7 @@ namespace WebPL.Models
         {
             Account.forms = forms;
 
-            if (LogIn())
-            {
-                return;
-            }
-
-            if (LogOut())
-            {
-                return;
-            }
-
-            if (ChangePassword())
-            {
-                return;
-            }
-
-            if (CurrentUser != User.Guest)
+            if (LogIn() || LogOut() || ChangePassword() || CurrentUser != User.Guest)
             {
                 return;
             }
@@ -73,6 +54,11 @@ namespace WebPL.Models
                 return false;
             }
 
+            return PasswordChange(currentUser, oldPass, newPass);
+        }
+
+        private static bool PasswordChange(User currentUser, string oldPass, string newPass)
+        {
             var userLogic = Dependencies.UserLogic;
 
             if (!userLogic.PasswordIsOk(oldPass, currentUser.PasswordHash))
@@ -105,6 +91,11 @@ namespace WebPL.Models
                 return false;
             }
 
+            return UserLogIn(logName, logPass);
+        }
+
+        private static bool UserLogIn(string logName, string logPass)
+        {
             var userLogic = Dependencies.UserLogic;
 
             var logUser = userLogic.GetByName(logName);

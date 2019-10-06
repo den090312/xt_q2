@@ -9,8 +9,6 @@ namespace InterfacesDAL
 
         Manager GetByIdUser(int idUser);
 
-        bool IsManager(int idUser);
-
         IEnumerable<Manager> GetAll();
     }
 }

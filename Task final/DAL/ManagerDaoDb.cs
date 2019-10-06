@@ -43,6 +43,7 @@ namespace DAL
 
                 sqlCommand.CommandText = "GetManagerByIdUser";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
+
                 sqlCommand.Parameters.Add(SqlParId(id));
 
                 try
@@ -58,34 +59,6 @@ namespace DAL
                     Log.Error(exMessage + " Ошибка получения менеджера по id пользователя: " + id);
 
                     return null;
-                }
-            }
-        }
-
-        public bool IsManager(int idUser)
-        {
-            using (var sqlConnection = new SqlConnection(connectionString))
-            {
-                var sqlCommand = sqlConnection.CreateCommand();
-
-                sqlCommand.CommandText = "GetManagerCountByIdUser";
-                sqlCommand.CommandType = CommandType.StoredProcedure;
-
-                sqlCommand.Parameters.Add(SqlParId(idUser));
-
-                try
-                {
-                    sqlConnection.Open();
-
-                    return GetManagerCount(sqlCommand);
-                }
-                catch (Exception ex)
-                {
-                    StartLogger();
-                    var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                    Log.Error(exMessage + " Ошибка подтверждения менеджера по id пользователя: " + idUser);
-
-                    return false;
                 }
             }
         }
@@ -140,18 +113,6 @@ namespace DAL
             }
 
             return managerList;
-        }
-
-        private static bool GetManagerCount(SqlCommand sqlCommand)
-        {
-            var sqlDr = sqlCommand.ExecuteReader();
-
-            while (sqlDr.Read())
-            {
-                return sqlDr.GetInt32(0) > 0;
-            }
-
-            return false;
         }
 
         private Manager GetManager(SqlCommand sqlCommand, int idUser)

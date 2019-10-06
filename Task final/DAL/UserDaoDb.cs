@@ -113,7 +113,6 @@ namespace DAL
             }
         }
 
-
         public bool UpdatePasswordHash(User user, string passwordHash)
         {
             try

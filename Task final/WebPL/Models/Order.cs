@@ -63,9 +63,9 @@ namespace WebPL.Models
         private static bool AddOrder()
         {
             var idCustomer = Forms["customerId"];
-            var idProduct = Forms["chosenProductId"];
-            var quantity = Forms["chosenProductQuantity"];
-            var adress = Forms["orderAdress"];
+            var idProduct  = Forms["chosenProductId"];
+            var quantity   = Forms["chosenProductQuantity"];
+            var adress     = Forms["orderAdress"];
 
             if (string.IsNullOrEmpty(idCustomer) || string.IsNullOrEmpty(idProduct) || 
                 string.IsNullOrEmpty(quantity) || string.IsNullOrEmpty(adress))
@@ -146,7 +146,6 @@ namespace WebPL.Models
                 return false;
             }
         }
-
 
         private static bool CompleteOrder()
         {

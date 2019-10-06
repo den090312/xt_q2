@@ -3,10 +3,8 @@ using InterfacesDAL;
 using log4net;
 using log4net.Config;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.IO;
 
 namespace DAL
 {
@@ -40,12 +38,11 @@ namespace DAL
         {
             using (var sqlConnection = new SqlConnection(connectionString))
             {
-                var connectionState = sqlConnection.State;
-
                 var sqlCommand = sqlConnection.CreateCommand();
 
                 sqlCommand.CommandText = "GetCustomerByIdUser";
                 sqlCommand.CommandType = CommandType.StoredProcedure;
+
                 sqlCommand.Parameters.Add(SqlParId(id));
 
                 try
@@ -78,36 +75,6 @@ namespace DAL
             }
 
             return null;
-        }
-
-        public bool AddOrder(Order order)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool ChangeName(string newName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Customer> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Order> GetOrders()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Remove(Customer customer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveOrder(Order order)
-        {
-            throw new NotImplementedException();
         }
 
         private void AddCustomer(ref Customer customer)

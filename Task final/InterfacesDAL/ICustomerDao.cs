@@ -1,6 +1,4 @@
 ﻿using Entities;
-using System;
-using System.Collections.Generic;
 
 namespace InterfacesDAL
 {
@@ -9,17 +7,5 @@ namespace InterfacesDAL
         bool Add(ref Customer customer);
 
         Customer GetByIdUser(int idUser);
-
-        bool Remove(Customer customer);
-
-        IEnumerable<Customer> GetAll();
-
-        bool AddOrder(Order order);
-
-        void RemoveOrder(Order order);
-
-        IEnumerable<Order> GetOrders();
-
-        bool ChangeName(string newName);
     }
 }
