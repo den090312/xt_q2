@@ -14,5 +14,7 @@ namespace InterfacesDAL
         bool UpdateName(User user);
 
         User GetByName(string name);
+
+        bool UpdatePasswordHash(User user, string passwordHash);
     }
 }

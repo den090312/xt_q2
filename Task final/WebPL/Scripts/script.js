@@ -179,4 +179,45 @@
             }
         }
     }
+
+    var submit_change_password = document.getElementsByClassName("submit_change_password")[0];
+    if (submit_change_password) {
+        submit_change_password.onclick = function (event) {
+            var user_change_password = submit_change_password.parentElement.parentElement;
+            var alertbox = user_change_password.getElementsByClassName("alertbox")[0];
+            alertbox.style.display = "none";
+
+            var old_pass = user_change_password.getElementsByClassName("old_pass")[0];
+            var new_pass = user_change_password.getElementsByClassName("new_pass")[0];
+            var new_pass_confirm = user_change_password.getElementsByClassName("new_pass_confirm")[0];
+
+            if (!old_pass.value) {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "Введите старый пароль!";
+                event.preventDefault();
+                return;
+            }
+
+            if (!new_pass.value) {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "Введите новый пароль!";
+                event.preventDefault();
+                return;
+            }
+
+            if (!new_pass_confirm.value) {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "Подтвердите новый пароль!";
+                event.preventDefault();
+                return;
+            }
+
+            if (new_pass.value != new_pass_confirm.value) {
+                alertbox.style.display = "block";
+                alertbox.innerHTML = "Введенные пароли не совпадают!";
+                event.preventDefault();
+                return;
+            }
+        }
+    }
 }

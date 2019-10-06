@@ -113,6 +113,43 @@ namespace DAL
             }
         }
 
+
+        public bool UpdatePasswordHash(User user, string passwordHash)
+        {
+            try
+            {
+                UpdateUserPasswordHash(user, passwordHash);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                StartLogger();
+                var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                Log.Error(exMessage + " Ошибка смены имени пароля пользователя, id: " + user.Id + ", имя: '" + user.Name + "'");
+
+                return false;
+            }
+        }
+
+        private void UpdateUserPasswordHash(User user, string passwordHash)
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "UpdateUserPasswordHash";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.Add(SqlParId(user.Id));
+                sqlCommand.Parameters.Add(SqlParPasswordHash(passwordHash));
+
+                sqlConnection.Open();
+
+                sqlCommand.ExecuteNonQuery();
+            }
+        }
+
         private User GetUserByName(string name)
         {
             using (var sqlConnection = new SqlConnection(connectionString))

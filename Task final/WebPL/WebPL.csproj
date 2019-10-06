@@ -114,6 +114,7 @@
     <Content Include="Pages\CurrentUser.cshtml" />
     <Content Include="Pages\Orders.cshtml" />
     <Content Include="Pages\NewOrders.cshtml" />
+    <Content Include="Pages\ChangePassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

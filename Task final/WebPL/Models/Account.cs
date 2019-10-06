@@ -36,6 +36,11 @@ namespace WebPL.Models
                 return;
             }
 
+            if (ChangePassword())
+            {
+                return;
+            }
+
             if (CurrentUser != User.Guest)
             {
                 return;
@@ -49,6 +54,45 @@ namespace WebPL.Models
             }
 
             RegisterCustomer(registerUser);
+        }
+
+        private static bool ChangePassword()
+        {
+            var currentUser = Index.CurrentUser;
+
+            if (currentUser == User.Guest)
+            {
+                return false;
+            }
+
+            var oldPass = forms["oldPass"];
+            var newPass = forms["newPass"];
+
+            if (string.IsNullOrEmpty(oldPass) || string.IsNullOrEmpty(newPass))
+            {
+                return false;
+            }
+
+            var userLogic = Dependencies.UserLogic;
+
+            if (!userLogic.PasswordIsOk(oldPass, currentUser.PasswordHash))
+            {
+                Message = "Неправильный пароль!";
+
+                return true;
+            }
+            else if (userLogic.ChangePassword(currentUser, newPass))
+            {
+                Message = "Пароль изменен";
+
+                return true;
+            }
+            else
+            {
+                Message = "Ошибка изменения пароля!";
+
+                return true;
+            }
         }
 
         private static bool LogIn()

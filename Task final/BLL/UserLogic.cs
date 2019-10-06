@@ -87,7 +87,6 @@ namespace BLL
             return userDao.GetByName(name);
         }
 
-
         public bool PasswordIsOk(string password, string hashcode)
         {
             NullCheck(password);
@@ -97,6 +96,16 @@ namespace BLL
             EmptyStringCheck(hashcode);
 
             return GetHash(password) == hashcode;
+        }
+
+        public bool ChangePassword(User user, string password)
+        {
+            NullCheck(user);
+
+            NullCheck(password);
+            EmptyStringCheck(password);
+
+            return userDao.UpdatePasswordHash(user, GetHash(password));
         }
 
         private string GetHash(string password)

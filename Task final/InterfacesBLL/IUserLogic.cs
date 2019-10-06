@@ -22,5 +22,7 @@ namespace InterfacesBLL
         User GetByName(string name);
 
         bool PasswordIsOk(string password, string hashcode);
+
+        bool ChangePassword(User user, string password);
     }
 }
