@@ -21,6 +21,10 @@ namespace WebPL.Models
             {
                 return;
             }
+            else
+            {
+                Message = string.Empty;
+            }
         }
 
         private static bool AddManager()

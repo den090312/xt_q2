@@ -1,12 +1,10 @@
-﻿@using WebPL.Models;
-@using Common;
+﻿@using Common;
 
 @{
     Layout = null;
 
     var managers = Dependencies.ManagerLogic.GetAll();
 
-    <b id="messagebox">@Index.Message</b>
     <h2 class="product_caption">Менеджеры</h2>
     <div class="table">
         <div class="tableRow">
