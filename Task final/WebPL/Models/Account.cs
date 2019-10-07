@@ -22,7 +22,7 @@ namespace WebPL.Models
         {
             Account.forms = forms;
 
-            if (LogIn() || LogOut() || ChangePassword() || CurrentUser != User.Guest)
+            if (LogIn() || LogOut() || ChangePassword())
             {
                 return true;
             }
