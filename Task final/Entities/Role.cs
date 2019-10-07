@@ -45,7 +45,6 @@
 
             Customer = new Role("Customer")
             {
-                OrderRead = true,
                 OrderWrite = true,
                 ProductRead = true
             };
