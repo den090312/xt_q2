@@ -4,50 +4,54 @@
 @{
     Layout = null;
 }
-<form method="post" action="~/Pages/Orders.cshtml" style="float: left;">
-    @{
-        var currentRole = Dependencies.RoleLogic.GetById(Index.CurrentUser.IdRole);
+    <form method="post" action="~/Pages/Orders.cshtml" style="float: left;">
+        @{
+            var currentRole = Dependencies.RoleLogic.GetById(Index.CurrentUser.IdRole);
 
-        if (currentRole == null)
-        {
-            Response.Redirect("~/Pages/Error.cshtml");
-        }
-
-        var userType = string.Empty;
-
-        if (currentRole.OrderWrite)
-        {
-            var customer = Dependencies.CustomerLogic.GetByIdUser(Index.CurrentUser.Id);
-
-            if (customer != null)
-            {
-                userType = "customer";
-                <input type="text" name="id" value="@customer.Id" style="display: none;" />
-            }
-            else
+            if (currentRole == null)
             {
                 Response.Redirect("~/Pages/Error.cshtml");
             }
-        }
 
-        if (currentRole.ProductWrite)
-        {
-            var manager = Dependencies.ManagerLogic.GetByUserId(Index.CurrentUser.Id);
+            var userType = string.Empty;
 
-            if (manager != null)
+            if (currentRole.OrderWrite)
             {
-                userType = "manager";
-                <input type="text" name="id" value="@manager.Id" style="display: none;" />
+                var customer = Dependencies.CustomerLogic.GetByIdUser(Index.CurrentUser.Id);
+
+                if (customer != null)
+                {
+                    userType = "customer";
+                    <input type="text" name="id" value="@customer.Id" style="display: none;" />
+                }
+                else
+                {
+                    Response.Redirect("~/Pages/Error.cshtml");
+                }
             }
-            else
+
+            if (currentRole.ProductWrite)
             {
-                Response.Redirect("~/Pages/Error.cshtml");
+                var manager = Dependencies.ManagerLogic.GetByUserId(Index.CurrentUser.Id);
+
+                if (manager != null)
+                {
+                    userType = "manager";
+                    <input type="text" name="id" value="@manager.Id" style="display: none;" />
+                }
+                else
+                {
+                    Response.Redirect("~/Pages/Error.cshtml");
+                }
+            }
+            <input type="text" name="userType" value="@userType" style="display: none;" />
+
+            if (currentRole.OrderWrite || currentRole.ProductWrite)
+            {
+                <input type="submit" class="myOrders" value="Мои заказы" />
             }
         }
-        <input type="text" name="userType" value="@userType" style="display: none;" />
-        <input type="submit" class="myOrders" value="Мои заказы" />
-    }
-</form>
+    </form>
 <form method="post" action="~/Index.cshtml" class="user_log_out">
     <input type="submit" class="log_out" value="Выйти" style="margin-left: 15px;" />
     <input type="text" class="log_out_post" style="display: none;" name="loggedOut" />
