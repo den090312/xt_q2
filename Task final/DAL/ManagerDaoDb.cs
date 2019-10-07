@@ -135,6 +135,9 @@ namespace DAL
                 return manager;
             }
 
+            StartLogger();
+            Log.Error($"Менеджер с idUser = '{idUser}' не найден!");
+
             return null;
         }
 

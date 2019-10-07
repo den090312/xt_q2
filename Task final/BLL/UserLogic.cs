@@ -27,7 +27,7 @@ namespace BLL
             loggerDao = iLoggerDao;
         }
 
-        public void InitLogger() => loggerDao.StartLogger();
+        public void StartLogger() => loggerDao.StartLogger();
 
         public bool Add(int roleId, string name, string password)
         {

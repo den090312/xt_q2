@@ -2,8 +2,17 @@
 @using Entities;
 @using Common;
 
+<script>
+    $(document).ready(function () {
+        $('#feedback').ajaxForm(function () {
+            var feedback_message = document.getElementById("feedback").getElementsByClassName("feedback_message")[0];
+            feedback_message.innerHTML = "Спасибо, Ваше мнение очень важно для нас!";
+        });
+    });
+</script>
+
 @{
-    Dependencies.LoggerLogic.InitLogger();
+    Dependencies.LoggerLogic.StartLogger();
 
     Layout = "~/Pages/_Layout.cshtml";
 
@@ -14,6 +23,12 @@
     catch
     {
         Response.Redirect("~/Pages/Error.cshtml");
+    }
+
+    if (IsAjax)
+    {
+        var feedbackComment = Request.Form["feedbackComment"];
+        var feedbackName = Request.Form["feedbackName"];
     }
 
     if (IsPost)
@@ -48,7 +63,7 @@
         currentRoleName = currentRole.Name;
     }
 
-    <b id="messagebox">@Index.Message</b>
+    <b>@Index.Message</b>
     <p class="currentUserName">Имя пользователя: @currentUser.Name</p>
     <p class="currentUserRole">Роль: @currentRoleName</p>
 
@@ -86,5 +101,10 @@
     if (currentRole.ManagerWrite)
     {
         @RenderPage("~/Pages/AddManager.cshtml");
+    }
+
+    if (currentRole.OrderWrite)
+    {
+        @RenderPage("~/Pages/Feedback.cshtml");
     }
 }

@@ -26,10 +26,10 @@ namespace WebPL.Models
 
         public static void Run()
         {
-            Account();
-            Order();
-            Product();
-            Manager();
+            if (Account() || Order() || Product() || Manager())
+            {
+                return;
+            }
         }
 
         public static void DemoData()
@@ -92,9 +92,12 @@ namespace WebPL.Models
             return logPath;
         }
 
-        private static void Account()
+        private static bool Account()
         {
-            Models.Account.Run(Forms);
+            if (!Models.Account.Run(Forms))
+            {
+                return false;
+            }
 
             var message = Models.Account.Message;
 
@@ -112,11 +115,16 @@ namespace WebPL.Models
             }
 
             CurrentUser = Models.Account.CurrentUser;
+
+            return true;
         }
 
-        private static void Order()
+        private static bool Order()
         {
-            Models.Order.Run(Forms);
+            if (!Models.Order.Run(Forms))
+            {
+                return false;
+            }
 
             var message = Models.Order.Message;
 
@@ -124,11 +132,16 @@ namespace WebPL.Models
             {
                 Message = message;
             }
+
+            return true;
         }
 
-        private static void Product()
+        private static bool Product()
         {
-            Models.Product.Run(Forms);
+            if (!Models.Product.Run(Forms))
+            {
+                return false;
+            }
 
             var message = Models.Product.Message;
 
@@ -136,11 +149,16 @@ namespace WebPL.Models
             {
                 Message = message;
             }
+
+            return true;
         }
 
-        private static void Manager()
+        private static bool Manager()
         {
-            Models.Manager.Run(Forms);
+            if (!Models.Manager.Run(Forms))
+            {
+                return false;
+            }
 
             var message = Models.Manager.Message;
 
@@ -148,6 +166,8 @@ namespace WebPL.Models
             {
                 Message = message;
             }
+
+            return true;
         }
 
         private static void LoadDemoRoles(out Role roleGuest, out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin)

@@ -1,10 +1,5 @@
 ﻿using Common;
-using Entities;
-using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Web;
 
 namespace WebPL.Models
 {
@@ -16,14 +11,11 @@ namespace WebPL.Models
 
         static Product() => Message = string.Empty;
 
-        public static void Run(NameValueCollection forms)
+        public static bool Run(NameValueCollection forms)
         {
             Forms = forms;
 
-            if (AddProduct() || RemoveProduct())
-            {
-                return;
-            } 
+            return AddProduct() || RemoveProduct();
         }
 
         private static bool AddProduct()
@@ -38,21 +30,21 @@ namespace WebPL.Models
 
             if (!decimal.TryParse(price, out decimal priceParsed))
             {
-                return false;
+                Message = $"Ошибка. Некорректная цена - '{price}'!";
+
+                return true;
             }
 
             if (Dependencies.ProductLogic.Add(name, priceParsed))
             {
                 Message = "Товар добавлен";
-
-                return true;
             }
             else
             {
-                Message = "Ошибка добавления товара!";
-
-                return false;
+                Message = $"Ошибка добавления товара - '{name}', цена - '{priceParsed}'!";
             }
+
+            return true;
         }
 
         private static bool RemoveProduct()
@@ -68,9 +60,9 @@ namespace WebPL.Models
 
             if (!int.TryParse(productId, out int productIdParsed))
             {
-                Message = "Некорректный id товара!";
+                Message = $"Ошибка. Некорректный id товара - '{productId}'!";
 
-                return false;
+                return true;
             }
 
             if (Dependencies.ProductLogic.Remove(productIdParsed))
@@ -81,9 +73,9 @@ namespace WebPL.Models
             }
             else
             {
-                Message = "Ошибка удаления товара!";
+                Message = $"Ошибка удаления товара, id - '{productIdParsed}'!";
 
-                return false;
+                return true;
             }
         }
     }

@@ -13,18 +13,20 @@ namespace WebPL.Models
 
         static Manager() => Message = string.Empty;
 
-        public static void Run(NameValueCollection forms)
+        public static bool Run(NameValueCollection forms)
         {
             Forms = forms;
 
             if (AddManager())
             {
-                return;
+                return true;
             }
             else
             {
                 Message = string.Empty;
             }
+
+            return false;
         }
 
         private static bool AddManager()
@@ -58,15 +60,13 @@ namespace WebPL.Models
             if (Dependencies.ManagerLogic.Add(ref manager))
             {
                 Message = "Менеджер добавлен";
-
-                return true;
             }
             else
             {
-                Message = "Ошибка добавления менеджера!";
-
-                return false;
+                Message = $"Ошибка добавления менеджера, имя - '{manager.Name}'!";
             }
+
+            return true;
         }
 
         private static Entities.Manager GetManager(string name, string rankString, User user)

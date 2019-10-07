@@ -91,6 +91,8 @@
   <ItemGroup>
     <Content Include="Content\styles.css" />
     <Content Include="favicon.ico" />
+    <Content Include="Scripts\form.js" />
+    <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\script.js" />
     <Content Include="Scripts\script.sql" />
     <Content Include="Web.config" />
@@ -121,6 +123,7 @@
     <Content Include="Pages\Roles.cshtml" />
     <Content Include="Pages\Managers.cshtml" />
     <Content Include="Pages\AddManager.cshtml" />
+    <Content Include="Pages\Feedback.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

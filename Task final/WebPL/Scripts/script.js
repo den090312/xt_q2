@@ -1,15 +1,18 @@
 ﻿window.onload = function () {
     logOut();
-    productBlock();
-    productBlockDelete();
-    customerOrders();
-    logIn();
-    register(); 
-    submitProductAdd();
-    submitOrder();
-    submitChangePassword();
-    managerAdd();
-    submitManagerAdd();
+
+    setChosenProduct();
+    setChosenProductDelete();
+    setChosenCustomerOrders();
+    setChosenManagerAdd();
+
+    validateLogIn();
+    validateRegister(); 
+    validateAddProduct();
+    validateAddOrders();
+    validateChangePassword();
+    validateManagerAdd();
+    validateFeedback();
 
     function logOut() {
         var user_log_out = document.getElementsByClassName("user_log_out")[0];
@@ -24,7 +27,7 @@
         }
     }
 
-    function productBlock() {
+    function setChosenProduct() {
         var product_block = document.getElementsByClassName("product_block")[0];
         if (product_block) {
             product_block.onclick = function (event) {
@@ -40,7 +43,7 @@
         }
     }
 
-    function productBlockDelete() {
+    function setChosenProductDelete() {
         var product_block_delete = document.getElementsByClassName("product_block_delete")[0];
         if (product_block_delete) {
             product_block_delete.onclick = function (event) {
@@ -54,7 +57,7 @@
         }
     }
 
-    function customerOrders() {
+    function setChosenCustomerOrders() {
         var customer_orders = document.getElementsByClassName("customer_orders")[0];
         if (customer_orders) {
             customer_orders.onclick = function (event) {
@@ -81,7 +84,7 @@
         }
     } 
 
-    function logIn() {
+    function validateLogIn() {
         var log_in = document.getElementsByClassName("log_in")[0];
         if (log_in) {
             log_in.onclick = function (event) {
@@ -106,7 +109,7 @@
         }
     }
 
-    function register() {
+    function validateRegister() {
         var register = document.getElementsByClassName("register")[0];
         if (register) {
             register.onclick = function (event) {
@@ -131,7 +134,7 @@
         }
     }
 
-    function submitProductAdd() {
+    function validateAddProduct() {
         var submit_product_add = document.getElementsByClassName("submit_product_add")[0];
         if (submit_product_add) {
             submit_product_add.onclick = function (event) {
@@ -156,13 +159,22 @@
         }
     }
 
-    function submitOrder() {
-        var submit_order = document.getElementsByClassName("submit_order")[0];
-        if (submit_order) {
-            submit_order.onclick = function (event) {
+    function validateAddOrders() {
+        var submit_orders = document.getElementsByClassName("submit_order");
+        var product_block = document.getElementsByClassName("product_block")[0];
+        if (submit_orders) {
+            for (let submit_order of submit_orders) {
+                validateOrder(submit_order, product_block);
+            }
+        }
+
+        function validateOrder(submit_order, product_block) {
+            submit_order.onclick = function(event) {
                 var product = submit_order.parentElement;
+
+                cleanAlertBoxes(product_block);
+
                 var alertbox = product.getElementsByClassName("alertbox")[0];
-                alertbox.style.display = "none";
                 var product_quantity_value = product.getElementsByClassName("product_quantity_value")[0];
                 var order_adress_value = product.getElementsByClassName("order_adress_value")[0];
                 if (!product_quantity_value.value) {
@@ -175,14 +187,20 @@
                     alertbox.style.display = "block";
                     alertbox.innerHTML = "Введите адрес доставки товара!";
                     event.preventDefault();
-
                     return;
                 }
+            };
+        }
+
+        function cleanAlertBoxes(product_block) {
+            var alertboxes = product_block.getElementsByClassName("alertbox");
+            for (let alertbox of alertboxes) {
+                alertbox.style.display = "none";
             }
         }
     }
 
-    function submitChangePassword() {
+    function validateChangePassword() {
         var submit_change_password = document.getElementsByClassName("submit_change_password")[0];
         if (submit_change_password) {
             submit_change_password.onclick = function (event) {
@@ -220,7 +238,7 @@
         }
     }
 
-    function managerAdd() {
+    function setChosenManagerAdd() {
         var manager_add = document.getElementsByClassName("manager_add")[0];
         if (manager_add) {
             manager_add.addEventListener("change", managerAddChange);
@@ -237,7 +255,7 @@
         }
     }
 
-    function submitManagerAdd() {
+    function validateManagerAdd() {
         var manager_add = document.getElementsByClassName("manager_add")[0];
         if (manager_add) {
             var submit_manager_add = manager_add.getElementsByClassName("submit_manager_add")[0];
@@ -262,6 +280,31 @@
                 if (!manager_new_name.value) {
                     alertbox.style.display = "block";
                     alertbox.innerHTML = "Введите имя!";
+                    event.preventDefault();
+                    return;
+                }
+            }
+        }
+    }
+
+    function validateFeedback() {
+        var feedback_add = document.getElementsByClassName("feedback_add")[0];
+        if (feedback_add) {
+            var submit_feedback_add = feedback_add.getElementsByClassName("submit_feedback_add")[0];
+            submit_feedback_add.onclick = function (event) {
+                var alertbox = feedback_add.getElementsByClassName("alertbox")[0];
+                alertbox.style.display = "none";
+                var feedback_name = feedback_add.getElementsByClassName("feedback_name")[0];
+                var feedback_comment = feedback_add.getElementsByClassName("feedback_comment")[0];
+                if (!feedback_name.value) {
+                    alertbox.style.display = "block";
+                    alertbox.innerHTML = "Введите имя!";
+                    event.preventDefault();
+                    return;
+                }
+                if (!feedback_comment.value) {
+                    alertbox.style.display = "block";
+                    alertbox.innerHTML = "Введите отзыв!";
                     event.preventDefault();
                     return;
                 }

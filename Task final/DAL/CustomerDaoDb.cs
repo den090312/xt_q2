@@ -74,6 +74,9 @@ namespace DAL
                 return new Customer(id, idUser, name);
             }
 
+            StartLogger();
+            Log.Error($"Покупатель с idUser = '{idUser}' не найден!");
+
             return null;
         }
 

@@ -23,7 +23,7 @@ namespace BLL
             loggerDao = iLoggerDao;
         }
 
-        public void InitLogger() => loggerDao.StartLogger();
+        public void StartLogger() => loggerDao.StartLogger();
 
         public bool Add(ref Customer customer)
         {

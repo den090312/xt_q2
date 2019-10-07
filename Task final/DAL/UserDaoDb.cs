@@ -178,6 +178,9 @@ namespace DAL
                 return new User(id, roleId, name, passwordHash);
             }
 
+            StartLogger();
+            Log.Error($"Пользователь с именем = '{name}' не найден!");
+
             return null;
         }
 

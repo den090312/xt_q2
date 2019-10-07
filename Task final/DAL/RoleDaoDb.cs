@@ -219,6 +219,9 @@ namespace DAL
                 return role;
             }
 
+            StartLogger();
+            Log.Error($"Роль с id = '{id}' не найдена!");
+
             return null;
         }
 

@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Web;
 
 namespace WebPL.Models
 {
@@ -16,14 +15,11 @@ namespace WebPL.Models
 
         static Order() => Message = string.Empty;
 
-        public static void Run(NameValueCollection forms)
+        public static bool Run(NameValueCollection forms)
         {
             Forms = forms;
 
-            if (AddOrder() || CancelOrder() || RestoreOrder() || InWorkOrder() || CompleteOrder())
-            {
-                return;
-            }
+            return AddOrder() || CancelOrder() || RestoreOrder() || InWorkOrder() || CompleteOrder();
         }
 
         public static IEnumerable<Entities.Order> GetOrders()
@@ -38,7 +34,7 @@ namespace WebPL.Models
 
             if (!int.TryParse(id, out int idParsed))
             {
-                Message = $"Некорректный id - '{id}'!";
+                Message = $"Ошибка. Некорректный id - '{id}'!";
 
                 return Enumerable.Empty<Entities.Order>();
             }
@@ -88,15 +84,13 @@ namespace WebPL.Models
             if (Dependencies.OrderLogic.CancelOrder(id))
             {
                 Message = "Заказ отменен";
-
-                return true;
             }
             else
             {
-                Message = "Ошибка отмены заказа!";
-
-                return false;
+                Message = $"Ошибка отмены заказа, id - '{id}'!";
             }
+
+            return true;
         }
 
         private static bool RestoreOrder()
@@ -111,15 +105,13 @@ namespace WebPL.Models
             if (Dependencies.OrderLogic.RestoreOrder(id))
             {
                 Message = "Заказ восстановлен";
-
-                return true;
             }
             else
             {
-                Message = "Ошибка восстановления заказа!";
-
-                return false;
+                Message = $"Ошибка восстановления заказа, id - '{id}'!";
             }
+
+            return true;
         }
 
         private static bool InWorkOrder()
@@ -131,20 +123,18 @@ namespace WebPL.Models
                 return false;
             }
 
-            var idManager = Dependencies.ManagerLogic.GetByUserId(Index.CurrentUser.Id);
+            var manager = Dependencies.ManagerLogic.GetByUserId(Index.CurrentUser.Id);
 
-            if (Dependencies.OrderLogic.InWorkOrder(orderId, idManager.Id))
+            if (Dependencies.OrderLogic.InWorkOrder(orderId, manager.Id))
             {
                 Message = "Заказ взят в работу";
-
-                return true;
             }
             else
             {
-                Message = "Ошибка взятия заказа в работу!";
-
-                return false;
+                Message = $"Ошибка взятия заказа в работу, id заказа - '{orderId}, id менеджера - '{manager.Id}'!";
             }
+
+            return true;
         }
 
         private static bool CompleteOrder()
@@ -159,15 +149,13 @@ namespace WebPL.Models
             if (Dependencies.OrderLogic.CompleteOrder(id))
             {
                 Message = "Заказ доставлен";
-
-                return true;
             }
             else
             {
-                Message = "Ошибка доставки заказа!";
-
-                return false;
+                Message = $"Ошибка доставки заказа, id - '{id}'!";
             }
+
+            return true;
         }
 
         private static int GetFormsOrderId(string elementName)
@@ -181,7 +169,7 @@ namespace WebPL.Models
 
             if (!int.TryParse(id, out int idParsed))
             {
-                Message = $"Некорректный id - {id}!";
+                Message = $"Ошибка. Некорректный id - {id}!";
 
                 return 0;
             }
@@ -193,23 +181,23 @@ namespace WebPL.Models
         {
             if (!int.TryParse(idCustomer, out int idCustomerParsed))
             {
-                Message = $"Некорректный idCustomer - '{idCustomer}'!";
+                Message = $"Ошибка. Некорректный id покупателя - '{idCustomer}'!";
 
-                return false;
+                return true;
             }
 
             if (!int.TryParse(idProduct, out int idProductParsed))
             {
-                Message = $"Некорректный idProduct - '{idProduct}'!";
+                Message = $"Ошибка. Некорректный id товара - '{idProduct}'!";
 
-                return false;
+                return true;
             }
 
             if (!int.TryParse(quantity, out int quantityParsed))
             {
-                Message = $"Некорректный quantity - '{quantity}'!";
+                Message = $"Ошибка. Некорректное количество товара - '{quantity}'!";
 
-                return false;
+                return true;
             }
 
             return OrderAddParsed(idCustomerParsed, idProductParsed, quantityParsed, adress);
@@ -233,15 +221,13 @@ namespace WebPL.Models
                 AddProductsToOrder(order);
 
                 Message = "Заказ создан";
-
-                return true;
             }
             else
             {
-                Message = "Ошибка создания заказа!";
-
-                return false;
+                Message = $"Ошибка создания заказа, id покупателя - '{idCustomer}'!";
             }
+
+            return true;
         }
 
         private static void AddProductsToOrder(Entities.Order order)
@@ -250,7 +236,7 @@ namespace WebPL.Models
             {
                 if (!Dependencies.OrderProductLogic.Add(new OrderProduct(order.Id, productId)))
                 {
-                    Message = $"Товар id '{productId}' не был добавлен в заказ id '{order.Id}'";
+                    Message = $"Ошибка. Товар id '{productId}' не был добавлен в заказ id '{order.Id}'";
 
                     return;
                 }

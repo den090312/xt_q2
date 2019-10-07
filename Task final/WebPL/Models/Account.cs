@@ -18,23 +18,25 @@ namespace WebPL.Models
             CurrentUser = User.Guest;
         }
 
-        public static void Run(NameValueCollection forms)
+        public static bool Run(NameValueCollection forms)
         {
             Account.forms = forms;
 
             if (LogIn() || LogOut() || ChangePassword() || CurrentUser != User.Guest)
             {
-                return;
+                return true;
             }
 
             var registerUser = RegisterUser();
 
             if (registerUser == User.Guest)
             {
-                return;
+                return false;
             }
 
             RegisterCustomer(registerUser);
+
+            return true;
         }
 
         private static bool ChangePassword()
@@ -144,14 +146,10 @@ namespace WebPL.Models
             if (Dependencies.CustomerLogic.Add(ref customer))
             {
                 Message = "Покупатель зарегистрирован";
-
-                return;
             }
             else
             {
-                Message = "Ошибка регистрации покупателя!";
-
-                return;
+                Message = $"Ошибка регистрации покупателя, имя - '{customer.Name}'!";
             }
         }
 
@@ -179,7 +177,7 @@ namespace WebPL.Models
 
             if (userLogic.GetByName(regName) != null)
             {
-                Message = "Пользователь с таким именем уже существует!";
+                Message = $"Ошибка. Пользователь с таким именем уже существует - '{regName}'!";
 
                 return User.Guest;
             }
@@ -195,7 +193,7 @@ namespace WebPL.Models
             }
             else
             {
-                Message = "Ошибка регистрации пользователя!";
+                Message = $"Ошибка регистрации пользователя, имя - '{regName}'!";
 
                 return User.Guest;
             }

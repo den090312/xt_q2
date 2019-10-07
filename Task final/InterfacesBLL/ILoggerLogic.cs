@@ -6,6 +6,6 @@ namespace InterfacesBLL
     {
         ILog Log { get; }
 
-        void InitLogger();
+        void StartLogger();
     }
 }

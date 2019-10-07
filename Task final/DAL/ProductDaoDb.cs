@@ -138,6 +138,9 @@ namespace DAL
                 return new Product(id, name, price);
             }
 
+            StartLogger();
+            Log.Error($"Товар с id = '{id}' не найден!");
+
             return null;
         }
 
