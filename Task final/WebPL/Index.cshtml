@@ -62,7 +62,6 @@
     if (IsAjax)
     {
         Index.Forms = Request.Form;
-
         try
         {
             Index.RunAjax();
@@ -106,18 +105,22 @@
     {
         @RenderPage("~/Pages/Users.cshtml");
     }
+
     if (currentRole.RoleRead)
     {
         @RenderPage("~/Pages/Roles.cshtml");
     }
+
     if (currentRole.ManagerRead)
     {
         @RenderPage("~/Pages/Managers.cshtml");
     }
+
     if (currentRole.ManagerWrite)
     {
         @RenderPage("~/Pages/AddManager.cshtml");
     }
+
     if (currentRole.OrderWrite)
     {
         @RenderPage("~/Pages/Feedback.cshtml");
