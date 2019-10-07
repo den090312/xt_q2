@@ -92,6 +92,7 @@
     <Content Include="Content\styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="Scripts\script.js" />
+    <Content Include="Scripts\script.sql" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
