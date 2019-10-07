@@ -1,10 +1,7 @@
 ﻿@using Common;
-
 @{
     Layout = null;
-
     var newOrders = Enumerable.Empty<Entities.Order>();
-
     try
     {
         newOrders = Dependencies.OrderLogic.GetNewOrders();
@@ -13,12 +10,10 @@
     {
         Response.Redirect("~/Pages/Error.cshtml");
     }
-
     if (newOrders.Count() == 0)
     {
         <h2 class="product_caption">Новых заказов не найдено</h2>
     }
-
     if (newOrders.Count() > 0)
     {
         <h2 class="product_caption">Новые заказы</h2>
@@ -45,9 +40,7 @@
                             <input type="submit" class="inWorkOrder" name="inWorkOrder" value="Взять в работу" />
                         </div>
                     </div>
-
                     var productIds = Enumerable.Empty<int>();
-
                     try
                     {
                         productIds = Dependencies.OrderProductLogic.GetProductIds(order.Id);
@@ -56,13 +49,11 @@
                     {
                         Response.Redirect("~/Pages/Error.cshtml");
                     }
-
                     <div class="subTable">
                         <div class="tableRow">
                             <div class="tableCellCaption">Товар</div>
                             <div class="tableCellCaption">Цена</div>
                         </div>
-
                         @foreach (var id in productIds)
                         {
                             var product = Dependencies.ProductLogic.GetById(id);
@@ -71,7 +62,6 @@
                             {
                                 Response.Redirect("~/Pages/Error.cshtml");
                             }
-
                             <div class="tableRow">
                                 <div class="tableCell">@product.Name</div>
                                 <div class="tableCell">@product.Price</div>

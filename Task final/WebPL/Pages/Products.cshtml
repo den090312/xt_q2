@@ -1,16 +1,12 @@
 ﻿@using WebPL.Models;
-@using Entities;
 @using Common;
-
 @{
     Layout = null;
-
     <h2 class="product_caption">Товары</h2>
     <div class="products">
         @{
             var roleLogic = Dependencies.RoleLogic;
             var products = Enumerable.Empty<Entities.Product>();
-
             try
             {
                 products = Dependencies.ProductLogic.GetAll();
@@ -19,10 +15,8 @@
             {
                 Response.Redirect("~/Pages/Error.cshtml");
             }
-
             var currentUser = Index.CurrentUser;
             var roleId = 0;
-
             if (currentUser.IdRole == 0)
             {
                 try
@@ -38,23 +32,18 @@
             {
                 roleId = currentUser.IdRole;
             }
-
             var currentRole = roleLogic.GetById(roleId);
-
             if (currentRole == null)
             {
                 Response.Redirect("~/Pages/Error.cshtml");
             }
-
             if (currentRole.OrderWrite)
             {
                 var customer = Dependencies.CustomerLogic.GetByIdUser(currentUser.Id);
-
                 if (customer == null)
                 {
                     Response.Redirect("~/Pages/Error.cshtml");
                 }
-
                 <div class="product_block">
                     @foreach (var product in products)
                     {
@@ -101,7 +90,6 @@
             }
         }
     </div>
-
     if (currentRole.ProductWrite)
     {
         <form method="post" action="~/Index.cshtml" class="product_add">

@@ -1,10 +1,7 @@
 ﻿@using Common;
-
 @{
     Layout = null;
-
     var feedbacks = Dependencies.FeedbackLogic.GetAll();
-
     <h2 class="feedback_caption">Отзывы</h2>
     <div id="feedback_table" class="table">
         <div class="tableRow">
@@ -21,7 +18,6 @@
             </div>
         }
     </div>
-
     <form id="feedback" class="feedback_add" action="" method="post">
         <h4>Добавить отзыв</h4>
         <p class="alertbox"></p>

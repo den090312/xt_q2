@@ -1,10 +1,7 @@
 ﻿@using Common;
-
 @{
     Layout = null;
-
     var managers = Dependencies.ManagerLogic.GetAll();
-
     <h2 class="product_caption">Менеджеры</h2>
     <div class="table">
         <div class="tableRow">
@@ -13,7 +10,6 @@
             <div class="tableCellCaption">Name</div>
             <div class="tableCellCaption">Rank</div>
         </div>
-
         @foreach (var manager in managers)
         {
             <div class="tableRow">

@@ -1,11 +1,7 @@
-﻿@using WebPL.Models;
-@using Common;
-
+﻿@using Common;
 @{
     Layout = null;
-
     var users = Dependencies.UserLogic.GetAll();
-
     <h2 class="product_caption">Пользователи</h2>
     <div class="table">
         <div class="tableRow">
@@ -14,7 +10,6 @@
             <div class="tableCellCaption">Name</div>
             <div class="tableCellCaption">PasswordHash</div>
         </div>
-
         @foreach (var user in users)
         {
             <div class="tableRow">

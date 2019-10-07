@@ -1,17 +1,12 @@
 ﻿@using WebPL.Models;
 @using Common;
-
 @{
     Layout = "~/Pages/_Layout.cshtml";
-
     Index.Message = string.Empty;
-
     var orders = Enumerable.Empty<Entities.Order>();
-
     if (IsPost)
     {
         WebPL.Models.Order.Forms = Request.Form;
-
         try
         {
             orders = WebPL.Models.Order.GetOrders();
@@ -21,7 +16,6 @@
             Response.Redirect("~/Pages/Error.cshtml");
         }
     }
-
     if (orders.Count() == 0)
     {
         <h2 class="product_caption">Заказов не найдено</h2>
@@ -29,7 +23,6 @@
             <input type="button" value="На главную" style="margin-top: 25px;" />
         </a>
     }
-
     if (orders.Count() > 0)
     {
         <b id="messagebox">@Index.Message</b>
@@ -68,9 +61,7 @@
                             }
                         </div>
                     </div>
-
                     var productIds = Dependencies.OrderProductLogic.GetProductIds(order.Id);
-
                     <div class="subTable">
                         <div class="tableRow">
                             <div class="tableCellCaption">Товар</div>

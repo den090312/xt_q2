@@ -1,20 +1,16 @@
 ﻿@using WebPL.Models;
 @using Common;
-
 @{
     Layout = null;
 }
     <form method="post" action="~/Pages/Orders.cshtml" style="float: left;">
         @{
             var currentRole = Dependencies.RoleLogic.GetById(Index.CurrentUser.IdRole);
-
             if (currentRole == null)
             {
                 Response.Redirect("~/Pages/Error.cshtml");
             }
-
             var userType = string.Empty;
-
             if (currentRole.OrderWrite)
             {
                 var customer = Dependencies.CustomerLogic.GetByIdUser(Index.CurrentUser.Id);
@@ -29,11 +25,9 @@
                     Response.Redirect("~/Pages/Error.cshtml");
                 }
             }
-
             if (currentRole.ProductWrite)
             {
                 var manager = Dependencies.ManagerLogic.GetByUserId(Index.CurrentUser.Id);
-
                 if (manager != null)
                 {
                     userType = "manager";
@@ -45,14 +39,12 @@
                 }
             }
             <input type="text" name="userType" value="@userType" style="display: none;" />
-
             if (currentRole.OrderWrite || currentRole.ProductWrite)
             {
                 <input type="submit" class="myOrders" value="Мои заказы" />
             }
         }
     </form>
-
     <form method="post" action="~/Index.cshtml" class="user_log_out">
         <input type="submit" class="log_out" value="Выйти" style="margin-left: 15px;" />
         <input type="text" class="log_out_post" style="display: none;" name="loggedOut" />
