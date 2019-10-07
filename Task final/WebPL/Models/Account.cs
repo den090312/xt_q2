@@ -146,6 +146,8 @@ namespace WebPL.Models
             if (Dependencies.CustomerLogic.Add(ref customer))
             {
                 Message = "Покупатель зарегистрирован";
+
+                CurrentUser = user;
             }
             else
             {
