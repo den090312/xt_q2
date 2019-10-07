@@ -17,7 +17,7 @@ namespace WebPL.Models
         {
             Forms = forms;
 
-            if (AddManager())
+            if (TryAddManager())
             {
                 return true;
             }
@@ -29,7 +29,7 @@ namespace WebPL.Models
             return false;
         }
 
-        private static bool AddManager()
+        private static bool TryAddManager()
         {
             var roleIdString = Forms["selectRoleIdChosen"];
 
@@ -45,9 +45,18 @@ namespace WebPL.Models
                 return false;
             }
 
+            if (Dependencies.UserLogic.GetByName(userName) != null)
+            {
+                Message = $"Ошибка. Пользователь с таким логином уже существует - '{userName}'!";
+
+                return true;
+            }
+
             if (!int.TryParse(roleIdString, out int roleId))
             {
-                return false;
+                Message = $"Ошибка. Некорректный id роли - '{roleId}'!";
+
+                return true;
             }
 
             var manager = GetManager(managerName, rank, GetAddedUser(userName, password, roleId));

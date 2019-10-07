@@ -6,19 +6,19 @@
     <form method="post" action="~/Index.cshtml" class="manager_add">
         <h4>Добавить менеджера</h4>
         <p class="alertbox"></p>
+        <label>
+            Роль:
+            <select class="selectRole" style="margin-left: 5px;">
+            @{
+                var roles = Dependencies.RoleLogic.GetAll();
 
-        Роль:
-        <select class="selectRole" style="margin-left: 5px;">
-        @{
-            var roles = Dependencies.RoleLogic.GetAll();
-
-            foreach (var role in roles)
-            {
-                <option>@role.Name</option>
+                foreach (var role in roles)
+                {
+                    <option>@role.Name</option>
+                }
             }
-        }
-        </select>
-
+            </select>
+        </label>
         <select class="selectRoleId" style="display: none;">
         @{
             foreach (var role in roles)
@@ -29,25 +29,26 @@
         </select>
         <input type="text" class="selectRoleIdChosen" name="selectRoleIdChosen" style="display: none;" />
         <p>
-            <input type="text" class="manager_new_login" name="newManagerLogin" placeholder="Логин" />
+            <input type="text" class="manager_new_login" name="newManagerLogin" placeholder="Логин пользователя" />
         </p>
         <p>
-            <input type="text" class="manager_new_pass" name="newManagerPass" placeholder="Пароль" />
+            <input type="text" class="manager_new_pass" name="newManagerPass" placeholder="Пароль пользователя" />
         <p>
-            <input type="text" class="manager_new_name" name="newManagerName" placeholder="Имя" />
+            <input type="text" class="manager_new_name" name="newManagerName" placeholder="Имя менеджера" />
         </p>
+        <label>
+            Ранг:
+            <select class="selectRank" style="margin-left: 5px;">
+            @{
+                var ranks = Entities.Manager.Ranks();
 
-        Ранг:
-        <select class="selectRank" style="margin-left: 5px;">
-        @{
-            var ranks = Entities.Manager.Ranks();
-
-            foreach (var rank in ranks)
-            {
-                <option>@rank</option>
+                foreach (var rank in ranks)
+                {
+                    <option>@rank</option>
+                }
             }
-        }
-        </select>
+            </select>
+        </label>
         <input type="text" class="selectRankChosen" name="selectRankChosen" style="display: none;" />
         <p>
             <input type="submit" class="submit_manager_add" value="Ок" />

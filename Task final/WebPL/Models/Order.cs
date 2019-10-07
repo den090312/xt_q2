@@ -19,7 +19,7 @@ namespace WebPL.Models
         {
             Forms = forms;
 
-            return AddOrder() || CancelOrder() || RestoreOrder() || InWorkOrder() || CompleteOrder();
+            return TryAddOrder() || TryCancelOrder() || TryRestoreOrder() || TryInWorkOrder() || TryCompleteOrder();
         }
 
         public static IEnumerable<Entities.Order> GetOrders()
@@ -56,7 +56,7 @@ namespace WebPL.Models
             return Enumerable.Empty<Entities.Order>();
         }
 
-        private static bool AddOrder()
+        private static bool TryAddOrder()
         {
             var idCustomer = Forms["customerId"];
             var idProduct  = Forms["chosenProductId"];
@@ -72,7 +72,7 @@ namespace WebPL.Models
             return OrderAdd(idCustomer, idProduct, quantity, adress);
         }
 
-        private static bool CancelOrder()
+        private static bool TryCancelOrder()
         {
             var id = GetFormsOrderId("orderCancelId");
 
@@ -93,7 +93,7 @@ namespace WebPL.Models
             return true;
         }
 
-        private static bool RestoreOrder()
+        private static bool TryRestoreOrder()
         {
             var id = GetFormsOrderId("orderRestoreId");
 
@@ -114,7 +114,7 @@ namespace WebPL.Models
             return true;
         }
 
-        private static bool InWorkOrder()
+        private static bool TryInWorkOrder()
         {
             var orderId = GetFormsOrderId("inWorkOrderId");
 
@@ -137,7 +137,7 @@ namespace WebPL.Models
             return true;
         }
 
-        private static bool CompleteOrder()
+        private static bool TryCompleteOrder()
         {
             var id = GetFormsOrderId("orderCompleteId");
 

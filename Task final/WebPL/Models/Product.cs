@@ -15,10 +15,10 @@ namespace WebPL.Models
         {
             Forms = forms;
 
-            return AddProduct() || RemoveProduct();
+            return TryAddProduct() || TryRemoveProduct();
         }
 
-        private static bool AddProduct()
+        private static bool TryAddProduct()
         {
             var name  = Forms["newProductName"];
             var price = Forms["newProductPrice"];
@@ -47,7 +47,7 @@ namespace WebPL.Models
             return true;
         }
 
-        private static bool RemoveProduct()
+        private static bool TryRemoveProduct()
         {
             var productId = Forms["chosenProductIdDelete"];
 

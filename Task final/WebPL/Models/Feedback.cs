@@ -17,7 +17,7 @@ namespace WebPL.Models
         {
             Forms = forms;
 
-            if (AddFeedback())
+            if (TryAddFeedback())
             {
                 return true;
             }
@@ -29,7 +29,7 @@ namespace WebPL.Models
             return false;
         }
 
-        private static bool AddFeedback()
+        private static bool TryAddFeedback()
         {
             var name = Forms["feedbackName"];
             var text = Forms["feedbackText"];

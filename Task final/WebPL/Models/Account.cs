@@ -22,7 +22,7 @@ namespace WebPL.Models
         {
             Account.forms = forms;
 
-            if (LogIn() || LogOut() || ChangePassword())
+            if (TryLogIn() || TryLogOut() || TryChangePassword())
             {
                 return true;
             }
@@ -39,7 +39,7 @@ namespace WebPL.Models
             return true;
         }
 
-        private static bool ChangePassword()
+        private static bool TryChangePassword()
         {
             var currentUser = Index.CurrentUser;
 
@@ -83,7 +83,7 @@ namespace WebPL.Models
             }
         }
 
-        private static bool LogIn()
+        private static bool TryLogIn()
         {
             var logName = forms["logName"];
             var logPass = forms["logPass"];
@@ -124,7 +124,7 @@ namespace WebPL.Models
             }
         }
 
-        private static bool LogOut()
+        private static bool TryLogOut()
         {
             var loggedOut = forms["loggedOut"];
 
