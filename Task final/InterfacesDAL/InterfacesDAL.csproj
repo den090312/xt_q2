@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICustomerDao.cs" />
+    <Compile Include="IFeedbackDao.cs" />
     <Compile Include="ILoggerDao.cs" />
     <Compile Include="IManagerDao.cs" />
     <Compile Include="IOrderProductDao.cs" />

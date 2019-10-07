@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\Index.cs" />
     <Compile Include="Models\Manager.cs" />
     <Compile Include="Models\Order.cs" />

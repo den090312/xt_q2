@@ -7,6 +7,8 @@
         $('#feedback').ajaxForm(function () {
             var feedback_message = document.getElementById("feedback").getElementsByClassName("feedback_message")[0];
             feedback_message.innerHTML = "Спасибо, Ваше мнение очень важно для нас!";
+            feedback.getElementsByClassName("feedback_name")[0].value = "";
+            feedback.getElementsByClassName("feedback_comment")[0].value = "";
         });
     });
 </script>
@@ -25,19 +27,13 @@
         Response.Redirect("~/Pages/Error.cshtml");
     }
 
-    if (IsAjax)
-    {
-        var feedbackComment = Request.Form["feedbackComment"];
-        var feedbackName = Request.Form["feedbackName"];
-    }
-
     if (IsPost)
     {
         Index.Forms = Request.Form;
 
         try
         {
-            Index.Run();
+            Index.RunPost();
         }
         catch
         {
@@ -46,6 +42,20 @@
 
         //POST-reload page fix
         @Html.Raw("<script>document.location='Index.cshtml'</script>");
+    }
+        
+    if (IsAjax)
+    {
+        Index.Forms = Request.Form;
+
+        try
+        {
+            Index.RunAjax();
+        }
+        catch
+        {
+            Response.Redirect("~/Pages/Error.cshtml");
+        }
     }
 
     var currentUser = Index.CurrentUser;

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICustomerLogic.cs" />
+    <Compile Include="IFeedbackLogic.cs" />
     <Compile Include="ILoggerLogic.cs" />
     <Compile Include="IManagerLogic.cs" />
     <Compile Include="IOrderProductLogic.cs" />

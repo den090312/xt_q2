@@ -24,9 +24,17 @@ namespace WebPL.Models
             CurrentUser = Models.Account.CurrentUser;
         }
 
-        public static void Run()
+        public static void RunPost()
         {
             if (Account() || Order() || Product() || Manager())
+            {
+                return;
+            }
+        }
+
+        public static void RunAjax()
+        {
+            if (Feedback())
             {
                 return;
             }
@@ -161,6 +169,23 @@ namespace WebPL.Models
             }
 
             var message = Models.Manager.Message;
+
+            if (message != string.Empty)
+            {
+                Message = message;
+            }
+
+            return true;
+        }
+
+        private static bool Feedback()
+        {
+            if (!Models.Feedback.Run(Forms))
+            {
+                return false;
+            }
+
+            var message = Models.Feedback.Message;
 
             if (message != string.Empty)
             {
