@@ -1,7 +1,9 @@
-﻿using InterfacesBLL;
+﻿using Entities;
+using InterfacesBLL;
 using InterfacesDAL;
 using log4net;
 using System;
+using System.Collections.Generic;
 
 namespace BLL
 {
@@ -22,6 +24,8 @@ namespace BLL
             loggerDao = iLoggerDao;
         }
 
+        public void StartLogger() => loggerDao.StartLogger();
+
         public bool Add(string name, string text)
         {
             NullCheck(name);
@@ -32,7 +36,7 @@ namespace BLL
             return feedbackDao.Add(name, text);
         }
 
-        public void StartLogger() => loggerDao.StartLogger();
+        public IEnumerable<Feedback> GetAll() => feedbackDao.GetAll();
 
         private void EmptyStringCheck(string inputString)
         {

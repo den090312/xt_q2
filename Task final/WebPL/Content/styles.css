@@ -22,7 +22,7 @@
     margin: auto;
 }
 
-.product_caption, .error_caption {
+.product_caption, .error_caption, .feedback_caption {
     text-align: center;
 }  
 
@@ -81,7 +81,7 @@
     font-weight: bold;
 }
 
-.feedback_comment {
+.feedback_text {
     width: 300px;
     height: 100px;
 }

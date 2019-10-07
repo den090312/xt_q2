@@ -295,14 +295,14 @@
                 var alertbox = feedback_add.getElementsByClassName("alertbox")[0];
                 alertbox.style.display = "none";
                 var feedback_name = feedback_add.getElementsByClassName("feedback_name")[0];
-                var feedback_comment = feedback_add.getElementsByClassName("feedback_comment")[0];
+                var feedback_text = feedback_add.getElementsByClassName("feedback_text")[0];
                 if (!feedback_name.value) {
                     alertbox.style.display = "block";
                     alertbox.innerHTML = "Введите имя!";
                     event.preventDefault();
                     return;
                 }
-                if (!feedback_comment.value) {
+                if (!feedback_text.value) {
                     alertbox.style.display = "block";
                     alertbox.innerHTML = "Введите отзыв!";
                     event.preventDefault();

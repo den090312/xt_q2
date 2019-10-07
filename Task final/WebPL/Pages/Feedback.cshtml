@@ -1,8 +1,29 @@
-﻿@{
+﻿@using Common;
+
+@{
     Layout = null;
 
+    var feedbacks = Dependencies.FeedbackLogic.GetAll();
+
+    <h2 class="feedback_caption">Отзывы</h2>
+    <div id="feedback_table" class="table">
+        <div class="tableRow">
+            <div class="tableCellCaption">Дата</div>
+            <div class="tableCellCaption">Имя</div>
+            <div class="tableCellCaption">Текст</div>
+        </div>
+        @foreach (var feedback in feedbacks)
+        {
+            <div class="tableRow">
+                <div class="tableCell">@feedback.Date.ToString("dd.MM.yyyy")</div>
+                <div class="tableCell">@feedback.Name</div>
+                <div class="tableCell">@feedback.Text</div>
+            </div>
+        }
+    </div>
+
     <form id="feedback" class="feedback_add" action="" method="post">
-        <h4>Отзыв а работе сайта</h4>
+        <h4>Добавить отзыв</h4>
         <p class="alertbox"></p>
         <p class="feedback_message"></p>
         Ваше имя:
@@ -11,7 +32,7 @@
         </p>
         Ваш отзыв:
         <p>
-            <textarea class="feedback_comment" name="feedbackComment" maxlength="300"></textarea>
+            <textarea class="feedback_text" name="feedbackText" maxlength="300"></textarea>
         </p>
         <p>
             <input type="submit" class="submit_feedback_add" value="Отправить" />

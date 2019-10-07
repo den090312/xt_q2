@@ -3,6 +3,7 @@ using InterfacesDAL;
 using log4net;
 using log4net.Config;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -32,6 +33,51 @@ namespace DAL
 
                 return false;
             }
+        }
+
+        public IEnumerable<Feedback> GetAll()
+        {
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                var sqlCommand = sqlConnection.CreateCommand();
+
+                sqlCommand.CommandText = "GetAllFeedbacks";
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                try
+                {
+                    sqlConnection.Open();
+
+                    return GetAllFeedbacks(sqlCommand);
+                }
+                catch (Exception ex)
+                {
+                    StartLogger();
+                    var exMessage = ex.Message.Replace(Environment.NewLine, "");
+                    Log.Error(exMessage + " Ошибка получения всех отзывов");
+
+                    return new List<Feedback>();
+                }
+            }
+        }
+
+        private IEnumerable<Feedback> GetAllFeedbacks(SqlCommand sqlCommand)
+        {
+            var feedbackList = new List<Feedback>();
+
+            var sqlDr = sqlCommand.ExecuteReader();
+
+            while (sqlDr.Read())
+            {
+                var id   = sqlDr.GetInt32(0);
+                var date = sqlDr.GetDateTime(1);
+                var name = sqlDr.GetString(2);
+                var text = sqlDr.GetString(3);
+
+                feedbackList.Add(new Feedback(id, name, date, text));
+            }
+
+            return feedbackList;
         }
 
         private void AddFeedback(string name, string text)

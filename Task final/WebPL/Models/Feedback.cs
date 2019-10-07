@@ -32,7 +32,7 @@ namespace WebPL.Models
         private static bool AddFeedback()
         {
             var name = Forms["feedbackName"];
-            var text = Forms["feedbackComment"];
+            var text = Forms["feedbackText"];
 
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(text))
             {

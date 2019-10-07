@@ -5,10 +5,41 @@
 <script>
     $(document).ready(function () {
         $('#feedback').ajaxForm(function () {
-            var feedback_message = document.getElementById("feedback").getElementsByClassName("feedback_message")[0];
+            var feedback = document.getElementById("feedback");
+            var feedback_name = feedback.getElementsByClassName("feedback_name")[0];
+            var feedback_text = feedback.getElementsByClassName("feedback_text")[0];
+
+            var feedback_table = document.getElementById("feedback_table");
+            var table_row = document.createElement("div");
+            table_row.className = "tableRow";
+
+            var table_cell_date = document.createElement("div");
+            table_cell_date.className = "tableCell";
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+            table_cell_date.innerHTML = dd + '.' + mm + '.' + yyyy;
+
+            var table_cell_name = document.createElement("div");
+            table_cell_name.className = "tableCell";
+            table_cell_name.innerHTML = feedback_name.value;
+
+            var table_cell_text = document.createElement("div");
+            table_cell_text.className = "tableCell";
+            table_cell_text.innerHTML = feedback_text.value;
+
+            table_row.appendChild(table_cell_date);
+            table_row.appendChild(table_cell_name);
+            table_row.appendChild(table_cell_text);
+            
+            feedback_table.appendChild(table_row);
+
+            var feedback_message = feedback.getElementsByClassName("feedback_message")[0];
             feedback_message.innerHTML = "Спасибо, Ваше мнение очень важно для нас!";
-            feedback.getElementsByClassName("feedback_name")[0].value = "";
-            feedback.getElementsByClassName("feedback_comment")[0].value = "";
+
+            feedback_name.value = "";
+            feedback_text.value = "";
         });
     });
 </script>
