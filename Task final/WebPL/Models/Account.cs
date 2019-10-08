@@ -72,15 +72,13 @@ namespace WebPL.Models
             else if (userLogic.ChangePassword(currentUser, newPass))
             {
                 Message = "Пароль изменен";
-
-                return true;
             }
             else
             {
                 Message = "Ошибка изменения пароля!";
-
-                return true;
             }
+
+            return true;
         }
 
         private static bool TryLogIn()
@@ -112,16 +110,14 @@ namespace WebPL.Models
             if (!userLogic.PasswordIsOk(logPass, logUser.PasswordHash))
             {
                 Message = "Неправильный пароль!";
-
-                return true;
             }
             else
             {
                 CurrentUser = logUser;
                 Message = "ok";
-
-                return true;
             }
+
+            return true;
         }
 
         private static bool TryLogOut()

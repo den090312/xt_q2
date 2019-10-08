@@ -68,15 +68,13 @@ namespace WebPL.Models
             if (Dependencies.ProductLogic.Remove(productIdParsed))
             {
                 Message = "Товар удален";
-
-                return true;
             }
             else
             {
                 Message = $"Ошибка удаления товара, id - '{productIdParsed}'!";
-
-                return true;
             }
+
+            return true;
         }
     }
 }
