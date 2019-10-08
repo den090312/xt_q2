@@ -32,7 +32,7 @@ namespace BLL
             return customerDao.Add(ref customer);
         }
 
-        public Customer GetByIdUser(int userId)
+        public Customer GetByUserId(int userId)
         {
             IdCheck(userId);
 

@@ -9,7 +9,7 @@ namespace InterfacesBLL
 
         bool Add(ref User user, int roleId, string password);
 
-        bool Remove(int userId);
+        bool Remove(int id);
 
         IEnumerable<User> GetAll();
 
@@ -17,7 +17,7 @@ namespace InterfacesBLL
 
         User GetByName(string name);
 
-        bool PasswordIsOk(string password, string hashcode);
+        bool PasswordIsOk(string password, string passwordHash);
 
         bool ChangePassword(User user, string password);
     }

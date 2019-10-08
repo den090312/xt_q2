@@ -7,7 +7,7 @@ namespace InterfacesBLL
     {
         bool Add(ref Manager manager);
 
-        Manager GetByUserId(int idUser);
+        Manager GetByUserId(int userId);
 
         IEnumerable<Manager> GetAll();
     }

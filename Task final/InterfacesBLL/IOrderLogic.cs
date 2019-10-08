@@ -19,6 +19,6 @@ namespace InterfacesBLL
 
         IEnumerable<Order> GetNewOrders();
 
-        bool InWorkOrder(int orderId, int idManager);
+        bool InWorkOrder(int orderId, int managerId);
     }
 }

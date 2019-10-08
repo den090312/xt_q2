@@ -58,19 +58,19 @@ namespace BLL
 
         public bool NoRoles() => roleDao.NoRoles();
 
-        public Role GetById(int id)
+        public Role Get(int id)
         {
             IdCheck(id);
 
-            return roleDao.GetById(id);
+            return roleDao.Get(id);
         }
 
-        public int GetIdByName(string name)
+        public int GetId(string name)
         {
             NullCheck(name);
             EmptyStringCheck(name);
 
-            return roleDao.GetIdByName(name);
+            return roleDao.GetId(name);
         }
 
         private void IdCheck(int id)

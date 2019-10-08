@@ -13,7 +13,7 @@ namespace InterfacesBLL
 
         IEnumerable<Product> GetAll();
 
-        Product GetById(int id);
+        Product Get(int id);
 
         bool Remove(int id);
     }

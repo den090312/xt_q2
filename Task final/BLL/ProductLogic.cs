@@ -50,11 +50,11 @@ namespace BLL
 
         public IEnumerable<Product> GetAll() => productDao.GetAll();
 
-        public Product GetById(int idProduct)
+        public Product Get(int idProduct)
         {
             IdCheck(idProduct);
 
-            return productDao.GetById(idProduct);
+            return productDao.Get(idProduct);
         }
 
         public bool Remove(int id)

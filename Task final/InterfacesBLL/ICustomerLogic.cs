@@ -6,6 +6,6 @@ namespace InterfacesBLL
     {
         bool Add(ref Customer customer);
 
-        Customer GetByIdUser(int userId);
+        Customer GetByUserId(int userId);
     }
 }

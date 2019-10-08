@@ -99,7 +99,7 @@ namespace DAL
 
         public bool NoRoles() => GetRolesCount() == 0;
 
-        public Role GetById(int id)
+        public Role Get(int id)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
             {
@@ -153,7 +153,7 @@ namespace DAL
             }
         }
 
-        public int GetIdByName(string name)
+        public int GetId(string name)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
             {

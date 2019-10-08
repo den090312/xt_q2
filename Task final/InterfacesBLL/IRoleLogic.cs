@@ -7,7 +7,7 @@ namespace InterfacesBLL
     {
         bool Add(ref Role role);
 
-        bool Remove(int roleId);
+        bool Remove(int id);
 
         IEnumerable<Role> GetAll();
 
@@ -15,8 +15,8 @@ namespace InterfacesBLL
 
         bool NoRoles();
 
-        Role GetById(int id);
+        Role Get(int id);
 
-        int GetIdByName(string name);
+        int GetId(string name);
     }
 }

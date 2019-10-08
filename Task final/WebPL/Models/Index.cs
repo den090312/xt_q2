@@ -44,8 +44,8 @@ namespace WebPL.Models
         {
             if (Dependencies.RoleLogic.NoRoles())
             {
-                LoadDemoRoles(out Role roleGuest, out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin);
-                LoadDemoUsers(roleGuest, roleCustomer, roleManager, roleAdmin, roleSuperAdmin, out int userManagerId);
+                LoadDemoRoles(out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin);
+                LoadDemoUsers(roleCustomer, roleManager, roleAdmin, roleSuperAdmin, out int userManagerId);
                 LoadGeneralManager(userManagerId);
             }
 
@@ -195,11 +195,11 @@ namespace WebPL.Models
             return true;
         }
 
-        private static void LoadDemoRoles(out Role roleGuest, out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin)
+        private static void LoadDemoRoles(out Role roleCustomer, out Role roleManager, out Role roleAdmin, out Role roleSuperAdmin)
         {
             var roleLogic = Dependencies.RoleLogic;
 
-            roleGuest = Role.Guest;
+            var roleGuest = Role.Guest;
             roleLogic.Add(ref roleGuest);
 
             roleCustomer = Role.Customer;
@@ -215,12 +215,9 @@ namespace WebPL.Models
             roleLogic.Add(ref roleSuperAdmin);
         }
 
-        private static void LoadDemoUsers(Role roleGuest, Role roleCustomer, Role roleManager, Role roleAdmin, Role roleSuperAdmin, out int userManagerId)
+        private static void LoadDemoUsers(Role roleCustomer, Role roleManager, Role roleAdmin, Role roleSuperAdmin, out int userManagerId)
         {
             var userLogic = Dependencies.UserLogic;
-
-            var userGuest = User.Guest;
-            userLogic.Add(ref userGuest, roleGuest.Id, "Guest");
 
             var userCustomer = User.Customer;
             userLogic.Add(ref userCustomer, roleCustomer.Id, "Customer");

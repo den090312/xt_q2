@@ -210,7 +210,7 @@ namespace WebPL.Models
                 idProduct
             };
 
-            var product = Dependencies.ProductLogic.GetById(idProduct);
+            var product = Dependencies.ProductLogic.Get(idProduct);
 
             decimal sum = product.Price * quantity;
 

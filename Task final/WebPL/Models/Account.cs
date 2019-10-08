@@ -180,7 +180,7 @@ namespace WebPL.Models
                 return User.Guest;
             }
 
-            var roleId = Dependencies.RoleLogic.GetIdByName(regRole.Name);
+            var roleId = Dependencies.RoleLogic.GetId(regRole.Name);
 
             if (userLogic.Add(roleId, regName, regPass))
             {

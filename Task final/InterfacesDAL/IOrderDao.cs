@@ -15,7 +15,7 @@ namespace InterfacesDAL
 
         bool RestoreOrder(int id);
 
-        bool InWorkOrder(int orderId, int idManager);
+        bool InWorkOrder(int orderId, int managerId);
 
         IEnumerable<Order> GetNewOrders();
 

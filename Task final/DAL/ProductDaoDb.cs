@@ -63,7 +63,7 @@ namespace DAL
             }
         }
 
-        public Product GetById(int id)
+        public Product Get(int id)
         {
             using (var sqlConnection = new SqlConnection(connectionString))
             {
