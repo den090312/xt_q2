@@ -7,12 +7,12 @@ namespace Entities
     {
         public static string Name { get; }
 
-        public static FileInfo ConfigFile { get; }
+        public static FileInfo Config { get; }
 
         static Logger()
         {
             Name = "LOGGER";
-            ConfigFile = new FileInfo(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+            Config = new FileInfo(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
         }
     }
 }

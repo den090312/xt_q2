@@ -15,7 +15,7 @@ namespace DAL
 
         public ILog Log { get; } = LogManager.GetLogger(Logger.Name);
 
-        public void StartLogger() => XmlConfigurator.Configure(Logger.ConfigFile);
+        public void StartLogger() => XmlConfigurator.Configure(Logger.Config);
 
         public bool Add(ref Product product)
         {
