@@ -6,16 +6,23 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace DAL
 {
     public class UserDaoDb : IUserDao, ILoggerDao
     {
-        private static readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=orderservice;Integrated Security=True";
+        private readonly string connectionString = @"Data Source=DEN090312\SQLEXPRESS;Initial Catalog=orderservice;Integrated Security=True";
 
-        public ILog Log { get; } = LogManager.GetLogger(Logger.Name);
+        private static readonly string loggerName;
 
-        public void StartLogger() => XmlConfigurator.Configure(Logger.Config);
+        private readonly FileInfo loggerConfig = new FileInfo(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
+
+        public ILog Log { get; } = LogManager.GetLogger(loggerName);
+
+        public void StartLogger() => XmlConfigurator.Configure(loggerConfig);
+
+        static UserDaoDb() => loggerName = "LOGGER";
 
         public bool Add(ref User user)
         {

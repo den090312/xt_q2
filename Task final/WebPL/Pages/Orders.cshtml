@@ -70,7 +70,7 @@
 
                         @foreach (var id in productIds)
                         {
-                            var product = Dependencies.ProductLogic.GetById(id);
+                            var product = Dependencies.ProductLogic.Get(id);
 
                             if (product == null)
                             {

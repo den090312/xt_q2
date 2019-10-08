@@ -21,7 +21,7 @@
             {
                 try
                 {
-                    roleId = roleLogic.GetIdByName(Index.CurrentUser.Name);
+                    roleId = roleLogic.GetId(Index.CurrentUser.Name);
                 }
                 catch
                 {
@@ -32,14 +32,14 @@
             {
                 roleId = currentUser.IdRole;
             }
-            var currentRole = roleLogic.GetById(roleId);
+            var currentRole = roleLogic.Get(roleId);
             if (currentRole == null)
             {
                 Response.Redirect("~/Pages/Error.cshtml");
             }
             if (currentRole.OrderWrite)
             {
-                var customer = Dependencies.CustomerLogic.GetByIdUser(currentUser.Id);
+                var customer = Dependencies.CustomerLogic.GetByUserId(currentUser.Id);
                 if (customer == null)
                 {
                     Response.Redirect("~/Pages/Error.cshtml");

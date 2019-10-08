@@ -5,7 +5,7 @@
 }
     <form method="post" action="~/Pages/Orders.cshtml" style="float: left;">
         @{
-            var currentRole = Dependencies.RoleLogic.GetById(Index.CurrentUser.IdRole);
+            var currentRole = Dependencies.RoleLogic.Get(Index.CurrentUser.IdRole);
             if (currentRole == null)
             {
                 Response.Redirect("~/Pages/Error.cshtml");
@@ -13,7 +13,7 @@
             var userType = string.Empty;
             if (currentRole.OrderWrite)
             {
-                var customer = Dependencies.CustomerLogic.GetByIdUser(Index.CurrentUser.Id);
+                var customer = Dependencies.CustomerLogic.GetByUserId(Index.CurrentUser.Id);
 
                 if (customer != null)
                 {
