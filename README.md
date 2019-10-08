@@ -51,3 +51,9 @@ WEB_UI.Database.RunScript(connectionString, scriptPath);
 Пользователь "администратор": просмотр перечня пользователей, ролей и менеджеров; добавление менеджеров   
 
 Скрипт для БД: WebPL\Scripts\script.sql
+
+При отсутствии данных в БД загружаются демо данные, в том числе пользователи:
+
+Customer - пароль "Customer", по аналогии: Manager, Admin и SuperAdmin
+
+Основная информация доступна под учеткой Admin (пароль "Admin")
