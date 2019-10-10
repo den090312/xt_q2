@@ -36,7 +36,7 @@ namespace DAL
             {
                 StartLogger();
                 var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                Log.Error(exMessage + " Ошибка добавления товара, название: '" + product.Name + "'");
+                Log.Error(exMessage + $" Ошибка добавления товара, название: '{product.Name}'");
 
                 return false;
             }
@@ -91,7 +91,7 @@ namespace DAL
                 {
                     StartLogger();
                     var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                    Log.Error(exMessage + " Ошибка получения товара по id: " + id);
+                    Log.Error(exMessage + $" Ошибка получения товара по id: '{id}'");
 
                     return null;
                 }
@@ -110,7 +110,7 @@ namespace DAL
             {
                 StartLogger();
                 var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                Log.Error(exMessage + " Ошибка удаления товара по id: " + id);
+                Log.Error(exMessage + $" Ошибка удаления товара по id: '{id}'");
 
                 return false;
             }
@@ -146,7 +146,7 @@ namespace DAL
             }
 
             StartLogger();
-            Log.Error($"Товар с id = '{id}' не найден!");
+            Log.Error($"Товар с id '{id}' не найден!");
 
             return null;
         }

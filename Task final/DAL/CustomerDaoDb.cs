@@ -62,7 +62,7 @@ namespace DAL
                 {
                     StartLogger();
                     var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                    Log.Error(exMessage + $" Ошибка получения покупателя по id пользователя: {id}");
+                    Log.Error(exMessage + $" Ошибка получения покупателя по id пользователя: '{id}'");
 
                     return null;
                 }

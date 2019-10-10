@@ -36,7 +36,7 @@ namespace DAL
             {
                 StartLogger();
                 var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                Log.Error(exMessage + " Ошибка добавления пользователя, id: " + user.Id + ", имя: '" + user.Name + "'");
+                Log.Error(exMessage + $" Ошибка добавления пользователя, id: '{user.Id}', имя: '{user.Name}'");
 
                 return false;
             }
@@ -54,7 +54,7 @@ namespace DAL
             {
                 StartLogger();
                 var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                Log.Error(exMessage + " Ошибка удаления пользователя, id: " + id);
+                Log.Error(exMessage + $" Ошибка удаления пользователя, id: '{id}'");
 
                 return false;
             }
@@ -72,7 +72,7 @@ namespace DAL
             {
                 StartLogger();
                 var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                Log.Error(exMessage + " Ошибка смены имени пользователя, id: " + user.Id + ", имя: '" + user.Name + "'");
+                Log.Error(exMessage + $" Ошибка смены имени пользователя, id: '{user.Id}', имя: '{user.Name}'");
 
                 return false;
             }
@@ -88,7 +88,7 @@ namespace DAL
             {
                 StartLogger();
                 var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                Log.Error(exMessage + " Ошибка получения пользователя по имени: '" + name + "'");
+                Log.Error(exMessage + $" Ошибка получения пользователя по имени: '{name}'");
 
                 return null;
             }
@@ -132,7 +132,7 @@ namespace DAL
             {
                 StartLogger();
                 var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                Log.Error(exMessage + " Ошибка смены имени пароля пользователя, id: " + user.Id + ", имя: '" + user.Name + "'");
+                Log.Error(exMessage + $" Ошибка смены имени пароля пользователя, id: '{user.Id}', имя: '{user.Name}'");
 
                 return false;
             }
@@ -186,7 +186,7 @@ namespace DAL
             }
 
             StartLogger();
-            Log.Error($"Пользователь с именем = '{name}' не найден!");
+            Log.Error($"Пользователь с именем '{name}' не найден!");
 
             return null;
         }

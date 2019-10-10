@@ -55,13 +55,6 @@ namespace WebPL.Models
             }
         }
 
-        private static void LoadGeneralManager(int userManagerId)
-        {
-            var manager = new Entities.Manager(userManagerId, "Manager", Entities.Manager.Rank.General);
-
-            Dependencies.ManagerLogic.Add(ref manager);
-        }
-
         public static string GetLastError()
         {
             var logPath = GetLogPath();
@@ -73,7 +66,7 @@ namespace WebPL.Models
             var encoding = Encoding.GetEncoding(1251);
 
             var lastError = string.Empty;
-            
+
             using (var sr = new StreamReader(fs, encoding))
             {
                 while (!sr.EndOfStream)
@@ -83,6 +76,13 @@ namespace WebPL.Models
             }
 
             return lastError;
+        }
+
+        private static void LoadGeneralManager(int userManagerId)
+        {
+            var manager = new Entities.Manager(userManagerId, "Manager", Entities.Manager.Rank.General);
+
+            Dependencies.ManagerLogic.Add(ref manager);
         }
 
         private static string GetLogPath()

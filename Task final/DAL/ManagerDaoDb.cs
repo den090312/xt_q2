@@ -36,7 +36,7 @@ namespace DAL
             {
                 StartLogger();
                 var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                Log.Error(exMessage + " Ошибка добавления менеджера, имя: '" + manager.Name + "'");
+                Log.Error(exMessage + $" Ошибка добавления менеджера, имя: '{manager.Name}'");
 
                 return false;
             }
@@ -63,7 +63,7 @@ namespace DAL
                 {
                     StartLogger();
                     var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                    Log.Error(exMessage + " Ошибка получения менеджера по id пользователя: " + id);
+                    Log.Error(exMessage + $" Ошибка получения менеджера по id пользователя: '{id}'");
 
                     return null;
                 }
@@ -143,7 +143,7 @@ namespace DAL
             }
 
             StartLogger();
-            Log.Error($"Менеджер с idUser = '{idUser}' не найден!");
+            Log.Error($"Менеджер с idUser '{idUser}' не найден!");
 
             return null;
         }

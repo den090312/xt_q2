@@ -65,7 +65,7 @@ namespace DAL
                 {
                     StartLogger();
                     var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                    Log.Error(exMessage + " Ошибка получения заказа по id покупателя, id: " + id);
+                    Log.Error(exMessage + $" Ошибка получения заказа по id покупателя, id: '{id}'");
 
                     return new List<Order>();
                 }
@@ -93,7 +93,7 @@ namespace DAL
                 {
                     StartLogger();
                     var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                    Log.Error(exMessage + " Ошибка получения заказа по id менеджера, id: " + id);
+                    Log.Error(exMessage + $" Ошибка получения заказа по id менеджера, id: '{id}'");
 
                     return new List<Order>();
                 }
@@ -112,7 +112,7 @@ namespace DAL
             {
                 StartLogger();
                 var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                Log.Error(exMessage + " Ошибка отмены заказа, id: " + id);
+                Log.Error(exMessage + $" Ошибка отмены заказа, id: '{id}'");
 
                 return false;
             }
@@ -130,7 +130,7 @@ namespace DAL
             {
                 StartLogger();
                 var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                Log.Error(exMessage + " Ошибка восстановления заказа, id: " + id);
+                Log.Error(exMessage + $" Ошибка восстановления заказа, id: '{id}'");
 
                 return false;
             }
@@ -148,7 +148,7 @@ namespace DAL
             {
                 StartLogger();
                 var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                Log.Error(exMessage + " Ошибка взятия заказа в работу, id заказа: " + idOrder + ", id менеджера: " + idManager);
+                Log.Error(exMessage + $" Ошибка взятия заказа в работу, id заказа: '{idOrder}', id менеджера: '{idManager}'");
 
                 return false;
             }
@@ -166,7 +166,7 @@ namespace DAL
             {
                 StartLogger();
                 var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                Log.Error(exMessage + " Ошибка завершения заказа, id: " + id);
+                Log.Error(exMessage + $" Ошибка завершения заказа, id: '{id}'");
 
                 return false;
             }

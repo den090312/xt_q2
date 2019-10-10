@@ -36,7 +36,7 @@ namespace DAL
             {
                 StartLogger();
                 var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                Log.Error(exMessage + " Ошибка добавления роли, имя: '" + role.Name + "'");
+                Log.Error(exMessage + $" Ошибка добавления роли, имя: '{role.Name}'");
 
                 return false;
             }
@@ -54,7 +54,7 @@ namespace DAL
             {
                 StartLogger();
                 var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                Log.Error(exMessage + " Ошибка удаления роли, id: " + id);
+                Log.Error(exMessage + $" Ошибка удаления роли, id: '{id}'");
 
                 return false;
             }
@@ -72,7 +72,7 @@ namespace DAL
             {
                 StartLogger();
                 var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                Log.Error(exMessage + " Ошибка смены имени роли, id: " + role.Id + ", имя: " + role.Name + "'");
+                Log.Error(exMessage + $" Ошибка смены имени роли, id: '{role.Id}', имя: '{role.Name}'");
 
                 return false;
             }
@@ -127,7 +127,7 @@ namespace DAL
                 {
                     StartLogger();
                     var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                    Log.Error(exMessage + " Ошибка получения роли по id: " + id);
+                    Log.Error(exMessage + $" Ошибка получения роли по id: '{id}'");
 
                     return null;
                 }
@@ -182,7 +182,7 @@ namespace DAL
                 {
                     StartLogger();
                     var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                    Log.Error(exMessage + " Ошибка получения роли по имени: '" + name + "'");
+                    Log.Error(exMessage + $" Ошибка получения роли по имени: '{name}'");
 
                     return 0;
                 }
@@ -227,7 +227,7 @@ namespace DAL
             }
 
             StartLogger();
-            Log.Error($"Роль с id = '{id}' не найдена!");
+            Log.Error($"Роль с id '{id}' не найдена!");
 
             return null;
         }

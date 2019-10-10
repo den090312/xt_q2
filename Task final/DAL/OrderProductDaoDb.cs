@@ -36,7 +36,7 @@ namespace DAL
             {
                 StartLogger();
                 var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                Log.Error(exMessage + " Ошибка добавления товара в заказ, id товара: " + orderProduct.IdProduct + ", id заказа: " + orderProduct.IdOrder);
+                Log.Error(exMessage + $" Ошибка добавления товара в заказ, id товара: '{orderProduct.IdProduct}', id заказа: '{orderProduct.IdOrder}'");
 
                 return false;
             }
@@ -63,7 +63,7 @@ namespace DAL
                 {
                     StartLogger();
                     var exMessage = ex.Message.Replace(Environment.NewLine, "");
-                    Log.Error(exMessage + " Ошибка получения товаров по id заказа: " + orderId);
+                    Log.Error(exMessage + $" Ошибка получения товаров по id заказа: '{orderId}'");
 
                     return new List<int>();
                 }

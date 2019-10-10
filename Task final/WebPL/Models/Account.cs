@@ -184,7 +184,7 @@ namespace WebPL.Models
 
             if (userLogic.Add(roleId, regName, regPass))
             {
-                CurrentUser = Dependencies.UserLogic.GetByName(regName);
+                CurrentUser = userLogic.GetByName(regName);
                 Message = "Пользователь зарегистрирован";
 
                 return CurrentUser;
