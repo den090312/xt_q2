@@ -136,5 +136,10 @@ namespace DAL
                 customer.Id = sqlDr.GetInt32(0);
             }
         }
+
+        public string GetLastError()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

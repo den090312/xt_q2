@@ -25,6 +25,7 @@ namespace BLL
         }
 
         public void StartLogger() => loggerDao.StartLogger();
+        public string GetLastError() => loggerDao.GetLastError();
 
         public bool Add(string name, string text)
         {

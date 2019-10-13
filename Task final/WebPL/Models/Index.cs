@@ -55,49 +55,13 @@ namespace WebPL.Models
             }
         }
 
-        public static string GetLastError()
-        {
-            var logPath = GetLogPath();
-
-            NullCheck(logPath);
-            EmptyStringCheck(logPath);
-
-            var fs = new FileStream(logPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-            var encoding = Encoding.GetEncoding(1251);
-
-            var lastError = string.Empty;
-
-            using (var sr = new StreamReader(fs, encoding))
-            {
-                while (!sr.EndOfStream)
-                {
-                    lastError = sr.ReadLine();
-                }
-            }
-
-            return lastError;
-        }
+        public static string GetLastError() => Dependencies.LoggerLogic.GetLastError();
 
         private static void LoadGeneralManager(int userManagerId)
         {
             var manager = new Entities.Manager(userManagerId, "Manager", Entities.Manager.Rank.General);
 
             Dependencies.ManagerLogic.Add(ref manager);
-        }
-
-        private static string GetLogPath()
-        {
-            var repository = Dependencies.LoggerLogic.Log.Logger.Repository;
-            var appenders = ((Hierarchy)repository).Root.Appenders.OfType<RollingFileAppender>();
-
-            var logPath = string.Empty;
-
-            foreach (var appender in appenders)
-            {
-                logPath = appender.File;
-            }
-
-            return logPath;
         }
 
         private static bool Account()

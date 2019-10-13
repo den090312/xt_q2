@@ -209,5 +209,10 @@ namespace DAL
                 Direction = ParameterDirection.Input
             };
         }
+
+        public string GetLastError()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

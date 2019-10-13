@@ -20,6 +20,8 @@ namespace BLL
 
         public void StartLogger() => loggerDao.StartLogger();
 
+        public string GetLastError() => loggerDao.GetLastError();
+
         private void NullCheck<T>(T classObject) where T : class
         {
             if (classObject is null)

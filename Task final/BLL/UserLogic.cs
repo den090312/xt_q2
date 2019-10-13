@@ -29,6 +29,8 @@ namespace BLL
 
         public void StartLogger() => loggerDao.StartLogger();
 
+        public string GetLastError() => loggerDao.GetLastError();
+
         public bool Add(int roleId, string name, string password)
         {
             IdCheck(roleId);

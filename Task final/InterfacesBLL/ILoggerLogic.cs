@@ -7,5 +7,7 @@ namespace InterfacesBLL
         ILog Log { get; }
 
         void StartLogger();
+
+        string GetLastError();
     }
 }

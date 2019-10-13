@@ -7,5 +7,7 @@ namespace InterfacesDAL
         ILog Log { get; }
 
         void StartLogger();
+
+        string GetLastError();
     }
 }
